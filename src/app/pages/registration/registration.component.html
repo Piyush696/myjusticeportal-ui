@@ -10,10 +10,27 @@
         <mat-card>
             <h3 style="text-align: center;font-size: 20px;">Create an Account</h3>
             <div class="col-md-12" class="input-container">
+                <div class="col-md-6 input-name">
+                    <mat-form-field appearance="fill" style="width: 50%;">
+                        <mat-label>FirstName</mat-label>
+                        <input matInput placeholder="First Name" [formControl]="firstName" required>
+                        <mat-error *ngIf="firstName.invalid">{{getErrorMessage()}}</mat-error>
+                    </mat-form-field>
+                </div>
+                <div class="col-md-6">
+                    <mat-form-field appearance="fill" style="width: 50%;">
+                        <mat-label>LastName</mat-label>
+                        <input matInput placeholder="Last Name" [formControl]="lastName" required>
+                        <mat-error *ngIf="lastName.invalid">{{getErrorMessage()}}</mat-error>
+                    </mat-form-field>
+                </div>
+            </div>
+
+            <div class="col-md-12" class="input-container">
                 <mat-form-field appearance="fill" style="width: 50%;">
-                    <mat-label>Username</mat-label>
-                    <input matInput placeholder="name" [formControl]="name" required>
-                    <mat-error *ngIf="name.invalid">{{getErrorMessage()}}</mat-error>
+                    <mat-label>Email</mat-label>
+                    <input matInput placeholder="Email" [formControl]="email" required>
+                    <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>
                 </mat-form-field>
             </div>
             <div class="col-md-12" class="input-container">
@@ -30,18 +47,12 @@
                     <mat-error *ngIf="confirmPassword.invalid">{{getErrorMessage()}}</mat-error>
                 </mat-form-field>
             </div>
-            <div class="col-md-12" class="input-container">
-                <mat-form-field appearance="fill" style="width: 50%;">
-                    <mat-label>Phone(Optional)</mat-label>
-                    <input matInput placeholder="Phone" [formControl]="phone" required>
-                    <mat-error *ngIf="phone.invalid">{{getErrorMessage()}}</mat-error>
-                </mat-form-field>
-            </div>
             <div class="button-row input-container">
                 <button mat-raised-button color="primary" class="btn-padding">Register</button>
             </div>
             <div class="button-row input-container">
-                <button mat-stroked-button color="primary" class="btn-padding">Back to Login</button>
+                <button [routerLink]="'/login'" mat-stroked-button color="primary" class="btn-padding">Back to
+                    Login</button>
             </div>
         </mat-card>
     </div>

@@ -22,3 +22,8 @@
   padding: 5px 12px 4px 13px;
   border-radius: 7px;
 }
+
+.input-name {
+  display: flex;
+  flex-direction: row-reverse;
+}
