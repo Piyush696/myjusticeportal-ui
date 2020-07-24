@@ -4,20 +4,32 @@
 <div class="example-container">
     <div class="col">
         <mat-card>
-            <h2 class="justify-center">Create an Account</h2>
+            <h2 class="text-center">Create an Account</h2>
             <div class="col-md-12" class="input-container">
                 <div class="col-md-6 input-name">
                     <mat-form-field appearance="fill" style="width: 50%;">
                         <mat-label>FirstName</mat-label>
-                        <input matInput placeholder="First Name" [formControl]="firstName" required>
-                        <mat-error *ngIf="firstName.invalid">{{getErrorMessage()}}</mat-error>
+                        <input matInput placeholder="First Name" [formControl]="RegistrationForm.controls['firstName']"
+                            required>
+                        <mat-error
+                            *ngIf="RegistrationForm.controls['firstName'].invalid && RegistrationForm.controls['firstName'].touched">
+                            <small class="text-danger" *ngIf="RegistrationForm.get('firstName').errors?.required">
+                                firstName is
+                                Required</small>
+                        </mat-error>
                     </mat-form-field>
                 </div>
                 <div class="col-md-6">
                     <mat-form-field appearance="fill" style="width: 50%;">
                         <mat-label>LastName</mat-label>
-                        <input matInput placeholder="Last Name" [formControl]="lastName" required>
-                        <mat-error *ngIf="lastName.invalid">{{getErrorMessage()}}</mat-error>
+                        <input matInput placeholder="Last Name" [formControl]="RegistrationForm.controls['lastName']"
+                            required>
+                        <mat-error
+                            *ngIf="RegistrationForm.controls['lastName'].invalid && RegistrationForm.controls['lastName'].touched">
+                            <small class="text-danger" *ngIf="RegistrationForm.get('lastName').errors?.required">
+                                lastName is
+                                Required</small>
+                        </mat-error>
                     </mat-form-field>
                 </div>
             </div>
@@ -25,26 +37,43 @@
             <div class="col-md-12" class="input-container">
                 <mat-form-field appearance="fill" style="width: 50%;">
                     <mat-label>Email</mat-label>
-                    <input matInput placeholder="Email" [formControl]="email" required>
-                    <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>
+                    <input matInput placeholder="Email" [formControl]="RegistrationForm.controls['email']" required>
+                    <mat-error
+                        *ngIf="RegistrationForm.controls['email'].invalid && RegistrationForm.controls['email'].touched">
+                        <small class="text-danger" *ngIf="RegistrationForm.get('email').errors?.required">
+                            Email is
+                            Required</small>
+                    </mat-error>
                 </mat-form-field>
             </div>
             <div class="col-md-12" class="input-container">
                 <mat-form-field appearance="fill" style="width: 50%;">
                     <mat-label>Password</mat-label>
-                    <input matInput placeholder="password" [formControl]="password" required>
-                    <mat-error *ngIf="password.invalid">{{getErrorMessage()}}</mat-error>
+                    <input matInput placeholder="password" [formControl]="RegistrationForm.controls['password']"
+                        required>
+                    <mat-error
+                        *ngIf="RegistrationForm.controls['password'].invalid && RegistrationForm.controls['password'].touched">
+                        <small class="text-danger" *ngIf="RegistrationForm.get('password').errors?.required">
+                            Password is
+                            Required</small>
+                    </mat-error>
                 </mat-form-field>
             </div>
             <div class="col-md-12" class="input-container">
                 <mat-form-field appearance="fill" style="width: 50%;">
                     <mat-label>Confirm Password</mat-label>
-                    <input matInput placeholder="Confirm Password" [formControl]="confirmPassword" required>
-                    <mat-error *ngIf="confirmPassword.invalid">{{getErrorMessage()}}</mat-error>
+                    <input matInput placeholder="Confirm Password"
+                        [formControl]="RegistrationForm.controls['confirmPassword']" required>
+                    <mat-error
+                        *ngIf="RegistrationForm.controls['confirmPassword'].invalid && RegistrationForm.controls['confirmPassword'].touched">
+                        <small class="text-danger" *ngIf="RegistrationForm.get('confirmPassword').errors?.required">
+                            Password is
+                            Required</small>
+                    </mat-error>
                 </mat-form-field>
             </div>
             <div class="button-row input-container">
-                <button mat-raised-button color="primary" class="btn-padding">Register</button>
+                <button mat-raised-button color="primary" class="btn-padding" (click)="onRegister()">Register</button>
             </div>
             <div class="button-row input-container">
                 <button [routerLink]="'/login'" mat-stroked-button color="primary" class="btn-padding">Back to
