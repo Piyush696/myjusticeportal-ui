@@ -35,9 +35,7 @@ import { BrowserModule } from '@angular/platform-browser';
     BrowserModule,
     MatInputModule,
     BrowserAnimationsModule,
-    RouterModule.forRoot(AppRoutes, {
-      useHash: true
-    }),
+    RouterModule.forRoot(AppRoutes),
     SidebarModule,
     MatCardModule,
     NavbarModule,
