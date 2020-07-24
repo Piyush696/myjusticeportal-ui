@@ -1,0 +1,24 @@
+.example-container {
+  padding-right: 15%;
+  padding-left: 15%;
+  padding-top: 5%;
+  padding-bottom: 5%;
+}
+
+.input-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+}
+
+
+
+.button-row .mat-button-base {
+  margin: 8px 8px 8px 0;
+}
+
+.btn-padding {
+  padding: 5px 12px 4px 13px;
+  border-radius: 7px;
+}

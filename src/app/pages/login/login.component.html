@@ -1,0 +1,48 @@
+<div class="row" style="background: #e4e3e9;">
+    <div class="card">
+        <div class="card-heading">
+            <img src="assets/img/logo.PNG" alt="logo" width="150" height="60" style="margin-left: 20px;">
+        </div>
+    </div>
+</div>
+<div class="example-container">
+    <div class="col">
+        <mat-card>
+            <div class="col-md-12" class="input-container">
+                <mat-form-field appearance="fill" style="width: 50%;">
+                    <mat-label>Enter your email</mat-label>
+                    <input matInput placeholder="pat@example.com" [formControl]="email" required>
+                    <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>
+                </mat-form-field>
+            </div>
+            <div class="col-md-12" class="input-container">
+                <mat-form-field appearance="fill" style="width: 50%;">
+                    <mat-label>Password</mat-label>
+                    <input matInput placeholder="password" [formControl]="password" required>
+                    <mat-error *ngIf="password.invalid">{{getErrorMessage()}}</mat-error>
+                </mat-form-field>
+            </div>
+            <div class="button-row input-container">
+                <button mat-raised-button color="primary" class="btn-padding">Login</button>
+            </div>
+            <div class="button-row input-container">
+                <button mat-stroked-button color="primary" class="btn-padding">Create an Account</button>
+            </div>
+            <div class="button-row input-container">
+                <label>DISCLAIMER: Curabitur egestas ullamcorper leo vitae luctus. Pellentesque finibus, dui a pharetra
+                    cursus, velit metus
+                    dignissim lorem, sit amet rhoncus massa dui quis sapien. Nunc porttitor faucibus velit. Nulla
+                    volutpat ipsum eu
+                    fringilla sagittis. Quisque viverra, neque in suscipit porttitor, nunc turpis tincidunt augue, eget
+                    vestibulum neque
+                    nisl vitae purus. Aenean vel enim ac tortor porttitor ornare. In id magna maximus, dignissim nisi
+                    at, feugiat augue.
+                    Vestibulum nec aliquet mauris. Quisque nec fringilla eros. Nulla eu vehicula erat, maximus tincidunt
+                    tortor. Nam at
+                    tellus ac augue feugiat convallis sed at metus. In ultricies augue turpis, non posuere risus commodo
+                    sit amet. Praesent
+                    id nunc arcu.Copyright © 2020 My Justice Portal LLC. All rights reserved</label>
+            </div>
+        </mat-card>
+    </div>
+</div>
