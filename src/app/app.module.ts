@@ -23,6 +23,10 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatCardModule } from '@angular/material/card';
 import { BrowserModule } from '@angular/platform-browser';
+import { HttpClientModule } from '@angular/common/http';
+import { RegistrationService } from './services/registration.service';
+import { CacheService } from './services/cache.service';
+import { LoginService } from './services/login.service';
 
 @NgModule({
   declarations: [
@@ -39,6 +43,7 @@ import { BrowserModule } from '@angular/platform-browser';
     SidebarModule,
     MatCardModule,
     NavbarModule,
+    HttpClientModule,
     FormsModule,
     MatButtonModule,
     ReactiveFormsModule,
@@ -47,6 +52,9 @@ import { BrowserModule } from '@angular/platform-browser';
     FixedPluginModule
   ],
   providers: [
+    RegistrationService,
+    CacheService,
+    LoginService,
     { provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { appearance: 'fill' } },
   ],
   bootstrap: [AppComponent, LoginComponent, RegistrationComponent]

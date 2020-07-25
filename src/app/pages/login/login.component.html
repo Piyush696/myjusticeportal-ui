@@ -1,11 +1,11 @@
 <div style="background: #e4e3e9;">
-    <img src="assets/img/LOGO 4.jpg" alt="logo" width="150" height="60" style="margin-left: 20px;">
+    <img src="assets/img/LOGO 4.jpg" alt="logo" class="logo">
 </div>
-<div class="example-container">
+<div class="login-container">
     <div class="col">
         <mat-card>
             <div class="col-md-12" class="input-container">
-                <mat-form-field appearance="fill" style="width: 50%;">
+                <mat-form-field appearance="fill" class="mat-forms-fields">
                     <mat-label>Enter your email</mat-label>
                     <input matInput placeholder="pat@example.com" [formControl]="loginForm.controls['email']" required>
                     <mat-error *ngIf="loginForm.controls['email'].invalid && loginForm.controls['email'].touched">
@@ -16,9 +16,10 @@
                 </mat-form-field>
             </div>
             <div class="col-md-12" class="input-container">
-                <mat-form-field appearance="fill" style="width: 50%;">
+                <mat-form-field appearance="fill" class="mat-forms-fields mat-Padding">
                     <mat-label>Password</mat-label>
-                    <input matInput placeholder="password" [formControl]="loginForm.controls['password']" required>
+                    <input type="password" matInput placeholder="password"
+                        [formControl]="loginForm.controls['password']" required>
                     <mat-error *ngIf="loginForm.controls['password'].invalid && loginForm.controls['password'].touched">
                         <small class="text-danger" *ngIf="loginForm.get('password').errors?.required">
                             Password is
@@ -27,7 +28,8 @@
                 </mat-form-field>
             </div>
             <div class="button-row input-container">
-                <button mat-raised-button color="primary" class="btn-padding" (click)="onLogin()">Login</button>
+                <button [disabled]="loginForm.invalid" mat-raised-button color="primary" class="btn-padding"
+                    (click)="onLogin()">Login</button>
             </div>
             <div class="button-row input-container">
                 <button [routerLink]="'/register'" mat-stroked-button color="primary" class="btn-padding">Create an
@@ -35,7 +37,7 @@
             </div>
         </mat-card>
         <div>
-            <div class="button-row input-container">
+            <div class="button-row input-container text-style">
                 <label>DISCLAIMER: Curabitur egestas ullamcorper leo vitae luctus. Pellentesque finibus, dui a pharetra
                     cursus, velit metus
                     dignissim lorem, sit amet rhoncus massa dui quis sapien. Nunc porttitor faucibus velit. Nulla

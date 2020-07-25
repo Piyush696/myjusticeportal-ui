@@ -1,33 +1,33 @@
 <div style="background: #e4e3e9;">
-    <img src="assets/img/LOGO 4.jpg" alt="logo" width="150" height="60">
+    <img src="assets/img/LOGO 4.jpg" alt="logo" class="logo">
 </div>
-<div class="example-container">
+<div class="register-container">
     <div class="col">
         <mat-card>
             <h2 class="text-center">Create an Account</h2>
             <div class="col-md-12" class="input-container">
                 <div class="col-md-6 input-name">
-                    <mat-form-field appearance="fill" style="width: 50%;">
+                    <mat-form-field appearance="fill" class="mat-forms-fields form-fields">
                         <mat-label>FirstName</mat-label>
                         <input matInput placeholder="First Name" [formControl]="registrationForm.controls['firstName']"
                             required>
                         <mat-error
                             *ngIf="registrationForm.controls['firstName'].invalid && registrationForm.controls['firstName'].touched">
                             <small class="text-danger" *ngIf="registrationForm.get('firstName').errors?.required">
-                                firstName is
+                                First Name is
                                 Required</small>
                         </mat-error>
                     </mat-form-field>
                 </div>
                 <div class="col-md-6">
-                    <mat-form-field appearance="fill" style="width: 50%;">
+                    <mat-form-field appearance="fill" class="mat-forms-fields form-fields">
                         <mat-label>LastName</mat-label>
                         <input matInput placeholder="Last Name" [formControl]="registrationForm.controls['lastName']"
                             required>
                         <mat-error
                             *ngIf="registrationForm.controls['lastName'].invalid && registrationForm.controls['lastName'].touched">
                             <small class="text-danger" *ngIf="registrationForm.get('lastName').errors?.required">
-                                lastName is
+                                Last Name is
                                 Required</small>
                         </mat-error>
                     </mat-form-field>
@@ -35,7 +35,7 @@
             </div>
 
             <div class="col-md-12" class="input-container">
-                <mat-form-field appearance="fill" style="width: 50%;">
+                <mat-form-field appearance="fill" class="mat-forms-fields form-fields">
                     <mat-label>Email</mat-label>
                     <input matInput placeholder="Email" [formControl]="registrationForm.controls['email']" required>
                     <mat-error
@@ -47,7 +47,7 @@
                 </mat-form-field>
             </div>
             <div class="col-md-12" class="input-container">
-                <mat-form-field appearance="fill" style="width: 50%;">
+                <mat-form-field appearance="fill" class="mat-forms-fields form-fields">
                     <mat-label>Password</mat-label>
                     <input matInput placeholder="password" [formControl]="registrationForm.controls['password']"
                         required>
@@ -60,7 +60,7 @@
                 </mat-form-field>
             </div>
             <div class="col-md-12" class="input-container">
-                <mat-form-field appearance="fill" style="width: 50%;">
+                <mat-form-field appearance="fill" class="mat-forms-fields form-fields">
                     <mat-label>Confirm Password</mat-label>
                     <input matInput placeholder="Confirm Password"
                         [formControl]="registrationForm.controls['confirmPassword']" required>
