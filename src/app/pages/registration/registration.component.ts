@@ -7,11 +7,11 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
   styleUrls: ['./registration.component.css']
 })
 export class RegistrationComponent implements OnInit {
-  RegistrationForm: FormGroup;
+  registrationForm: FormGroup;
   constructor(private fb: FormBuilder) { }
 
   ngOnInit(): void {
-    this.RegistrationForm = this.fb.group({
+    this.registrationForm = this.fb.group({
       firstName: ['', [Validators.required]],
       lastName: ['', [Validators.required]],
       email: ['', [Validators.required]],
@@ -22,6 +22,6 @@ export class RegistrationComponent implements OnInit {
   }
 
   onRegister() {
-    console.log(this.RegistrationForm.value)
+    console.log(this.registrationForm.value)
   }
 }

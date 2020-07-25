@@ -7,18 +7,18 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  LoginForm: FormGroup;
+  loginForm: FormGroup;
   constructor(private fb: FormBuilder) { }
 
   ngOnInit(): void {
-    this.LoginForm = this.fb.group({
+    this.loginForm = this.fb.group({
       email: ['', [Validators.required]],
       password: ['', [Validators.required]],
     })
   }
 
   onLogin() {
-    console.log(this.LoginForm.value)
+    console.log(this.loginForm.value)
   }
 
 

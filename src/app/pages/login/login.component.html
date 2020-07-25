@@ -7,9 +7,9 @@
             <div class="col-md-12" class="input-container">
                 <mat-form-field appearance="fill" style="width: 50%;">
                     <mat-label>Enter your email</mat-label>
-                    <input matInput placeholder="pat@example.com" [formControl]="LoginForm.controls['email']" required>
-                    <mat-error *ngIf="LoginForm.controls['email'].invalid && LoginForm.controls['email'].touched">
-                        <small class="text-danger" *ngIf="LoginForm.get('email').errors?.required">
+                    <input matInput placeholder="pat@example.com" [formControl]="loginForm.controls['email']" required>
+                    <mat-error *ngIf="loginForm.controls['email'].invalid && loginForm.controls['email'].touched">
+                        <small class="text-danger" *ngIf="loginForm.get('email').errors?.required">
                             Email is
                             Required</small>
                     </mat-error>
@@ -18,9 +18,9 @@
             <div class="col-md-12" class="input-container">
                 <mat-form-field appearance="fill" style="width: 50%;">
                     <mat-label>Password</mat-label>
-                    <input matInput placeholder="password" [formControl]="LoginForm.controls['password']" required>
-                    <mat-error *ngIf="LoginForm.controls['password'].invalid && LoginForm.controls['password'].touched">
-                        <small class="text-danger" *ngIf="LoginForm.get('password').errors?.required">
+                    <input matInput placeholder="password" [formControl]="loginForm.controls['password']" required>
+                    <mat-error *ngIf="loginForm.controls['password'].invalid && loginForm.controls['password'].touched">
+                        <small class="text-danger" *ngIf="loginForm.get('password').errors?.required">
                             Password is
                             Required</small>
                     </mat-error>
