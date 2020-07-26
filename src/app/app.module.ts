@@ -1,3 +1,4 @@
+import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
@@ -17,6 +18,10 @@ import { NavbarModule } from './layouts/navbar/navbar.module';
 import { SidebarModule } from './layouts/sidebar/sidebar.module';
 import { LoginComponent } from './pages/login/login.component';
 import { RegistrationComponent } from './pages/registration/registration.component';
+import { CacheService } from './services/cache.service';
+import { LoginService } from './services/login.service';
+import { RegistrationService } from './services/registration.service';
+
 
 @NgModule({
   declarations: [
@@ -33,6 +38,7 @@ import { RegistrationComponent } from './pages/registration/registration.compone
     SidebarModule,
     MatCardModule,
     NavbarModule,
+    HttpClientModule,
     FormsModule,
     MatButtonModule,
     ReactiveFormsModule,
@@ -40,6 +46,9 @@ import { RegistrationComponent } from './pages/registration/registration.compone
     FooterModule,
   ],
   providers: [
+    RegistrationService,
+    CacheService,
+    LoginService,
     { provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { appearance: 'fill' } },
   ],
   bootstrap: [AppComponent]
