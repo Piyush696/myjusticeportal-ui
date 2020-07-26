@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { RegistrationService } from 'app/services/registration.service';
 
 @Component({
   selector: 'app-registration',
@@ -7,20 +8,24 @@ import { FormControl, Validators } from '@angular/forms';
   styleUrls: ['./registration.component.css']
 })
 export class RegistrationComponent implements OnInit {
-  name = new FormControl('', [Validators.required, Validators.email]);
-  password = new FormControl('', [Validators.required]);
-  confirmPassword = new FormControl('', [Validators.required]);
-  phone = new FormControl('', [Validators.required]);
-  constructor() { }
+  registrationForm: FormGroup;
+  constructor(private fb: FormBuilder, private registrationService: RegistrationService) { }
 
   ngOnInit(): void {
+    this.registrationForm = this.fb.group({
+      firstName: ['', [Validators.required]],
+      lastName: ['', [Validators.required]],
+      email: ['', [Validators.required]],
+      password: ['', [Validators.required]],
+      confirmPassword: ['', [Validators.required]],
+      phone: ['', [Validators.required]],
+    })
   }
 
-  getErrorMessage() {
-    if (this.name.hasError('required')) {
-      return 'You must enter a value';
-    }
-    return this.name.hasError('email') ? 'Not a valid email' : '';
+  onRegister() {
+    console.log(this.registrationForm.value)
+    this.registrationService.addUser(this.registrationForm.value).subscribe((result) => {
+      console.log(result)
+    })
   }
-
 }

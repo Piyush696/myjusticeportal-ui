@@ -1,10 +1,12 @@
 {
   "name": "myjustice-portal",
   "version": "1.0.0",
+  "description": "My Justice Portal",
+  "author": "@gauravkunal",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve -o",
-    "build": "ng build",
+    "start": "node server.js",
+    "build": "ng build --configuration=$NODE_ENV",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
@@ -32,10 +34,11 @@
     "chart.js": "2.8.0",
     "chartist": "0.11.2",
     "core-js": "3.6.4",
-    "express": "4.17.1",
+    "express": "^4.17.1",
     "jquery": "3.4.1",
     "moment": "2.24.0",
     "ngx-toastr": "10.0.4",
+    "path": "^0.12.7",
     "rxjs": "6.5.4",
     "tslib": "1.11.1",
     "zone.js": "0.9.1"

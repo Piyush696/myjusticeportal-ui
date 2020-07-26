@@ -1,33 +1,32 @@
-import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
+import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { BrowserModule } from '@angular/platform-browser';
+import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { RouterModule } from '@angular/router';
 import { ToastrModule } from "ngx-toastr";
-
-import { SidebarModule } from './sidebar/sidebar.module';
-import { FooterModule } from './shared/footer/footer.module';
-import { NavbarModule } from './shared/navbar/navbar.module';
-import { FixedPluginModule } from './shared/fixedplugin/fixedplugin.module';
 import { AppComponent } from './app.component';
 import { AppRoutes } from './app.routing';
-import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
+import { FooterModule } from './layouts/footer/footer.module';
+import { LayoutComponent } from './layouts/layout.component';
+import { NavbarModule } from './layouts/navbar/navbar.module';
+import { SidebarModule } from './layouts/sidebar/sidebar.module';
 import { LoginComponent } from './pages/login/login.component';
 import { RegistrationComponent } from './pages/registration/registration.component';
+import { CacheService } from './services/cache.service';
+import { LoginService } from './services/login.service';
+import { RegistrationService } from './services/registration.service';
 
-
-import { MatInputModule } from '@angular/material/input';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
-import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
-
-import { MatButtonModule } from '@angular/material/button';
-import { MatButtonToggleModule } from '@angular/material/button-toggle';
-import { MatCardModule } from '@angular/material/card';
-import { BrowserModule } from '@angular/platform-browser';
 
 @NgModule({
   declarations: [
     AppComponent,
-    AdminLayoutComponent,
+    LayoutComponent,
     LoginComponent,
     RegistrationComponent
   ],
@@ -35,23 +34,24 @@ import { BrowserModule } from '@angular/platform-browser';
     BrowserModule,
     MatInputModule,
     BrowserAnimationsModule,
-    RouterModule.forRoot(AppRoutes, {
-      useHash: true
-    }),
+    RouterModule.forRoot(AppRoutes),
     SidebarModule,
     MatCardModule,
     NavbarModule,
+    HttpClientModule,
     FormsModule,
     MatButtonModule,
     ReactiveFormsModule,
     ToastrModule.forRoot(),
     FooterModule,
-    FixedPluginModule
   ],
   providers: [
+    RegistrationService,
+    CacheService,
+    LoginService,
     { provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { appearance: 'fill' } },
   ],
-  bootstrap: [AppComponent, LoginComponent, RegistrationComponent]
+  bootstrap: [AppComponent]
 })
 export class AppModule { }
 
