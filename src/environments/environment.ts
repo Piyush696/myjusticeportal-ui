@@ -5,8 +5,5 @@
 
 export const environment = {
   production: false,
-  paths: {
-    ui: 'localhost:4200',
-    api: 'http://localhost:3030/api',
-  },
+  api: 'http://localhost:3030/api',
 };

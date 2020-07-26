@@ -1,8 +1,8 @@
-import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { of } from 'rxjs';
 import { environment } from '../../environments/environment';
 import { CacheService } from './cache.service';
-import { Observable, of } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
@@ -15,7 +15,7 @@ export class LoginService {
   constructor(private httpClient: HttpClient, private cacheService: CacheService,) {
 
     const env: any = environment;
-    this.apiPath = env.paths.api
+    this.apiPath = env.api
     this.loginUser = 'users/login';
     this.authenticated = !!this.cacheService.getCache('user');
     this.route = 'users';
