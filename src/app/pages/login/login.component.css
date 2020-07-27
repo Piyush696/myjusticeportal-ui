@@ -5,6 +5,11 @@
   margin-top: 7%;
 }
 
+.header {
+  height: 70px;
+  background: #e4e3e9;
+}
+
 .input-container {
   display: flex;
   align-items: center;
@@ -16,6 +21,7 @@
   width: 150px;
   height: 60px;
   margin-left: 20px;
+  margin-top: 7px;
 }
 
 .btn-group {

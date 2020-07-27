@@ -24,10 +24,10 @@ export class RegistrationComponent implements OnInit {
   }
 
   onRegister() {
+    this.router.navigateByUrl('/dashboard')
     console.log(this.registrationForm.value)
     this.registrationService.addUser(this.registrationForm.value).subscribe((result) => {
       console.log(result)
-      this.router.navigateByUrl('/dashboard')
     })
   }
 }
