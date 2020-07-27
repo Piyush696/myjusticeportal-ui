@@ -1,8 +1,8 @@
 <div style="background: #e4e3e9;">
-    <img src="assets/img/LOGO 4.jpg" alt="logo" class="logo">
+    <img src="assets/img/logo.png" alt="logo" class="logo">
 </div>
 <div class="register-container">
-    <div class="col">
+    <div class="matCard">
         <mat-card>
             <h2 class="text-center">Create an Account</h2>
             <div class="col-md-12" class="input-container">
@@ -49,8 +49,8 @@
             <div class="col-md-12" class="input-container">
                 <mat-form-field appearance="fill" class="mat-forms-fields form-fields">
                     <mat-label>Password</mat-label>
-                    <input matInput placeholder="password" [formControl]="registrationForm.controls['password']"
-                        required>
+                    <input type="password" matInput placeholder="password"
+                        [formControl]="registrationForm.controls['password']" required>
                     <mat-error
                         *ngIf="registrationForm.controls['password'].invalid && registrationForm.controls['password'].touched">
                         <small class="text-danger" *ngIf="registrationForm.get('password').errors?.required">
@@ -62,7 +62,7 @@
             <div class="col-md-12" class="input-container">
                 <mat-form-field appearance="fill" class="mat-forms-fields form-fields">
                     <mat-label>Confirm Password</mat-label>
-                    <input matInput placeholder="Confirm Password"
+                    <input type="password" matInput placeholder="Confirm Password"
                         [formControl]="registrationForm.controls['confirmPassword']" required>
                     <mat-error
                         *ngIf="registrationForm.controls['confirmPassword'].invalid && registrationForm.controls['confirmPassword'].touched">
