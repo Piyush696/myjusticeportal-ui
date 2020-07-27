@@ -1,9 +1,10 @@
 <div style="background: #e4e3e9;">
-    <img src="assets/img/LOGO 4.jpg" alt="logo" class="logo">
+    <img src="assets/img/logo.png" alt="logo" class="logo">
 </div>
 <div class="login-container">
-    <div class="col">
+    <div class="matCard">
         <mat-card>
+            <h2 class="text-center">Welcome to My Justice Portal!</h2>
             <div class="col-md-12" class="input-container">
                 <mat-form-field appearance="fill" class="mat-forms-fields">
                     <mat-label>Enter your email</mat-label>
@@ -27,13 +28,15 @@
                     </mat-error>
                 </mat-form-field>
             </div>
-            <div class="button-row input-container">
-                <button [disabled]="loginForm.invalid" mat-raised-button color="primary" class="btn-padding"
-                    (click)="onLogin()">Login</button>
-            </div>
-            <div class="button-row input-container">
-                <button [routerLink]="'/register'" mat-stroked-button color="primary" class="btn-padding">Create an
-                    Account</button>
+            <div class="btn-group">
+                <div class="button-row">
+                    <button [disabled]="loginForm.invalid" mat-raised-button color="primary" class="btn-padding"
+                        (click)="onLogin()">Login</button>
+                </div>
+                <div class="button-row">
+                    <button [routerLink]="'/register'" mat-stroked-button color="primary" class="btn-padding">Create an
+                        Account</button>
+                </div>
             </div>
         </mat-card>
         <div>

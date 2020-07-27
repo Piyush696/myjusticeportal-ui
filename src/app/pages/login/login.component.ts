@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { LoginService } from 'app/services/login.service';
 import { ToastrService } from "ngx-toastr";
 @Component({
@@ -9,7 +10,8 @@ import { ToastrService } from "ngx-toastr";
 })
 export class LoginComponent implements OnInit {
   loginForm: FormGroup;
-  constructor(private fb: FormBuilder, private loginService: LoginService, private toastr: ToastrService) { }
+  constructor(private fb: FormBuilder, private router: Router,
+    private loginService: LoginService, private toastr: ToastrService) { }
 
   ngOnInit(): void {
     this.loginForm = this.fb.group({
@@ -30,6 +32,7 @@ export class LoginComponent implements OnInit {
           this.loginService.checkToken().then((data: any) => {
             console.log(data)
             this.showNotification('top', 'right');
+            this.router.navigateByUrl('/dashboard')
           })
         }
 
