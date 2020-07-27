@@ -3,8 +3,8 @@
 </div>
 <div class="register-container">
     <div class="matCard">
+        <h1 class="text-center">Create an Account</h1>
         <mat-card>
-            <h2 class="text-center">Create an Account</h2>
             <div class="col-md-12" class="input-container">
                 <div class="col-md-6 input-name">
                     <mat-form-field appearance="fill" class="mat-forms-fields form-fields">
@@ -19,7 +19,7 @@
                         </mat-error>
                     </mat-form-field>
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-6" style="padding-right: 0;">
                     <mat-form-field appearance="fill" class="mat-forms-fields form-fields">
                         <mat-label>LastName</mat-label>
                         <input matInput placeholder="Last Name" [formControl]="registrationForm.controls['lastName']"

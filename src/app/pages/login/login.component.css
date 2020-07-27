@@ -6,7 +6,7 @@
 }
 
 .header {
-  height: 70px;
+  height: 80px;
   background: #e4e3e9;
 }
 
@@ -19,9 +19,8 @@
 
 .logo {
   width: 150px;
-  height: 60px;
   margin-left: 20px;
-  margin-top: 7px;
+  margin-bottom: 3px;
 }
 
 .btn-group {
@@ -46,9 +45,17 @@
 }
 
 .mat-forms-fields {
-  width: 65%;
-  padding-top: 40px;
-  padding-bottom: 5px;
+  width: 100%;
+  padding: 2px 10px 3px 10px;
+}
+
+.text-danger {
+  font-size: 13px;
+}
+
+.btn-group {
+  display: flex;
+  justify-content: space-between;
 }
 
 .button-row .mat-button-base {

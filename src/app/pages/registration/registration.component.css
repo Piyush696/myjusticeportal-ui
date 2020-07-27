@@ -10,7 +10,7 @@
 }
 
 .header {
-  height: 70px;
+  height: 80px;
   background: #e4e3e9;
 }
 
@@ -21,11 +21,12 @@
   padding: 10px;
 }
 
+
+
 .logo {
   width: 150px;
-  height: 60px;
   margin-left: 10px;
-  margin-top: 7px;
+  margin-bottom: 3px;
 }
 
 .form-fields {
@@ -33,13 +34,16 @@
 }
 
 .mat-forms-fields {
-  width: 76%;
-  padding-top: 40px;
-  padding-bottom: 5px;
+  width: 100%;
 }
 
-.button-row .mat-button-base {
-  margin: 8px 8px 8px 0;
+.text-danger {
+  font-size: 13px;
+}
+
+
+.full-width {
+  padding-right: 0px;
 }
 
 .btn-padding {
@@ -50,4 +54,5 @@
 .input-name {
   display: flex;
   flex-direction: row-reverse;
+  padding: 0px;
 }
