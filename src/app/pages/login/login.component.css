@@ -1,68 +1,18 @@
-.login-container {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-top: 7%;
-}
-
 .header {
   height: 80px;
   background: #e4e3e9;
 }
 
-.input-container {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 10px;
-}
 
 .logo {
   width: 150px;
-  margin-left: 20px;
-  margin-bottom: 3px;
 }
 
-.btn-group {
-  display: flex;
-  justify-content: space-around;
-  margin-left: 10px;
-}
 
 .matCard {
   width: 600px;
 }
 
-.text-style {
-  text-indent: 50px;
-  text-align: justify;
-  letter-spacing: 3px;
-  padding-top: 15px;
-}
-
-.mat-Padding {
-  padding-top: 10px !important;
-}
-
-.mat-forms-fields {
-  width: 100%;
-  padding: 2px 10px 3px 10px;
-}
-
-.text-danger {
-  font-size: 13px;
-}
-
-.btn-group {
-  display: flex;
-  justify-content: space-between;
-}
-
-.button-row .mat-button-base {
-  margin: 8px 8px 8px 0;
-}
-
-.btn-padding {
-  padding: 5px 12px 4px 13px;
-  border-radius: 7px;
+.disclaimer-width {
+  width: 1000px;
 }

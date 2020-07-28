@@ -1,10 +1,3 @@
-.register-container {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-top: 7%;
-}
-
 .matCard {
   width: 600px;
 }
@@ -14,45 +7,6 @@
   background: #e4e3e9;
 }
 
-.input-container {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 10px;
-}
-
-
-
 .logo {
   width: 150px;
-  margin-left: 10px;
-  margin-bottom: 3px;
-}
-
-.form-fields {
-  padding-top: 5px !important;
-}
-
-.mat-forms-fields {
-  width: 100%;
-}
-
-.text-danger {
-  font-size: 13px;
-}
-
-
-.full-width {
-  padding-right: 0px;
-}
-
-.btn-padding {
-  padding: 5px 12px 4px 13px;
-  border-radius: 7px;
-}
-
-.input-name {
-  display: flex;
-  flex-direction: row-reverse;
-  padding: 0px;
 }
