@@ -72,12 +72,15 @@
                     </mat-error>
                 </mat-form-field>
             </div>
-            <div class="button-row input-container">
-                <button mat-raised-button color="primary" class="btn-padding" (click)="onRegister()">Register</button>
-            </div>
-            <div class="button-row input-container">
-                <button [routerLink]="'/login'" mat-stroked-button color="primary" class="btn-padding">Back to
-                    Login</button>
+            <div class="btn-group">
+                <div>
+                    <button mat-raised-button color="primary" class="btn-padding"
+                        (click)="onRegister()">Register</button>
+                </div>
+                <div>
+                    <button [routerLink]="'/login'" mat-stroked-button color="primary" class="btn-padding">Back to
+                        Login</button>
+                </div>
             </div>
         </mat-card>
     </div>

@@ -2,7 +2,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-top: 7%;
+  margin-top: 50px;
 }
 
 .header {
@@ -30,23 +30,39 @@
 }
 
 .matCard {
-  width: 600px;
+  width: 700px;
 }
 
 .text-style {
-  text-indent: 50px;
   text-align: justify;
   letter-spacing: 3px;
   padding-top: 15px;
+}
+
+.text-size {
+  width: 1000px;
 }
 
 .mat-Padding {
   padding-top: 10px !important;
 }
 
+.mat-btn-area {
+  padding-left: 20px;
+}
+
+.button-row {
+  padding-bottom: 20px;
+
+}
+
+.mat-btn-default {
+  padding-right: 20px;
+}
+
 .mat-forms-fields {
   width: 100%;
-  padding: 2px 10px 3px 10px;
+  padding: 10px 20px 10px 20px;
 }
 
 .text-danger {
@@ -65,4 +81,8 @@
 .btn-padding {
   padding: 5px 12px 4px 13px;
   border-radius: 7px;
+}
+
+.text-center {
+  margin-bottom: 50px;
 }
