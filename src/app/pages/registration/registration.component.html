@@ -14,8 +14,8 @@
                         <mat-error
                             *ngIf="registrationForm.controls['firstName'].invalid && registrationForm.controls['firstName'].touched">
                             <small class="text-danger" *ngIf="registrationForm.get('firstName').errors?.required">
-                                First Name is
-                                Required</small>
+                                First Name is Required
+                            </small>
                         </mat-error>
                     </mat-form-field>
                 </div>
@@ -27,8 +27,8 @@
                         <mat-error
                             *ngIf="registrationForm.controls['lastName'].invalid && registrationForm.controls['lastName'].touched">
                             <small class="text-danger" *ngIf="registrationForm.get('lastName').errors?.required">
-                                Last Name is
-                                Required</small>
+                                Last Name is Required
+                            </small>
                         </mat-error>
                     </mat-form-field>
                 </div>
@@ -42,8 +42,8 @@
                     <mat-error
                         *ngIf="registrationForm.controls['username'].invalid && registrationForm.controls['username'].touched">
                         <small class="text-danger" *ngIf="registrationForm.get('username').errors?.required">
-                            Username is
-                            Required</small>
+                            Username is Required
+                        </small>
                     </mat-error>
                 </mat-form-field>
             </div>
@@ -63,8 +63,8 @@
                     <mat-error
                         *ngIf="registrationForm.controls['password'].invalid && registrationForm.controls['password'].touched">
                         <small class="text-danger" *ngIf="registrationForm.get('password').errors?.required">
-                            Password is
-                            Required</small>
+                            Password is Required
+                        </small>
                     </mat-error>
                 </mat-form-field>
             </div>
@@ -76,8 +76,8 @@
                     <mat-error
                         *ngIf="registrationForm.controls['confirmPassword'].invalid && registrationForm.controls['confirmPassword'].touched">
                         <small class="text-danger" *ngIf="registrationForm.get('confirmPassword').errors?.required">
-                            Password is
-                            Required</small>
+                            Password is Required
+                        </small>
                     </mat-error>
                 </mat-form-field>
             </div>
@@ -86,8 +86,9 @@
                     <button class="ml-2" mat-raised-button color="primary" (click)="onRegister()">Register</button>
                 </div>
                 <div class="mr-2">
-                    <button [routerLink]="'/login'" mat-stroked-button color="primary">Back to
-                        Login</button>
+                    <button [routerLink]="'/login'" mat-button color="primary">
+                        Back to Login
+                    </button>
                 </div>
             </div>
         </mat-card>
