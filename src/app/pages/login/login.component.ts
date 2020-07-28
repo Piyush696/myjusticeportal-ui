@@ -21,7 +21,6 @@ export class LoginComponent implements OnInit {
   }
 
   onLogin() {
-    this.router.navigateByUrl('/dashboard')
     console.log('xsax')
     this.loginService.userLogin(
       this.loginForm.get('email').value,
@@ -32,6 +31,7 @@ export class LoginComponent implements OnInit {
         if (res.success) {
           this.loginService.checkToken().then((data: any) => {
             console.log(data)
+            this.router.navigateByUrl('/dashboard')
             this.showNotification('top', 'right');
           })
         }

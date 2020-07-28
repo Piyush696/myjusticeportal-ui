@@ -36,14 +36,23 @@
 
             <div class="d-flex justify-content-center align-items-center p-2">
                 <mat-form-field appearance="fill" class="w-100 pt-2">
-                    <mat-label>Email</mat-label>
-                    <input matInput placeholder="Email" [formControl]="registrationForm.controls['email']" required>
+                    <mat-label>Username</mat-label>
+                    <input matInput placeholder="username" [formControl]="registrationForm.controls['username']"
+                        required>
                     <mat-error
-                        *ngIf="registrationForm.controls['email'].invalid && registrationForm.controls['email'].touched">
-                        <small class="text-danger" *ngIf="registrationForm.get('email').errors?.required">
-                            Email is
+                        *ngIf="registrationForm.controls['username'].invalid && registrationForm.controls['username'].touched">
+                        <small class="text-danger" *ngIf="registrationForm.get('username').errors?.required">
+                            Username is
                             Required</small>
                     </mat-error>
+                </mat-form-field>
+            </div>
+
+            <div class="d-flex justify-content-center align-items-center p-2">
+                <mat-form-field appearance="fill" class="w-100 pt-2">
+                    <mat-label>Email</mat-label>
+                    <input matInput placeholder="Email" [formControl]="registrationForm.controls['email']" required>
+
                 </mat-form-field>
             </div>
             <div class="d-flex justify-content-center align-items-center p-2">
