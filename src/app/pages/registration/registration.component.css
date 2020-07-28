@@ -2,19 +2,16 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-top: 50px;
 }
 
 .matCard {
   width: 600px;
-  padding-bottom: 20px;
 }
 
 .btn-group {
   display: flex;
   justify-content: space-between;
   margin-left: 10px;
-  margin-bottom: 13px !important;
 }
 
 .header {
@@ -54,9 +51,6 @@
   padding-right: 0px;
 }
 
-.btn-padding {
-  border-radius: 7px;
-}
 
 .input-name {
   display: flex;

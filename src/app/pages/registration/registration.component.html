@@ -2,8 +2,8 @@
     <img src="assets/img/logo.png" alt="logo" class="logo">
 </div>
 <div class="register-container">
-    <div class="matCard">
-        <h1 class="text-center mb-4 pb-4">Create an Account</h1>
+    <div class="matCard mt-5 mb-5">
+        <h1 class="text-center mb-5">Create an Account</h1>
         <mat-card>
             <div class="col-md-12" class="input-container">
                 <div class="col-md-6 input-name">
@@ -72,13 +72,12 @@
                     </mat-error>
                 </mat-form-field>
             </div>
-            <div class="btn-group mt-1">
+            <div class="btn-group mt-2 mb-3">
                 <div>
-                    <button mat-raised-button color="primary" class="btn-padding"
-                        (click)="onRegister()">Register</button>
+                    <button mat-raised-button color="primary" (click)="onRegister()">Register</button>
                 </div>
                 <div class="mr-2">
-                    <button [routerLink]="'/login'" mat-stroked-button color="primary" class="btn-padding">Back to
+                    <button [routerLink]="'/login'" mat-stroked-button color="primary">Back to
                         Login</button>
                 </div>
             </div>
