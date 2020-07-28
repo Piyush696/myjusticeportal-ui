@@ -33,7 +33,7 @@
   width: 600px;
 }
 
-.text-style {
+.disclamer-width {
   text-align: justify;
   letter-spacing: 3px;
   padding-top: 15px;
@@ -47,22 +47,9 @@
   padding-top: 10px !important;
 }
 
-.mat-btn-area {
-  padding-left: 20px;
-}
-
-.button-row {
-  padding-bottom: 20px;
-
-}
-
-.mat-btn-default {
-  padding-right: 20px;
-}
 
 .mat-forms-fields {
   width: 100%;
-  padding: 10px 20px 10px 20px;
 }
 
 .text-danger {
@@ -81,8 +68,4 @@
 .btn-padding {
   padding: 5px 12px 4px 13px;
   border-radius: 7px;
-}
-
-.text-center {
-  margin-bottom: 50px;
 }

@@ -13,7 +13,8 @@
 .btn-group {
   display: flex;
   justify-content: space-between;
-  padding: 10px 20px 22px 20px;
+  margin-left: 10px;
+  margin-bottom: 13px !important;
 }
 
 .header {
@@ -25,7 +26,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 15px 24px 10px 24px;
+  padding: 10px;
 }
 
 
@@ -48,16 +49,12 @@
   font-size: 13px;
 }
 
-.text-center {
-  margin-bottom: 50px;
-}
 
 .full-width {
   padding-right: 0px;
 }
 
 .btn-padding {
-  padding: 5px 12px 4px 13px;
   border-radius: 7px;
 }
 

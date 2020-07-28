@@ -3,10 +3,10 @@
 </div>
 <div class="login-container">
     <div class="matCard">
-        <h1 class="text-center">Welcome to My Justice Portal!</h1>
+        <h1 class="text-center mb-3 pb-4">Welcome to My Justice Portal!</h1>
         <mat-card>
             <div class="col-md-12" class="input-container">
-                <mat-form-field appearance="fill" class="mat-forms-fields">
+                <mat-form-field appearance="fill" class="mat-forms-fields p-4">
                     <mat-label>Enter your email</mat-label>
                     <input matInput placeholder="pat@example.com" [formControl]="loginForm.controls['email']" required>
                     <mat-error *ngIf="loginForm.controls['email'].invalid && loginForm.controls['email'].touched">
@@ -17,7 +17,7 @@
                 </mat-form-field>
             </div>
             <div class="col-md-12" class="input-container">
-                <mat-form-field appearance="fill" class="mat-forms-fields mat-Padding">
+                <mat-form-field appearance="fill" class="mat-forms-fields p-4">
                     <mat-label>Password</mat-label>
                     <input type="password" matInput placeholder="password"
                         [formControl]="loginForm.controls['password']" required>
@@ -29,11 +29,11 @@
                 </mat-form-field>
             </div>
             <div class="btn-group">
-                <div class="button-row mat-btn-area">
+                <div class="pl-4 pb-4">
                     <button [disabled]="loginForm.invalid" mat-raised-button color="primary" class="btn-padding"
                         (click)="onLogin()">Login</button>
                 </div>
-                <div class="button-row mat-btn-default">
+                <div class="pb-4 pr-4 mr-2">
                     <button [routerLink]="'/register'" mat-stroked-button color="primary" class="btn-padding">Create an
                         Account</button>
                 </div>
@@ -43,7 +43,7 @@
         </div>
     </div>
 </div>
-<div class="login-container text-style">
+<div class="login-container disclamer-width">
     <label class="text-size">DISCLAIMER: Curabitur egestas ullamcorper leo vitae luctus. Pellentesque finibus, dui a
         pharetra
         cursus, velit metus
