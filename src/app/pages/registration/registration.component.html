@@ -1,13 +1,13 @@
 <div class="header">
-    <img src="assets/img/logo.png" alt="logo" class="logo">
+    <img src="assets/img/logo.png" alt="logo" class="logo ml-2">
 </div>
-<div class="register-container">
-    <div class="matCard mt-5 mb-5">
-        <h1 class="text-center mb-5">Create an Account</h1>
+<div class="d-flex justify-content-center align-items-center">
+    <div class="matCard mt-4 mb-5">
+        <h1 class="text-center mb-4">Create an Account</h1>
         <mat-card>
-            <div class="col-md-12" class="input-container">
-                <div class="col-md-6 input-name">
-                    <mat-form-field appearance="fill" class="mat-forms-fields form-fields">
+            <div class="col-md-12" class="d-flex justify-content-center align-items-center p-2">
+                <div class="col-md-6 p-0">
+                    <mat-form-field appearance="fill" class="w-100 pt-2">
                         <mat-label>FirstName</mat-label>
                         <input matInput placeholder="First Name" [formControl]="registrationForm.controls['firstName']"
                             required>
@@ -20,7 +20,7 @@
                     </mat-form-field>
                 </div>
                 <div class="col-md-6" style="padding-right: 0;">
-                    <mat-form-field appearance="fill" class="mat-forms-fields form-fields">
+                    <mat-form-field appearance="fill" class="w-100 pt-2">
                         <mat-label>LastName</mat-label>
                         <input matInput placeholder="Last Name" [formControl]="registrationForm.controls['lastName']"
                             required>
@@ -34,8 +34,8 @@
                 </div>
             </div>
 
-            <div class="col-md-12" class="input-container">
-                <mat-form-field appearance="fill" class="mat-forms-fields form-fields">
+            <div class="col-md-12" class="d-flex justify-content-center align-items-center p-2">
+                <mat-form-field appearance="fill" class="w-100 pt-2">
                     <mat-label>Email</mat-label>
                     <input matInput placeholder="Email" [formControl]="registrationForm.controls['email']" required>
                     <mat-error
@@ -46,8 +46,8 @@
                     </mat-error>
                 </mat-form-field>
             </div>
-            <div class="col-md-12" class="input-container">
-                <mat-form-field appearance="fill" class="mat-forms-fields form-fields">
+            <div class="col-md-12" class="d-flex justify-content-center align-items-center p-2">
+                <mat-form-field appearance="fill" class="w-100 pt-2">
                     <mat-label>Password</mat-label>
                     <input type="password" matInput placeholder="password"
                         [formControl]="registrationForm.controls['password']" required>
@@ -59,8 +59,8 @@
                     </mat-error>
                 </mat-form-field>
             </div>
-            <div class="col-md-12" class="input-container">
-                <mat-form-field appearance="fill" class="mat-forms-fields form-fields">
+            <div class="col-md-12" class="d-flex justify-content-center align-items-center p-2">
+                <mat-form-field appearance="fill" class="w-100 pt-2">
                     <mat-label>Confirm Password</mat-label>
                     <input type="password" matInput placeholder="Confirm Password"
                         [formControl]="registrationForm.controls['confirmPassword']" required>
@@ -72,9 +72,9 @@
                     </mat-error>
                 </mat-form-field>
             </div>
-            <div class="btn-group mt-2 mb-3">
+            <div class="d-flex justify-content-between mb-2">
                 <div>
-                    <button mat-raised-button color="primary" (click)="onRegister()">Register</button>
+                    <button class="ml-2" mat-raised-button color="primary" (click)="onRegister()">Register</button>
                 </div>
                 <div class="mr-2">
                     <button [routerLink]="'/login'" mat-stroked-button color="primary">Back to
