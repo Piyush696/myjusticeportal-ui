@@ -12,7 +12,7 @@
 .btn-group {
   display: flex;
   justify-content: space-between;
-  padding: 20px;
+  padding: 10px 20px 22px 20px;
 }
 
 .header {
