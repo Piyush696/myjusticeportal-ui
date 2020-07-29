@@ -1,5 +1,5 @@
 <div class="d-flex justify-content-center align-items-center">
-    <div class="my-5">
+    <div class="my-3">
         <div class="d-flex justify-content-center">
             <img src="assets/img/logo.png" alt="logo" class="logo">
         </div>
@@ -7,12 +7,12 @@
             <div class="row">
                 <div class="col-6 pl-2 mb-1">
                     <mat-form-field appearance="fill" class="w-100">
-                        <mat-label>FirstName</mat-label>
+                        <mat-label>First Name</mat-label>
                         <input matInput placeholder="First Name" [formControl]="registrationForm.controls['firstName']"
                             required>
                         <mat-error
                             *ngIf="registrationForm.controls['firstName'].invalid && registrationForm.controls['firstName'].touched">
-                            <small class="text-danger" *ngIf="registrationForm.get('firstName').errors?.required">
+                            <small class="font13" *ngIf="registrationForm.get('firstName').errors?.required">
                                 First Name is Required
                             </small>
                         </mat-error>
@@ -20,12 +20,12 @@
                 </div>
                 <div class="col-6 pr-2 mb-1">
                     <mat-form-field appearance="fill" class="w-100">
-                        <mat-label>LastName</mat-label>
+                        <mat-label>Last Name</mat-label>
                         <input matInput placeholder="Last Name" [formControl]="registrationForm.controls['lastName']"
                             required>
                         <mat-error
                             *ngIf="registrationForm.controls['lastName'].invalid && registrationForm.controls['lastName'].touched">
-                            <small class="text-danger" *ngIf="registrationForm.get('lastName').errors?.required">
+                            <small class="font13" *ngIf="registrationForm.get('lastName').errors?.required">
                                 Last Name is Required
                             </small>
                         </mat-error>
@@ -41,7 +41,7 @@
                         required>
                     <mat-error
                         *ngIf="registrationForm.controls['username'].invalid && registrationForm.controls['username'].touched">
-                        <small class="text-danger" *ngIf="registrationForm.get('username').errors?.required">
+                        <small class="font13" *ngIf="registrationForm.get('username').errors?.required">
                             Username is Required
                         </small>
                     </mat-error>
@@ -51,7 +51,7 @@
             <div class="row">
                 <mat-form-field appearance="fill" class="w-100 p-2">
                     <mat-label>Email</mat-label>
-                    <input matInput placeholder="Email" [formControl]="registrationForm.controls['email']" required>
+                    <input matInput placeholder="Email" [formControl]="registrationForm.controls['email']">
                 </mat-form-field>
             </div>
 
@@ -62,7 +62,7 @@
                         [formControl]="registrationForm.controls['password']" required>
                     <mat-error
                         *ngIf="registrationForm.controls['password'].invalid && registrationForm.controls['password'].touched">
-                        <small class="text-danger" *ngIf="registrationForm.get('password').errors?.required">
+                        <small class="font13" *ngIf="registrationForm.get('password').errors?.required">
                             Password is Required
                         </small>
                     </mat-error>
@@ -76,7 +76,7 @@
                         [formControl]="registrationForm.controls['confirmPassword']" required>
                     <mat-error
                         *ngIf="registrationForm.controls['confirmPassword'].invalid && registrationForm.controls['confirmPassword'].touched">
-                        <small class="text-danger" *ngIf="registrationForm.get('confirmPassword').errors?.required">
+                        <small class="font13" *ngIf="registrationForm.get('confirmPassword').errors?.required">
                             Password is Required
                         </small>
                     </mat-error>
@@ -87,7 +87,7 @@
                 <button [routerLink]="'/login'" mat-button color="primary">
                     Back to Login
                 </button>
-                <button class="px-2 py-1" mat-raised-button color="primary" (click)="onRegister()">Register</button>
+                <button class="px-4 py-1" mat-raised-button color="primary" (click)="onRegister()">REGISTER</button>
             </div>
         </mat-card>
     </div>
