@@ -25,30 +25,38 @@ export class RegistrationComponent implements OnInit {
   }
 
   onRegister() {
-    console.log(this.registrationForm.value)
     this.registrationService.addUser(this.registrationForm.value).subscribe((result) => {
-      this.showNotification('top', 'right');
+      this.showNotification('top', 'right', 'success');
       this.router.navigateByUrl('/dashboard')
-      console.log(result)
     })
   }
 
-  showNotification(from, align) {
-    const color = Math.floor(Math.random() * 5 + 1);
-
-    switch (color) {
-      case 1:
-        this.toastr.info(
-          '<span data-notify="icon" class="nc-icon nc-bell-55"></span><span data-notify="message">User <b>My Justice Portal</b> - .</span>',
-          "",
-          {
-            timeOut: 4000,
-            closeButton: true,
-            enableHtml: true,
-            toastClass: "alert alert-info alert-with-icon",
-            positionClass: "toast-" + from + "-" + align
-          }
-        );
+  showNotification(from, align, value) {
+    if (value === 'success') {
+      this.toastr.success(
+        '<span data-notify="icon" class="nc-icon nc-bell-55"></span><span data-notify="message">Welcome to <b>My Justice Portal</b> - .</span>',
+        "",
+        {
+          timeOut: 4000,
+          closeButton: true,
+          enableHtml: true,
+          toastClass: "alert alert-info alert-with-icon",
+          positionClass: "toast-" + from + "-" + align
+        }
+      );
+    }
+    else {
+      this.toastr.error(
+        '<span data-notify="icon" class="nc-icon nc-bell-55"></span><span data-notify="message"><b>Error</b> - .</span>',
+        "",
+        {
+          timeOut: 4000,
+          enableHtml: true,
+          closeButton: true,
+          toastClass: "alert alert-danger alert-with-icon",
+          positionClass: "toast-" + from + "-" + align
+        }
+      );
     }
   }
 }
