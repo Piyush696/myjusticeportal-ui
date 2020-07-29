@@ -5,15 +5,15 @@
         </div>
         <mat-card class="p-5">
             <mat-form-field appearance="fill" class="w-100 p-3">
-                <mat-label>Enter your username or email</mat-label>
-                <input matInput placeholder="user@example.com" [formControl]="loginForm.controls['email']" required>
-                <mat-error *ngIf="loginForm.controls['email'].invalid && loginForm.controls['email'].touched">
-                    <div class="font13" *ngIf="loginForm.get('email').errors?.required">
+                <mat-label>Enter your email or username</mat-label>
+                <input matInput placeholder="user@example.com" [formControl]="loginForm.controls['user']" required>
+                <mat-error *ngIf="loginForm.controls['user'].invalid && loginForm.controls['user'].touched">
+                    <div class="font13" *ngIf="loginForm.get('user').errors?.required">
                         Username or email is required
                     </div>
                 </mat-error>
             </mat-form-field>
- 
+
             <mat-form-field appearance="fill" class="w-100 p-3">
                 <mat-label>Enter your password</mat-label>
                 <input type="password" matInput placeholder="password" [formControl]="loginForm.controls['password']"
@@ -29,8 +29,7 @@
                 <button [routerLink]="'/register'" mat-button color="primary">
                     Create an account
                 </button>
-                <button class="px-4 py-1" [disabled]="loginForm.invalid" mat-raised-button color="primary"
-                    (click)="onLogin()">LOGIN</button>
+                <button class="px-4 py-1" mat-raised-button color="primary" (click)="onLogin()">LOGIN</button>
             </div>
         </mat-card>
     </div>

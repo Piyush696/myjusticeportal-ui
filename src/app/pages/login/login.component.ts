@@ -15,7 +15,7 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
     this.loginForm = this.fb.group({
-      email: ['', [Validators.required]],
+      user: ['', [Validators.required]],
       password: ['', [Validators.required]],
     })
   }
@@ -23,8 +23,8 @@ export class LoginComponent implements OnInit {
   onLogin() {
     console.log('xsax')
     this.loginService.userLogin(
-      this.loginForm.get('email').value,
-      this.loginForm.get('password').value
+      this.loginForm.get('user').value,
+      this.loginForm.get('password').value,
     ).then(
       (res: any) => {
         console.log(res)
@@ -35,10 +35,10 @@ export class LoginComponent implements OnInit {
             this.showNotification('top', 'right');
           })
         }
-
       })
-
   }
+
+
   showNotification(from, align) {
     const color = Math.floor(Math.random() * 5 + 1);
 
