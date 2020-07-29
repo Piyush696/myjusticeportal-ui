@@ -84,10 +84,10 @@
             </div>
 
             <div class="d-flex justify-content-between">
-                <button class="px-2 py-1" [routerLink]="'/login'" mat-button color="primary">
+                <button [routerLink]="'/login'" mat-button color="primary">
                     Back to Login
                 </button>
-                <button mat-raised-button color="primary" (click)="onRegister()">Register</button>
+                <button class="px-2 py-1" mat-raised-button color="primary" (click)="onRegister()">Register</button>
             </div>
         </mat-card>
     </div>
