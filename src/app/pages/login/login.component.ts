@@ -27,11 +27,9 @@ export class LoginComponent implements OnInit {
       this.loginForm.get('password').value,
     ).subscribe(
       (res: any) => {
-        console.log(res)
         if (res.success) {
           this.cacheService.setCache('token', res.token);
           this.loginService.checkToken().then((data: any) => {
-            console.log(data)
             if (data.success) {
               this.router.navigateByUrl('/dashboard')
               this.showNotification('top', 'right', 'success');
@@ -60,9 +58,8 @@ export class LoginComponent implements OnInit {
       );
     }
     else {
-      console.log('xsax')
       this.toastr.error(
-        '<span data-notify="icon" class="nc-icon nc-bell-55"></span><span data-notify="message">Welcome to <b>My Justice Portal</b> - .</span>',
+        '<span data-notify="icon" class="nc-icon nc-bell-55"></span><span data-notify="message"><b>User not Registered</b> - .</span>',
         "",
         {
           timeOut: 4000,

@@ -25,17 +25,14 @@ export class RegistrationComponent implements OnInit {
   }
 
   onRegister() {
-    console.log(this.registrationForm.value)
     this.registrationService.addUser(this.registrationForm.value).subscribe((result) => {
       this.showNotification('top', 'right', 'success');
       this.router.navigateByUrl('/dashboard')
-      console.log(result)
     })
   }
 
   showNotification(from, align, value) {
     if (value === 'success') {
-      console.log('xsax')
       this.toastr.success(
         '<span data-notify="icon" class="nc-icon nc-bell-55"></span><span data-notify="message">Welcome to <b>My Justice Portal</b> - .</span>',
         "",
@@ -49,9 +46,8 @@ export class RegistrationComponent implements OnInit {
       );
     }
     else {
-      console.log('xsax')
       this.toastr.error(
-        '<span data-notify="icon" class="nc-icon nc-bell-55"></span><span data-notify="message">Welcome to <b>My Justice Portal</b> - .</span>',
+        '<span data-notify="icon" class="nc-icon nc-bell-55"></span><span data-notify="message"><b>Error</b> - .</span>',
         "",
         {
           timeOut: 4000,

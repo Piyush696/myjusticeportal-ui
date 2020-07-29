@@ -30,30 +30,6 @@ export class LoginService {
     return this.httpClient.get(`${this.apiPath}/${this.route}/check-token`, httpOptions).toPromise();
   }
 
-  // async userLogin(user: string, password: string): Promise<{ success: boolean }> {
-  //   try {
-  //     const res: any = await this.httpClient.post<Object>(`${this.apiPath}/${this.loginUser}`, {
-  //       user,
-  //       password
-  //     }).toPromise();
-
-  //     if (res && res.token) {
-
-  //       this.authenticated = true;
-
-  //       this.cacheService.setCache('token', res.token);
-
-  //       return of({ success: true, res }).toPromise();
-  //     } else {
-
-  //       return of({ success: false, ...res }).toPromise();
-  //     }
-
-  //   } catch (e) {
-  //     return of({ success: false }).toPromise();
-  //   }
-  // }
-
   userLogin(user: string, password: string) {
     return this.httpClient.post<object>(`${this.apiPath}/${this.loginUser}`, { user: user, password: password })
   }
