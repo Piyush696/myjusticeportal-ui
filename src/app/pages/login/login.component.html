@@ -1,57 +1,44 @@
-<div style="background: #e4e3e9;">
-    <img src="assets/img/LOGO 4.jpg" alt="logo" class="logo">
-</div>
-<div class="login-container">
-    <div class="col">
-        <mat-card>
-            <div class="col-md-12" class="input-container">
-                <mat-form-field appearance="fill" class="mat-forms-fields">
-                    <mat-label>Enter your email</mat-label>
-                    <input matInput placeholder="pat@example.com" [formControl]="loginForm.controls['email']" required>
-                    <mat-error *ngIf="loginForm.controls['email'].invalid && loginForm.controls['email'].touched">
-                        <small class="text-danger" *ngIf="loginForm.get('email').errors?.required">
-                            Email is
-                            Required</small>
-                    </mat-error>
-                </mat-form-field>
-            </div>
-            <div class="col-md-12" class="input-container">
-                <mat-form-field appearance="fill" class="mat-forms-fields mat-Padding">
-                    <mat-label>Password</mat-label>
-                    <input type="password" matInput placeholder="password"
-                        [formControl]="loginForm.controls['password']" required>
-                    <mat-error *ngIf="loginForm.controls['password'].invalid && loginForm.controls['password'].touched">
-                        <small class="text-danger" *ngIf="loginForm.get('password').errors?.required">
-                            Password is
-                            Required</small>
-                    </mat-error>
-                </mat-form-field>
-            </div>
-            <div class="button-row input-container">
-                <button [disabled]="loginForm.invalid" mat-raised-button color="primary" class="btn-padding"
-                    (click)="onLogin()">Login</button>
-            </div>
-            <div class="button-row input-container">
-                <button [routerLink]="'/register'" mat-stroked-button color="primary" class="btn-padding">Create an
-                    Account</button>
+<div class="d-flex justify-content-center align-items-center">
+    <div class="my-5">
+        <div class="d-flex justify-content-center">
+            <img src="assets/img/logo.png" alt="logo" class="logo">
+        </div>
+        <mat-card class="p-5">
+            <mat-form-field appearance="fill" class="w-100 p-3">
+                <mat-label>Enter your email or username</mat-label>
+                <input matInput placeholder="user@example.com" [formControl]="loginForm.controls['user']" required>
+                <mat-error *ngIf="loginForm.controls['user'].invalid && loginForm.controls['user'].touched">
+                    <div class="font13" *ngIf="loginForm.get('user').errors?.required">
+                        Username or email is required
+                    </div>
+                </mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="fill" class="w-100 p-3">
+                <mat-label>Enter your password</mat-label>
+                <input type="password" matInput placeholder="password" [formControl]="loginForm.controls['password']"
+                    required>
+                <mat-error *ngIf="loginForm.controls['password'].invalid && loginForm.controls['password'].touched">
+                    <small class="font13" *ngIf="loginForm.get('password').errors?.required">
+                        Password is Required
+                    </small>
+                </mat-error>
+            </mat-form-field>
+
+            <div class="d-flex justify-content-between px-3 mt-2">
+                <button [routerLink]="'/register'" mat-button color="primary">
+                    Create an account
+                </button>
+                <button class="px-4 py-1" mat-raised-button color="primary" (click)="onLogin()">LOGIN</button>
             </div>
         </mat-card>
-        <div>
-            <div class="button-row input-container text-style">
-                <label>DISCLAIMER: Curabitur egestas ullamcorper leo vitae luctus. Pellentesque finibus, dui a pharetra
-                    cursus, velit metus
-                    dignissim lorem, sit amet rhoncus massa dui quis sapien. Nunc porttitor faucibus velit. Nulla
-                    volutpat ipsum eu
-                    fringilla sagittis. Quisque viverra, neque in suscipit porttitor, nunc turpis tincidunt augue, eget
-                    vestibulum neque
-                    nisl vitae purus. Aenean vel enim ac tortor porttitor ornare. In id magna maximus, dignissim nisi
-                    at, feugiat augue.
-                    Vestibulum nec aliquet mauris. Quisque nec fringilla eros. Nulla eu vehicula erat, maximus tincidunt
-                    tortor. Nam at
-                    tellus ac augue feugiat convallis sed at metus. In ultricies augue turpis, non posuere risus commodo
-                    sit amet. Praesent
-                    id nunc arcu.Copyright © 2020 My Justice Portal LLC. All rights reserved</label>
-            </div>
-        </div>
     </div>
+</div>
+<div class="d-flex justify-content-center">
+    <p class="w-75">DISCLAIMER: The standard chunk of Lorem Ipsum used since the 1500s is reproduced
+        below for those interested. Sections 1.10.32 and 1.10.33 from "de Finibus Bonorum et Malorum" by Cicero are also
+        reproduced in their exact original form, accompanied by English versions from the 1914 translation by H.
+        Rackham. when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has
+        survived not only five centuries, but also the leap into electronic typesetting, remaining essentially
+        unchanged. Copyright © 2020 My Justice Portal LLC. All rights reserved</p>
 </div>

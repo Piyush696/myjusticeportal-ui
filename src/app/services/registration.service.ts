@@ -25,7 +25,7 @@ export class RegistrationService {
   //   };
   // }
   addUser(profileData) {
-    return this.httpClient.post<object>(`${this.apiPath}/${this.createUser}/`, profileData)
+    return this.httpClient.post<object>(`${this.apiPath}/${this.createUser}/registration`, profileData)
   }
   // getAllusers() {
   //   return this.httpClient.get<object>(`${this.apiPath}/${this.allUsers}/`)

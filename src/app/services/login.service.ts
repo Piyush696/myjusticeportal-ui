@@ -22,54 +22,15 @@ export class LoginService {
   }
 
   checkToken() {
-    console.log(this.cacheService.getCache('token').token)
     const httpOptions = {
       headers: new HttpHeaders({
-        'Authorization': `Bearer ${this.cacheService.getCache('token').token}`
+        'Authorization': `Bearer ${this.cacheService.getCache('token')}`
       })
     };
     return this.httpClient.get(`${this.apiPath}/${this.route}/check-token`, httpOptions).toPromise();
   }
 
-  // async userLogin(email: string, password: string) {
-  //    
-  //     const body = {
-  //       email: email,
-  //       password: password
-  //     }
-  //     return this.httpClient.post<object>(`${this.apiPath}/${this.createUser}/`, body)
-  //   
-  // }
-
-
-  async userLogin(email: string, password: string): Promise<{ success: boolean }> {
-    try {
-      const res: any = await this.httpClient.post<Object>(`${this.apiPath}/${this.loginUser}`, {
-        email,
-        password
-      }).toPromise();
-
-      if (res.data && res.data.token) {
-
-        this.authenticated = true;
-
-        this.cacheService.setCache('token', res.data);
-
-        return of({ success: true, res }).toPromise();
-      } else {
-
-        return of({ success: false, ...res }).toPromise();
-      }
-
-    } catch (e) {
-      return of({ success: false }).toPromise();
-    }
-
+  userLogin(user: string, password: string) {
+    return this.httpClient.post<object>(`${this.apiPath}/${this.loginUser}`, { user: user, password: password })
   }
-
-  // getUserById(id) {
-  //   return this.httpClient.get<any>(`${this.apiPath}/user/${id}`);
-
-  // }
-
 }
