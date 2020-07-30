@@ -4,6 +4,10 @@ import { Router } from '@angular/router';
 import { CacheService } from 'app/services/cache.service';
 import { LoginService } from 'app/services/login.service';
 import { ToastrService } from "ngx-toastr";
+import { Store } from '@ngrx/store';
+import { AddUserInfo } from 'app/store/actions/userInfo.actions';
+
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -11,7 +15,7 @@ import { ToastrService } from "ngx-toastr";
 })
 export class LoginComponent implements OnInit {
   loginForm: FormGroup;
-  constructor(private fb: FormBuilder, private router: Router,
+  constructor(private fb: FormBuilder, private router: Router, private store: Store<any>,
     private loginService: LoginService, private toastr: ToastrService, private cacheService: CacheService) { }
 
   ngOnInit(): void {
@@ -30,6 +34,7 @@ export class LoginComponent implements OnInit {
         if (res.success) {
           this.cacheService.setCache('token', res.token);
           this.loginService.checkToken().then((data: any) => {
+            this.store.dispatch(new AddUserInfo(Object.assign({}, data.user)));
             if (data.success) {
               this.router.navigateByUrl('/dashboard')
               this.showNotification('top', 'right', 'success');
