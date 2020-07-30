@@ -21,6 +21,9 @@ import { RegistrationComponent } from './pages/registration/registration.compone
 import { CacheService } from './services/cache.service';
 import { LoginService } from './services/login.service';
 import { RegistrationService } from './services/registration.service';
+import { StoreModule } from '@ngrx/store';
+import { rootReducer } from './store/reducers';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
 
 @NgModule({
@@ -44,6 +47,10 @@ import { RegistrationService } from './services/registration.service';
     ReactiveFormsModule,
     ToastrModule.forRoot(),
     FooterModule,
+    StoreModule.forRoot(rootReducer),
+    StoreDevtoolsModule.instrument({
+      maxAge: 25
+    })
   ],
   providers: [
     RegistrationService,
