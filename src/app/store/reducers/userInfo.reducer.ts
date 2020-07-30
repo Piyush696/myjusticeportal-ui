@@ -7,7 +7,6 @@ export function UserInfoReducer(state: any = initialState, action: UserInfoActio
     switch (action.type) {
         case UserInfoTypes.ADD_USERINFO:
             return action.payload;
-
         default:
             return state;
     }
