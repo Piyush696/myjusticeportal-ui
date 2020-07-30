@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { CacheService } from 'app/services/cache.service';
+import { LoginService } from 'app/services/login.service';
 import { RegistrationService } from 'app/services/registration.service';
 import { ToastrService } from 'ngx-toastr';
 
@@ -11,7 +13,7 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class RegistrationComponent implements OnInit {
   registrationForm: FormGroup;
-  constructor(private fb: FormBuilder, private toastr: ToastrService, private registrationService: RegistrationService, private router: Router) { }
+  constructor(private loginService: LoginService, private cacheService: CacheService, private fb: FormBuilder, private toastr: ToastrService, private registrationService: RegistrationService, private router: Router) { }
 
   ngOnInit(): void {
     this.registrationForm = this.fb.group({
@@ -25,9 +27,13 @@ export class RegistrationComponent implements OnInit {
   }
 
   onRegister() {
-    this.registrationService.addUser(this.registrationForm.value).subscribe((result) => {
-      this.showNotification('top', 'right', 'success');
-      this.router.navigateByUrl('/dashboard')
+    this.registrationService.addUser(this.registrationForm.value).subscribe((res: any) => {
+      console.log(res)
+      this.cacheService.setCache('token', res.token);
+      this.loginService.checkToken().then((data: any) => {
+        this.showNotification('top', 'right', 'success');
+        this.router.navigateByUrl('/dashboard')
+      })
     })
   }
 
