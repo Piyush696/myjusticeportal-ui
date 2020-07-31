@@ -29,7 +29,7 @@ export class RegistrationComponent implements OnInit {
   onRegister() {
     this.registrationService.addUser(this.registrationForm.value).subscribe((res: any) => {
       this.cacheService.setCache('token', res.token);
-      this.loginService.checkToken().then((data: any) => {
+      this.loginService.checkToken().subscribe((data: any) => {
         this.showNotification('top', 'right', 'success');
         this.router.navigateByUrl('/dashboard')
       })
@@ -39,7 +39,7 @@ export class RegistrationComponent implements OnInit {
   showNotification(from, align, value) {
     if (value === 'success') {
       this.toastr.success(
-        '<span data-notify="icon" class="nc-icon nc-bell-55"></span><span data-notify="message">Welcome to <b>My Justice Portal</b> - .</span>',
+        '<span data-notify="icon" class="nc-icon nc-bell-55"></span><span data-notify="message">Welcome to <b>My Justice Portal</b></span>',
         "",
         {
           timeOut: 4000,
@@ -52,7 +52,7 @@ export class RegistrationComponent implements OnInit {
     }
     else {
       this.toastr.error(
-        '<span data-notify="icon" class="nc-icon nc-bell-55"></span><span data-notify="message"><b>Error</b> - .</span>',
+        '<span data-notify="icon" class="nc-icon nc-bell-55"></span><span data-notify="message"><b>Error</b></span>',
         "",
         {
           timeOut: 4000,

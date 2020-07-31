@@ -33,7 +33,7 @@ export class LoginComponent implements OnInit {
       (res: any) => {
         if (res.success) {
           this.cacheService.setCache('token', res.token);
-          this.loginService.checkToken().then((data: any) => {
+          this.loginService.checkToken().subscribe((data: any) => {
             this.store.dispatch(new AddUserInfo(Object.assign({}, data.user)));
             if (data.success) {
               this.router.navigateByUrl('/dashboard')

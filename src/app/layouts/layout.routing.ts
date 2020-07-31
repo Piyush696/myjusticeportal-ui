@@ -7,13 +7,14 @@ import { TypographyComponent } from '../pages/typography/typography.component';
 import { IconsComponent } from '../pages/icons/icons.component';
 import { MapsComponent } from '../pages/maps/maps.component';
 import { NotificationsComponent } from '../pages/notifications/notifications.component';
+import { AuthGuard } from 'app/guards/auth.guard';
 
 export const LayoutRoutes: Routes = [
-    { path: 'dashboard', component: DashboardComponent },
-    { path: 'user', component: UserComponent },
-    { path: 'table', component: TableComponent },
-    { path: 'typography', component: TypographyComponent },
-    { path: 'icons', component: IconsComponent },
-    { path: 'maps', component: MapsComponent },
-    { path: 'notifications', component: NotificationsComponent }
+    { path: 'dashboard', canActivate: [AuthGuard], component: DashboardComponent },
+    { path: 'user', canActivate: [AuthGuard], component: UserComponent },
+    { path: 'table', canActivate: [AuthGuard], component: TableComponent },
+    { path: 'typography', canActivate: [AuthGuard], component: TypographyComponent },
+    { path: 'icons', canActivate: [AuthGuard], component: IconsComponent },
+    { path: 'maps', canActivate: [AuthGuard], component: MapsComponent },
+    { path: 'notifications', canActivate: [AuthGuard], component: NotificationsComponent }
 ];

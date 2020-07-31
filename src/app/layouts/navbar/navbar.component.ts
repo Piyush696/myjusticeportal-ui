@@ -94,7 +94,7 @@ export class NavbarComponent implements OnInit {
   }
 
   logout() {
-    this.cacheService.removeCache("user");
+    this.cacheService.removeCache("token");
     this.router.navigateByUrl('/login')
   }
 

@@ -27,7 +27,7 @@ export class LoginService {
         'Authorization': `Bearer ${this.cacheService.getCache('token')}`
       })
     };
-    return this.httpClient.get(`${this.apiPath}/${this.route}/check-token`, httpOptions).toPromise();
+    return this.httpClient.get(`${this.apiPath}/${this.route}/check-token`, httpOptions);
   }
 
   userLogin(user: string, password: string) {
