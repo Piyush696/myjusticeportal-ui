@@ -93,7 +93,12 @@
                     (click)="onRegister()">REGISTER</button> -->
             </div>
         </mat-card>
-        <mat-card class="p-3" *ngIf="isRoleSelected">
+    </div>
+</div>
+
+<div class="d-flex justify-content-center align-items-center">
+    <div class="my-3">
+        <mat-card class="p-4" *ngIf="isRoleSelected">
             <div class="d-flex justify-content-center align-items-center">
                 <mat-label>Select your role</mat-label>
             </div>
@@ -101,8 +106,8 @@
                 <mat-form-field appearance="fill" class="w-100">
                     <mat-label>Select role</mat-label>
                     <mat-select>
-                        <mat-option *ngFor="let food of foods" [value]="food.value">
-                            {{food.viewValue}}
+                        <mat-option *ngFor="let role of roleList.data" [value]="role.roleId">
+                            {{role.name}}
                         </mat-option>
                     </mat-select>
                 </mat-form-field>

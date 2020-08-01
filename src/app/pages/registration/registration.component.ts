@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { CacheService } from 'app/services/cache.service';
 import { LoginService } from 'app/services/login.service';
 import { RegistrationService } from 'app/services/registration.service';
+import { RoleService } from 'app/services/role.service';
 import { ToastrService } from 'ngx-toastr';
 
 @Component({
@@ -14,12 +15,11 @@ import { ToastrService } from 'ngx-toastr';
 export class RegistrationComponent implements OnInit {
   registrationForm: FormGroup;
   isRoleSelected: boolean;
-  foods = [
-    { value: 'End User', viewValue: 'Steak' },
-    { value: 'pizza-1', viewValue: 'Pizza' },
-    { value: 'tacos-2', viewValue: 'Tacos' }
-  ];
-  constructor(private loginService: LoginService, private cacheService: CacheService, private fb: FormBuilder, private toastr: ToastrService, private registrationService: RegistrationService, private router: Router) { }
+  roleList: any;
+
+  constructor(private loginService: LoginService, private cacheService: CacheService, private fb: FormBuilder,
+    private toastr: ToastrService, private roleService: RoleService,
+    private registrationService: RegistrationService, private router: Router) { }
 
   ngOnInit(): void {
     this.registrationForm = this.fb.group({
@@ -30,10 +30,19 @@ export class RegistrationComponent implements OnInit {
       confirmPassword: ['', [Validators.required]],
       username: ['', [Validators.required]],
     })
+    this.getRoles();
   }
+
+  getRoles() {
+    this.roleService.getAllRoles().subscribe((role) => {
+      this.roleList = role
+    })
+  }
+
   onNext() {
     this.isRoleSelected = true;
   }
+
   onRegister() {
     this.registrationService.addUser(this.registrationForm.value).subscribe((res: any) => {
       console.log(res)
