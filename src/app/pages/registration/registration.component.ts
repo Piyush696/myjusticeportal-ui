@@ -29,7 +29,7 @@ export class RegistrationComponent implements OnInit {
     this.registrationForm = this.fb.group({
       firstName: ['', [Validators.required]],
       lastName: ['', [Validators.required]],
-      email: ['', [Validators.required, this.validateEmail.bind(this)]],
+      email: ['', [this.validateEmail.bind(this)]],
       password: ['', [Validators.required]],
       confirmPassword: ['', [Validators.required]],
       username: ['', [Validators.required]],
@@ -46,7 +46,7 @@ export class RegistrationComponent implements OnInit {
 
   validateEmail(control: AbstractControl) {
     const pattern = /^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,15})$/;
-    if (!control.value.match(pattern)) {
+    if (!control.value.match(pattern) && control.value !== '') {
       return { invalidEmail: true };
     }
     return null;
