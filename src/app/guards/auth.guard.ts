@@ -18,25 +18,20 @@ export class AuthGuard implements CanActivate {
   canActivate() {
 
     return this.loginService.checkToken().then((data: any) => {
-      console.log(data)
       if (data.success) {
-        // this.store.dispatch(new AddUserInfo(Object.assign({}, data.user)));
+        this.store.dispatch(new AddUserInfo(Object.assign({}, data.user)));
         return true;
       } else {
-        console.log(data)
         this.cacheService.removeCache('user');
         this.router.navigateByUrl('/login')
         return false;
-
       }
     }).catch((x) => {
-      console.log(x)
       this.cacheService.removeCache('user');
       this.router.navigateByUrl('/login')
       return false;
-
     })
-    
+
   }
 
 }
