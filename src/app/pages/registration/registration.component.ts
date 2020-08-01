@@ -28,6 +28,7 @@ export class RegistrationComponent implements OnInit {
 
   onRegister() {
     this.registrationService.addUser(this.registrationForm.value).subscribe((res: any) => {
+      console.log(res)
       this.cacheService.setCache('token', res.token);
       this.loginService.checkToken().then((data: any) => {
         this.showNotification('top', 'right', 'success');
