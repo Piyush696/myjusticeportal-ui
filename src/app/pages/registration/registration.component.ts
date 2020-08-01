@@ -13,6 +13,12 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class RegistrationComponent implements OnInit {
   registrationForm: FormGroup;
+  isRoleSelected: boolean;
+  foods = [
+    { value: 'steak-0', viewValue: 'Steak' },
+    { value: 'pizza-1', viewValue: 'Pizza' },
+    { value: 'tacos-2', viewValue: 'Tacos' }
+  ];
   constructor(private loginService: LoginService, private cacheService: CacheService, private fb: FormBuilder, private toastr: ToastrService, private registrationService: RegistrationService, private router: Router) { }
 
   ngOnInit(): void {
@@ -25,7 +31,9 @@ export class RegistrationComponent implements OnInit {
       username: ['', [Validators.required]],
     })
   }
-
+  onNext() {
+    this.isRoleSelected = true;
+  }
   onRegister() {
     this.registrationService.addUser(this.registrationForm.value).subscribe((res: any) => {
       console.log(res)
