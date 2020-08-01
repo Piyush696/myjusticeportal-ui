@@ -16,7 +16,7 @@ import { AddRole, LoadRole } from 'app/store/actions/role.actions';
 })
 export class RegistrationComponent implements OnInit {
   registrationForm: FormGroup;
-  isRoleSelected: number = 1;
+  step: number = 1;
   roleList: any;
 
   constructor(private loginService: LoginService, private cacheService: CacheService, private fb: FormBuilder,
@@ -46,7 +46,6 @@ export class RegistrationComponent implements OnInit {
 
   onRegister() {
     this.registrationService.addUser(this.registrationForm.value).subscribe((res: any) => {
-      console.log(res)
       this.cacheService.setCache('token', res.token);
       this.loginService.checkToken().then((data: any) => {
         this.showNotification('top', 'right', 'success');

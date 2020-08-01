@@ -17,7 +17,6 @@ export class DashboardComponent implements OnInit {
   ngOnInit() {
     this.store.select(s => s.userInfo).subscribe(x => {
       this.userRole = x.role
-      console.log(x)
     })
   };
 
