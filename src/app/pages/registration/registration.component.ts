@@ -29,7 +29,7 @@ export class RegistrationComponent implements OnInit {
   onRegister() {
     this.registrationService.addUser(this.registrationForm.value).subscribe((res: any) => {
       this.cacheService.setCache('token', res.token);
-      this.loginService.checkToken().subscribe((data: any) => {
+      this.loginService.checkToken().then((data: any) => {
         this.showNotification('top', 'right', 'success');
         this.router.navigateByUrl('/dashboard')
       })

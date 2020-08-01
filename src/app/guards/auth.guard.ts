@@ -12,29 +12,31 @@ import { LoginService } from 'app/services/login.service';
 export class AuthGuard implements CanActivate {
 
   constructor(private router: Router,
-    private loginService: LoginService, private store: Store<any>,private cacheService: CacheService) {
+    private loginService: LoginService, private store: Store<any>, private cacheService: CacheService) {
   }
 
-  canActivate(
-    next: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
+  canActivate() {
 
-    this.loginService.checkToken().subscribe((data: any) => {
+    return this.loginService.checkToken().then((data: any) => {
+      console.log(data)
       if (data.success) {
-        this.store.dispatch(new AddUserInfo(Object.assign({}, data.user)));
+        // this.store.dispatch(new AddUserInfo(Object.assign({}, data.user)));
         return true;
-      }
-      else {
+      } else {
+        console.log(data)
         this.cacheService.removeCache('user');
         this.router.navigateByUrl('/login')
         return false;
+
       }
-    }, () => {
+    }).catch((x) => {
+      console.log(x)
       this.cacheService.removeCache('user');
       this.router.navigateByUrl('/login')
       return false;
+
     })
-    return false;
+    
   }
 
 }
