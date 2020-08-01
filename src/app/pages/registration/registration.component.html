@@ -52,6 +52,13 @@
                 <mat-form-field appearance="fill" class="w-100 p-2">
                     <mat-label>Email</mat-label>
                     <input matInput placeholder="Email" [formControl]="registrationForm.controls['email']">
+                    <mat-error>
+                        <div
+                            *ngIf="registrationForm.controls['email'].invalid &&
+                                           registrationForm.controls['email'].touched && !registrationForm.controls['email'].hasError('emailTaken')">
+                            <i class="error-msg ">That doesn't look right. </i>
+                        </div>
+                    </mat-error>
                 </mat-form-field>
             </div>
 

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { CacheService } from 'app/services/cache.service';
 import { LoginService } from 'app/services/login.service';
@@ -29,7 +29,7 @@ export class RegistrationComponent implements OnInit {
     this.registrationForm = this.fb.group({
       firstName: ['', [Validators.required]],
       lastName: ['', [Validators.required]],
-      email: ['', [Validators.required]],
+      email: ['', [Validators.required, this.validateEmail.bind(this)]],
       password: ['', [Validators.required]],
       confirmPassword: ['', [Validators.required]],
       username: ['', [Validators.required]],
@@ -42,6 +42,14 @@ export class RegistrationComponent implements OnInit {
     this.store.select(s => s.role).subscribe(data => {
       this.roleList = data;
     })
+  }
+
+  validateEmail(control: AbstractControl) {
+    const pattern = /^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,15})$/;
+    if (!control.value.match(pattern)) {
+      return { invalidEmail: true };
+    }
+    return null;
   }
 
   onRegister() {
