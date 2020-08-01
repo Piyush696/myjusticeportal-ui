@@ -24,7 +24,9 @@ import { RegistrationService } from './services/registration.service';
 import { StoreModule } from '@ngrx/store';
 import { rootReducer } from './store/reducers';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
-
+import { MatSelectModule } from '@angular/material/select';
+import { EffectsModule } from '@ngrx/effects';
+import { effects } from './store/effects';
 
 @NgModule({
   declarations: [
@@ -40,6 +42,7 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
     RouterModule.forRoot(AppRoutes),
     SidebarModule,
     MatCardModule,
+    MatSelectModule,
     NavbarModule,
     HttpClientModule,
     FormsModule,
@@ -48,6 +51,7 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
     ToastrModule.forRoot(),
     FooterModule,
     StoreModule.forRoot(rootReducer),
+    EffectsModule.forRoot(effects),
     StoreDevtoolsModule.instrument({
       maxAge: 25
     })

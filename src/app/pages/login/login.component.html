@@ -29,7 +29,8 @@
                 <button [routerLink]="'/register'" mat-button color="primary">
                     Create an account
                 </button>
-                <button class="px-4 py-1" mat-raised-button color="primary" (click)="onLogin()">LOGIN</button>
+                <button [disabled]="this.loginForm.invalid" class="px-4 py-1" mat-raised-button color="primary"
+                    (click)="onLogin()">LOGIN</button>
             </div>
         </mat-card>
     </div>

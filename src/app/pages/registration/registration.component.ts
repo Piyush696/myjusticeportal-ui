@@ -4,7 +4,10 @@ import { Router } from '@angular/router';
 import { CacheService } from 'app/services/cache.service';
 import { LoginService } from 'app/services/login.service';
 import { RegistrationService } from 'app/services/registration.service';
+import { RoleService } from 'app/services/role.service';
 import { ToastrService } from 'ngx-toastr';
+import { Store } from '@ngrx/store';
+import { AddRole, LoadRole } from 'app/store/actions/role.actions';
 
 @Component({
   selector: 'app-registration',
@@ -13,16 +16,31 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class RegistrationComponent implements OnInit {
   registrationForm: FormGroup;
-  constructor(private loginService: LoginService, private cacheService: CacheService, private fb: FormBuilder, private toastr: ToastrService, private registrationService: RegistrationService, private router: Router) { }
+  step: number = 1;
+  roleList: any;
+
+  constructor(private loginService: LoginService, private cacheService: CacheService, private fb: FormBuilder,
+    private toastr: ToastrService, private roleService: RoleService,
+    private registrationService: RegistrationService, private router: Router, private store: Store<any>) { }
 
   ngOnInit(): void {
+    this.store.dispatch(new LoadRole());
+
     this.registrationForm = this.fb.group({
       firstName: ['', [Validators.required]],
       lastName: ['', [Validators.required]],
-      email: [''],
+      email: ['', [Validators.required]],
       password: ['', [Validators.required]],
       confirmPassword: ['', [Validators.required]],
       username: ['', [Validators.required]],
+      roleId: ['', [Validators.required]]
+    })
+    this.onGetRoles();
+  }
+
+  onGetRoles() {
+    this.store.select(s => s.role).subscribe(data => {
+      this.roleList = data;
     })
   }
 
