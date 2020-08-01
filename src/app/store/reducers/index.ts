@@ -1,5 +1,7 @@
 import { UserInfoReducer } from './userInfo.reducer';
+import { RoleReducer } from './role.reducer';
 
 export const rootReducer = {
-    userInfo: UserInfoReducer
+    userInfo: UserInfoReducer,
+    role: RoleReducer
 }

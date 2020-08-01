@@ -9,12 +9,16 @@ import { Subscription } from 'rxjs';
 })
 
 export class DashboardComponent implements OnInit {
+  userRole: any;
 
   constructor(private store: Store<any>) {
   }
 
   ngOnInit() {
-    this.store.select(s => s.userInfo).subscribe(x => console.log(x))
+    this.store.select(s => s.userInfo).subscribe(x => {
+      this.userRole = x.role
+      console.log(x)
+    })
   };
 
 }

@@ -25,6 +25,8 @@ import { StoreModule } from '@ngrx/store';
 import { rootReducer } from './store/reducers';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { MatSelectModule } from '@angular/material/select';
+import { EffectsModule } from '@ngrx/effects';
+import { effects } from './store/effects';
 
 @NgModule({
   declarations: [
@@ -49,6 +51,7 @@ import { MatSelectModule } from '@angular/material/select';
     ToastrModule.forRoot(),
     FooterModule,
     StoreModule.forRoot(rootReducer),
+    EffectsModule.forRoot(effects),
     StoreDevtoolsModule.instrument({
       maxAge: 25
     })
