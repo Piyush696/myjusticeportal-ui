@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import Chart from 'chart.js';
-
+import { Store } from '@ngrx/store';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'dashboard-cmp',
@@ -10,6 +10,11 @@ import Chart from 'chart.js';
 
 export class DashboardComponent implements OnInit {
 
-  ngOnInit() { };
-  
+  constructor(private store: Store<any>) {
+  }
+
+  ngOnInit() {
+    this.store.select(s=>s.userInfo).subscribe(x => console.log(x))
+  };
+
 }
