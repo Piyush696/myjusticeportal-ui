@@ -24,7 +24,7 @@ import { RegistrationService } from './services/registration.service';
 import { StoreModule } from '@ngrx/store';
 import { rootReducer } from './store/reducers';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
-
+import { MatSelectModule } from '@angular/material/select';
 
 @NgModule({
   declarations: [
@@ -40,6 +40,7 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
     RouterModule.forRoot(AppRoutes),
     SidebarModule,
     MatCardModule,
+    MatSelectModule,
     NavbarModule,
     HttpClientModule,
     FormsModule,

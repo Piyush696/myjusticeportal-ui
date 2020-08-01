@@ -15,7 +15,7 @@ export class RegistrationComponent implements OnInit {
   registrationForm: FormGroup;
   isRoleSelected: boolean;
   foods = [
-    { value: 'steak-0', viewValue: 'Steak' },
+    { value: 'End User', viewValue: 'Steak' },
     { value: 'pizza-1', viewValue: 'Pizza' },
     { value: 'tacos-2', viewValue: 'Tacos' }
   ];
@@ -38,7 +38,7 @@ export class RegistrationComponent implements OnInit {
     this.registrationService.addUser(this.registrationForm.value).subscribe((res: any) => {
       console.log(res)
       this.cacheService.setCache('token', res.token);
-      this.loginService.checkToken().subscribe((data: any) => {
+      this.loginService.checkToken().then((data: any) => {
         this.showNotification('top', 'right', 'success');
         this.router.navigateByUrl('/dashboard')
       })
