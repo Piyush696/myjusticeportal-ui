@@ -29,7 +29,7 @@ export class RegistrationService {
     return this.httpClient.post<object>(`${this.apiPath}/${this.createUser}`, profileData)
   }
 
-  checkEmail(query = {}) {
+  checkUser(query = {}) {
     return this.httpClient.get<Object>(`${this.apiPath}/users`, { params: query });
   }
 

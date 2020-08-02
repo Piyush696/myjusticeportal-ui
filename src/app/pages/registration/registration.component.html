@@ -39,11 +39,16 @@
                     <mat-label>Username</mat-label>
                     <input matInput placeholder="username" [formControl]="registrationForm.controls['username']"
                         required>
-                    <mat-error
-                        *ngIf="registrationForm.controls['username'].invalid && registrationForm.controls['username'].touched">
-                        <small class="font13" *ngIf="registrationForm.get('username').errors?.required">
-                            Username is Required
-                        </small>
+                    <mat-error>
+                        <div *ngIf="isTaken">
+                            <small class="font13">Username already taken.</small>
+                        </div>
+                        <div
+                            *ngIf="!isTaken && registrationForm.controls['username'].invalid && registrationForm.controls['username'].touched">
+                            <small class="font13" *ngIf="registrationForm.get('username').errors?.required">
+                                Username is Required
+                            </small>
+                        </div>
                     </mat-error>
                 </mat-form-field>
             </div>
@@ -53,8 +58,11 @@
                     <mat-label>Email (Optional)</mat-label>
                     <input matInput placeholder="Email" [formControl]="registrationForm.controls['email']">
                     <mat-error>
+                        <div *ngIf="isTaken">
+                            <small class="font13">Email already taken.</small>
+                        </div>
                         <div
-                            *ngIf="registrationForm.controls['email'].invalid &&
+                            *ngIf="!isTaken && registrationForm.controls['email'].invalid &&
                                            registrationForm.controls['email'].touched && !registrationForm.controls['email'].hasError('emailTaken')">
                             <small class="font13">That doesn't look right. </small>
                         </div>
