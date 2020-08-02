@@ -18,7 +18,6 @@ export class RegistrationComponent implements OnInit {
   registrationForm: FormGroup;
   step: number = 1;
   roleList: any;
-  isTaken: boolean;
 
   constructor(private loginService: LoginService, private cacheService: CacheService, private fb: FormBuilder,
     private toastr: ToastrService, private roleService: RoleService,
@@ -42,10 +41,8 @@ export class RegistrationComponent implements OnInit {
   async validateUserNotTaken(control: AbstractControl) {
     const result: any = await this.registrationService.checkUser({ user: control.value }).toPromise();
     if (result.taken) {
-      this.isTaken = true;
       return { taken: true };
     } else {
-      this.isTaken = false;
       return null;
     }
   }
