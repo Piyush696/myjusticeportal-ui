@@ -24,9 +24,15 @@ export class RegistrationService {
   //     })
   //   };
   // }
+
   addUser(profileData) {
     return this.httpClient.post<object>(`${this.apiPath}/${this.createUser}`, profileData)
   }
+
+  checkUser(query = {}) {
+    return this.httpClient.get<Object>(`${this.apiPath}/users`, { params: query });
+  }
+
   // getAllusers() {
   //   return this.httpClient.get<object>(`${this.apiPath}/${this.allUsers}/`)
   // }

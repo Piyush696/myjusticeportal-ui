@@ -29,13 +29,22 @@ export class RegistrationComponent implements OnInit {
     this.registrationForm = this.fb.group({
       firstName: ['', [Validators.required]],
       lastName: ['', [Validators.required]],
-      email: ['', [this.validateEmail.bind(this)]],
-      password: ['', [Validators.required]],
-      confirmPassword: ['', [Validators.required]],
-      username: ['', [Validators.required]],
+      email: ['', [this.validateEmail.bind(this)], this.validateUserNotTaken.bind(this)],
+      password: ['', [Validators.required, Validators.minLength(6)]],
+      confirmPassword: ['', [Validators.required], Validators.minLength(6)],
+      username: ['', [Validators.required], this.validateUserNotTaken.bind(this)],
       roleId: ['', [Validators.required]]
     })
     this.onGetRoles();
+  }
+
+  async validateUserNotTaken(control: AbstractControl) {
+    const result: any = await this.registrationService.checkUser({ user: control.value }).toPromise();
+    if (result.taken) {
+      return { taken: true };
+    } else {
+      return null;
+    }
   }
 
   onGetRoles() {
