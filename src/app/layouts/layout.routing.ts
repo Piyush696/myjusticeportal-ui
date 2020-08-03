@@ -8,10 +8,12 @@ import { IconsComponent } from '../pages/icons/icons.component';
 import { MapsComponent } from '../pages/maps/maps.component';
 import { NotificationsComponent } from '../pages/notifications/notifications.component';
 import { AuthGuard } from 'app/guards/auth.guard';
+import { UsersComponent } from 'app/pages/users/users.component';
 
 export const LayoutRoutes: Routes = [
     { path: 'dashboard', canActivate: [AuthGuard], component: DashboardComponent },
     { path: 'user', canActivate: [AuthGuard], component: UserComponent },
+    { path: 'users', canActivate: [AuthGuard], component: UsersComponent },
     { path: 'table', canActivate: [AuthGuard], component: TableComponent },
     { path: 'typography', canActivate: [AuthGuard], component: TypographyComponent },
     { path: 'icons', canActivate: [AuthGuard], component: IconsComponent },
