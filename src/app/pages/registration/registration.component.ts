@@ -31,10 +31,10 @@ export class RegistrationComponent implements OnInit {
       lastName: ['', [Validators.required]],
       email: ['', [this.validateEmail.bind(this)], this.validateUserNotTaken.bind(this)],
       password: ['', [Validators.required, Validators.minLength(6)]],
-      confirmPassword: ['', [Validators.required], Validators.minLength(6)],
+      confirmPassword: ['', [Validators.required, Validators.minLength(6)]],
       username: ['', [Validators.required], this.validateUserNotTaken.bind(this)],
       roleId: ['', [Validators.required]]
-    })
+    }, { validator: this.checkIfMatchingPasswords('password', 'confirmPassword') });
     this.onGetRoles();
   }
 
@@ -46,6 +46,19 @@ export class RegistrationComponent implements OnInit {
       return null;
     }
   }
+
+  checkIfMatchingPasswords(passwordKey: string, passwordConfirmationKey: string) {
+    return (group: FormGroup) => {
+      const passwordInput = group.controls[passwordKey];
+      const passwordConfirmationInput = group.controls[passwordConfirmationKey];
+      if (passwordInput.value !== passwordConfirmationInput.value) {
+        return passwordConfirmationInput.setErrors({ notSamePassword: true });
+      } else {
+        return passwordConfirmationInput.setErrors(null);
+      }
+    };
+  }
+
 
   onGetRoles() {
     this.store.select(s => s.role).subscribe(data => {
