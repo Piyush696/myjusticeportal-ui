@@ -27,6 +27,7 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { MatSelectModule } from '@angular/material/select';
 import { EffectsModule } from '@ngrx/effects';
 import { effects } from './store/effects';
+import { MatListModule } from '@angular/material/list';
 
 @NgModule({
   declarations: [
@@ -45,6 +46,8 @@ import { effects } from './store/effects';
     MatSelectModule,
     NavbarModule,
     HttpClientModule,
+    MatInputModule,
+    MatListModule,
     FormsModule,
     MatButtonModule,
     ReactiveFormsModule,
