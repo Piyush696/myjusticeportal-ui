@@ -79,11 +79,13 @@
                     <mat-label>Password</mat-label>
                     <input type="password" matInput placeholder="password"
                         [formControl]="registrationForm.controls['password']" required>
-                    <mat-error
-                        *ngIf="registrationForm.controls['password'].invalid && registrationForm.controls['password'].touched">
-                        <small class="font13" *ngIf="registrationForm.get('password').errors?.required">
-                            Password is Required
-                        </small>
+                    <mat-error>
+                        <div
+                            *ngIf="registrationForm.controls['password'].invalid && registrationForm.controls['password'].touched">
+                            <small class="font13">
+                                Password is Required
+                            </small>
+                        </div>
                     </mat-error>
                 </mat-form-field>
             </div>
@@ -93,11 +95,13 @@
                     <mat-label>Confirm Password</mat-label>
                     <input type="password" matInput placeholder="Confirm Password"
                         [formControl]="registrationForm.controls['confirmPassword']" required>
-                    <mat-error
-                        *ngIf="registrationForm.controls['confirmPassword'].invalid && registrationForm.controls['confirmPassword'].touched">
-                        <small class="font13" *ngIf="registrationForm.get('confirmPassword').errors?.required">
-                            Password is Required
-                        </small>
+                    <mat-error>
+                        <div *ngIf="registrationForm.controls['confirmPassword'].invalid &&  registrationForm.controls['confirmPassword'].touched &&
+                               registrationForm.controls['confirmPassword'].hasError('notSamePassword')">
+                            <small class="font13">
+                                Password does not match
+                            </small>
+                        </div>
                     </mat-error>
                 </mat-form-field>
             </div>
