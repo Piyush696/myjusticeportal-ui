@@ -1,0 +1,35 @@
+.logo {
+  width: 100%;
+  background: #fff;
+}
+
+
+.nav {
+  margin-top: 0px !important;
+}
+
+.sidebar .logo:after,
+.off-canvas-sidebar .logo:after {
+  height: 1px !important;
+  position: unset !important;
+}
+
+.sidebar-wrapper {
+  background: #333442;
+  padding-bottom: 0%;
+}
+
+.letter-spacing {
+  letter-spacing: 1px;
+  text-transform: none;
+  font-weight: 500;
+  font-size: 14px;
+}
+
+.sidebar-style {
+  opacity: 3 !important;
+  color: #000000 !important;
+  border-radius: 5px;
+  background: #f8f6f6 !important;
+  padding: 10px;
+}
