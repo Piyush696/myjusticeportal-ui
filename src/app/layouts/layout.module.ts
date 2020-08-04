@@ -1,10 +1,11 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { UsersComponent } from 'app/pages/users/users.component';
 import { DashboardComponent } from '../pages/dashboard/dashboard.component';
+import { MatButtonModule } from '@angular/material/button';
 import { IconsComponent } from '../pages/icons/icons.component';
 import { MapsComponent } from '../pages/maps/maps.component';
 import { NotificationsComponent } from '../pages/notifications/notifications.component';
@@ -18,6 +19,8 @@ import { MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
 import { MatInputModule } from '@angular/material/input';
 import { MatCardModule } from '@angular/material/card';
+import { MyAccountComponent } from 'app/pages/my-account/my-account.component';
+import { ToastrModule } from 'ngx-toastr';
 @NgModule({
   imports: [
     CommonModule,
@@ -30,6 +33,10 @@ import { MatCardModule } from '@angular/material/card';
     MatPaginatorModule,
     MatSortModule,
     MatTableModule,
+    FormsModule,
+    ReactiveFormsModule,
+    MatButtonModule,
+    ToastrModule.forRoot(),
   ],
   declarations: [
     DashboardComponent,
@@ -39,7 +46,8 @@ import { MatCardModule } from '@angular/material/card';
     IconsComponent,
     MapsComponent,
     NotificationsComponent,
-    UsersComponent
+    UsersComponent,
+    MyAccountComponent
   ]
 })
 

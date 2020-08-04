@@ -1,0 +1,23 @@
+ .form-control {
+   border: 1px solid #333442;
+   height: 47px;
+   border-radius: 3px;
+   box-sizing: border-box;
+   font-size: 14px;
+   margin-bottom: 10px;
+   line-height: 25px;
+   letter-spacing: 2px;
+   background: #c0c6f3;
+ }
+
+ .header-title {
+   font-weight: bold !important;
+   line-height: 10px !important;
+   letter-spacing: 2px !important;
+ }
+
+ .anchor-style {
+   font-size: 18px;
+   color: #333442;
+   background: #c0c6f3;
+ }

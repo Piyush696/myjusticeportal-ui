@@ -45,7 +45,7 @@
             </p>
           </a>
           <div ngbDropdownMenu aria-labelledby="navbarDropdownMenuLink" class="dropdown-menu dropdown-menu-right">
-            <a ngbDropdownItem href="javascript:void(0)">Profile</a>
+            <a [routerLink]="'/my-account'" ngbDropdownItem href="javascript:void(0)">My Account</a>
             <a ngbDropdownItem (click)="logout()">Logout</a>
             <!-- <a ngbDropdownItem href="javascript:void(0)">Something else here</a> -->
           </div>
