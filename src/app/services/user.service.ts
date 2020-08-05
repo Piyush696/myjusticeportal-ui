@@ -28,4 +28,11 @@ export class UserService {
     return this.httpClient.get<object>(`${this.apiPath}/${this.getAllUser}`, this.getHeaders())
   }
 
+  getSingleUser() {
+    return this.httpClient.get<object>(`${this.apiPath}/${this.getAllUser}/user`, this.getHeaders())
+  }
+
+  resetPassword(password) {
+    return this.httpClient.put<Object>(`${this.apiPath}/${this.getAllUser}/password`, { password: password }, this.getHeaders());
+  }
 }

@@ -1,0 +1,131 @@
+<h1 class="header-title">My Account</h1>
+<label class="header-sub-text">Manage your account information</label>
+
+<div class="row">
+    <div class="col-6">
+        <mat-card class="w-100 p-4">
+            <div class="row">
+                <mat-form-field appearance="fill" class="w-100 p-2">
+                    <mat-label>Firstname</mat-label>
+                    <input type="text" matInput placeholder="firstname"
+                        [formControl]="profileForm.controls['firstName']" required>
+                    <mat-error>
+                        <div
+                            *ngIf="profileForm.controls['firstName'].invalid && profileForm.controls['firstName'].touched">
+                            <small class="font13">
+                                Firstname is Required
+                            </small>
+                        </div>
+                    </mat-error>
+                </mat-form-field>
+            </div>
+            <div class="row">
+                <mat-form-field appearance="fill" class="w-100 p-2">
+                    <mat-label>Lastname</mat-label>
+                    <input type="text" matInput placeholder="lastname" [formControl]="profileForm.controls['lastName']"
+                        required>
+                    <mat-error>
+                        <div
+                            *ngIf="profileForm.controls['lastName'].invalid && profileForm.controls['lastName'].touched">
+                            <small class="font13">
+                                Lastname is Required
+                            </small>
+                        </div>
+                    </mat-error>
+                </mat-form-field>
+            </div>
+            <div class="row">
+                <mat-form-field appearance="fill" class="w-100 p-2">
+                    <mat-label>Username</mat-label>
+                    <input type="text" matInput placeholder="username" [formControl]="profileForm.controls['username']"
+                        required>
+                    <mat-error>
+                        <div
+                            *ngIf="profileForm.controls['username'].invalid && profileForm.controls['username'].touched">
+                            <small class="font13">
+                                username is Required
+                            </small>
+                        </div>
+                    </mat-error>
+                </mat-form-field>
+            </div>
+            <div class="row pl-1 pr-1">
+                <div class="form-control">
+                    <a class="w-100 anchor-style" data-toggle="modal" data-target="#passwordModal" mat-flat-button>Click
+                        here to reset your password</a>
+                </div>
+            </div>
+            <div class="row">
+                <mat-form-field appearance="fill" class="w-100 p-2">
+                    <mat-label>Email</mat-label>
+                    <input type="email" matInput placeholder="email" [formControl]="profileForm.controls['email']"
+                        required>
+                    <mat-error>
+                        <div *ngIf="profileForm.controls['email'].invalid && profileForm.controls['email'].touched">
+                            <small class="font13">
+                                Email is Required
+                            </small>
+                        </div>
+                    </mat-error>
+                </mat-form-field>
+            </div>
+            <div class="d-flex justify-content-end">
+                <button class="px-4 py-1" mat-raised-button color="primary" (click)="editChanges()">Edit
+                    Changes</button>
+            </div>
+        </mat-card>
+    </div>
+</div>
+
+<!-- modal -->
+<div class="modal fade" id="passwordModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="d-flex justify-content-center modal-header">
+                <mat-label class="font-weight-bold">Update Password</mat-label>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <mat-form-field appearance="fill" class="w-100 p-2">
+                                <mat-label>New Password</mat-label>
+                                <input type="password" matInput placeholder="password"
+                                    [formControl]="passwordForm.controls['password']" required>
+                                <mat-error>
+                                    <div
+                                        *ngIf="passwordForm.controls['password'].invalid && passwordForm.controls['password'].touched">
+                                        <small class="font13">
+                                            Password is Required
+                                        </small>
+                                    </div>
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+
+                        <div class="form-group">
+                            <mat-form-field appearance="fill" class="w-100 p-2">
+                                <mat-label>Confirm Password</mat-label>
+                                <input type="password" matInput placeholder="Confirm Password"
+                                    [formControl]="passwordForm.controls['confirmPassword']" required>
+                                <mat-error>
+                                    <div *ngIf="passwordForm.controls['confirmPassword'].invalid && passwordForm.controls['confirmPassword'].touched
+                                         && passwordForm.controls['confirmPassword'].hasError('notSamePassword')">
+                                        <small class="font13">
+                                            Password does not match
+                                        </small>
+                                    </div>
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="d-flex justify-content-between modal-footer">
+                <button type="button" class="btn btn-secondary waves-effect" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-info waves-effect waves-light" data-dismiss="modal"
+                    (click)="passwordChange()">Save</button>
+            </div>
+        </div>
+    </div>
+</div><!-- /.modal -->

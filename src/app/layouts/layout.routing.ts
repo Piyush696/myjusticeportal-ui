@@ -9,6 +9,7 @@ import { MapsComponent } from '../pages/maps/maps.component';
 import { NotificationsComponent } from '../pages/notifications/notifications.component';
 import { AuthGuard } from 'app/guards/auth.guard';
 import { UsersComponent } from 'app/pages/users/users.component';
+import { MyAccountComponent } from 'app/pages/my-account/my-account.component';
 
 export const LayoutRoutes: Routes = [
     { path: 'dashboard', canActivate: [AuthGuard], component: DashboardComponent },
@@ -18,5 +19,6 @@ export const LayoutRoutes: Routes = [
     { path: 'typography', canActivate: [AuthGuard], component: TypographyComponent },
     { path: 'icons', canActivate: [AuthGuard], component: IconsComponent },
     { path: 'maps', canActivate: [AuthGuard], component: MapsComponent },
-    { path: 'notifications', canActivate: [AuthGuard], component: NotificationsComponent }
+    { path: 'notifications', canActivate: [AuthGuard], component: NotificationsComponent },
+    { path: 'my-account', canActivate: [AuthGuard], component: MyAccountComponent },
 ];
