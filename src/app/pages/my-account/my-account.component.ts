@@ -61,7 +61,6 @@ export class MyAccountComponent implements OnInit {
   getSingleUser(userId) {
     this.userId = userId
     this.userService.getSingleUser(userId).subscribe((result: any) => {
-      console.log(result)
       this.user = result.data;
       this.profileForm.get('firstName').setValue(result.data.firstName)
       this.profileForm.get('lastName').setValue(result.data.lastName)
