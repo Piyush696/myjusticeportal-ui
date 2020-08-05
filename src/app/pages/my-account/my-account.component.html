@@ -6,6 +6,36 @@
         <mat-card class="w-100 p-4">
             <div class="row">
                 <mat-form-field appearance="fill" class="w-100 p-2">
+                    <mat-label>Firstname</mat-label>
+                    <input type="text" matInput placeholder="firstname"
+                        [formControl]="profileForm.controls['firstName']" required>
+                    <mat-error>
+                        <div
+                            *ngIf="profileForm.controls['firstName'].invalid && profileForm.controls['firstName'].touched">
+                            <small class="font13">
+                                Firstname is Required
+                            </small>
+                        </div>
+                    </mat-error>
+                </mat-form-field>
+            </div>
+            <div class="row">
+                <mat-form-field appearance="fill" class="w-100 p-2">
+                    <mat-label>Lastname</mat-label>
+                    <input type="text" matInput placeholder="lastname" [formControl]="profileForm.controls['lastName']"
+                        required>
+                    <mat-error>
+                        <div
+                            *ngIf="profileForm.controls['lastName'].invalid && profileForm.controls['lastName'].touched">
+                            <small class="font13">
+                                Lastname is Required
+                            </small>
+                        </div>
+                    </mat-error>
+                </mat-form-field>
+            </div>
+            <div class="row">
+                <mat-form-field appearance="fill" class="w-100 p-2">
                     <mat-label>Username</mat-label>
                     <input type="text" matInput placeholder="username" [formControl]="profileForm.controls['username']"
                         required>
@@ -27,35 +57,6 @@
             </div>
             <div class="row">
                 <mat-form-field appearance="fill" class="w-100 p-2">
-                    <mat-label>Housing Unit</mat-label>
-                    <input type="text" matInput placeholder="housing" [formControl]="profileForm.controls['housing']"
-                        required>
-                    <mat-error>
-                        <div *ngIf="profileForm.controls['housing'].invalid && profileForm.controls['housing'].touched">
-                            <small class="font13">
-                                Housing unit is Required
-                            </small>
-                        </div>
-                    </mat-error>
-                </mat-form-field>
-            </div>
-            <div class="row">
-                <mat-form-field appearance="fill" class="w-100 p-2">
-                    <mat-label>Facility</mat-label>
-                    <input type="text" matInput placeholder="facility" [formControl]="profileForm.controls['facility']"
-                        required>
-                    <mat-error>
-                        <div
-                            *ngIf="profileForm.controls['facility'].invalid && profileForm.controls['facility'].touched">
-                            <small class="font13">
-                                Facility is Required
-                            </small>
-                        </div>
-                    </mat-error>
-                </mat-form-field>
-            </div>
-            <div class="row">
-                <mat-form-field appearance="fill" class="w-100 p-2">
                     <mat-label>Email</mat-label>
                     <input type="email" matInput placeholder="email" [formControl]="profileForm.controls['email']"
                         required>
@@ -66,13 +67,6 @@
                             </small>
                         </div>
                     </mat-error>
-                </mat-form-field>
-            </div>
-            <div class="row">
-                <mat-form-field appearance="fill" class="w-100 p-2">
-                    <mat-label>Phone</mat-label>
-                    <input type="text" matInput placeholder="phone" [formControl]="profileForm.controls['phone']"
-                        required>
                 </mat-form-field>
             </div>
             <div class="d-flex justify-content-end">

@@ -19,19 +19,17 @@ export class MyAccountComponent implements OnInit {
 
   ngOnInit() {
     this.createControl();
-    this.createPasswordControl();
     this.getLoginDetails();
   }
 
   createControl() {
     this.profileForm = this.fb.group({
       username: ['', [Validators.required]],
-      password: ['', [Validators.required]],
-      housing: ['', [Validators.required]],
-      facility: ['', [Validators.required]],
+      firstName: ['', [Validators.required]],
+      lastName: ['', [Validators.required]],
       email: ['', [Validators.required]],
-      Phone: ['', [Validators.required]],
     })
+    this.createPasswordControl();
   }
 
   createPasswordControl() {
@@ -63,9 +61,13 @@ export class MyAccountComponent implements OnInit {
   getSingleUser(userId) {
     this.userId = userId
     this.userService.getSingleUser(userId).subscribe((result: any) => {
-      this.user = result.data[0];
-      this.profileForm.get('username').setValue(result.data[0].username)
-      this.profileForm.get('email').setValue(result.data[0].email)
+      console.log(result)
+      this.user = result.data;
+      this.profileForm.get('firstName').setValue(result.data.firstName)
+      this.profileForm.get('lastName').setValue(result.data.lastName)
+      this.profileForm.get('username').setValue(result.data.username)
+      this.profileForm.get('email').setValue(result.data.email)
+      this.profileForm.disable();
     })
   }
 
