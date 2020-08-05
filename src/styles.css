@@ -14,3 +14,7 @@ body {
 .header-sub-text {
   font-size: 18px;
 }
+
+.line-height {
+  line-height: 14px !important;
+}

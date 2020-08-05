@@ -1,0 +1,32 @@
+.card-style {
+  border: 1px solid #333442;
+  color: #333442;
+  background: #e4e4ec;
+}
+
+.case-heading {
+  font-weight: bolder;
+  letter-spacing: 1px;
+}
+
+.color {
+  color: #333442;
+}
+
+.background-color {
+  background-color: #333442;
+}
+
+.button-play {
+  border-radius: 50%;
+  border: 3px solid #333442;
+  background: #333442;
+}
+
+.fa-play:before {
+  content: "\f04b";
+  color: #fff;
+  position: relative;
+  left: 2px;
+  font-size: 23px;
+}
