@@ -51,16 +51,19 @@ export class MyAccountComponent implements OnInit {
     };
   }
 
+  editChanges() {
+    this.profileForm.enable();
+  }
+
   getLoginDetails() {
     this.store.select(s => s.userInfo).subscribe(x => {
-      this.getSingleUser(x.userId)
+      this.getSingleUser();
     })
   }
 
 
-  getSingleUser(userId) {
-    this.userId = userId
-    this.userService.getSingleUser(userId).subscribe((result: any) => {
+  getSingleUser() {
+    this.userService.getSingleUser().subscribe((result: any) => {
       this.user = result.data;
       this.profileForm.get('firstName').setValue(result.data.firstName)
       this.profileForm.get('lastName').setValue(result.data.lastName)
@@ -71,7 +74,7 @@ export class MyAccountComponent implements OnInit {
   }
 
   passwordChange() {
-    this.userService.resetPassword(this.userId, this.passwordForm.get('password').value).subscribe((reset: any) => {
+    this.userService.resetPassword(this.passwordForm.get('password').value).subscribe((reset: any) => {
       if (reset.success) {
         this.showNotification('top', 'right', 'success');
       }
