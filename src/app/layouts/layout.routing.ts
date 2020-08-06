@@ -11,6 +11,8 @@ import { AuthGuard } from 'app/guards/auth.guard';
 import { UsersComponent } from 'app/pages/users/users.component';
 import { MyAccountComponent } from 'app/pages/my-account/my-account.component';
 import { CasesComponent } from 'app/pages/cases/cases.component';
+import { NewCaseComponent } from 'app/pages/new-case/new-case.component';
+import { ViewCasesComponent } from 'app/pages/view-cases/view-cases.component';
 
 export const LayoutRoutes: Routes = [
     { path: 'dashboard', canActivate: [AuthGuard], component: DashboardComponent },
@@ -22,5 +24,7 @@ export const LayoutRoutes: Routes = [
     { path: 'maps', canActivate: [AuthGuard], component: MapsComponent },
     { path: 'notifications', canActivate: [AuthGuard], component: NotificationsComponent },
     { path: 'my-account', canActivate: [AuthGuard], component: MyAccountComponent },
-    { path: 'my-cases', canActivate: [AuthGuard], component: CasesComponent },
+    { path: 'cases', canActivate: [AuthGuard], component: CasesComponent },
+    { path: 'case/create', canActivate: [AuthGuard], component: NewCaseComponent },
+    { path: 'case/:caseId', canActivate: [AuthGuard], component: ViewCasesComponent },
 ];

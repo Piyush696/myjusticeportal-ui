@@ -25,6 +25,7 @@ import { CasesComponent } from 'app/pages/cases/cases.component';
 import { NewCaseComponent } from 'app/pages/new-case/new-case.component';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
+import { ViewCasesComponent } from 'app/pages/view-cases/view-cases.component';
 @NgModule({
   imports: [
     CommonModule,
@@ -55,7 +56,8 @@ import { MatNativeDateModule } from '@angular/material/core';
     UsersComponent,
     MyAccountComponent,
     CasesComponent,
-    NewCaseComponent
+    NewCaseComponent,
+    ViewCasesComponent
   ],
   providers: [
     MatDatepickerModule,

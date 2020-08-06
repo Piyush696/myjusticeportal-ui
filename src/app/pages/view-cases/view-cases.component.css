@@ -6,3 +6,9 @@
   background: #e4e4ec;
   color: #333442;
 }
+
+.text-default {
+  font-weight: 800;
+  line-height: 11px;
+  white-space: nowrap;
+}

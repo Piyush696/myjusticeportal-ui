@@ -1,5 +1,6 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { CaseService } from 'app/services/case.service';
 import { ToastrService } from 'ngx-toastr';
 
@@ -10,9 +11,8 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class NewCaseComponent implements OnInit {
   addCaseForm: FormGroup;
-  @Output() back = new EventEmitter()
 
-  constructor(private toastr: ToastrService, private fb: FormBuilder, private caseService: CaseService) { }
+  constructor(private route: Router, private toastr: ToastrService, private fb: FormBuilder, private caseService: CaseService) { }
 
   ngOnInit(): void {
     this.addCaseForm = this.fb.group({
@@ -23,16 +23,16 @@ export class NewCaseComponent implements OnInit {
       caseRelatedTo: ['', [Validators.required]],
       caseJurisdiction: ['', [Validators.required]],
       nextCourtDate: ['', [Validators.required]],
-      legalrepresentation: ['', [Validators.required]],
+      legalRepresentation: ['', [Validators.required]],
     });
   }
 
-  myCases() {
-    this.back.emit(true)
+  backToCase() {
+    let url = '/cases';
+    this.route.navigateByUrl(url)
   }
 
   createCase() {
-    console.log(this.addCaseForm.value)
     this.caseService.postCase(this.addCaseForm.value).subscribe((res: any) => {
       if (res.success) {
         this.showNotification('top', 'right', 'success');

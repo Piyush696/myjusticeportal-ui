@@ -34,7 +34,7 @@ import { MatListModule } from '@angular/material/list';
     AppComponent,
     LayoutComponent,
     LoginComponent,
-    RegistrationComponent,
+    RegistrationComponent
   ],
   imports: [
     BrowserModule,

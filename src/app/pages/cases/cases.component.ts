@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { CaseService } from 'app/services/case.service';
 
 @Component({
   selector: 'app-cases',
@@ -6,14 +8,31 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./cases.component.css']
 })
 export class CasesComponent implements OnInit {
-  isCreateCase: boolean;
-  constructor() { }
+  caseList: any;
+  caseData: any;
+  constructor(private caseService: CaseService, private route: Router) { }
 
   ngOnInit(): void {
+    this.getCases();
   }
+
+  getCases() {
+    this.caseService.getCases().subscribe((cases: any) => {
+      this.caseList = cases.data;
+    })
+  }
+
   clickBack(back) {
-    if (back === true) {
-      this.isCreateCase = false;
-    }
+    if (back === true) { }
+  }
+
+  createCase() {
+    let url = '/case/create';
+    this.route.navigateByUrl(url)
+  }
+
+  onViewCase(caseId) {
+    let url = '/case/' + caseId;
+    this.route.navigateByUrl(url)
   }
 }

@@ -7,12 +7,12 @@ import { CacheService } from './cache.service';
 })
 export class CaseService {
   private apiPath: string;
-  private createCase: string;
+  private case: string;
   allUsers: string;
   constructor(private httpClient: HttpClient, private cacheService: CacheService) {
     const env: any = environment;
     this.apiPath = env.api
-    this.createCase = 'case';
+    this.case = 'case';
   }
   getHeaders() {
     return {
@@ -23,6 +23,14 @@ export class CaseService {
   }
 
   postCase(caseData) {
-    return this.httpClient.post<object>(`${this.apiPath}/${this.createCase}`, caseData, this.getHeaders())
+    return this.httpClient.post<object>(`${this.apiPath}/${this.case}`, caseData, this.getHeaders())
+  }
+
+  getCases() {
+    return this.httpClient.get<object>(`${this.apiPath}/${this.case}`, this.getHeaders())
+  }
+
+  getCase(caseId) {
+    return this.httpClient.get<object>(`${this.apiPath}/${this.case}/case/${caseId}`, this.getHeaders())
   }
 }

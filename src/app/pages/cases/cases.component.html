@@ -1,25 +1,23 @@
 <div class="row">
-    <div *ngIf="isCreateCase" class="col-8">
-        <app-new-case (back)="clickBack($event)"></app-new-case>
-    </div>
-    <div *ngIf="!isCreateCase" class="col-6">
+    <div class="col-6">
         <div>
             <h1 class="line-height font-weight-bold">My Cases</h1>
-            <h4 class="line-height header-sub-text">A dashboard to view and manage all the cases you have created</h4>
+            <h4 class="line-height header-sub-text">A dashboard to view and manage all the cases you have created
+            </h4>
         </div>
 
-        <div class="p-2">
+        <div *ngFor="let case of caseList;let i = index" class="pr-2 pb-2 pt-2 pl-0">
             <mat-card class="w-100 card-style">
                 <div class="d-flex justify-content-between">
                     <div>
-                        <mat-label><span class="case-heading color">Case 1</span><span
+                        <mat-label><span class="case-heading color">Case {{i+1}}</span><span
                                 class="case-heading color">:</span><span class="case-heading color">Aggravated
                                 Assault</span></mat-label>
                         <br>
-                        <span class="color">My Current Charges</span>
+                        <span class="color">{{case.caseRelatedTo}}</span>
                     </div>
                     <div>
-                        <button class='button-play'>
+                        <button class='button-play' (click)="onViewCase(case.caseId)">
                             <i class="fa fa-play" aria-hidden="true"></i>
                         </button>
                     </div>
@@ -27,27 +25,9 @@
             </mat-card>
         </div>
 
-        <div class="p-2">
-            <mat-card class="w-100 card-style">
-                <div class="d-flex justify-content-between">
-                    <div>
-                        <mat-label><span class="case-heading color">Case 2</span><span
-                                class="case-heading color">:</span><span class="case-heading color">Theft by
-                                Taking</span></mat-label>
-                        <br>
-                        <span class="color">A Pending Appeal</span>
-                    </div>
-                    <div>
-                        <button class='button-play'>
-                            <i class="fa fa-play" aria-hidden="true"></i>
-                        </button>
-                    </div>
-                </div>
-            </mat-card>
-        </div>
-
-        <div class="p-2">
-            <button class="background-color" mat-raised-button color="primary" (click)="isCreateCase = true">Add a New
+        <div class="pr-2 pb-2 pt-2 pl-0">
+            <button class="background-color" mat-raised-button color="primary" (click)="createCase()">Add a
+                New
                 Case</button>
         </div>
     </div>
