@@ -13,12 +13,12 @@
         <div class="col-6 pl-0">
             <mat-form-field appearance="fill" class="w-100 pl-2">
                 <mat-label>First Name</mat-label>
-                <input type="email" matInput placeholder="firstName" [formControl]="addCaseForm.controls['firstName']"
+                <input type="email" matInput placeholder="First Name" [formControl]="addCaseForm.controls['firstName']"
                     required>
                 <mat-error>
                     <div *ngIf="addCaseForm.controls['firstName'].invalid && addCaseForm.controls['firstName'].touched">
                         <small class="font13">
-                            FirstName is Required
+                            First Name is Required
                         </small>
                     </div>
                 </mat-error>
@@ -27,12 +27,12 @@
         <div class="col-6 pl-2">
             <mat-form-field appearance="fill" class="w-100 p-0">
                 <mat-label>Last Name</mat-label>
-                <input type="email" matInput placeholder="lastName" [formControl]="addCaseForm.controls['lastName']"
+                <input type="email" matInput placeholder="Last Name" [formControl]="addCaseForm.controls['lastName']"
                     required>
                 <mat-error>
                     <div *ngIf="addCaseForm.controls['lastName'].invalid && addCaseForm.controls['lastName'].touched">
                         <small class="font13">
-                            LastName is Required
+                            Last Name is Required
                         </small>
                     </div>
                 </mat-error>
