@@ -21,6 +21,11 @@ import { MatInputModule } from '@angular/material/input';
 import { MatCardModule } from '@angular/material/card';
 import { MyAccountComponent } from 'app/pages/my-account/my-account.component';
 import { ToastrModule } from 'ngx-toastr';
+import { CasesComponent } from 'app/pages/cases/cases.component';
+import { NewCaseComponent } from 'app/pages/new-case/new-case.component';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+import { ViewCaseComponent } from 'app/pages/view-case/view-case.component';
 @NgModule({
   imports: [
     CommonModule,
@@ -37,6 +42,8 @@ import { ToastrModule } from 'ngx-toastr';
     ReactiveFormsModule,
     MatButtonModule,
     ToastrModule.forRoot(),
+    MatDatepickerModule,
+    MatNativeDateModule
   ],
   declarations: [
     DashboardComponent,
@@ -47,7 +54,14 @@ import { ToastrModule } from 'ngx-toastr';
     MapsComponent,
     NotificationsComponent,
     UsersComponent,
-    MyAccountComponent
+    MyAccountComponent,
+    CasesComponent,
+    NewCaseComponent,
+    ViewCaseComponent
+  ],
+  providers: [
+    MatDatepickerModule,
+    MatNativeDateModule
   ]
 })
 

@@ -13,8 +13,8 @@
 
 
   <ul class="nav">
-    <li *ngFor="let menuItem of menuItems" routerLinkActive="active" class="{{menuItem.class}} label-bg">
-      <a class="d-flex justify-content-center sidebar-style">
+    <li *ngFor="let menuItem of menuItems" class="{{menuItem.class}} label-bg">
+      <a class="d-flex justify-content-center sidebar-style" href="#" [routerLink]="[menuItem.path]">
         <p class="letter-spacing">{{menuItem.title}}</p>
       </a>
     </li>

@@ -1,0 +1,58 @@
+<div class="row">
+    <div class="col-6">
+        <div>
+            <h1 class="line-height font-weight-bold">My Cases</h1>
+            <h4 class="line-height header-sub-text">A dashboard to view and manage all the cases you have created
+            </h4>
+        </div>
+
+        <div *ngFor="let case of caseList;let i = index" class="pr-2 pb-2 pt-2 pl-0">
+            <mat-card class="w-100 card-style">
+                <div class="d-flex justify-content-between">
+                    <div>
+                        <mat-label><span class="case-heading color">Case {{i+1}}</span><span
+                                class="case-heading color">:</span><span class="case-heading color">Aggravated
+                                Assault</span></mat-label>
+                        <br>
+                        <span class="color">{{case.caseRelatedTo}}</span>
+                    </div>
+                    <div>
+                        <button class='button-play' (click)="onViewCase(case.caseId)">
+                            <i class="fa fa-play" aria-hidden="true"></i>
+                        </button>
+                    </div>
+                </div>
+            </mat-card>
+        </div>
+
+        <div class="pr-2 pb-2 pt-2 pl-0">
+            <button [routerLink]="'/case/create'" class="background-color" mat-raised-button color="primary">Add a
+                New
+                Case</button>
+        </div>
+    </div>
+    <div class="col-6">
+        <div class="mt-2">
+            <h1 class="line-height font-weight-bold">Sponsors</h1>
+            <h4 class="line-height header-sub-text">Laywers and bondsman ready to help</h4>
+        </div>
+        <div class="mt-4">
+            <mat-card class="sponser-card w-100">
+                <h3 class="d-flex justify-content-center line-height">Randall and Ranika Lawyers</h3>
+                <div class="d-flex justify-content-center">
+                    <button class="white-btn" mat-raised-button color="primary">Contact</button>
+                </div>
+            </mat-card>
+        </div>
+
+        <div>
+            <mat-card class="sponser-card w-100 mt-4">
+                <img src="assets/img/sponsers.PNG" alt="Girl in a jacket" width="500" height="600">
+                <h3 class="d-flex justify-content-center line-height">Anytime Bail Bonds</h3>
+                <div class="d-flex justify-content-center">
+                    <button class="white-btn" mat-raised-button color="primary">Contact</button>
+                </div>
+            </mat-card>
+        </div>
+    </div>
+</div>
