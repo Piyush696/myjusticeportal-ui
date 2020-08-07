@@ -12,3 +12,7 @@
   line-height: 11px;
   white-space: nowrap;
 }
+
+.view-card-color {
+  border: 1px solid #333442;
+}
