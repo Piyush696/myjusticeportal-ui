@@ -22,11 +22,6 @@ export class CasesComponent implements OnInit {
     })
   }
 
-  clickBack(back) {
-    if (back === true) { }
-  }
-
-
   onViewCase(caseId) {
     let url = '/case/' + caseId;
     this.route.navigateByUrl(url)
