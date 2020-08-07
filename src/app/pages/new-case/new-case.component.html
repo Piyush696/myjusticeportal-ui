@@ -58,7 +58,7 @@
             </mat-form-field>
         </div>
         <div class="col-6 pl-0">
-            <mat-form-field appearance="fill" class="w-100 p-0">
+            <mat-form-field appearance="fill" class="w-100 pl-2">
                 <mat-label>Date of Arrest</mat-label>
                 <input matInput [matDatepicker]="picker1" [formControl]="addCaseForm.controls['dateOfArrest']" required>
                 <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
@@ -93,7 +93,7 @@
             </mat-form-field>
         </div>
         <div class="col-6 pl-0">
-            <mat-form-field appearance="fill" class="w-100 p-0">
+            <mat-form-field appearance="fill" class="w-100 pl-2">
                 <mat-label>Case Jurisdiction</mat-label>
                 <input type="email" matInput placeholder="caseJurisdiction"
                     [formControl]="addCaseForm.controls['caseJurisdiction']" required>
@@ -120,7 +120,7 @@
             </mat-form-field>
         </div>
         <div class="col-6 pl-0">
-            <mat-form-field appearance="fill" class="w-100 p-0">
+            <mat-form-field appearance="fill" class="w-100 pl-2">
                 <mat-label>Legal representation</mat-label>
                 <input type="email" matInput placeholder="legalRepresentation"
                     [formControl]="addCaseForm.controls['legalRepresentation']" required>
