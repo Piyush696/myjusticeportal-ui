@@ -27,11 +27,6 @@ export class NewCaseComponent implements OnInit {
     });
   }
 
-  backToCase() {
-    let url = '/cases';
-    this.route.navigateByUrl(url)
-  }
-
   createCase() {
     this.caseService.postCase(this.addCaseForm.value).subscribe((res: any) => {
       if (res.success) {
