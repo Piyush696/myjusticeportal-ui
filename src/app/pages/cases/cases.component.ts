@@ -26,10 +26,6 @@ export class CasesComponent implements OnInit {
     if (back === true) { }
   }
 
-  createCase() {
-    let url = '/case/create';
-    this.route.navigateByUrl(url)
-  }
 
   onViewCase(caseId) {
     let url = '/case/' + caseId;
