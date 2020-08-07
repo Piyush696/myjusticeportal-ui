@@ -15,6 +15,14 @@ body {
   font-size: 18px;
 }
 
+.color {
+  color: #333442;
+}
+
+.bg-header {
+  background: #eaeaea !important;
+}
+
 .line-height {
   line-height: 14px !important;
 }

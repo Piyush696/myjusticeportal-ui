@@ -12,7 +12,7 @@ import { ToastrService } from 'ngx-toastr';
 export class NewCaseComponent implements OnInit {
   addCaseForm: FormGroup;
 
-  constructor(private route: Router, private toastr: ToastrService, private fb: FormBuilder, private caseService: CaseService) { }
+  constructor(private router: Router, private route: Router, private toastr: ToastrService, private fb: FormBuilder, private caseService: CaseService) { }
 
   ngOnInit(): void {
     this.addCaseForm = this.fb.group({
@@ -31,6 +31,7 @@ export class NewCaseComponent implements OnInit {
     this.caseService.postCase(this.addCaseForm.value).subscribe((res: any) => {
       if (res.success) {
         this.showNotification('top', 'right', 'success');
+        this.router.navigateByUrl('/case')
       }
     })
   }
