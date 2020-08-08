@@ -50,7 +50,7 @@
                     <div>
                         <mat-label>
                             <span class="text-default">Date of Arrest</span><span>:
-                            </span><span> {{caseDetails?.dateOfArrest |date: 'dd/MM/yy'}}</span>
+                            </span><span> {{caseDetails?.dateOfArrest |date: 'MM/dd/yyyy'}}</span>
                         </mat-label>
                     </div>
                     <div>
@@ -68,7 +68,8 @@
                     <div>
                         <mat-label>
                             <span class="text-default">Next Court
-                                Date</span><span>:</span><span> {{caseDetails?.nextCourtDate | date: 'dd-MM-yy'}}</span>
+                                Date</span><span>:</span><span>
+                                {{caseDetails?.nextCourtDate |date: 'MM-dd-yyyy'}}</span>
                         </mat-label>
                     </div>
                     <div>

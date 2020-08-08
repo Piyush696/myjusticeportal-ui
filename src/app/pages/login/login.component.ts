@@ -40,7 +40,7 @@ export class LoginComponent implements OnInit {
               this.toasterService.showSuccessToater('Welcome to My Justice Portal.');
             }
             else {
-              this.toasterService.showErrorToater('User not Registered.');
+              this.toasterService.showErrorToater('Username or password is not correct.');
             }
           })
         }
