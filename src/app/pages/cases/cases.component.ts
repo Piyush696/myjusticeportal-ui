@@ -10,6 +10,7 @@ import { CaseService } from 'app/services/case.service';
 export class CasesComponent implements OnInit {
   caseList: any;
   caseData: any;
+
   constructor(private caseService: CaseService, private route: Router) { }
 
   ngOnInit(): void {

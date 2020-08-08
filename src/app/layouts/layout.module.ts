@@ -22,10 +22,12 @@ import { MatCardModule } from '@angular/material/card';
 import { MyAccountComponent } from 'app/pages/my-account/my-account.component';
 import { ToastrModule } from 'ngx-toastr';
 import { CasesComponent } from 'app/pages/cases/cases.component';
-import { NewCaseComponent } from 'app/pages/new-case/new-case.component';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { ViewCaseComponent } from 'app/pages/view-case/view-case.component';
+import { CaseFormComponent } from 'app/pages/case-form/case-form.component';
+import { CreateCaseComponent } from 'app/pages/create-case/create-case.component';
+import { EditCaseComponent } from 'app/pages/edit-case/edit-case.component';
 @NgModule({
   imports: [
     CommonModule,
@@ -56,8 +58,10 @@ import { ViewCaseComponent } from 'app/pages/view-case/view-case.component';
     UsersComponent,
     MyAccountComponent,
     CasesComponent,
-    NewCaseComponent,
-    ViewCaseComponent
+    ViewCaseComponent,
+    CaseFormComponent,
+    CreateCaseComponent,
+    EditCaseComponent
   ],
   providers: [
     MatDatepickerModule,
