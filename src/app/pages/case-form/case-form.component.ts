@@ -12,8 +12,8 @@ import { ToasterService } from 'app/services/toaster.service';
 
 export class CaseFormComponent implements OnInit, OnChanges {
   caseForm: FormGroup;
-  buttonStatus: string = 'Add Case';
-  headerStatus: string = 'Create a Case';
+  buttonText: string = 'Add Case';
+  headerText: string = 'Create a Case';
   @Input() caseDetails;
   constructor(private toasterService: ToasterService, private router: Router, private fb: FormBuilder, private caseService: CaseService) { }
 
@@ -32,8 +32,8 @@ export class CaseFormComponent implements OnInit, OnChanges {
 
   ngOnChanges() {
     if (this.caseDetails) {
-      this.buttonStatus = 'Edit Case';
-      this.headerStatus = 'Edit a Case';
+      this.buttonText = 'Update Case';
+      this.headerText = 'Edit a Case';
       this.caseForm.get('firstName').setValue(this.caseDetails.user.firstName)
       this.caseForm.get('lastName').setValue(this.caseDetails.user.lastName)
       this.caseForm.get('countyOfArrest').setValue(this.caseDetails.countyOfArrest)
