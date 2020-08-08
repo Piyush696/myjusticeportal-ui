@@ -21,4 +21,9 @@ export class ViewCaseComponent implements OnInit {
       this.caseDetails = result.data;
     })
   }
+
+  editCase() {
+    let url = '/case/' + this.route.snapshot.params['caseId'] + '/edit';
+    this.router.navigateByUrl(url)
+  }
 }

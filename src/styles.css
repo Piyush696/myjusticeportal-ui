@@ -26,3 +26,12 @@ body {
 .line-height {
   line-height: 14px !important;
 }
+
+.nc-single-02::before {
+  color: black;
+}
+
+.dropup .dropdown-toggle:after,
+.dropdown .dropdown-toggle:after {
+  color: black;
+}

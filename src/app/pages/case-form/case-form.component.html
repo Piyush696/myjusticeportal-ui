@@ -1,10 +1,10 @@
 <div class="col-12 d-flex justify-content-between pl-0">
     <div>
-        <h1 class="line-height font-weight-bold">Create a Case</h1>
+        <h1 class="line-height font-weight-bold">{{headerText}}</h1>
         <h4 class="line-height header-sub-text">Enter your basic case information.</h4>
     </div>
     <div>
-        <button [routerLink]="'/case'" class="white-btn px-5" mat-raised-button color="primary">Back To My
+        <button [routerLink]="'/case'" class="white-btn px-5 py-1" mat-raised-button color="primary">Back To My
             Cases</button>
     </div>
 </div>
@@ -13,10 +13,10 @@
         <div class="col-6 pl-0">
             <mat-form-field appearance="fill" class="w-100 pl-2">
                 <mat-label>First Name</mat-label>
-                <input type="email" matInput placeholder="First Name" [formControl]="addCaseForm.controls['firstName']"
+                <input type="email" matInput placeholder="First Name" [formControl]="caseForm.controls['firstName']"
                     required>
                 <mat-error>
-                    <div *ngIf="addCaseForm.controls['firstName'].invalid && addCaseForm.controls['firstName'].touched">
+                    <div *ngIf="caseForm.controls['firstName'].invalid && caseForm.controls['firstName'].touched">
                         <small class="font13">
                             First Name is Required
                         </small>
@@ -27,10 +27,10 @@
         <div class="col-6 pl-2">
             <mat-form-field appearance="fill" class="w-100 p-0">
                 <mat-label>Last Name</mat-label>
-                <input type="email" matInput placeholder="Last Name" [formControl]="addCaseForm.controls['lastName']"
+                <input type="email" matInput placeholder="Last Name" [formControl]="caseForm.controls['lastName']"
                     required>
                 <mat-error>
-                    <div *ngIf="addCaseForm.controls['lastName'].invalid && addCaseForm.controls['lastName'].touched">
+                    <div *ngIf="caseForm.controls['lastName'].invalid && caseForm.controls['lastName'].touched">
                         <small class="font13">
                             Last Name is Required
                         </small>
@@ -46,10 +46,10 @@
             <mat-form-field appearance="fill" class="w-100 pl-2">
                 <mat-label>County of Arrest</mat-label>
                 <input type="email" matInput placeholder="countyOfArrest"
-                    [formControl]="addCaseForm.controls['countyOfArrest']" required>
+                    [formControl]="caseForm.controls['countyOfArrest']" required>
                 <mat-error>
                     <div
-                        *ngIf="addCaseForm.controls['countyOfArrest'].invalid && addCaseForm.controls['countyOfArrest'].touched">
+                        *ngIf="caseForm.controls['countyOfArrest'].invalid && caseForm.controls['countyOfArrest'].touched">
                         <small class="font13">
                             County of Arrest is Required
                         </small>
@@ -60,12 +60,11 @@
         <div class="col-6 pl-0">
             <mat-form-field appearance="fill" class="w-100 pl-2">
                 <mat-label>Date of Arrest</mat-label>
-                <input matInput [matDatepicker]="picker1" [formControl]="addCaseForm.controls['dateOfArrest']" required>
+                <input matInput [matDatepicker]="picker1" [formControl]="caseForm.controls['dateOfArrest']" required>
                 <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
                 <mat-datepicker #picker1></mat-datepicker>
                 <mat-error>
-                    <div
-                        *ngIf="addCaseForm.controls['dateOfArrest'].invalid && addCaseForm.controls['dateOfArrest'].touched">
+                    <div *ngIf="caseForm.controls['dateOfArrest'].invalid && caseForm.controls['dateOfArrest'].touched">
                         <small class="font13">
                             Date of Arrest is Required
                         </small>
@@ -81,10 +80,10 @@
             <mat-form-field appearance="fill" class="w-100 pl-2">
                 <mat-label>This Case is Related To:</mat-label>
                 <input type="email" matInput placeholder="caseRelatedTo"
-                    [formControl]="addCaseForm.controls['caseRelatedTo']" required>
+                    [formControl]="caseForm.controls['caseRelatedTo']" required>
                 <mat-error>
                     <div
-                        *ngIf="addCaseForm.controls['caseRelatedTo'].invalid && addCaseForm.controls['caseRelatedTo'].touched">
+                        *ngIf="caseForm.controls['caseRelatedTo'].invalid && caseForm.controls['caseRelatedTo'].touched">
                         <small class="font13">
                             This Case is Related To is Required
                         </small>
@@ -96,10 +95,10 @@
             <mat-form-field appearance="fill" class="w-100 pl-2">
                 <mat-label>Case Jurisdiction</mat-label>
                 <input type="email" matInput placeholder="caseJurisdiction"
-                    [formControl]="addCaseForm.controls['caseJurisdiction']" required>
+                    [formControl]="caseForm.controls['caseJurisdiction']" required>
                 <mat-error>
                     <div
-                        *ngIf="addCaseForm.controls['caseJurisdiction'].invalid && addCaseForm.controls['caseJurisdiction'].touched">
+                        *ngIf="caseForm.controls['caseJurisdiction'].invalid && caseForm.controls['caseJurisdiction'].touched">
                         <small class="font13">
                             Case Jurisdiction is Required
                         </small>
@@ -114,7 +113,7 @@
         <div class="col-6 pl-0">
             <mat-form-field appearance="fill" class="w-100 pl-2">
                 <mat-label>Next Court Date</mat-label>
-                <input matInput [matDatepicker]="picker" [formControl]="addCaseForm.controls['nextCourtDate']" required>
+                <input matInput [matDatepicker]="picker" [formControl]="caseForm.controls['nextCourtDate']" required>
                 <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                 <mat-datepicker #picker></mat-datepicker>
             </mat-form-field>
@@ -123,10 +122,10 @@
             <mat-form-field appearance="fill" class="w-100 pl-2">
                 <mat-label>Legal representation</mat-label>
                 <input type="email" matInput placeholder="legalRepresentation"
-                    [formControl]="addCaseForm.controls['legalRepresentation']" required>
+                    [formControl]="caseForm.controls['legalRepresentation']" required>
                 <mat-error>
                     <div
-                        *ngIf="addCaseForm.controls['legalRepresentation'].invalid && addCaseForm.controls['legalRepresentation'].touched">
+                        *ngIf="caseForm.controls['legalRepresentation'].invalid && caseForm.controls['legalRepresentation'].touched">
                         <small class="font13">Legal representation is Required</small>
                     </div>
                 </mat-error>
@@ -135,6 +134,7 @@
     </div>
 </div>
 <div class="py-3 pr-3 d-flex">
-    <button class="background-color px-5" mat-raised-button color="primary" (click)="createCase()">Add Case</button>
-    <button [routerLink]="'/case'" class="white-btn px-5 ml-3" mat-raised-button color="primary">Cancel</button>
+    <button class="background-color px-5 py-1" mat-raised-button color="primary"
+        (click)="updateCase()">{{buttonText}}</button>
+    <button [routerLink]="'/case'" class="white-btn px-5 ml-3 py-1" mat-raised-button color="primary">Cancel</button>
 </div>

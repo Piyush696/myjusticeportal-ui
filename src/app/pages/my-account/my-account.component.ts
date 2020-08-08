@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
-import { ToastrService } from 'ngx-toastr';
+import { ToasterService } from 'app/services/toaster.service';
 import { UserService } from '../../services/user.service';
 
 @Component({
@@ -15,7 +15,7 @@ export class MyAccountComponent implements OnInit {
   passwordForm: FormGroup;
   userId: any;
 
-  constructor(private userService: UserService, private store: Store<any>, private fb: FormBuilder, private toastr: ToastrService) { }
+  constructor(private toasterService: ToasterService, private userService: UserService, private store: Store<any>, private fb: FormBuilder) { }
 
   ngOnInit() {
     this.createControl();
@@ -76,37 +76,8 @@ export class MyAccountComponent implements OnInit {
   passwordChange() {
     this.userService.resetPassword(this.passwordForm.get('password').value).subscribe((reset: any) => {
       if (reset.success) {
-        this.showNotification('top', 'right', 'success');
+        this.toasterService.showSuccessToater('Password Reset Successfully.');
       }
     })
-  }
-
-  showNotification(from, align, value) {
-    if (value === 'success') {
-      this.toastr.success(
-        '<span data-notify="icon" class="nc-icon nc-bell-55"></span><span data-notify="message"><b>Password Reset Successfully</b> - .</span>',
-        "",
-        {
-          timeOut: 4000,
-          closeButton: true,
-          enableHtml: true,
-          toastClass: "alert alert-info alert-with-icon",
-          positionClass: "toast-" + from + "-" + align
-        }
-      );
-    }
-    else {
-      this.toastr.error(
-        '<span data-notify="icon" class="nc-icon nc-bell-55"></span><span data-notify="message"><b>User not Registered</b> - .</span>',
-        "",
-        {
-          timeOut: 4000,
-          enableHtml: true,
-          closeButton: true,
-          toastClass: "alert alert-danger alert-with-icon",
-          positionClass: "toast-" + from + "-" + align
-        }
-      );
-    }
   }
 }
