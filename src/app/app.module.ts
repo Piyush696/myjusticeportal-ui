@@ -5,10 +5,15 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { MatListModule } from '@angular/material/list';
+import { MatSelectModule } from '@angular/material/select';
 import { BrowserModule } from '@angular/platform-browser';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { RouterModule } from '@angular/router';
+import { EffectsModule } from '@ngrx/effects';
+import { StoreModule } from '@ngrx/store';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { ToastrModule } from "ngx-toastr";
 import { AppComponent } from './app.component';
 import { AppRoutes } from './app.routing';
@@ -21,13 +26,8 @@ import { RegistrationComponent } from './pages/registration/registration.compone
 import { CacheService } from './services/cache.service';
 import { LoginService } from './services/login.service';
 import { RegistrationService } from './services/registration.service';
-import { StoreModule } from '@ngrx/store';
-import { rootReducer } from './store/reducers';
-import { StoreDevtoolsModule } from '@ngrx/store-devtools';
-import { MatSelectModule } from '@angular/material/select';
-import { EffectsModule } from '@ngrx/effects';
 import { effects } from './store/effects';
-import { MatListModule } from '@angular/material/list';
+import { rootReducer } from './store/reducers';
 
 @NgModule({
   declarations: [
