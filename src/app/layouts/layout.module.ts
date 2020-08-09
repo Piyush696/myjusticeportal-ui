@@ -1,9 +1,11 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { UsersComponent } from 'app/pages/users/users.component';
 import { DashboardComponent } from '../pages/dashboard/dashboard.component';
+import { MatButtonModule } from '@angular/material/button';
 import { IconsComponent } from '../pages/icons/icons.component';
 import { MapsComponent } from '../pages/maps/maps.component';
 import { NotificationsComponent } from '../pages/notifications/notifications.component';
@@ -11,14 +13,39 @@ import { TableComponent } from '../pages/table/table.component';
 import { TypographyComponent } from '../pages/typography/typography.component';
 import { UserComponent } from '../pages/user/user.component';
 import { LayoutRoutes } from './layout.routing';
-
-
+import { MatListModule } from '@angular/material/list';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSortModule } from '@angular/material/sort';
+import { MatTableModule } from '@angular/material/table';
+import { MatInputModule } from '@angular/material/input';
+import { MatCardModule } from '@angular/material/card';
+import { MyAccountComponent } from 'app/pages/my-account/my-account.component';
+import { ToastrModule } from 'ngx-toastr';
+import { CasesComponent } from 'app/pages/cases/cases.component';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+import { ViewCaseComponent } from 'app/pages/view-case/view-case.component';
+import { CaseFormComponent } from 'app/pages/case-form/case-form.component';
+import { CreateCaseComponent } from 'app/pages/create-case/create-case.component';
+import { EditCaseComponent } from 'app/pages/edit-case/edit-case.component';
 @NgModule({
   imports: [
     CommonModule,
     RouterModule.forChild(LayoutRoutes),
     FormsModule,
-    NgbModule
+    NgbModule,
+    MatInputModule,
+    MatCardModule,
+    MatListModule,
+    MatPaginatorModule,
+    MatSortModule,
+    MatTableModule,
+    FormsModule,
+    ReactiveFormsModule,
+    MatButtonModule,
+    ToastrModule.forRoot(),
+    MatDatepickerModule,
+    MatNativeDateModule
   ],
   declarations: [
     DashboardComponent,
@@ -28,6 +55,17 @@ import { LayoutRoutes } from './layout.routing';
     IconsComponent,
     MapsComponent,
     NotificationsComponent,
+    UsersComponent,
+    MyAccountComponent,
+    CasesComponent,
+    ViewCaseComponent,
+    CaseFormComponent,
+    CreateCaseComponent,
+    EditCaseComponent
+  ],
+  providers: [
+    MatDatepickerModule,
+    MatNativeDateModule
   ]
 })
 

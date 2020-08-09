@@ -1,0 +1,97 @@
+<div class="col-12">
+    <div class="d-flex justify-content-between">
+        <div>
+            <h1 class="line-height font-weight-bold">Case {{caseDetails?.caseId}}: Aggravated Assault</h1>
+            <h4 class="line-height">Your case details at-a-glance</h4>
+        </div>
+        <div>
+            <button [routerLink]="'/case'" class="white-btn px-5 py-1" mat-raised-button color="primary">Back To My
+                Cases</button>
+        </div>
+    </div>
+    <div class="col-12 pl-0">
+        <div class="row">
+            <div class="col-7">
+                <mat-card class="view-card-color w-100">
+                    <div class="d-flex justify-content-between">
+                        <div>
+                            <h3 class="line-height font-weight-bold">Case Information</h3>
+                        </div>
+                        <div>
+                            <button class="white-btn px-5 py-1" mat-raised-button color="primary"
+                                (click)="editCase()">Edit
+                                Cases</button>
+                        </div>
+                    </div>
+                    <div>
+                        <mat-label>
+                            <span class="text-default">First Name</span><span>:
+                            </span><span> {{caseDetails?.user?.firstName}}</span>
+                        </mat-label>
+                    </div>
+                    <div>
+                        <mat-label>
+                            <span class="text-default">Last Name</span><span>:
+                            </span><span> {{caseDetails?.user?.lastName}}</span>
+                        </mat-label>
+                    </div>
+                    <div>
+                        <mat-label>
+                            <span class="text-default">Charges or Legal Matter</span><span>: </span><span>Aggravated
+                                Assault</span>
+                        </mat-label>
+                    </div>
+                    <div>
+                        <mat-label>
+                            <span class="text-default">County of Arrest</span><span>:
+                            </span><span> {{caseDetails?.countyOfArrest}}</span>
+                        </mat-label>
+                    </div>
+                    <div>
+                        <mat-label>
+                            <span class="text-default">Date of Arrest</span><span>:
+                            </span><span> {{caseDetails?.dateOfArrest |date: 'MM/dd/yyyy'}}</span>
+                        </mat-label>
+                    </div>
+                    <div>
+                        <mat-label>
+                            <span class="text-default">This Case Is Related To</span><span>:
+                            </span><span> {{caseDetails?.caseRelatedTo}}</span>
+                        </mat-label>
+                    </div>
+                    <div>
+                        <mat-label>
+                            <span class="text-default">Case
+                                Jurisdiction</span><span>: </span><span> {{caseDetails?.caseJurisdiction}}</span>
+                        </mat-label>
+                    </div>
+                    <div>
+                        <mat-label>
+                            <span class="text-default">Next Court
+                                Date</span><span>:</span><span>
+                                {{caseDetails?.nextCourtDate |date: 'MM-dd-yyyy'}}</span>
+                        </mat-label>
+                    </div>
+                    <div>
+                        <mat-label>
+                            <span class="text-default">Legal
+                                Representation</span><span>:</span><span> {{caseDetails?.legalRepresentation}}</span>
+                        </mat-label>
+                    </div>
+                </mat-card>
+            </div>
+            <div class="col-5">
+                <button class="background-color btn-group mt-1 py-1" mat-raised-button color="primary">View My Case
+                    Files</button><br>
+                <button class="background-color  btn-group mt-1 py-1" mat-raised-button color="primary">Legal Research
+                    Assistant</button><br>
+                <button class="background-color  btn-group mt-1 py-1" mat-raised-button color="primary">Ask a
+                    Lawyer</button><br>
+                <button class="background-color  btn-group mt-1 py-1" mat-raised-button color="primary">Hire a
+                    Lawyer</button><br>
+                <button class="background-color  btn-group mt-1 py-1" mat-raised-button color="primary">Find a
+                    Bondsman</button><br>
+            </div>
+        </div>
+    </div>
+</div>

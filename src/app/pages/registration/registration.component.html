@@ -1,18 +1,18 @@
-<div class="d-flex justify-content-center align-items-center">
-    <div class="my-5">
+<div class="d-flex justify-content-center align-items-center bg-color">
+    <div class="my-3">
         <div class="d-flex justify-content-center">
             <img src="assets/img/logo.png" alt="logo" class="logo">
         </div>
-        <mat-card class="p-5">
+        <mat-card *ngIf="step === 1" class="p-5">
             <div class="row">
                 <div class="col-6 pl-2 mb-1">
                     <mat-form-field appearance="fill" class="w-100">
-                        <mat-label>FirstName</mat-label>
+                        <mat-label>First Name</mat-label>
                         <input matInput placeholder="First Name" [formControl]="registrationForm.controls['firstName']"
                             required>
                         <mat-error
                             *ngIf="registrationForm.controls['firstName'].invalid && registrationForm.controls['firstName'].touched">
-                            <small class="text-danger" *ngIf="registrationForm.get('firstName').errors?.required">
+                            <small class="font13" *ngIf="registrationForm.get('firstName').errors?.required">
                                 First Name is Required
                             </small>
                         </mat-error>
@@ -20,12 +20,12 @@
                 </div>
                 <div class="col-6 pr-2 mb-1">
                     <mat-form-field appearance="fill" class="w-100">
-                        <mat-label>LastName</mat-label>
+                        <mat-label>Last Name</mat-label>
                         <input matInput placeholder="Last Name" [formControl]="registrationForm.controls['lastName']"
                             required>
                         <mat-error
                             *ngIf="registrationForm.controls['lastName'].invalid && registrationForm.controls['lastName'].touched">
-                            <small class="text-danger" *ngIf="registrationForm.get('lastName').errors?.required">
+                            <small class="font13" *ngIf="registrationForm.get('lastName').errors?.required">
                                 Last Name is Required
                             </small>
                         </mat-error>
@@ -39,19 +39,38 @@
                     <mat-label>Username</mat-label>
                     <input matInput placeholder="username" [formControl]="registrationForm.controls['username']"
                         required>
-                    <mat-error
-                        *ngIf="registrationForm.controls['username'].invalid && registrationForm.controls['username'].touched">
-                        <small class="text-danger" *ngIf="registrationForm.get('username').errors?.required">
-                            Username is Required
-                        </small>
+                    <mat-error>
+                        <div
+                            *ngIf="registrationForm.controls['username'].invalid &&
+                                           registrationForm.controls['username'].touched && registrationForm.controls['username'].hasError('taken')">
+                            <small class="font13">Username already taken.</small>
+                        </div>
+                        <div *ngIf="registrationForm.controls['username'].invalid && registrationForm.controls['username'].touched
+                             && registrationForm.get('username').errors?.required">
+                            <small class="font13">
+                                Username is Required
+                            </small>
+                        </div>
                     </mat-error>
                 </mat-form-field>
             </div>
 
             <div class="row">
                 <mat-form-field appearance="fill" class="w-100 p-2">
-                    <mat-label>Email</mat-label>
-                    <input matInput placeholder="Email" [formControl]="registrationForm.controls['email']" required>
+                    <mat-label>Email (Optional)</mat-label>
+                    <input matInput placeholder="Email" [formControl]="registrationForm.controls['email']">
+                    <mat-error>
+                        <div
+                            *ngIf="registrationForm.controls['email'].invalid &&
+                                           registrationForm.controls['email'].touched && registrationForm.controls['email'].hasError('taken')">
+                            <small class="font13">Email already taken.</small>
+                        </div>
+                        <div
+                            *ngIf="registrationForm.controls['email'].invalid &&
+                                           registrationForm.controls['email'].touched && !registrationForm.controls['email'].hasError('taken')">
+                            <small class=" font13">That doesn't look right. </small>
+                        </div>
+                    </mat-error>
                 </mat-form-field>
             </div>
 
@@ -60,11 +79,13 @@
                     <mat-label>Password</mat-label>
                     <input type="password" matInput placeholder="password"
                         [formControl]="registrationForm.controls['password']" required>
-                    <mat-error
-                        *ngIf="registrationForm.controls['password'].invalid && registrationForm.controls['password'].touched">
-                        <small class="text-danger" *ngIf="registrationForm.get('password').errors?.required">
-                            Password is Required
-                        </small>
+                    <mat-error>
+                        <div
+                            *ngIf="registrationForm.controls['password'].invalid && registrationForm.controls['password'].touched">
+                            <small class="font13">
+                                Password is Required
+                            </small>
+                        </div>
                     </mat-error>
                 </mat-form-field>
             </div>
@@ -74,11 +95,13 @@
                     <mat-label>Confirm Password</mat-label>
                     <input type="password" matInput placeholder="Confirm Password"
                         [formControl]="registrationForm.controls['confirmPassword']" required>
-                    <mat-error
-                        *ngIf="registrationForm.controls['confirmPassword'].invalid && registrationForm.controls['confirmPassword'].touched">
-                        <small class="text-danger" *ngIf="registrationForm.get('confirmPassword').errors?.required">
-                            Password is Required
-                        </small>
+                    <mat-error>
+                        <div *ngIf="registrationForm.controls['confirmPassword'].invalid &&  registrationForm.controls['confirmPassword'].touched &&
+                               registrationForm.controls['confirmPassword'].hasError('notSamePassword')">
+                            <small class="font13">
+                                Password does not match
+                            </small>
+                        </div>
                     </mat-error>
                 </mat-form-field>
             </div>
@@ -87,8 +110,32 @@
                 <button [routerLink]="'/login'" mat-button color="primary">
                     Back to Login
                 </button>
-                <button class="px-2 py-1" mat-raised-button color="primary" (click)="onRegister()">Register</button>
+                <button [disabled]="registrationForm.get('confirmPassword').invalid || 
+                registrationForm.get('password').invalid || registrationForm.get('email').invalid 
+                 || registrationForm.get('firstName').invalid  || registrationForm.get('lastName').invalid"
+                    *ngIf="step === 1" class="px-4 py-1 float-right" mat-raised-button color="primary"
+                    (click)="step = 2">NEXT</button>
             </div>
         </mat-card>
+
+        <div class="row" *ngIf="step == 2">
+            <mat-card class="p-5">
+                <mat-form-field appearance="fill" class="wpx-420">
+                    <mat-label>Select role</mat-label>
+                    <mat-select [formControl]="registrationForm.controls['roleId']">
+                        <mat-option *ngFor="let role of roleList" [value]="role.roleId">
+                            {{role.name}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <div class="d-flex justify-content-between">
+                    <button [routerLink]="'/login'" mat-button color="primary">
+                        Back to Login
+                    </button>
+                    <button [disabled]="this.registrationForm.invalid" class="px-4 py-1" mat-raised-button
+                        color="primary" (click)="onRegister()">REGISTER</button>
+                </div>
+            </mat-card>
+        </div>
     </div>
 </div>

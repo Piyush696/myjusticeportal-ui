@@ -21,14 +21,20 @@ import { RegistrationComponent } from './pages/registration/registration.compone
 import { CacheService } from './services/cache.service';
 import { LoginService } from './services/login.service';
 import { RegistrationService } from './services/registration.service';
-
+import { StoreModule } from '@ngrx/store';
+import { rootReducer } from './store/reducers';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { MatSelectModule } from '@angular/material/select';
+import { EffectsModule } from '@ngrx/effects';
+import { effects } from './store/effects';
+import { MatListModule } from '@angular/material/list';
 
 @NgModule({
   declarations: [
     AppComponent,
     LayoutComponent,
     LoginComponent,
-    RegistrationComponent
+    RegistrationComponent,
   ],
   imports: [
     BrowserModule,
@@ -37,13 +43,21 @@ import { RegistrationService } from './services/registration.service';
     RouterModule.forRoot(AppRoutes),
     SidebarModule,
     MatCardModule,
+    MatSelectModule,
     NavbarModule,
     HttpClientModule,
+    MatInputModule,
+    MatListModule,
     FormsModule,
     MatButtonModule,
     ReactiveFormsModule,
     ToastrModule.forRoot(),
     FooterModule,
+    StoreModule.forRoot(rootReducer),
+    EffectsModule.forRoot(effects),
+    StoreDevtoolsModule.instrument({
+      maxAge: 25
+    })
   ],
   providers: [
     RegistrationService,

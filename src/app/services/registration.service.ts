@@ -13,7 +13,7 @@ export class RegistrationService {
   constructor(private httpClient: HttpClient) {
     const env: any = environment;
     this.apiPath = env.api
-    this.createUser = 'user';
+    this.createUser = 'user/registration';
   }
 
 
@@ -24,9 +24,15 @@ export class RegistrationService {
   //     })
   //   };
   // }
+
   addUser(profileData) {
-    return this.httpClient.post<object>(`${this.apiPath}/${this.createUser}/registration`, profileData)
+    return this.httpClient.post<object>(`${this.apiPath}/${this.createUser}`, profileData)
   }
+
+  checkUser(query = {}) {
+    return this.httpClient.get<Object>(`${this.apiPath}/users`, { params: query });
+  }
+
   // getAllusers() {
   //   return this.httpClient.get<object>(`${this.apiPath}/${this.allUsers}/`)
   // }

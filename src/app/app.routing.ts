@@ -8,7 +8,7 @@ import { DashboardComponent } from './pages/dashboard/dashboard.component';
 export const AppRoutes: Routes = [
   {
     path: '',
-    redirectTo: 'login',
+    redirectTo: 'dashboard',
     pathMatch: 'full',
   }, {
     path: '',

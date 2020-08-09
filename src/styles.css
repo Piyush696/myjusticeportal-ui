@@ -1,8 +1,37 @@
 /* You can add global styles to this file, and also import other style files */
 body {
-  background-color: #fffbfb;
+  background-color: #ffffff;
 }
 
 .font13 {
   font-size: 13px;
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+.header-sub-text {
+  font-size: 18px;
+}
+
+.color-grey {
+  color: #333442;
+}
+
+.bg-header {
+  background: #eaeaea !important;
+}
+
+.line-height {
+  line-height: 14px !important;
+}
+
+.nc-single-02::before {
+  color: black;
+}
+
+.dropup .dropdown-toggle:after,
+.dropdown .dropdown-toggle:after {
+  color: black;
 }
