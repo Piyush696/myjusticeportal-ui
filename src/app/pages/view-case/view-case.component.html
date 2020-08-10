@@ -12,10 +12,10 @@
     <div class="col-12 pl-0">
         <div class="row">
             <div class="col-7">
-                <mat-card class="view-card-color w-100">
-                    <div class="d-flex justify-content-between">
+                <mat-card class="view-card-color w-100 pt-4">
+                    <div class="d-flex justify-content-between pb-2">
                         <div>
-                            <h3 class="line-height font-weight-bold">Case Information</h3>
+                            <h3 class="line-height font-weight-bold m-0 pt-3">Case Information</h3>
                         </div>
                         <div>
                             <button class="white-btn px-5 py-1" mat-raised-button color="primary"
@@ -24,50 +24,50 @@
                         </div>
                     </div>
                     <div>
-                        <mat-label class="text-default">First Name:
+                        <p class="text-default">First Name:
                             <span class="font-weight-normal"> {{caseDetails?.user?.firstName}}</span>
-                        </mat-label>
+                        </p>
                     </div>
                     <div>
-                        <mat-label class="text-default">Last Name:
+                        <p class="text-default">Last Name:
                             <span class="font-weight-normal"> {{caseDetails?.user?.lastName}}</span>
-                        </mat-label>
+                        </p>
                     </div>
                     <div>
-                        <mat-label class="text-default">Charges or Legal Matter:
+                        <p class="text-default">Charges or Legal Matter:
                             <span class="font-weight-normal">Aggravated Assault</span>
-                        </mat-label>
+                        </p>
                     </div>
                     <div>
-                        <mat-label class="text-default">County of Arrest:
+                        <p class="text-default">County of Arrest:
                             <span class="font-weight-normal"> {{caseDetails?.countyOfArrest}}</span>
-                        </mat-label>
+                        </p>
                     </div>
                     <div>
-                        <mat-label class="text-default">Date of Arrest:
+                        <p class="text-default">Date of Arrest:
                             <span class="font-weight-normal"> {{caseDetails?.dateOfArrest |date: 'MM/dd/yyyy'}}</span>
-                        </mat-label>
+                        </p>
                     </div>
                     <div>
-                        <mat-label class="text-default">This Case Is Related To:
+                        <p class="text-default">This Case Is Related To:
                             <span class="font-weight-normal"> {{caseDetails?.caseRelatedTo}}</span>
-                        </mat-label>
+                        </p>
                     </div>
                     <div>
-                        <mat-label class="text-default">Case Jurisdiction:
+                        <p class="text-default">Case Jurisdiction:
                             <span class="font-weight-normal"> {{caseDetails?.caseJurisdiction}}</span>
-                        </mat-label>
+                        </p>
                     </div>
                     <div>
-                        <mat-label class="text-default">Next Court
+                        <p class="text-default">Next Court
                             Date:
                             <span class="font-weight-normal"> {{caseDetails?.nextCourtDate |date: 'MM-dd-yyyy'}}</span>
-                        </mat-label>
+                        </p>
                     </div>
                     <div>
-                        <mat-label class="text-default">Legal Representation:
+                        <p class="text-default">Legal Representation:
                             <span class="font-weight-normal"> {{caseDetails?.legalRepresentation}}</span>
-                        </mat-label>
+                        </p>
                     </div>
                 </mat-card>
             </div>
