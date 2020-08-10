@@ -9,6 +9,7 @@ import { UserService } from '../../services/user.service';
   templateUrl: './my-account.component.html',
   styleUrls: ['./my-account.component.css']
 })
+
 export class MyAccountComponent implements OnInit {
   user: any;
   profileForm: FormGroup;
