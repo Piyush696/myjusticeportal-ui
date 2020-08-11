@@ -28,7 +28,8 @@ import { LoginService } from './services/login.service';
 import { RegistrationService } from './services/registration.service';
 import { effects } from './store/effects';
 import { rootReducer } from './store/reducers';
-
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatDialogModule } from '@angular/material/dialog';
 @NgModule({
   declarations: [
     AppComponent,
@@ -48,11 +49,13 @@ import { rootReducer } from './store/reducers';
     HttpClientModule,
     MatInputModule,
     MatListModule,
+    MatDialogModule,
     FormsModule,
     MatButtonModule,
     ReactiveFormsModule,
     ToastrModule.forRoot(),
     FooterModule,
+    MatCheckboxModule,
     StoreModule.forRoot(rootReducer),
     EffectsModule.forRoot(effects),
     StoreDevtoolsModule.instrument({

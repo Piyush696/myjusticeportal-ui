@@ -9,3 +9,18 @@
 .bg-color {
   background-color: #fffbfb !important;
 }
+
+.termCondition-margin {
+  margin: 0 12px;
+}
+
+.disclaimer-heading {
+  font-weight: bolder;
+  letter-spacing: 1px;
+}
+
+.terms-text {
+  line-height: 21px;
+  letter-spacing: 1px;
+  color: #000000;
+}

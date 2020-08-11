@@ -8,6 +8,7 @@ import { RoleService } from 'app/services/role.service';
 import { Store } from '@ngrx/store';
 import { AddRole, LoadRole } from 'app/store/actions/role.actions';
 import { ToasterService } from 'app/services/toaster.service';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-registration',
@@ -19,7 +20,7 @@ export class RegistrationComponent implements OnInit {
   step: number = 1;
   roleList: any;
 
-  constructor(private loginService: LoginService, private cacheService: CacheService, private fb: FormBuilder,
+  constructor(public dialog: MatDialog, private loginService: LoginService, private cacheService: CacheService, private fb: FormBuilder,
     private toasterService: ToasterService, private roleService: RoleService,
     private registrationService: RegistrationService, private router: Router, private store: Store<any>) { }
 
@@ -72,6 +73,16 @@ export class RegistrationComponent implements OnInit {
       return { invalidEmail: true };
     }
     return null;
+  }
+
+  openModal(templateRef) {
+    let dialogRef = this.dialog.open(templateRef, {
+      width: '500px',
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+    });
   }
 
   onRegister() {
