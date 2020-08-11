@@ -9,6 +9,7 @@ import { UserService } from '../../services/user.service';
   templateUrl: './my-account.component.html',
   styleUrls: ['./my-account.component.css']
 })
+
 export class MyAccountComponent implements OnInit {
   user: any;
   profileForm: FormGroup;
@@ -52,7 +53,10 @@ export class MyAccountComponent implements OnInit {
   }
 
   editChanges() {
-    this.profileForm.enable();
+    this.userService.updateUser(this.profileForm.value).subscribe((result: any) => {
+      this.toasterService.showSuccessToater('User Updated Successfully.')
+      this.getSingleUser();
+    })
   }
 
   getLoginDetails() {
@@ -69,7 +73,6 @@ export class MyAccountComponent implements OnInit {
       this.profileForm.get('lastName').setValue(result.data.lastName)
       this.profileForm.get('username').setValue(result.data.username)
       this.profileForm.get('email').setValue(result.data.email)
-      this.profileForm.disable();
     })
   }
 

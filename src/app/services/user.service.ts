@@ -35,4 +35,8 @@ export class UserService {
   resetPassword(password) {
     return this.httpClient.put<Object>(`${this.apiPath}/${this.getAllUser}/password`, { password: password }, this.getHeaders());
   }
+
+  updateUser(userData) {
+    return this.httpClient.put<Object>(`${this.apiPath}/${this.getAllUser}`, userData, this.getHeaders());
+  }
 }
