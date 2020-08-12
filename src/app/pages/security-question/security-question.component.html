@@ -1,0 +1,28 @@
+<mat-card class="p-5">
+    <mat-form-field appearance="fill" class="w-100">
+        <mat-label>Select Question</mat-label>
+        <mat-select [formControl]="securityQuestionForm.controls['securityQuestionId']">
+            <mat-option *ngFor="let question of securityQuestions" [value]="question.securityQuestionId">
+                {{question.question}}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+    <br>
+    <mat-form-field appearance="fill" class="w-100">
+        <mat-label>Answer</mat-label>
+        <input type="text" matInput placeholder="Answer" [formControl]="securityQuestionForm.controls['answer']"
+            required>
+    </mat-form-field>
+
+    <div class="d-flex justify-content-between">
+        <button mat-button color="primary">
+            BACK
+        </button>
+
+        <button *ngIf="!isRegister" class="px-4 py-1" mat-raised-button color="primary"
+            (click)="onAnswerQuestion()">NEXT</button>
+
+        <button *ngIf="isRegister" class="px-4 py-1" mat-raised-button color="primary"
+            (click)="register()">REGISTER</button>
+    </div>
+</mat-card>

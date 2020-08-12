@@ -30,12 +30,14 @@ import { effects } from './store/effects';
 import { rootReducer } from './store/reducers';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatDialogModule } from '@angular/material/dialog';
+import { SecurityQuestionComponent } from './pages/security-question/security-question.component';
 @NgModule({
   declarations: [
     AppComponent,
     LayoutComponent,
     LoginComponent,
     RegistrationComponent,
+    SecurityQuestionComponent,
   ],
   imports: [
     BrowserModule,

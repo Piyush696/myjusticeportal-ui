@@ -21,6 +21,16 @@
 
 .terms-text {
   line-height: 21px;
-  letter-spacing: 1px;
+  letter-spacing: 0px;
+  font-size: 12px;
   color: #000000;
+  padding-right: 5px !important;
+  height: 210px;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  text-align: justify;
+}
+
+.border-card {
+  border: 1px solid #000;
 }

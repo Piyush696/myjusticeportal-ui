@@ -3,7 +3,7 @@
         <div class="d-flex justify-content-center">
             <img src="assets/img/logo.png" alt="logo" class="logo">
         </div>
-        <mat-card *ngIf="step === 1" class="p-5">
+        <mat-card *ngIf="step == 1" class="p-5">
             <div class="row">
                 <div class="col-6 pl-2 mb-1">
                     <mat-form-field appearance="fill" class="w-100">
@@ -106,9 +106,13 @@
                 </mat-form-field>
             </div>
             <div class="row">
-                <mat-checkbox class="termCondition-margin"><a (click)="openModal(mytemplate)">I accept the Terms and
-                        Conditions
-                        of using this website and agree to abide by all applicable laws and standards.</a>
+                <mat-checkbox class="termCondition-margin" [formControl]="registrationForm.controls['termCondition']"><a
+                        (click)="openModal(mytemplate)">
+                        <span>I accept the Terms and
+                            Conditions
+                            of using this website and agree</span>
+                        <br>
+                        <span>to abide by all applicable laws and standards.</span></a>
                 </mat-checkbox>
             </div>
             <div class="d-flex justify-content-between">
@@ -117,9 +121,9 @@
                 </button>
                 <button [disabled]="registrationForm.get('confirmPassword').invalid || 
                 registrationForm.get('password').invalid || registrationForm.get('email').invalid 
-                 || registrationForm.get('firstName').invalid  || registrationForm.get('lastName').invalid"
-                    *ngIf="step === 1" class="px-4 py-1 float-right" mat-raised-button color="primary"
-                    (click)="step = 2">NEXT</button>
+                 || registrationForm.get('firstName').invalid  || registrationForm.get('lastName').invalid 
+                 || registrationForm.get('termCondition').invalid || isNextDisabled" *ngIf="step === 1"
+                    class="px-4 py-1 float-right" mat-raised-button color="primary" (click)="step = 2">NEXT</button>
             </div>
         </mat-card>
 
@@ -127,7 +131,8 @@
             <mat-card class="p-5">
                 <mat-form-field appearance="fill" class="wpx-420">
                     <mat-label>Select role</mat-label>
-                    <mat-select [formControl]="registrationForm.controls['roleId']">
+                    <mat-select [formControl]="registrationForm.controls['roleId']"
+                        (selectionChange)="onSelectRole($event.value)">
                         <mat-option *ngFor="let role of roleList" [value]="role.roleId">
                             {{role.name}}
                         </mat-option>
@@ -137,10 +142,15 @@
                     <button [routerLink]="'/login'" mat-button color="primary">
                         Back to Login
                     </button>
-                    <button [disabled]="this.registrationForm.invalid" class="px-4 py-1" mat-raised-button
-                        color="primary" (click)="onRegister()">REGISTER</button>
+                    <button class="px-4 py-1" mat-raised-button color="primary"
+                        (click)="onCreateRegisterUser()">NEXT</button>
                 </div>
             </mat-card>
+        </div>
+
+        <div class="row" *ngIf="step == 3" class="wpx-420">
+            <app-security-question [selectedRoleId]="selectedRoleId" (isRegisterEvent)="onUpdateRegisteredUser($event)">
+            </app-security-question>
         </div>
     </div>
 </div>
@@ -158,22 +168,20 @@
                         bottom to accept.</span>
                 </p>
             </div>
-            <div>
+            <div class="border-card">
                 <mat-card>
                     <p>
                         <span class="disclaimer-heading">TERMS AND CONDITIONS</span>
                     </p>
-                    <p class="terms-text">
+                    <p class="terms-text p-0 m-0" (scroll)="onScroll($event)">
                         Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been
-                        the industry's standard
-                        dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it
-                        to make a type specimen
-                        book. It has survived not only five centuries, but also the leap into electronic typesetting,
-                        remaining essentially
-                        unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem
-                        Ipsum passages, and more
-                        recently with desktop publishing software like Aldus PageMaker including versions of Lorem
-                        Ipsum.Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece
+                        the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley
+                        of type and scrambled it to make a type specimen book. It has survived not only five centuries,
+                        but also the leap into electronic typesetting, emaining essentially unchanged.<br> It was
+                        popularised in the 1960s with the release of Letraset sheets containing Lorem
+                        Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker
+                        including versions of Lorem Ipsum.
+                        Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece
                         of classical Latin literature
                         from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at
                         Hampden-Sydney College in Virginia,
@@ -205,10 +213,11 @@
 
             <div>
                 <div class="d-flex justify-content-between p-2">
-                    <button class="px-4 py-1" mat-button color="primary">
+                    <button mat-dialog-close class="px-4 py-1" mat-button color="primary">
                         DECLINE
                     </button>
-                    <button class="px-4 py-1" mat-raised-button color="primary" (click)="onRegister()">ACCEPT</button>
+                    <button [disabled]="isAcceptDisabled" class="px-4 py-1" mat-raised-button color="primary"
+                        mat-dialog-close (click)="onAcceptTerms()">ACCEPT</button>
                 </div>
             </div>
         </div>

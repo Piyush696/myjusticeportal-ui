@@ -1,24 +1,21 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { environment } from '../../environments/environment';
+import { environment } from 'environments/environment';
 import { CacheService } from './cache.service';
 
 @Injectable({
   providedIn: 'root'
 })
-
-export class RegistrationService {
+export class SecurityService {
   private apiPath: string;
-  private createUser: string;
+  private allSecurityQuestion: string;
   allUsers: string;
 
   constructor(private httpClient: HttpClient, private cacheService: CacheService) {
     const env: any = environment;
     this.apiPath = env.api
-    this.createUser = 'user/registration';
+    this.allSecurityQuestion = 'securityQuestion';
   }
-
-
   getHeaders() {
     return {
       headers: new HttpHeaders({
@@ -27,16 +24,11 @@ export class RegistrationService {
     };
   }
 
-  addUser(profileData) {
-    return this.httpClient.post<object>(`${this.apiPath}/${this.createUser}`, profileData)
+  getAllSecurityRoles(roleId) {
+    return this.httpClient.get<object>(`${this.apiPath}/${this.allSecurityQuestion}/${roleId}`)
   }
 
-  checkUser(query = {}) {
-    return this.httpClient.get<Object>(`${this.apiPath}/users`, { params: query });
+  createSecurityAnswers(securityQuestionAnswer) {
+    return this.httpClient.post<object>(`${this.apiPath}/${this.allSecurityQuestion}`, securityQuestionAnswer, this.getHeaders())
   }
-
-  updateUser(status) {
-    return this.httpClient.put<object>(`${this.apiPath}/user`, { status }, this.getHeaders())
-  }
-
 }
