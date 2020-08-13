@@ -106,8 +106,8 @@
                 </mat-form-field>
             </div>
             <div class="row">
-                <mat-checkbox class="termCondition-margin" [formControl]="registrationForm.controls['termCondition']"><a
-                        (click)="openModal(mytemplate)">
+                <mat-checkbox class="termCondition-margin" [formControl]="registrationForm.controls['termCondition']"
+                    (click)="openModal(mytemplate)"><a (click)="openModal(mytemplate)">
                         <span>I accept the Terms and
                             Conditions
                             of using this website and agree</span>
@@ -127,25 +127,30 @@
             </div>
         </mat-card>
 
-        <div class="row" *ngIf="step == 2">
-            <mat-card class="p-5">
-                <mat-form-field appearance="fill" class="wpx-420">
-                    <mat-label>Select role</mat-label>
-                    <mat-select [formControl]="registrationForm.controls['roleId']"
-                        (selectionChange)="onSelectRole($event.value)">
-                        <mat-option *ngFor="let role of roleList" [value]="role.roleId">
-                            {{role.name}}
-                        </mat-option>
-                    </mat-select>
-                </mat-form-field>
-                <div class="d-flex justify-content-between">
-                    <button [routerLink]="'/login'" mat-button color="primary">
-                        Back to Login
-                    </button>
-                    <button class="px-4 py-1" mat-raised-button color="primary"
-                        (click)="onCreateRegisterUser()">NEXT</button>
-                </div>
-            </mat-card>
+        <div *ngIf="step == 2">
+            <div class="row">
+                <mat-card class="p-5">
+                    <mat-form-field appearance="fill" class="wpx-420">
+                        <mat-label>Select role</mat-label>
+                        <mat-select [formControl]="registrationForm.controls['roleId']"
+                            (selectionChange)="onSelectRole($event.value)">
+                            <mat-option *ngFor="let role of roleList" [value]="role.roleId">
+                                {{role.name}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    <div class="d-flex justify-content-between">
+                        <button mat-button color="primary" (click)="step = 1">
+                            Back
+                        </button>
+                        <button class="px-4 py-1" mat-raised-button color="primary"
+                            (click)="onCreateRegisterUser()">NEXT</button>
+                    </div>
+                </mat-card>
+            </div>
+            <div class="d-flex justify-content-center pt-2">
+                <a [routerLink]="'/login'" mat-button>Back to Login</a>
+            </div>
         </div>
 
         <div class="row" *ngIf="step == 3" class="wpx-420">

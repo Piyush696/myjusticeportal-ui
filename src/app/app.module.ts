@@ -31,6 +31,7 @@ import { rootReducer } from './store/reducers';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatDialogModule } from '@angular/material/dialog';
 import { SecurityQuestionComponent } from './pages/security-question/security-question.component';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 @NgModule({
   declarations: [
     AppComponent,
@@ -55,6 +56,7 @@ import { SecurityQuestionComponent } from './pages/security-question/security-qu
     FormsModule,
     MatButtonModule,
     ReactiveFormsModule,
+    MatProgressBarModule,
     ToastrModule.forRoot(),
     FooterModule,
     MatCheckboxModule,

@@ -111,7 +111,7 @@ export class RegistrationComponent implements OnInit {
 
   onUpdateRegisteredUser(value: boolean) {
     this.registrationService.updateUser(value).subscribe((user: any) => {
-      this.toasterService.showSuccessToater('>Welcome to My Justice Portal.')
+      this.toasterService.showSuccessToater('Welcome to My Justice Portal.')
       this.router.navigateByUrl('/dashboard')
     })
   }

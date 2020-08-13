@@ -9,11 +9,14 @@ import { SecurityService } from 'app/services/security.service';
 })
 export class SecurityQuestionComponent implements OnInit, OnChanges {
   @Input() selectedRoleId: number;
-  securityQuestions: any;
+  securityQuestions: any = [];
+  backSelectedQuestion: any = [];
   @Output() isRegisterEvent = new EventEmitter()
-  isRegister: boolean;
-  count: number = 1;
+  count: number = 0;
+  progressValue: number = 0;
   securityQuestionForm: FormGroup;
+  originalSecurityQuestions: any;
+  questionId: any;
 
   constructor(private fb: FormBuilder, public securityService: SecurityService) { }
 
@@ -31,21 +34,38 @@ export class SecurityQuestionComponent implements OnInit, OnChanges {
   ngOnChanges() {
     this.securityService.getAllSecurityRoles(this.selectedRoleId).subscribe((questions: any) => {
       this.securityQuestions = questions.data
+      this.originalSecurityQuestions = questions.data
     })
   }
 
   onAnswerQuestion() {
     this.securityQuestions = this.securityQuestions.filter(filteredquestion => filteredquestion.securityQuestionId != parseInt(this.securityQuestionForm.get('securityQuestionId').value))
-    this.count++;
+    this.count = this.count + 1;
+    this.progressValue = this.progressValue + 33.33;
     this.setAnswers();
-    if (this.count == 3) {
-      this.isRegister = true;
+  }
+
+  onBackClick() {
+    let x;
+    this.count = this.count - 1;
+    this.progressValue = this.progressValue - 33.33;
+    x = this.originalSecurityQuestions.filter((filteredquestion) => {
+      if (filteredquestion.securityQuestionId == this.questionId) {
+        return filteredquestion;
+      }
+    })
+    this.securityQuestions = this.securityQuestions.concat(x)
+    if (this.count == 0) {
+      this.securityQuestions = []
+      this.securityQuestions = this.originalSecurityQuestions
     }
   }
 
   setAnswers() {
-    this.securityService.createSecurityAnswers(this.securityQuestionForm.value).subscribe((data: any) => {
-      this.securityQuestionForm.reset();
+    this.questionId = this.securityQuestionForm.get('securityQuestionId').value
+    let formValue = this.securityQuestionForm.value;
+    this.securityQuestionForm.reset()
+    this.securityService.createSecurityAnswers(formValue).subscribe((data: any) => {
     })
   }
 
