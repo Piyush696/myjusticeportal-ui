@@ -19,11 +19,6 @@ body {
   height: unset;
 }
 
-.mat-checkbox-inner-container {
-  height: 20px !important;
-  width: 22px !important;
-}
-
 .mat-option-text.mat-option-text {
   white-space: normal;
   line-height: 29px;
