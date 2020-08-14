@@ -108,11 +108,11 @@
             <div class="row">
                 <mat-checkbox class="termCondition-margin" [formControl]="registrationForm.controls['termCondition']"
                     (click)="openModal(mytemplate)"><a (click)="openModal(mytemplate)">
-                        <span>I accept the Terms and
+                        <div>I accept the Terms and
                             Conditions
-                            of using this website and agree</span>
-                        <br>
-                        <span>to abide by all applicable laws and standards.</span></a>
+                            of using this website and agree</div>
+                        <div>to abide by all applicable laws and standards.</div>
+                    </a>
                 </mat-checkbox>
             </div>
             <div class="d-flex justify-content-between">
@@ -173,12 +173,12 @@
                         bottom to accept.</span>
                 </p>
             </div>
-            <div class="border-card">
+            <div class="border border-dark">
                 <mat-card>
                     <p>
                         <span class="disclaimer-heading">TERMS AND CONDITIONS</span>
                     </p>
-                    <p class="terms-text p-0 m-0" (scroll)="onScroll($event)">
+                    <p class="terms-text pr-3 m-0" (scroll)="onScroll($event)">
                         Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been
                         the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley
                         of type and scrambled it to make a type specimen book. It has survived not only five centuries,

@@ -7,7 +7,8 @@ import { SecurityService } from 'app/services/security.service';
   templateUrl: './security-question.component.html',
   styleUrls: ['./security-question.component.css']
 })
-export class SecurityQuestionComponent implements OnInit, OnChanges {
+export class SecurityQuestionComponent implements OnInit {
+
   @Input() selectedRoleId: number;
   securityQuestions: any = [];
   backSelectedQuestion: any = [];
@@ -22,6 +23,7 @@ export class SecurityQuestionComponent implements OnInit, OnChanges {
 
   ngOnInit(): void {
     this.createFormControl();
+    this.getAllSecurityQuestions();
   }
 
   createFormControl() {
@@ -31,7 +33,7 @@ export class SecurityQuestionComponent implements OnInit, OnChanges {
     });
   }
 
-  ngOnChanges() {
+  getAllSecurityQuestions() {
     this.securityService.getAllSecurityRoles(this.selectedRoleId).subscribe((questions: any) => {
       this.securityQuestions = questions.data
       this.originalSecurityQuestions = questions.data
