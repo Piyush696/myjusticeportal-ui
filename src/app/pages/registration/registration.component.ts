@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { CacheService } from 'app/services/cache.service';
@@ -8,24 +8,31 @@ import { RoleService } from 'app/services/role.service';
 import { Store } from '@ngrx/store';
 import { AddRole, LoadRole } from 'app/store/actions/role.actions';
 import { ToasterService } from 'app/services/toaster.service';
+import { MatDialog } from '@angular/material/dialog';
+import { SecurityService } from 'app/services/security.service';
 
 @Component({
   selector: 'app-registration',
   templateUrl: './registration.component.html',
   styleUrls: ['./registration.component.css']
 })
+@HostListener('scroll', ['$event'])
 export class RegistrationComponent implements OnInit {
   registrationForm: FormGroup;
   step: number = 1;
   roleList: any;
+  securityQuestions: any;
+  securityQuestionId: number;
+  selectedRoleId: number;
+  isAcceptDisabled: boolean = true;
+  isNextDisabled: boolean = true;
 
-  constructor(private loginService: LoginService, private cacheService: CacheService, private fb: FormBuilder,
+  constructor(public securityService: SecurityService, public dialog: MatDialog, private loginService: LoginService, private cacheService: CacheService, private fb: FormBuilder,
     private toasterService: ToasterService, private roleService: RoleService,
     private registrationService: RegistrationService, private router: Router, private store: Store<any>) { }
 
   ngOnInit(): void {
     this.store.dispatch(new LoadRole());
-
     this.registrationForm = this.fb.group({
       firstName: ['', [Validators.required]],
       lastName: ['', [Validators.required]],
@@ -33,7 +40,8 @@ export class RegistrationComponent implements OnInit {
       password: ['', [Validators.required, Validators.minLength(6)]],
       confirmPassword: ['', [Validators.required, Validators.minLength(6)]],
       username: ['', [Validators.required], this.validateUserNotTaken.bind(this)],
-      roleId: ['', [Validators.required]]
+      roleId: ['', [Validators.required]],
+      termCondition: ['', [Validators.required]]
     }, { validator: this.checkIfMatchingPasswords('password', 'confirmPassword') });
     this.onGetRoles();
   }
@@ -66,6 +74,14 @@ export class RegistrationComponent implements OnInit {
     })
   }
 
+  onSelectRole(roleId) {
+    this.selectedRoleId = roleId
+  }
+
+  onSelectQuestion(questionId) {
+    this.securityQuestionId = questionId
+  }
+
   validateEmail(control: AbstractControl) {
     const pattern = /^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,15})$/;
     if (!control.value.match(pattern) && control.value !== '') {
@@ -74,13 +90,46 @@ export class RegistrationComponent implements OnInit {
     return null;
   }
 
-  onRegister() {
+  openModal(templateRef) {
+    let dialogRef = this.dialog.open(templateRef, {
+      width: '500px',
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+    });
+  }
+
+  onCreateRegisterUser() {
     this.registrationService.addUser(this.registrationForm.value).subscribe((res: any) => {
       this.cacheService.setCache('token', res.token);
       this.loginService.checkToken().then((data: any) => {
-        this.toasterService.showSuccessToater('>Welcome to My Justice Portal.')
-        this.router.navigateByUrl('/dashboard')
+        this.step = 3;
       })
     })
   }
+
+  onUpdateRegisteredUser(value: boolean) {
+    this.registrationService.updateUser(value).subscribe((user: any) => {
+      this.toasterService.showSuccessToater('Welcome to My Justice Portal.')
+      this.router.navigateByUrl('/dashboard')
+    })
+  }
+
+
+  onScroll(event: any) {
+    // visible height + pixel scrolled >= total height 
+    if (event.target.offsetHeight + event.target.scrollTop >= event.target.scrollHeight) {
+      this.isAcceptDisabled = false;
+    }
+    else {
+      this.isAcceptDisabled = true;
+    }
+  }
+
+  onAcceptTerms() {
+    this.isNextDisabled = false;
+    this.registrationForm.get('termCondition').setValue(true)
+  }
+
 }

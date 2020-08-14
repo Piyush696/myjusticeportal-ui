@@ -11,6 +11,19 @@ body {
   cursor: pointer;
 }
 
+/* .mat-checkbox-background {
+  background: #7676d4 !important;
+} */
+
+.mat-select-panel mat-option.mat-option {
+  height: unset;
+}
+
+.mat-option-text.mat-option-text {
+  white-space: normal;
+  line-height: 29px;
+}
+
 .header-sub-text {
   font-size: 18px;
 }
