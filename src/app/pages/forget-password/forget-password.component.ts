@@ -75,10 +75,6 @@ export class ForgetPasswordComponent implements OnInit {
     })
   }
 
-  onBackClick() {
-
-  }
-
   resetPassword() {
     const data = {
       "user": this.passwordResetForm.get('user').value,
