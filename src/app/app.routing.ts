@@ -1,5 +1,6 @@
 import { Routes } from '@angular/router';
 import { LayoutComponent } from './layouts/layout.component';
+import { ForgetPasswordComponent } from './pages/forget-password/forget-password.component';
 import { LoginComponent } from './pages/login/login.component';
 import { RegistrationComponent } from './pages/registration/registration.component';
 
@@ -25,6 +26,10 @@ export const AppRoutes: Routes = [
   {
     path: 'register',
     component: RegistrationComponent
+  },
+  {
+    path: 'forget-password',
+    component: ForgetPasswordComponent
   },
   {
     path: '**',
