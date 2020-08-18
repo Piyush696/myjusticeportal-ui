@@ -13,11 +13,13 @@ import { MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
 import { RouterModule } from '@angular/router';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { AppSettingsComponent } from 'app/pages/app-settings/app-settings.component';
 import { CaseFormComponent } from 'app/pages/case-form/case-form.component';
 import { CasesComponent } from 'app/pages/cases/cases.component';
 import { CreateCaseComponent } from 'app/pages/create-case/create-case.component';
 import { EditCaseComponent } from 'app/pages/edit-case/edit-case.component';
 import { MyAccountComponent } from 'app/pages/my-account/my-account.component';
+import { PostageAppComponent } from 'app/pages/postage-app/postage-app.component';
 import { UsersComponent } from 'app/pages/users/users.component';
 import { ViewCaseComponent } from 'app/pages/view-case/view-case.component';
 import { ToastrModule } from 'ngx-toastr';
@@ -63,7 +65,9 @@ import { LayoutRoutes } from './layout.routing';
     ViewCaseComponent,
     CaseFormComponent,
     CreateCaseComponent,
-    EditCaseComponent
+    EditCaseComponent,
+    AppSettingsComponent,
+    PostageAppComponent
   ],
   providers: [
     MatDatepickerModule,

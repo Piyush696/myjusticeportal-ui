@@ -104,7 +104,6 @@ export class RegistrationComponent implements OnInit {
     this.registrationService.addUser(this.registrationForm.value).subscribe((res: any) => {
       this.cacheService.setCache('token', res.token);
       this.loginService.checkToken().then((data: any) => {
-        console.log(data)
         this.step = 3;
       })
     })

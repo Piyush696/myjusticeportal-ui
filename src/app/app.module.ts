@@ -32,8 +32,6 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { ForgetPasswordComponent } from './pages/forget-password/forget-password.component';
-import { AppSettingsComponent } from './pages/app-settings/app-settings.component';
-import { PostageAppComponent } from './pages/postage-app/postage-app.component';
 import { SecurityQuestionComponent } from './pages/security-question/security-question.component';
 @NgModule({
   declarations: [
@@ -42,9 +40,7 @@ import { SecurityQuestionComponent } from './pages/security-question/security-qu
     LoginComponent,
     RegistrationComponent,
     SecurityQuestionComponent,
-    ForgetPasswordComponent,
-    AppSettingsComponent,
-    PostageAppComponent
+    ForgetPasswordComponent
   ],
   imports: [
     BrowserModule,

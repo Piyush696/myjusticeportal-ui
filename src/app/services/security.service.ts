@@ -48,5 +48,9 @@ export class SecurityService {
     return this.httpClient.get<object>(`${this.apiPath}/${this.allSecurityQuestion}/user/securityQuestions`, this.getHeaders())
   }
 
+  updateSecurityQuestionAnswer(updatedAnswer) {
+    return this.httpClient.put<object>(`${this.apiPath}/${this.allSecurityQuestion}/securityQuestion`, updatedAnswer, this.getHeaders())
+  }
+
 
 }

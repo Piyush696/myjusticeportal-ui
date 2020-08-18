@@ -13,6 +13,7 @@ export const ROUTES: RouteInfo[] = [
     // { path: '/dashboard', title: 'Dashboard', icon: 'nc-bank', class: '' },
     // { path: '/users', title: 'All Users', icon: 'nc-bank', class: '' },
     { path: '/', title: 'My Dockets', icon: 'nc-bank', class: '' },
+    { path: '/app-setting', title: 'My SuperAdmin view', icon: 'nc-bank', class: '' },
     { path: '/', title: 'Law Library', icon: 'nc-bank', class: '' },
     { path: '/', title: 'Legal Research Assistance', icon: 'nc-bank', class: '' },
     { path: '/', title: 'Legal Forms', icon: 'nc-bank', class: '' },

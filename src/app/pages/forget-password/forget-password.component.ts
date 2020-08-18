@@ -44,8 +44,13 @@ export class ForgetPasswordComponent implements OnInit {
 
   getAllUserSecurityQuestions() {
     this.securityService.getUserSecurityQuestions(this.passwordResetForm.get('user').value).subscribe((securityQuestions: any) => {
-      this.securityQuestions = securityQuestions.data.securityQuestions
-      this.step = 2;
+      if (securityQuestions.data) {
+        this.securityQuestions = securityQuestions.data.securityQuestions
+        this.step = 2;
+      }
+      else {
+        this.toasterService.showErrorToater('Invalid User.')
+      }
     })
   }
 

@@ -23,7 +23,6 @@ export class PostageAppComponent implements OnInit {
 
   getPostageCredentials() {
     this.postageService.getCredentials().subscribe((credentials: any) => {
-      console.log(credentials)
       this.postageCredentialForm.get('apiUrl').setValue(credentials.data.apiUrl)
       this.postageCredentialForm.get('apiKey').setValue(credentials.data.apiKey)
       this.postageCredentialForm.get('project').setValue(credentials.data.project)
@@ -34,7 +33,6 @@ export class PostageAppComponent implements OnInit {
 
   updateCendencialChanges() {
     this.postageService.updateCredentials(this.postageCredentialForm.value).subscribe((updatedData: any) => {
-      console.log(updatedData)
       this.getPostageCredentials();
     })
   }

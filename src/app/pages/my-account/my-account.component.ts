@@ -53,7 +53,6 @@ export class MyAccountComponent implements OnInit {
   }
   getAllSecurityQuestion() {
     this.securityService.getUserSecurityQuestion().subscribe((questions: any) => {
-      console.log(questions)
       this.securityQuestionList = questions.data
     })
   }
@@ -102,7 +101,29 @@ export class MyAccountComponent implements OnInit {
     })
   }
 
-  onSelectQuestions(value) {
-    console.log(value)
+  onSelectQuestions(securityQuestionId) {
+    this.securityQuestionList.filter(data => {
+      if (data.securityQuestionId == securityQuestionId) {
+        this.securityQuestionForm.get('answer').setValue(data.answer)
+        this.securityQuestionForm.get('answer').disable()
+      }
+    })
+  }
+
+  onSaveChanges() {
+    const data = {
+      "securityQuestionId": this.securityQuestionForm.get('securityQuestionId').value,
+      "answer": this.securityQuestionForm.get('answer').value
+    }
+    this.securityService.updateSecurityQuestionAnswer(data).subscribe((data: any) => {
+      if (data.data) {
+        this.getAllSecurityQuestion()
+        this.toasterService.showSuccessToater('Security Question Updated Successfully.')
+        this.securityQuestionForm.reset()
+      }
+      else {
+        this.toasterService.showErrorToater('Security Question not Updated.')
+      }
+    })
   }
 }
