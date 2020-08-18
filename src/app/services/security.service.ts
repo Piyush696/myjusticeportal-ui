@@ -43,4 +43,10 @@ export class SecurityService {
   resetPassword(resetData) {
     return this.httpClient.put<Object>(`${this.apiPath}/user/reset-pass`, resetData);
   }
+
+  getUserSecurityQuestion() {
+    return this.httpClient.get<object>(`${this.apiPath}/${this.allSecurityQuestion}/user/securityQuestions`, this.getHeaders())
+  }
+
+
 }

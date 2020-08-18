@@ -8,6 +8,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatInputModule } from '@angular/material/input';
 import { MatListModule } from '@angular/material/list';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSelectModule } from '@angular/material/select';
 import { MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
 import { RouterModule } from '@angular/router';
@@ -41,6 +42,7 @@ import { LayoutRoutes } from './layout.routing';
     MatSortModule,
     MatTableModule,
     FormsModule,
+    MatSelectModule,
     ReactiveFormsModule,
     MatButtonModule,
     ToastrModule.forRoot(),

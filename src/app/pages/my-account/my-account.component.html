@@ -69,7 +69,9 @@
                     </mat-error>
                 </mat-form-field>
             </div>
-            <div class="d-flex justify-content-end">
+            <div class="d-flex justify-content-between">
+                <button data-toggle="modal" data-target="#manageSecurityQuestionModal" class="px-4 py-1"
+                    mat-raised-button color="primary">Manage Security Questions</button>
                 <button class="px-4 py-1" mat-raised-button color="primary" (click)="editChanges()">Edit
                     Changes</button>
             </div>
@@ -129,3 +131,53 @@
         </div>
     </div>
 </div><!-- /.modal -->
+
+<!-- modal -->
+<div class="modal fade" id="manageSecurityQuestionModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="d-flex justify-content-center modal-header">
+                <mat-label class="font-weight-bold">Manage Security Questions</mat-label>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <mat-form-field appearance="fill" class="wpx-420">
+                                <mat-label>Select Security Questions</mat-label>
+                                <mat-select [formControl]="securityQuestionForm.controls['securityQuestionId']"
+                                    (selectionChange)="onSelectQuestions($event.value)">
+                                    <mat-option *ngFor="let securityQuestion of securityQuestionList"
+                                        [value]="securityQuestion.securityQuestionId">
+                                        {{securityQuestion.question}}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+
+                        <div class="form-group">
+                            <mat-form-field appearance="fill" class="w-100 p-2">
+                                <mat-label>Answer</mat-label>
+                                <input type="text" matInput placeholder="Answer"
+                                    [formControl]="securityQuestionForm.controls['answer']" required>
+                                <mat-error>
+                                    <div
+                                        *ngIf="securityQuestionForm.controls['answer'].invalid && securityQuestionForm.controls['answer'].touched">
+                                        <small class="font13">
+                                            Answer is Required
+                                        </small>
+                                    </div>
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="d-flex justify-content-between modal-footer">
+                <button type="button" class="btn btn-secondary waves-effect" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-info waves-effect waves-light" data-dismiss="modal"
+                    (click)="passwordChange()">Save</button>
+            </div>
+        </div>
+    </div>
+</div>

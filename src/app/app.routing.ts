@@ -1,5 +1,6 @@
 import { Routes } from '@angular/router';
 import { LayoutComponent } from './layouts/layout.component';
+import { AppSettingsComponent } from './pages/app-settings/app-settings.component';
 import { ForgetPasswordComponent } from './pages/forget-password/forget-password.component';
 import { LoginComponent } from './pages/login/login.component';
 import { RegistrationComponent } from './pages/registration/registration.component';
@@ -30,6 +31,10 @@ export const AppRoutes: Routes = [
   {
     path: 'forget-password',
     component: ForgetPasswordComponent
+  },
+  {
+    path: 'app-setting',
+    component: AppSettingsComponent
   },
   {
     path: '**',
