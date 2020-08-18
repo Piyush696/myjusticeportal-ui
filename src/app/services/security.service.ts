@@ -9,14 +9,11 @@ import { CacheService } from './cache.service';
 export class SecurityService {
   private apiPath: string;
   private allSecurityQuestion: string;
-  private passwordReset: string;
-  allUsers: string;
 
   constructor(private httpClient: HttpClient, private cacheService: CacheService) {
     const env: any = environment;
     this.apiPath = env.api
     this.allSecurityQuestion = 'securityQuestion';
-    this.passwordReset = 'user'
   }
 
   getHeaders() {
@@ -44,6 +41,6 @@ export class SecurityService {
   }
 
   resetPassword(resetData) {
-    return this.httpClient.put<Object>(`${this.apiPath}/${this.passwordReset}/reset-pass`, resetData);
+    return this.httpClient.put<Object>(`${this.apiPath}/user/reset-pass`, resetData);
   }
 }

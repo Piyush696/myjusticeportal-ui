@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { SecurityService } from 'app/services/security.service';
 import { ToasterService } from 'app/services/toaster.service';
 
@@ -14,7 +15,7 @@ export class ForgetPasswordComponent implements OnInit {
   securityQuestions: any;
   count: number = 1;
 
-  constructor(private fb: FormBuilder, private securityService: SecurityService, private toasterService: ToasterService) { }
+  constructor(private fb: FormBuilder, private router: Router, private securityService: SecurityService, private toasterService: ToasterService) { }
 
   ngOnInit(): void {
     this.createFormControl();
@@ -83,6 +84,7 @@ export class ForgetPasswordComponent implements OnInit {
     this.securityService.resetPassword(data).subscribe((res: any) => {
       if (res.success) {
         this.toasterService.showSuccessToater('Password Reset Successfully.')
+        this.router.navigateByUrl('/login')
       }
     })
   }
