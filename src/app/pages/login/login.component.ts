@@ -44,6 +44,9 @@ export class LoginComponent implements OnInit {
             }
           })
         }
+        else {
+          this.toasterService.showErrorToater('Username or password is not correct.');
+        }
       })
   }
 }

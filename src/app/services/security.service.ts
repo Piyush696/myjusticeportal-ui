@@ -9,13 +9,13 @@ import { CacheService } from './cache.service';
 export class SecurityService {
   private apiPath: string;
   private allSecurityQuestion: string;
-  allUsers: string;
 
   constructor(private httpClient: HttpClient, private cacheService: CacheService) {
     const env: any = environment;
     this.apiPath = env.api
     this.allSecurityQuestion = 'securityQuestion';
   }
+
   getHeaders() {
     return {
       headers: new HttpHeaders({
@@ -30,5 +30,17 @@ export class SecurityService {
 
   createSecurityAnswers(securityQuestionAnswer) {
     return this.httpClient.post<object>(`${this.apiPath}/${this.allSecurityQuestion}`, securityQuestionAnswer, this.getHeaders())
+  }
+
+  getUserSecurityQuestions(user: string) {
+    return this.httpClient.post<object>(`${this.apiPath}/${this.allSecurityQuestion}/securityQues`, { user })
+  }
+
+  checkAnswer(data) {
+    return this.httpClient.post<object>(`${this.apiPath}/${this.allSecurityQuestion}/check-answer`, data)
+  }
+
+  resetPassword(resetData) {
+    return this.httpClient.put<Object>(`${this.apiPath}/user/reset-pass`, resetData);
   }
 }
