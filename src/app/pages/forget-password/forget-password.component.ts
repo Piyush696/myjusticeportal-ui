@@ -13,7 +13,6 @@ export class ForgetPasswordComponent implements OnInit {
   passwordResetForm: FormGroup;
   step: number = 1;
   securityQuestions: any;
-  count: number = 1;
 
   constructor(private fb: FormBuilder, private router: Router, private securityService: SecurityService, private toasterService: ToasterService) { }
 
@@ -55,11 +54,9 @@ export class ForgetPasswordComponent implements OnInit {
       "user": this.passwordResetForm.get('user').value,
       "answer": this.passwordResetForm.get('answer').value,
       "securityQuestionId": this.passwordResetForm.get('securityQuestionId').value,
-      "securityQuestionAnswered": this.count
     }
     this.securityService.checkAnswer(data).subscribe((res: any) => {
       if (res.match === true) {
-        this.count = this.count + 1;
         this.toasterService.showSuccessToater('Security Question and Answer Matched.')
         this.securityQuestions = this.securityQuestions.filter(filteredquestion => filteredquestion.securityQuestionId != parseInt(this.passwordResetForm.get('securityQuestionId').value))
         this.passwordResetForm.get('answer').reset();
