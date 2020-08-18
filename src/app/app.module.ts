@@ -33,6 +33,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { SecurityQuestionComponent } from './pages/security-question/security-question.component';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { ForgetPasswordComponent } from './pages/forget-password/forget-password.component';
+import { Dashboardv3Component } from './pages/dashboardv3/dashboardv3.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -41,6 +42,7 @@ import { ForgetPasswordComponent } from './pages/forget-password/forget-password
     RegistrationComponent,
     SecurityQuestionComponent,
     ForgetPasswordComponent,
+    Dashboardv3Component,
   ],
   imports: [
     BrowserModule,
