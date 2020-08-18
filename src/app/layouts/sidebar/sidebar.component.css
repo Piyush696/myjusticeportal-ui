@@ -1,8 +1,11 @@
 .logo {
   width: 100%;
-  background: #fff;
 }
 
+.logo-size {
+  padding-bottom: 1px;
+  padding-top: 1px;
+}
 
 .nav {
   margin-top: 0px !important;
