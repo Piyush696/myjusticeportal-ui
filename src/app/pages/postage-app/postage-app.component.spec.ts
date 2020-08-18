@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { Dashboardv3Component } from './dashboardv3.component';
+import { PostageAppComponent } from './postage-app.component';
 
-describe('Dashboardv3Component', () => {
-  let component: Dashboardv3Component;
-  let fixture: ComponentFixture<Dashboardv3Component>;
+describe('PostageAppComponent', () => {
+  let component: PostageAppComponent;
+  let fixture: ComponentFixture<PostageAppComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ Dashboardv3Component ]
+      declarations: [ PostageAppComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(Dashboardv3Component);
+    fixture = TestBed.createComponent(PostageAppComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
