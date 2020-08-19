@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
+import { SecurityService } from 'app/services/security.service';
 import { ToasterService } from 'app/services/toaster.service';
 import { UserService } from '../../services/user.service';
 
@@ -14,13 +15,17 @@ export class MyAccountComponent implements OnInit {
   user: any;
   profileForm: FormGroup;
   passwordForm: FormGroup;
+  securityQuestionForm: FormGroup;
   userId: any;
+  securityQuestionList: any[];
 
-  constructor(private toasterService: ToasterService, private userService: UserService, private store: Store<any>, private fb: FormBuilder) { }
+  constructor(private toasterService: ToasterService, private securityService: SecurityService, private userService: UserService, private store: Store<any>, private fb: FormBuilder) { }
 
   ngOnInit() {
     this.createControl();
     this.getLoginDetails();
+    this.securityQuestionControl();
+    this.getAllSecurityQuestion()
   }
 
   createControl() {
@@ -38,6 +43,18 @@ export class MyAccountComponent implements OnInit {
       password: ['', [Validators.required]],
       confirmPassword: ['', [Validators.required]],
     }, { validator: this.checkIfMatchingPasswords('password', 'confirmPassword') })
+  }
+
+  securityQuestionControl() {
+    this.securityQuestionForm = this.fb.group({
+      securityQuestionId: ['', [Validators.required]],
+      answer: ['', [Validators.required]],
+    })
+  }
+  getAllSecurityQuestion() {
+    this.securityService.getUserSecurityQuestion().subscribe((questions: any) => {
+      this.securityQuestionList = questions.data
+    })
   }
 
   checkIfMatchingPasswords(passwordKey: string, passwordConfirmationKey: string) {
@@ -80,6 +97,32 @@ export class MyAccountComponent implements OnInit {
     this.userService.resetPassword(this.passwordForm.get('password').value).subscribe((reset: any) => {
       if (reset.success) {
         this.toasterService.showSuccessToater('Password Reset Successfully.');
+      }
+    })
+  }
+
+  onSelectQuestions(securityQuestionId) {
+    this.securityQuestionList.filter(data => {
+      if (data.securityQuestionId == securityQuestionId) {
+        this.securityQuestionForm.get('answer').setValue(data.answer)
+        this.securityQuestionForm.get('answer').disable()
+      }
+    })
+  }
+
+  onSaveChanges() {
+    const data = {
+      "securityQuestionId": this.securityQuestionForm.get('securityQuestionId').value,
+      "answer": this.securityQuestionForm.get('answer').value
+    }
+    this.securityService.updateSecurityQuestionAnswer(data).subscribe((data: any) => {
+      if (data.data) {
+        this.getAllSecurityQuestion()
+        this.toasterService.showSuccessToater('Security Question Updated Successfully.')
+        this.securityQuestionForm.reset()
+      }
+      else {
+        this.toasterService.showErrorToater('Security Question not Updated.')
       }
     })
   }

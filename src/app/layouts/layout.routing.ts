@@ -1,5 +1,6 @@
 import { Routes } from '@angular/router';
 import { AuthGuard } from 'app/guards/auth.guard';
+import { AppSettingsComponent } from 'app/pages/app-settings/app-settings.component';
 import { CasesComponent } from 'app/pages/cases/cases.component';
 import { CreateCaseComponent } from 'app/pages/create-case/create-case.component';
 import { EditCaseComponent } from 'app/pages/edit-case/edit-case.component';
@@ -29,4 +30,5 @@ export const LayoutRoutes: Routes = [
     { path: 'case/create', canActivate: [AuthGuard], component: CreateCaseComponent },
     { path: 'case/:caseId/edit', canActivate: [AuthGuard], component: EditCaseComponent },
     { path: 'case/:caseId', canActivate: [AuthGuard], component: ViewCaseComponent },
+    { path: 'app-setting', canActivate: [AuthGuard], component: AppSettingsComponent },
 ];

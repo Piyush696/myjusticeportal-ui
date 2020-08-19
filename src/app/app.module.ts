@@ -30,9 +30,9 @@ import { effects } from './store/effects';
 import { rootReducer } from './store/reducers';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatDialogModule } from '@angular/material/dialog';
-import { SecurityQuestionComponent } from './pages/security-question/security-question.component';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { ForgetPasswordComponent } from './pages/forget-password/forget-password.component';
+import { SecurityQuestionComponent } from './pages/security-question/security-question.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -40,7 +40,7 @@ import { ForgetPasswordComponent } from './pages/forget-password/forget-password
     LoginComponent,
     RegistrationComponent,
     SecurityQuestionComponent,
-    ForgetPasswordComponent,
+    ForgetPasswordComponent
   ],
   imports: [
     BrowserModule,
