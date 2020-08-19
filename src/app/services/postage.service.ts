@@ -13,6 +13,7 @@ export class PostageService {
     const env: any = environment;
     this.apiPath = env.api
   }
+
   getHeaders() {
     return {
       headers: new HttpHeaders({
@@ -26,6 +27,6 @@ export class PostageService {
   }
 
   updateCredentials(updateCredencialData) {
-    return this.httpClient.put<object>(`${this.apiPath}/postage`, updateCredencialData, this.getHeaders())
+    return this.httpClient.post<object>(`${this.apiPath}/postage`, updateCredencialData, this.getHeaders())
   }
 }

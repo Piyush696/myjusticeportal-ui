@@ -17,6 +17,12 @@
   border: 1px solid #333442;
 }
 
+
 .btn-group {
   width: 50%;
+}
+
+.padding-btn {
+  padding-left: 41px;
+  padding-right: 40px;
 }
