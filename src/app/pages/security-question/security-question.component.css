@@ -3,9 +3,16 @@
 }
 
 .mat-progress-bar {
-  height: 10px !important;
+  height: 20px !important;
 }
 
 .mat-typography {
   background-color: #fffbfb !important;
+}
+
+.mat-progress-section {
+  display: flex;
+  align-content: center;
+  align-items: center;
+  height: 60px;
 }

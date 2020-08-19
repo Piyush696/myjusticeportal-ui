@@ -1,6 +1,9 @@
 <mat-card class="p-5">
     <div class="mb-5">
-        <mat-progress-bar mode="determinate" value="{{progressValue}}"></mat-progress-bar>
+        <section class="mat-progress-section">
+            <mat-progress-bar mode="determinate" value="{{progressValue}}"></mat-progress-bar>
+            <div style="position: absolute; padding: 10px; color: white;"> {{progressValue}}/100% </div>
+        </section>
     </div>
     <mat-form-field appearance="fill" class="w-100">
         <mat-label>Select Question</mat-label>
