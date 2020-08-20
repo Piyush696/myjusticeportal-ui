@@ -11,6 +11,7 @@ import { TwilioService } from 'app/services/twilio.service';
 })
 export class TwilioCredentialsComponent implements OnInit {
   twilioCredentialForm: FormGroup;
+  isDisabled: boolean = true;
   constructor(private fb: FormBuilder, private twilioService: TwilioService, private toasterService: ToasterService) { }
 
   ngOnInit(): void {
@@ -26,6 +27,7 @@ export class TwilioCredentialsComponent implements OnInit {
       this.twilioCredentialForm.get('accountSid').setValue(credentials.data.accountSid)
       this.twilioCredentialForm.get('authToken').setValue(credentials.data.authToken)
       this.twilioCredentialForm.disable();
+      this.isDisabled = true;
     })
   }
 
@@ -36,4 +38,7 @@ export class TwilioCredentialsComponent implements OnInit {
     })
   }
 
+  enableSave() {
+    this.isDisabled = false;
+  }
 }
