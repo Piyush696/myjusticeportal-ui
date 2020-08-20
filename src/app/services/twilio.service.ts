@@ -29,4 +29,12 @@ export class TwilioService {
   updateTwilioCredentials(updateTwilioCredencialData) {
     return this.httpClient.post<object>(`${this.apiPath}/twilio/twilio`, updateTwilioCredencialData, this.getHeaders())
   }
+
+  getOtp(otpData) {
+    return this.httpClient.post<object>(`${this.apiPath}/twilio`, otpData, this.getHeaders())
+  }
+
+  verifyCode(otpData) {
+    return this.httpClient.post<object>(`${this.apiPath}/twilio/verify-sms`, otpData, this.getHeaders())
+  }
 }
