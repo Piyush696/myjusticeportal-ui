@@ -70,9 +70,9 @@
             </div>
             <div class="row d-flex justify-content-between">
                 <button class="px-4 py-1 ml-2" mat-raised-button color="primary"
-                    (click)="this.postageCredentialForm.enable()">Edit
+                    (click)="this.postageCredentialForm.enable(); enableSave()">Edit
                     Changes</button>
-                <button class="px-4 py-1 mr-2" mat-raised-button color="primary"
+                <button [disabled]="isDisabled" class="px-4 py-1 mr-2" mat-raised-button color="primary"
                     (click)="updateCendencialChanges()">Save</button>
             </div>
         </mat-card>
