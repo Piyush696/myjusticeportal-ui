@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-
+import { Router } from '@angular/router';
 
 export interface RouteInfo {
     path: string;
@@ -24,17 +24,49 @@ export const ROUTES: RouteInfo[] = [
     { path: '/', title: 'Bail Bonds', icon: 'nc-bank', class: '' },
 ];
 
-
 @Component({
     moduleId: module.id,
     selector: 'sidebar-cmp',
-    styleUrls: ['./sidebar.component.css'],
-    templateUrl: 'sidebar.component.html',
+    styleUrls: ['./sidebar.component.scss'],
+    templateUrl: 'sidebar.component.html'
 })
 
 export class SidebarComponent implements OnInit {
     public menuItems: any[];
+    currentMenu: any;
+
+    constructor(private router: Router) { };
+
+    ngAfterViewInit() {
+        if (this.router.url) {
+            this.currentMenu = this.menuItems.find(x => x.path == this.router.url);
+        }
+        if (this.currentMenu) {
+            setTimeout(() => {
+                let elem: HTMLElement = document.getElementById(this.currentMenu.path);
+                elem.classList.add('active');
+                elem.classList.add('currentMenu');
+            }, 100);
+        }
+    }
+
     ngOnInit() {
         this.menuItems = ROUTES.filter(menuItem => menuItem);
+    }
+
+    onChangeMenu(path) {
+        setTimeout(() => {
+            var x = <HTMLElement[]><any>document.getElementsByClassName('label-bg');
+            for (var i = 0; i < x.length; i++) {
+                x[i].classList.remove('active');
+                x[i].classList.remove('currentMenu');
+            }
+        }, 50);
+        this.currentMenu = this.menuItems.find(x => x.path == path);
+        setTimeout(() => {
+            let elem: HTMLElement = document.getElementById(this.currentMenu.path);
+            elem.classList.add('active');
+            elem.classList.add('currentMenu');
+        }, 200);
     }
 }

@@ -3,11 +3,10 @@
     <img [routerLink]="'/case'" src="assets/img/sidebar-logo.png" class="logo-size">
   </div>
 
-
-
   <ul class="nav">
-    <li *ngFor="let menuItem of menuItems" class="{{menuItem.class}} label-bg">
-      <a class="d-flex justify-content-center sidebar-style" href="#" [routerLink]="[menuItem.path]">
+    <li *ngFor="let menuItem of menuItems" class="{{menuItem.class}} label-bg" id="{{menuItem?.path}}">
+      <a class="d-flex justify-content-center sidebar-style onHoverMenu" href="#" [routerLink]="[menuItem.path]"
+        (click)="onChangeMenu(menuItem?.path)">
         <p class="letter-spacing">{{menuItem.title}}</p>
       </a>
     </li>
