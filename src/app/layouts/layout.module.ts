@@ -32,6 +32,7 @@ import { TableComponent } from '../pages/table/table.component';
 import { TypographyComponent } from '../pages/typography/typography.component';
 import { UserComponent } from '../pages/user/user.component';
 import { LayoutRoutes } from './layout.routing';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 @NgModule({
   imports: [
     CommonModule,
@@ -48,6 +49,7 @@ import { LayoutRoutes } from './layout.routing';
     MatSelectModule,
     ReactiveFormsModule,
     MatButtonModule,
+    MatSlideToggleModule,
     ToastrModule.forRoot(),
     MatDatepickerModule,
     MatNativeDateModule

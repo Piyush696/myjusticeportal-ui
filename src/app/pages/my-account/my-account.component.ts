@@ -20,6 +20,7 @@ export class MyAccountComponent implements OnInit {
   userId: any;
   securityQuestionList: any[];
   OtpField: boolean;
+  isMfa: boolean;
   verifiedIcon: boolean;
 
   constructor(private twilioService: TwilioService, private toasterService: ToasterService, private securityService: SecurityService, private userService: UserService, private store: Store<any>, private fb: FormBuilder) { }
@@ -39,7 +40,8 @@ export class MyAccountComponent implements OnInit {
       email: ['', [Validators.required]],
       mobile: ['', [Validators.required]],
       countryCode: ['', [Validators.required]],
-      otp: ['', [Validators.required]]
+      otp: ['', [Validators.required]],
+      isMFA: [''],
     })
     this.createPasswordControl();
   }
@@ -98,6 +100,7 @@ export class MyAccountComponent implements OnInit {
       this.profileForm.get('email').setValue(result.data.email)
       this.profileForm.get('countryCode').setValue(result.data.countryCode)
       this.profileForm.get('mobile').setValue(result.data.mobile)
+      this.profileForm.get('isMFA').setValue(result.data.isMFA)
       this.passwordForm.disable();
     })
   }
@@ -160,6 +163,14 @@ export class MyAccountComponent implements OnInit {
         this.verifiedIcon = true;
         this.getSingleUser();
         this.toasterService.showSuccessToater('Verified.')
+      }
+    })
+  }
+
+  onMfaSelect() {
+    this.userService.updateUser({ isMFA: this.profileForm.get('isMFA').value }).subscribe((isMFA: any) => {
+      if (isMFA.success) {
+        this.toasterService.showSuccessToater('Success')
       }
     })
   }
