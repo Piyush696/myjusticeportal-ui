@@ -37,3 +37,19 @@
   background: #f8f6f6 !important;
   padding: 10px;
 }
+
+.onHoverMenu:hover {
+  background-color: #c1c1c1 !important;
+}
+.onHoverMenu:hover p {
+  font-weight: 600;
+}
+
+.currentMenu {
+  a {
+    background-color: #c1c1c1 !important;
+  }
+  p {
+    font-weight: 600;
+  }
+}
