@@ -58,7 +58,7 @@
             <div class="row">
                 <mat-form-field appearance="fill" class="w-100 p-2">
                     <mat-label>Email</mat-label>
-                    <input type="email" matInput placeholder="email" [formControl]="profileForm.controls['email']"
+                    <input type="email" matInput placeholder="Email" [formControl]="profileForm.controls['email']"
                         required>
                     <mat-error>
                         <div *ngIf="profileForm.controls['email'].invalid && profileForm.controls['email'].touched">
@@ -68,6 +68,83 @@
                         </div>
                     </mat-error>
                 </mat-form-field>
+            </div>
+            <div class="row mr-3">
+                <div class="col-4 p-0">
+                    <div class="row">
+                        <div class="col-4 pr-0">
+                            <mat-form-field appearance="fill" class="w-100 p-2">
+                                <mat-label>+</mat-label>
+                                <input [disabled]="true" type="text" matInput placeholder="+">
+                            </mat-form-field>
+                        </div>
+                        <div class="col-8">
+                            <mat-form-field appearance="fill" class="w-100 p-2">
+                                <mat-label>Country Code</mat-label>
+                                <input type="number" matInput placeholder="Country Code"
+                                    [formControl]="profileForm.controls['countryCode']" required>
+                                <mat-error>
+                                    <div
+                                        *ngIf="profileForm.controls['countryCode'].invalid && profileForm.controls['countryCode'].touched">
+                                        <small class="font13">
+                                            Country Code is Required
+                                        </small>
+                                    </div>
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-5 p-0">
+                    <mat-form-field appearance="fill" class="w-100 p-2">
+                        <mat-label>Mobile</mat-label>
+                        <input type="text" matInput placeholder="Mobile" [formControl]="profileForm.controls['mobile']"
+                            required>
+                        <mat-error>
+                            <div
+                                *ngIf="profileForm.controls['mobile'].invalid && profileForm.controls['mobile'].touched">
+                                <small class="font13">
+                                    Mobile is Required
+                                </small>
+                            </div>
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+                <div class="col-3 d-flex justify-content-between">
+                    <div>
+                        <i *ngIf="verifiedIcon" class="nc-icon nc-check-2"></i>
+                    </div>
+                    <div>
+                        <button *ngIf="!verifiedIcon"
+                            [disabled]="profileForm.get('countryCode').invalid || profileForm.get('mobile').invalid"
+                            mat-raised-button color="primary" class="mt-2 px-5 py-2" (click)="onGetOtp()">Get
+                            Otp</button>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div *ngIf="OtpField" class=" d-flex justify-content-between">
+                    <div>
+
+                        <mat-form-field appearance="fill" class="w-100 p-2">
+                            <mat-label>Enter Otp</mat-label>
+                            <input type="number" matInput placeholder="Enter Otp"
+                                [formControl]="profileForm.controls['otp']" required>
+                            <mat-error>
+                                <div *ngIf="profileForm.controls['otp'].invalid && profileForm.controls['otp'].touched">
+                                    <small class="font13">
+                                        Otp is Required
+                                    </small>
+                                </div>
+                            </mat-error>
+                        </mat-form-field>
+
+                    </div>
+                    <div>
+                        <button [disabled]="profileForm.get('otp').invalid" mat-raised-button color="primary"
+                            class="mt-2 px-5 py-1" (click)="onVerifySms()">Submit</button>
+                    </div>
+                </div>
             </div>
             <div class="d-flex justify-content-between">
                 <button data-toggle="modal" data-target="#manageSecurityQuestionModal" class="px-4 py-1"
