@@ -20,6 +20,7 @@ import { CreateCaseComponent } from 'app/pages/create-case/create-case.component
 import { EditCaseComponent } from 'app/pages/edit-case/edit-case.component';
 import { MyAccountComponent } from 'app/pages/my-account/my-account.component';
 import { PostageAppComponent } from 'app/pages/postage-app/postage-app.component';
+import { TwilioCredentialsComponent } from 'app/pages/twilio-credentials/twilio-credentials.component';
 import { UsersComponent } from 'app/pages/users/users.component';
 import { ViewCaseComponent } from 'app/pages/view-case/view-case.component';
 import { ToastrModule } from 'ngx-toastr';
@@ -67,7 +68,8 @@ import { LayoutRoutes } from './layout.routing';
     CreateCaseComponent,
     EditCaseComponent,
     AppSettingsComponent,
-    PostageAppComponent
+    PostageAppComponent,
+    TwilioCredentialsComponent
   ],
   providers: [
     MatDatepickerModule,

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { PostageService } from 'app/services/postage.service';
+import { ToasterService } from 'app/services/toaster.service';
 
 @Component({
   selector: 'app-postage-app',
@@ -9,7 +10,7 @@ import { PostageService } from 'app/services/postage.service';
 })
 export class PostageAppComponent implements OnInit {
   postageCredentialForm: FormGroup;
-  constructor(private fb: FormBuilder, private postageService: PostageService) { }
+  constructor(private fb: FormBuilder, private postageService: PostageService, private toasterService: ToasterService) { }
 
   ngOnInit(): void {
     this.postageCredentialForm = this.fb.group({
@@ -33,6 +34,7 @@ export class PostageAppComponent implements OnInit {
 
   updateCendencialChanges() {
     this.postageService.updateCredentials(this.postageCredentialForm.value).subscribe((updatedData: any) => {
+      this.toasterService.showSuccessToater('Postage Credentials updated.')
       this.getPostageCredentials();
     })
   }

@@ -5,6 +5,7 @@
 .logo-size {
   padding-bottom: 1px;
   padding-top: 1px;
+  cursor: pointer;
 }
 
 .nav {
