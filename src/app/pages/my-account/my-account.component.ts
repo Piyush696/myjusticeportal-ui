@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { SecurityService } from 'app/services/security.service';
 import { ToasterService } from 'app/services/toaster.service';
+import { TwilioService } from 'app/services/twilio.service';
 import { UserService } from '../../services/user.service';
 
 @Component({
@@ -18,8 +19,11 @@ export class MyAccountComponent implements OnInit {
   securityQuestionForm: FormGroup;
   userId: any;
   securityQuestionList: any[];
+  OtpField: boolean;
+  isMfa: boolean;
+  verifiedIcon: boolean;
 
-  constructor(private toasterService: ToasterService, private securityService: SecurityService, private userService: UserService, private store: Store<any>, private fb: FormBuilder) { }
+  constructor(private twilioService: TwilioService, private toasterService: ToasterService, private securityService: SecurityService, private userService: UserService, private store: Store<any>, private fb: FormBuilder) { }
 
   ngOnInit() {
     this.createControl();
@@ -34,6 +38,10 @@ export class MyAccountComponent implements OnInit {
       firstName: ['', [Validators.required]],
       lastName: ['', [Validators.required]],
       email: ['', [Validators.required]],
+      mobile: ['', [Validators.required]],
+      countryCode: ['', [Validators.required]],
+      otp: ['', [Validators.required]],
+      isMFA: [''],
     })
     this.createPasswordControl();
   }
@@ -90,6 +98,10 @@ export class MyAccountComponent implements OnInit {
       this.profileForm.get('lastName').setValue(result.data.lastName)
       this.profileForm.get('username').setValue(result.data.username)
       this.profileForm.get('email').setValue(result.data.email)
+      this.profileForm.get('countryCode').setValue(result.data.countryCode)
+      this.profileForm.get('mobile').setValue(result.data.mobile)
+      this.profileForm.get('isMFA').setValue(result.data.isMFA)
+      this.passwordForm.disable();
     })
   }
 
@@ -123,6 +135,42 @@ export class MyAccountComponent implements OnInit {
       }
       else {
         this.toasterService.showErrorToater('Security Question not Updated.')
+      }
+    })
+  }
+
+  onGetOtp() {
+    const data = {
+      "mobile": this.profileForm.get('mobile').value,
+      "countryCode": this.profileForm.get('countryCode').value,
+      "email": this.profileForm.get('email').value
+    }
+    this.twilioService.getOtp(data).subscribe((otp: any) => {
+      if (otp.success) {
+        this.OtpField = true;
+        this.toasterService.showSuccessToater('Please submit your otp.')
+      }
+      else {
+        this.OtpField = false;
+      }
+    })
+  }
+
+  onVerifySms() {
+    this.twilioService.verifyCode({ otp: this.profileForm.get('otp').value }).subscribe((verifyData: any) => {
+      if (verifyData.success) {
+        this.OtpField = false;
+        this.verifiedIcon = true;
+        this.getSingleUser();
+        this.toasterService.showSuccessToater('Verified.')
+      }
+    })
+  }
+
+  onMfaSelect() {
+    this.userService.updateUser({ isMFA: this.profileForm.get('isMFA').value }).subscribe((isMFA: any) => {
+      if (isMFA.success) {
+        this.toasterService.showSuccessToater('Success')
       }
     })
   }
