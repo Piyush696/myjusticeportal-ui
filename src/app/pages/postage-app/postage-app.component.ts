@@ -10,6 +10,7 @@ import { ToasterService } from 'app/services/toaster.service';
 })
 export class PostageAppComponent implements OnInit {
   postageCredentialForm: FormGroup;
+  isDisabled: boolean = true;
   constructor(private fb: FormBuilder, private postageService: PostageService, private toasterService: ToasterService) { }
 
   ngOnInit(): void {
@@ -29,6 +30,7 @@ export class PostageAppComponent implements OnInit {
       this.postageCredentialForm.get('project').setValue(credentials.data.project)
       this.postageCredentialForm.get('template').setValue(credentials.data.template)
       this.postageCredentialForm.disable();
+      this.isDisabled = true;
     })
   }
 
@@ -39,4 +41,7 @@ export class PostageAppComponent implements OnInit {
     })
   }
 
+  enableSave() {
+    this.isDisabled = false;
+  }
 }
