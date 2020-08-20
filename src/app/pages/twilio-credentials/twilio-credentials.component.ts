@@ -23,7 +23,6 @@ export class TwilioCredentialsComponent implements OnInit {
 
   getTwilioCredentials() {
     this.twilioService.getTwilioCredentials().subscribe((credentials: any) => {
-      console.log(credentials)
       this.twilioCredentialForm.get('accountSid').setValue(credentials.data.accountSid)
       this.twilioCredentialForm.get('authToken').setValue(credentials.data.authToken)
       this.twilioCredentialForm.disable();
