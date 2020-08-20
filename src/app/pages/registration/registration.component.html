@@ -119,7 +119,7 @@
                     Back to Login
                 </button>
                 <button [disabled]="registrationForm.get('confirmPassword').invalid || 
-                registrationForm.get('password').invalid || registrationForm.get('email').invalid 
+                registrationForm.get('password').invalid 
                  || registrationForm.get('firstName').invalid  || registrationForm.get('lastName').invalid 
                  || registrationForm.get('termCondition').invalid || isNextDisabled" *ngIf="step === 1"
                     class="px-4 py-1 float-right" mat-raised-button color="primary" (click)="step = 2">NEXT</button>
