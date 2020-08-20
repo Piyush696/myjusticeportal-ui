@@ -1,5 +1,5 @@
 <div class="d-flex justify-content-start">
-    <div class="my-3">
+    <div class="w-100 my-3">
         <div>
             <h1 class="line-height font-weight-bold">Postage Credentials</h1>
             <h4 class="line-height header-sub-text">View and Manage all the Postage Credentials.
@@ -70,10 +70,13 @@
             </div>
             <div class="row d-flex justify-content-between">
                 <button class="px-4 py-1 ml-2" mat-raised-button color="primary"
-                    (click)="this.postageCredentialForm.enable(); enableSave()">Edit
-                    Changes</button>
+                    (click)="this.postageCredentialForm.enable(); enableSave()">
+                    Edit Changes
+                </button>
                 <button [disabled]="isDisabled" class="px-4 py-1 mr-2" mat-raised-button color="primary"
-                    (click)="updateCendencialChanges()">Save</button>
+                    (click)="updateCendencialChanges()">
+                    Save
+                </button>
             </div>
         </mat-card>
     </div>
