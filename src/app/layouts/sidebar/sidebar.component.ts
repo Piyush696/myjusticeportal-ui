@@ -63,10 +63,12 @@ export class SidebarComponent implements OnInit {
             }
         }, 50);
         this.currentMenu = this.menuItems.find(x => x.path == path);
-        setTimeout(() => {
-            let elem: HTMLElement = document.getElementById(this.currentMenu.path);
-            elem.classList.add('active');
-            elem.classList.add('currentMenu');
-        }, 200);
+        if (this.currentMenu.path != '/') {
+            setTimeout(() => {
+                let elem: HTMLElement = document.getElementById(this.currentMenu.path);
+                elem.classList.add('active');
+                elem.classList.add('currentMenu');
+            }, 200);
+        }
     }
 }
