@@ -56,7 +56,6 @@ export class MyAccountComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
     });
   }
 
@@ -134,7 +133,7 @@ export class MyAccountComponent implements OnInit {
 
   onSaveChanges() {
     const data = {
-      "securityQuestionId": this.securityQuestionForm.get('securityQuestionId').value,
+      "securityQuestionId": parseInt(this.securityQuestionForm.get('securityQuestionId').value),
       "answer": this.securityQuestionForm.get('answer').value
     }
     this.securityQuestionData.push(data)
