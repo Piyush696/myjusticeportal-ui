@@ -39,17 +39,17 @@
                             <span class="font-weight-normal">Aggravated Assault</span>
                         </p>
                     </div>
-                    <div>
+                    <div *ngIf="caseDetails?.countyOfArrest">
                         <p class="text-default">County of Arrest:
                             <span class="font-weight-normal"> {{caseDetails?.countyOfArrest}}</span>
                         </p>
                     </div>
-                    <div>
+                    <div *ngIf="caseDetails?.dateOfArrest">
                         <p class="text-default">Date of Arrest:
                             <span class="font-weight-normal"> {{caseDetails?.dateOfArrest |date: 'MM/dd/yyyy'}}</span>
                         </p>
                     </div>
-                    <div>
+                    <div *ngIf="caseDetails?.briefDescriptionOfChargeOrLegalMatter">
                         <p class="text-default">Brief Description of Charge(s) or Legal Matter:
                             <span class="font-weight-normal">
                                 {{caseDetails?.briefDescriptionOfChargeOrLegalMatter}}</span>
