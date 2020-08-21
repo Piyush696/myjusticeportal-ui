@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
 import { SecurityService } from 'app/services/security.service';
 import { ToasterService } from 'app/services/toaster.service';
@@ -22,14 +23,17 @@ export class MyAccountComponent implements OnInit {
   OtpField: boolean;
   isMfa: boolean;
   verifiedIcon: boolean;
+  securityQuestionData = [];
+  count: number = 0;
 
-  constructor(private twilioService: TwilioService, private toasterService: ToasterService, private securityService: SecurityService, private userService: UserService, private store: Store<any>, private fb: FormBuilder) { }
+
+  constructor(public dialog: MatDialog, private twilioService: TwilioService, private toasterService: ToasterService, private securityService: SecurityService, private userService: UserService, private store: Store<any>, private fb: FormBuilder) { }
 
   ngOnInit() {
     this.createControl();
     this.getLoginDetails();
     this.securityQuestionControl();
-    this.getAllSecurityQuestion()
+    // this.getAllSecurityQuestion()
   }
 
   createControl() {
@@ -46,6 +50,16 @@ export class MyAccountComponent implements OnInit {
     this.createPasswordControl();
   }
 
+  openModal(templateRef) {
+    let dialogRef = this.dialog.open(templateRef, {
+      width: '500px',
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+    });
+  }
+
+
   createPasswordControl() {
     this.passwordForm = this.fb.group({
       password: ['', [Validators.required]],
@@ -57,11 +71,6 @@ export class MyAccountComponent implements OnInit {
     this.securityQuestionForm = this.fb.group({
       securityQuestionId: ['', [Validators.required]],
       answer: ['', [Validators.required]],
-    })
-  }
-  getAllSecurityQuestion() {
-    this.securityService.getUserSecurityQuestion().subscribe((questions: any) => {
-      this.securityQuestionList = questions.data
     })
   }
 
@@ -90,9 +99,17 @@ export class MyAccountComponent implements OnInit {
     })
   }
 
+  getAllSecurityQuestion(roleId?) {
+    this.securityService.getAllSecurityRoles(roleId).subscribe((questions: any) => {
+      this.securityQuestionList = questions.data
+    })
+  }
 
   getSingleUser() {
     this.userService.getSingleUser().subscribe((result: any) => {
+      result.data.roles.forEach(element => {
+        this.getAllSecurityQuestion(element.roleId)
+      });
       this.user = result.data;
       this.profileForm.get('firstName').setValue(result.data.firstName)
       this.profileForm.get('lastName').setValue(result.data.lastName)
@@ -101,7 +118,7 @@ export class MyAccountComponent implements OnInit {
       this.profileForm.get('countryCode').setValue(result.data.countryCode)
       this.profileForm.get('mobile').setValue(result.data.mobile)
       this.profileForm.get('isMFA').setValue(result.data.isMFA)
-      this.passwordForm.disable();
+
     })
   }
 
@@ -109,36 +126,37 @@ export class MyAccountComponent implements OnInit {
     this.userService.resetPassword(this.passwordForm.get('password').value).subscribe((reset: any) => {
       if (reset.success) {
         this.toasterService.showSuccessToater('Password Reset Successfully.');
-      }
-    })
-  }
-
-  onSelectQuestions(securityQuestionId) {
-    this.securityQuestionList.filter(data => {
-      if (data.securityQuestionId == securityQuestionId) {
-        this.securityQuestionForm.get('answer').setValue(data.answer)
-        this.securityQuestionForm.get('answer').disable()
+        this.closeModal();
       }
     })
   }
 
   onSaveChanges() {
     const data = {
-      "securityQuestionId": this.securityQuestionForm.get('securityQuestionId').value,
+      "securityQuestionId": parseInt(this.securityQuestionForm.get('securityQuestionId').value),
       "answer": this.securityQuestionForm.get('answer').value
     }
-    this.securityService.updateSecurityQuestionAnswer(data).subscribe((data: any) => {
-      if (data.data) {
-        this.getAllSecurityQuestion()
-        this.toasterService.showSuccessToater('Security Question Updated Successfully.')
-        this.securityQuestionForm.reset()
-      }
-      else {
-        this.toasterService.showErrorToater('Security Question not Updated.')
-      }
-    })
+    this.securityQuestionData.push(data)
+    this.securityQuestionList = this.securityQuestionList.filter(filteredquestion => filteredquestion.securityQuestionId != parseInt(this.securityQuestionForm.get('securityQuestionId').value))
+    this.securityQuestionForm.get('answer').reset();
+    this.count = this.count + 1;
+    if (this.count === 3) {
+      this.securityService.updateSecurityQuestionAnswer(this.securityQuestionData).subscribe((data: any) => {
+        if (data.success) {
+          this.closeModal();
+          this.toasterService.showSuccessToater('Security Question Updated Successfully.')
+          this.securityQuestionForm.reset()
+        }
+        else {
+          this.toasterService.showErrorToater('Security Question not Updated.')
+        }
+      })
+    }
   }
 
+  closeModal(): void {
+    this.dialog.closeAll();
+  }
   onGetOtp() {
     const data = {
       "mobile": this.profileForm.get('mobile').value,
