@@ -45,7 +45,7 @@
                             <span class="font-weight-normal"> {{caseDetails?.countyOfArrest}}</span>
                         </p>
                     </div>
-                    <div>
+                    <div *ngIf="caseDetails?.attorneyName">
                         <p class="text-default">Attorney Name:
                             <span class="font-weight-normal"> {{caseDetails?.attorneyName}}</span>
                         </p>
