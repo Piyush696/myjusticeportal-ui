@@ -34,6 +34,7 @@ import { UserComponent } from '../pages/user/user.component';
 import { LayoutRoutes } from './layout.routing';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatDialogModule } from '@angular/material/dialog';
 @NgModule({
   imports: [
     CommonModule,
@@ -54,7 +55,8 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
     ToastrModule.forRoot(),
     MatDatepickerModule,
     MatProgressBarModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    MatDialogModule
   ],
   declarations: [
     DashboardComponent,

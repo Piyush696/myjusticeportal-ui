@@ -1,5 +1,6 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
 import { SecurityService } from 'app/services/security.service';
 import { ToasterService } from 'app/services/toaster.service';
@@ -18,7 +19,6 @@ export class MyAccountComponent implements OnInit {
   passwordForm: FormGroup;
   securityQuestionForm: FormGroup;
   userId: any;
-  @ViewChild('closeBtn') closeBtn: ElementRef;
   securityQuestionList: any[];
   OtpField: boolean;
   isMfa: boolean;
@@ -27,7 +27,7 @@ export class MyAccountComponent implements OnInit {
   count: number = 0;
 
 
-  constructor(private twilioService: TwilioService, private toasterService: ToasterService, private securityService: SecurityService, private userService: UserService, private store: Store<any>, private fb: FormBuilder) { }
+  constructor(public dialog: MatDialog, private twilioService: TwilioService, private toasterService: ToasterService, private securityService: SecurityService, private userService: UserService, private store: Store<any>, private fb: FormBuilder) { }
 
   ngOnInit() {
     this.createControl();
@@ -48,6 +48,21 @@ export class MyAccountComponent implements OnInit {
       isMFA: [''],
     })
     this.createPasswordControl();
+  }
+
+  openModal(templateRef) {
+    let dialogRef = this.dialog.open(templateRef, {
+      width: '500px',
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+    });
+  }
+  openPasswordModal(templateRef) {
+    let dialogRef = this.dialog.open(templateRef, {
+      width: '500px',
+    });
   }
 
   createPasswordControl() {
@@ -108,7 +123,7 @@ export class MyAccountComponent implements OnInit {
       this.profileForm.get('countryCode').setValue(result.data.countryCode)
       this.profileForm.get('mobile').setValue(result.data.mobile)
       this.profileForm.get('isMFA').setValue(result.data.isMFA)
-      this.passwordForm.disable();
+
     })
   }
 
@@ -116,6 +131,7 @@ export class MyAccountComponent implements OnInit {
     this.userService.resetPassword(this.passwordForm.get('password').value).subscribe((reset: any) => {
       if (reset.success) {
         this.toasterService.showSuccessToater('Password Reset Successfully.');
+        this.closeModal();
       }
     })
   }
@@ -144,7 +160,7 @@ export class MyAccountComponent implements OnInit {
   }
 
   closeModal(): void {
-    this.closeBtn.nativeElement.click();
+    this.dialog.closeAll();
   }
   onGetOtp() {
     const data = {
