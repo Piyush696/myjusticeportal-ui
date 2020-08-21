@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { CaseService } from 'app/services/case.service';
 import { ToasterService } from 'app/services/toaster.service';
+import { Store } from '@ngrx/store';
 
 @Component({
   selector: 'app-case-form',
@@ -15,19 +16,26 @@ export class CaseFormComponent implements OnInit, OnChanges {
   buttonText: string = 'Add Case';
   headerText: string = 'Create a Case';
   @Input() caseDetails;
-  constructor(private toasterService: ToasterService, private router: Router, private fb: FormBuilder, private caseService: CaseService) { }
+  userData: any;
+  constructor(private toasterService: ToasterService, private router: Router, private fb: FormBuilder, private caseService: CaseService, private store: Store<any>) { }
 
   ngOnInit(): void {
+    this.store.select(s => s.userInfo).subscribe(user => {
+      this.userData = user
+    })
+
     this.caseForm = this.fb.group({
       firstName: ['', [Validators.required]],
       lastName: ['', [Validators.required]],
-      countyOfArrest: ['', [Validators.required]],
-      dateOfArrest: ['', [Validators.required]],
-      caseRelatedTo: ['', [Validators.required]],
-      caseJurisdiction: ['', [Validators.required]],
+      countyOfArrest: [''],
+      dateOfArrest: [''],
+      briefDescriptionOfChargeOrLegalMatter: ['', [Validators.required]],
+      attorneyName: [''],
       nextCourtDate: ['', [Validators.required]],
-      legalRepresentation: ['', [Validators.required]],
+      otherInformation: ['', [Validators.required]],
     });
+    this.caseForm.get('firstName').setValue(this.userData.firstName)
+    this.caseForm.get('lastName').setValue(this.userData.lastName)
   }
 
   ngOnChanges() {
@@ -38,10 +46,10 @@ export class CaseFormComponent implements OnInit, OnChanges {
       this.caseForm.get('lastName').setValue(this.caseDetails.user.lastName)
       this.caseForm.get('countyOfArrest').setValue(this.caseDetails.countyOfArrest)
       this.caseForm.get('dateOfArrest').setValue(this.caseDetails.dateOfArrest)
-      this.caseForm.get('caseRelatedTo').setValue(this.caseDetails.caseRelatedTo)
-      this.caseForm.get('caseJurisdiction').setValue(this.caseDetails.caseJurisdiction)
+      this.caseForm.get('briefDescriptionOfChargeOrLegalMatter').setValue(this.caseDetails.briefDescriptionOfChargeOrLegalMatter)
+      this.caseForm.get('attorneyName').setValue(this.caseDetails.attorneyName)
       this.caseForm.get('nextCourtDate').setValue(this.caseDetails.nextCourtDate)
-      this.caseForm.get('legalRepresentation').setValue(this.caseDetails.legalRepresentation)
+      this.caseForm.get('otherInformation').setValue(this.caseDetails.otherInformation)
     }
   }
 
