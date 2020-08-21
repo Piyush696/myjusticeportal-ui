@@ -33,6 +33,7 @@ import { TypographyComponent } from '../pages/typography/typography.component';
 import { UserComponent } from '../pages/user/user.component';
 import { LayoutRoutes } from './layout.routing';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 @NgModule({
   imports: [
     CommonModule,
@@ -52,6 +53,7 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
     MatSlideToggleModule,
     ToastrModule.forRoot(),
     MatDatepickerModule,
+    MatProgressBarModule,
     MatNativeDateModule
   ],
   declarations: [
