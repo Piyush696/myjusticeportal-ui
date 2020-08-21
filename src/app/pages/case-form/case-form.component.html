@@ -120,13 +120,13 @@
         </div>
         <div class="col-6 pl-0">
             <mat-form-field appearance="fill" class="w-100 pl-2">
-                <mat-label>Legal representation</mat-label>
-                <input type="email" matInput placeholder="legalRepresentation"
-                    [formControl]="caseForm.controls['legalRepresentation']" required>
+                <mat-label>Other Information</mat-label>
+                <input type="email" matInput placeholder="Other Information"
+                    [formControl]="caseForm.controls['otherInformation']" required>
                 <mat-error>
                     <div
-                        *ngIf="caseForm.controls['legalRepresentation'].invalid && caseForm.controls['legalRepresentation'].touched">
-                        <small class="font13">Legal representation is Required</small>
+                        *ngIf="caseForm.controls['otherInformation'].invalid && caseForm.controls['otherInformation'].touched">
+                        <small class="font13">Other Information is Required</small>
                     </div>
                 </mat-error>
             </mat-form-field>
