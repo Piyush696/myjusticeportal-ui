@@ -4,7 +4,6 @@ import { Router } from '@angular/router';
 import { CaseService } from 'app/services/case.service';
 import { ToasterService } from 'app/services/toaster.service';
 import { Store } from '@ngrx/store';
-import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-case-form',
@@ -22,7 +21,6 @@ export class CaseFormComponent implements OnInit, OnChanges {
 
   ngOnInit(): void {
     this.store.select(s => s.userInfo).subscribe(user => {
-      console.log(user)
       this.userData = user
     })
 
