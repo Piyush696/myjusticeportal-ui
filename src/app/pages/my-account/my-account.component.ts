@@ -59,11 +59,7 @@ export class MyAccountComponent implements OnInit {
       console.log('The dialog was closed');
     });
   }
-  openPasswordModal(templateRef) {
-    let dialogRef = this.dialog.open(templateRef, {
-      width: '500px',
-    });
-  }
+
 
   createPasswordControl() {
     this.passwordForm = this.fb.group({
