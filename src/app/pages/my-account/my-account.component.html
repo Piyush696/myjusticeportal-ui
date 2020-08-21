@@ -216,7 +216,7 @@
 
 <!-- modal -->
 <div class="modal fade" id="manageSecurityQuestionModal" #closeBtn tabindex="-1" role="dialog" aria-hidden="true">
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="d-flex justify-content-center modal-header">
                 <mat-label class="font-weight-bold">Manage Security Questions</mat-label>
@@ -259,7 +259,7 @@
                     mat-raised-button color="primary" (click)="onSaveChanges()">Submit</button>
 
                 <button type="button" class="px-4 py-1" mat-raised-button color="primary"
-                    (click)="securityQuestionForm.enable()">Edit</button>
+                    data-dismiss="modal">Close</button>
             </div>
         </div>
     </div>
