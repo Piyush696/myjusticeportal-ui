@@ -3,6 +3,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { CaseService } from 'app/services/case.service';
 import { ToasterService } from 'app/services/toaster.service';
+import { Store } from '@ngrx/store';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-case-form',
@@ -15,9 +17,15 @@ export class CaseFormComponent implements OnInit, OnChanges {
   buttonText: string = 'Add Case';
   headerText: string = 'Create a Case';
   @Input() caseDetails;
-  constructor(private toasterService: ToasterService, private router: Router, private fb: FormBuilder, private caseService: CaseService) { }
+  userData: any;
+  constructor(private toasterService: ToasterService, private router: Router, private fb: FormBuilder, private caseService: CaseService, private store: Store<any>) { }
 
   ngOnInit(): void {
+    this.store.select(s => s.userInfo).subscribe(user => {
+      console.log(user)
+      this.userData = user
+    })
+
     this.caseForm = this.fb.group({
       firstName: ['', [Validators.required]],
       lastName: ['', [Validators.required]],
@@ -28,6 +36,8 @@ export class CaseFormComponent implements OnInit, OnChanges {
       nextCourtDate: ['', [Validators.required]],
       legalRepresentation: ['', [Validators.required]],
     });
+    this.caseForm.get('firstName').setValue(this.userData.firstName)
+    this.caseForm.get('lastName').setValue(this.userData.lastName)
   }
 
   ngOnChanges() {
