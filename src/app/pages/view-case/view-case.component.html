@@ -1,7 +1,8 @@
 <div class="col-12">
     <div class="d-flex justify-content-between">
         <div>
-            <h1 class="line-height font-weight-bold">Case {{caseDetails?.caseId}}: Aggravated Assault</h1>
+            <h1 class="line-height font-weight-bold">Case {{caseDetails?.caseId}}: {{caseDetails?.otherInformation}}
+            </h1>
             <h4 class="line-height">Your case details at-a-glance</h4>
         </div>
         <div class="mr-3">
@@ -44,18 +45,7 @@
                             <span class="font-weight-normal"> {{caseDetails?.countyOfArrest}}</span>
                         </p>
                     </div>
-                    <div *ngIf="caseDetails?.dateOfArrest">
-                        <p class="text-default">Date of Arrest:
-                            <span class="font-weight-normal"> {{caseDetails?.dateOfArrest |date: 'MM/dd/yyyy'}}</span>
-                        </p>
-                    </div>
-                    <div *ngIf="caseDetails?.briefDescriptionOfChargeOrLegalMatter">
-                        <p class="text-default">Brief Description of Charge(s) or Legal Matter:
-                            <span class="font-weight-normal">
-                                {{caseDetails?.briefDescriptionOfChargeOrLegalMatter}}</span>
-                        </p>
-                    </div>
-                    <div>
+                    <div *ngIf="caseDetails?.attorneyName">
                         <p class="text-default">Attorney Name:
                             <span class="font-weight-normal"> {{caseDetails?.attorneyName}}</span>
                         </p>
@@ -67,8 +57,8 @@
                         </p>
                     </div>
                     <div>
-                        <p class="text-default">Legal Representation:
-                            <span class="font-weight-normal"> {{caseDetails?.legalRepresentation}}</span>
+                        <p class="text-default">Other Information:
+                            <span class="font-weight-normal"> {{caseDetails?.otherInformation}}</span>
                         </p>
                     </div>
                 </mat-card>

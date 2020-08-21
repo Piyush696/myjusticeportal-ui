@@ -32,7 +32,7 @@ export class CaseFormComponent implements OnInit, OnChanges {
       briefDescriptionOfChargeOrLegalMatter: ['', [Validators.required]],
       attorneyName: [''],
       nextCourtDate: ['', [Validators.required]],
-      legalRepresentation: ['', [Validators.required]],
+      otherInformation: ['', [Validators.required]],
     });
     this.caseForm.get('firstName').setValue(this.userData.firstName)
     this.caseForm.get('lastName').setValue(this.userData.lastName)
@@ -49,7 +49,7 @@ export class CaseFormComponent implements OnInit, OnChanges {
       this.caseForm.get('briefDescriptionOfChargeOrLegalMatter').setValue(this.caseDetails.briefDescriptionOfChargeOrLegalMatter)
       this.caseForm.get('attorneyName').setValue(this.caseDetails.attorneyName)
       this.caseForm.get('nextCourtDate').setValue(this.caseDetails.nextCourtDate)
-      this.caseForm.get('legalRepresentation').setValue(this.caseDetails.legalRepresentation)
+      this.caseForm.get('otherInformation').setValue(this.caseDetails.otherInformation)
     }
   }
 
