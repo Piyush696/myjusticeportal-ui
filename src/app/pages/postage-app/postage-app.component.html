@@ -1,0 +1,83 @@
+<div class="d-flex justify-content-start">
+    <div class="w-100 my-3">
+        <div>
+            <h1 class="line-height font-weight-bold">Postage Credentials</h1>
+            <h4 class="line-height header-sub-text">View and Manage all the Postage Credentials.
+            </h4>
+        </div>
+        <mat-card class="w-100 p-5">
+            <div class="row">
+                <mat-form-field appearance="fill" class="w-100 p-2">
+                    <mat-label>Auth Url</mat-label>
+                    <input type="text" matInput placeholder="Auth Url"
+                        [formControl]="postageCredentialForm.controls['apiUrl']" required>
+                    <mat-error>
+                        <div
+                            *ngIf="postageCredentialForm.controls['apiUrl'].invalid && postageCredentialForm.controls['apiUrl'].touched">
+                            <small class="font13">
+                                Auth Url is Required
+                            </small>
+                        </div>
+                    </mat-error>
+                </mat-form-field>
+            </div>
+            <div class="row">
+                <mat-form-field appearance="fill" class="w-100 p-2">
+                    <mat-label>Api Key</mat-label>
+                    <input type="text" matInput placeholder="Api Key"
+                        [formControl]="postageCredentialForm.controls['apiKey']" required>
+                    <mat-error>
+                        <div
+                            *ngIf="postageCredentialForm.controls['apiKey'].invalid && postageCredentialForm.controls['apiKey'].touched">
+                            <small class="font13">
+                                Api Key is Required
+                            </small>
+                        </div>
+                    </mat-error>
+                </mat-form-field>
+            </div>
+            <div class="row">
+                <div class="col-6 pl-0">
+                    <mat-form-field appearance="fill" class="w-100 p-2">
+                        <mat-label>Project</mat-label>
+                        <input type="text" matInput placeholder="Project"
+                            [formControl]="postageCredentialForm.controls['project']" required>
+                        <mat-error>
+                            <div
+                                *ngIf="postageCredentialForm.controls['project'].invalid && postageCredentialForm.controls['project'].touched">
+                                <small class="font13">
+                                    Project is Required
+                                </small>
+                            </div>
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+                <div class="col-6 pr-0">
+                    <mat-form-field appearance="fill" class="w-100 p-2">
+                        <mat-label>Template</mat-label>
+                        <input type="text" matInput placeholder="Template"
+                            [formControl]="postageCredentialForm.controls['template']" required>
+                        <mat-error>
+                            <div
+                                *ngIf="postageCredentialForm.controls['template'].invalid && postageCredentialForm.controls['template'].touched">
+                                <small class="font13">
+                                    Template is Required
+                                </small>
+                            </div>
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="row d-flex justify-content-between">
+                <button class="px-4 py-1 ml-2" mat-raised-button color="primary"
+                    (click)="this.postageCredentialForm.enable(); enableSave()">
+                    Edit Changes
+                </button>
+                <button [disabled]="isDisabled" class="px-4 py-1 mr-2" mat-raised-button color="primary"
+                    (click)="updateCendencialChanges()">
+                    Save
+                </button>
+            </div>
+        </mat-card>
+    </div>
+</div>

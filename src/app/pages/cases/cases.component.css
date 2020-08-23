@@ -39,3 +39,8 @@
   background: #e4e4ec;
   color: #333442;
 }
+
+.px-perc {
+  padding-left: 13%;
+  padding-right: 13%;
+}

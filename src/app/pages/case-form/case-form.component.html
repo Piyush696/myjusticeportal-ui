@@ -13,7 +13,7 @@
         <div class="col-6 pl-0">
             <mat-form-field appearance="fill" class="w-100 pl-2">
                 <mat-label>First Name</mat-label>
-                <input type="email" matInput placeholder="First Name" [formControl]="caseForm.controls['firstName']"
+                <input type="text" matInput placeholder="First Name" [formControl]="caseForm.controls['firstName']"
                     required>
                 <mat-error>
                     <div *ngIf="caseForm.controls['firstName'].invalid && caseForm.controls['firstName'].touched">
@@ -27,7 +27,7 @@
         <div class="col-6 pl-2">
             <mat-form-field appearance="fill" class="w-100 p-0">
                 <mat-label>Last Name</mat-label>
-                <input type="email" matInput placeholder="Last Name" [formControl]="caseForm.controls['lastName']"
+                <input type="text" matInput placeholder="Last Name" [formControl]="caseForm.controls['lastName']"
                     required>
                 <mat-error>
                     <div *ngIf="caseForm.controls['lastName'].invalid && caseForm.controls['lastName'].touched">
@@ -44,32 +44,32 @@
     <div class="row pt-2">
         <div class="col-6 pl-0">
             <mat-form-field appearance="fill" class="w-100 pl-2">
-                <mat-label>County of Arrest</mat-label>
-                <input type="email" matInput placeholder="countyOfArrest"
-                    [formControl]="caseForm.controls['countyOfArrest']" required>
-                <mat-error>
+                <mat-label>County of Arrest (If Applicable)</mat-label>
+                <input type="text" matInput placeholder="countyOfArrest"
+                    [formControl]="caseForm.controls['countyOfArrest']">
+                <!-- <mat-error>
                     <div
                         *ngIf="caseForm.controls['countyOfArrest'].invalid && caseForm.controls['countyOfArrest'].touched">
                         <small class="font13">
                             County of Arrest is Required
                         </small>
                     </div>
-                </mat-error>
+                </mat-error> -->
             </mat-form-field>
         </div>
         <div class="col-6 pl-0">
             <mat-form-field appearance="fill" class="w-100 pl-2">
-                <mat-label>Date of Arrest</mat-label>
-                <input matInput [matDatepicker]="picker1" [formControl]="caseForm.controls['dateOfArrest']" required>
+                <mat-label>Date of Arrest (If Applicable)</mat-label>
+                <input matInput [matDatepicker]="picker1" [formControl]="caseForm.controls['dateOfArrest']">
                 <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
                 <mat-datepicker #picker1></mat-datepicker>
-                <mat-error>
+                <!-- <mat-error>
                     <div *ngIf="caseForm.controls['dateOfArrest'].invalid && caseForm.controls['dateOfArrest'].touched">
                         <small class="font13">
                             Date of Arrest is Required
                         </small>
                     </div>
-                </mat-error>
+                </mat-error> -->
             </mat-form-field>
         </div>
     </div>
@@ -78,12 +78,12 @@
     <div class="row pt-2">
         <div class="col-6 pl-0">
             <mat-form-field appearance="fill" class="w-100 pl-2">
-                <mat-label>This Case is Related To:</mat-label>
-                <input type="email" matInput placeholder="caseRelatedTo"
-                    [formControl]="caseForm.controls['caseRelatedTo']" required>
+                <mat-label>Brief Description of Charge(s) or Legal Matter</mat-label>
+                <input type="text" matInput placeholder="Brief Description of Charges"
+                    [formControl]="caseForm.controls['briefDescriptionOfChargeOrLegalMatter']" required>
                 <mat-error>
                     <div
-                        *ngIf="caseForm.controls['caseRelatedTo'].invalid && caseForm.controls['caseRelatedTo'].touched">
+                        *ngIf="caseForm.controls['briefDescriptionOfChargeOrLegalMatter'].invalid && caseForm.controls['briefDescriptionOfChargeOrLegalMatter'].touched">
                         <small class="font13">
                             This Case is Related To is Required
                         </small>
@@ -93,17 +93,17 @@
         </div>
         <div class="col-6 pl-0">
             <mat-form-field appearance="fill" class="w-100 pl-2">
-                <mat-label>Case Jurisdiction</mat-label>
-                <input type="email" matInput placeholder="caseJurisdiction"
-                    [formControl]="caseForm.controls['caseJurisdiction']" required>
-                <mat-error>
+                <mat-label>Attorney Name (If Applicable)</mat-label>
+                <input type="text" matInput placeholder="Attorney Name"
+                    [formControl]="caseForm.controls['attorneyName']">
+                <!-- <mat-error>
                     <div
                         *ngIf="caseForm.controls['caseJurisdiction'].invalid && caseForm.controls['caseJurisdiction'].touched">
                         <small class="font13">
                             Case Jurisdiction is Required
                         </small>
                     </div>
-                </mat-error>
+                </mat-error> -->
             </mat-form-field>
         </div>
     </div>
@@ -120,13 +120,13 @@
         </div>
         <div class="col-6 pl-0">
             <mat-form-field appearance="fill" class="w-100 pl-2">
-                <mat-label>Legal representation</mat-label>
-                <input type="email" matInput placeholder="legalRepresentation"
-                    [formControl]="caseForm.controls['legalRepresentation']" required>
+                <mat-label>Other Information</mat-label>
+                <input type="email" matInput placeholder="Other Information"
+                    [formControl]="caseForm.controls['otherInformation']" required>
                 <mat-error>
                     <div
-                        *ngIf="caseForm.controls['legalRepresentation'].invalid && caseForm.controls['legalRepresentation'].touched">
-                        <small class="font13">Legal representation is Required</small>
+                        *ngIf="caseForm.controls['otherInformation'].invalid && caseForm.controls['otherInformation'].touched">
+                        <small class="font13">Other Information is Required</small>
                     </div>
                 </mat-error>
             </mat-form-field>

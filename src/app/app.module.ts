@@ -28,6 +28,11 @@ import { LoginService } from './services/login.service';
 import { RegistrationService } from './services/registration.service';
 import { effects } from './store/effects';
 import { rootReducer } from './store/reducers';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { ForgetPasswordComponent } from './pages/forget-password/forget-password.component';
+import { SecurityQuestionComponent } from './pages/security-question/security-question.component';
 
 @NgModule({
   declarations: [
@@ -35,6 +40,8 @@ import { rootReducer } from './store/reducers';
     LayoutComponent,
     LoginComponent,
     RegistrationComponent,
+    SecurityQuestionComponent,
+    ForgetPasswordComponent
   ],
   imports: [
     BrowserModule,
@@ -48,11 +55,14 @@ import { rootReducer } from './store/reducers';
     HttpClientModule,
     MatInputModule,
     MatListModule,
+    MatDialogModule,
     FormsModule,
     MatButtonModule,
     ReactiveFormsModule,
+    MatProgressBarModule,
     ToastrModule.forRoot(),
     FooterModule,
+    MatCheckboxModule,
     StoreModule.forRoot(rootReducer),
     EffectsModule.forRoot(effects),
     StoreDevtoolsModule.instrument({

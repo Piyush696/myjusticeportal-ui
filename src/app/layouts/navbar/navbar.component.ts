@@ -34,6 +34,7 @@ export class NavbarComponent implements OnInit {
       this.sidebarClose();
     });
   }
+
   getTitle() {
     var titlee = this.location.prepareExternalUrl(this.location.path());
     if (titlee.charAt(0) === '#') {
@@ -46,6 +47,7 @@ export class NavbarComponent implements OnInit {
     }
     return '';
   }
+
   sidebarToggle() {
     if (this.sidebarVisible === false) {
       this.sidebarOpen();
@@ -53,6 +55,7 @@ export class NavbarComponent implements OnInit {
       this.sidebarClose();
     }
   }
+
   sidebarOpen() {
     const toggleButton = this.toggleButton;
     const html = document.getElementsByTagName('html')[0];
@@ -67,6 +70,7 @@ export class NavbarComponent implements OnInit {
     }
     this.sidebarVisible = true;
   };
+
   sidebarClose() {
     const html = document.getElementsByTagName('html')[0];
     const mainPanel = <HTMLElement>document.getElementsByClassName('main-panel')[0];
@@ -79,10 +83,11 @@ export class NavbarComponent implements OnInit {
     this.sidebarVisible = false;
     html.classList.remove('nav-open');
   };
+
   collapse() {
     this.isCollapsed = !this.isCollapsed;
     const navbar = document.getElementsByTagName('nav')[0];
-    console.log(navbar);
+    // console.log(navbar);
     if (!this.isCollapsed) {
       navbar.classList.remove('navbar-transparent');
       navbar.classList.add('bg-white');
@@ -90,12 +95,10 @@ export class NavbarComponent implements OnInit {
       navbar.classList.add('navbar-transparent');
       navbar.classList.remove('bg-white');
     }
-
   }
 
   logout() {
     this.cacheService.removeCache("token");
-    this.router.navigateByUrl('/login')
+    this.router.navigateByUrl('/login');
   }
-
 }

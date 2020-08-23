@@ -1,8 +1,12 @@
 .logo {
   width: 100%;
-  background: #fff;
 }
 
+.logo-size {
+  padding-bottom: 1px;
+  padding-top: 1px;
+  cursor: pointer;
+}
 
 .nav {
   margin-top: 0px !important;
@@ -32,4 +36,20 @@
   border-radius: 5px;
   background: #f8f6f6 !important;
   padding: 10px;
+}
+
+.onHoverMenuItem:hover {
+  background-color: #c1c1c1 !important;
+}
+.onHoverMenuItem:hover p {
+  font-weight: 600;
+}
+
+.currentMenu {
+  a {
+    background-color: #c1c1c1 !important;
+  }
+  p {
+    font-weight: 600;
+  }
 }

@@ -3,21 +3,16 @@ import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { CacheService } from './cache.service';
 
+
 @Injectable({
   providedIn: 'root'
 })
-
-export class RegistrationService {
+export class TwilioService {
   private apiPath: string;
-  private createUser: string;
-  allUsers: string;
-
   constructor(private httpClient: HttpClient, private cacheService: CacheService) {
     const env: any = environment;
     this.apiPath = env.api
-    this.createUser = 'user/registration';
   }
-
 
   getHeaders() {
     return {
@@ -27,16 +22,19 @@ export class RegistrationService {
     };
   }
 
-  addUser(profileData) {
-    return this.httpClient.post<object>(`${this.apiPath}/${this.createUser}`, profileData)
+  getTwilioCredentials() {
+    return this.httpClient.get<object>(`${this.apiPath}/twilio`, this.getHeaders())
   }
 
-  checkUser(query = {}) {
-    return this.httpClient.get<Object>(`${this.apiPath}/users`, { params: query });
+  updateTwilioCredentials(updateTwilioCredencialData) {
+    return this.httpClient.post<object>(`${this.apiPath}/twilio/twilio`, updateTwilioCredencialData, this.getHeaders())
   }
 
-  updateUser(status) {
-    return this.httpClient.put<object>(`${this.apiPath}/user`, { status }, this.getHeaders())
+  getOtp(otpData) {
+    return this.httpClient.post<object>(`${this.apiPath}/twilio`, otpData, this.getHeaders())
   }
 
+  verifyCode(otpData) {
+    return this.httpClient.post<object>(`${this.apiPath}/twilio/verify-sms`, otpData, this.getHeaders())
+  }
 }

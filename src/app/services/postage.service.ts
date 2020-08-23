@@ -6,18 +6,13 @@ import { CacheService } from './cache.service';
 @Injectable({
   providedIn: 'root'
 })
-
-export class RegistrationService {
+export class PostageService {
   private apiPath: string;
-  private createUser: string;
-  allUsers: string;
 
   constructor(private httpClient: HttpClient, private cacheService: CacheService) {
     const env: any = environment;
     this.apiPath = env.api
-    this.createUser = 'user/registration';
   }
-
 
   getHeaders() {
     return {
@@ -27,16 +22,11 @@ export class RegistrationService {
     };
   }
 
-  addUser(profileData) {
-    return this.httpClient.post<object>(`${this.apiPath}/${this.createUser}`, profileData)
+  getCredentials() {
+    return this.httpClient.get<object>(`${this.apiPath}/postage`, this.getHeaders())
   }
 
-  checkUser(query = {}) {
-    return this.httpClient.get<Object>(`${this.apiPath}/users`, { params: query });
+  updateCredentials(updateCredencialData) {
+    return this.httpClient.post<object>(`${this.apiPath}/postage`, updateCredencialData, this.getHeaders())
   }
-
-  updateUser(status) {
-    return this.httpClient.put<object>(`${this.apiPath}/user`, { status }, this.getHeaders())
-  }
-
 }

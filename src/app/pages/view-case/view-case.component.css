@@ -9,7 +9,7 @@
 
 .text-default {
   font-weight: 800;
-  line-height: 11px;
+  line-height: 7.5px;
   white-space: nowrap;
 }
 
@@ -18,5 +18,10 @@
 }
 
 .btn-group {
-  width: 50%;
+  width: 17em;
+}
+
+.padding-btn {
+  padding-left: 63px;
+  padding-right: 60px;
 }
