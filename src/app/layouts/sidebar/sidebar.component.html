@@ -4,9 +4,10 @@
   </div>
 
   <ul class="nav">
-    <li *ngFor="let menuItem of menuItems;let isLast=last" class="{{menuItem.class}} label-bg" id="{{menuItem?.path}}"
-      [ngClass]="{'pb-3' : isLast}">
-      <a class="d-flex justify-content-center sidebar-style onHoverMenuItem" href="#" [routerLink]="[menuItem.path]"
+    <li *ngFor="let menuItem of filteredMenuItems;let isLast=last" class="{{menuItem.class}} label-bg onHoverMenuItem"
+      id="{{menuItem?.path}}" [ngClass]="{'pb-3' : isLast}">
+      <em class="{{menuItem.class}}"></em>
+      <a class="d-flex justify-content-center sidebar-style" href="#" [routerLink]="[menuItem.path]"
         (click)="onChangeMenu(menuItem?.path)">
         <p class="letter-spacing">{{menuItem.title}}</p>
       </a>
