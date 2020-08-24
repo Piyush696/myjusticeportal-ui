@@ -1,27 +1,29 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Store } from '@ngrx/store';
 
 export interface RouteInfo {
     path: string;
     title: string;
     icon: string;
     class: string;
+    roleIds: any;
 }
 
 export const ROUTES: RouteInfo[] = [
-    { path: '/case', title: 'My Cases', icon: 'nc-bank', class: '' },
-    // { path: '/dashboard', title: 'Dashboard', icon: 'nc-bank', class: '' },
-    // { path: '/users', title: 'All Users', icon: 'nc-bank', class: '' },
-    { path: '/', title: 'My Dockets', icon: 'nc-bank', class: '' },
-    { path: '/app-setting', title: 'My SuperAdmin View', icon: 'nc-bank', class: '' },
-    { path: '/', title: 'Law Library', icon: 'nc-bank', class: '' },
-    { path: '/', title: 'Legal Research Assistance', icon: 'nc-bank', class: '' },
-    { path: '/', title: 'Legal Forms', icon: 'nc-bank', class: '' },
-    { path: '/', title: 'Ask a lawyer', icon: 'nc-bank', class: '' },
-    { path: '/', title: 'Hire a lawyer', icon: 'nc-bank', class: '' },
-    { path: '/', title: 'Message My lawyer', icon: 'nc-bank', class: '' },
-    { path: '/', title: 'Video My lawyer', icon: 'nc-bank', class: '' },
-    { path: '/', title: 'Bail Bonds', icon: 'nc-bank', class: '' },
+    { path: '/case', title: 'My Cases', icon: 'nc-bank', class: '', roleIds: [1, 4] },
+    // { path: '/dashboard', title: 'Dashboard', icon: 'nc-bank', class: '', roleIds: [] },
+    // { path: '/users', title: 'All Users', icon: 'nc-bank', class: '', roleIds: [] },
+    { path: '/', title: 'My Dockets', icon: 'nc-bank', class: '', roleIds: [2] },
+    { path: '/app-setting', title: 'My SuperAdmin View', icon: 'nc-bank', class: '', roleIds: [7] },
+    { path: '/', title: 'Law Library', icon: 'nc-bank', class: '', roleIds: [4, 5, 6] },
+    { path: '/', title: 'Legal Research Assistance', icon: 'nc-bank', class: '', roleIds: [4, 6] },
+    { path: '/', title: 'Legal Forms', icon: 'nc-bank', class: '', roleIds: [1, 2] },
+    { path: '/', title: 'Ask a lawyer', icon: 'nc-bank', class: '', roleIds: [3, 4, 7] },
+    { path: '/', title: 'Hire a lawyer', icon: 'nc-bank', class: '', roleIds: [3, 6, 7] },
+    { path: '/', title: 'Message My lawyer', icon: 'nc-bank', class: '', roleIds: [1, 3] },
+    { path: '/', title: 'Video My lawyer', icon: 'nc-bank', class: '', roleIds: [1, 3, 7] },
+    { path: '/', title: 'Bail Bonds', icon: 'nc-bank', class: '', roleIds: [1, 4, 6, 7] }
 ];
 
 @Component({
@@ -32,14 +34,15 @@ export const ROUTES: RouteInfo[] = [
 })
 
 export class SidebarComponent implements OnInit {
-    public menuItems: any[];
+    public filteredMenuItems: any[];
     currentMenu: any;
+    userRole: any;
 
-    constructor(private router: Router) { };
+    constructor(private router: Router, private store: Store<any>) { };
 
     ngAfterViewInit() {
         if (this.router.url) {
-            this.currentMenu = this.menuItems.find(x => x.path == this.router.url);
+            this.currentMenu = this.filteredMenuItems.find(x => x.path == this.router.url);
         }
         if (this.currentMenu) {
             setTimeout(() => {
@@ -51,18 +54,30 @@ export class SidebarComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.menuItems = ROUTES.filter(menuItem => menuItem);
+        this.store.select(s => s.userInfo).subscribe(x => {
+            this.userRole = x.role[0];
+        })
+        this.filterMenuByUser();
+    }
+
+    filterMenuByUser() {
+        this.filteredMenuItems = ROUTES.filter(menu => {
+            let isExist = menu.roleIds.find(roleId => roleId == this.userRole.roleId);
+            if (isExist) {
+                return menu;
+            }
+        });
     }
 
     onChangeMenu(path) {
         setTimeout(() => {
-            var x = <HTMLElement[]><any>document.getElementsByClassName('label-bg');
+            var x = <HTMLElement[]><any>document.getElementsByClassName('onHoverMenuItem');
             for (var i = 0; i < x.length; i++) {
                 x[i].classList.remove('active');
                 x[i].classList.remove('currentMenu');
             }
         }, 50);
-        this.currentMenu = this.menuItems.find(x => x.path == path);
+        this.currentMenu = this.filteredMenuItems.find(x => x.path == path);
         if (this.currentMenu.path != '/') {
             setTimeout(() => {
                 let elem: HTMLElement = document.getElementById(this.currentMenu.path);
