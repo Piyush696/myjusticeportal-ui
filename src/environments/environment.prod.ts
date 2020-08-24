@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  api: 'https://mip-api.herokuapp.com/api'
+  api: 'https://mjp-api.herokuapp.com/api'
 };
