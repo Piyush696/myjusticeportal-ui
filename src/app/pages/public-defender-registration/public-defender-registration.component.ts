@@ -1,0 +1,15 @@
+import { Component, OnInit } from '@angular/core';
+
+@Component({
+  selector: 'app-public-defender-registration',
+  templateUrl: './public-defender-registration.component.html',
+  styleUrls: ['./public-defender-registration.component.css']
+})
+export class PublicDefenderRegistrationComponent implements OnInit {
+
+  constructor() { }
+
+  ngOnInit(): void {
+  }
+
+}

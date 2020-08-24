@@ -1,0 +1,8 @@
+<div>
+    <app-email-registration *ngIf="step == 1" (isNextEvent)="onNextClick($event)"></app-email-registration>
+    <div class="row" *ngIf="step == 2" class="wpx-420">
+        <app-security-question class="d-flex justify-content-center align-item-center"
+            (isRegisterEvent)="onUpdateRegisteredUser($event)">
+        </app-security-question>
+    </div>
+</div>

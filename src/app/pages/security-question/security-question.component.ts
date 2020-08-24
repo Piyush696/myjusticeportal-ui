@@ -8,8 +8,6 @@ import { SecurityService } from 'app/services/security.service';
   styleUrls: ['./security-question.component.css']
 })
 export class SecurityQuestionComponent implements OnInit {
-
-  @Input() selectedRoleId: number;
   securityQuestions: any = [];
   backSelectedQuestion: any = [];
   @Output() isRegisterEvent = new EventEmitter()
@@ -34,7 +32,8 @@ export class SecurityQuestionComponent implements OnInit {
   }
 
   getAllSecurityQuestions() {
-    this.securityService.getAllSecurityRoles(this.selectedRoleId).subscribe((questions: any) => {
+    let selectedRoleId = 1;
+    this.securityService.getAllSecurityRoles(selectedRoleId).subscribe((questions: any) => {
       this.securityQuestions = questions.data
       this.originalSecurityQuestions = questions.data
     })

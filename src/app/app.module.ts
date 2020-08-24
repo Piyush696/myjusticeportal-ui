@@ -33,6 +33,14 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { ForgetPasswordComponent } from './pages/forget-password/forget-password.component';
 import { SecurityQuestionComponent } from './pages/security-question/security-question.component';
+import { UserRegistrationComponent } from './pages/user-registration/user-registration.component';
+import { FacilityRegistrationComponent } from './pages/facility-registration/facility-registration.component';
+import { LawyerRegistrationComponent } from './pages/lawyer-registration/lawyer-registration.component';
+import { BondsmanRegistrationComponent } from './pages/bondsman-registration/bondsman-registration.component';
+import { ParalegalRegistrationComponent } from './pages/paralegal-registration/paralegal-registration.component';
+import { PublicDefenderRegistrationComponent } from './pages/public-defender-registration/public-defender-registration.component';
+import { EmailRegistrationComponent } from './shared/email-registration/email-registration.component';
+import { MobileRegistrationComponent } from './shared/mobile-registration/mobile-registration.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +49,15 @@ import { SecurityQuestionComponent } from './pages/security-question/security-qu
     LoginComponent,
     RegistrationComponent,
     SecurityQuestionComponent,
-    ForgetPasswordComponent
+    ForgetPasswordComponent,
+    UserRegistrationComponent,
+    FacilityRegistrationComponent,
+    LawyerRegistrationComponent,
+    BondsmanRegistrationComponent,
+    ParalegalRegistrationComponent,
+    PublicDefenderRegistrationComponent,
+    EmailRegistrationComponent,
+    MobileRegistrationComponent
   ],
   imports: [
     BrowserModule,

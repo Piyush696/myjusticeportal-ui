@@ -2,6 +2,11 @@
   width: 420px;
 }
 
+.logo {
+  width: 225px;
+}
+
+
 .mat-progress-bar {
   height: 20px !important;
 }

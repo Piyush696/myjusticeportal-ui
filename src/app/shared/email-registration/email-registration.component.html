@@ -1,0 +1,194 @@
+<div class="d-flex justify-content-center align-items-center bg-color">
+    <div class="my-3">
+        <div class="d-flex justify-content-center">
+            <img src="assets/img/logo.png" alt="logo" class="logo">
+        </div>
+        <mat-card class="p-5">
+            <div class="row">
+                <div class="col-6 pl-2 mb-1">
+                    <mat-form-field appearance="fill" class="w-100">
+                        <mat-label>First Name</mat-label>
+                        <input matInput placeholder="First Name" [formControl]="registrationForm.controls['firstName']"
+                            required>
+                        <mat-error
+                            *ngIf="registrationForm.controls['firstName'].invalid && registrationForm.controls['firstName'].touched">
+                            <small class="font13" *ngIf="registrationForm.get('firstName').errors?.required">
+                                First Name is Required
+                            </small>
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+                <div class="col-6 pr-2 mb-1">
+                    <mat-form-field appearance="fill" class="w-100">
+                        <mat-label>Last Name</mat-label>
+                        <input matInput placeholder="Last Name" [formControl]="registrationForm.controls['lastName']"
+                            required>
+                        <mat-error
+                            *ngIf="registrationForm.controls['lastName'].invalid && registrationForm.controls['lastName'].touched">
+                            <small class="font13" *ngIf="registrationForm.get('lastName').errors?.required">
+                                Last Name is Required
+                            </small>
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+            </div>
+
+
+            <div class="row">
+                <mat-form-field appearance="fill" class="w-100 p-2">
+                    <mat-label>Username</mat-label>
+                    <input matInput placeholder="username" [formControl]="registrationForm.controls['username']"
+                        required>
+                    <mat-error>
+                        <div
+                            *ngIf="registrationForm.controls['username'].invalid &&
+                                           registrationForm.controls['username'].touched && registrationForm.controls['username'].hasError('taken')">
+                            <small class="font13">Username already taken.</small>
+                        </div>
+                        <div *ngIf="registrationForm.controls['username'].invalid && registrationForm.controls['username'].touched
+                             && registrationForm.get('username').errors?.required">
+                            <small class="font13">
+                                Username is Required
+                            </small>
+                        </div>
+                    </mat-error>
+                </mat-form-field>
+            </div>
+
+            <div class="row">
+                <mat-form-field appearance="fill" class="w-100 p-2">
+                    <mat-label>Email (Optional)</mat-label>
+                    <input matInput placeholder="Email" [formControl]="registrationForm.controls['email']">
+                    <mat-error>
+                        <div
+                            *ngIf="registrationForm.controls['email'].invalid &&
+                                           registrationForm.controls['email'].touched && registrationForm.controls['email'].hasError('taken')">
+                            <small class="font13">Email already taken.</small>
+                        </div>
+                        <div
+                            *ngIf="registrationForm.controls['email'].invalid &&
+                                           registrationForm.controls['email'].touched && !registrationForm.controls['email'].hasError('taken')">
+                            <small class=" font13">That doesn't look right. </small>
+                        </div>
+                    </mat-error>
+                </mat-form-field>
+            </div>
+
+            <div class="row">
+                <mat-form-field appearance="fill" class="w-100 p-2">
+                    <mat-label>Password</mat-label>
+                    <input type="password" matInput placeholder="password"
+                        [formControl]="registrationForm.controls['password']" required>
+                    <mat-error>
+                        <div
+                            *ngIf="registrationForm.controls['password'].invalid && registrationForm.controls['password'].touched">
+                            <small class="font13">
+                                Password is Required
+                            </small>
+                        </div>
+                    </mat-error>
+                </mat-form-field>
+            </div>
+
+            <div class="row">
+                <mat-form-field appearance="fill" class="w-100 p-2">
+                    <mat-label>Confirm Password</mat-label>
+                    <input type="password" matInput placeholder="Confirm Password"
+                        [formControl]="registrationForm.controls['confirmPassword']" required>
+                    <mat-error>
+                        <div *ngIf="registrationForm.controls['confirmPassword'].invalid &&  registrationForm.controls['confirmPassword'].touched &&
+                               registrationForm.controls['confirmPassword'].hasError('notSamePassword')">
+                            <small class="font13">
+                                Password does not match
+                            </small>
+                        </div>
+                    </mat-error>
+                </mat-form-field>
+            </div>
+            <div class="row">
+                <mat-checkbox class="termCondition-margin" [formControl]="registrationForm.controls['termCondition']"
+                    (click)="openModal(mytemplate)"><a (click)="openModal(mytemplate)">
+                        <div>I accept the <span class="font-weight-bold">Terms and Conditions</span>
+                            of using this website and agree</div>
+                        <div>to abide by all applicable laws and standards.</div>
+                    </a>
+                </mat-checkbox>
+            </div>
+            <div class="d-flex justify-content-between">
+                <button [routerLink]="'/login'" mat-button color="primary">
+                    Back to Login
+                </button>
+                <button class="px-4 py-1 float-right" mat-raised-button color="primary"
+                    (click)="onNextClick()">NEXT</button>
+            </div>
+        </mat-card>
+    </div>
+</div>
+
+<div>
+    <ng-template #mytemplate>
+        <div class="col-12">
+            <div>
+                <p class="disclaimer-heading">
+                    DISCLAIMER CONFIRMATION
+                </p>
+                <p>
+                    To confirm you have read and understood our terms and conditions,please read and scroll to the
+                    bottom to accept.
+                </p>
+            </div>
+            <div class="border border-dark">
+                <mat-card>
+                    <p>
+                        <span class="disclaimer-heading">TERMS AND CONDITIONS</span>
+                    </p>
+                    <p class="terms-text pr-3 m-0" (scroll)="onScroll($event)">
+                        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been
+                        the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley
+                        of type and scrambled it to make a type specimen book. It has survived not only five centuries,
+                        but also the leap into electronic typesetting, emaining essentially unchanged.<br> It was
+                        popularised in the 1960s with the release of Letraset sheets containing Lorem
+                        Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker
+                        including versions of Lorem Ipsum.
+                        Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece
+                        of classical Latin literature
+                        from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at
+                        Hampden-Sydney College in Virginia,
+                        looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and
+                        going through the cites of
+                        the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from
+                        sections 1.10.32 and 1.10.33
+                        of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC.
+                        This book is a treatise
+                        on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum,
+                        "Lorem ipsum dolor sit
+                        amet..", comes from a line in section 1.10.32.
+                        Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of
+                        classical Latin literature
+                        from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at
+                        Hampden-Sydney College in Virginia,
+                        looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and
+                        going through the cites of
+                        the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from
+                        sections 1.10.32 and 1.10.33
+                        of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC.
+                        This book is a treatise
+                        on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum,
+                        "Lorem ipsum dolor sit
+                        amet..", comes from a line in section 1.10.32.
+                    </p>
+                </mat-card>
+            </div>
+
+            <div>
+                <div class="d-flex justify-content-between p-2">
+                    <button mat-dialog-close class="px-4 py-1" mat-button color="primary">
+                        DECLINE
+                    </button>
+                    <button [disabled]="isAcceptDisabled" class="px-4 py-1" mat-raised-button color="primary"
+                        mat-dialog-close (click)="onAcceptTerms()">ACCEPT</button>
+                </div>
+            </div>
+        </div>
+    </ng-template>
+</div>
