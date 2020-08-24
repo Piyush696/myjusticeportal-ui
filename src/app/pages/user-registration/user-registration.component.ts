@@ -11,7 +11,7 @@ import { ToasterService } from 'app/services/toaster.service';
 export class UserRegistrationComponent implements OnInit {
 
   step: number = 1;
-  userId: number;
+  email: string;
 
   constructor(private registrationService: RegistrationService, private toasterService: ToasterService, private router: Router) { }
 
@@ -20,7 +20,7 @@ export class UserRegistrationComponent implements OnInit {
 
   onNextClick(value) {
     this.step = 2;
-    this.userId = value;
+    this.email = value;
 
   }
 
