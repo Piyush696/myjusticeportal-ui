@@ -33,7 +33,6 @@
                 </div>
             </div>
 
-
             <div class="row">
                 <mat-form-field appearance="fill" class="w-100 p-2">
                     <mat-label>Username</mat-label>
@@ -118,11 +117,11 @@
                 <button [routerLink]="'/login'" mat-button color="primary">
                     Back to Login
                 </button>
-                <button [disabled]="registrationForm.get('confirmPassword').invalid || 
-                registrationForm.get('password').invalid 
-                 || registrationForm.get('firstName').invalid  || registrationForm.get('lastName').invalid 
-                 || registrationForm.get('termCondition').invalid || isNextDisabled" *ngIf="step === 1"
-                    class="px-4 py-1 float-right" mat-raised-button color="primary" (click)="step = 2">NEXT</button>
+                <button *ngIf="step === 1" class="px-4 py-1 float-right" mat-raised-button color="primary"
+                    [disabled]="registrationForm.get('confirmPassword').invalid || registrationForm.get('password').invalid || 
+                    registrationForm.get('firstName').invalid || registrationForm.get('lastName').invalid || registrationForm.get('termCondition').invalid || isNextDisabled" (click)="step = 2">
+                    NEXT
+                </button>
             </div>
         </mat-card>
 
@@ -142,8 +141,9 @@
                         <button mat-button color="primary" (click)="step = 1">
                             Back
                         </button>
-                        <button class="px-4 py-1" mat-raised-button color="primary"
-                            (click)="onCreateRegisterUser()">NEXT</button>
+                        <button class="px-4 py-1" mat-raised-button color="primary" (click)="onCreateRegisterUser()">
+                            NEXT
+                        </button>
                     </div>
                 </mat-card>
             </div>
@@ -220,7 +220,9 @@
                         DECLINE
                     </button>
                     <button [disabled]="isAcceptDisabled" class="px-4 py-1" mat-raised-button color="primary"
-                        mat-dialog-close (click)="onAcceptTerms()">ACCEPT</button>
+                        mat-dialog-close (click)="onAcceptTerms()">
+                        ACCEPT
+                    </button>
                 </div>
             </div>
         </div>
