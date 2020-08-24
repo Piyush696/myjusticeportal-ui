@@ -7,9 +7,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PublicDefenderRegistrationComponent implements OnInit {
 
+  step: number = 1;
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  onNextClick(value) {
+    console.log(value)
+    this.step = 2;
   }
 
 }

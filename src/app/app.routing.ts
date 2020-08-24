@@ -28,10 +28,10 @@ export const AppRoutes: Routes = [
     path: 'login',
     component: LoginComponent
   },
-  {
-    path: 'register',
-    component: RegistrationComponent
-  },
+  // {
+  //   path: 'register',
+  //   component: RegistrationComponent
+  // },
   {
     path: 'lawyer/registration',
     component: LawyerRegistrationComponent
@@ -45,7 +45,7 @@ export const AppRoutes: Routes = [
     component: ParalegalRegistrationComponent
   },
   {
-    path: 'user/registration',
+    path: 'register',
     component: UserRegistrationComponent
   },
   {

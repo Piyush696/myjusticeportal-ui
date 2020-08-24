@@ -1,1 +1,85 @@
-<p>mobile-registration works!</p>
+<div class="bg-color">
+    <div class="d-flex justify-content-center align-items-center">
+        <div class="my-5">
+            <div class="d-flex justify-content-center">
+                <img src="assets/img/logo.png" alt="logo" class="logo">
+            </div>
+            <p class="text-center">Step 2/2</p>
+            <mat-card class="p-4">
+                <h1 class="font-weight-bold text-center">Account Verification</h1>
+                <p class="text-center">
+                    To ensure account security, we require that you verify a mobile phone via text message.</p>
+                <p class="text-center">Enter yourmobile number below and we will send you a code to verify.</p>
+
+                <div class="row">
+                    <div class="col-2 pr-0">
+                        <mat-form-field appearance="fill" class="w-100 px-0">
+                            <mat-label>+</mat-label>
+                            <input [disabled]="true" type="text" matInput placeholder="+">
+                        </mat-form-field>
+                    </div>
+                    <div class="col-3 px-0">
+                        <mat-form-field appearance="fill" class="w-100 px-0">
+                            <mat-label>Country Code</mat-label>
+                            <input type="text" matInput placeholder="Country Code"
+                                [formControl]="mobileRegistrationForm.controls['countryCode']" required>
+                            <mat-error>
+                                <div
+                                    *ngIf="mobileRegistrationForm.controls['countryCode'].invalid && mobileRegistrationForm.controls['countryCode'].touched">
+                                    <small class="font13">
+                                        Country Code is Required
+                                    </small>
+                                </div>
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-7 pl-0">
+                        <mat-form-field appearance="fill" class="w-100 px-0">
+                            <mat-label>Mobile</mat-label>
+                            <input type="text" matInput placeholder="Mobile"
+                                [formControl]="mobileRegistrationForm.controls['mobile']" required>
+                            <mat-error>
+                                <div
+                                    *ngIf="mobileRegistrationForm.controls['mobile'].invalid && mobileRegistrationForm.controls['mobile'].touched">
+                                    <small class="font13">
+                                        Mobile is Required
+                                    </small>
+                                </div>
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+                </div>
+                <p class="font-weight-bold text-center">If you are in the United States, leave 1 as your Country
+                    Code.
+                </p>
+                <div *ngIf="OtpField" class="row">
+                    <div class="col-9 pr-0">
+                        <mat-form-field appearance="fill" class="w-100 p-2">
+                            <mat-label>Enter Otp</mat-label>
+                            <input type="number" matInput placeholder="Enter Otp"
+                                [formControl]="mobileRegistrationForm.controls['otp']" required>
+                            <mat-error>
+                                <div
+                                    *ngIf="mobileRegistrationForm.controls['otp'].invalid && mobileRegistrationForm.controls['otp'].touched">
+                                    <small class="font13">
+                                        Otp is Required
+                                    </small>
+                                </div>
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-3 pl-0">
+                        <button [disabled]="mobileRegistrationForm.get('otp').invalid" mat-raised-button color="primary"
+                            class="mt-2 px-5 py-1" (click)="onVerifySms()">Submit</button>
+                    </div>
+                </div>
+                <div class="d-flex justify-content-end">
+                    <button *ngIf="!OtpField"
+                        [disabled]="mobileRegistrationForm.get('countryCode').invalid || mobileRegistrationForm.get('mobile').invalid"
+                        mat-raised-button color="primary" class="mt-2 px-5 py-2" (click)="onGetOtp()">Get
+                        Otp</button>
+                </div>
+            </mat-card>
+        </div>
+    </div>
+</div>

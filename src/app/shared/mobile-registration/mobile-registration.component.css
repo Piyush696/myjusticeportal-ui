@@ -1,0 +1,20 @@
+.logo {
+  width: 225px;
+}
+
+.wpx-420 {
+  width: 420px;
+}
+
+.w-25 {
+  width: 25%;
+}
+
+.bg-color {
+  background-color: #fffbfb !important;
+}
+
+.mat-form-field-appearance-fill .mat-form-field-flex {
+  border: 1px solid black !important;
+  border-radius: 6px !important;
+}

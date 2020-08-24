@@ -98,4 +98,9 @@ export class EmailRegistrationComponent implements OnInit {
       })
     })
   }
+
+  onAcceptTerms() {
+    this.isNextDisabled = false;
+    this.registrationForm.get('termCondition').setValue(true)
+  }
 }
