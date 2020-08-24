@@ -16,7 +16,6 @@ export class SecurityQuestionComponent implements OnInit {
   progressValue: number = 0;
   originalSecurityQuestions: any;
   questionId: any;
-  attemptedQuestion: number = 0;
 
   @Input() selectedRoleId: number;
   @Output() isRegisterEvent = new EventEmitter();
@@ -25,7 +24,7 @@ export class SecurityQuestionComponent implements OnInit {
 
   ngOnInit(): void {
     this.createFormControl();
-    this.getAllSecurityQuestions();
+    this.onGetAllSecurityQuestions();
   }
 
   createFormControl() {
@@ -35,24 +34,24 @@ export class SecurityQuestionComponent implements OnInit {
     });
   }
 
-  getAllSecurityQuestions() {
-    this.securityService.getAllSecurityRoles(this.selectedRoleId).subscribe((questions: any) => {
+  onGetAllSecurityQuestions() {
+    this.securityService.getAllSecurityRoles(1).subscribe((questions: any) => {
       this.securityQuestions = questions.data;
       this.originalSecurityQuestions = questions.data;
     })
   }
 
-  onAnswerQuestion() {
+  onClickNext() {
     this.securityQuestions = this.securityQuestions.filter(filteredquestion => filteredquestion.securityQuestionId != parseInt(this.securityQuestionForm.get('securityQuestionId').value));
     this.count = this.count + 1;
-    this.progressValue = this.progressValue + 33.33;
+    this.progressValue = (100 / 3) * this.count;
     this.setAnswers();
   }
 
-  onBackClick() {
+  onClickBack() {
     let x;
     this.count = this.count - 1;
-    this.progressValue = this.progressValue - 33.33;
+    this.progressValue = (100 / 3) * this.count;
     x = this.originalSecurityQuestions.filter((filteredquestion) => {
       if (filteredquestion.securityQuestionId == this.questionId) {
         return filteredquestion;
@@ -68,12 +67,12 @@ export class SecurityQuestionComponent implements OnInit {
   setAnswers() {
     this.questionId = this.securityQuestionForm.get('securityQuestionId').value;
     let formValue = this.securityQuestionForm.value;
-    this.securityQuestionForm.reset();
     this.securityService.createSecurityAnswers(formValue).subscribe((data: any) => {
-    })
+      this.securityQuestionForm.reset();
+    });
   }
 
-  register() {
+  onClickRegister() {
     this.setAnswers();
     this.isRegisterEvent.emit(true);
   }
