@@ -34,6 +34,7 @@ export class LoginComponent implements OnInit {
         if (res.success) {
           this.cacheService.setCache('token', res.token);
           this.loginService.checkToken().then((data: any) => {
+            console.log(data)
             this.store.dispatch(new AddUserInfo(Object.assign({}, data.user)));
             if (data.success) {
               this.router.navigateByUrl('/dashboard')

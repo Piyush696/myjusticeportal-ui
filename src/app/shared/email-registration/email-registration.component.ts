@@ -10,6 +10,7 @@ import { RoleService } from 'app/services/role.service';
 import { SecurityService } from 'app/services/security.service';
 import { ToasterService } from 'app/services/toaster.service';
 import { LoadRole } from 'app/store/actions/role.actions';
+import { AddUserInfo } from 'app/store/actions/userInfo.actions';
 
 @Component({
   selector: 'app-email-registration',
@@ -94,6 +95,8 @@ export class EmailRegistrationComponent implements OnInit {
     this.registrationService.addUser(this.registrationForm.value).subscribe((res: any) => {
       this.cacheService.setCache('token', res.token);
       this.loginService.checkToken().then((data: any) => {
+        console.log(data)
+        this.store.dispatch(new AddUserInfo(Object.assign({}, data.user)));
         this.isNextEvent.emit(data.user.email)
       })
     })
