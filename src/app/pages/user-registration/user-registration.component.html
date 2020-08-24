@@ -1,6 +1,11 @@
 <div>
     <app-email-registration *ngIf="step == 1" (isNextEvent)="onNextClick($event)"></app-email-registration>
+
     <div class="row" *ngIf="step == 2" class="wpx-420">
+        <app-additional-info [email]="email" (userMetaEventEmitter)="userMetaData($event)"></app-additional-info>
+    </div>
+
+    <div class="row" *ngIf="step == 3" class="wpx-420">
         <app-security-question class="d-flex justify-content-center align-item-center"
             (isRegisterEvent)="onUpdateRegisteredUser($event)">
         </app-security-question>

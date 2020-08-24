@@ -16,6 +16,7 @@ import { SecurityService } from 'app/services/security.service';
   templateUrl: './registration.component.html',
   styleUrls: ['./registration.component.css']
 })
+
 @HostListener('scroll', ['$event'])
 export class RegistrationComponent implements OnInit {
   registrationForm: FormGroup;
@@ -27,7 +28,8 @@ export class RegistrationComponent implements OnInit {
   isAcceptDisabled: boolean = true;
   isNextDisabled: boolean = true;
 
-  constructor(public securityService: SecurityService, public dialog: MatDialog, private loginService: LoginService, private cacheService: CacheService, private fb: FormBuilder,
+  constructor(public securityService: SecurityService, public dialog: MatDialog,
+    private loginService: LoginService, private cacheService: CacheService, private fb: FormBuilder,
     private toasterService: ToasterService, private roleService: RoleService,
     private registrationService: RegistrationService, private router: Router, private store: Store<any>) { }
 
@@ -66,7 +68,6 @@ export class RegistrationComponent implements OnInit {
       }
     };
   }
-
 
   onGetRoles() {
     this.store.select(s => s.role).subscribe(data => {
@@ -116,7 +117,6 @@ export class RegistrationComponent implements OnInit {
     })
   }
 
-
   onScroll(event: any) {
     // visible height + pixel scrolled >= total height 
     if (event.target.offsetHeight + event.target.scrollTop >= event.target.scrollHeight) {
@@ -131,5 +131,4 @@ export class RegistrationComponent implements OnInit {
     this.isNextDisabled = false;
     this.registrationForm.get('termCondition').setValue(true)
   }
-
 }
