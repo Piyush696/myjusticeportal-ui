@@ -17,7 +17,7 @@
 
 .mat-progress-section {
   position: absolute;
-  padding: 10px;
+  /* padding: 10px; */
   color: white;
-  top: 40px;
+  /* top: 40px; */
 }

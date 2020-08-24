@@ -4,10 +4,17 @@
             <img src="assets/img/logo.png" alt="logo" class="logo">
         </div>
         <mat-card class="p-5">
+            <h2 class="font-weight-bold mb-1">
+                Security Questions
+            </h2>
+            <p class="text-dark">
+                Please set your security question so you can access
+                your account if you ever forget your password or ID.
+            </p>
             <div class="mb-5">
                 <section class="d-flex justify-content-center align-item-center">
                     <mat-progress-bar mode="determinate" value="{{progressValue}}"></mat-progress-bar>
-                    <div class="mat-progress-section"> {{progressValue}}/100% </div>
+                    <div class="mat-progress-section">{{count}}/3</div>
                 </section>
             </div>
             <mat-form-field appearance="fill" class="w-100">
@@ -22,19 +29,21 @@
             <mat-form-field appearance="fill" class="w-100">
                 <mat-label>Answer</mat-label>
                 <input type="text" matInput placeholder="Answer" [formControl]="securityQuestionForm.controls['answer']"
-                    required>
+                    required />
             </mat-form-field>
 
             <div class="d-flex justify-content-between">
-                <button mat-button color="primary" (click)="onBackClick()">
+                <button mat-button color="primary" [disabled]="!count" (click)="onClickBack()">
                     BACK
                 </button>
-
-                <button [disabled]="securityQuestionForm.get('answer').invalid" *ngIf="count != 2" class="px-4 py-1"
-                    mat-raised-button color="primary" (click)="onAnswerQuestion()">NEXT</button>
-
-                <button [disabled]="securityQuestionForm.get('answer').invalid" *ngIf="count == 2" class="px-4 py-1"
-                    mat-raised-button color="primary" (click)="register()">REGISTER</button>
+                <button *ngIf="count != 2" class="px-4 py-1" mat-raised-button color="primary"
+                    [disabled]="securityQuestionForm.invalid" (click)="onClickNext()">
+                    NEXT
+                </button>
+                <button *ngIf="count == 2" class="px-4 py-1" mat-raised-button color="primary"
+                    [disabled]="securityQuestionForm.invalid" (click)="onClickRegister()">
+                    REGISTER
+                </button>
             </div>
         </mat-card>
         <div class="row d-flex justify-content-center pt-2">

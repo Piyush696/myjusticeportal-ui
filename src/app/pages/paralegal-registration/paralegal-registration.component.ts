@@ -14,7 +14,6 @@ export class ParalegalRegistrationComponent implements OnInit {
   }
 
   onNextClick(value) {
-    console.log(value)
     this.step = 2;
   }
 }
