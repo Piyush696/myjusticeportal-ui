@@ -9,15 +9,23 @@ import { ToasterService } from 'app/services/toaster.service';
   styleUrls: ['./user-registration.component.css']
 })
 export class UserRegistrationComponent implements OnInit {
+
   step: number = 1;
+  userId: number;
+
   constructor(private registrationService: RegistrationService, private toasterService: ToasterService, private router: Router) { }
 
   ngOnInit(): void {
   }
 
   onNextClick(value) {
-    console.log(value)
     this.step = 2;
+    this.userId = value;
+
+  }
+
+  userMetaData(value) {
+    this.step = 3;
   }
 
   onUpdateRegisteredUser(value: boolean) {

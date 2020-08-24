@@ -41,6 +41,7 @@ import { ParalegalRegistrationComponent } from './pages/paralegal-registration/p
 import { PublicDefenderRegistrationComponent } from './pages/public-defender-registration/public-defender-registration.component';
 import { EmailRegistrationComponent } from './shared/email-registration/email-registration.component';
 import { MobileRegistrationComponent } from './shared/mobile-registration/mobile-registration.component';
+import { AdditionalInfoComponent } from './shared/additional-info/additional-info.component';
 
 @NgModule({
   declarations: [
@@ -57,7 +58,8 @@ import { MobileRegistrationComponent } from './shared/mobile-registration/mobile
     ParalegalRegistrationComponent,
     PublicDefenderRegistrationComponent,
     EmailRegistrationComponent,
-    MobileRegistrationComponent
+    MobileRegistrationComponent,
+    AdditionalInfoComponent
   ],
   imports: [
     BrowserModule,

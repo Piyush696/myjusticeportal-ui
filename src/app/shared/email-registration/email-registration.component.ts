@@ -94,7 +94,7 @@ export class EmailRegistrationComponent implements OnInit {
     this.registrationService.addUser(this.registrationForm.value).subscribe((res: any) => {
       this.cacheService.setCache('token', res.token);
       this.loginService.checkToken().then((data: any) => {
-        this.isNextEvent.emit(true)
+        this.isNextEvent.emit(data.user.userId)
       })
     })
   }
