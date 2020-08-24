@@ -7,22 +7,23 @@ export interface RouteInfo {
     title: string;
     icon: string;
     class: string;
+    roleIds: any;
 }
 
 export const ROUTES: RouteInfo[] = [
-    { path: '/case', title: 'My Cases', icon: 'nc-bank', class: '' },
-    // { path: '/dashboard', title: 'Dashboard', icon: 'nc-bank', class: '' },
-    // { path: '/users', title: 'All Users', icon: 'nc-bank', class: '' },
-    { path: '/', title: 'My Dockets', icon: 'nc-bank', class: '' },
-    { path: '/app-setting', title: 'My SuperAdmin View', icon: 'nc-bank', class: '' },
-    { path: '/', title: 'Law Library', icon: 'nc-bank', class: '' },
-    { path: '/', title: 'Legal Research Assistance', icon: 'nc-bank', class: '' },
-    { path: '/', title: 'Legal Forms', icon: 'nc-bank', class: '' },
-    { path: '/', title: 'Ask a lawyer', icon: 'nc-bank', class: '' },
-    { path: '/', title: 'Hire a lawyer', icon: 'nc-bank', class: '' },
-    { path: '/', title: 'Message My lawyer', icon: 'nc-bank', class: '' },
-    { path: '/', title: 'Video My lawyer', icon: 'nc-bank', class: '' },
-    { path: '/', title: 'Bail Bonds', icon: 'nc-bank', class: '' },
+    { path: '/case', title: 'My Cases', icon: 'nc-bank', class: '', roleIds: [1, 4] },
+    // { path: '/dashboard', title: 'Dashboard', icon: 'nc-bank', class: '', roleIds: [] },
+    // { path: '/users', title: 'All Users', icon: 'nc-bank', class: '', roleIds: [] },
+    { path: '/', title: 'My Dockets', icon: 'nc-bank', class: '', roleIds: [2] },
+    { path: '/app-setting', title: 'My SuperAdmin View', icon: 'nc-bank', class: '', roleIds: [7] },
+    { path: '/', title: 'Law Library', icon: 'nc-bank', class: '', roleIds: [4, 5, 6] },
+    { path: '/', title: 'Legal Research Assistance', icon: 'nc-bank', class: '', roleIds: [4, 6] },
+    { path: '/', title: 'Legal Forms', icon: 'nc-bank', class: '', roleIds: [1, 2] },
+    { path: '/', title: 'Ask a lawyer', icon: 'nc-bank', class: '', roleIds: [3, 4, 7] },
+    { path: '/', title: 'Hire a lawyer', icon: 'nc-bank', class: '', roleIds: [3, 6, 7] },
+    { path: '/', title: 'Message My lawyer', icon: 'nc-bank', class: '', roleIds: [1, 3] },
+    { path: '/', title: 'Video My lawyer', icon: 'nc-bank', class: '', roleIds: [1, 3, 7] },
+    { path: '/', title: 'Bail Bonds', icon: 'nc-bank', class: '', roleIds: [1, 4, 6, 7] }
 ];
 
 @Component({
@@ -60,31 +61,12 @@ export class SidebarComponent implements OnInit {
     }
 
     filterMenuByUser() {
-        // this.filteredMenuItems = ROUTES.filter(menuItem => menuItem);
-        if (this.userRole.name == 'User') {
-            this.filteredMenuItems = ROUTES.filter(menu => menu.title == 'My Cases' || menu.title == 'Hire a lawyer');
-        }
-        else if (this.userRole.name == 'Facility') {
-            this.filteredMenuItems = ROUTES.filter(menu => menu);
-        }
-        else if (this.userRole.name == 'Paralegal') {
-            this.filteredMenuItems = ROUTES.filter(menu => menu);
-        }
-        else if (this.userRole.name == 'Lawyer') {
-            this.filteredMenuItems = ROUTES.filter(menu => menu.title == 'Law Library' || menu.title == 'Legal Research Assistance');
-        }
-        else if (this.userRole.name == 'Public Defender') {
-            this.filteredMenuItems = ROUTES.filter(menu => menu.title == 'My SuperAdmin View');
-        }
-        else if (this.userRole.name == 'Bondsman') {
-            this.filteredMenuItems = ROUTES.filter(menu => menu.title == 'Bail Bonds');
-        }
-        else if (this.userRole.name == 'Superadmin') {
-            this.filteredMenuItems = ROUTES.filter(menu => menu);
-        }
-        else {
-            this.filteredMenuItems = ROUTES.filter(menu => menu);
-        }
+        this.filteredMenuItems = ROUTES.filter(menu => {
+            let isExist = menu.roleIds.find(roleId => roleId == this.userRole.roleId);
+            if (isExist) {
+                return menu;
+            }
+        });
     }
 
     onChangeMenu(path) {
