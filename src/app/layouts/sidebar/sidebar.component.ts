@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Store } from '@ngrx/store';
 
 export interface RouteInfo {
     path: string;
@@ -32,14 +33,15 @@ export const ROUTES: RouteInfo[] = [
 })
 
 export class SidebarComponent implements OnInit {
-    public menuItems: any[];
+    public filteredMenuItems: any[];
     currentMenu: any;
+    userRole: any;
 
-    constructor(private router: Router) { };
+    constructor(private router: Router, private store: Store<any>) { };
 
     ngAfterViewInit() {
         if (this.router.url) {
-            this.currentMenu = this.menuItems.find(x => x.path == this.router.url);
+            this.currentMenu = this.filteredMenuItems.find(x => x.path == this.router.url);
         }
         if (this.currentMenu) {
             setTimeout(() => {
@@ -51,18 +53,49 @@ export class SidebarComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.menuItems = ROUTES.filter(menuItem => menuItem);
+        this.store.select(s => s.userInfo).subscribe(x => {
+            this.userRole = x.role[0];
+        })
+        this.filterMenuByUser();
+    }
+
+    filterMenuByUser() {
+        // this.filteredMenuItems = ROUTES.filter(menuItem => menuItem);
+        if (this.userRole.name == 'User') {
+            this.filteredMenuItems = ROUTES.filter(menu => menu.title == 'My Cases' || menu.title == 'Hire a lawyer');
+        }
+        else if (this.userRole.name == 'Facility') {
+            this.filteredMenuItems = ROUTES.filter(menu => menu);
+        }
+        else if (this.userRole.name == 'Paralegal') {
+            this.filteredMenuItems = ROUTES.filter(menu => menu);
+        }
+        else if (this.userRole.name == 'Lawyer') {
+            this.filteredMenuItems = ROUTES.filter(menu => menu.title == 'Law Library' || menu.title == 'Legal Research Assistance');
+        }
+        else if (this.userRole.name == 'Public Defender') {
+            this.filteredMenuItems = ROUTES.filter(menu => menu.title == 'My SuperAdmin View');
+        }
+        else if (this.userRole.name == 'Bondsman') {
+            this.filteredMenuItems = ROUTES.filter(menu => menu.title == 'Bail Bonds');
+        }
+        else if (this.userRole.name == 'Superadmin') {
+            this.filteredMenuItems = ROUTES.filter(menu => menu);
+        }
+        else {
+            this.filteredMenuItems = ROUTES.filter(menu => menu);
+        }
     }
 
     onChangeMenu(path) {
         setTimeout(() => {
-            var x = <HTMLElement[]><any>document.getElementsByClassName('label-bg');
+            var x = <HTMLElement[]><any>document.getElementsByClassName('onHoverMenuItem');
             for (var i = 0; i < x.length; i++) {
                 x[i].classList.remove('active');
                 x[i].classList.remove('currentMenu');
             }
         }, 50);
-        this.currentMenu = this.menuItems.find(x => x.path == path);
+        this.currentMenu = this.filteredMenuItems.find(x => x.path == path);
         if (this.currentMenu.path != '/') {
             setTimeout(() => {
                 let elem: HTMLElement = document.getElementById(this.currentMenu.path);
