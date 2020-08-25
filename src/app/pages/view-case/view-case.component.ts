@@ -7,10 +7,12 @@ import { CaseService } from 'app/services/case.service';
   templateUrl: './view-case.component.html',
   styleUrls: ['./view-case.component.css']
 })
+
 export class ViewCaseComponent implements OnInit {
   caseDetails: any;
-  constructor(private router: Router, private route: ActivatedRoute, private caseService: CaseService) {
-  }
+
+  constructor(private router: Router, private route: ActivatedRoute,
+    private caseService: CaseService) { }
 
   ngOnInit(): void {
     this.getCase();
@@ -24,6 +26,10 @@ export class ViewCaseComponent implements OnInit {
 
   editCase() {
     let url = '/case/' + this.route.snapshot.params['caseId'] + '/edit';
-    this.router.navigateByUrl(url)
+    this.router.navigateByUrl(url);
+  }
+
+  onClickViewFiles() {
+    this.router.navigateByUrl('/case/' + this.route.snapshot.params['caseId'] + '/files');
   }
 }
