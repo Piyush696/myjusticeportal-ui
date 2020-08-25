@@ -79,5 +79,38 @@
                 </button>
             </div>
         </mat-card>
+
+        <mat-card class="w-100 p-5 mt-4">
+            <div>
+                <h1 class="line-height font-weight-bold">Law Library Link</h1>
+                <h4 class="line-height header-sub-text">View and Manage all the Law Library Links.
+                </h4>
+            </div>
+            <div class="row">
+                <mat-form-field appearance="fill" class="w-100 p-2">
+                    <mat-label>Law Library Link</mat-label>
+                    <input type="text" matInput placeholder="Link Url"
+                        [formControl]="librarylForm.controls['libraryLink']" required>
+                    <mat-error>
+                        <div
+                            *ngIf="librarylForm.controls['libraryLink'].invalid && librarylForm.controls['libraryLink'].touched">
+                            <small class="font13">
+                                Link is Required
+                            </small>
+                        </div>
+                    </mat-error>
+                </mat-form-field>
+            </div>
+            <div class="row d-flex justify-content-between">
+                <button class="px-4 py-1 ml-2" mat-raised-button color="primary"
+                    (click)="this.librarylForm.enable(); enableSaveLink()">
+                    Edit Changes
+                </button>
+                <button [disabled]="isDisabledLink" class="px-4 py-1 mr-2" mat-raised-button color="primary"
+                    (click)="updateLink()">
+                    Save
+                </button>
+            </div>
+        </mat-card>
     </div>
 </div>

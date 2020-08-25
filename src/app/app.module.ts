@@ -36,6 +36,17 @@ import { SecurityQuestionComponent } from './pages/security-question/security-qu
 import { ViewCaseFilesComponent } from './pages/view-case-files/view-case-files.component';
 import { FileUploadModule } from 'ng2-file-upload';
 import { MatIconModule } from '@angular/material/icon';
+import { UserRegistrationComponent } from './pages/user-registration/user-registration.component';
+import { FacilityRegistrationComponent } from './pages/facility-registration/facility-registration.component';
+import { LawyerRegistrationComponent } from './pages/lawyer-registration/lawyer-registration.component';
+import { BondsmanRegistrationComponent } from './pages/bondsman-registration/bondsman-registration.component';
+import { ParalegalRegistrationComponent } from './pages/paralegal-registration/paralegal-registration.component';
+import { PublicDefenderRegistrationComponent } from './pages/public-defender-registration/public-defender-registration.component';
+import { EmailRegistrationComponent } from './shared/email-registration/email-registration.component';
+import { MobileRegistrationComponent } from './shared/mobile-registration/mobile-registration.component';
+import { AdditionalInfoComponent } from './shared/additional-info/additional-info.component';
+import { LibraryLinkService } from './services/library-link.service';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -44,7 +55,16 @@ import { MatIconModule } from '@angular/material/icon';
     RegistrationComponent,
     SecurityQuestionComponent,
     ForgetPasswordComponent,
-    ViewCaseFilesComponent
+    ViewCaseFilesComponent,
+    UserRegistrationComponent,
+    FacilityRegistrationComponent,
+    LawyerRegistrationComponent,
+    BondsmanRegistrationComponent,
+    ParalegalRegistrationComponent,
+    PublicDefenderRegistrationComponent,
+    EmailRegistrationComponent,
+    MobileRegistrationComponent,
+    AdditionalInfoComponent
   ],
   imports: [
     BrowserModule,
@@ -77,10 +97,12 @@ import { MatIconModule } from '@angular/material/icon';
     RegistrationService,
     CacheService,
     LoginService,
+    LibraryLinkService,
     { provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { appearance: 'fill' } },
   ],
   bootstrap: [AppComponent]
 })
+
 export class AppModule { }
 
 platformBrowserDynamic().bootstrapModule(AppModule)

@@ -6,3 +6,7 @@
   background: #e4e4ec;
   color: #333442;
 }
+
+button[disabled] {
+  cursor: not-allowed;
+}

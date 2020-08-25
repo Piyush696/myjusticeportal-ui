@@ -1,23 +1,18 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { CacheService } from './cache.service';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
-
-export class RegistrationService {
+export class LibraryLinkService {
   private apiPath: string;
-  private createUser: string;
-  allUsers: string;
 
   constructor(private httpClient: HttpClient, private cacheService: CacheService) {
     const env: any = environment;
     this.apiPath = env.api
-    this.createUser = 'user/registration';
   }
-
 
   getHeaders() {
     return {
@@ -26,17 +21,12 @@ export class RegistrationService {
       })
     };
   }
-
-  addUser(profileData) {
-    return this.httpClient.post<object>(`${this.apiPath}/${this.createUser}`, profileData)
+  getAllLibraryLink() {
+    return this.httpClient.get<object>(`${this.apiPath}/libraryLink`, this.getHeaders())
   }
 
-  checkUser(query = {}) {
-    return this.httpClient.get<Object>(`${this.apiPath}/users`, { params: query });
-  }
-
-  updateUser(value) {
-    return this.httpClient.put<object>(`${this.apiPath}/user`, { value })
+  updateLibraryLink(data) {
+    return this.httpClient.post<object>(`${this.apiPath}/libraryLink`, data, this.getHeaders())
   }
 
 }
