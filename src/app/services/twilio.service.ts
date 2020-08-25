@@ -34,6 +34,14 @@ export class TwilioService {
     return this.httpClient.post<object>(`${this.apiPath}/twilio`, otpData, this.getHeaders())
   }
 
+  getRegisterOtp(otpData) {
+    return this.httpClient.post<object>(`${this.apiPath}/twilio/register/twilio`, otpData)
+  }
+
+  verifyRegisterCode(otpData) {
+    return this.httpClient.post<object>(`${this.apiPath}/twilio/register/verify-sms`, otpData)
+  }
+
   verifyCode(otpData) {
     return this.httpClient.post<object>(`${this.apiPath}/twilio/verify-sms`, otpData, this.getHeaders())
   }

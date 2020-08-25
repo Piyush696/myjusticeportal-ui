@@ -29,7 +29,7 @@ export class SecurityService {
   }
 
   createSecurityAnswers(securityQuestionAnswer) {
-    return this.httpClient.post<object>(`${this.apiPath}/${this.allSecurityQuestion}`, securityQuestionAnswer, this.getHeaders())
+    return this.httpClient.post<object>(`${this.apiPath}/${this.allSecurityQuestion}`, securityQuestionAnswer)
   }
 
   getUserSecurityQuestions(user: string) {

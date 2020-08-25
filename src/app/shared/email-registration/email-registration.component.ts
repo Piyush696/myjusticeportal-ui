@@ -33,17 +33,16 @@ export class EmailRegistrationComponent implements OnInit {
     this.registrationForm = this.fb.group({
       firstName: ['', [Validators.required]],
       lastName: ['', [Validators.required]],
-      email: ['', [this.validateEmail.bind(this)], this.validateUserNotTaken.bind(this)],
+      userName: ['', [Validators.required], this.validateUserNotTaken.bind(this)],
       password: ['', [Validators.required, Validators.minLength(6)]],
       confirmPassword: ['', [Validators.required, Validators.minLength(6)]],
-      username: ['', [Validators.required], this.validateUserNotTaken.bind(this)],
       roleId: ['', [Validators.required]],
       termCondition: ['', [Validators.required]]
     }, { validator: this.checkIfMatchingPasswords('password', 'confirmPassword') });
   }
 
   async validateUserNotTaken(control: AbstractControl) {
-    const result: any = await this.registrationService.checkUser({ user: control.value }).toPromise();
+    const result: any = await this.registrationService.checkUser({ userName: control.value }).toPromise();
     if (result.taken) {
       return { taken: true };
     } else {
@@ -61,14 +60,6 @@ export class EmailRegistrationComponent implements OnInit {
         return passwordConfirmationInput.setErrors(null);
       }
     };
-  }
-
-  validateEmail(control: AbstractControl) {
-    const pattern = /^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,15})$/;
-    if (!control.value.match(pattern) && control.value !== '') {
-      return { invalidEmail: true };
-    }
-    return null;
   }
 
   openModal(templateRef) {
@@ -95,16 +86,12 @@ export class EmailRegistrationComponent implements OnInit {
     const data = {
       "firstName": this.registrationForm.get('firstName').value,
       "lastName": this.registrationForm.get('lastName').value,
-      "email": this.registrationForm.get('email').value,
+      "userName": this.registrationForm.get('userName').value,
       "password": this.registrationForm.get('password').value,
       "roleId": this.selectedRoleId
     }
     this.registrationService.addUser(data).subscribe((res: any) => {
-      this.cacheService.setCache('token', res.token);
-      this.loginService.checkToken().then((data: any) => {
-        this.store.dispatch(new AddUserInfo(Object.assign({}, data.user)));
-        this.isNextEvent.emit(data.user.email)
-      })
+      this.isNextEvent.emit(res.data.userName)
     })
   }
 
