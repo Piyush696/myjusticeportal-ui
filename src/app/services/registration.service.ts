@@ -35,8 +35,8 @@ export class RegistrationService {
     return this.httpClient.get<Object>(`${this.apiPath}/users`, { params: query });
   }
 
-  updateUser(status) {
-    return this.httpClient.put<object>(`${this.apiPath}/user`, { status }, this.getHeaders())
+  updateUser(value) {
+    return this.httpClient.put<object>(`${this.apiPath}/user`, { value })
   }
 
 }

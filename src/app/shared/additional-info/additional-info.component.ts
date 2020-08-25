@@ -12,7 +12,7 @@ export class AdditionalInfoComponent implements OnInit {
   additionalInfo: FormGroup;
 
   @Output() userMetaEventEmitter = new EventEmitter();
-  @Input('email') email: string;
+  @Input('userName') userName: string;
 
   constructor(private fb: FormBuilder, private userMetaService: UserMetaService) { }
 
@@ -27,7 +27,7 @@ export class AdditionalInfoComponent implements OnInit {
 
     var userMetaList = [{ metaKey: 'housing_unit', metaValue: this.additionalInfo.get('housing_unit').value },
     { metaKey: 'facility', metaValue: this.additionalInfo.get('facility').value }]
-    this.userMetaService.createUserMeta({ metaList: userMetaList, email: this.email }).subscribe(
+    this.userMetaService.createUserMeta({ metaList: userMetaList, userName: this.userName }).subscribe(
       (res: any) => {
         this.userMetaEventEmitter.emit(true);
       })
