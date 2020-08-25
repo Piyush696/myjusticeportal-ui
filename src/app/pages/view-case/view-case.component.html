@@ -1,14 +1,15 @@
 <div class="col-12">
     <div class="d-flex justify-content-between">
         <div>
-            <h1 class="line-height font-weight-bold">Case {{caseDetails?.caseId}}: {{caseDetails?.otherInformation}}
+            <h1 class="line-height font-weight-bold">
+                Case {{caseDetails?.caseId}}: {{caseDetails?.otherInformation}}
             </h1>
             <h4 class="line-height">Your case details at-a-glance</h4>
         </div>
         <div class="mr-3">
-            <button [routerLink]="'/case'" class="white-btn py-1 padding-btn" mat-raised-button color="primary">Back To
-                My
-                Cases</button>
+            <button [routerLink]="'/case'" class="white-btn py-1 padding-btn" mat-raised-button color="primary">
+                Back To My Cases
+            </button>
         </div>
     </div>
     <div class="col-12 pl-0">
@@ -17,12 +18,14 @@
                 <mat-card class="view-card-color w-100 pt-4">
                     <div class="d-flex justify-content-between pb-2">
                         <div>
-                            <h3 class="line-height font-weight-bold m-0 pt-3">Case Information</h3>
+                            <h3 class="line-height font-weight-bold m-0 pt-3">
+                                Case Information
+                            </h3>
                         </div>
                         <div>
-                            <button class="white-btn px-5 py-1" mat-raised-button color="primary"
-                                (click)="editCase()">Edit
-                                Cases</button>
+                            <button class="white-btn px-5 py-1" mat-raised-button color="primary" (click)="editCase()">
+                                Edit Cases
+                            </button>
                         </div>
                     </div>
                     <div>
@@ -51,8 +54,8 @@
                         </p>
                     </div>
                     <div>
-                        <p class="text-default">Next Court
-                            Date:
+                        <p class="text-default">
+                            Next Court Date:
                             <span class="font-weight-normal"> {{caseDetails?.nextCourtDate |date: 'MM-dd-yyyy'}}</span>
                         </p>
                     </div>
@@ -66,31 +69,34 @@
             <div class="col-5">
                 <div>
                     <div class="d-flex justify-content-end">
-                        <button class="background-color btn-group mt-1 py-1 btn-group" mat-raised-button
-                            color="primary">View My
-                            Case
-                            Files</button>
+                        <button class="background-color btn-group mt-1 py-1 btn-group" mat-raised-button color="primary"
+                            (click)="onClickViewFiles()">
+                            View My Case Files
+                        </button>
                     </div>
                     <div class="d-flex justify-content-end">
                         <button class="background-color  btn-group mt-1 py-1 btn-group" mat-raised-button
-                            color="primary">Legal
-                            Research
-                            Assistant</button>
+                            color="primary">
+                            Legal Research Assistant
+                        </button>
                     </div>
                     <div class="d-flex justify-content-end">
                         <button class="background-color  btn-group mt-1 py-1 btn-group" mat-raised-button
-                            color="primary">Ask a
-                            Lawyer</button>
+                            color="primary">
+                            Ask a Lawyer
+                        </button>
                     </div>
                     <div class="d-flex justify-content-end">
                         <button class="background-color  btn-group mt-1 py-1 btn-group" mat-raised-button
-                            color="primary">Hire a
-                            Lawyer</button>
+                            color="primary">
+                            Hire a Lawyer
+                        </button>
                     </div>
                     <div class="d-flex justify-content-end">
                         <button class="background-color  btn-group mt-1 py-1 btn-group" mat-raised-button
-                            color="primary">Find a
-                            Bondsman</button>
+                            color="primary">
+                            Find a Bondsman
+                        </button>
                     </div>
                     <div class="d-flex justify-content-end line-height mt-3">
                         <img src="assets/img/msg-lawyer.PNG" width="150" height="50">

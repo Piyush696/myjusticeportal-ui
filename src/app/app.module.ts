@@ -33,7 +33,9 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { ForgetPasswordComponent } from './pages/forget-password/forget-password.component';
 import { SecurityQuestionComponent } from './pages/security-question/security-question.component';
-
+import { ViewCaseFilesComponent } from './pages/view-case-files/view-case-files.component';
+import { FileUploadModule } from 'ng2-file-upload';
+import { MatIconModule } from '@angular/material/icon';
 @NgModule({
   declarations: [
     AppComponent,
@@ -41,33 +43,35 @@ import { SecurityQuestionComponent } from './pages/security-question/security-qu
     LoginComponent,
     RegistrationComponent,
     SecurityQuestionComponent,
-    ForgetPasswordComponent
+    ForgetPasswordComponent,
+    ViewCaseFilesComponent
   ],
   imports: [
     BrowserModule,
-    MatInputModule,
     BrowserAnimationsModule,
     RouterModule.forRoot(AppRoutes),
     SidebarModule,
-    MatCardModule,
-    MatSelectModule,
     NavbarModule,
     HttpClientModule,
-    MatInputModule,
-    MatListModule,
-    MatDialogModule,
     FormsModule,
-    MatButtonModule,
     ReactiveFormsModule,
-    MatProgressBarModule,
     ToastrModule.forRoot(),
     FooterModule,
-    MatCheckboxModule,
     StoreModule.forRoot(rootReducer),
     EffectsModule.forRoot(effects),
     StoreDevtoolsModule.instrument({
       maxAge: 25
-    })
+    }),
+    FileUploadModule,
+    MatButtonModule,
+    MatCardModule,
+    MatCheckboxModule,
+    MatDialogModule,
+    MatIconModule,
+    MatInputModule,
+    MatListModule,
+    MatProgressBarModule,
+    MatSelectModule,
   ],
   providers: [
     RegistrationService,

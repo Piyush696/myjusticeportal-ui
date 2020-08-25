@@ -2,7 +2,8 @@
     <div class="col-7">
         <div>
             <h1 class="line-height font-weight-bold">My Cases</h1>
-            <h4 class="line-height header-sub-text">A dashboard to view and manage all the cases you have created
+            <h4 class="line-height header-sub-text">
+                A dashboard to view and manage all the cases you have created
             </h4>
         </div>
 
@@ -11,15 +12,14 @@
                 <div class="d-flex justify-content-between">
                     <div>
                         <mat-label>
-                            <span class="case-heading color">Case {{case.caseId}}</span>
-                            <span class="case-heading color">:</span>
+                            <span class="case-heading color">Case {{case.caseId}}:</span>
                             <span class="case-heading color"> {{case?.otherInformation}}</span>
                         </mat-label>
                         <br>
                         <span class="color">{{case.caseRelatedTo}}</span>
                     </div>
                     <div>
-                        <button class='button-play' (click)="onViewCase(case.caseId)">
+                        <button class='button-play' title="View Details" (click)="onViewCase(case.caseId)">
                             <i class="fa fa-play" aria-hidden="true"></i>
                         </button>
                     </div>
