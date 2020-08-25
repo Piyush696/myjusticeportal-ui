@@ -13,10 +13,10 @@
                         <mat-label>
                             <span class="case-heading color">Case {{i+1}}</span>
                             <span class="case-heading color">:</span>
-                            <span class="case-heading color"> {{case?.briefDescriptionOfChargeOrLegalMatter}}</span>
+                            <span class="case-heading color"> {{case?.otherInformation}}</span>
                         </mat-label>
                         <br>
-                        <span class="color">{{case.otherInformation}}</span>
+                        <span class="color">{{case.briefDescriptionOfChargeOrLegalMatter}}</span>
                     </div>
                     <div>
                         <button class='button-play' (click)="onViewCase(case.caseId)">
@@ -65,7 +65,7 @@
         <div>
             <div class="d-flex justify-content-center line-height mt-3">
                 <button class="white-btn py-1" mat-raised-button color="primary"><i
-                        class="fas fa-user-shield pr-1"></i>Message My Lawyer</button>
+                        class="nc-icon nc-single-02 pr-1"></i>Message My Lawyer</button>
             </div>
         </div>
     </div>
