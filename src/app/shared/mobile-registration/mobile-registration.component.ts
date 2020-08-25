@@ -35,7 +35,7 @@ export class MobileRegistrationComponent implements OnInit {
       "countryCode": this.mobileRegistrationForm.get('countryCode').value,
       "userName": this.userName,
     }
-    this.twilioService.getOtp(data).subscribe((otp: any) => {
+    this.twilioService.getRegisterOtp(data).subscribe((otp: any) => {
       if (otp.success) {
         this.OtpField = true;
         this.toasterService.showSuccessToater('Please submit your otp.')
