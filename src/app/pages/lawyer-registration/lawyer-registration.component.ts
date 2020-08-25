@@ -7,6 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LawyerRegistrationComponent implements OnInit {
   step: number = 1;
+  selectedRoleId: number = 2;
   constructor() { }
 
   ngOnInit(): void {

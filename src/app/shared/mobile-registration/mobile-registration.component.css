@@ -14,7 +14,11 @@
   background-color: #fffbfb !important;
 }
 
-.mat-form-field-appearance-fill .mat-form-field-flex {
-  border: 1px solid black !important;
-  border-radius: 6px !important;
+.mat-border {
+  border: 1px solid #040b27;
+  border-radius: 5px;
+}
+
+.hpx {
+  height: 53px;
 }

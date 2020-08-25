@@ -1,5 +1,6 @@
 <div>
-    <app-email-registration *ngIf="step == 1" (isNextEvent)="onNextClick($event)"></app-email-registration>
+    <app-email-registration *ngIf="step == 1" (isNextEvent)="onNextClick($event)" [selectedRoleId]="selectedRoleId">
+    </app-email-registration>
 
     <div class="row" *ngIf="step == 2" class="wpx-420">
         <app-additional-info [email]="email" (userMetaEventEmitter)="userMetaData($event)"></app-additional-info>

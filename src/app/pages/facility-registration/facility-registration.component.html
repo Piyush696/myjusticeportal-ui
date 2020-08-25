@@ -1,4 +1,5 @@
 <div>
-    <app-email-registration *ngIf="step == 1" (isNextEvent)="onNextClick($event)"></app-email-registration>
+    <app-email-registration *ngIf="step == 1" (isNextEvent)="onNextClick($event)" [selectedRoleId]="selectedRoleId">
+    </app-email-registration>
     <app-mobile-registration *ngIf="step == 2"></app-mobile-registration>
 </div>

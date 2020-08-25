@@ -8,6 +8,8 @@ import { Component, OnInit } from '@angular/core';
 export class FacilityRegistrationComponent implements OnInit {
 
   step: number = 1;
+  selectedRoleId: number = 3;
+
   constructor() { }
 
   ngOnInit(): void {

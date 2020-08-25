@@ -8,6 +8,7 @@ import { Component, OnInit } from '@angular/core';
 export class ParalegalRegistrationComponent implements OnInit {
 
   step: number = 1;
+  selectedRoleId: number = 4;
   constructor() { }
 
   ngOnInit(): void {

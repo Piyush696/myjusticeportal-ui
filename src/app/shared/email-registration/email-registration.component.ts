@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
@@ -22,7 +22,7 @@ export class EmailRegistrationComponent implements OnInit {
   registrationForm: FormGroup;
   isAcceptDisabled: boolean = true;
   isNextDisabled: boolean = true;
-  // @Output: selectedRoleId;
+  @Input() selectedRoleId;
   @Output() isNextEvent = new EventEmitter()
 
   constructor(public securityService: SecurityService, public dialog: MatDialog, private loginService: LoginService, private cacheService: CacheService, private fb: FormBuilder, private toasterService: ToasterService, private roleService: RoleService,
@@ -92,7 +92,14 @@ export class EmailRegistrationComponent implements OnInit {
   }
 
   onNextClick() {
-    this.registrationService.addUser(this.registrationForm.value).subscribe((res: any) => {
+    const data = {
+      "firstName": this.registrationForm.get('firstName').value,
+      "lastName": this.registrationForm.get('lastName').value,
+      "email": this.registrationForm.get('email').value,
+      "password": this.registrationForm.get('password').value,
+      "roleId": this.selectedRoleId
+    }
+    this.registrationService.addUser(data).subscribe((res: any) => {
       this.cacheService.setCache('token', res.token);
       this.loginService.checkToken().then((data: any) => {
         this.store.dispatch(new AddUserInfo(Object.assign({}, data.user)));

@@ -12,7 +12,7 @@ export class UserRegistrationComponent implements OnInit {
 
   step: number = 1;
   email: string;
-
+  selectedRoleId: number = 1;
   constructor(private registrationService: RegistrationService, private toasterService: ToasterService, private router: Router) { }
 
   ngOnInit(): void {

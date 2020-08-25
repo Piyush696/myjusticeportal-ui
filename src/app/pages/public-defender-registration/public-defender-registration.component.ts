@@ -8,6 +8,7 @@ import { Component, OnInit } from '@angular/core';
 export class PublicDefenderRegistrationComponent implements OnInit {
 
   step: number = 1;
+  selectedRoleId: number = 5;
   constructor() { }
 
   ngOnInit(): void {

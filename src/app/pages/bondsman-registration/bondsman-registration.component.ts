@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./bondsman-registration.component.css']
 })
 export class BondsmanRegistrationComponent implements OnInit {
-
+  selectedRoleId: number = 6;
   step: number = 1;
   constructor() { }
 
