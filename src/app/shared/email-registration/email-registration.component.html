@@ -99,11 +99,12 @@
                 <button [routerLink]="'/login'" mat-button color="primary">
                     Back to Login
                 </button>
-                <button [disabled]="registrationForm.get('confirmPassword').invalid || registrationForm.get('userName').invalid
-                registrationForm.get('password').invalid 
-                 || registrationForm.get('firstName').invalid  || registrationForm.get('lastName').invalid 
-                 || registrationForm.get('termCondition').invalid || isNextDisabled" class="px-4 py-1 float-right"
-                    mat-raised-button color="primary" (click)="onNextClick()">NEXT</button>
+                <button
+                    [disabled]="registrationForm.get('userName').invalid || registrationForm.get('lastName').invalid 
+                || registrationForm.get('firstName').invalid || registrationForm.get('password').invalid ||  
+                registrationForm.get('confirmPassword').invalid ||  registrationForm.get('termCondition').invalid || isNextDisabled"
+                    class="px-4 py-1 float-right" mat-raised-button color="primary"
+                    (click)="onNextClick()">NEXT</button>
             </div>
         </mat-card>
     </div>
