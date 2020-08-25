@@ -49,7 +49,7 @@ export class ForgetPasswordComponent implements OnInit {
         this.step = 2;
       }
       else {
-        this.toasterService.showSuccessToater('Reset Password Link sent')
+        this.toasterService.showSuccessToater('Reset Password Link Sent')
       }
     })
   }
