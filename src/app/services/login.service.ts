@@ -30,7 +30,11 @@ export class LoginService {
     return this.httpClient.get(`${this.apiPath}/${this.route}/check-token`, httpOptions).toPromise();
   }
 
-  userLogin(user: string, password: string) {
-    return this.httpClient.post<object>(`${this.apiPath}/${this.loginUser}`, { user: user, password: password })
+  userLogin(userName: string, password: string) {
+    return this.httpClient.post<object>(`${this.apiPath}/${this.loginUser}`, { userName: userName, password: password })
+  }
+
+  veriFyOtp(userName: string, otp: string) {
+    return this.httpClient.post<object>(`${this.apiPath}/${this.route}/verify-otp`, { userName: userName, otp: otp })
   }
 }

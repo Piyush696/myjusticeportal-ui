@@ -6,6 +6,7 @@ import { LoginService } from 'app/services/login.service';
 import { Store } from '@ngrx/store';
 import { AddUserInfo } from 'app/store/actions/userInfo.actions';
 import { ToasterService } from 'app/services/toaster.service';
+import { TwilioService } from 'app/services/twilio.service';
 
 
 @Component({
@@ -15,22 +16,27 @@ import { ToasterService } from 'app/services/toaster.service';
 })
 export class LoginComponent implements OnInit {
   loginForm: FormGroup;
+  step: number = 1;
   constructor(private fb: FormBuilder, private router: Router, private store: Store<any>,
-    private loginService: LoginService, private toasterService: ToasterService, private cacheService: CacheService) { }
+    private loginService: LoginService, private toasterService: ToasterService, private cacheService: CacheService, private twilioService: TwilioService) { }
 
   ngOnInit(): void {
     this.loginForm = this.fb.group({
-      user: ['', [Validators.required]],
+      userName: ['', [Validators.required]],
       password: ['', [Validators.required]],
+      otp: ['', [Validators.required]],
+      countryCode: ['', [Validators.required]],
+      mobile: ['', [Validators.required]],
     })
   }
 
   onLogin() {
     this.loginService.userLogin(
-      this.loginForm.get('user').value,
+      this.loginForm.get('userName').value,
       this.loginForm.get('password').value,
     ).subscribe(
       (res: any) => {
+        console.log(res)
         if (res.success) {
           this.cacheService.setCache('token', res.token);
           this.loginService.checkToken().then((data: any) => {
@@ -45,8 +51,50 @@ export class LoginComponent implements OnInit {
           })
         }
         else {
-          this.toasterService.showErrorToater(res.error.name);
+          if (res.data === 'Please Enter Your Otp.') {
+            this.toasterService.showErrorToater('Please Enter Your Otp.');
+            this.step = 2;
+          }
+          else {
+            this.toasterService.showErrorToater('Please Register your Mobile Number');
+            this.step = 3;
+          }
         }
       })
+  }
+
+  onVerify() {
+    this.loginService.veriFyOtp(this.loginForm.get('userName').value, this.loginForm.get('otp').value).subscribe((isVerified: any) => {
+      if (isVerified.success) {
+        this.cacheService.setCache('token', isVerified.token);
+        this.loginService.checkToken().then((data: any) => {
+          if (data.success) {
+            this.store.dispatch(new AddUserInfo(Object.assign({}, data.user)));
+            this.router.navigateByUrl('/dashboard')
+            this.toasterService.showSuccessToater('Welcome to My Justice Portal.');
+          }
+          else {
+            this.toasterService.showErrorToater(data.error.name);
+          }
+        })
+      }
+    })
+  }
+
+  onGetOtp() {
+    const data = {
+      "mobile": this.loginForm.get('mobile').value,
+      "countryCode": this.loginForm.get('countryCode').value,
+      "userName": this.loginForm.get('userName').value,
+    }
+    this.twilioService.getRegisterOtp(data).subscribe((otp: any) => {
+      if (otp.success) {
+        this.step = 2;
+        this.toasterService.showSuccessToater('Please submit your otp.')
+      }
+      else {
+        this.step = 3;
+      }
+    })
   }
 }

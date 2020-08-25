@@ -4,13 +4,14 @@
             <div class="d-flex justify-content-center">
                 <img src="assets/img/logo.png" alt="logo" class="logo">
             </div>
-            <mat-card class="p-4">
+            <mat-card class="p-4" *ngIf="step === 1">
                 <mat-form-field appearance="fill" class="w-100 p-3">
-                    <mat-label>Enter your email or username</mat-label>
-                    <input matInput placeholder="user@example.com" [formControl]="loginForm.controls['user']" required>
-                    <mat-error *ngIf="loginForm.controls['user'].invalid && loginForm.controls['user'].touched">
-                        <div class="font13" *ngIf="loginForm.get('user').errors?.required">
-                            Username or email is required
+                    <mat-label>Enter your email or userNamename</mat-label>
+                    <input matInput placeholder="userName@example.com" [formControl]="loginForm.controls['userName']"
+                        required>
+                    <mat-error *ngIf="loginForm.controls['userName'].invalid && loginForm.controls['userName'].touched">
+                        <div class="font13" *ngIf="loginForm.get('userName').errors?.required">
+                            User is required
                         </div>
                     </mat-error>
                 </mat-form-field>
@@ -30,8 +31,72 @@
                     <button [routerLink]="'/register'" mat-button color="primary">
                         Create an account
                     </button>
-                    <button [disabled]="this.loginForm.invalid" class="px-4 py-1" mat-raised-button color="primary"
-                        (click)="onLogin()">LOGIN</button>
+                    <button
+                        [disabled]="this.loginForm.get('userName').invalid || this.loginForm.get('password').invalid"
+                        class="px-4 py-1" mat-raised-button color="primary" (click)="onLogin()">LOGIN</button>
+                </div>
+            </mat-card>
+            <mat-card *ngIf="step === 2" class="p-4">
+                <mat-form-field appearance="fill" class="w-100 p-3">
+                    <mat-label>Please Enter Your Otp</mat-label>
+                    <input matInput placeholder="user@example.com" [formControl]="loginForm.controls['otp']" required>
+                    <mat-error *ngIf="loginForm.controls['otp'].invalid && loginForm.controls['otp'].touched">
+                        <div class="font13" *ngIf="loginForm.get('otp').errors?.required">
+                            Otp is required
+                        </div>
+                    </mat-error>
+                </mat-form-field>
+
+                <div class="d-flex justify-content-center px-3 mt-2">
+                    <button [disabled]="this.loginForm.get('otp').invalid" class="px-4 py-1" mat-raised-button
+                        color="primary" (click)="onVerify()">LOGIN</button>
+                </div>
+            </mat-card>
+            <mat-card *ngIf="step === 3" class="p-4">
+                <h1 class="font-weight-bold text-center">Account Verification</h1>
+                <p class="text-center m-0 px-3">
+                    To ensure account security, we require that you verify a mobile phone via text message.</p>
+                <p class="text-center mb-3 px-3">Enter yourmobile number below and we will send you a code to verify.
+                </p>
+                <div class="row pl-5">
+                    <div class="align-items-center bg-header col-1 d-flex justify-content-center mat-border m-0 p-0">
+                        <mat-label>+</mat-label>
+                    </div>
+                    <div class="col-2 px-0">
+                        <mat-form-field appearance="fill" class="w-100 mat-border hpx px-0">
+                            <mat-label>Country Code</mat-label>
+                            <input type="text" matInput placeholder="Country Code"
+                                [formControl]="loginForm.controls['countryCode']" required>
+                            <mat-error>
+                                <div
+                                    *ngIf="loginForm.controls['countryCode'].invalid && loginForm.controls['countryCode'].touched">
+                                    <small class="font13">
+                                        Country Code is Required
+                                    </small>
+                                </div>
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-8 pl-0">
+                        <mat-form-field appearance="fill" class="w-100 mat-border hpx px-0">
+                            <mat-label>Mobile</mat-label>
+                            <input type="text" matInput placeholder="Mobile"
+                                [formControl]="loginForm.controls['mobile']" required>
+                            <mat-error>
+                                <div
+                                    *ngIf="loginForm.controls['mobile'].invalid && loginForm.controls['mobile'].touched">
+                                    <small class="font13">
+                                        Mobile is Required
+                                    </small>
+                                </div>
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+                </div>
+                <div class="d-flex justify-content-center">
+                    <button [disabled]="loginForm.get('countryCode').invalid || loginForm.get('mobile').invalid"
+                        mat-raised-button color="primary" class="mt-4 px-5 py-2" (click)="onGetOtp()">Get
+                        Otp</button>
                 </div>
             </mat-card>
             <div class="d-flex justify-content-center p-3">
