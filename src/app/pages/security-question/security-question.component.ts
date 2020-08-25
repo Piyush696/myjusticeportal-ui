@@ -24,7 +24,7 @@ export class SecurityQuestionComponent implements OnInit {
 
   ngOnInit(): void {
     this.createFormControl();
-    this.onGetAllSecurityQuestions();
+    this.getAllSecurityQuestions();
   }
 
   createFormControl() {
@@ -34,10 +34,11 @@ export class SecurityQuestionComponent implements OnInit {
     });
   }
 
-  onGetAllSecurityQuestions() {
-    this.securityService.getAllSecurityRoles(1).subscribe((questions: any) => {
-      this.securityQuestions = questions.data;
-      this.originalSecurityQuestions = questions.data;
+  getAllSecurityQuestions() {
+    let selectedRoleId = 1;
+    this.securityService.getAllSecurityRoles(selectedRoleId).subscribe((questions: any) => {
+      this.securityQuestions = questions.data
+      this.originalSecurityQuestions = questions.data
     })
   }
 
