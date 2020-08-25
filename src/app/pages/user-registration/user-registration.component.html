@@ -3,12 +3,12 @@
     </app-email-registration>
 
     <div class="row" *ngIf="step == 2" class="wpx-420">
-        <app-additional-info [email]="email" (userMetaEventEmitter)="userMetaData($event)"></app-additional-info>
+        <app-additional-info [userName]="userName" (userMetaEventEmitter)="userMetaData($event)"></app-additional-info>
     </div>
 
     <div class="row" *ngIf="step == 3" class="wpx-420">
         <app-security-question class="d-flex justify-content-center align-item-center"
-            (isRegisterEvent)="onUpdateRegisteredUser($event)">
+            (isRegisterEvent)="onUpdateRegisteredUser($event)" [userName]="userName">
         </app-security-question>
     </div>
 </div>

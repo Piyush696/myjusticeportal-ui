@@ -18,6 +18,7 @@ export class SecurityQuestionComponent implements OnInit {
   questionId: any;
 
   @Input() selectedRoleId: number;
+  @Input() userName: number;
   @Output() isRegisterEvent = new EventEmitter();
 
   constructor(private fb: FormBuilder, public securityService: SecurityService) { }
@@ -68,6 +69,7 @@ export class SecurityQuestionComponent implements OnInit {
   setAnswers() {
     this.questionId = this.securityQuestionForm.get('securityQuestionId').value;
     let formValue = this.securityQuestionForm.value;
+    formValue['userName'] = this.userName
     this.securityService.createSecurityAnswers(formValue).subscribe((data: any) => {
       this.securityQuestionForm.reset();
     });
@@ -75,6 +77,10 @@ export class SecurityQuestionComponent implements OnInit {
 
   onClickRegister() {
     this.setAnswers();
-    this.isRegisterEvent.emit(true);
+    let data = {
+      "status": true,
+      "userName": this.userName
+    }
+    this.isRegisterEvent.emit(data);
   }
 }
