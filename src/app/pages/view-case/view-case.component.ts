@@ -30,6 +30,6 @@ export class ViewCaseComponent implements OnInit {
   }
 
   onClickViewFiles() {
-    this.router.navigateByUrl('/case/' + this.route.snapshot.params['caseId'] + '/view-case-files');
+    this.router.navigateByUrl('/case/' + this.route.snapshot.params['caseId'] + '/files');
   }
 }

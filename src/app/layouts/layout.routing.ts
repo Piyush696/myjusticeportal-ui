@@ -31,5 +31,5 @@ export const LayoutRoutes: Routes = [
     { path: 'case/:caseId/edit', canActivate: [AuthGuard], component: EditCaseComponent },
     { path: 'case/:caseId', canActivate: [AuthGuard], component: ViewCaseComponent },
     { path: 'app-setting', canActivate: [AuthGuard], component: AppSettingsComponent },
-    { path: 'case/:caseId/view-case-files', canActivate: [AuthGuard], component: ViewCaseFilesComponent },
+    { path: 'case/:caseId/files', canActivate: [AuthGuard], component: ViewCaseFilesComponent },
 ];
