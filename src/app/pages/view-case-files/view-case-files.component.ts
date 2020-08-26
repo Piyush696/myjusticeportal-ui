@@ -39,10 +39,14 @@ export class ViewCaseFilesComponent implements OnInit {
     this.location.back();
   }
 
-  uploadFiles() {
+  onUploadCaseFile() {
     // this.loading = true;
     let formData = new FormData();
-    formData.append('caseId', this.activatedRoute.snapshot.params['caseId']);
+    if (this.uploadedCaseFiles) {
+      formData.append('caseId', this.uploadedCaseFiles.caseId);
+    } else {
+      formData.append('caseId', this.activatedRoute.snapshot.params['caseId']);
+    }
     this.uploader1.queue.forEach((file) => {
       formData.append('file', file._file);
     })
@@ -54,11 +58,19 @@ export class ViewCaseFilesComponent implements OnInit {
     });
   }
 
-  deleteCaseFile(fileId) {
-    // this.loading = true;
+  onDeleteCaseFile(fileId) {
     this.caseService.deleteFile(fileId).subscribe((res: any) => {
-      // this.loading = false;
       this.onGetCase();
+    });
+  }
+
+  onDownloadCaseFile(fileId) {
+    let data: any = {};
+    data.caseId = this.uploadedCaseFiles.caseId;
+    data.fileId = fileId;
+
+    this.caseService.getDownloadLink(data).subscribe((res: any) => {
+      window.open(res.data, '_self ');
     });
   }
 }

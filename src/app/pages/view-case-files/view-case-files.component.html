@@ -1,7 +1,8 @@
 <div class="d-flex justify-content-between">
     <div>
         <h1 class="line-height font-weight-bold">
-            Case 01: qwerty
+            Case {{uploadedCaseFiles?.caseId > 9 ? '' : '0'+uploadedCaseFiles?.caseId}}:&nbsp;
+            {{uploadedCaseFiles?.briefDescriptionOfChargeOrLegalMatter | titlecase}}
         </h1>
         <h4 class="line-height">
             Files related to your case.
@@ -42,11 +43,11 @@
                 </td>
                 <td nowrap class="float-right border-0 px-0">
                     <a class="mr-1" mat-raised-button href="javascript:void(0)" title="Download"
-                        (click)="fileDdownloadLink(file.fileId)">
+                        (click)="onDownloadCaseFile(file?.fileId)">
                         <mat-icon>file_download</mat-icon>Download
                     </a>
                     <button class="ml-2 mr-1" mat-raised-button color="warn" title="Delete"
-                        (click)="deleteCaseFile(file?.fileId)">
+                        (click)="onDeleteCaseFile(file?.fileId)">
                         <mat-icon>delete</mat-icon>Delete
                     </button>
                 </td>
@@ -69,7 +70,7 @@
                 <tr class="pr-0" *ngFor="let item of uploader1?.queue">
                     <td class="pr-0"><strong>{{item?.file?.name}}</strong></td>
                     <td nowrap class="pr-0">
-                        <button class="mr-1" mat-raised-button color="warn" (click)="item.remove()">
+                        <button class="mr-1" mat-raised-button color="accent" (click)="item.remove()">
                             <mat-icon>delete</mat-icon>Remove
                         </button>
                     </td>
@@ -77,7 +78,7 @@
             </tbody>
         </table>
         <div *ngIf="uploader1?.queue?.length > 0" class="d-flex justify-content-center mx-auto">
-            <button class="mr-1" mat-raised-button color="primary" (click)="uploadFiles()">
+            <button class="mr-1" mat-raised-button color="primary" (click)="onUploadCaseFile()">
                 <mat-icon>file_upload</mat-icon>Upload
             </button>
         </div>
@@ -89,7 +90,9 @@
 
 <div>
     <mat-card class="outer-card">
-        <mat-label class="font-weight-bold">My Private Files:</mat-label>
+        <mat-label class="font-weight-bold">
+            My Private Files({{uploadedCaseFiles?.caseFile?.length}}):
+        </mat-label>
         <div *ngIf="!uploadedCaseFiles?.caseFile?.length">
             <mat-label class="font-weight-bold text-info">
                 No files uploaded yet.
@@ -111,7 +114,7 @@
                 </div>
             </div>
             <div>
-                <button mat-mini-fab color="primary" title="Download">
+                <button mat-mini-fab color="primary" title="Download" (click)="onDownloadCaseFile(file?.fileId)">
                     <mat-icon>file_download</mat-icon>
                 </button>
             </div>
