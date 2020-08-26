@@ -35,7 +35,7 @@ export class ViewCaseFilesComponent implements OnInit {
     })
   }
 
-  goBack() {
+  backToCases() {
     this.location.back();
   }
 
