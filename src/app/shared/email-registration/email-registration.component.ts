@@ -22,7 +22,7 @@ export class EmailRegistrationComponent implements OnInit {
   registrationForm: FormGroup;
   isAcceptDisabled: boolean = true;
   isNextDisabled: boolean = true;
-  @Input() selectedRoleId;
+  @Input() roleId;
   @Output() isNextEvent = new EventEmitter()
   step: any;
 
@@ -34,7 +34,7 @@ export class EmailRegistrationComponent implements OnInit {
     this.registrationForm = this.fb.group({
       firstName: ['', [Validators.required]],
       lastName: ['', [Validators.required]],
-      userName: ['', [Validators.required], this.validateUserNotTaken.bind(this)],
+      userName: ['', [Validators.required, this.validateEmail.bind(this)], this.validateUserNotTaken.bind(this)],
       password: ['', [Validators.required, Validators.minLength(6)]],
       confirmPassword: ['', [Validators.required, Validators.minLength(6)]],
       roleId: ['', [Validators.required]],
@@ -44,6 +44,16 @@ export class EmailRegistrationComponent implements OnInit {
       this.step = true
     } else {
       this.step = false
+    }
+  }
+
+  validateEmail(control: AbstractControl) {
+    if (this.roleId != 1) {
+      const pattern = /^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,15})$/;
+      if (!control.value.match(pattern) && control.value !== '') {
+        return { invalidEmail: true };
+      }
+      return null;
     }
   }
 
@@ -94,7 +104,7 @@ export class EmailRegistrationComponent implements OnInit {
       "lastName": this.registrationForm.get('lastName').value,
       "userName": this.registrationForm.get('userName').value,
       "password": this.registrationForm.get('password').value,
-      "roleId": this.selectedRoleId
+      "roleId": this.roleId
     }
     this.registrationService.addUser(data).subscribe((res: any) => {
       this.isNextEvent.emit(res.data.userName)

@@ -14,7 +14,7 @@ import { Router } from '@angular/router';
 })
 export class BondsmanRegistrationComponent implements OnInit {
   step: number = 1;
-  selectedRoleId: number = 2;
+  roleId: number = 6;
   userName;
   constructor(private store: Store<any>, private router: Router, private toaterService: ToasterService, private loginService: LoginService, private registrationService: RegistrationService, private cacheService: CacheService) { }
 

@@ -36,7 +36,6 @@ export class LoginComponent implements OnInit {
       this.loginForm.get('password').value,
     ).subscribe(
       (res: any) => {
-        console.log(res)
         if (res.success) {
           this.cacheService.setCache('token', res.token);
           this.loginService.checkToken().then((data: any) => {
