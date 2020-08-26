@@ -16,6 +16,7 @@ export class ParalegalRegistrationComponent implements OnInit {
   step: number = 1;
   roleId: number = 4;
   userName;
+  totalSteps: number = 2;
   constructor(private store: Store<any>, private router: Router, private toaterService: ToasterService, private loginService: LoginService, private registrationService: RegistrationService, private cacheService: CacheService) { }
 
   ngOnInit(): void {
