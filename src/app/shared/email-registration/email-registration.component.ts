@@ -24,7 +24,7 @@ export class EmailRegistrationComponent implements OnInit {
   isNextDisabled: boolean = true;
   @Input() roleId;
   @Output() isNextEvent = new EventEmitter()
-  @Input() steps: any
+  @Input() totalSteps: any
 
   constructor(public securityService: SecurityService, public dialog: MatDialog, private loginService: LoginService, private cacheService: CacheService, private fb: FormBuilder, private toasterService: ToasterService, private roleService: RoleService,
     private registrationService: RegistrationService, private router: Router, private store: Store<any>) { }
