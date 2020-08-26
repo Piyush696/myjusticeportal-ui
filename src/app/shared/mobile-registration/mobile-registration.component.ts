@@ -19,13 +19,12 @@ export class MobileRegistrationComponent implements OnInit {
 
   ngOnInit(): void {
     this.createControl();
-    this.mobileRegistrationForm.get('countryCode').setValue('1')
   }
 
   createControl() {
     this.mobileRegistrationForm = this.fb.group({
       mobile: ['', [Validators.required]],
-      countryCode: ['', [Validators.required]],
+      countryCode: ['1', [Validators.required]],
       otp: ['', [Validators.required]]
     })
   }
