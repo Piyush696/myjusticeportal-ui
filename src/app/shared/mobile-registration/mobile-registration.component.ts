@@ -30,8 +30,6 @@ export class MobileRegistrationComponent implements OnInit {
   }
 
   onGetOtp() {
-    this.mobileRegistrationForm.get('mobile').disable()
-    this.mobileRegistrationForm.get('countryCode').disable()
     const data = {
       "mobile": this.mobileRegistrationForm.get('mobile').value,
       "countryCode": this.mobileRegistrationForm.get('countryCode').value,
@@ -39,6 +37,8 @@ export class MobileRegistrationComponent implements OnInit {
     }
     this.twilioService.getRegisterOtp(data).subscribe((otp: any) => {
       if (otp.success) {
+        this.mobileRegistrationForm.get('mobile').disable()
+        this.mobileRegistrationForm.get('countryCode').disable()
         this.OtpField = true;
         this.toasterService.showSuccessToater('Please submit your otp.')
       }
