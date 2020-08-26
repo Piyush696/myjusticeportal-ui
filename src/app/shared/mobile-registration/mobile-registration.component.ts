@@ -7,7 +7,7 @@ import { TwilioService } from 'app/services/twilio.service';
 @Component({
   selector: 'app-mobile-registration',
   templateUrl: './mobile-registration.component.html',
-  styleUrls: ['./mobile-registration.component.css']
+  styleUrls: ['./mobile-registration.component.scss']
 })
 export class MobileRegistrationComponent implements OnInit {
   mobileRegistrationForm: FormGroup;
