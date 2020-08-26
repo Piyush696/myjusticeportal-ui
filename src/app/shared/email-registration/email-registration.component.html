@@ -34,7 +34,7 @@
             </div>
 
 
-            <div class="row">
+            <div *ngIf="roleId == 1" class="row">
                 <mat-form-field appearance="fill" class="w-100 p-2">
                     <mat-label>Username</mat-label>
                     <input matInput placeholder="Username" [formControl]="registrationForm.controls['userName']"
@@ -50,6 +50,26 @@
                             <small class="font13">
                                 Username is Required
                             </small>
+                        </div>
+                    </mat-error>
+                </mat-form-field>
+            </div>
+
+            <div *ngIf="roleId != 1" class="row">
+                <mat-form-field appearance="fill" class="w-100 p-2">
+                    <mat-label>Email</mat-label>
+                    <input matInput placeholder="x@x.com" [formControl]="registrationForm.controls['userName']"
+                        required>
+                    <mat-error>
+                        <div
+                            *ngIf="registrationForm.controls['userName'].invalid &&
+                                                                   registrationForm.controls['userName'].touched && registrationForm.controls['userName'].hasError('taken')">
+                            <small class="font13">Email already taken.</small>
+                        </div>
+                        <div
+                            *ngIf="registrationForm.controls['userName'].invalid &&
+                                                                   registrationForm.controls['userName'].touched && !registrationForm.controls['userName'].hasError('taken')">
+                            <small class=" font13">That doesn't look right. </small>
                         </div>
                     </mat-error>
                 </mat-form-field>

@@ -13,9 +13,11 @@ import { Router } from '@angular/router';
   styleUrls: ['./public-defender-registration.component.css']
 })
 export class PublicDefenderRegistrationComponent implements OnInit {
+
   step: number = 1;
-  selectedRoleId: number = 2;
+  roleId: number = 5;
   userName;
+
   constructor(private store: Store<any>, private router: Router, private toaterService: ToasterService, private loginService: LoginService, private registrationService: RegistrationService, private cacheService: CacheService) { }
 
   ngOnInit(): void {
