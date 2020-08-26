@@ -48,4 +48,8 @@ export class CaseService {
   deleteFile(fileId) {
     return this.httpClient.delete<any>(`${this.apiPath}/case-file/deleteFile/` + fileId, this.getHeaders());
   }
+
+  getDownloadLink(data) {
+    return this.httpClient.post<any>(`${this.apiPath}/case-file/fileDownloadLink`, data, this.getHeaders());
+  }
 }
