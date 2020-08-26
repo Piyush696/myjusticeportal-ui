@@ -59,11 +59,8 @@
                 <p class="text-center mb-3 px-3">Enter yourmobile number below and we will send you a code to verify.
                 </p>
                 <div class="row pl-5">
-                    <div class="align-items-center bg-header col-1 d-flex justify-content-center mat-border m-0 p-0">
-                        <mat-label>+</mat-label>
-                    </div>
-                    <div class="col-2 px-0">
-                        <mat-form-field appearance="fill" class="w-100 mat-border hpx px-0">
+                    <div class="col-3 px-0">
+                        <mat-form-field appearance="fill" class="w-100 hpx px-0">
                             <mat-label>Country Code</mat-label>
                             <input type="text" matInput placeholder="Country Code"
                                 [formControl]="loginForm.controls['countryCode']" required>
@@ -77,8 +74,8 @@
                             </mat-error>
                         </mat-form-field>
                     </div>
-                    <div class="col-8 pl-0">
-                        <mat-form-field appearance="fill" class="w-100 mat-border hpx px-0">
+                    <div class="col-5 pl-0">
+                        <mat-form-field appearance="fill" class="w-60 hpx px-0">
                             <mat-label>Mobile</mat-label>
                             <input type="text" matInput placeholder="Mobile"
                                 [formControl]="loginForm.controls['mobile']" required>
