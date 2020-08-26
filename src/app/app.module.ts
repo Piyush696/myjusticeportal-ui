@@ -33,6 +33,9 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { ForgetPasswordComponent } from './pages/forget-password/forget-password.component';
 import { SecurityQuestionComponent } from './pages/security-question/security-question.component';
+import { ViewCaseFilesComponent } from './pages/view-case-files/view-case-files.component';
+import { FileUploadModule } from 'ng2-file-upload';
+import { MatIconModule } from '@angular/material/icon';
 import { UserRegistrationComponent } from './pages/user-registration/user-registration.component';
 import { FacilityRegistrationComponent } from './pages/facility-registration/facility-registration.component';
 import { LawyerRegistrationComponent } from './pages/lawyer-registration/lawyer-registration.component';
@@ -42,6 +45,7 @@ import { PublicDefenderRegistrationComponent } from './pages/public-defender-reg
 import { EmailRegistrationComponent } from './shared/email-registration/email-registration.component';
 import { MobileRegistrationComponent } from './shared/mobile-registration/mobile-registration.component';
 import { AdditionalInfoComponent } from './shared/additional-info/additional-info.component';
+import { LibraryLinkService } from './services/library-link.service';
 
 @NgModule({
   declarations: [
@@ -51,6 +55,7 @@ import { AdditionalInfoComponent } from './shared/additional-info/additional-inf
     RegistrationComponent,
     SecurityQuestionComponent,
     ForgetPasswordComponent,
+    ViewCaseFilesComponent,
     UserRegistrationComponent,
     FacilityRegistrationComponent,
     LawyerRegistrationComponent,
@@ -63,38 +68,41 @@ import { AdditionalInfoComponent } from './shared/additional-info/additional-inf
   ],
   imports: [
     BrowserModule,
-    MatInputModule,
     BrowserAnimationsModule,
     RouterModule.forRoot(AppRoutes),
     SidebarModule,
-    MatCardModule,
-    MatSelectModule,
     NavbarModule,
     HttpClientModule,
-    MatInputModule,
-    MatListModule,
-    MatDialogModule,
     FormsModule,
-    MatButtonModule,
     ReactiveFormsModule,
-    MatProgressBarModule,
     ToastrModule.forRoot(),
     FooterModule,
-    MatCheckboxModule,
     StoreModule.forRoot(rootReducer),
     EffectsModule.forRoot(effects),
     StoreDevtoolsModule.instrument({
       maxAge: 25
-    })
+    }),
+    FileUploadModule,
+    MatButtonModule,
+    MatCardModule,
+    MatCheckboxModule,
+    MatDialogModule,
+    MatIconModule,
+    MatInputModule,
+    MatListModule,
+    MatProgressBarModule,
+    MatSelectModule,
   ],
   providers: [
     RegistrationService,
     CacheService,
     LoginService,
+    LibraryLinkService,
     { provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { appearance: 'fill' } },
   ],
   bootstrap: [AppComponent]
 })
+
 export class AppModule { }
 
 platformBrowserDynamic().bootstrapModule(AppModule)

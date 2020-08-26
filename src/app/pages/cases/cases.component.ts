@@ -7,6 +7,7 @@ import { CaseService } from 'app/services/case.service';
   templateUrl: './cases.component.html',
   styleUrls: ['./cases.component.css']
 })
+
 export class CasesComponent implements OnInit {
   caseList: any;
   caseData: any;
@@ -24,7 +25,6 @@ export class CasesComponent implements OnInit {
   }
 
   onViewCase(caseId) {
-    let url = '/case/' + caseId;
-    this.route.navigateByUrl(url)
+    this.route.navigateByUrl('/case/' + caseId);
   }
 }

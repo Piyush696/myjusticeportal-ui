@@ -1,0 +1,120 @@
+<div class="d-flex justify-content-between">
+    <div>
+        <h1 class="line-height font-weight-bold">
+            Case 01: qwerty
+        </h1>
+        <h4 class="line-height">
+            Files related to your case.
+        </h4>
+    </div>
+    <div>
+        <button mat-raised-button class="btn-background px-5 py-1" (click)="goBack()">
+            Back To My Cases
+        </button>
+    </div>
+</div>
+
+<!-- To Upload Files -->
+
+<div class="mt-3">
+    <mat-label class="font-weight-bold">
+        Uploaded Files({{uploadedCaseFiles?.caseFile?.length}}):
+    </mat-label>
+    <hr class="my-1" />
+    <div *ngIf="!uploadedCaseFiles?.caseFile?.length">
+        <mat-label class="font-weight-bold text-info">
+            No files uploaded yet.
+        </mat-label>
+    </div>
+    <table class="table mb-0">
+        <!-- <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Name</th>
+            <td mat-cell *matCellDef="let element">{{element?.fileName}}</td>
+        </ng-container>
+        <ng-container matColumnDef="action">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Action</th>
+            <td mat-cell *matCellDef="let element">{{element?.fileName}}</td>
+        </ng-container> -->
+        <tbody>
+            <tr class="pr-0" *ngFor="let file of uploadedCaseFiles?.caseFile">
+                <td class="border-0 px-0" title="{{file?.fileName}}">
+                    <strong>{{file?.fileName}}</strong>
+                </td>
+                <td nowrap class="float-right border-0 px-0">
+                    <a class="mr-1" mat-raised-button href="javascript:void(0)" title="Download"
+                        (click)="fileDdownloadLink(file.fileId)">
+                        <mat-icon>file_download</mat-icon>Download
+                    </a>
+                    <button class="ml-2 mr-1" mat-raised-button color="warn" title="Delete"
+                        (click)="deleteCaseFile(file?.fileId)">
+                        <mat-icon>delete</mat-icon>Delete
+                    </button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <div class="card-body p-0 pt-1">
+        <div class="drag-border p-3">
+            <div ng2FileDrop [ngClass]="{'another-file-over-class': hasAnotherDropZoneOver}"
+                (fileOver)="fileOverAnother($event)" [uploader]="uploader1"
+                class="box-placeholder my-drop-zone font-weight-bold pb-2">
+                Drag and drop files here (or) Choose below to attach.
+            </div>
+            <label for="file1" class="file-upload mb-0">
+                <input id="file1" type="file" ng2FileSelect [uploader]="uploader1" multiple />
+            </label>
+        </div>
+        <table class="table m-0">
+            <tbody>
+                <tr class="pr-0" *ngFor="let item of uploader1?.queue">
+                    <td class="pr-0"><strong>{{item?.file?.name}}</strong></td>
+                    <td nowrap class="pr-0">
+                        <button class="mr-1" mat-raised-button color="warn" (click)="item.remove()">
+                            <mat-icon>delete</mat-icon>Remove
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <div *ngIf="uploader1?.queue?.length > 0" class="d-flex justify-content-center mx-auto">
+            <button class="mr-1" mat-raised-button color="primary" (click)="uploadFiles()">
+                <mat-icon>file_upload</mat-icon>Upload
+            </button>
+        </div>
+    </div>
+    <hr />
+</div>
+
+<!-- To Show Uploaded Files -->
+
+<div>
+    <mat-card class="outer-card">
+        <mat-label class="font-weight-bold">My Private Files:</mat-label>
+        <div *ngIf="!uploadedCaseFiles?.caseFile?.length">
+            <mat-label class="font-weight-bold text-info">
+                No files uploaded yet.
+            </mat-label>
+        </div>
+        <mat-card class="d-flex justify-content-between align-items-center inner-card mt-2"
+            *ngFor="let file of uploadedCaseFiles?.caseFile">
+            <div>
+                <mat-label class="font-weight-bold">
+                    {{file?.fileName}}
+                </mat-label>
+                <div class="pt-1">
+                    <span>
+                        Uploaded Date: {{file?.createdAt | date : 'MM/dd/yyyy'}}
+                    </span>
+                    <span class="pl-4">
+                        Type: {{file?.fileType}}
+                    </span>
+                </div>
+            </div>
+            <div>
+                <button mat-mini-fab color="primary" title="Download">
+                    <mat-icon>file_download</mat-icon>
+                </button>
+            </div>
+        </mat-card>
+    </mat-card>
+</div>
