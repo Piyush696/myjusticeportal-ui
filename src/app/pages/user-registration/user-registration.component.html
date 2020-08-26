@@ -1,5 +1,6 @@
-<div>
-    <app-email-registration *ngIf="step == 1" (isNextEvent)="onNextClick($event)" [roleId]="roleId">
+<div class="bg-color">
+    <app-email-registration [totalSteps]="totalSteps" *ngIf="step == 1" (isNextEvent)="onNextClick($event)"
+        [roleId]="roleId">
     </app-email-registration>
 
     <div class="row" *ngIf="step == 2" class="wpx-420">
