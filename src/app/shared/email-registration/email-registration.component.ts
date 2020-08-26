@@ -24,6 +24,7 @@ export class EmailRegistrationComponent implements OnInit {
   isNextDisabled: boolean = true;
   @Input() selectedRoleId;
   @Output() isNextEvent = new EventEmitter()
+  step: any;
 
   constructor(public securityService: SecurityService, public dialog: MatDialog, private loginService: LoginService, private cacheService: CacheService, private fb: FormBuilder, private toasterService: ToasterService, private roleService: RoleService,
     private registrationService: RegistrationService, private router: Router, private store: Store<any>) { }
@@ -39,6 +40,11 @@ export class EmailRegistrationComponent implements OnInit {
       roleId: ['', [Validators.required]],
       termCondition: ['', [Validators.required]]
     }, { validator: this.checkIfMatchingPasswords('password', 'confirmPassword') });
+    if (this.router.url == '/register') {
+      this.step = true
+    } else {
+      this.step = false
+    }
   }
 
   async validateUserNotTaken(control: AbstractControl) {
