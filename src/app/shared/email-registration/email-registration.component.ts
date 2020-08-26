@@ -21,6 +21,7 @@ export class EmailRegistrationComponent implements OnInit {
 
   registrationForm: FormGroup;
   isAcceptDisabled: boolean = true;
+  isUser: boolean = true;
   isNextDisabled: boolean = true;
   @Input() selectedRoleId;
   @Output() isNextEvent = new EventEmitter()
@@ -33,12 +34,28 @@ export class EmailRegistrationComponent implements OnInit {
     this.registrationForm = this.fb.group({
       firstName: ['', [Validators.required]],
       lastName: ['', [Validators.required]],
-      userName: ['', [Validators.required], this.validateUserNotTaken.bind(this)],
+      userName: ['', [Validators.required, this.validateEmail.bind(this)], this.validateUserNotTaken.bind(this)],
       password: ['', [Validators.required, Validators.minLength(6)]],
       confirmPassword: ['', [Validators.required, Validators.minLength(6)]],
       roleId: ['', [Validators.required]],
       termCondition: ['', [Validators.required]]
     }, { validator: this.checkIfMatchingPasswords('password', 'confirmPassword') });
+    if (this.selectedRoleId == 1) {
+      this.isUser = true;
+    }
+    else {
+      this.isUser = false
+    }
+  }
+
+  validateEmail(control: AbstractControl) {
+    if (this.isUser === false) {
+      const pattern = /^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,15})$/;
+      if (!control.value.match(pattern) && control.value !== '') {
+        return { invalidEmail: true };
+      }
+      return null;
+    }
   }
 
   async validateUserNotTaken(control: AbstractControl) {
