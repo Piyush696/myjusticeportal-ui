@@ -52,11 +52,11 @@ export class LoginComponent implements OnInit {
         }
         else {
           if (res.data === 'Please Enter Your Otp.') {
-            this.toasterService.showErrorToater('Please Enter Your Otp.');
+            this.toasterService.showSuccessToater('Please Enter Your Otp.');
             this.step = 2;
           }
           else {
-            this.toasterService.showErrorToater('Please Register your Mobile Number');
+            this.toasterService.showSuccessToater('Please Register your Mobile Number');
             this.step = 3;
           }
         }
