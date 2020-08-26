@@ -59,6 +59,9 @@
                 <p class="text-center mb-3 px-3">Enter yourmobile number below and we will send you a code to verify.
                 </p>
                 <div class="row pl-5">
+                    <div class="pt-3">
+                        <mat-label>+</mat-label>
+                    </div>
                     <div class="col-3 px-0">
                         <mat-form-field appearance="fill" class="w-100 hpx px-0">
                             <mat-label>Country Code</mat-label>
@@ -75,7 +78,7 @@
                         </mat-form-field>
                     </div>
                     <div class="col-5 pl-0">
-                        <mat-form-field appearance="fill" class="w-60 hpx px-0">
+                        <mat-form-field appearance="fill" class="w-100 hpx px-0">
                             <mat-label>Mobile</mat-label>
                             <input type="text" matInput placeholder="Mobile"
                                 [formControl]="loginForm.controls['mobile']" required>

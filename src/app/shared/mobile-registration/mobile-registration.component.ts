@@ -19,6 +19,7 @@ export class MobileRegistrationComponent implements OnInit {
 
   ngOnInit(): void {
     this.createControl();
+    this.mobileRegistrationForm.get('countryCode').setValue('1')
   }
 
   createControl() {
@@ -30,6 +31,7 @@ export class MobileRegistrationComponent implements OnInit {
   }
 
   onGetOtp() {
+    this.mobileRegistrationForm.disable()
     const data = {
       "mobile": this.mobileRegistrationForm.get('mobile').value,
       "countryCode": this.mobileRegistrationForm.get('countryCode').value,
