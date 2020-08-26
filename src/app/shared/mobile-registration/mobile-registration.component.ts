@@ -31,7 +31,8 @@ export class MobileRegistrationComponent implements OnInit {
   }
 
   onGetOtp() {
-    this.mobileRegistrationForm.disable()
+    this.mobileRegistrationForm.get('mobile').disable()
+    this.mobileRegistrationForm.get('countryCode').disable()
     const data = {
       "mobile": this.mobileRegistrationForm.get('mobile').value,
       "countryCode": this.mobileRegistrationForm.get('countryCode').value,
