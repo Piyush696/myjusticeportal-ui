@@ -22,8 +22,9 @@ export class EmailRegistrationComponent implements OnInit {
   registrationForm: FormGroup;
   isAcceptDisabled: boolean = true;
   isNextDisabled: boolean = true;
-  @Input() selectedRoleId;
+  @Input() roleId;
   @Output() isNextEvent = new EventEmitter()
+  @Input() totalSteps: any
 
   constructor(public securityService: SecurityService, public dialog: MatDialog, private loginService: LoginService, private cacheService: CacheService, private fb: FormBuilder, private toasterService: ToasterService, private roleService: RoleService,
     private registrationService: RegistrationService, private router: Router, private store: Store<any>) { }
@@ -33,12 +34,22 @@ export class EmailRegistrationComponent implements OnInit {
     this.registrationForm = this.fb.group({
       firstName: ['', [Validators.required]],
       lastName: ['', [Validators.required]],
-      userName: ['', [Validators.required], this.validateUserNotTaken.bind(this)],
+      userName: ['', [Validators.required, this.validateEmail.bind(this)], this.validateUserNotTaken.bind(this)],
       password: ['', [Validators.required, Validators.minLength(6)]],
       confirmPassword: ['', [Validators.required, Validators.minLength(6)]],
       roleId: ['', [Validators.required]],
       termCondition: ['', [Validators.required]]
     }, { validator: this.checkIfMatchingPasswords('password', 'confirmPassword') });
+  }
+
+  validateEmail(control: AbstractControl) {
+    if (this.roleId != 1) {
+      const pattern = /^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,15})$/;
+      if (!control.value.match(pattern) && control.value !== '') {
+        return { invalidEmail: true };
+      }
+      return null;
+    }
   }
 
   async validateUserNotTaken(control: AbstractControl) {
@@ -88,7 +99,7 @@ export class EmailRegistrationComponent implements OnInit {
       "lastName": this.registrationForm.get('lastName').value,
       "userName": this.registrationForm.get('userName').value,
       "password": this.registrationForm.get('password').value,
-      "roleId": this.selectedRoleId
+      "roleId": this.roleId
     }
     this.registrationService.addUser(data).subscribe((res: any) => {
       this.isNextEvent.emit(res.data.userName)

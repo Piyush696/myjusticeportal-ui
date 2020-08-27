@@ -2,7 +2,7 @@
     <div class="d-flex justify-content-between">
         <div>
             <h1 class="line-height font-weight-bold">
-                Case {{caseDetails?.caseId}}: {{caseDetails?.otherInformation}}
+                Case: {{caseDetails?.otherInformation}}
             </h1>
             <h4 class="line-height">Your case details at-a-glance</h4>
         </div>
@@ -54,13 +54,13 @@
                         </p>
                     </div>
                     <div>
-                        <p class="text-default">
+                        <p class="text-default" div *ngIf="caseDetails?.nextCourtDate">
                             Next Court Date:
                             <span class="font-weight-normal"> {{caseDetails?.nextCourtDate |date: 'MM-dd-yyyy'}}</span>
                         </p>
                     </div>
                     <div>
-                        <p class="text-default">Other Information:
+                        <p class="text-default" *ngIf="caseDetails?.otherInformation">Other Information:
                             <span class="font-weight-normal"> {{caseDetails?.otherInformation}}</span>
                         </p>
                     </div>

@@ -14,8 +14,10 @@ import { Router } from '@angular/router';
 })
 export class LawyerRegistrationComponent implements OnInit {
   step: number = 1;
-  selectedRoleId: number = 2;
+  roleId: number = 2;
   userName;
+  totalSteps: number = 2;
+
   constructor(private store: Store<any>, private router: Router, private toaterService: ToasterService, private loginService: LoginService, private registrationService: RegistrationService, private cacheService: CacheService) { }
 
   ngOnInit(): void {

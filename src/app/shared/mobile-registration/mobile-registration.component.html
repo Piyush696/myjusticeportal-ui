@@ -4,22 +4,25 @@
             <div class="d-flex justify-content-center">
                 <img src="assets/img/logo.png" alt="logo" class="logo">
             </div>
-            <p class="text-center">Step 2/2</p>
+            <h3 class="text-center font-weight-bold">Step 2/2</h3>
             <mat-card class="p-4">
                 <h1 class="font-weight-bold text-center">Account Verification</h1>
                 <p class="text-center m-0 px-3">
                     To ensure account security, we require that you verify a mobile phone via text message.</p>
-                <p class="text-center mb-3 px-3">Enter yourmobile number below and we will send you a code to verify.
+                <p class="text-center mb-3 px-3">Enter your mobile number below and we will send you a code to verify.
                 </p>
 
-                <div class="row pl-5">
-                    <div class="align-items-center bg-header col-1 d-flex justify-content-center mat-border m-0 p-0">
-                        <mat-label>+</mat-label>
+                <div class="row pl-5 d-flex justify-content-center">
+                    <div class="align-items-center col-1 d-flex justify-content-center  m-0 p-0"
+                        style="background-color:#f5f5f5;">
+                        <h1 class="mb-0">
+                            <mat-label>+</mat-label>
+                        </h1>
                     </div>
-                    <div class="col-2 px-0">
-                        <mat-form-field appearance="fill" class="w-100 mat-border hpx px-0">
+                    <div class="col-3 px-0">
+                        <mat-form-field appearance="fill" class="w-100 hpx px-1">
                             <mat-label>Country Code</mat-label>
-                            <input type="text" matInput placeholder="Country Code"
+                            <input type="number" matInput placeholder="Country Code"
                                 [formControl]="mobileRegistrationForm.controls['countryCode']" required>
                             <mat-error>
                                 <div
@@ -31,10 +34,10 @@
                             </mat-error>
                         </mat-form-field>
                     </div>
-                    <div class="col-8 pl-0">
-                        <mat-form-field appearance="fill" class="w-100 mat-border hpx px-0">
+                    <div class="col-5 pl-0">
+                        <mat-form-field appearance="fill" class="w-100 hpx px-0">
                             <mat-label>Mobile</mat-label>
-                            <input type="text" matInput placeholder="Mobile"
+                            <input type="number" matInput placeholder="Mobile Number"
                                 [formControl]="mobileRegistrationForm.controls['mobile']" required>
                             <mat-error>
                                 <div
@@ -50,17 +53,17 @@
                 <p class="font-weight-bold text-center pt-4">If you are in the United States, leave 1 as your Country
                     Code.
                 </p>
-                <div *ngIf="OtpField" class="row">
-                    <div class="col-9 pr-0">
+                <div *ngIf="OtpField" class=" d-flex justify-content-end pr-5" style="margin-right: 40px;">
+                    <div class="col-7 pr-0">
                         <mat-form-field appearance="fill" class="w-100 p-2">
-                            <mat-label>Enter Otp</mat-label>
-                            <input type="number" matInput placeholder="Enter Otp"
+                            <mat-label>Enter Auth Code</mat-label>
+                            <input type="number" matInput placeholder="Enter Code"
                                 [formControl]="mobileRegistrationForm.controls['otp']" required>
                             <mat-error>
                                 <div
                                     *ngIf="mobileRegistrationForm.controls['otp'].invalid && mobileRegistrationForm.controls['otp'].touched">
                                     <small class="font13">
-                                        Otp is Required
+                                        Auth Code is Required
                                     </small>
                                 </div>
                             </mat-error>
@@ -68,14 +71,14 @@
                     </div>
                     <div class="col-3 pl-0">
                         <button [disabled]="mobileRegistrationForm.get('otp').invalid" mat-raised-button color="primary"
-                            class="mt-2 px-5 py-1" (click)="onVerifySms()">Submit</button>
+                            class="mt-2 px-5 py-2" (click)="onVerifySms()">Submit</button>
                     </div>
                 </div>
-                <div class="d-flex justify-content-end">
+                <div class="d-flex justify-content-end pr-5" style="margin-right: 21px;">
                     <button *ngIf="!OtpField"
                         [disabled]="mobileRegistrationForm.get('countryCode').invalid || mobileRegistrationForm.get('mobile').invalid"
-                        mat-raised-button color="primary" class="mt-2 px-5 py-2" (click)="onGetOtp()">Get
-                        Otp</button>
+                        mat-raised-button color="primary" class="mt-2 px-5 py-2" (click)="onGetOtp()">Get Auth
+                        Code</button>
                 </div>
             </mat-card>
         </div>

@@ -51,7 +51,6 @@ export class PostageAppComponent implements OnInit {
 
   getLibraryLinks() {
     this.libraryLinkService.getAllLibraryLink().subscribe(res => {
-      console.log(res)
       this.librarylForm.get('libraryLink').setValue(res['data'].libraryLink)
       this.librarylForm.disable();
       this.isDisabledLink = true;
