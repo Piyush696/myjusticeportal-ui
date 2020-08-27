@@ -14,7 +14,8 @@ export class ForgetPasswordComponent implements OnInit {
   step: number = 1;
   securityQuestions: any;
 
-  constructor(private fb: FormBuilder, private router: Router, private securityService: SecurityService, private toasterService: ToasterService) { }
+  constructor(private fb: FormBuilder, private router: Router,
+    private securityService: SecurityService, private toasterService: ToasterService) { }
 
   ngOnInit(): void {
     this.createFormControl();
@@ -22,7 +23,7 @@ export class ForgetPasswordComponent implements OnInit {
 
   createFormControl() {
     this.passwordResetForm = this.fb.group({
-      user: ['', [Validators.required]],
+      userName: ['', [Validators.required]],
       securityQuestionId: ['', [Validators.required]],
       answer: ['', [Validators.required]],
       password: ['', [Validators.required, Validators.minLength(6)]],
@@ -43,20 +44,21 @@ export class ForgetPasswordComponent implements OnInit {
   }
 
   getAllUserSecurityQuestions() {
-    this.securityService.getUserSecurityQuestions(this.passwordResetForm.get('user').value).subscribe((securityQuestions: any) => {
+    this.securityService.getUserSecurityQuestions(this.passwordResetForm.get('userName').value).subscribe((securityQuestions: any) => {
+      // console.log(securityQuestions.data);
       if (securityQuestions.data) {
-        this.securityQuestions = securityQuestions.data.securityQuestions
+        this.securityQuestions = securityQuestions.data.securityQuestions;
         this.step = 2;
       }
       else {
-        this.toasterService.showSuccessToater('Reset Password Link Sent')
+        this.toasterService.showSuccessToater('Reset Password Link Sent');
       }
     })
   }
 
   onSelectQuestion() {
     const data = {
-      "user": this.passwordResetForm.get('user').value,
+      "userName": this.passwordResetForm.get('userName').value,
       "answer": this.passwordResetForm.get('answer').value,
       "securityQuestionId": this.passwordResetForm.get('securityQuestionId').value,
     }
@@ -80,13 +82,13 @@ export class ForgetPasswordComponent implements OnInit {
 
   resetPassword() {
     const data = {
-      "user": this.passwordResetForm.get('user').value,
+      "userName": this.passwordResetForm.get('userName').value,
       "password": this.passwordResetForm.get('password').value
     }
     this.securityService.resetPassword(data).subscribe((res: any) => {
       if (res.success) {
-        this.toasterService.showSuccessToater('Password Reset Successfully.')
-        this.router.navigateByUrl('/login')
+        this.toasterService.showSuccessToater('Password Reset Successfully.');
+        this.router.navigateByUrl('/login');
       }
     })
   }
