@@ -25,7 +25,7 @@ export class LoginComponent implements OnInit {
       userName: ['', [Validators.required]],
       password: ['', [Validators.required]],
       otp: ['', [Validators.required]],
-      countryCode: ['', [Validators.required]],
+      countryCode: ['01', [Validators.required]],
       mobile: ['', [Validators.required]],
     })
   }

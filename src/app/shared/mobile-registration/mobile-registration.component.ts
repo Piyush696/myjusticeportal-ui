@@ -24,7 +24,7 @@ export class MobileRegistrationComponent implements OnInit {
   createControl() {
     this.mobileRegistrationForm = this.fb.group({
       mobile: ['', [Validators.required]],
-      countryCode: ['1', [Validators.required]],
+      countryCode: ['01', [Validators.required]],
       otp: ['', [Validators.required]]
     })
   }
