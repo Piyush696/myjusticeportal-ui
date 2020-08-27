@@ -8,6 +8,7 @@ import { LoginComponent } from './pages/login/login.component';
 import { ParalegalRegistrationComponent } from './pages/paralegal-registration/paralegal-registration.component';
 import { UserRegistrationComponent } from './pages/user-registration/user-registration.component';
 import { ResetPasswordComponent } from './pages/reset-password/reset-password.component';
+import { PublicDefenderRegistrationComponent } from './pages/public-defender-registration/public-defender-registration.component';
 
 export const AppRoutes: Routes = [
   { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
@@ -19,12 +20,12 @@ export const AppRoutes: Routes = [
   },
   { path: 'login', component: LoginComponent },
   // { path: 'register', component: RegistrationComponent },
+  { path: 'register', component: UserRegistrationComponent },
   { path: 'lawyer/registration', component: LawyerRegistrationComponent },
   { path: 'facility/registration', component: FacilityRegistrationComponent },
   { path: 'paralegal/registration', component: ParalegalRegistrationComponent },
-  { path: 'register', component: UserRegistrationComponent },
+  { path: 'defender/registration', component: PublicDefenderRegistrationComponent },
   { path: 'bondsman/registration', component: BondsmanRegistrationComponent },
-  { path: 'defender/registration', component: BondsmanRegistrationComponent },
   { path: 'forget-password', component: ForgetPasswordComponent },
   { path: 'reset-password/:token', component: ResetPasswordComponent },
   { path: '**', redirectTo: 'dashboard' }
