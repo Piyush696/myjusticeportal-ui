@@ -93,15 +93,4 @@ export class LoginComponent implements OnInit {
       }
     })
   }
-
-  onUpdateRegisteredUser(data) {
-    const value = {
-      "status": true,
-      "userName": this.loginForm.get('userName').value
-    }
-    this.registrationService.updateUser(value).subscribe((user: any) => {
-      this.cacheService.setCache('token', user.token);
-      this.checkToken()
-    })
-  }
 }

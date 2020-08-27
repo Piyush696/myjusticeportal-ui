@@ -1,8 +1,12 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { LoginService } from 'app/services/login.service';
 import { ToasterService } from 'app/services/toaster.service';
 import { TwilioService } from 'app/services/twilio.service';
+import { Store } from '@ngrx/store';
+import { AddUserInfo } from 'app/store/actions/userInfo.actions';
+import { CacheService } from 'app/services/cache.service';
 
 @Component({
   selector: 'app-mobile-registration',
@@ -13,9 +17,8 @@ export class MobileRegistrationComponent implements OnInit {
   mobileRegistrationForm: FormGroup;
   OtpField: boolean;
   @Input() userName;
-  @Output() isRegisterEvent = new EventEmitter()
 
-  constructor(private fb: FormBuilder, private twilioService: TwilioService, private toasterService: ToasterService, private router: Router) { }
+  constructor(private cacheService: CacheService, private store: Store<any>, private toaterService: ToasterService, private fb: FormBuilder, private loginService: LoginService, private twilioService: TwilioService, private toasterService: ToasterService, private router: Router) { }
 
   ngOnInit(): void {
     this.createControl();
@@ -50,10 +53,21 @@ export class MobileRegistrationComponent implements OnInit {
 
   onVerifySms() {
     this.twilioService.verifyRegisterCode({ otp: this.mobileRegistrationForm.get('otp').value, userName: this.userName }).subscribe((verifyData: any) => {
+      console.log(verifyData)
       if (verifyData.success) {
         this.OtpField = false;
-        this.isRegisterEvent.emit(true);
         this.toasterService.showSuccessToater('Verified.')
+        this.cacheService.setCache('token', verifyData.token);
+        this.loginService.checkToken().then((data: any) => {
+          if (data.success) {
+            this.store.dispatch(new AddUserInfo(Object.assign({}, data.user)));
+            this.toaterService.showSuccessToater('Welcome to My Justice Portal.')
+            this.router.navigateByUrl('/dashboard')
+          }
+          else {
+            this.toaterService.showSuccessToater('Not a valid token.')
+          }
+        })
       }
       else {
         this.toasterService.showErrorToater(verifyData.data)
