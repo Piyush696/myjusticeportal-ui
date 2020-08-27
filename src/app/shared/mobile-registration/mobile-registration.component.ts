@@ -54,7 +54,7 @@ export class MobileRegistrationComponent implements OnInit {
         this.toasterService.showSuccessToater('Verified.')
       }
       else {
-        this.toasterService.showSuccessToater('Wrong OTP.')
+        this.toasterService.showSuccessToater(verifyData.data)
       }
     })
   }
