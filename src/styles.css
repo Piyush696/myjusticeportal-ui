@@ -1,4 +1,5 @@
 /* You can add global styles to this file, and also import other style files */
+
 body {
   background-color: #ffffff;
 }
@@ -44,7 +45,11 @@ body {
   color: black;
 }
 
-.dropup .dropdown-toggle:after,
-.dropdown .dropdown-toggle:after {
+.dropup .dropdown-toggle:after, .dropdown .dropdown-toggle:after {
   color: black;
+}
+
+input[type="number"]::-webkit-inner-spin-button, input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }
