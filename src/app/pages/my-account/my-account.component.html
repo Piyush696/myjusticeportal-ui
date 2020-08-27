@@ -118,7 +118,7 @@
                         <button *ngIf="!verifiedIcon"
                             [disabled]="profileForm.get('countryCode').invalid || profileForm.get('mobile').invalid"
                             mat-raised-button color="primary" class="mt-2 px-5 py-2" (click)="onGetOtp()">Get
-                            Otp</button>
+                            Auth Code</button>
                     </div>
                 </div>
             </div>
@@ -127,13 +127,13 @@
                     <div>
 
                         <mat-form-field appearance="fill" class="w-100 p-2">
-                            <mat-label>Enter Otp</mat-label>
+                            <mat-label>Enter Auth Code</mat-label>
                             <input type="number" matInput placeholder="Enter Otp"
                                 [formControl]="profileForm.controls['otp']" required>
                             <mat-error>
                                 <div *ngIf="profileForm.controls['otp'].invalid && profileForm.controls['otp'].touched">
                                     <small class="font13">
-                                        Otp is Required
+                                        Auth Code is Required
                                     </small>
                                 </div>
                             </mat-error>
