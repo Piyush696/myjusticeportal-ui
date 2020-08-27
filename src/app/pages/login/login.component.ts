@@ -49,7 +49,7 @@ export class LoginComponent implements OnInit {
             }
           })
         }
-        else if (res.data === 'Invalid Email.') {
+        else if (res.data === 'Invalid User.') {
           this.toasterService.showErrorToater(res.data);
         }
         else if (res.data === 'Invalid Password.') {
