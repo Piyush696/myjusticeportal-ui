@@ -30,7 +30,7 @@
     "@ngrx/store": "^9.2.0",
     "@ngrx/store-devtools": "^9.2.0",
     "@ngui/map": "0.30.3",
-    "@types/googlemaps": "3.39.9",
+    "@types/googlemaps": "3.39.11",
     "arrive": "2.4.1",
     "bootstrap": "4.5.0",
     "bootstrap-notify": "3.1.3",
