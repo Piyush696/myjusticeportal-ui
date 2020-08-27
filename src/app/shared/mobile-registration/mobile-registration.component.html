@@ -53,17 +53,17 @@
                 <p class="font-weight-bold text-center pt-4">If you are in the United States, leave 1 as your Country
                     Code.
                 </p>
-                <div *ngIf="OtpField" class="row">
-                    <div class="col-9 pr-0">
+                <div *ngIf="OtpField" class=" d-flex justify-content-end pr-5" style="margin-right: 40px;">
+                    <div class="col-7 pr-0">
                         <mat-form-field appearance="fill" class="w-100 p-2">
-                            <mat-label>Enter Otp</mat-label>
-                            <input type="number" matInput placeholder="Enter Otp"
+                            <mat-label>Enter Auth Code</mat-label>
+                            <input type="number" matInput placeholder="Enter Code"
                                 [formControl]="mobileRegistrationForm.controls['otp']" required>
                             <mat-error>
                                 <div
                                     *ngIf="mobileRegistrationForm.controls['otp'].invalid && mobileRegistrationForm.controls['otp'].touched">
                                     <small class="font13">
-                                        Otp is Required
+                                        Auth Code is Required
                                     </small>
                                 </div>
                             </mat-error>
