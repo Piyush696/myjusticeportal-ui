@@ -6,7 +6,6 @@ import { LoginService } from 'app/services/login.service';
 import { Store } from '@ngrx/store';
 import { AddUserInfo } from 'app/store/actions/userInfo.actions';
 import { ToasterService } from 'app/services/toaster.service';
-import { TwilioService } from 'app/services/twilio.service';
 import { RegistrationService } from 'app/services/registration.service';
 
 
