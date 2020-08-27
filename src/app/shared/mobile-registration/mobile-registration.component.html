@@ -22,7 +22,7 @@
                     <div class="col-3 px-0">
                         <mat-form-field appearance="fill" class="w-100 hpx px-1">
                             <mat-label>Country Code</mat-label>
-                            <input type="text" matInput placeholder="Country Code"
+                            <input type="number" matInput placeholder="Country Code"
                                 [formControl]="mobileRegistrationForm.controls['countryCode']" required>
                             <mat-error>
                                 <div
@@ -37,7 +37,7 @@
                     <div class="col-5 pl-0">
                         <mat-form-field appearance="fill" class="w-100 hpx px-0">
                             <mat-label>Mobile</mat-label>
-                            <input type="text" matInput placeholder="Mobile Number"
+                            <input type="number" matInput placeholder="Mobile Number"
                                 [formControl]="mobileRegistrationForm.controls['mobile']" required>
                             <mat-error>
                                 <div
@@ -71,7 +71,7 @@
                     </div>
                     <div class="col-3 pl-0">
                         <button [disabled]="mobileRegistrationForm.get('otp').invalid" mat-raised-button color="primary"
-                            class="mt-2 px-5 py-1" (click)="onVerifySms()">Submit</button>
+                            class="mt-2 px-5 py-2" (click)="onVerifySms()">Submit</button>
                     </div>
                 </div>
                 <div class="d-flex justify-content-end pr-5" style="margin-right: 21px;">

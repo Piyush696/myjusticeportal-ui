@@ -42,7 +42,7 @@
                     <input matInput placeholder="user@example.com" [formControl]="loginForm.controls['otp']" required>
                     <mat-error *ngIf="loginForm.controls['otp'].invalid && loginForm.controls['otp'].touched">
                         <div class="font13" *ngIf="loginForm.get('otp').errors?.required">
-                            Otp is required
+                            Auth Code is required
                         </div>
                     </mat-error>
                 </mat-form-field>
