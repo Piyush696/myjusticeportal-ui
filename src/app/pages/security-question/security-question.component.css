@@ -6,6 +6,9 @@
   width: 225px;
 }
 
+.bg-color {
+  background-color: #fffbfb !important;
+}
 
 .mat-progress-bar {
   height: 20px !important;

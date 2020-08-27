@@ -7,7 +7,7 @@ import { TwilioService } from 'app/services/twilio.service';
 @Component({
   selector: 'app-mobile-registration',
   templateUrl: './mobile-registration.component.html',
-  styleUrls: ['./mobile-registration.component.css']
+  styleUrls: ['./mobile-registration.component.scss']
 })
 export class MobileRegistrationComponent implements OnInit {
   mobileRegistrationForm: FormGroup;
@@ -24,7 +24,7 @@ export class MobileRegistrationComponent implements OnInit {
   createControl() {
     this.mobileRegistrationForm = this.fb.group({
       mobile: ['', [Validators.required]],
-      countryCode: ['', [Validators.required]],
+      countryCode: ['1', [Validators.required]],
       otp: ['', [Validators.required]]
     })
   }
@@ -37,6 +37,8 @@ export class MobileRegistrationComponent implements OnInit {
     }
     this.twilioService.getRegisterOtp(data).subscribe((otp: any) => {
       if (otp.success) {
+        this.mobileRegistrationForm.get('mobile').disable()
+        this.mobileRegistrationForm.get('countryCode').disable()
         this.OtpField = true;
         this.toasterService.showSuccessToater('Please submit your otp.')
       }

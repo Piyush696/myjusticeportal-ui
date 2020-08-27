@@ -4,17 +4,20 @@
             <div class="d-flex justify-content-center">
                 <img src="assets/img/logo.png" alt="logo" class="logo">
             </div>
-            <p class="text-center">Step 2/2</p>
+            <h3 class="text-center font-weight-bold">Step 2/2</h3>
             <mat-card class="p-4">
                 <h1 class="font-weight-bold text-center">Account Verification</h1>
                 <p class="text-center m-0 px-3">
                     To ensure account security, we require that you verify a mobile phone via text message.</p>
-                <p class="text-center mb-3 px-3">Enter yourmobile number below and we will send you a code to verify.
+                <p class="text-center mb-3 px-3">Enter your mobile number below and we will send you a code to verify.
                 </p>
 
                 <div class="row pl-5 d-flex justify-content-center">
+                    <div class="pt-3">
+                        <mat-label>+</mat-label>
+                    </div>
                     <div class="col-3 px-0">
-                        <mat-form-field appearance="fill" class="w-100 hpx px-3">
+                        <mat-form-field appearance="fill" class="w-100 hpx px-1">
                             <mat-label>Country Code</mat-label>
                             <input type="text" matInput placeholder="Country Code"
                                 [formControl]="mobileRegistrationForm.controls['countryCode']" required>
@@ -68,11 +71,11 @@
                             class="mt-2 px-5 py-1" (click)="onVerifySms()">Submit</button>
                     </div>
                 </div>
-                <div class="d-flex justify-content-end">
+                <div class="d-flex justify-content-end pr-5" style="margin-right: 31px;">
                     <button *ngIf="!OtpField"
                         [disabled]="mobileRegistrationForm.get('countryCode').invalid || mobileRegistrationForm.get('mobile').invalid"
-                        mat-raised-button color="primary" class="mt-2 px-5 py-2" (click)="onGetOtp()">Get
-                        Otp</button>
+                        mat-raised-button color="primary" class="mt-2 px-5 py-2" (click)="onGetOtp()">Get Auth
+                        Code</button>
                 </div>
             </mat-card>
         </div>

@@ -17,6 +17,7 @@ export class UserRegistrationComponent implements OnInit {
   step: number = 1;
   userName: string;
   roleId: number = 1;
+  totalSteps: number = 3
   constructor(private store: Store<any>, private loginService: LoginService, private cacheService: CacheService, private registrationService: RegistrationService, private toasterService: ToasterService, private router: Router) { }
 
   ngOnInit(): void {
