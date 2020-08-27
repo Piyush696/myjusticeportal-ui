@@ -1,7 +1,7 @@
 <div class="bg-color">
     <div class="d-flex justify-content-center align-items-center">
         <div class="my-5">
-            <div class="d-flex justify-content-center">
+            <div *ngIf="step === 1" class="d-flex justify-content-center">
                 <img src="assets/img/logo.png" alt="logo" class="logo">
             </div>
             <mat-card class="p-4" *ngIf="step === 1">
@@ -49,59 +49,12 @@
 
                 <div class="d-flex justify-content-center px-3 mt-2">
                     <button [disabled]="this.loginForm.get('otp').invalid" class="px-4 py-1" mat-raised-button
-                        color="primary" (click)="onVerify()">LOGIN</button>
+                        color="primary" (click)="onVerify()">Verify</button>
                 </div>
             </mat-card>
-            <mat-card *ngIf="step === 3" class="p-4">
-                <h1 class="font-weight-bold text-center">Account Verification</h1>
-                <p class="text-center m-0 px-3">
-                    To ensure account security, we require that you verify a mobile phone via text message.</p>
-                <p class="text-center mb-3 px-3">Enter yourmobile number below and we will send you a code to verify.
-                </p>
-                <div class="row pl-5 d-flex justify-content-center">
-                    <div class="align-items-center col-1 d-flex justify-content-center  m-0 p-0"
-                        style="background-color:#f5f5f5;">
-                        <h1 class="mb-0">
-                            <mat-label>+</mat-label>
-                        </h1>
-                    </div>
-                    <div class="col-3 px-0">
-                        <mat-form-field appearance="fill" class="w-100 hpx px-1">
-                            <mat-label>Country Code</mat-label>
-                            <input type="text" matInput placeholder="Country Code"
-                                [formControl]="loginForm.controls['countryCode']" required>
-                            <mat-error>
-                                <div
-                                    *ngIf="loginForm.controls['countryCode'].invalid && loginForm.controls['countryCode'].touched">
-                                    <small class="font13">
-                                        Country Code is Required
-                                    </small>
-                                </div>
-                            </mat-error>
-                        </mat-form-field>
-                    </div>
-                    <div class="col-5 pl-0">
-                        <mat-form-field appearance="fill" class="w-100 hpx px-0">
-                            <mat-label>Mobile</mat-label>
-                            <input type="text" matInput placeholder="Mobile Number"
-                                [formControl]="loginForm.controls['mobile']" required>
-                            <mat-error>
-                                <div
-                                    *ngIf="loginForm.controls['mobile'].invalid && loginForm.controls['mobile'].touched">
-                                    <small class="font13">
-                                        Mobile is Required
-                                    </small>
-                                </div>
-                            </mat-error>
-                        </mat-form-field>
-                    </div>
-                </div>
-                <div class="d-flex justify-content-end pr-5 mr-3">
-                    <button [disabled]="loginForm.get('countryCode').invalid || loginForm.get('mobile').invalid"
-                        mat-raised-button color="primary" class="mt-4 px-5 py-2" (click)="onGetOtp()">Get Auth
-                        Code</button>
-                </div>
-            </mat-card>
+            <app-mobile-registration *ngIf="step === 3" [userName]="loginForm.get('userName').value"
+                (isRegisterEvent)="onUpdateRegisteredUser($event)">
+            </app-mobile-registration>
             <div class="d-flex justify-content-center p-3">
                 <a [routerLink]="'/forget-password'" class="text-dark">Forget Password ? Click here to
                     reset?</a>
