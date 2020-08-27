@@ -46,6 +46,7 @@ import { EmailRegistrationComponent } from './shared/email-registration/email-re
 import { MobileRegistrationComponent } from './shared/mobile-registration/mobile-registration.component';
 import { AdditionalInfoComponent } from './shared/additional-info/additional-info.component';
 import { LibraryLinkService } from './services/library-link.service';
+import { ResetPasswordComponent } from './pages/reset-password/reset-password.component';
 
 @NgModule({
   declarations: [
@@ -64,7 +65,8 @@ import { LibraryLinkService } from './services/library-link.service';
     PublicDefenderRegistrationComponent,
     EmailRegistrationComponent,
     MobileRegistrationComponent,
-    AdditionalInfoComponent
+    AdditionalInfoComponent,
+    ResetPasswordComponent
   ],
   imports: [
     BrowserModule,

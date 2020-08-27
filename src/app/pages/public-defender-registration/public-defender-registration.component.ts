@@ -12,11 +12,11 @@ import { Router } from '@angular/router';
   templateUrl: './public-defender-registration.component.html',
   styleUrls: ['./public-defender-registration.component.css']
 })
-export class PublicDefenderRegistrationComponent implements OnInit {
 
+export class PublicDefenderRegistrationComponent implements OnInit {
   step: number = 1;
   roleId: number = 5;
-  userName;
+  userName: string = '';
   totalSteps: number = 2;
 
   constructor(private store: Store<any>, private router: Router, private toaterService: ToasterService, private loginService: LoginService, private registrationService: RegistrationService, private cacheService: CacheService) { }
@@ -50,5 +50,4 @@ export class PublicDefenderRegistrationComponent implements OnInit {
       })
     })
   }
-
 }
