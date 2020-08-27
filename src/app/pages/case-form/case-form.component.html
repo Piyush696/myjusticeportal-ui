@@ -113,7 +113,7 @@
         <div class="col-6 pl-0">
             <mat-form-field appearance="fill" class="w-100 pl-2">
                 <mat-label>Next Court Date</mat-label>
-                <input matInput [matDatepicker]="picker" [formControl]="caseForm.controls['nextCourtDate']" required>
+                <input matInput [matDatepicker]="picker" [formControl]="caseForm.controls['nextCourtDate']">
                 <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                 <mat-datepicker #picker></mat-datepicker>
             </mat-form-field>
