@@ -56,7 +56,7 @@ export class MobileRegistrationComponent implements OnInit {
         this.toasterService.showSuccessToater('Verified.')
       }
       else {
-        this.toasterService.showSuccessToater(verifyData.data)
+        this.toasterService.showErrorToater(verifyData.data)
       }
     })
   }
