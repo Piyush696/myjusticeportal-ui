@@ -39,7 +39,7 @@
             <mat-card *ngIf="step === 2" class="p-4">
                 <mat-form-field appearance="fill" class="w-100 p-3">
                     <mat-label>Please Enter Your Auth Code</mat-label>
-                    <input matInput placeholder="user@example.com" [formControl]="loginForm.controls['otp']" required>
+                    <input matInput placeholder="Enter Auth Code" [formControl]="loginForm.controls['otp']" required>
                     <mat-error *ngIf="loginForm.controls['otp'].invalid && loginForm.controls['otp'].touched">
                         <div class="font13" *ngIf="loginForm.get('otp').errors?.required">
                             Auth Code is required
@@ -56,7 +56,7 @@
                 (isRegisterEvent)="onUpdateRegisteredUser($event)">
             </app-mobile-registration>
             <div class="d-flex justify-content-center p-3">
-                <a [routerLink]="'/forget-password'" class="text-dark">Forget Password ? Click here to
+                <a [routerLink]="'/forget-password'" class="text-dark">Forget Password? Click here to
                     reset?</a>
             </div>
         </div>
