@@ -31,11 +31,13 @@ export class CaseFormComponent implements OnInit, OnChanges {
       dateOfArrest: [''],
       briefDescriptionOfChargeOrLegalMatter: ['', [Validators.required]],
       attorneyName: [''],
-      nextCourtDate: ['', [Validators.required]],
-      otherInformation: ['', [Validators.required]],
+      nextCourtDate: [''],
+      otherInformation: [''],
     });
     this.caseForm.get('firstName').setValue(this.userData.firstName)
     this.caseForm.get('lastName').setValue(this.userData.lastName)
+    this.caseForm.get('firstName').disable()
+    this.caseForm.get('lastName').disable()
   }
 
   ngOnChanges() {

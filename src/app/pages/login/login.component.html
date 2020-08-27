@@ -38,11 +38,11 @@
             </mat-card>
             <mat-card *ngIf="step === 2" class="p-4">
                 <mat-form-field appearance="fill" class="w-100 p-3">
-                    <mat-label>Please Enter Your Otp</mat-label>
-                    <input matInput placeholder="user@example.com" [formControl]="loginForm.controls['otp']" required>
+                    <mat-label>Please Enter Your Auth Code</mat-label>
+                    <input matInput placeholder="Enter Auth Code" [formControl]="loginForm.controls['otp']" required>
                     <mat-error *ngIf="loginForm.controls['otp'].invalid && loginForm.controls['otp'].touched">
                         <div class="font13" *ngIf="loginForm.get('otp').errors?.required">
-                            Otp is required
+                            Auth Code is required
                         </div>
                     </mat-error>
                 </mat-form-field>
@@ -55,7 +55,7 @@
             <app-mobile-registration *ngIf="step === 3" [userName]="loginForm.get('userName').value">
             </app-mobile-registration>
             <div class="d-flex justify-content-center p-3">
-                <a [routerLink]="'/forget-password'" class="text-dark">Forget Password ? Click here to
+                <a [routerLink]="'/forget-password'" class="text-dark">Forget Password? Click here to
                     reset?</a>
             </div>
         </div>

@@ -6,11 +6,11 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './public-defender-registration.component.html',
   styleUrls: ['./public-defender-registration.component.css']
 })
-export class PublicDefenderRegistrationComponent implements OnInit {
 
+export class PublicDefenderRegistrationComponent implements OnInit {
   step: number = 1;
   roleId: number = 5;
-  userName;
+  userName: string = '';
   totalSteps: number = 2;
 
   constructor() { }
