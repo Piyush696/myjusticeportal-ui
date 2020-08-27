@@ -6,7 +6,6 @@ import { LoginService } from 'app/services/login.service';
 import { Store } from '@ngrx/store';
 import { AddUserInfo } from 'app/store/actions/userInfo.actions';
 import { ToasterService } from 'app/services/toaster.service';
-import { TwilioService } from 'app/services/twilio.service';
 import { RegistrationService } from 'app/services/registration.service';
 
 
@@ -89,17 +88,6 @@ export class LoginComponent implements OnInit {
       else {
         this.toasterService.showErrorToater(data.error.name);
       }
-    })
-  }
-
-  onUpdateRegisteredUser(data) {
-    const value = {
-      "status": true,
-      "userName": this.loginForm.get('userName').value
-    }
-    this.registrationService.updateUser(value).subscribe((user: any) => {
-      this.cacheService.setCache('token', user.token);
-      this.checkToken()
     })
   }
 }
