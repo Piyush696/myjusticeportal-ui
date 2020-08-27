@@ -33,7 +33,7 @@ export class SecurityService {
   }
 
   getUserSecurityQuestions(userName: string) {
-    return this.httpClient.post<object>(`${this.apiPath}/${this.allSecurityQuestion}/securityQues`, { userName });
+    return this.httpClient.post<object>(`${this.apiPath}/${this.allSecurityQuestion}/forgot-password`, { userName });
   }
 
   checkAnswer(data) {
