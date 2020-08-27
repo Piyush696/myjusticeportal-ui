@@ -54,13 +54,13 @@
                         </p>
                     </div>
                     <div>
-                        <p class="text-default">
+                        <p class="text-default" div *ngIf="caseDetails?.nextCourtDate">
                             Next Court Date:
                             <span class="font-weight-normal"> {{caseDetails?.nextCourtDate |date: 'MM-dd-yyyy'}}</span>
                         </p>
                     </div>
                     <div>
-                        <p class="text-default">Other Information:
+                        <p class="text-default" *ngIf="caseDetails?.otherInformation">Other Information:
                             <span class="font-weight-normal"> {{caseDetails?.otherInformation}}</span>
                         </p>
                     </div>
