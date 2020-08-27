@@ -7,6 +7,7 @@ import { Store } from '@ngrx/store';
 import { AddUserInfo } from 'app/store/actions/userInfo.actions';
 import { ToasterService } from 'app/services/toaster.service';
 import { TwilioService } from 'app/services/twilio.service';
+import { RegistrationService } from 'app/services/registration.service';
 
 
 @Component({
@@ -18,7 +19,7 @@ export class LoginComponent implements OnInit {
   loginForm: FormGroup;
   step: number = 1;
   constructor(private fb: FormBuilder, private router: Router, private store: Store<any>,
-    private loginService: LoginService, private toasterService: ToasterService, private cacheService: CacheService) { }
+    private loginService: LoginService, private toasterService: ToasterService, private cacheService: CacheService, private registrationService: RegistrationService) { }
 
   ngOnInit(): void {
     this.loginForm = this.fb.group({
@@ -93,14 +94,14 @@ export class LoginComponent implements OnInit {
     })
   }
 
-  onSuccessVerify(value) {
-    if (value) {
-      this.loginService.jwtSet(this.loginForm.get('userName').value).subscribe((data: any) => {
-        if (data.success) {
-          this.cacheService.setCache('token', data.token);
-          this.checkToken();
-        }
-      })
+  onUpdateRegisteredUser(data) {
+    const value = {
+      "status": true,
+      "userName": this.loginForm.get('userName').value
     }
+    this.registrationService.updateUser(value).subscribe((user: any) => {
+      this.cacheService.setCache('token', user.token);
+      this.checkToken()
+    })
   }
 }

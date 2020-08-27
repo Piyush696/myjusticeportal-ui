@@ -37,8 +37,4 @@ export class LoginService {
   veriFyOtp(userName: string, otp: string) {
     return this.httpClient.post<object>(`${this.apiPath}/${this.route}/verify-otp`, { userName: userName, otp: otp })
   }
-
-  jwtSet(userName: string) {
-    return this.httpClient.get<object>(`${this.apiPath}/user/${userName}`)
-  }
 }

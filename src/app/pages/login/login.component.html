@@ -53,7 +53,7 @@
                 </div>
             </mat-card>
             <app-mobile-registration *ngIf="step === 3" [userName]="loginForm.get('userName').value"
-                (isRegisterEvent)="onSuccessVerify($event)">
+                (isRegisterEvent)="onUpdateRegisteredUser($event)">
             </app-mobile-registration>
             <div class="d-flex justify-content-center p-3">
                 <a [routerLink]="'/forget-password'" class="text-dark">Forget Password ? Click here to
