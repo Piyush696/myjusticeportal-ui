@@ -6,6 +6,7 @@ import { CacheService } from './cache.service';
 @Injectable({
   providedIn: 'root'
 })
+
 export class UserService {
   private apiPath: string;
   private getAllUser: string;
@@ -16,6 +17,7 @@ export class UserService {
     this.apiPath = env.api
     this.getAllUser = 'user';
   }
+
   getHeaders() {
     return {
       headers: new HttpHeaders({
@@ -42,5 +44,9 @@ export class UserService {
 
   deleteUser(userId) {
     return this.httpClient.delete<object>(`${this.apiPath}/user/` + userId, this.getHeaders());
+  }
+
+  updateUserInfo(userData) {
+    return this.httpClient.put<Object>(`${this.apiPath}/${this.getAllUser}/updateUser`, userData, this.getHeaders());
   }
 }

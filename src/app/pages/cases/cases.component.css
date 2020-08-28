@@ -32,7 +32,7 @@
   color: #fff;
   position: relative;
   left: 2px;
-  font-size: 23px;
+  font-size: 30px;
 }
 
 .white-btn {
@@ -43,4 +43,12 @@
 .px-perc {
   padding-left: 13%;
   padding-right: 13%;
+}
+
+.mat-dialog-container {
+  padding: 21px 15px 7px 15px !important;
+}
+
+.notes-height {
+  height: 10px;
 }

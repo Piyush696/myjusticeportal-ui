@@ -18,10 +18,18 @@
                         <br>
                         <span class="color">{{case.briefDescriptionOfChargeOrLegalMatter}}</span>
                     </div>
-                    <div>
-                        <button class='button-play' title="View Details" (click)="onViewCase(case.caseId)">
-                            <i class="fa fa-play" aria-hidden="true"></i>
-                        </button>
+                    <div class="d-flex">
+                        <div class="pr-2">
+                            <button class="ml-1" mat-mini-fab color="primary" title="Delete"
+                                (click)="openModal(managenotesModel,case)">
+                                <mat-icon>filter_list</mat-icon>
+                            </button>
+                        </div>
+                        <div>
+                            <button mat-mini-fab color="dark" title="View Details" (click)="onViewCase(case.caseId)">
+                                <mat-icon>play_arrow</mat-icon>
+                            </button>
+                        </div>
                     </div>
                 </div>
             </mat-card>
@@ -70,3 +78,35 @@
         </div>
     </div>
 </div>
+
+<ng-template #managenotesModel>
+    <div class="d-flex justify-content-start p-0">
+        <h3 class="font-weight-bold pl-2">Notes</h3>
+    </div>
+    <div>
+        <div class="row">
+            <div class="col-md-12">
+                <div>
+                    <mat-form-field appearance="fill" class="w-100 p-2">
+                        <textarea rows="10" matInput [formControl]="caseNoteForm.controls['notes']"></textarea>
+                        <mat-error>
+                            <div
+                                *ngIf="caseNoteForm.controls['notes'].invalid && caseNoteForm.controls['notes'].touched">
+                                <small class="font13">
+                                    Notes is Required
+                                </small>
+                            </div>
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="d-flex justify-content-end p-0">
+        <button *ngIf="buttonText === 'Edit'" [disabled]="caseNoteForm.get('notes').invalid" mat-raised-button
+            color="primary" type="button" class="mt-2 px-4 py-1"
+            (click)="this.caseNoteForm.enable();buttonText = 'Save'">{{buttonText}}</button>
+        <button *ngIf="buttonText === 'Save'" [disabled]="caseNoteForm.get('notes').invalid" mat-raised-button
+            color="primary" type="button" class="px-4 py-1 mt-2" (click)="onSaveChanges()">{{buttonText}}</button>
+    </div>
+</ng-template>

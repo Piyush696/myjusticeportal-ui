@@ -48,6 +48,7 @@ import { MatIconModule } from '@angular/material/icon';
     MatPaginatorModule,
     MatSortModule,
     MatTableModule,
+    MatIconModule,
     FormsModule,
     MatSelectModule,
     ReactiveFormsModule,
