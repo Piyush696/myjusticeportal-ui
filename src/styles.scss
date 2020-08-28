@@ -1,0 +1,100 @@
+/* You can add global styles to this file, and also import other style files */
+
+body {
+  background-color: #ffffff;
+}
+
+.font13 {
+  font-size: 13px;
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+.header-sub-text {
+  font-size: 18px;
+}
+
+.color-grey {
+  color: #333442;
+}
+
+.bg-header {
+  background: #eaeaea !important;
+}
+
+.line-height {
+  line-height: 14px !important;
+}
+
+.nc-single-02::before {
+  color: black;
+}
+
+.dropup .dropdown-toggle:after,
+.dropdown .dropdown-toggle:after {
+  color: black;
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+// For material table.
+
+/* .mat-checkbox-background {
+  background: #7676d4 !important;
+} */
+
+.mat-select-panel mat-option.mat-option {
+  height: unset;
+}
+
+.mat-option-text.mat-option-text {
+  white-space: normal;
+  line-height: 29px;
+}
+
+.mat-table td,
+.mat-table th {
+  border: 1px solid #eee;
+  padding: 8px !important;
+}
+
+.mat-table tr:nth-child(even) {
+  background-color: #fafbfc;
+}
+
+.mat-table tr:hover {
+  background-color: #ddd;
+}
+
+.mat-table th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #fafbfc;
+  color: black;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+mat-option:last-child:before {
+  content: "All";
+  float: left;
+  text-transform: none;
+  top: 4px;
+  position: relative;
+}
+
+mat-option:last-child .mat-option-text {
+  display: none;
+  position: relative;
+}
+
+[mat-mini-fab]:focus {
+  outline: 0 !important;
+}

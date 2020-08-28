@@ -25,11 +25,11 @@ export class UserService {
   }
 
   getUsers() {
-    return this.httpClient.get<object>(`${this.apiPath}/${this.getAllUser}`, this.getHeaders())
+    return this.httpClient.get<object>(`${this.apiPath}/${this.getAllUser}`, this.getHeaders());
   }
 
   getSingleUser() {
-    return this.httpClient.get<object>(`${this.apiPath}/${this.getAllUser}/user`, this.getHeaders())
+    return this.httpClient.get<object>(`${this.apiPath}/${this.getAllUser}/user`, this.getHeaders());
   }
 
   resetPassword(password) {
@@ -38,5 +38,9 @@ export class UserService {
 
   updateUser(userData) {
     return this.httpClient.put<Object>(`${this.apiPath}/${this.getAllUser}`, userData, this.getHeaders());
+  }
+
+  deleteUser(userId) {
+    return this.httpClient.delete<object>(`${this.apiPath}/user/` + userId, this.getHeaders());
   }
 }
