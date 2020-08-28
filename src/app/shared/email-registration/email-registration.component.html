@@ -5,8 +5,8 @@
         </div>
         <h3 class="text-center font-weight-bold">Step 1/{{totalSteps}}</h3>
         <mat-card class="p-5">
-            <div class="row">
-                <div class="col-6 pl-2 mb-1">
+            <div class="row mb-1">
+                <div class="col-4 pl-2 mb-1">
                     <mat-form-field appearance="fill" class="w-100">
                         <mat-label>First Name</mat-label>
                         <input matInput placeholder="Legal First Name"
@@ -14,12 +14,12 @@
                         <mat-error
                             *ngIf="registrationForm.controls['firstName'].invalid && registrationForm.controls['firstName'].touched">
                             <small class="font13" *ngIf="registrationForm.get('firstName').errors?.required">
-                                First Name is Required
+                                Legal First Name is Required
                             </small>
                         </mat-error>
                     </mat-form-field>
                 </div>
-                <div class="col-6 pr-2">
+                <div class="col-4 pl-2 mb-1">
                     <mat-form-field appearance="fill" class="w-100">
                         <mat-label>Middle Name</mat-label>
                         <input matInput placeholder="Legal Middle Name"
@@ -27,14 +27,12 @@
                         <mat-error
                             *ngIf="registrationForm.controls['middleName'].invalid && registrationForm.controls['middleName'].touched">
                             <small class="font13" *ngIf="registrationForm.get('middleName').errors?.required">
-                                Middle Name is Required
+                                Legal Middle Name is Required
                             </small>
                         </mat-error>
                     </mat-form-field>
                 </div>
-            </div>
-            <div class="row">
-                <div class="col-6 pl-2">
+                <div class="col-4 mb-1">
                     <mat-form-field appearance="fill" class="w-100">
                         <mat-label>Last Name</mat-label>
                         <input matInput placeholder="Legal Last Name"
@@ -42,13 +40,15 @@
                         <mat-error
                             *ngIf="registrationForm.controls['lastName'].invalid && registrationForm.controls['lastName'].touched">
                             <small class="font13" *ngIf="registrationForm.get('lastName').errors?.required">
-                                Last Name is Required
+                                Legal Last Name is Required
                             </small>
                         </mat-error>
                     </mat-form-field>
                 </div>
+            </div>
 
-                <div *ngIf="roleId == 1" class="col-6 px-1 pl-3 pr-2">
+            <div class="row">
+                <div *ngIf="roleId == 1" class="col pl-2">
                     <mat-form-field appearance="fill" class="w-100">
                         <mat-label>Username</mat-label>
                         <input matInput placeholder="Username" [formControl]="registrationForm.controls['userName']"
@@ -69,7 +69,7 @@
                     </mat-form-field>
                 </div>
 
-                <div *ngIf="roleId != 1" class="col-6 px-1 pl-3 pr-2">
+                <div *ngIf="roleId != 1" class="col pl-2">
                     <mat-form-field appearance="fill" class="w-100">
                         <mat-label>Email</mat-label>
                         <input matInput placeholder="abc@xyz.com" [formControl]="registrationForm.controls['userName']"
