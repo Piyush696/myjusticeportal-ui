@@ -41,13 +41,17 @@
             <div class="col-6" *ngIf="isUser">
                 <mat-form-field appearance="fill" class="w-100 p-2">
                     <mat-label>User Name</mat-label>
-                    <input type="text" matInput placeholder="User Name" [formControl]="profileForm.controls['userName']"
-                        required>
+                    <input matInput placeholder="User Name" [formControl]="profileForm.controls['userName']" required>
                     <mat-error>
                         <div
-                            *ngIf="profileForm.controls['userName'].invalid && profileForm.controls['userName'].touched">
+                            *ngIf="profileForm.controls['userName'].invalid &&
+                                                                   profileForm.controls['userName'].touched && profileForm.controls['userName'].hasError('taken')">
+                            <small class="font13">User Name already taken.</small>
+                        </div>
+                        <div *ngIf="profileForm.controls['userName'].invalid && profileForm.controls['userName'].touched
+                                                     && profileForm.get('userName').errors?.required">
                             <small class="font13">
-                                userName is Required
+                                User Name is Required
                             </small>
                         </div>
                     </mat-error>
@@ -56,11 +60,15 @@
             <div class="col-6" *ngIf="!isUser">
                 <mat-form-field appearance="fill" class="w-100 p-2">
                     <mat-label>Email</mat-label>
-                    <input type="email" matInput placeholder="Email" [formControl]="profileForm.controls['userName']"
-                        required>
+                    <input matInput placeholder="Email" [formControl]="profileForm.controls['userName']" required>
                     <mat-error>
                         <div
-                            *ngIf="profileForm.controls['userName'].invalid && profileForm.controls['userName'].touched">
+                            *ngIf="profileForm.controls['userName'].invalid &&
+                                                                   profileForm.controls['userName'].touched && profileForm.controls['userName'].hasError('taken')">
+                            <small class="font13">Email already taken.</small>
+                        </div>
+                        <div *ngIf="profileForm.controls['userName'].invalid && profileForm.controls['userName'].touched
+                                                     && profileForm.get('userName').errors?.required">
                             <small class="font13">
                                 Email is Required
                             </small>

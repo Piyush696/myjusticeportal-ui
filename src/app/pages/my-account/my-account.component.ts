@@ -1,11 +1,12 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, AbstractControl } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
 import { SecurityService } from 'app/services/security.service';
 import { ToasterService } from 'app/services/toaster.service';
 import { TwilioService } from 'app/services/twilio.service';
 import { UserService } from '../../services/user.service';
+import { RegistrationService } from 'app/services/registration.service';
 
 @Component({
   selector: 'app-my-account',
@@ -26,9 +27,10 @@ export class MyAccountComponent implements OnInit {
   securityQuestionData = [];
   count: number = 0;
   isUser: boolean = false;
+  roleId: number;
 
 
-  constructor(public dialog: MatDialog, private twilioService: TwilioService, private toasterService: ToasterService, private securityService: SecurityService, private userService: UserService, private store: Store<any>, private fb: FormBuilder) { }
+  constructor(private registrationService: RegistrationService, public dialog: MatDialog, private twilioService: TwilioService, private toasterService: ToasterService, private securityService: SecurityService, private userService: UserService, private store: Store<any>, private fb: FormBuilder) { }
 
   ngOnInit() {
     this.createControl();
@@ -39,12 +41,31 @@ export class MyAccountComponent implements OnInit {
 
   createControl() {
     this.profileForm = this.fb.group({
-      userName: ['', [Validators.required]],
+      userName: ['', [Validators.required, this.validateEmail.bind(this)], this.validateUserNotTaken.bind(this)],
       firstName: ['', [Validators.required]],
       lastName: ['', [Validators.required]],
       isMFA: [''],
     })
     this.createPasswordControl();
+  }
+
+  validateEmail(control: AbstractControl) {
+    if (this.roleId != 1) {
+      const pattern = /^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,15})$/;
+      if (!control.value.match(pattern) && control.value !== '') {
+        return { invalidEmail: true };
+      }
+      return null;
+    }
+  }
+
+  async validateUserNotTaken(control: AbstractControl) {
+    const result: any = await this.registrationService.checkUser({ userName: control.value }).toPromise();
+    if (result.taken) {
+      return { taken: true };
+    } else {
+      return null;
+    }
   }
 
   openModal(templateRef) {
@@ -104,6 +125,7 @@ export class MyAccountComponent implements OnInit {
 
   getSingleUser() {
     this.userService.getSingleUser().subscribe((result: any) => {
+      this.roleId = result.data.roles[0].roleId;
       if (result.data.roles[0].name == 'User') {
         this.isUser = true
       } else {
