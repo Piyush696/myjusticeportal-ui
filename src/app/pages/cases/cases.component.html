@@ -104,10 +104,10 @@
         </div>
     </div>
     <div class="d-flex justify-content-end modal-footer p-0">
-        <button *ngIf="buttonStatus === 'Edit'" [disabled]="caseNoteForm.get('notes').invalid" mat-raised-button
+        <button *ngIf="buttonText === 'Edit'" [disabled]="caseNoteForm.get('notes').invalid" mat-raised-button
             color="primary" type="button" class="mt-2 px-4 py-1"
-            (click)="this.caseNoteForm.enable();buttonStatus = 'Save'">{{buttonStatus}}</button>
-        <button *ngIf="buttonStatus === 'Save'" [disabled]="caseNoteForm.get('notes').invalid" mat-raised-button
-            color="primary" type="button" class="px-4 py-1 mt-2" (click)="onSaveChanges()">{{buttonStatus}}</button>
+            (click)="this.caseNoteForm.enable();buttonText = 'Save'">{{buttonText}}</button>
+        <button *ngIf="buttonText === 'Save'" [disabled]="caseNoteForm.get('notes').invalid" mat-raised-button
+            color="primary" type="button" class="px-4 py-1 mt-2" (click)="onSaveChanges()">{{buttonText}}</button>
     </div>
 </ng-template>

@@ -15,7 +15,7 @@ export class CasesComponent implements OnInit {
   caseList: any;
   caseData: any;
   caseNoteForm: FormGroup;
-  buttonStatus: string = 'Edit';
+  buttonText: string = 'Edit';
   caseId: any;
   constructor(private router: Router, private toasterService: ToasterService, public dialog: MatDialog, private caseService: CaseService, private route: Router, private fb: FormBuilder) { }
 
@@ -37,7 +37,6 @@ export class CasesComponent implements OnInit {
   }
 
   openModal(templateRef, value) {
-    console.log(templateRef, value)
     this.caseId = value.caseId
     let dialogRef = this.dialog.open(templateRef, {
       width: '500px',
@@ -57,7 +56,7 @@ export class CasesComponent implements OnInit {
       this.caseNoteForm.disable();
       this.dialog.closeAll();
       this.getCases();
-      this.buttonStatus = 'Edit';
+      this.buttonText = 'Edit';
       this.toasterService.showSuccessToater('Notes Updated Successfully.')
     })
   }
