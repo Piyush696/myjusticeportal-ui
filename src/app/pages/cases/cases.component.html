@@ -89,8 +89,7 @@
                 <div class="form-group">
                     <mat-form-field appearance="fill" class="w-100 p-2">
                         <mat-label>Notes</mat-label>
-                        <textarea matInput cdkTextareaAutosize cdkAutosizeMinRows="1" cdkAutosizeMaxRows="8"
-                            [formControl]="caseNoteForm.controls['notes']"></textarea>
+                        <textarea matInput [formControl]="caseNoteForm.controls['notes']"></textarea>
                         <mat-error>
                             <div
                                 *ngIf="caseNoteForm.controls['notes'].invalid && caseNoteForm.controls['notes'].touched">
