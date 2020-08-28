@@ -8,7 +8,7 @@
             <div class="col-6">
                 <mat-form-field appearance="fill" class="w-100 p-2">
                     <mat-label>First Name</mat-label>
-                    <input type="text" matInput placeholder="First Name"
+                    <input type="text" matInput placeholder="Legal First Name"
                         [formControl]="profileForm.controls['firstName']" required>
                     <mat-error>
                         <div
@@ -22,9 +22,28 @@
             </div>
             <div class="col-6">
                 <mat-form-field appearance="fill" class="w-100 p-2">
+                    <mat-label>Middle Name</mat-label>
+                    <input type="text" matInput placeholder="Legal Middle Name"
+                        [formControl]="profileForm.controls['middleName']" required>
+                    <mat-error>
+                        <div
+                            *ngIf="profileForm.controls['middleName'].invalid && profileForm.controls['middleName'].touched">
+                            <small class="font13">
+                                Lastname is Required
+                            </small>
+                        </div>
+                    </mat-error>
+                </mat-form-field>
+            </div>
+
+        </div>
+        <!-- </div> -->
+        <div class="row">
+            <div class="col-6">
+                <mat-form-field appearance="fill" class="w-100 p-2">
                     <mat-label>Last Name</mat-label>
-                    <input type="text" matInput placeholder="Last Name" [formControl]="profileForm.controls['lastName']"
-                        required>
+                    <input type="text" matInput placeholder="Legal Last Name"
+                        [formControl]="profileForm.controls['lastName']" required>
                     <mat-error>
                         <div
                             *ngIf="profileForm.controls['lastName'].invalid && profileForm.controls['lastName'].touched">
@@ -35,9 +54,6 @@
                     </mat-error>
                 </mat-form-field>
             </div>
-        </div>
-        <!-- </div> -->
-        <div class="row">
             <div class="col-6" *ngIf="isUser">
                 <mat-form-field appearance="fill" class="w-100 p-2">
                     <mat-label>User Name</mat-label>
@@ -77,13 +93,7 @@
                 </mat-form-field>
             </div>
 
-            <div class="col-6">
-                <mat-form-field appearance="fill" class="w-100 p-2">
-                    <mat-label>Middle Name</mat-label>
-                    <input type="text" matInput placeholder="Middle Name">
 
-                </mat-form-field>
-            </div>
         </div>
         <div class="row pl-2">
             <div class="col-6">

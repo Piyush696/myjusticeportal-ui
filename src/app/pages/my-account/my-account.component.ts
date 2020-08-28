@@ -44,6 +44,7 @@ export class MyAccountComponent implements OnInit {
       userName: ['', [Validators.required, this.validateEmail.bind(this)], this.validateUserNotTaken.bind(this)],
       firstName: ['', [Validators.required]],
       lastName: ['', [Validators.required]],
+      middleName: ['', [Validators.required]],
       isMFA: [''],
     })
     this.createPasswordControl();
@@ -136,6 +137,7 @@ export class MyAccountComponent implements OnInit {
       });
       this.user = result.data;
       this.profileForm.get('firstName').setValue(result.data.firstName)
+      this.profileForm.get('middleName').setValue(result.data.middleName)
       this.profileForm.get('lastName').setValue(result.data.lastName)
       this.profileForm.get('userName').setValue(result.data.userName)
       this.profileForm.get('isMFA').setValue(result.data.isMFA)
