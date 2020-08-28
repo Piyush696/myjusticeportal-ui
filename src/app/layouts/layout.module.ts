@@ -35,6 +35,7 @@ import { LayoutRoutes } from './layout.routing';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatIconModule } from '@angular/material/icon';
 @NgModule({
   imports: [
     CommonModule,
@@ -47,6 +48,7 @@ import { MatDialogModule } from '@angular/material/dialog';
     MatPaginatorModule,
     MatSortModule,
     MatTableModule,
+    MatIconModule,
     FormsModule,
     MatSelectModule,
     ReactiveFormsModule,
