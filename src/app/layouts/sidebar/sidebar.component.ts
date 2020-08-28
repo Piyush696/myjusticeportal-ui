@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
 
 export interface RouteInfo {
@@ -13,7 +12,7 @@ export interface RouteInfo {
 export const ROUTES: RouteInfo[] = [
     { path: '/case', title: 'My Cases', icon: 'nc-bank', class: '', roleIds: [1, 4] },
     // { path: '/dashboard', title: 'Dashboard', icon: 'nc-bank', class: '', roleIds: [] },
-    { path: '/users', title: 'All Users', icon: 'nc-bank', class: '', roleIds: [1, 7] },
+    { path: '/users', title: 'All Users', icon: 'nc-bank', class: '', roleIds: [7] },
     { path: '/My-Dockets', title: 'My Dockets', icon: 'nc-bank', class: '', roleIds: [2] },
     { path: '/app-setting', title: 'My SuperAdmin View', icon: 'nc-bank', class: '', roleIds: [7] },
     { path: '/Law-Library', title: 'Law Library', icon: 'nc-bank', class: '', roleIds: [4, 5, 6] },
