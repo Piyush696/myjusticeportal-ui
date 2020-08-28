@@ -18,13 +18,18 @@
                         <br>
                         <span class="color">{{case.briefDescriptionOfChargeOrLegalMatter}}</span>
                     </div>
-                    <div>
-                        <button class='button-play' title="View Details" (click)="openModal(managenotesModel,case)">
-                            <i class="fa fa-play" aria-hidden="true"></i>
-                        </button>
-                        <button class='button-play' title="View Details" (click)="onViewCase(case.caseId)">
-                            <i class="fa fa-play" aria-hidden="true"></i>
-                        </button>
+                    <div class="d-flex">
+                        <div class="pr-2">
+                            <button class="ml-1" mat-mini-fab color="primary" title="Delete"
+                                (click)="openModal(managenotesModel,case)">
+                                <mat-icon>filter_list</mat-icon>
+                            </button>
+                        </div>
+                        <div>
+                            <button mat-mini-fab color="dark" title="View Details" (click)="onViewCase(case.caseId)">
+                                <mat-icon>play_arrow</mat-icon>
+                            </button>
+                        </div>
                     </div>
                 </div>
             </mat-card>
