@@ -54,3 +54,15 @@ input[type="number"]::-webkit-inner-spin-button, input[type="number"]::-webkit-o
   -moz-appearance: none;
   margin: 0;
 }
+
+input[type="text"]:disabled {
+  cursor: not-allowed;
+  -webkit-text-fill-color: #1f1e1e;
+  opacity: 1;
+}
+
+input[type="textarea"]:disabled {
+  cursor: not-allowed;
+  -webkit-text-fill-color: #1f1e1e;
+  opacity: 1;
+}
