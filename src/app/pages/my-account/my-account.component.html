@@ -2,10 +2,10 @@
 <label class="header-sub-text">Manage your account information</label>
 
 <div class="row">
-    <div class="col-12">
+    <div class="col-9 pl-1">
         <div class="row">
             <!-- <div class="w-100 p-4"> -->
-            <div class="col-6">
+            <div class="col-3">
                 <mat-form-field appearance="fill" class="w-100 p-2">
                     <mat-label>First Name</mat-label>
                     <input type="text" matInput placeholder="Legal First Name"
@@ -20,7 +20,7 @@
                     </mat-error>
                 </mat-form-field>
             </div>
-            <div class="col-6">
+            <div class="col-3">
                 <mat-form-field appearance="fill" class="w-100 p-2">
                     <mat-label>Middle Name</mat-label>
                     <input type="text" matInput placeholder="Legal Middle Name"
@@ -35,11 +35,7 @@
                     </mat-error>
                 </mat-form-field>
             </div>
-
-        </div>
-        <!-- </div> -->
-        <div class="row">
-            <div class="col-6">
+            <div class="col-3">
                 <mat-form-field appearance="fill" class="w-100 p-2">
                     <mat-label>Last Name</mat-label>
                     <input type="text" matInput placeholder="Legal Last Name"
@@ -54,7 +50,10 @@
                     </mat-error>
                 </mat-form-field>
             </div>
-            <div class="col-6" *ngIf="isUser">
+        </div>
+        <!-- </div> -->
+        <div class="row">
+            <div class="col-9" *ngIf="isUser">
                 <mat-form-field appearance="fill" class="w-100 p-2">
                     <mat-label>User Name</mat-label>
                     <input matInput placeholder="User Name" [formControl]="profileForm.controls['userName']" required>
@@ -73,7 +72,8 @@
                     </mat-error>
                 </mat-form-field>
             </div>
-            <div class="col-6" *ngIf="!isUser">
+
+            <div class="col-9" *ngIf="!isUser">
                 <mat-form-field appearance="fill" class="w-100 p-2">
                     <mat-label>Email</mat-label>
                     <input matInput placeholder="Email" [formControl]="profileForm.controls['userName']" required>
@@ -92,11 +92,10 @@
                     </mat-error>
                 </mat-form-field>
             </div>
-
-
         </div>
+
         <div class="row pl-2">
-            <div class="col-6">
+            <div class="col-9">
                 <div class="d-flex justify-content-start pb-2">
                     <mat-slide-toggle [checked]="user?.isMFA" (change)="onMfaSelect()"
                         [formControl]="profileForm.controls['isMFA']">isMFA</mat-slide-toggle>
@@ -104,24 +103,29 @@
             </div>
         </div>
 
-        <div class="row px-4">
-            <div class="form-control">
-                <a class="w-100 anchor-style" mat-flat-button (click)="openModal(passwordModal)">Click
-                    here to reset your password</a>
+        <div class="row px-2">
+            <div class="col-9">
+                <div class="form-control">
+                    <a class="w-100 anchor-style" mat-flat-button (click)="openModal(passwordModal)">Click
+                        here to reset your password</a>
+                </div>
             </div>
         </div>
         <div class="row d-flex justify-content-center">
-            <div class="pr-2">
+            <div class="pr-3">
                 <button class="px-4 py-1" mat-raised-button color="primary"
                     (click)="openModal(manageSecurityQuestionModal)">Manage Security Questions</button>
+
             </div>
             <div class="">
                 <button class="px-4 py-1" mat-raised-button color="primary" (click)="editChanges()">Edit
                     Changes</button>
+
             </div>
         </div>
     </div>
 </div>
+
 
 <!-- Password Reset Modal  -->
 <ng-template #passwordModal>
