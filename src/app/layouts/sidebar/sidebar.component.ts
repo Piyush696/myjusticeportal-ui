@@ -14,7 +14,7 @@ export const ROUTES: RouteInfo[] = [
     // { path: '/dashboard', title: 'Dashboard', icon: 'nc-bank', class: '', roleIds: [] },
     { path: '/users', title: 'All Users', icon: 'nc-bank', class: '', roleIds: [7] },
     { path: '/My-Dockets', title: 'My Dockets', icon: 'nc-bank', class: '', roleIds: [2] },
-    { path: '/app-setting', title: 'My SuperAdmin View', icon: 'nc-bank', class: '', roleIds: [7] },
+    { path: '/app-setting', title: 'Application Settings', icon: 'nc-bank', class: '', roleIds: [7] },
     { path: '/Law-Library', title: 'Law Library', icon: 'nc-bank', class: '', roleIds: [4, 5, 6] },
     { path: '/Legal-Research-Assistance', title: 'Legal Research Assistance', icon: 'nc-bank', class: '', roleIds: [4, 6] },
     { path: '/Legal-Forms', title: 'Legal Forms', icon: 'nc-bank', class: '', roleIds: [1, 2] },
