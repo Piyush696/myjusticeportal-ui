@@ -44,3 +44,7 @@
   padding-left: 13%;
   padding-right: 13%;
 }
+
+.mat-dialog-container {
+  padding: 21px 15px 7px 15px !important;
+}

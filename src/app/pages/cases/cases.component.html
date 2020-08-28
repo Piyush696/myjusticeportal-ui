@@ -19,6 +19,9 @@
                         <span class="color">{{case.briefDescriptionOfChargeOrLegalMatter}}</span>
                     </div>
                     <div>
+                        <button class='button-play' title="View Details" (click)="openModal(managenotesModel,case)">
+                            <i class="fa fa-play" aria-hidden="true"></i>
+                        </button>
                         <button class='button-play' title="View Details" (click)="onViewCase(case.caseId)">
                             <i class="fa fa-play" aria-hidden="true"></i>
                         </button>
@@ -70,3 +73,37 @@
         </div>
     </div>
 </div>
+
+<ng-template #managenotesModel>
+    <div class="d-flex justify-content-center modal-header p-1">
+        <h2 class="font-weight-bold text-center">Manage Case Notes</h2>
+    </div>
+    <div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <mat-form-field appearance="fill" class="w-100 p-2">
+                        <mat-label>Notes</mat-label>
+                        <textarea matInput cdkTextareaAutosize cdkAutosizeMinRows="1" cdkAutosizeMaxRows="8"
+                            [formControl]="caseNoteForm.controls['notes']"></textarea>
+                        <mat-error>
+                            <div
+                                *ngIf="caseNoteForm.controls['notes'].invalid && caseNoteForm.controls['notes'].touched">
+                                <small class="font13">
+                                    Notes is Required
+                                </small>
+                            </div>
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="d-flex justify-content-end modal-footer p-0">
+        <button *ngIf="buttonStatus === 'Edit'" [disabled]="caseNoteForm.get('notes').invalid" mat-raised-button
+            color="primary" type="button" class="mt-2 px-4 py-1"
+            (click)="this.caseNoteForm.enable();buttonStatus = 'Save'">{{buttonStatus}}</button>
+        <button *ngIf="buttonStatus === 'Save'" [disabled]="caseNoteForm.get('notes').invalid" mat-raised-button
+            color="primary" type="button" class="px-4 py-1 mt-2" (click)="onSaveChanges()">{{buttonStatus}}</button>
+    </div>
+</ng-template>
