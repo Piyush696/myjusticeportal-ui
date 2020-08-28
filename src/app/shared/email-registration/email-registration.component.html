@@ -48,7 +48,7 @@
                     </mat-form-field>
                 </div>
 
-                <div *ngIf="roleId == 1" class="col-6 mb-1 px-1 pl-3">
+                <div *ngIf="roleId == 1" class="col-6 mb-1 px-1 pl-3 pr-2">
                     <mat-form-field appearance="fill" class="w-100">
                         <mat-label>Username</mat-label>
                         <input matInput placeholder="Username" [formControl]="registrationForm.controls['userName']"
@@ -69,7 +69,7 @@
                     </mat-form-field>
                 </div>
 
-                <div *ngIf="roleId != 1" class="col-6 mb-1 px-1 pl-3">
+                <div *ngIf="roleId != 1" class="col-6 mb-1 px-1 pl-3 pr-2">
                     <mat-form-field appearance="fill" class="w-100">
                         <mat-label>Email</mat-label>
                         <input matInput placeholder="abc@xyz.com" [formControl]="registrationForm.controls['userName']"
