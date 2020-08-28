@@ -3,10 +3,9 @@
     <img [routerLink]="'/case'" src="assets/img/sidebar-logo.png" class="logo-size">
   </div>
   <ul class="nav">
-    <li *ngFor="let menuItem of filteredMenuItems;let isLast=last" class="{{menuItem?.class}} label-bg onHoverMenuItem"
-      id="{{menuItem?.path}}" [ngClass]="{'pb-3' : isLast}" title="{{menuItem.title}}">
-      <a class="d-flex justify-content-center sidebar-style" href="#" [routerLink]="[menuItem.path]"
-        (click)="onChangeMenu(menuItem?.path)">
+    <li *ngFor="let menuItem of filteredMenuItems;let isLast=last" class="{{menuItem?.class}} label-bg"
+      [ngClass]="{'pb-3' : isLast}" title="{{menuItem.title}}" routerLinkActive="active currentMenu">
+      <a class="d-flex justify-content-center sidebar-style" href="#" [routerLink]="[menuItem.path]">
         <p class="letter-spacing">{{menuItem.title}}</p>
       </a>
     </li>
