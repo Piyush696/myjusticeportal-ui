@@ -39,4 +39,7 @@ export class UserService {
   updateUser(userData) {
     return this.httpClient.put<Object>(`${this.apiPath}/${this.getAllUser}`, userData, this.getHeaders());
   }
+  updateUserInfo(userData) {
+    return this.httpClient.put<Object>(`${this.apiPath}/${this.getAllUser}/updateUser`, userData, this.getHeaders());
+  }
 }

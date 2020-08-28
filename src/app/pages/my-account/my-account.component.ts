@@ -25,6 +25,7 @@ export class MyAccountComponent implements OnInit {
   verifiedIcon: boolean;
   securityQuestionData = [];
   count: number = 0;
+  isUser: boolean = false;
 
 
   constructor(public dialog: MatDialog, private twilioService: TwilioService, private toasterService: ToasterService, private securityService: SecurityService, private userService: UserService, private store: Store<any>, private fb: FormBuilder) { }
@@ -38,13 +39,9 @@ export class MyAccountComponent implements OnInit {
 
   createControl() {
     this.profileForm = this.fb.group({
-      username: ['', [Validators.required]],
+      userName: ['', [Validators.required]],
       firstName: ['', [Validators.required]],
       lastName: ['', [Validators.required]],
-      email: ['', [Validators.required]],
-      mobile: ['', [Validators.required]],
-      countryCode: ['', [Validators.required]],
-      otp: ['', [Validators.required]],
       isMFA: [''],
     })
     this.createPasswordControl();
@@ -87,7 +84,7 @@ export class MyAccountComponent implements OnInit {
   }
 
   editChanges() {
-    this.userService.updateUser(this.profileForm.value).subscribe((result: any) => {
+    this.userService.updateUserInfo(this.profileForm.value).subscribe((result: any) => {
       this.toasterService.showSuccessToater('User Updated Successfully.')
       this.getSingleUser();
     })
@@ -107,16 +104,18 @@ export class MyAccountComponent implements OnInit {
 
   getSingleUser() {
     this.userService.getSingleUser().subscribe((result: any) => {
+      if (result.data.roles[0].name == 'User') {
+        this.isUser = true
+      } else {
+        this.isUser = false
+      }
       result.data.roles.forEach(element => {
         this.getAllSecurityQuestion(element.roleId)
       });
       this.user = result.data;
       this.profileForm.get('firstName').setValue(result.data.firstName)
       this.profileForm.get('lastName').setValue(result.data.lastName)
-      this.profileForm.get('username').setValue(result.data.username)
-      this.profileForm.get('email').setValue(result.data.email)
-      this.profileForm.get('countryCode').setValue(result.data.countryCode)
-      this.profileForm.get('mobile').setValue(result.data.mobile)
+      this.profileForm.get('userName').setValue(result.data.userName)
       this.profileForm.get('isMFA').setValue(result.data.isMFA)
 
     })
@@ -156,33 +155,6 @@ export class MyAccountComponent implements OnInit {
 
   closeModal(): void {
     this.dialog.closeAll();
-  }
-  onGetOtp() {
-    const data = {
-      "mobile": this.profileForm.get('mobile').value,
-      "countryCode": this.profileForm.get('countryCode').value,
-      "email": this.profileForm.get('email').value
-    }
-    this.twilioService.getOtp(data).subscribe((otp: any) => {
-      if (otp.success) {
-        this.OtpField = true;
-        this.toasterService.showSuccessToater('Please submit your otp.')
-      }
-      else {
-        this.OtpField = false;
-      }
-    })
-  }
-
-  onVerifySms() {
-    this.twilioService.verifyCode({ otp: this.profileForm.get('otp').value }).subscribe((verifyData: any) => {
-      if (verifyData.success) {
-        this.OtpField = false;
-        this.verifiedIcon = true;
-        this.getSingleUser();
-        this.toasterService.showSuccessToater('Verified.')
-      }
-    })
   }
 
   onMfaSelect() {
