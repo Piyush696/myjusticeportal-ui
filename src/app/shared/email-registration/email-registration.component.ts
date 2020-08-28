@@ -34,6 +34,7 @@ export class EmailRegistrationComponent implements OnInit {
     this.registrationForm = this.fb.group({
       firstName: ['', [Validators.required]],
       lastName: ['', [Validators.required]],
+      middleName: ['', [Validators.required]],
       userName: ['', [Validators.required, this.validateEmail.bind(this)], this.validateUserNotTaken.bind(this)],
       password: ['', [Validators.required, Validators.minLength(6)]],
       confirmPassword: ['', [Validators.required, Validators.minLength(6)]],
@@ -96,6 +97,7 @@ export class EmailRegistrationComponent implements OnInit {
   onNextClick() {
     const data = {
       "firstName": this.registrationForm.get('firstName').value,
+      "middleName": this.registrationForm.get('middleName').value,
       "lastName": this.registrationForm.get('lastName').value,
       "userName": this.registrationForm.get('userName').value,
       "password": this.registrationForm.get('password').value,
