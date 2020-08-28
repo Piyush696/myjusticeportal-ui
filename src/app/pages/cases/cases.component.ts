@@ -13,10 +13,9 @@ import { ToasterService } from 'app/services/toaster.service';
 
 export class CasesComponent implements OnInit {
   caseList: any;
-  caseData: any;
   caseNoteForm: FormGroup;
   buttonText: string = 'Edit';
-  caseId: any;
+  currentCaseId: any;
   constructor(private router: Router, private toasterService: ToasterService, public dialog: MatDialog, private caseService: CaseService, private route: Router, private fb: FormBuilder) { }
 
   ngOnInit(): void {
@@ -37,7 +36,7 @@ export class CasesComponent implements OnInit {
   }
 
   openModal(templateRef, value) {
-    this.caseId = value.caseId
+    this.currentCaseId = value.caseId
     let dialogRef = this.dialog.open(templateRef, {
       width: '500px',
     });
@@ -52,7 +51,7 @@ export class CasesComponent implements OnInit {
   }
 
   onSaveChanges() {
-    this.caseService.updateCase(this.caseNoteForm.value, this.caseId).subscribe((res: any) => {
+    this.caseService.updateCase(this.caseNoteForm.value, this.currentCaseId).subscribe((res: any) => {
       this.caseNoteForm.disable();
       this.dialog.closeAll();
       this.getCases();

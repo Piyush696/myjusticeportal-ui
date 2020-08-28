@@ -48,3 +48,7 @@
 .mat-dialog-container {
   padding: 21px 15px 7px 15px !important;
 }
+
+.notes-height {
+  height: 10px;
+}
