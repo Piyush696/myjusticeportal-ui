@@ -76,6 +76,7 @@ export class FacilityComponent implements OnInit {
 
   openModal(templateRef, value) {
     this.addHide = value
+    this.buttonText = 'Edit';
     if (value) {
       this.facilityForm.reset()
     } else {
