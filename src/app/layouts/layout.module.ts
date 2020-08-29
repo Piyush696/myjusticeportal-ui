@@ -35,6 +35,7 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
+import { FacilityComponent } from 'app/pages/facility/facility.component';
 
 @NgModule({
   imports: [
@@ -77,7 +78,8 @@ import { MatIconModule } from '@angular/material/icon';
     EditCaseComponent,
     AppSettingsComponent,
     PostageAppComponent,
-    TwilioCredentialsComponent
+    TwilioCredentialsComponent,
+    FacilityComponent
   ],
   providers: [
     MatDatepickerModule,
