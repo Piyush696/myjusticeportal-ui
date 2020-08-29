@@ -30,7 +30,6 @@ import { MapsComponent } from '../pages/maps/maps.component';
 import { NotificationsComponent } from '../pages/notifications/notifications.component';
 import { TableComponent } from '../pages/table/table.component';
 import { TypographyComponent } from '../pages/typography/typography.component';
-import { UserComponent } from '../pages/user/user.component';
 import { LayoutRoutes } from './layout.routing';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
@@ -60,11 +59,11 @@ import { FacilityComponent } from 'app/pages/facility/facility.component';
     MatDatepickerModule,
     MatProgressBarModule,
     MatNativeDateModule,
-    MatDialogModule
+    MatDialogModule,
+    MatIconModule
   ],
   declarations: [
     DashboardComponent,
-    UserComponent,
     TableComponent,
     TypographyComponent,
     IconsComponent,
