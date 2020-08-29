@@ -5,7 +5,6 @@ import { LoginService } from 'app/services/login.service';
 import { ToasterService } from 'app/services/toaster.service';
 import { TwilioService } from 'app/services/twilio.service';
 import { Store } from '@ngrx/store';
-import { AddUserInfo } from 'app/store/actions/userInfo.actions';
 import { CacheService } from 'app/services/cache.service';
 
 @Component({
@@ -56,20 +55,23 @@ export class MobileRegistrationComponent implements OnInit {
       console.log(verifyData)
       if (verifyData.success) {
         this.OtpField = false;
-        this.toasterService.showSuccessToater('Verified.')
-        this.cacheService.setCache('token', verifyData.token);
-        this.loginService.checkToken().then((data: any) => {
-          if (data.success) {
-            this.store.dispatch(new AddUserInfo(Object.assign({}, data.user)));
-            this.toaterService.showSuccessToater('Welcome to My Justice Portal.')
-            this.router.navigateByUrl('/dashboard')
-          }
-          else {
-            this.toaterService.showSuccessToater('Not a valid token.')
-          }
-        })
+        this.toaterService.showWarningToater("Your account is under review. Please contact Administrator to activate your account.")
+        this.router.navigateByUrl('/login')
+        // this.cacheService.setCache('token', verifyData.token);
+        // this.loginService.checkToken().then((data: any) => {
+        //   if (data.success) {
+        //     this.store.dispatch(new AddUserInfo(Object.assign({}, data.user)));
+        //     this.toaterService.showWarningToater('Your account is under Review. Please contact customer services.')
+        //      this.router.navigateByUrl('/dashboard')
+        //     this.router.navigateByUrl('/login')
+        //   }
+        //   else {
+        //     this.toaterService.showSuccessToater('Not a valid token.')
+        //   }
+        // })
       }
       else {
+        this.router.navigateByUrl('/login')
         this.toasterService.showErrorToater(verifyData.data)
       }
     })

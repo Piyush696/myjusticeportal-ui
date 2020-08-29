@@ -47,20 +47,17 @@ export class LoginComponent implements OnInit {
             }
           })
         }
-        else if (res.data === 'Invalid User.') {
-          this.toasterService.showErrorToater(res.data);
-        }
-        else if (res.data === 'Invalid Password.') {
-          this.toasterService.showErrorToater(res.data);
-        }
         else {
-          if (res.data === 'Please Enter Your Otp.') {
-            this.toasterService.showSuccessToater('Please Enter Your Otp.');
+          if (res.data === 'Please Enter Your auth code.') {
+            this.toasterService.showSuccessToater(res.data);
             this.step = 2;
           }
-          else {
-            this.toasterService.showSuccessToater('Please Register your Mobile Number');
+          else if (res.data === 'Please Register your Mobile Number.') {
+            this.toasterService.showSuccessToater(res.data);
             this.step = 3;
+          }
+          else {
+            this.toasterService.showWarningToater(res.data);
           }
         }
       })
@@ -69,8 +66,10 @@ export class LoginComponent implements OnInit {
   onVerify() {
     this.loginService.veriFyOtp(this.loginForm.get('userName').value, this.loginForm.get('otp').value).subscribe((isVerified: any) => {
       if (isVerified.success) {
-        this.cacheService.setCache('token', isVerified.token);
-        this.checkToken();
+        // this.cacheService.setCache('token', isVerified.token);
+        this.router.navigateByUrl('/login')
+        this.toasterService.showWarningToater("Your account is under review. Please contact Administrator to activate your account.")
+        // this.checkToken();
       }
       else {
         this.toasterService.showErrorToater(isVerified.data);
