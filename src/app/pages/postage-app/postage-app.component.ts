@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { PostageService } from 'app/services/postage.service';
 import { ToasterService } from 'app/services/toaster.service';
-import { LibraryLinkService } from 'app/services/library-link.service';
 
 @Component({
   selector: 'app-postage-app',
@@ -14,8 +13,7 @@ export class PostageAppComponent implements OnInit {
   isDisabled: boolean = true;
   librarylForm: FormGroup;
   isDisabledLink: boolean = true;
-  constructor(private fb: FormBuilder, private postageService: PostageService, private toasterService: ToasterService,
-    private libraryLinkService: LibraryLinkService) { }
+  constructor(private fb: FormBuilder, private postageService: PostageService, private toasterService: ToasterService) { }
 
   ngOnInit(): void {
     this.postageCredentialForm = this.fb.group({
@@ -28,7 +26,6 @@ export class PostageAppComponent implements OnInit {
       libraryLink: ['', [Validators.required]],
     });
     this.getPostageCredentials();
-    this.getLibraryLinks()
   }
 
   getPostageCredentials() {
@@ -49,25 +46,8 @@ export class PostageAppComponent implements OnInit {
     })
   }
 
-  getLibraryLinks() {
-    this.libraryLinkService.getAllLibraryLink().subscribe(res => {
-      this.librarylForm.get('libraryLink').setValue(res['data'].libraryLink)
-      this.librarylForm.disable();
-      this.isDisabledLink = true;
-    })
-  }
-
-  updateLink() {
-    this.libraryLinkService.updateLibraryLink(this.librarylForm.value).subscribe((updatedData: any) => {
-      this.toasterService.showSuccessToater('Library Link updated.')
-      this.getLibraryLinks();
-    })
-  }
-
   enableSave() {
     this.isDisabled = false;
   }
-  enableSaveLink() {
-    this.isDisabledLink = false;
-  }
+
 }
