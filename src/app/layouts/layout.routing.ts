@@ -14,6 +14,7 @@ import { NotificationsComponent } from '../pages/notifications/notifications.com
 import { TableComponent } from '../pages/table/table.component';
 import { TypographyComponent } from '../pages/typography/typography.component';
 import { ViewCaseFilesComponent } from 'app/pages/view-case-files/view-case-files.component';
+import { FacilityComponent } from 'app/pages/facility/facility.component';
 import { UserDetailsComponent } from 'app/pages/user-details/user-details.component';
 
 export const LayoutRoutes: Routes = [
@@ -31,5 +32,6 @@ export const LayoutRoutes: Routes = [
     { path: 'case/:caseId/edit', canActivate: [AuthGuard], component: EditCaseComponent },
     { path: 'case/:caseId', canActivate: [AuthGuard], component: ViewCaseComponent },
     { path: 'case/:caseId/files', canActivate: [AuthGuard], component: ViewCaseFilesComponent },
+    { path: 'facility', canActivate: [AuthGuard], component: FacilityComponent },
     { path: 'app-setting', canActivate: [AuthGuard], component: AppSettingsComponent },
 ];

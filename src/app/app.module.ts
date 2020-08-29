@@ -45,8 +45,8 @@ import { PublicDefenderRegistrationComponent } from './pages/public-defender-reg
 import { EmailRegistrationComponent } from './shared/email-registration/email-registration.component';
 import { MobileRegistrationComponent } from './shared/mobile-registration/mobile-registration.component';
 import { AdditionalInfoComponent } from './shared/additional-info/additional-info.component';
-import { LibraryLinkService } from './services/library-link.service';
 import { ResetPasswordComponent } from './pages/reset-password/reset-password.component';
+import { FacilityService } from './services/facility.service';
 
 @NgModule({
   declarations: [
@@ -99,7 +99,7 @@ import { ResetPasswordComponent } from './pages/reset-password/reset-password.co
     RegistrationService,
     CacheService,
     LoginService,
-    LibraryLinkService,
+    FacilityService,
     { provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { appearance: 'fill' } },
   ],
   bootstrap: [AppComponent]

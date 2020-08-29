@@ -6,9 +6,8 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 @Injectable({
   providedIn: 'root'
 })
-export class LibraryLinkService {
+export class FacilityService {
   private apiPath: string;
-
   constructor(private httpClient: HttpClient, private cacheService: CacheService) {
     const env: any = environment;
     this.apiPath = env.api
@@ -21,12 +20,21 @@ export class LibraryLinkService {
       })
     };
   }
-  getAllLibraryLink() {
-    return this.httpClient.get<object>(`${this.apiPath}/libraryLink`, this.getHeaders())
+
+  createFacility(facilityData) {
+    return this.httpClient.post<object>(`${this.apiPath}/facility`, facilityData, this.getHeaders());
   }
 
-  updateLibraryLink(data) {
-    return this.httpClient.post<object>(`${this.apiPath}/libraryLink`, data, this.getHeaders())
+  updateFacility(facilityData, facilityId) {
+    return this.httpClient.put<object>(`${this.apiPath}/facility/` + facilityId, facilityData, this.getHeaders());
+  }
+
+  getAllFacility() {
+    return this.httpClient.get<object>(`${this.apiPath}/facility`, this.getHeaders())
+  }
+
+  deleteFacility(facilityId) {
+    return this.httpClient.delete<object>(`${this.apiPath}/facility/` + facilityId, this.getHeaders())
   }
 
 }
