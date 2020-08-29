@@ -68,7 +68,6 @@ export class LoginComponent implements OnInit {
     this.loginService.veriFyOtp(this.loginForm.get('userName').value, this.loginForm.get('otp').value).subscribe((isVerified: any) => {
       if (isVerified.success) {
         this.cacheService.setCache('token', isVerified.token);
-        this.toasterService.showWarningToater("Your account is under review. Please contact Administrator to activate your account.")
         this.checkToken();
       }
       else {
