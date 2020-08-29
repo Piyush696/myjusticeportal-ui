@@ -11,8 +11,6 @@ import { ToasterService } from 'app/services/toaster.service';
 export class PostageAppComponent implements OnInit {
   postageCredentialForm: FormGroup;
   isDisabled: boolean = true;
-  librarylForm: FormGroup;
-  isDisabledLink: boolean = true;
   constructor(private fb: FormBuilder, private postageService: PostageService, private toasterService: ToasterService) { }
 
   ngOnInit(): void {
@@ -21,9 +19,6 @@ export class PostageAppComponent implements OnInit {
       apiKey: ['', [Validators.required]],
       project: ['', [Validators.required]],
       template: ['', [Validators.required]],
-    });
-    this.librarylForm = this.fb.group({
-      libraryLink: ['', [Validators.required]],
     });
     this.getPostageCredentials();
   }
