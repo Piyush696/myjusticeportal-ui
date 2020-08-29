@@ -71,7 +71,7 @@ export class LoginComponent implements OnInit {
       if (isVerified.success) {
         // this.cacheService.setCache('token', isVerified.token);
         this.router.navigateByUrl('/login')
-        this.toasterService.showWarningToater('Please contact Administrator to activate your account.')
+        this.toasterService.showWarningToater("Your account is under review. Please contact Administrator to activate your account.")
         // this.checkToken();
       }
       else {
