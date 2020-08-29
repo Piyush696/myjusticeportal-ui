@@ -22,7 +22,8 @@ export const ROUTES: RouteInfo[] = [
     { path: '/Hire-a-lawyer', title: 'Hire a lawyer', icon: 'nc-bank', class: '', roleIds: [3, 6, 7] },
     { path: '/Message-My-lawyer', title: 'Message My lawyer', icon: 'nc-bank', class: '', roleIds: [1, 3] },
     { path: '/Video-My-lawyer', title: 'Video My lawyer', icon: 'nc-bank', class: '', roleIds: [1, 3, 7] },
-    { path: '/Bail-Bonds', title: 'Bail Bonds', icon: 'nc-bank', class: '', roleIds: [1, 4, 6, 7] }
+    { path: '/Bail-Bonds', title: 'Bail Bonds', icon: 'nc-bank', class: '', roleIds: [1, 4, 6, 7] },
+    { path: '/facility', title: 'Facility', icon: 'nc-bank', class: '', roleIds: [2] }
 ];
 
 @Component({
