@@ -1,33 +1,28 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
-import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { CacheService } from 'app/services/cache.service';
-import { LoginService } from 'app/services/login.service';
 import { RegistrationService } from 'app/services/registration.service';
-import { RoleService } from 'app/services/role.service';
 import { SecurityService } from 'app/services/security.service';
-import { ToasterService } from 'app/services/toaster.service';
 import { LoadRole } from 'app/store/actions/role.actions';
-import { AddUserInfo } from 'app/store/actions/userInfo.actions';
 
 @Component({
   selector: 'app-email-registration',
   templateUrl: './email-registration.component.html',
   styleUrls: ['./email-registration.component.css']
 })
-export class EmailRegistrationComponent implements OnInit {
 
+export class EmailRegistrationComponent implements OnInit {
   registrationForm: FormGroup;
   isAcceptDisabled: boolean = true;
   isNextDisabled: boolean = true;
+
   @Input() roleId;
   @Output() isNextEvent = new EventEmitter()
   @Input() totalSteps: any
 
-  constructor(public securityService: SecurityService, public dialog: MatDialog, private loginService: LoginService, private cacheService: CacheService, private fb: FormBuilder, private toasterService: ToasterService, private roleService: RoleService,
-    private registrationService: RegistrationService, private router: Router, private store: Store<any>) { }
+  constructor(public securityService: SecurityService, public dialog: MatDialog, private fb: FormBuilder,
+    private registrationService: RegistrationService, private store: Store<any>) { }
 
   ngOnInit(): void {
     this.store.dispatch(new LoadRole());

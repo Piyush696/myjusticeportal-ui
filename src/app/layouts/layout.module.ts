@@ -35,6 +35,7 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
+import { UserDetailsComponent } from 'app/pages/user-details/user-details.component';
 import { FacilityComponent } from 'app/pages/facility/facility.component';
 
 @NgModule({
@@ -70,6 +71,7 @@ import { FacilityComponent } from 'app/pages/facility/facility.component';
     MapsComponent,
     NotificationsComponent,
     UsersComponent,
+    UserDetailsComponent,
     MyAccountComponent,
     CasesComponent,
     ViewCaseComponent,

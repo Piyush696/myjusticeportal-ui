@@ -6,7 +6,7 @@ import { LoginService } from 'app/services/login.service';
 import { RegistrationService } from 'app/services/registration.service';
 import { RoleService } from 'app/services/role.service';
 import { Store } from '@ngrx/store';
-import { AddRole, LoadRole } from 'app/store/actions/role.actions';
+import { LoadRole } from 'app/store/actions/role.actions';
 import { ToasterService } from 'app/services/toaster.service';
 import { MatDialog } from '@angular/material/dialog';
 import { SecurityService } from 'app/services/security.service';

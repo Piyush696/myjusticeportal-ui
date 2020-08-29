@@ -12,7 +12,11 @@
             <ng-container matColumnDef="name">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header>User</th>
                 <td mat-cell *matCellDef="let user">
-                    {{user?.firstName | titlecase}} {{user?.lastName | titlecase}}
+                    {{user?.firstName | titlecase}}
+                    <span *ngIf="user?.middleName">
+                        &nbsp;{{user?.middleName | titlecase}}
+                    </span>
+                    &nbsp;{{user?.lastName | titlecase}}
                 </td>
             </ng-container>
             <ng-container matColumnDef="userName">
@@ -34,8 +38,8 @@
             <ng-container matColumnDef="action">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header>Action</th>
                 <td mat-cell *matCellDef="let user">
-                    <button [routerLink]="'/user-details'" class="mr-1" mat-mini-fab color="primary"
-                        title="View Details" (click)="onDeleteUser()">
+                    <button [routerLink]="'/users/'+user.userId" class="mr-1" mat-mini-fab color="primary"
+                        title="View Details">
                         <mat-icon>remove_red_eye</mat-icon>
                     </button>
                     <button mat-mini-fab color="warn" title="Delete User" (click)="onDeleteUser(user)">
