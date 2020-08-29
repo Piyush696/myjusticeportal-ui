@@ -56,7 +56,7 @@ export class MobileRegistrationComponent implements OnInit {
       console.log(verifyData)
       if (verifyData.success) {
         this.OtpField = false;
-        this.toaterService.showWarningToater('Your account is under Review. Please contact customer services.')
+        this.toaterService.showWarningToater('Please contact Administrator to activate your account.')
         this.router.navigateByUrl('/login')
         // this.cacheService.setCache('token', verifyData.token);
         // this.loginService.checkToken().then((data: any) => {
