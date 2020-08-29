@@ -51,8 +51,8 @@ export class FacilityComponent implements OnInit {
   }
 
   onDeletefacility(facility) {
-    this.facilityService.deleteFacility(facility.facilityId).subscribe(res => {
-      if (res['success']) {
+    this.facilityService.deleteFacility(facility.facilityId).subscribe((res: any) => {
+      if (res.success) {
         this.toasterService.showSuccessToater('Facility successfully deleted.');
         this.getAllFacilities();
       } else {
@@ -62,9 +62,9 @@ export class FacilityComponent implements OnInit {
   }
 
   AddFacility() {
-    this.facilityService.createFacility(this.facilityForm.value).subscribe(res => {
+    this.facilityService.createFacility(this.facilityForm.value).subscribe((res: any) => {
       this.dialog.closeAll();
-      if (res['success']) {
+      if (res.success) {
         this.toasterService.showSuccessToater('Facility successfully Added.');
         this.getAllFacilities();
       } else {
@@ -95,9 +95,9 @@ export class FacilityComponent implements OnInit {
 
   onSaveChanges(facility) {
     this.buttonText = 'Edit';
-    this.facilityService.updateFacility(this.facilityForm.value, this.facilityId).subscribe(res => {
+    this.facilityService.updateFacility(this.facilityForm.value, this.facilityId).subscribe((res: any) => {
       this.dialog.closeAll();
-      if (res['success']) {
+      if (res.success) {
         this.toasterService.showSuccessToater('Facility successfully updated.');
         this.getAllFacilities();
       } else {
