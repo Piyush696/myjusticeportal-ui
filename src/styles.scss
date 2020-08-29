@@ -83,18 +83,18 @@ input[type="number"]::-webkit-outer-spin-button {
   font-size: 14px;
 }
 
-mat-option:last-child:before {
-  content: "All";
-  float: left;
-  text-transform: none;
-  top: 4px;
-  position: relative;
-}
+// mat-option:last-child:before {
+//   content: "All";
+//   float: left;
+//   text-transform: none;
+//   top: 4px;
+//   position: relative;
+// }
 
-mat-option:last-child .mat-option-text {
-  display: none;
-  position: relative;
-}
+// mat-option:last-child .mat-option-text {
+//   display: none;
+//   position: relative;
+// }
 
 [mat-mini-fab]:focus {
   outline: 0 !important;

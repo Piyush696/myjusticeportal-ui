@@ -19,7 +19,7 @@ import { UserDetailsComponent } from 'app/pages/user-details/user-details.compon
 export const LayoutRoutes: Routes = [
     { path: 'dashboard', canActivate: [AuthGuard], component: DashboardComponent },
     { path: 'users', canActivate: [AuthGuard], component: UsersComponent },
-    { path: 'user-details', canActivate: [AuthGuard], component: UserDetailsComponent },
+    { path: 'users/:userId', canActivate: [AuthGuard], component: UserDetailsComponent },
     { path: 'table', canActivate: [AuthGuard], component: TableComponent },
     { path: 'typography', canActivate: [AuthGuard], component: TypographyComponent },
     { path: 'icons', canActivate: [AuthGuard], component: IconsComponent },
