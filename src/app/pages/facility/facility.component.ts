@@ -61,8 +61,6 @@ export class FacilityComponent implements OnInit {
   }
 
   AddFacility() {
-
-    console.log(this.facilityForm.value)
     this.facilityService.createFacility(this.facilityForm.value).subscribe(res => {
       this.dialog.closeAll();
       if (res['success']) {
