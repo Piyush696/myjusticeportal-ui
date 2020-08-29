@@ -56,18 +56,20 @@ export class MobileRegistrationComponent implements OnInit {
       console.log(verifyData)
       if (verifyData.success) {
         this.OtpField = false;
-        this.toasterService.showSuccessToater('Verified.')
-        this.cacheService.setCache('token', verifyData.token);
-        this.loginService.checkToken().then((data: any) => {
-          if (data.success) {
-            this.store.dispatch(new AddUserInfo(Object.assign({}, data.user)));
-            this.toaterService.showSuccessToater('Welcome to My Justice Portal.')
-            this.router.navigateByUrl('/dashboard')
-          }
-          else {
-            this.toaterService.showSuccessToater('Not a valid token.')
-          }
-        })
+        this.toaterService.showWarningToater('Your account is under Review. Please contact customer services.')
+        this.router.navigateByUrl('/login')
+        // this.cacheService.setCache('token', verifyData.token);
+        // this.loginService.checkToken().then((data: any) => {
+        //   if (data.success) {
+        //     this.store.dispatch(new AddUserInfo(Object.assign({}, data.user)));
+        //     this.toaterService.showWarningToater('Your account is under Review. Please contact customer services.')
+        //      this.router.navigateByUrl('/dashboard')
+        //     this.router.navigateByUrl('/login')
+        //   }
+        //   else {
+        //     this.toaterService.showSuccessToater('Not a valid token.')
+        //   }
+        // })
       }
       else {
         this.toasterService.showErrorToater(verifyData.data)
