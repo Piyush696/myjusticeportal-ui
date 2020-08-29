@@ -71,7 +71,6 @@ export class MobileRegistrationComponent implements OnInit {
         // })
       }
       else {
-        this.router.navigateByUrl('/login')
         this.toasterService.showErrorToater(verifyData.data)
       }
     })
