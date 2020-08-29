@@ -47,6 +47,7 @@ import { MobileRegistrationComponent } from './shared/mobile-registration/mobile
 import { AdditionalInfoComponent } from './shared/additional-info/additional-info.component';
 import { LibraryLinkService } from './services/library-link.service';
 import { ResetPasswordComponent } from './pages/reset-password/reset-password.component';
+import { FacilityService } from './services/facility.service';
 
 @NgModule({
   declarations: [
@@ -100,6 +101,7 @@ import { ResetPasswordComponent } from './pages/reset-password/reset-password.co
     CacheService,
     LoginService,
     LibraryLinkService,
+    FacilityService,
     { provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { appearance: 'fill' } },
   ],
   bootstrap: [AppComponent]
