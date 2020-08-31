@@ -16,7 +16,9 @@ export class CasesComponent implements OnInit {
   caseNoteForm: FormGroup;
   buttonText: string = 'Edit';
   currentCaseId: any;
-  constructor(private router: Router, private toasterService: ToasterService, public dialog: MatDialog, private caseService: CaseService, private route: Router, private fb: FormBuilder) { }
+
+  constructor(private toasterService: ToasterService, public dialog: MatDialog,
+    private caseService: CaseService, private route: Router, private fb: FormBuilder) { }
 
   ngOnInit(): void {
     this.getCases();
