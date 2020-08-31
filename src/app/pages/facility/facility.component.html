@@ -66,15 +66,19 @@
                         required>
                     <mat-error>
                         <div
-                            *ngIf="facilityForm.get('facilityCode').invalid && facilityForm.get('facilityCode').touched">
+                            *ngIf="facilityForm.controls['facilityCode'].invalid &&
+                            (facilityForm.controls['facilityCode'].touched  && facilityForm.controls['facilityCode'].hasError('taken'))">
+                            <small class="font13">Facility Code already taken.</small>
+                        </div>
+                        <div *ngIf="facilityForm.controls['facilityCode'].invalid && facilityForm.controls['facilityCode'].touched
+                        &&facilityForm.controls['facilityCode'].errors?.required">
                             <small class="font13">
                                 Facility Code is Required
                             </small>
                         </div>
-
-                        <div *ngIf="facilityForm.get('facilityCode').errors?.minlength">
+                        <div *ngIf="facilityForm.controls['facilityCode'].errors?.minlength">
                             <small class="font13">
-                                Facility Code Must be 6 Characters
+                                Facility Code Must be 6 Characters.
                             </small>
                         </div>
                     </mat-error>

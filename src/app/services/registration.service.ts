@@ -35,6 +35,10 @@ export class RegistrationService {
     return this.httpClient.get<Object>(`${this.apiPath}/users`, { params: query });
   }
 
+  checkFacilityCode(query = {}) {
+    return this.httpClient.get<Object>(`${this.apiPath}/users/facilityCode/check`, { params: query });
+  }
+
   updateUser(value) {
     return this.httpClient.put<object>(`${this.apiPath}/user`, { value })
   }

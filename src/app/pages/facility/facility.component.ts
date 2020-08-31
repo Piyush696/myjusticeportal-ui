@@ -6,6 +6,7 @@ import { ToasterService } from 'app/services/toaster.service';
 import { FacilityService } from 'app/services/facility.service';
 import { MatDialog } from '@angular/material/dialog';
 import { FormBuilder, FormGroup, Validators, AbstractControl } from '@angular/forms';
+import { RegistrationService } from 'app/services/registration.service';
 
 
 
@@ -26,20 +27,29 @@ export class FacilityComponent implements OnInit {
   addHide: boolean = true;
   facilityId: any;
 
-  constructor(private toasterService: ToasterService, private facilityService: FacilityService, public dialog: MatDialog, private fb: FormBuilder) { }
+  constructor(private registrationService: RegistrationService, private toasterService: ToasterService, private facilityService: FacilityService, public dialog: MatDialog, private fb: FormBuilder) { }
 
   ngOnInit(): void {
     this.facilityForm = this.fb.group({
-      facilityCode: ['', [Validators.required]],
+      facilityCode: ['', [Validators.required], [this.validateUserNotTaken.bind(this)]],
       facilityName: ['', [Validators.required]],
       libraryLink: ['', [Validators.required]]
     })
     this.getAllFacilities()
   }
 
+  async validateUserNotTaken(control: AbstractControl) {
+    const result: any = await this.registrationService.checkFacilityCode({ facilityCode: control.value }).toPromise();
+    console.log(result.taken)
+    if (result.taken) {
+      return { taken: true };
+    } else {
+      return null;
+    }
+  }
+
   getAllFacilities() {
     this.facilityService.getAllFacility().subscribe((res: any) => {
-      console.log(res)
       this.dataSource = new MatTableDataSource(res.data);
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
