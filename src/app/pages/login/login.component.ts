@@ -37,6 +37,7 @@ export class LoginComponent implements OnInit {
         if (res.success) {
           this.cacheService.setCache('token', res.token);
           this.loginService.checkToken().then((data: any) => {
+            console.log(data)
             this.store.dispatch(new AddUserInfo(Object.assign({}, data.user)));
             if (data.success) {
               this.router.navigateByUrl('/dashboard')
@@ -55,6 +56,10 @@ export class LoginComponent implements OnInit {
           else if (res.data === 'Please Register your Mobile Number.') {
             this.toasterService.showSuccessToater(res.data);
             this.step = 3;
+          }
+          else if (res.data === 'Please complete your registration.') {
+            this.toasterService.showWarningToater(res.data);
+            // this.step = 4;
           }
           else {
             this.step = 1
@@ -88,4 +93,8 @@ export class LoginComponent implements OnInit {
       }
     })
   }
+
+  // userMetaData(value) {
+  //   console.log(value)
+  // }
 }

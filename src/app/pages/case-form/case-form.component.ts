@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CaseService } from 'app/services/case.service';
 import { ToasterService } from 'app/services/toaster.service';
 import { Store } from '@ngrx/store';
@@ -17,7 +17,11 @@ export class CaseFormComponent implements OnInit, OnChanges {
   headerText: string = 'Create a Case';
   @Input() caseDetails;
   userData: any;
-  constructor(private toasterService: ToasterService, private router: Router, private fb: FormBuilder, private caseService: CaseService, private store: Store<any>) { }
+  facilityCode: any;
+  constructor(private activatedRoute: ActivatedRoute, private toasterService: ToasterService, private router: Router, private fb: FormBuilder, private caseService: CaseService, private store: Store<any>) {
+    this.facilityCode = this.activatedRoute.snapshot.params.facilityCode;
+    console.log(this.facilityCode)
+  }
 
   ngOnInit(): void {
     this.store.select(s => s.userInfo).subscribe(user => {
@@ -66,9 +70,14 @@ export class CaseFormComponent implements OnInit, OnChanges {
       this.caseService.postCase(this.caseForm.value).subscribe((res: any) => {
         if (res.success) {
           this.toasterService.showSuccessToater('Case Created Successfully.')
-          this.router.navigateByUrl('/case')
+          let _url = this.facilityCode + '/case'
+          this.router.navigateByUrl(_url)
         }
       })
     }
+  }
+  onBackToMyCases() {
+    let _url = this.facilityCode + '/case'
+    this.router.navigateByUrl(_url)
   }
 }

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CaseService } from 'app/services/case.service';
 import { ToasterService } from 'app/services/toaster.service';
 
@@ -16,7 +16,12 @@ export class CasesComponent implements OnInit {
   caseNoteForm: FormGroup;
   buttonText: string = 'Edit';
   currentCaseId: any;
-  constructor(private router: Router, private toasterService: ToasterService, public dialog: MatDialog, private caseService: CaseService, private route: Router, private fb: FormBuilder) { }
+  facilityCode: any;
+
+  constructor(private activatedRoute: ActivatedRoute, private router: Router, private toasterService: ToasterService, public dialog: MatDialog, private caseService: CaseService, private route: Router, private fb: FormBuilder) {
+    this.facilityCode = this.activatedRoute.snapshot.params.facilityCode;
+    console.log(this.facilityCode)
+  }
 
   ngOnInit(): void {
     this.getCases();
@@ -47,7 +52,8 @@ export class CasesComponent implements OnInit {
   }
 
   onViewCase(caseId) {
-    this.route.navigateByUrl('/case/' + caseId);
+    let _url = this.facilityCode + '/case/' + caseId
+    this.route.navigateByUrl(_url);
   }
 
   onSaveChanges() {
@@ -58,5 +64,9 @@ export class CasesComponent implements OnInit {
       this.buttonText = 'Edit';
       this.toasterService.showSuccessToater('Notes Updated Successfully.')
     })
+  }
+  onCreateCase() {
+    let _url = this.facilityCode + '/case/create'
+    this.router.navigateByUrl(_url)
   }
 }

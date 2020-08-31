@@ -28,7 +28,7 @@
                 </mat-form-field>
 
                 <div class="d-flex justify-content-between px-3 mt-2">
-                    <button [routerLink]="'/register'" mat-button color="primary">
+                    <button [routerLink]="'/Blr001/registration'" mat-button color="primary">
                         Create an account
                     </button>
                     <button
@@ -54,6 +54,8 @@
             </mat-card>
             <app-mobile-registration *ngIf="step === 3" [userName]="loginForm.get('userName').value">
             </app-mobile-registration>
+            <!-- <app-additional-info *ngIf="step === 4" [userName]="this.loginForm.get('userName').value"
+                (userMetaEventEmitter)="userMetaData($event)"></app-additional-info> -->
             <div class="d-flex justify-content-center p-3">
                 <a [routerLink]="'/forget-password'" class="text-dark">Forget Password? Click here to
                     reset?</a>

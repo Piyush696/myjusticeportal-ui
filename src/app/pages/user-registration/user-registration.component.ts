@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CacheService } from 'app/services/cache.service';
 import { LoginService } from 'app/services/login.service';
 import { RegistrationService } from 'app/services/registration.service';
@@ -18,7 +18,14 @@ export class UserRegistrationComponent implements OnInit {
   userName: string;
   roleId: number = 1;
   totalSteps: number = 3
-  constructor(private store: Store<any>, private loginService: LoginService, private cacheService: CacheService, private registrationService: RegistrationService, private toasterService: ToasterService, private router: Router) { }
+  facilityCode: any;
+
+  constructor(private activatedRoute: ActivatedRoute, private store: Store<any>,
+    private loginService: LoginService, private cacheService: CacheService,
+    private registrationService: RegistrationService, private toasterService: ToasterService, private router: Router) {
+    this.facilityCode = this.activatedRoute.snapshot.params.facilityCode;
+    console.log(this.facilityCode)
+  }
 
   ngOnInit(): void {
   }
@@ -39,7 +46,7 @@ export class UserRegistrationComponent implements OnInit {
         if (data.success) {
           this.store.dispatch(new AddUserInfo(Object.assign({}, data.user)));
           this.toasterService.showSuccessToater('Welcome to My Justice Portal.')
-          this.router.navigateByUrl('/dashboard')
+          this.router.navigateByUrl(this.facilityCode + '/userdashboard')
         }
       })
     })
