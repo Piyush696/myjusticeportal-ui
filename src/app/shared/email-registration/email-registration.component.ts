@@ -18,11 +18,12 @@ export class EmailRegistrationComponent implements OnInit {
   isNextDisabled: boolean = true;
 
   @Input() roleId;
-  @Output() isNextEvent = new EventEmitter()
-  @Input() totalSteps: any
+  @Output() isNextEvent = new EventEmitter();
+  @Input() totalSteps: any;
 
   constructor(public securityService: SecurityService, public dialog: MatDialog, private fb: FormBuilder,
-    private registrationService: RegistrationService, private store: Store<any>) { }
+    private registrationService: RegistrationService, private store: Store<any>) {
+  }
 
   ngOnInit(): void {
     this.store.dispatch(new LoadRole());
@@ -90,21 +91,18 @@ export class EmailRegistrationComponent implements OnInit {
   }
 
   onNextClick() {
-    const data = {
+    const userData = {
       "firstName": this.registrationForm.get('firstName').value,
       "middleName": this.registrationForm.get('middleName').value,
       "lastName": this.registrationForm.get('lastName').value,
       "userName": this.registrationForm.get('userName').value,
-      "password": this.registrationForm.get('password').value,
-      "roleId": this.roleId
+      "password": this.registrationForm.get('password').value
     }
-    this.registrationService.addUser(data).subscribe((res: any) => {
-      this.isNextEvent.emit(res.data.userName)
-    })
+    this.isNextEvent.emit(userData);
   }
 
   onAcceptTerms() {
     this.isNextDisabled = false;
-    this.registrationForm.get('termCondition').setValue(true)
+    this.registrationForm.get('termCondition').setValue(true);
   }
 }

@@ -37,6 +37,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 import { UserDetailsComponent } from 'app/pages/user-details/user-details.component';
 import { FacilityComponent } from 'app/pages/facility/facility.component';
+import { UserDashboardComponent } from 'app/pages/user-dashboard/user-dashboard.component';
 
 @NgModule({
   imports: [
@@ -81,7 +82,8 @@ import { FacilityComponent } from 'app/pages/facility/facility.component';
     AppSettingsComponent,
     PostageAppComponent,
     TwilioCredentialsComponent,
-    FacilityComponent
+    FacilityComponent,
+    UserDashboardComponent
   ],
   providers: [
     MatDatepickerModule,
