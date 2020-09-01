@@ -14,15 +14,17 @@ import { UserLoginService } from 'app/services/login/user-login.service';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
+
 export class LoginComponent implements OnInit {
   loginForm: FormGroup;
   step: number = 1;
   facilityCode: any;
-  constructor(private activatedRoute: ActivatedRoute, private fb: FormBuilder, private router: Router, private store: Store<any>, private userLoginService: UserLoginService,
+
+  constructor(private activatedRoute: ActivatedRoute, private fb: FormBuilder,
+    private router: Router, private store: Store<any>, private userLoginService: UserLoginService,
     private loginService: LoginService, private toasterService: ToasterService,
     private cacheService: CacheService, private registrationService: RegistrationService) {
     this.facilityCode = this.activatedRoute.snapshot.params.facilityCode;
-
   }
 
   ngOnInit(): void {
@@ -65,7 +67,6 @@ export class LoginComponent implements OnInit {
     //     if (res.success) {
     //       this.cacheService.setCache('token', res.token);
     //       this.loginService.checkToken().then((data: any) => {
-    //         console.log(data)
     //         this.store.dispatch(new AddUserInfo(Object.assign({}, data.user)));
     //         if (data.success) {
     //           this.router.navigateByUrl('/dashboard')

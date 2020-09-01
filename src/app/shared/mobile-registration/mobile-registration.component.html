@@ -8,8 +8,10 @@
             <mat-card class="p-4">
                 <h1 class="font-weight-bold text-center">Account Verification</h1>
                 <p class="text-center m-0 px-3">
-                    To ensure account security, we require that you verify a mobile phone via text message.</p>
-                <p class="text-center mb-3 px-3">Enter your mobile number below and we will send you a code to verify.
+                    To ensure account security, we require that you verify a mobile phone via text message.
+                </p>
+                <p class="text-center mb-3 px-3">
+                    Enter your mobile number below and we will send you a code to verify.
                 </p>
 
                 <div class="row pl-5 d-flex justify-content-center">
@@ -50,8 +52,8 @@
                         </mat-form-field>
                     </div>
                 </div>
-                <p class="font-weight-bold text-center pt-4">If you are in the United States, leave 1 as your Country
-                    Code.
+                <p class="font-weight-bold text-center pt-4">
+                    If you are in the United States, leave 1 as your Country Code.
                 </p>
                 <div *ngIf="OtpField" class=" d-flex justify-content-end pr-5" style="margin-right: 40px;">
                     <div class="col-7 pr-0">
@@ -71,14 +73,17 @@
                     </div>
                     <div class="col-3 pl-0">
                         <button [disabled]="mobileRegistrationForm.get('otp').invalid" mat-raised-button color="primary"
-                            class="mt-2 px-5 py-2" (click)="onVerifySms()">Submit</button>
+                            class="mt-2 px-5 py-2" (click)="onVerifySms()">
+                            Submit
+                        </button>
                     </div>
                 </div>
                 <div class="d-flex justify-content-end pr-5" style="margin-right: 21px;">
                     <button *ngIf="!OtpField"
                         [disabled]="mobileRegistrationForm.get('countryCode').invalid || mobileRegistrationForm.get('mobile').invalid"
-                        mat-raised-button color="primary" class="mt-2 px-5 py-2" (click)="onGetOtp()">Get Auth
-                        Code</button>
+                        mat-raised-button color="primary" class="mt-2 px-5 py-2" (click)="onGetOtp()">
+                        Get Auth Code
+                    </button>
                 </div>
             </mat-card>
         </div>
