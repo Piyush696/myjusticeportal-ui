@@ -20,7 +20,8 @@ export class UserRegistrationComponent implements OnInit {
   userRegData = {};
 
   constructor(private loginService: LoginService, private activatedRoute: ActivatedRoute, private store: Store<any>,
-    private userRegistrationService: UserRegistrationService, private cacheService: CacheService, private toasterService: ToasterService, private router: Router) {
+    private userRegistrationService: UserRegistrationService, private cacheService: CacheService,
+    private toasterService: ToasterService, private router: Router) {
 
     this.facilityCode = this.activatedRoute.snapshot.params.facilityCode;
     console.log(this.facilityCode)
