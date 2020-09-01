@@ -38,6 +38,13 @@ export class UsersComponent implements OnInit, OnDestroy {
     this.userService.getUsers().subscribe((res: any) => {
       // console.log(res.data);
       this.dataSource = new MatTableDataSource(res.data);
+      this.dataSource.sortingDataAccessor = (item: any, property) => {
+        switch (property) {
+          case 'name': if (item) return item.firstName + item.middleName + item.lastName;
+          case 'roles': if (item) return item.roles[0].name;
+          default: return item[property];
+        }
+      };
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
     })

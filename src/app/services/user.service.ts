@@ -49,4 +49,16 @@ export class UserService {
   updateUserInfo(userData) {
     return this.httpClient.put<Object>(`${this.apiPath}/${this.getAllUser}/updateUser`, userData, this.getHeaders());
   }
+
+  getSingleUserById(userId) {
+    return this.httpClient.get<object>(`${this.apiPath}/user/singleUser/` + userId, this.getHeaders());
+  }
+
+  updateSingleUser(userData) {
+    return this.httpClient.put<Object>(`${this.apiPath}/user/updateSingleUser`, userData, this.getHeaders());
+  }
+
+  changeRole(roleId) {
+    return this.httpClient.put<Object>(`${this.apiPath}/user/changeRole`, roleId, this.getHeaders());
+  }
 }
