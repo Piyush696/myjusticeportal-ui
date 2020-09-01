@@ -7,8 +7,6 @@ import { FacilityService } from 'app/services/facility.service';
 import { MatDialog } from '@angular/material/dialog';
 import { FormBuilder, FormGroup, Validators, AbstractControl } from '@angular/forms';
 
-
-
 @Component({
   selector: 'app-facility',
   templateUrl: './facility.component.html',
@@ -20,21 +18,42 @@ export class FacilityComponent implements OnInit {
   dataSource = new MatTableDataSource();
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort: MatSort;
-  facility: any;
+
   facilityForm: FormGroup;
   buttonText: string = 'Edit';
   addHide: boolean = true;
-  facilityId: any;
+  facilityId: number;
+  addressForm: FormGroup;
+  facilityAddressId: number;
 
   constructor(private toasterService: ToasterService, private facilityService: FacilityService, public dialog: MatDialog, private fb: FormBuilder) { }
 
   ngOnInit(): void {
     this.facilityForm = this.fb.group({
-      facilityCode: ['', [Validators.required]],
+      facilityCode: ['', [Validators.required], [this.validateUserNotTaken.bind(this)]],
       facilityName: ['', [Validators.required]],
       libraryLink: ['', [Validators.required]]
     })
+
+    this.addressForm = this.fb.group({
+      street1: ['', [Validators.required]],
+      street2: [''],
+      city: ['', [Validators.required]],
+      state: ['', [Validators.required]],
+      zip: ['', [Validators.required]],
+      country: ['', [Validators.required]]
+    })
+
     this.getAllFacilities()
+  }
+
+  async validateUserNotTaken(control: AbstractControl) {
+    const result: any = await this.facilityService.checkFacilityCode(control.value).toPromise();
+    if (result.taken) {
+      return { taken: true };
+    } else {
+      return null;
+    }
   }
 
   getAllFacilities() {
@@ -61,7 +80,11 @@ export class FacilityComponent implements OnInit {
   }
 
   AddFacility() {
-    this.facilityService.createFacility(this.facilityForm.value).subscribe((res: any) => {
+    let facilityDetails = {
+      facility: this.facilityForm.value,
+      facilityAddress: this.addressForm.value
+    }
+    this.facilityService.createFacility(facilityDetails).subscribe((res: any) => {
       this.dialog.closeAll();
       if (res.success) {
         this.toasterService.showSuccessToater('Facility successfully Added.');
@@ -70,6 +93,7 @@ export class FacilityComponent implements OnInit {
         this.toasterService.showErrorToater('Facility is not Added.');
       }
       this.facilityForm.reset()
+      this.addressForm.reset()
     })
   }
 
@@ -78,24 +102,42 @@ export class FacilityComponent implements OnInit {
     this.buttonText = 'Edit';
     if (value) {
       this.facilityForm.reset()
+      this.addressForm.reset()
+      this.addressForm.enable()
+      this.facilityForm.enable()
     } else {
       this.facilityForm.disable()
+      this.addressForm.disable()
     }
     let dialogRef = this.dialog.open(templateRef, {
-      width: '500px',
+      width: '80vh',
+      height: '75vh'
     })
   }
 
   facilityView(facility) {
     this.facilityId = facility.facilityId
+    this.facilityAddressId = facility.Address.addressId
     this.facilityForm.get('facilityCode').setValue(facility.facilityCode)
     this.facilityForm.get('facilityName').setValue(facility.facilityName)
     this.facilityForm.get('libraryLink').setValue(facility.libraryLink)
+    this.addressForm.get('street1').setValue(facility.Address.street1)
+    this.addressForm.get('street2').setValue(facility.Address.street2)
+    this.addressForm.get('city').setValue(facility.Address.city)
+    this.addressForm.get('state').setValue(facility.Address.state)
+    this.addressForm.get('zip').setValue(facility.Address.zip)
+    this.addressForm.get('country').setValue(facility.Address.country)
   }
 
   onSaveChanges(facility) {
+    let facilityDetails = {
+      facility: this.facilityForm.value,
+      facilityAddress: this.addressForm.value,
+      facilityAddressId: this.facilityAddressId
+    }
+
     this.buttonText = 'Edit';
-    this.facilityService.updateFacility(this.facilityForm.value, this.facilityId).subscribe((res: any) => {
+    this.facilityService.updateFacility(facilityDetails, this.facilityId,).subscribe((res: any) => {
       this.dialog.closeAll();
       if (res.success) {
         this.toasterService.showSuccessToater('Facility successfully updated.');
