@@ -52,7 +52,6 @@ export class FacilityComponent implements OnInit {
 
   async validateUserNotTaken(control: AbstractControl) {
     const result: any = await this.registrationService.checkFacilityCode({ facilityCode: control.value }).toPromise();
-    console.log(result.taken)
     if (result.taken) {
       return { taken: true };
     } else {
