@@ -52,7 +52,7 @@ export class LoginComponent implements OnInit {
             this.toasterService.showSuccessToater('Welcome to My Justice Portal.');
           }
           else {
-            this.toasterService.showErrorToater(data.error.name);
+            this.toasterService.showErrorToater(res.data);
           }
         })
       }
