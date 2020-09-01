@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
-import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree, Router } from '@angular/router';
-import { Observable } from 'rxjs';
+import { CanActivate, Router } from '@angular/router';
 import { CacheService } from 'app/services/cache.service';
 import { Store } from '@ngrx/store';
 import { AddUserInfo } from 'app/store/actions/userInfo.actions';
@@ -16,8 +15,8 @@ export class AuthGuard implements CanActivate {
   }
 
   canActivate() {
-
     return this.loginService.checkToken().then((data: any) => {
+      console.log(data)
       if (data.success) {
         this.store.dispatch(new AddUserInfo(Object.assign({}, data.user)));
         return true;

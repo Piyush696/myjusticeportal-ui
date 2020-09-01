@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { SecurityService } from 'app/services/security.service';
 
@@ -16,10 +16,8 @@ export class SecurityQuestionComponent implements OnInit {
   progressValue: number = 0;
   originalSecurityQuestions: any;
   questionId: any;
-
-  @Input() selectedRoleId: number;
-  @Input() userName: number;
   @Output() isRegisterEvent = new EventEmitter();
+  securityQuestionAnswered = [];
 
   constructor(private fb: FormBuilder, public securityService: SecurityService) { }
 
@@ -69,18 +67,12 @@ export class SecurityQuestionComponent implements OnInit {
   setAnswers() {
     this.questionId = this.securityQuestionForm.get('securityQuestionId').value;
     let formValue = this.securityQuestionForm.value;
-    formValue['userName'] = this.userName
-    this.securityService.createSecurityAnswers(formValue).subscribe((data: any) => {
-      this.securityQuestionForm.reset();
-    });
+    this.securityQuestionAnswered.push(formValue)
+    this.securityQuestionForm.reset();
   }
 
   onClickRegister() {
     this.setAnswers();
-    let data = {
-      "status": true,
-      "userName": this.userName
-    }
-    this.isRegisterEvent.emit(data);
+    this.isRegisterEvent.emit(this.securityQuestionAnswered);
   }
 }

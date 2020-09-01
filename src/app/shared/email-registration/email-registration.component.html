@@ -19,7 +19,7 @@
                         </mat-error>
                     </mat-form-field>
                 </div>
-                <div class="col-4 pl-2 mb-1">
+                <div class="col-4 pl-0 mb-1">
                     <mat-form-field appearance="fill" class="w-100">
                         <mat-label>Legal Middle Name</mat-label>
                         <input matInput placeholder="Legal Middle Name"
@@ -32,7 +32,7 @@
                         </mat-error>
                     </mat-form-field>
                 </div>
-                <div class="col-4 mb-1">
+                <div class="col-4 pl-0 pr-2 mb-1">
                     <mat-form-field appearance="fill" class="w-100">
                         <mat-label>Legal Last Name</mat-label>
                         <input matInput placeholder="Legal Last Name"
@@ -48,28 +48,28 @@
             </div>
 
             <div class="row">
-                <div *ngIf="roleId == 1" class="col pl-2">
+                <div *ngIf="roleId == 1" class="col px-2">
                     <mat-form-field appearance="fill" class="w-100">
-                        <mat-label>Username</mat-label>
-                        <input matInput placeholder="Username" [formControl]="registrationForm.controls['userName']"
-                            required>
+                        <mat-label>User Name</mat-label>
+                        <input matInput [formControl]="registrationForm.controls['userName']" required>
                         <mat-error>
                             <div
-                                *ngIf="registrationForm.controls['userName'].invalid &&
-                                                                   registrationForm.controls['userName'].touched && registrationForm.controls['userName'].hasError('taken')">
-                                <small class="font13">Username already taken.</small>
+                                *ngIf="registrationForm.controls['userName'].invalid && 
+                                registrationForm.controls['userName'].touched && registrationForm.controls['userName'].hasError('taken')">
+                                <small class="font13">User Name already taken.</small>
                             </div>
-                            <div *ngIf="registrationForm.controls['userName'].invalid && registrationForm.controls['userName'].touched
-                                                     && registrationForm.get('userName').errors?.required">
+                            <div
+                                *ngIf="registrationForm.controls['userName'].invalid && 
+                                registrationForm.controls['userName'].touched && registrationForm.get('userName').errors?.required">
                                 <small class="font13">
-                                    Username is Required
+                                    User Name is Required
                                 </small>
                             </div>
                         </mat-error>
                     </mat-form-field>
                 </div>
 
-                <div *ngIf="roleId != 1" class="col pl-2">
+                <div *ngIf="roleId != 1" class="col px-2">
                     <mat-form-field appearance="fill" class="w-100">
                         <mat-label>Email</mat-label>
                         <input matInput placeholder="abc@xyz.com" [formControl]="registrationForm.controls['userName']"
@@ -83,7 +83,7 @@
                             <div
                                 *ngIf="registrationForm.controls['userName'].invalid &&
                                                                    registrationForm.controls['userName'].touched && !registrationForm.controls['userName'].hasError('taken')">
-                                <small class=" font13">That doesn't look right. </small>
+                                <small class=" font13">That doesn't look right.</small>
                             </div>
                         </mat-error>
                     </mat-form-field>

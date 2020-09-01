@@ -4,7 +4,7 @@
         <h4 class="line-height header-sub-text">Enter your basic case information.</h4>
     </div>
     <div>
-        <button [routerLink]="'/case'" class="white-btn px-5 py-1" mat-raised-button color="primary">Back To My
+        <button class="white-btn px-5 py-1" mat-raised-button color="primary" [routerLink]="'/case'">Back To My
             Cases</button>
     </div>
 </div>
@@ -136,5 +136,5 @@
 <div class="py-3 pr-3 d-flex">
     <button [disabled]="caseForm.invalid" class="background-color px-5 py-1" mat-raised-button color="primary"
         (click)="updateCase()">{{buttonText}}</button>
-    <button [routerLink]="'/case'" class="white-btn px-5 ml-3 py-1" mat-raised-button color="primary">Cancel</button>
+    <button class="white-btn px-5 ml-3 py-1" mat-raised-button color="primary" [routerLink]="'/case'">Cancel</button>
 </div>

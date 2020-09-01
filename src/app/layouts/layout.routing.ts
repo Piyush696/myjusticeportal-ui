@@ -16,6 +16,7 @@ import { TypographyComponent } from '../pages/typography/typography.component';
 import { ViewCaseFilesComponent } from 'app/pages/view-case-files/view-case-files.component';
 import { FacilityComponent } from 'app/pages/facility/facility.component';
 import { UserDetailsComponent } from 'app/pages/user-details/user-details.component';
+import { UserDashboardComponent } from 'app/pages/user-dashboard/user-dashboard.component';
 
 export const LayoutRoutes: Routes = [
     { path: 'dashboard', canActivate: [AuthGuard], component: DashboardComponent },
@@ -27,6 +28,7 @@ export const LayoutRoutes: Routes = [
     { path: 'maps', canActivate: [AuthGuard], component: MapsComponent },
     { path: 'notifications', canActivate: [AuthGuard], component: NotificationsComponent },
     { path: 'my-account', canActivate: [AuthGuard], component: MyAccountComponent },
+    { path: 'userdashboard', component: UserDashboardComponent },
     { path: 'case', canActivate: [AuthGuard], component: CasesComponent },
     { path: 'case/create', canActivate: [AuthGuard], component: CreateCaseComponent },
     { path: 'case/:caseId/edit', canActivate: [AuthGuard], component: EditCaseComponent },
