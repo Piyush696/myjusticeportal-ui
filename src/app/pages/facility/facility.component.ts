@@ -6,9 +6,6 @@ import { ToasterService } from 'app/services/toaster.service';
 import { FacilityService } from 'app/services/facility.service';
 import { MatDialog } from '@angular/material/dialog';
 import { FormBuilder, FormGroup, Validators, AbstractControl } from '@angular/forms';
-import { RegistrationService } from 'app/services/registration.service';
-
-
 
 @Component({
   selector: 'app-facility',
@@ -29,7 +26,7 @@ export class FacilityComponent implements OnInit {
   addressForm: FormGroup;
   facilityAddressId: number;
 
-  constructor(private registrationService: RegistrationService, private toasterService: ToasterService, private facilityService: FacilityService, public dialog: MatDialog, private fb: FormBuilder) { }
+  constructor(private toasterService: ToasterService, private facilityService: FacilityService, public dialog: MatDialog, private fb: FormBuilder) { }
 
   ngOnInit(): void {
     this.facilityForm = this.fb.group({
@@ -51,7 +48,7 @@ export class FacilityComponent implements OnInit {
   }
 
   async validateUserNotTaken(control: AbstractControl) {
-    const result: any = await this.registrationService.checkFacilityCode({ facilityCode: control.value }).toPromise();
+    const result: any = await this.facilityService.checkFacilityCode(control.value).toPromise();
     if (result.taken) {
       return { taken: true };
     } else {
