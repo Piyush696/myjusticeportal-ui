@@ -7,11 +7,10 @@ export interface RouteInfo {
     icon: string;
     class: string;
     roleIds: number[];
-    isFacility?: boolean;
 }
 
 export const ROUTES: RouteInfo[] = [
-    { path: '/case', title: 'My Cases', icon: 'nc-bank', class: '', roleIds: [1, 4], isFacility: true },
+    { path: '/case', title: 'My Cases', icon: 'nc-bank', class: '', roleIds: [1, 4] },
     // { path: '/dashboard', title: 'Dashboard', icon: 'nc-bank', class: '', roleIds: [] },
     // { path: ':facilityCode/userdashboard', title: 'Dashboard', icon: 'nc-bank', class: '', roleIds: [1] },
     { path: '/users', title: 'All Users', icon: 'nc-bank', class: '', roleIds: [7] },
@@ -19,7 +18,7 @@ export const ROUTES: RouteInfo[] = [
     { path: '/app-setting', title: 'Application Settings', icon: 'nc-bank', class: '', roleIds: [7] },
     { path: '/law-library', title: 'Law Library', icon: 'nc-bank', class: '', roleIds: [4, 5, 6] },
     { path: '/legal-research-Assistance', title: 'Legal Research Assistance', icon: 'nc-bank', class: '', roleIds: [4, 6] },
-    { path: '/legal-forms', title: 'Legal Forms', icon: 'nc-bank', class: '', roleIds: [1, 2], isFacility: false },
+    { path: '/legal-forms', title: 'Legal Forms', icon: 'nc-bank', class: '', roleIds: [1, 2] },
     { path: '/ask-lawyer', title: 'Ask a lawyer', icon: 'nc-bank', class: '', roleIds: [3, 4, 7] },
     { path: '/hire-lawyer', title: 'Hire a lawyer', icon: 'nc-bank', class: '', roleIds: [3, 6, 7] },
     { path: '/message-lawyer', title: 'Message My lawyer', icon: 'nc-bank', class: '', roleIds: [1, 3] },
@@ -52,8 +51,6 @@ export class SidebarComponent implements OnInit {
         this.filteredMenuItems = ROUTES.filter(menu => {
             let isExist = menu.roleIds.find(roleId => roleId == this.userRole.roleId);
             if (isExist) {
-                if (menu.isFacility) {
-                }
                 return menu;
             }
         });
