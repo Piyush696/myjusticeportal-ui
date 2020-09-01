@@ -1,5 +1,5 @@
 import { HttpClientModule } from '@angular/common/http';
-import { NgModule } from '@angular/core';
+import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
@@ -47,6 +47,11 @@ import { MobileRegistrationComponent } from './shared/mobile-registration/mobile
 import { AdditionalInfoComponent } from './shared/additional-info/additional-info.component';
 import { ResetPasswordComponent } from './pages/reset-password/reset-password.component';
 import { FacilityService } from './services/facility.service';
+import { AuthLoadService } from './services/auth/auth.service';
+
+export function usersProviderFactory(provider: AuthLoadService) {
+  return () => provider.setUserbyAPI();
+}
 
 @NgModule({
   declarations: [
@@ -101,6 +106,8 @@ import { FacilityService } from './services/facility.service';
     LoginService,
     FacilityService,
     { provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { appearance: 'fill' } },
+    AuthLoadService,
+    { provide: APP_INITIALIZER, useFactory: usersProviderFactory, deps: [AuthLoadService], multi: true }
   ],
   bootstrap: [AppComponent]
 })
