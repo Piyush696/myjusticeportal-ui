@@ -9,7 +9,7 @@ import { LoadRole } from 'app/store/actions/role.actions';
 @Component({
   selector: 'app-email-registration',
   templateUrl: './email-registration.component.html',
-  styleUrls: ['./email-registration.component.css']
+  styleUrls: ['./email-registration.component.scss']
 })
 
 export class EmailRegistrationComponent implements OnInit {
