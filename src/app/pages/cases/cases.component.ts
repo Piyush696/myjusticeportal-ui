@@ -17,12 +17,14 @@ export class CasesComponent implements OnInit {
   buttonText: string = 'Edit';
   currentCaseId: any;
 
-  constructor(private toasterService: ToasterService, public dialog: MatDialog,
-    private caseService: CaseService, private route: Router, private fb: FormBuilder) { }
+  constructor(private router: Router,
+    private toasterService: ToasterService, public dialog: MatDialog,
+    private caseService: CaseService, private fb: FormBuilder) {
+  }
 
   ngOnInit(): void {
     this.getCases();
-    this.createCaseNotesForm()
+    this.createCaseNotesForm();
   }
 
   createCaseNotesForm() {
@@ -49,7 +51,7 @@ export class CasesComponent implements OnInit {
   }
 
   onViewCase(caseId) {
-    this.route.navigateByUrl('/case/' + caseId);
+    this.router.navigateByUrl('/case/' + caseId);
   }
 
   onSaveChanges() {
@@ -58,7 +60,7 @@ export class CasesComponent implements OnInit {
       this.dialog.closeAll();
       this.getCases();
       this.buttonText = 'Edit';
-      this.toasterService.showSuccessToater('Notes Updated Successfully.')
+      this.toasterService.showSuccessToater('Notes Updated Successfully.');
     })
   }
 }

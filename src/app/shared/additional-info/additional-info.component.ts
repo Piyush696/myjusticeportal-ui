@@ -24,13 +24,9 @@ export class AdditionalInfoComponent implements OnInit {
   }
 
   submit() {
-
     var userMetaList = [{ metaKey: 'housing_unit', metaValue: this.additionalInfo.get('housing_unit').value },
     { metaKey: 'facility', metaValue: this.additionalInfo.get('facility').value }]
-    this.userMetaService.createUserMeta({ metaList: userMetaList, userName: this.userName }).subscribe(
-      (res: any) => {
-        this.userMetaEventEmitter.emit(true);
-      })
+    this.userMetaEventEmitter.emit(userMetaList);
   }
 
 }

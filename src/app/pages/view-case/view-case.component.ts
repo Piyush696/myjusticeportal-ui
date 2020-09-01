@@ -12,7 +12,8 @@ export class ViewCaseComponent implements OnInit {
   caseDetails: any;
 
   constructor(private router: Router, private route: ActivatedRoute,
-    private caseService: CaseService) { }
+    private caseService: CaseService) {
+  }
 
   ngOnInit(): void {
     this.getCase();
@@ -25,8 +26,7 @@ export class ViewCaseComponent implements OnInit {
   }
 
   editCase() {
-    let url = '/case/' + this.route.snapshot.params['caseId'] + '/edit';
-    this.router.navigateByUrl(url);
+    this.router.navigateByUrl('/case/' + this.route.snapshot.params['caseId'] + '/edit');
   }
 
   onClickViewFiles() {

@@ -39,7 +39,6 @@ export class FacilityComponent implements OnInit {
 
   getAllFacilities() {
     this.facilityService.getAllFacility().subscribe((res: any) => {
-      console.log(res)
       this.dataSource = new MatTableDataSource(res.data);
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
