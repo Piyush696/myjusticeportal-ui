@@ -29,7 +29,6 @@ export class AuthLoadService {
       return new Promise((resolve, reject) => {
         this.httpClient.get(`${this.apiPath}/users/check-token`, httpOptions)
           .subscribe((response: any) => {
-            console.log(response)
             this.store.dispatch(new AddUserInfo(Object.assign({}, response.user)));
             resolve(true);
           },
