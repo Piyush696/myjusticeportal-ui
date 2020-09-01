@@ -9,7 +9,7 @@ import { LoadRole } from 'app/store/actions/role.actions';
 @Component({
   selector: 'app-email-registration',
   templateUrl: './email-registration.component.html',
-  styleUrls: ['./email-registration.component.css']
+  styleUrls: ['./email-registration.component.scss']
 })
 
 export class EmailRegistrationComponent implements OnInit {
@@ -18,11 +18,12 @@ export class EmailRegistrationComponent implements OnInit {
   isNextDisabled: boolean = true;
 
   @Input() roleId;
-  @Output() isNextEvent = new EventEmitter()
-  @Input() totalSteps: any
+  @Output() isNextEvent = new EventEmitter();
+  @Input() totalSteps: any;
 
   constructor(public securityService: SecurityService, public dialog: MatDialog, private fb: FormBuilder,
-    private registrationService: RegistrationService, private store: Store<any>) { }
+    private registrationService: RegistrationService, private store: Store<any>) {
+  }
 
   ngOnInit(): void {
     this.store.dispatch(new LoadRole());
@@ -97,11 +98,11 @@ export class EmailRegistrationComponent implements OnInit {
       "userName": this.registrationForm.get('userName').value,
       "password": this.registrationForm.get('password').value
     }
-    this.isNextEvent.emit(userData)
+    this.isNextEvent.emit(userData);
   }
 
   onAcceptTerms() {
     this.isNextDisabled = false;
-    this.registrationForm.get('termCondition').setValue(true)
+    this.registrationForm.get('termCondition').setValue(true);
   }
 }

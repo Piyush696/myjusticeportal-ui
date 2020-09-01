@@ -18,14 +18,15 @@ export class CasesComponent implements OnInit {
   currentCaseId: any;
   facilityCode: any;
 
-  constructor(private activatedRoute: ActivatedRoute, private router: Router, private toasterService: ToasterService, public dialog: MatDialog, private caseService: CaseService, private route: Router, private fb: FormBuilder) {
+  constructor(private activatedRoute: ActivatedRoute, private router: Router,
+    private toasterService: ToasterService, public dialog: MatDialog,
+    private caseService: CaseService, private fb: FormBuilder) {
     this.facilityCode = this.activatedRoute.snapshot.params.facilityCode;
-    console.log(this.facilityCode)
   }
 
   ngOnInit(): void {
     this.getCases();
-    this.createCaseNotesForm()
+    this.createCaseNotesForm();
   }
 
   createCaseNotesForm() {
@@ -52,8 +53,7 @@ export class CasesComponent implements OnInit {
   }
 
   onViewCase(caseId) {
-    let _url = this.facilityCode + '/case/' + caseId
-    this.route.navigateByUrl(_url);
+    this.router.navigateByUrl(this.facilityCode + '/case/' + caseId);
   }
 
   onSaveChanges() {
@@ -62,11 +62,11 @@ export class CasesComponent implements OnInit {
       this.dialog.closeAll();
       this.getCases();
       this.buttonText = 'Edit';
-      this.toasterService.showSuccessToater('Notes Updated Successfully.')
+      this.toasterService.showSuccessToater('Notes Updated Successfully.');
     })
   }
+
   onCreateCase() {
-    let _url = this.facilityCode + '/case/create'
-    this.router.navigateByUrl(_url)
+    this.router.navigateByUrl(this.facilityCode + '/case/create');
   }
 }

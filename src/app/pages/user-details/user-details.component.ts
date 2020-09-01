@@ -104,9 +104,9 @@ export class UserDetailsComponent implements OnInit, OnDestroy {
         data.isMFA = this.userDetailsForm.get('isMFA').value;
         this.userService.updateSingleUser(data).subscribe((res: any) => {
             if (res.success) {
-                this.toasterService.showSuccessToater('Mfa changed successfully.');
+                this.toasterService.showSuccessToater('MFA changed successfully.');
             } else {
-                this.toasterService.showErrorToater('Mfa change unsuccessful.');
+                this.toasterService.showErrorToater('MFA change unsuccessful.');
             }
             this.onGetUserDetails();
         });
