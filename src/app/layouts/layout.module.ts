@@ -36,6 +36,7 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 import { FacilityComponent } from 'app/pages/facility/facility.component';
+import { UserDashboardComponent } from 'app/pages/user-dashboard/user-dashboard.component';
 
 @NgModule({
   imports: [
@@ -79,7 +80,8 @@ import { FacilityComponent } from 'app/pages/facility/facility.component';
     AppSettingsComponent,
     PostageAppComponent,
     TwilioCredentialsComponent,
-    FacilityComponent
+    FacilityComponent,
+    UserDashboardComponent
   ],
   providers: [
     MatDatepickerModule,

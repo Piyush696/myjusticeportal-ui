@@ -1,12 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CacheService } from 'app/services/cache.service';
-import { LoginService } from 'app/services/login.service';
-import { RegistrationService } from 'app/services/registration.service';
 import { ToasterService } from 'app/services/toaster.service';
 import { Store } from '@ngrx/store';
+import { UserRegistrationService } from 'app/services/registration/user-registration.service';
+import { LoginService } from 'app/services/login.service';
 import { AddUserInfo } from 'app/store/actions/userInfo.actions';
-
 @Component({
   selector: 'app-user-registration',
   templateUrl: './user-registration.component.html',
@@ -15,40 +14,54 @@ import { AddUserInfo } from 'app/store/actions/userInfo.actions';
 export class UserRegistrationComponent implements OnInit {
 
   step: number = 1;
-  userName: string;
   roleId: number = 1;
   totalSteps: number = 3
   facilityCode: any;
+  userRegData = {};
 
-  constructor(private activatedRoute: ActivatedRoute, private store: Store<any>,
-    private loginService: LoginService, private cacheService: CacheService,
-    private registrationService: RegistrationService, private toasterService: ToasterService, private router: Router) {
+  constructor(private loginService: LoginService, private activatedRoute: ActivatedRoute, private store: Store<any>,
+    private userRegistrationService: UserRegistrationService, private cacheService: CacheService, private toasterService: ToasterService, private router: Router) {
+
     this.facilityCode = this.activatedRoute.snapshot.params.facilityCode;
     console.log(this.facilityCode)
+
   }
 
   ngOnInit(): void {
   }
 
-  onNextClick(value) {
+  onNextClick(userDetails) {
     this.step = 2;
-    this.userName = value;
+    console.log(userDetails)
+    this.userRegData = userDetails
   }
 
-  userMetaData(value) {
+  userMetaData(userMetaData) {
+    console.log(userMetaData)
     this.step = 3;
+    this.userRegData['userMeta'] = userMetaData
   }
 
-  onUpdateRegisteredUser(value: boolean) {
-    this.registrationService.updateUser(value).subscribe((user: any) => {
-      this.cacheService.setCache('token', user.token);
-      this.loginService.checkToken().then((data: any) => {
-        if (data.success) {
-          this.store.dispatch(new AddUserInfo(Object.assign({}, data.user)));
-          this.toasterService.showSuccessToater('Welcome to My Justice Portal.')
-          this.router.navigateByUrl(this.facilityCode + '/userdashboard')
-        }
-      })
+  onUpdateRegisteredUser(userSecurityQuestionData) {
+    console.log(userSecurityQuestionData)
+    this.userRegData['securityQuestionData'] = userSecurityQuestionData
+    this.userRegData['facilityCode'] = this.facilityCode;
+    console.log(this.userRegData)
+    this.userRegistrationService.userRegistration(this.userRegData).subscribe((user: any) => {
+      console.log(user)
+      if (user.token) {
+        this.cacheService.setCache('token', user.token);
+        this.loginService.checkToken().then((data: any) => {
+          if (data.success) {
+            this.store.dispatch(new AddUserInfo(Object.assign({}, data.user)));
+            this.toasterService.showSuccessToater('Welcome to My Justice Portal.')
+            this.router.navigateByUrl(this.facilityCode + '/userdashboard')
+          }
+        })
+      }
+      else {
+        this.toasterService.showSuccessToater('Welcome to My Justice Portal.')
+      }
     })
   }
 

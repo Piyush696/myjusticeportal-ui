@@ -10,8 +10,9 @@ export interface RouteInfo {
 }
 
 export const ROUTES: RouteInfo[] = [
-    { path: '/case', title: 'My Cases', icon: 'nc-bank', class: '', roleIds: [1, 4] },
+    { path: '/Blr001/case', title: 'My Cases', icon: 'nc-bank', class: '', roleIds: [1, 4] },
     // { path: '/dashboard', title: 'Dashboard', icon: 'nc-bank', class: '', roleIds: [] },
+    // { path: ':facilityCode/userdashboard', title: 'Dashboard', icon: 'nc-bank', class: '', roleIds: [1] },
     { path: '/users', title: 'All Users', icon: 'nc-bank', class: '', roleIds: [7] },
     { path: '/My-Dockets', title: 'My Dockets', icon: 'nc-bank', class: '', roleIds: [2] },
     { path: '/app-setting', title: 'Application Settings', icon: 'nc-bank', class: '', roleIds: [7] },
@@ -42,6 +43,8 @@ export class SidebarComponent implements OnInit {
 
     ngOnInit() {
         this.store.select(s => s.userInfo).subscribe(x => {
+            console.log(x)
+            console.log(x.role[0])
             this.userRole = x.role[0];
         })
         this.filterMenuByUser();
@@ -50,6 +53,7 @@ export class SidebarComponent implements OnInit {
     filterMenuByUser() {
         this.filteredMenuItems = ROUTES.filter(menu => {
             let isExist = menu.roleIds.find(roleId => roleId == this.userRole.roleId);
+            console.log(menu.roleIds.find(roleId => roleId == this.userRole.roleId))
             if (isExist) {
                 return menu;
             }
