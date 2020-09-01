@@ -12,7 +12,6 @@ export interface RouteInfo {
 
 export const ROUTES: RouteInfo[] = [
     { path: '/case', title: 'My Cases', icon: 'nc-bank', class: '', roleIds: [1, 4], isFacility: true },
-    // { path: '/Blr001/case', title: 'My Cases', icon: 'nc-bank', class: '', roleIds: [1, 4] },
     // { path: '/dashboard', title: 'Dashboard', icon: 'nc-bank', class: '', roleIds: [] },
     // { path: ':facilityCode/userdashboard', title: 'Dashboard', icon: 'nc-bank', class: '', roleIds: [1] },
     { path: '/users', title: 'All Users', icon: 'nc-bank', class: '', roleIds: [7] },

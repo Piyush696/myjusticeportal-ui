@@ -47,7 +47,7 @@ export class LoginComponent implements OnInit {
           console.log(data)
           this.store.dispatch(new AddUserInfo(Object.assign({}, data.user)));
           if (data.success) {
-            this.router.navigateByUrl(this.facilityCode + '/userdashboard')
+            this.router.navigateByUrl('/userdashboard')
             this.toasterService.showSuccessToater('Welcome to My Justice Portal.');
           }
           else {
