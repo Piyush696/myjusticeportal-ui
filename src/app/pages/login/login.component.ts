@@ -9,7 +9,6 @@ import { ToasterService } from 'app/services/toaster.service';
 import { RegistrationService } from 'app/services/registration.service';
 import { UserLoginService } from 'app/services/login/user-login.service';
 
-
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -52,9 +51,12 @@ export class LoginComponent implements OnInit {
             this.toasterService.showSuccessToater('Welcome to My Justice Portal.');
           }
           else {
-            this.toasterService.showErrorToater(res.data);
+            this.toasterService.showErrorToater(data.data);
           }
         })
+      }
+      else {
+        this.toasterService.showErrorToater(res.data);
       }
     })
     // this.loginService.userLogin(
