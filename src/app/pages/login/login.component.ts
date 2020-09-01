@@ -22,7 +22,6 @@ export class LoginComponent implements OnInit {
     private loginService: LoginService, private toasterService: ToasterService,
     private cacheService: CacheService, private registrationService: RegistrationService) {
     this.facilityCode = this.activatedRoute.snapshot.params.facilityCode;
-    console.log(this.facilityCode)
 
   }
 
@@ -44,7 +43,6 @@ export class LoginComponent implements OnInit {
       if (res.success) {
         this.cacheService.setCache('token', res.token);
         this.loginService.checkToken().then((data: any) => {
-          console.log(data)
           this.store.dispatch(new AddUserInfo(Object.assign({}, data.user)));
           if (data.success) {
             this.router.navigateByUrl('/userdashboard')
@@ -123,8 +121,4 @@ export class LoginComponent implements OnInit {
       }
     })
   }
-
-  // userMetaData(value) {
-  //   console.log(value)
-  // }
 }

@@ -43,8 +43,6 @@ export class SidebarComponent implements OnInit {
 
     ngOnInit() {
         this.store.select(s => s.userInfo).subscribe(x => {
-            console.log(x)
-            console.log(x.role[0])
             this.userRole = x.role[0];
         });
         this.filterMenuByUser();
@@ -53,10 +51,8 @@ export class SidebarComponent implements OnInit {
     filterMenuByUser() {
         this.filteredMenuItems = ROUTES.filter(menu => {
             let isExist = menu.roleIds.find(roleId => roleId == this.userRole.roleId);
-            console.log(menu.roleIds.find(roleId => roleId == this.userRole.roleId))
             if (isExist) {
                 if (menu.isFacility) {
-                    console.log(menu);
                 }
                 return menu;
             }
