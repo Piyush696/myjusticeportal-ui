@@ -10,12 +10,12 @@ import { RegistrationService } from 'app/services/registration.service';
 import { UserLoginService } from 'app/services/login/user-login.service';
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  selector: 'app-user-login',
+  templateUrl: './user-login.component.html',
+  styleUrls: ['./user-login.component.scss']
 })
 
-export class LoginComponent implements OnInit {
+export class UserLoginComponent implements OnInit {
   loginForm: FormGroup;
   step: number = 1;
   facilityCode: any;

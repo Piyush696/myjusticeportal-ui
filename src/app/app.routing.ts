@@ -4,11 +4,11 @@ import { BondsmanRegistrationComponent } from './pages/bondsman-registration/bon
 import { FacilityRegistrationComponent } from './pages/facility-registration/facility-registration.component';
 import { ForgetPasswordComponent } from './pages/forget-password/forget-password.component';
 import { LawyerRegistrationComponent } from './pages/lawyer-registration/lawyer-registration.component';
-import { LoginComponent } from './pages/login/login.component';
 import { ParalegalRegistrationComponent } from './pages/paralegal-registration/paralegal-registration.component';
 import { UserRegistrationComponent } from './pages/user-registration/user-registration.component';
 import { ResetPasswordComponent } from './pages/reset-password/reset-password.component';
 import { PublicDefenderRegistrationComponent } from './pages/public-defender-registration/public-defender-registration.component';
+import { LoginComponent } from './pages/all-login/login/login.component';
 
 export const AppRoutes: Routes = [
   { path: '', redirectTo: 'dashboard', pathMatch: 'full' },

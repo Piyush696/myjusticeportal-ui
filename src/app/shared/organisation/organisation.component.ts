@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output, Input } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
@@ -11,6 +11,7 @@ export class OrganisationComponent implements OnInit {
   organisationForm: FormGroup;
   addressForm: FormGroup;
 
+  @Input() totalSteps: any;
   @Output() orgAddressEventEmitter = new EventEmitter();
 
   constructor(private fb: FormBuilder) { }
