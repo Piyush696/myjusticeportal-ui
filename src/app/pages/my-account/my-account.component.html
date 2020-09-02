@@ -5,7 +5,7 @@
     <div class="col-9 pl-1">
         <div class="row">
             <!-- <div class="w-100 p-4"> -->
-            <div class="col-3">
+            <div class="col-3 p-0 pl-3">
                 <mat-form-field appearance="fill" class="w-100 p-1">
                     <mat-label>First Name</mat-label>
                     <input type="text" matInput placeholder="Legal First Name"
@@ -20,7 +20,7 @@
                     </mat-error>
                 </mat-form-field>
             </div>
-            <div class="col-3">
+            <div class="col-3 p-0">
                 <mat-form-field appearance="fill" class="w-100 p-1">
                     <mat-label>Middle Name</mat-label>
                     <input type="text" matInput placeholder="Legal Middle Name"
@@ -35,7 +35,7 @@
                     </mat-error>
                 </mat-form-field>
             </div>
-            <div class="col-3">
+            <div class="col-3 p-0 pr-3">
                 <mat-form-field appearance="fill" class="w-100 p-1">
                     <mat-label>Last Name</mat-label>
                     <input type="text" matInput placeholder="Legal Last Name"
@@ -111,14 +111,16 @@
                 </div>
             </div>
         </div>
-        <div class="row d-flex justify-content-center">
-            <div class="pr-3">
-                <button class="px-4 py-1" mat-raised-button color="primary"
-                    (click)="openModal(manageSecurityQuestionModal)">Manage Security Questions</button>
-            </div>
-            <div>
-                <button class="px-4 py-1" mat-raised-button color="primary" (click)="editChanges()">Edit
-                    Changes</button>
+        <div class="row">
+            <div class="col-9 d-flex justify-content-end">
+                <div class="pr-3">
+                    <button class="px-4 py-1" mat-raised-button color="primary"
+                        (click)="openModal(manageSecurityQuestionModal)">Manage Security Questions</button>
+                </div>
+                <div>
+                    <button class="px-4 py-1" mat-raised-button color="primary" (click)="editChanges()">Edit
+                        Changes</button>
+                </div>
             </div>
         </div>
     </div>
