@@ -36,5 +36,8 @@ export class FacilityService {
   deleteFacility(facilityId) {
     return this.httpClient.delete<object>(`${this.apiPath}/facility/` + facilityId, this.getHeaders())
   }
+  checkFacilityCode(code) {
+    return this.httpClient.get<Object>(`${this.apiPath}/facility/facilityCode/check/` + code, this.getHeaders());
+  }
 
 }
