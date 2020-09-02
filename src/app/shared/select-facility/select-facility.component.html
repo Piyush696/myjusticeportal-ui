@@ -6,7 +6,7 @@
         <mat-card class="p-4">
             <ul>
                 <li *ngFor="let facility of facilityList">
-                    <mat-checkbox (change)="onNativeChange($event.checked,facility.facilityId)">
+                    <mat-checkbox color="primary" (change)="onNativeChange($event.checked,facility.facilityId)">
                         {{facility.facilityCode}}
                     </mat-checkbox>
                 </li>

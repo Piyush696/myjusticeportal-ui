@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ToasterService } from 'app/services/toaster.service';
 import { Router } from '@angular/router';
+import { LawerService } from 'app/services/registration/lawer.service';
 
 @Component({
   selector: 'app-lawyer-registration',
@@ -13,41 +14,47 @@ export class LawyerRegistrationComponent implements OnInit {
   roleId: number = 2;
   regUserData = {};
   totalSteps: number = 2;
+  registrationData = {
+    'user': {},
+    'organization': {
+      'address': {}
+    },
+    'facilityIds': {}
+  }
 
-  constructor() { }
+  constructor(private lawerService: LawerService) { }
 
   ngOnInit(): void {
   }
 
   onNextClick(userData) {
-    console.log(userData)
     if (userData) {
-      this.regUserData['user'] = userData;
+      this.registrationData.user = userData;
       this.step = 2;
-    }
-    else {
+    } else {
       this.step = 1;
     }
   }
 
-  onCreateOrganisation(OrgData) {
-    console.log(OrgData)
-    if (OrgData) {
+  onCreateOrganisation(orgData) {
+    if (orgData) {
       this.step = 3;
-      this.regUserData['organization'] = OrgData
-    }
-    else {
+      this.registrationData.organization = orgData.name;
+      this.registrationData.organization.address = orgData.address;
+    } else {
       this.step = 2;
     }
   }
 
   onSelectedfacility(selectedfacility) {
     if (selectedfacility) {
-      this.step = 4
-      this.regUserData['facilities'] = selectedfacility
-      console.log(this.regUserData)
-    }
-    else {
+      this.step = 4;
+      this.registrationData.facilityIds = selectedfacility;
+      console.log(this.registrationData);
+      this.lawerService.onRegistration(this.registrationData).subscribe((res: any) => {
+        console.log(res);
+      });
+    } else {
       this.step = 3;
     }
   }
