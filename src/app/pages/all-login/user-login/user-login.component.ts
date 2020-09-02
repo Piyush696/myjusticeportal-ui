@@ -59,43 +59,6 @@ export class UserLoginComponent implements OnInit {
         this.toasterService.showErrorToater(res.data);
       }
     })
-    // this.loginService.userLogin(
-    //   this.loginForm.get('userName').value,
-    //   this.loginForm.get('password').value,
-    // ).subscribe(
-    //   (res: any) => {
-    //     if (res.success) {
-    //       this.cacheService.setCache('token', res.token);
-    //       this.loginService.checkToken().then((data: any) => {
-    //         this.store.dispatch(new AddUserInfo(Object.assign({}, data.user)));
-    //         if (data.success) {
-    //           this.router.navigateByUrl('/dashboard')
-    //           this.toasterService.showSuccessToater('Welcome to My Justice Portal.');
-    //         }
-    //         else {
-    //           this.toasterService.showErrorToater(data.error.name);
-    //         }
-    //       })
-    //     }
-    //     else {
-    //       if (res.data === 'Please Enter Your auth code.') {
-    //         this.toasterService.showSuccessToater(res.data);
-    //         this.step = 2;
-    //       }
-    //       else if (res.data === 'Please Register your Mobile Number.') {
-    //         this.toasterService.showSuccessToater(res.data);
-    //         this.step = 3;
-    //       }
-    //       else if (res.data === 'Please complete your registration.') {
-    //         this.toasterService.showWarningToater(res.data);
-    //         // this.step = 4;
-    //       }
-    //       else {
-    //         this.step = 1
-    //         this.toasterService.showWarningToater(res.data);
-    //       }
-    //     }
-    //   })
   }
 
   onVerify() {

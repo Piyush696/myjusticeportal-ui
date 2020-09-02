@@ -9,6 +9,7 @@ import { UserRegistrationComponent } from './pages/user-registration/user-regist
 import { ResetPasswordComponent } from './pages/reset-password/reset-password.component';
 import { PublicDefenderRegistrationComponent } from './pages/public-defender-registration/public-defender-registration.component';
 import { LoginComponent } from './pages/all-login/login/login.component';
+import { UserLoginComponent } from './pages/all-login/user-login/user-login.component';
 
 export const AppRoutes: Routes = [
   { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
@@ -19,7 +20,7 @@ export const AppRoutes: Routes = [
     }]
   },
   { path: 'login', component: LoginComponent },
-  { path: ':facilityCode/login', component: LoginComponent },
+  { path: ':facilityCode/login', component: UserLoginComponent },
   // { path: 'register', component: RegistrationComponent },
   { path: 'registration', component: UserRegistrationComponent },
   { path: 'lawyer/registration', component: LawyerRegistrationComponent },
