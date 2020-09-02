@@ -48,6 +48,7 @@ import { AdditionalInfoComponent } from './shared/additional-info/additional-inf
 import { ResetPasswordComponent } from './pages/reset-password/reset-password.component';
 import { FacilityService } from './services/facility.service';
 import { AuthLoadService } from './services/auth/auth.service';
+import { OrganisationComponent } from './shared/organisation/organisation/organisation.component';
 
 export function usersProviderFactory(provider: AuthLoadService) {
   return () => provider.setUserbyAPI();
@@ -71,7 +72,8 @@ export function usersProviderFactory(provider: AuthLoadService) {
     EmailRegistrationComponent,
     MobileRegistrationComponent,
     AdditionalInfoComponent,
-    ResetPasswordComponent
+    ResetPasswordComponent,
+    OrganisationComponent
   ],
   imports: [
     BrowserModule,

@@ -7,6 +7,7 @@ import { Router } from '@angular/router';
   templateUrl: './lawyer-registration.component.html',
   styleUrls: ['./lawyer-registration.component.css']
 })
+
 export class LawyerRegistrationComponent implements OnInit {
   step: number = 1;
   roleId: number = 2;
@@ -19,6 +20,7 @@ export class LawyerRegistrationComponent implements OnInit {
   }
 
   onNextClick(value) {
+    console.log(value)
     if (value) {
       this.userName = value;
       this.step = 2;
