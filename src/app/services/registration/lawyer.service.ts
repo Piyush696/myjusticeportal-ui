@@ -7,7 +7,7 @@ import { environment } from 'environments/environment';
   providedIn: 'root'
 })
 
-export class LawerService {
+export class LawyerService {
   private apiPath: string;
   allUsers: string;
 

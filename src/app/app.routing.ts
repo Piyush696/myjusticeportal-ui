@@ -1,13 +1,13 @@
 import { Routes } from '@angular/router';
 import { LayoutComponent } from './layouts/layout.component';
-import { BondsmanRegistrationComponent } from './pages/bondsman-registration/bondsman-registration.component';
-import { FacilityRegistrationComponent } from './pages/facility-registration/facility-registration.component';
+import { UserRegistrationComponent } from './pages/all-registration/user-registration/user-registration.component';
+import { FacilityRegistrationComponent } from './pages/all-registration/facility-registration/facility-registration.component';
+import { LawyerRegistrationComponent } from './pages/all-registration/lawyer-registration/lawyer-registration.component';
+import { ParalegalRegistrationComponent } from './pages/all-registration/paralegal-registration/paralegal-registration.component';
+import { PublicDefenderRegistrationComponent } from './pages/all-registration/public-defender-registration/public-defender-registration.component';
+import { BondsmanRegistrationComponent } from './pages/all-registration/bondsman-registration/bondsman-registration.component';
 import { ForgetPasswordComponent } from './pages/forget-password/forget-password.component';
-import { LawyerRegistrationComponent } from './pages/lawyer-registration/lawyer-registration.component';
-import { ParalegalRegistrationComponent } from './pages/paralegal-registration/paralegal-registration.component';
-import { UserRegistrationComponent } from './pages/user-registration/user-registration.component';
 import { ResetPasswordComponent } from './pages/reset-password/reset-password.component';
-import { PublicDefenderRegistrationComponent } from './pages/public-defender-registration/public-defender-registration.component';
 import { LoginComponent } from './pages/all-login/login/login.component';
 import { UserLoginComponent } from './pages/all-login/user-login/user-login.component';
 
