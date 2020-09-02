@@ -132,5 +132,37 @@ textarea[disabled] {
     position: absolute !important;
     box-shadow: 1px 2px 7px 1px rgba(0, 0, 0, 0.125) !important;
     transition: all 0.3s cubic-bezier(0.215, 0.61, 0.355, 1) 0s, opacity 0.3s ease 0s, height 0s linear 0.35s !important;
+    margin-top: 0px !important;
+    padding-left: 0px !important;
+  }
+
+  .navbar-nav .dropdown-menu:after {
+    border-bottom: 11px solid #ffffff !important;
+    border-left: 11px solid rgba(0, 0, 0, 0) !important;
+    border-right: 11px solid rgba(0, 0, 0, 0) !important;
+    content: "" !important;
+    display: inline-block !important;
+    position: absolute !important;
+    right: 12px !important;
+    top: -11px !important;
+  }
+
+  .dropdown-menu .dropdown-item:hover,
+  .dropdown-menu .dropdown-item:focus {
+    background-color: #66615b;
+    padding: 10px 45px 10px 15px;
+    clear: both;
+    white-space: nowrap;
+    width: 100%;
+  }
+  .navbar .navbar-nav .nav-link i.nc-icon {
+    top: -11px;
+    font-size: 22px;
+    font-weight: bold;
+    transition: all 0.3s cubic-bezier(0.215, 0.61, 0.355, 1) 0s, opacity 0.3s ease 0s, height 0s linear 0.35s !important;
+  }
+  .dropdown .dropdown-toggle:after {
+    padding-top: 13px;
+    font-size: 17px;
   }
 }
