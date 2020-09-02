@@ -17,6 +17,7 @@ import { ViewCaseFilesComponent } from 'app/pages/view-case-files/view-case-file
 import { FacilityComponent } from 'app/pages/facility/facility.component';
 import { UserDetailsComponent } from 'app/pages/user-details/user-details.component';
 import { UserDashboardComponent } from 'app/pages/user-dashboard/user-dashboard.component';
+import { LawyerdashboardComponent } from 'app/pages/lawyerdashboard/lawyerdashboard.component';
 
 export const LayoutRoutes: Routes = [
     { path: 'dashboard', canActivate: [AuthGuard], component: DashboardComponent },
@@ -24,6 +25,7 @@ export const LayoutRoutes: Routes = [
     { path: 'users/:userId', canActivate: [AuthGuard], component: UserDetailsComponent },
     { path: 'table', canActivate: [AuthGuard], component: TableComponent },
     { path: 'typography', canActivate: [AuthGuard], component: TypographyComponent },
+    { path: 'lawyer-dashboard', canActivate: [AuthGuard], component: LawyerdashboardComponent },
     { path: 'icons', canActivate: [AuthGuard], component: IconsComponent },
     { path: 'maps', canActivate: [AuthGuard], component: MapsComponent },
     { path: 'notifications', canActivate: [AuthGuard], component: NotificationsComponent },

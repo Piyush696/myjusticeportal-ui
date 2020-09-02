@@ -40,4 +40,9 @@ export class FacilityService {
     return this.httpClient.get<Object>(`${this.apiPath}/facility/facilityCode/check/` + code, this.getHeaders());
   }
 
+  getFacilities() {
+    return this.httpClient.get<object>(`${this.apiPath}/user/roleFacility`)
+  }
+
+
 }

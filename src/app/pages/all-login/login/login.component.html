@@ -33,7 +33,9 @@
                     </button>
                     <button
                         [disabled]="this.loginForm.get('userName').invalid || this.loginForm.get('password').invalid"
-                        class="px-4 py-1" mat-raised-button color="primary" (click)="onLogin()">LOGIN</button>
+                        class="px-4 py-1" mat-raised-button color="primary" (click)="onLogin()">
+                        LOGIN
+                    </button>
                 </div>
             </mat-card>
             <mat-card *ngIf="step === 2" class="p-4">
@@ -49,16 +51,17 @@
 
                 <div class="d-flex justify-content-center px-3 mt-2">
                     <button [disabled]="this.loginForm.get('otp').invalid" class="px-4 py-1" mat-raised-button
-                        color="primary" (click)="onVerify()">Verify</button>
+                        color="primary" (click)="onVerify()">
+                        Verify
+                    </button>
                 </div>
             </mat-card>
             <app-mobile-registration *ngIf="step === 3" [userName]="loginForm.get('userName').value">
             </app-mobile-registration>
-            <!-- <app-additional-info *ngIf="step === 4" [userName]="this.loginForm.get('userName').value"
-                (userMetaEventEmitter)="userMetaData($event)"></app-additional-info> -->
             <div class="d-flex justify-content-center p-3">
-                <a [routerLink]="'/forget-password'" class="text-dark">Forget Password? Click here to
-                    reset?</a>
+                <a [routerLink]="'/forget-password'" class="text-dark">
+                    Forget Password? Click here to reset?
+                </a>
             </div>
         </div>
     </div>
@@ -69,6 +72,7 @@
             reproduced in their exact original form, accompanied by English versions from the 1914 translation by H.
             Rackham. when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has
             survived not only five centuries, but also the leap into electronic typesetting, remaining essentially
-            unchanged. Copyright © 2020 My Justice Portal LLC. All rights reserved</p>
+            unchanged. Copyright © 2020 My Justice Portal LLC. All rights reserved
+        </p>
     </div>
 </div>

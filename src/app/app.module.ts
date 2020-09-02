@@ -21,7 +21,7 @@ import { FooterModule } from './layouts/footer/footer.module';
 import { LayoutComponent } from './layouts/layout.component';
 import { NavbarModule } from './layouts/navbar/navbar.module';
 import { SidebarModule } from './layouts/sidebar/sidebar.module';
-import { LoginComponent } from './pages/login/login.component';
+import { LoginComponent } from './pages/all-login/login/login.component';
 import { RegistrationComponent } from './pages/registration/registration.component';
 import { CacheService } from './services/cache.service';
 import { LoginService } from './services/login.service';
@@ -48,6 +48,9 @@ import { AdditionalInfoComponent } from './shared/additional-info/additional-inf
 import { ResetPasswordComponent } from './pages/reset-password/reset-password.component';
 import { FacilityService } from './services/facility.service';
 import { AuthLoadService } from './services/auth/auth.service';
+import { OrganisationComponent } from './shared/organisation/organisation.component';
+import { SelectFacilityComponent } from './shared/select-facility/select-facility.component';
+import { UserLoginComponent } from './pages/all-login/user-login/user-login.component';
 
 export function usersProviderFactory(provider: AuthLoadService) {
   return () => provider.setUserbyAPI();
@@ -71,7 +74,10 @@ export function usersProviderFactory(provider: AuthLoadService) {
     EmailRegistrationComponent,
     MobileRegistrationComponent,
     AdditionalInfoComponent,
-    ResetPasswordComponent
+    ResetPasswordComponent,
+    OrganisationComponent,
+    SelectFacilityComponent,
+    UserLoginComponent
   ],
   imports: [
     BrowserModule,
