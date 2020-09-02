@@ -1,0 +1,19 @@
+<div class="d-flex justify-content-center align-items-center bg-color">
+    <div class="my-3">
+        <div class="d-flex justify-content-center">
+            <img src="assets/img/logo.png" alt="logo" class="logo">
+        </div>
+        <mat-card class="p-4">
+            <ul>
+                <li *ngFor="let facility of facilityList">
+                    <mat-checkbox (change)="onNativeChange($event.checked,facility.facilityId)">
+                        {{facility.facilityCode}}
+                    </mat-checkbox>
+                </li>
+            </ul>
+            <div class="d-flex justify-content-center px-3 mt-2">
+                <button class="px-4 py-1" mat-raised-button color="primary" (click)="submit()">Submit</button>
+            </div>
+        </mat-card>
+    </div>
+</div>

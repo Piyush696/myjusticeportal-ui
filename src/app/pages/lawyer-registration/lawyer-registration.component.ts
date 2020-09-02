@@ -11,7 +11,7 @@ import { Router } from '@angular/router';
 export class LawyerRegistrationComponent implements OnInit {
   step: number = 1;
   roleId: number = 2;
-  userName;
+  regUserData = {};
   totalSteps: number = 2;
 
   constructor() { }
@@ -19,10 +19,10 @@ export class LawyerRegistrationComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  onNextClick(value) {
-    console.log(value)
-    if (value) {
-      this.userName = value;
+  onNextClick(userData) {
+    console.log(userData)
+    if (userData) {
+      this.regUserData['user'] = userData;
       this.step = 2;
     }
     else {
@@ -30,4 +30,25 @@ export class LawyerRegistrationComponent implements OnInit {
     }
   }
 
+  onCreateOrganisation(OrgData) {
+    console.log(OrgData)
+    if (OrgData) {
+      this.step = 3;
+      this.regUserData['organization'] = OrgData
+    }
+    else {
+      this.step = 2;
+    }
+  }
+
+  onSelectedfacility(selectedfacility) {
+    if (selectedfacility) {
+      this.step = 4
+      this.regUserData['facilities'] = selectedfacility
+      console.log(this.regUserData)
+    }
+    else {
+      this.step = 3;
+    }
+  }
 }
