@@ -16,7 +16,7 @@ export const ROUTES: RouteInfo[] = [
     { path: '/users', title: 'All Users', icon: 'nc-bank', class: '', roleIds: [7] },
     { path: '/my-dockets', title: 'My Dockets', icon: 'nc-bank', class: '', roleIds: [2] },
     { path: '/app-setting', title: 'Application Settings', icon: 'nc-bank', class: '', roleIds: [7] },
-    { path: '/law-library', title: 'Law Library', icon: 'nc-bank', class: '', roleIds: [4, 5, 6] },
+    { path: '', title: 'Law Library', icon: 'nc-bank', class: '', roleIds: [1] },
     { path: '/legal-research-Assistance', title: 'Legal Research Assistance', icon: 'nc-bank', class: '', roleIds: [4, 6] },
     { path: '/legal-forms', title: 'Legal Forms', icon: 'nc-bank', class: '', roleIds: [1, 2] },
     { path: '/ask-lawyer', title: 'Ask a lawyer', icon: 'nc-bank', class: '', roleIds: [3, 4, 7] },
@@ -37,11 +37,13 @@ export const ROUTES: RouteInfo[] = [
 export class SidebarComponent implements OnInit {
     public filteredMenuItems: any[];
     userRole: any;
+    libraryLink: any;
 
     constructor(private store: Store<any>) { };
 
     ngOnInit() {
         this.store.select(s => s.userInfo).subscribe(x => {
+            this.libraryLink = x.facility[0].libraryLink
             this.userRole = x.role[0];
         });
         this.filterMenuByUser();
@@ -55,4 +57,5 @@ export class SidebarComponent implements OnInit {
             }
         });
     }
+
 }
