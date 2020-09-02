@@ -19,4 +19,12 @@ export class LawerService {
   onRegistration(registrationData) {
     return this.httpClient.post<object>(`${this.apiPath}/lawyer-registration/registration`, registrationData);
   }
+
+  authenticateMobile(otpData) {
+    return this.httpClient.post<object>(`${this.apiPath}/lawyer-registration/authenticate/registration`, otpData);
+  }
+
+  verifySms(verifyData) {
+    return this.httpClient.post<object>(`${this.apiPath}/lawyer-registration/verify-sms/registration`, verifyData);
+  }
 }

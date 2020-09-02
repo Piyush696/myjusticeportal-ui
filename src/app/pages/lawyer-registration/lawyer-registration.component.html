@@ -6,5 +6,5 @@
     </app-organisation>
     <app-select-facility *ngIf="step == 3" (selectedFacilityEventEmitter)="onSelectedfacility($event)">
     </app-select-facility>
-    <app-mobile-registration *ngIf="step == 4"></app-mobile-registration>
+    <app-mobile-registration *ngIf="step == 4" [userName]="userName"></app-mobile-registration>
 </div>
