@@ -5,7 +5,12 @@
   <ul class="nav">
     <li *ngFor="let menuItem of filteredMenuItems;let isLast=last" class="{{menuItem?.class}} label-bg"
       [ngClass]="{'pb-3' : isLast}" title="{{menuItem?.title}}" routerLinkActive="active currentMenu">
-      <a class="d-flex justify-content-center sidebar-style" href="#" [routerLink]="[menuItem.path]">
+      <a *ngIf="!(menuItem.title =='Law Library')" class="d-flex justify-content-center sidebar-style" href="#"
+        [routerLink]="[menuItem.path]">
+        <p class="letter-spacing">{{menuItem.title}}</p>
+      </a>
+      <a *ngIf="menuItem.title =='Law Library'" class="d-flex justify-content-center sidebar-style"
+        href="//{{libraryLink}}" target="_blank" rel="noopener">
         <p class="letter-spacing">{{menuItem.title}}</p>
       </a>
     </li>

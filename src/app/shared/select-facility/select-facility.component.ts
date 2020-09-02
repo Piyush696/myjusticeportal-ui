@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output, Input } from '@angular/core';
 import { FacilityService } from 'app/services/facility.service';
 
 @Component({
@@ -11,6 +11,7 @@ export class SelectFacilityComponent implements OnInit {
   facilityList: any;
   facility = [];
 
+  @Input() totalSteps: any;
   @Output() selectedFacilityEventEmitter = new EventEmitter();
 
   constructor(private facilityService: FacilityService) { }
