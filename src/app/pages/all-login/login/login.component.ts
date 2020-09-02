@@ -6,8 +6,6 @@ import { LoginService } from 'app/services/login.service';
 import { Store } from '@ngrx/store';
 import { AddUserInfo } from 'app/store/actions/userInfo.actions';
 import { ToasterService } from 'app/services/toaster.service';
-import { RegistrationService } from 'app/services/registration.service';
-import { UserLoginService } from 'app/services/login/user-login.service';
 import { LawyerService } from 'app/services/login/lawyer.service';
 
 @Component({
