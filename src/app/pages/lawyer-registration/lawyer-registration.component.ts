@@ -11,9 +11,9 @@ import { LawerService } from 'app/services/registration/lawer.service';
 
 export class LawyerRegistrationComponent implements OnInit {
   step: number = 1;
-  roleId: number = 2;
-  regUserData = {};
   totalSteps: number = 4;
+  roleId: number = 2;
+  userName: string;
   registrationData = {
     'user': {},
     'organization': {
@@ -48,11 +48,14 @@ export class LawyerRegistrationComponent implements OnInit {
 
   onSelectedfacility(selectedfacility) {
     if (selectedfacility) {
-      this.step = 4;
       this.registrationData.facilityIds = selectedfacility;
       console.log(this.registrationData);
       this.lawerService.onRegistration(this.registrationData).subscribe((res: any) => {
-        console.log(res);
+        if (res.success) {
+          console.log(res.data.userName)
+          this.userName = res.data.userName
+          this.step = 4;
+        }
       });
     } else {
       this.step = 3;
