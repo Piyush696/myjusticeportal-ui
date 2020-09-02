@@ -38,6 +38,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { UserDetailsComponent } from 'app/pages/user-details/user-details.component';
 import { FacilityComponent } from 'app/pages/facility/facility.component';
 import { UserDashboardComponent } from 'app/pages/user-dashboard/user-dashboard.component';
+import { LawyerdashboardComponent } from 'app/pages/lawyerdashboard/lawyerdashboard.component';
 
 @NgModule({
   imports: [
@@ -83,7 +84,8 @@ import { UserDashboardComponent } from 'app/pages/user-dashboard/user-dashboard.
     PostageAppComponent,
     TwilioCredentialsComponent,
     FacilityComponent,
-    UserDashboardComponent
+    UserDashboardComponent,
+    LawyerdashboardComponent
   ],
   providers: [
     MatDatepickerModule,

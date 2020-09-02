@@ -3,9 +3,9 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { CacheService } from 'app/services/cache.service';
 import { ToasterService } from 'app/services/toaster.service';
 import { Store } from '@ngrx/store';
-import { UserRegistrationService } from 'app/services/registration/user-registration.service';
 import { LoginService } from 'app/services/login.service';
 import { AddUserInfo } from 'app/store/actions/userInfo.actions';
+import { UserService } from 'app/services/registration/user.service';
 
 @Component({
   selector: 'app-user-registration',
@@ -21,7 +21,7 @@ export class UserRegistrationComponent implements OnInit {
   userRegData = {};
 
   constructor(private loginService: LoginService, private activatedRoute: ActivatedRoute,
-    private store: Store<any>, private userRegistrationService: UserRegistrationService,
+    private store: Store<any>, private userRegistrationService: UserService,
     private cacheService: CacheService, private toasterService: ToasterService, private router: Router) {
     this.facilityCode = this.activatedRoute.snapshot.params.facilityCode;
   }

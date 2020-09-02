@@ -57,18 +57,6 @@ export class MobileRegistrationComponent implements OnInit {
         this.OtpField = false;
         this.toaterService.showWarningToater("Your account is under review. Please contact Administrator to activate your account.")
         this.router.navigateByUrl('/login')
-        // this.cacheService.setCache('token', verifyData.token);
-        // this.loginService.checkToken().then((data: any) => {
-        //   if (data.success) {
-        //     this.store.dispatch(new AddUserInfo(Object.assign({}, data.user)));
-        //     this.toaterService.showWarningToater('Your account is under Review. Please contact customer services.')
-        //      this.router.navigateByUrl('/dashboard')
-        //     this.router.navigateByUrl('/login')
-        //   }
-        //   else {
-        //     this.toaterService.showSuccessToater('Not a valid token.')
-        //   }
-        // })
       }
       else {
         this.toasterService.showErrorToater(verifyData.data)
