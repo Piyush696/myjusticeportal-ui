@@ -6,9 +6,10 @@
         </div>
         <h3 class="text-center font-weight-bold">Step 2/2</h3>
         <mat-card class="p-4">
+            <h2 class="text-center">Enter your Organisation details:</h2>
             <div class="row">
                 <div class="col-12">
-                    <mat-form-field appearance="fill" class="w-100 pl-2">
+                    <mat-form-field appearance="fill" class="w-100 px-2 mb-1">
                         <mat-label>Organisation Name</mat-label>
                         <input type="text" matInput [formControl]="organisationForm.controls['name']" required>
                         <mat-error>
@@ -21,8 +22,10 @@
                         </mat-error>
                     </mat-form-field>
                 </div>
-                <div class="col-12">
-                    <mat-form-field appearance="fill" class="w-100 pl-2">
+            </div>
+            <div class="row">
+                <div class="col-6">
+                    <mat-form-field appearance="fill" class="w-100 pl-2 mb-1">
                         <mat-label>Street 1</mat-label>
                         <input type="text" matInput [formControl]="addressForm.controls['street1']" required>
                         <mat-error>
@@ -35,8 +38,8 @@
                         </mat-error>
                     </mat-form-field>
                 </div>
-                <div class="col-12">
-                    <mat-form-field appearance="fill" class="w-100 pl-2">
+                <div class="col-6 pl-0">
+                    <mat-form-field appearance="fill" class="w-100 pr-2 mb-1">
                         <mat-label>Street 2</mat-label>
                         <input type="text" matInput [formControl]="addressForm.controls['street2']">
                     </mat-form-field>
@@ -45,7 +48,7 @@
 
             <div class="row">
                 <div class="col-6">
-                    <mat-form-field appearance="fill" class="w-100 pl-2">
+                    <mat-form-field appearance="fill" class="w-100 pl-2 mb-1">
                         <mat-label>City</mat-label>
                         <input type="text" matInput [formControl]="addressForm.controls['city']" required>
                         <mat-error>
@@ -57,8 +60,8 @@
                         </mat-error>
                     </mat-form-field>
                 </div>
-                <div class="col-6">
-                    <mat-form-field appearance="fill" class="w-100 pl-2">
+                <div class="col-6 pl-0">
+                    <mat-form-field appearance="fill" class="w-100 pr-2 mb-1">
                         <mat-label>State</mat-label>
                         <input type="text" matInput [formControl]="addressForm.controls['state']" required>
                         <mat-error>
@@ -86,8 +89,8 @@
                         </mat-error>
                     </mat-form-field>
                 </div>
-                <div class="col-6">
-                    <mat-form-field appearance="fill" class="w-100 pl-2">
+                <div class="col-6 pl-0">
+                    <mat-form-field appearance="fill" class="w-100 pr-2">
                         <mat-label>Zip Code</mat-label>
                         <input type="text" matInput [formControl]="addressForm.controls['zip']" required>
                         <mat-error>
@@ -100,7 +103,7 @@
                     </mat-form-field>
                 </div>
             </div>
-            <div class="d-flex justify-content-end px-3 mt-2">
+            <div class="d-flex justify-content-end mt-2 pr-2">
                 <button class="px-4 py-1" mat-raised-button color="primary"
                     [disabled]="organisationForm.invalid || this.addressForm.invalid" (click)="submit()">
                     Next

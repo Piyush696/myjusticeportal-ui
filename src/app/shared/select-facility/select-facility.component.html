@@ -4,15 +4,19 @@
             <img src="assets/img/logo.png" alt="logo" class="logo">
         </div>
         <mat-card class="p-4">
+            <h2 class="text-center">Select facilities:</h2>
             <ul>
                 <li *ngFor="let facility of facilityList">
-                    <mat-checkbox color="primary" (change)="onNativeChange($event.checked,facility.facilityId)">
+                    <mat-checkbox color="primary" (change)="onNativeChange($event.checked,facility?.facilityId)">
                         {{facility.facilityCode}}
                     </mat-checkbox>
                 </li>
             </ul>
             <div class="d-flex justify-content-center px-3 mt-2">
-                <button class="px-4 py-1" mat-raised-button color="primary" (click)="submit()">Submit</button>
+                <button class="px-4 py-1" mat-raised-button color="primary" [disabled]="!facility?.length"
+                    (click)="submit()">
+                    Submit
+                </button>
             </div>
         </mat-card>
     </div>

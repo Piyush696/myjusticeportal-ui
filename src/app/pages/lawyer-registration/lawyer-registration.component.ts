@@ -13,13 +13,13 @@ export class LawyerRegistrationComponent implements OnInit {
   step: number = 1;
   roleId: number = 2;
   regUserData = {};
-  totalSteps: number = 2;
+  totalSteps: number = 4;
   registrationData = {
     'user': {},
     'organization': {
       'address': {}
     },
-    'facilityIds': {}
+    'facilityIds': []
   }
 
   constructor(private lawerService: LawerService) { }

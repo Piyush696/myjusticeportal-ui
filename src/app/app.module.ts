@@ -48,7 +48,7 @@ import { AdditionalInfoComponent } from './shared/additional-info/additional-inf
 import { ResetPasswordComponent } from './pages/reset-password/reset-password.component';
 import { FacilityService } from './services/facility.service';
 import { AuthLoadService } from './services/auth/auth.service';
-import { OrganisationComponent } from './shared/organisation/organisation/organisation.component';
+import { OrganisationComponent } from './shared/organisation/organisation.component';
 import { SelectFacilityComponent } from './shared/select-facility/select-facility.component';
 
 export function usersProviderFactory(provider: AuthLoadService) {

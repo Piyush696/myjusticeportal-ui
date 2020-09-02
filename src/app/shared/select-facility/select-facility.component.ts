@@ -4,7 +4,7 @@ import { FacilityService } from 'app/services/facility.service';
 @Component({
   selector: 'app-select-facility',
   templateUrl: './select-facility.component.html',
-  styleUrls: ['./select-facility.component.css']
+  styleUrls: ['./select-facility.component.scss']
 })
 
 export class SelectFacilityComponent implements OnInit {

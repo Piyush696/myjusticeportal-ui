@@ -1,5 +1,5 @@
 <div>
-    <app-email-registration [totalSteps]="totalSteps" *ngIf="step == 1" (isNextEvent)="onNextClick($event)"
+    <app-email-registration *ngIf="step == 1" [totalSteps]="totalSteps" (isNextEvent)="onNextClick($event)"
         [roleId]="roleId">
     </app-email-registration>
     <app-organisation *ngIf="step == 2" (orgAddressEventEmitter)="onCreateOrganisation($event)">
