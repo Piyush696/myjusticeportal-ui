@@ -122,6 +122,7 @@ textarea[disabled] {
   -webkit-text-fill-color: #1f1e1e;
   opacity: 1;
 }
+
 @media screen and (max-width: 991px) {
   .navbar-nav .dropdown-menu:after {
     border-bottom: 11px solid #ffffff !important;
@@ -174,4 +175,22 @@ textarea[disabled] {
     margin-top: 0px !important;
     padding-left: 0px !important;
   }
+}
+
+.button-purple {
+  background-color: #333442 !important;
+  color: #ffffff !important;
+}
+
+.button-purple:disabled {
+  cursor: not-allowed !important;
+  background-color: #e0e0e0 !important;
+  color: #a6a6a6 !important;
+  font-weight: 400 !important;
+  user-select: none !important;
+  touch-action: none !important;
+  outline: none !important;
+  border: none !important;
+  -webkit-tap-highlight-color: transparent !important;
+  box-shadow: none !important;
 }
