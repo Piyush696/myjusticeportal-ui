@@ -51,8 +51,7 @@ export class LawyerRegistrationComponent implements OnInit {
       this.registrationData.facilityIds = selectedfacility;
       this.lawyerService.onRegistration(this.registrationData).subscribe((res: any) => {
         if (res.success) {
-          console.log(res.data.userName)
-          this.userName = res.data.userName
+          this.userName = res.data.userName;
           this.step = 4;
         }
       });

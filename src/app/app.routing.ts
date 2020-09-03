@@ -25,11 +25,11 @@ export const AppRoutes: Routes = [
   { path: 'registration', component: UserRegistrationComponent },
   { path: 'lawyer/registration', component: LawyerRegistrationComponent },
   // { path: 'facility/registration', component: FacilityRegistrationComponent },
-  { path: ':facilityCode/registration', component: UserRegistrationComponent },
-  { path: ':facilityCode/facility/registration', component: FacilityRegistrationComponent },
   { path: 'paralegal/registration', component: ParalegalRegistrationComponent },
   { path: 'defender/registration', component: PublicDefenderRegistrationComponent },
   { path: 'bondsman/registration', component: BondsmanRegistrationComponent },
+  { path: ':facilityCode/registration', component: UserRegistrationComponent },
+  { path: ':facilityCode/facility/registration', component: FacilityRegistrationComponent },
   { path: 'forget-password', component: ForgetPasswordComponent },
   { path: 'reset-password/:token', component: ResetPasswordComponent },
   { path: '**', redirectTo: 'dashboard' }
