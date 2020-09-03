@@ -2,6 +2,7 @@
     <app-email-registration *ngIf="step == 1" [totalSteps]="totalSteps" (isNextEvent)="onNextClick($event)"
         [roleId]="roleId">
     </app-email-registration>
-    <app-mobile-registration *ngIf="step == 2" [userName]="userName" (isRegisterEvent)="onUpdateRegisteredUser($event)">
+    <app-mobile-registration *ngIf="step == 2" [authCodeField]="authCodeField" [totalSteps]="totalSteps"
+        (isMobileEvent)="mobileDetails($event)" (isOtpEvent)="onAuthCodeValidate($event)">
     </app-mobile-registration>
 </div>
