@@ -74,7 +74,6 @@ export class PublicDefenderRegistrationComponent implements OnInit {
       "userName": this.userName
     }
     this.defenderService.authenticateMobile(mobileData).subscribe((generateCode: any) => {
-      console.log(generateCode)
       if (generateCode.success) {
         this.authCodeField = true;
       }
@@ -82,18 +81,15 @@ export class PublicDefenderRegistrationComponent implements OnInit {
   }
 
   onAuthCodeValidate(authcode) {
-    console.log(authcode)
     const authData = {
       "otp": authcode,
       "userName": this.userName
     }
     this.defenderService.verifySms(authData).subscribe((verified: any) => {
-      console.log(verified)
       if (verified.success) {
         this.authCodeField = false;
         this.cacheService.setCache('token', verified.token);
         this.loginService.checkToken().then((data: any) => {
-          console.log(data)
           if (data.success) {
             if (data.user.status) {
               this.router.navigateByUrl('/lawyer-dashboard')

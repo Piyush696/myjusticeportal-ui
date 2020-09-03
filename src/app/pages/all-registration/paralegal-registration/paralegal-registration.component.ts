@@ -73,7 +73,6 @@ export class ParalegalRegistrationComponent implements OnInit {
       "userName": this.userName
     }
     this.paralegalService.authenticateMobile(mobileData).subscribe((generateCode: any) => {
-      console.log(generateCode)
       if (generateCode.success) {
         this.authCodeField = true;
       }
@@ -81,18 +80,15 @@ export class ParalegalRegistrationComponent implements OnInit {
   }
 
   onAuthCodeValidate(authcode) {
-    console.log(authcode)
     const authData = {
       "otp": authcode,
       "userName": this.userName
     }
     this.paralegalService.verifySms(authData).subscribe((verified: any) => {
-      console.log(verified)
       if (verified.success) {
         this.authCodeField = false;
         this.cacheService.setCache('token', verified.token);
         this.loginService.checkToken().then((data: any) => {
-          console.log(data)
           if (data.success) {
             if (data.user.status) {
               this.router.navigateByUrl('/lawyer-dashboard')

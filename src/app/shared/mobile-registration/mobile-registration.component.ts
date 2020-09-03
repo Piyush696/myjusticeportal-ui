@@ -21,7 +21,6 @@ export class MobileRegistrationComponent implements OnInit, OnChanges {
 
   constructor(private fb: FormBuilder) { }
   ngOnChanges() {
-    console.log(this.authCodeField)
     if (this.authCodeField) {
       this.OtpField = true;
     }
