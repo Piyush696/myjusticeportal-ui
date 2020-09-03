@@ -1,16 +1,19 @@
 import { Component, OnInit } from '@angular/core';
+import { ParalegalService } from 'app/services/registration/paralegal.service';
 
 @Component({
   selector: 'app-paralegal-registration',
   templateUrl: './paralegal-registration.component.html',
-  styleUrls: ['./paralegal-registration.component.css']
+  styleUrls: ['./paralegal-registration.component.scss']
 })
+
 export class ParalegalRegistrationComponent implements OnInit {
   step: number = 1;
   roleId: number = 4;
-  userName;
+  userName: string;
   totalSteps: number = 2;
-  constructor() { }
+
+  constructor(private paralegalService: ParalegalService) { }
 
   ngOnInit(): void {
   }
@@ -24,5 +27,4 @@ export class ParalegalRegistrationComponent implements OnInit {
       this.step = 1;
     }
   }
-
 }

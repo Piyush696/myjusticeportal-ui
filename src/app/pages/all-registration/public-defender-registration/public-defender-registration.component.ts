@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
+import { PublicDefenderService } from 'app/services/registration/public-defender.service';
 
 
 @Component({
   selector: 'app-public-defender-registration',
   templateUrl: './public-defender-registration.component.html',
-  styleUrls: ['./public-defender-registration.component.css']
+  styleUrls: ['./public-defender-registration.component.scss']
 })
 
 export class PublicDefenderRegistrationComponent implements OnInit {
@@ -13,7 +14,7 @@ export class PublicDefenderRegistrationComponent implements OnInit {
   userName: string = '';
   totalSteps: number = 2;
 
-  constructor() { }
+  constructor(private publicDefenderService: PublicDefenderService) { }
 
   ngOnInit(): void {
   }
@@ -27,5 +28,4 @@ export class PublicDefenderRegistrationComponent implements OnInit {
       this.step = 1;
     }
   }
-
 }

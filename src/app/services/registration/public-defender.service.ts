@@ -7,7 +7,7 @@ import { environment } from 'environments/environment';
   providedIn: 'root'
 })
 
-export class LawerService {
+export class PublicDefenderService {
   private apiPath: string;
   allUsers: string;
 
@@ -17,14 +17,14 @@ export class LawerService {
   }
 
   onRegistration(registrationData) {
-    return this.httpClient.post<object>(`${this.apiPath}/lawyer-registration/registration`, registrationData);
+    return this.httpClient.post<object>(`${this.apiPath}/public-defender-registration/registration`, registrationData);
   }
 
   authenticateMobile(otpData) {
-    return this.httpClient.post<object>(`${this.apiPath}/lawyer-registration/authenticate/registration`, otpData);
+    return this.httpClient.post<object>(`${this.apiPath}/public-defender-registration/authenticate/registration`, otpData);
   }
 
   verifySms(verifyData) {
-    return this.httpClient.post<object>(`${this.apiPath}/lawyer-registration/verify-sms/registration`, verifyData);
+    return this.httpClient.post<object>(`${this.apiPath}/public-defender-registration/verify-sms/registration`, verifyData);
   }
 }
