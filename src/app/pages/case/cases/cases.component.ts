@@ -8,7 +8,7 @@ import { ToasterService } from 'app/services/toaster.service';
 @Component({
   selector: 'app-cases',
   templateUrl: './cases.component.html',
-  styleUrls: ['./cases.component.css']
+  styleUrls: ['./cases.component.scss']
 })
 
 export class CasesComponent implements OnInit {

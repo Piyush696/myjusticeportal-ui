@@ -14,15 +14,9 @@ import { MatTableModule } from '@angular/material/table';
 import { RouterModule } from '@angular/router';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AppSettingsComponent } from 'app/pages/app-settings/app-settings.component';
-import { CaseFormComponent } from 'app/pages/case-form/case-form.component';
-import { CasesComponent } from 'app/pages/cases/cases.component';
-import { CreateCaseComponent } from 'app/pages/create-case/create-case.component';
-import { EditCaseComponent } from 'app/pages/edit-case/edit-case.component';
 import { MyAccountComponent } from 'app/pages/my-account/my-account.component';
 import { PostageAppComponent } from 'app/pages/postage-app/postage-app.component';
 import { TwilioCredentialsComponent } from 'app/pages/twilio-credentials/twilio-credentials.component';
-import { UsersComponent } from 'app/pages/users/users.component';
-import { ViewCaseComponent } from 'app/pages/view-case/view-case.component';
 import { ToastrModule } from 'ngx-toastr';
 import { DashboardComponent } from '../pages/dashboard/dashboard.component';
 import { IconsComponent } from '../pages/icons/icons.component';
@@ -35,10 +29,18 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
-import { UserDetailsComponent } from 'app/pages/user-details/user-details.component';
 import { FacilityComponent } from 'app/pages/facility/facility.component';
 import { UserDashboardComponent } from 'app/pages/user-dashboard/user-dashboard.component';
 import { LawyerdashboardComponent } from 'app/pages/lawyerdashboard/lawyerdashboard.component';
+import { UsersComponent } from 'app/pages/all-users/users/users.component';
+import { UserDetailsComponent } from 'app/pages/all-users/user-details/user-details.component';
+import { CasesComponent } from 'app/pages/case/cases/cases.component';
+import { ViewCaseComponent } from 'app/pages/case/view-case/view-case.component';
+import { CaseFormComponent } from 'app/pages/case/case-form/case-form.component';
+import { CreateCaseComponent } from 'app/pages/case/create-case/create-case.component';
+import { EditCaseComponent } from 'app/pages/case/edit-case/edit-case.component';
+import { ViewCaseFilesComponent } from 'app/pages/case/view-case-files/view-case-files.component';
+import { FileUploadModule } from 'ng2-file-upload';
 
 @NgModule({
   imports: [
@@ -46,6 +48,9 @@ import { LawyerdashboardComponent } from 'app/pages/lawyerdashboard/lawyerdashbo
     RouterModule.forChild(LayoutRoutes),
     FormsModule,
     NgbModule,
+    ReactiveFormsModule,
+    FileUploadModule,
+    ToastrModule.forRoot(),
     MatInputModule,
     MatCardModule,
     MatListModule,
@@ -53,12 +58,9 @@ import { LawyerdashboardComponent } from 'app/pages/lawyerdashboard/lawyerdashbo
     MatSortModule,
     MatTableModule,
     MatIconModule,
-    FormsModule,
     MatSelectModule,
-    ReactiveFormsModule,
     MatButtonModule,
     MatSlideToggleModule,
-    ToastrModule.forRoot(),
     MatDatepickerModule,
     MatProgressBarModule,
     MatNativeDateModule,
@@ -72,14 +74,15 @@ import { LawyerdashboardComponent } from 'app/pages/lawyerdashboard/lawyerdashbo
     IconsComponent,
     MapsComponent,
     NotificationsComponent,
+    MyAccountComponent,
     UsersComponent,
     UserDetailsComponent,
-    MyAccountComponent,
     CasesComponent,
     ViewCaseComponent,
     CaseFormComponent,
     CreateCaseComponent,
     EditCaseComponent,
+    ViewCaseFilesComponent,
     AppSettingsComponent,
     PostageAppComponent,
     TwilioCredentialsComponent,

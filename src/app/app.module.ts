@@ -33,15 +33,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { ForgetPasswordComponent } from './pages/forget-password/forget-password.component';
 import { SecurityQuestionComponent } from './pages/security-question/security-question.component';
-import { ViewCaseFilesComponent } from './pages/view-case-files/view-case-files.component';
-import { FileUploadModule } from 'ng2-file-upload';
 import { MatIconModule } from '@angular/material/icon';
-import { UserRegistrationComponent } from './pages/all-registration/user-registration/user-registration.component';
-import { FacilityRegistrationComponent } from './pages/all-registration/facility-registration/facility-registration.component';
-import { LawyerRegistrationComponent } from './pages/all-registration/lawyer-registration/lawyer-registration.component';
-import { BondsmanRegistrationComponent } from './pages/all-registration/bondsman-registration/bondsman-registration.component';
-import { ParalegalRegistrationComponent } from './pages/all-registration/paralegal-registration/paralegal-registration.component';
-import { PublicDefenderRegistrationComponent } from './pages/all-registration/public-defender-registration/public-defender-registration.component';
 import { EmailRegistrationComponent } from './shared/email-registration/email-registration.component';
 import { MobileRegistrationComponent } from './shared/mobile-registration/mobile-registration.component';
 import { AdditionalInfoComponent } from './shared/additional-info/additional-info.component';
@@ -51,6 +43,13 @@ import { AuthLoadService } from './services/auth/auth.service';
 import { OrganisationComponent } from './shared/organisation/organisation.component';
 import { SelectFacilityComponent } from './shared/select-facility/select-facility.component';
 import { UserLoginComponent } from './pages/all-login/user-login/user-login.component';
+import { UserRegistrationComponent } from './pages/all-registration/user-registration/user-registration.component';
+import { FacilityRegistrationComponent } from './pages/all-registration/facility-registration/facility-registration.component';
+import { LawyerRegistrationComponent } from './pages/all-registration/lawyer-registration/lawyer-registration.component';
+import { ParalegalRegistrationComponent } from './pages/all-registration/paralegal-registration/paralegal-registration.component';
+import { PublicDefenderRegistrationComponent } from './pages/all-registration/public-defender-registration/public-defender-registration.component';
+import { BondsmanRegistrationComponent } from './pages/all-registration/bondsman-registration/bondsman-registration.component';
+// import { ViewCaseFilesComponent } from './pages/case/view-case-files/view-case-files.component';
 
 export function usersProviderFactory(provider: AuthLoadService) {
   return () => provider.setUserbyAPI();
@@ -64,13 +63,13 @@ export function usersProviderFactory(provider: AuthLoadService) {
     RegistrationComponent,
     SecurityQuestionComponent,
     ForgetPasswordComponent,
-    ViewCaseFilesComponent,
+    // ViewCaseFilesComponent,
     UserRegistrationComponent,
     FacilityRegistrationComponent,
     LawyerRegistrationComponent,
-    BondsmanRegistrationComponent,
     ParalegalRegistrationComponent,
     PublicDefenderRegistrationComponent,
+    BondsmanRegistrationComponent,
     EmailRegistrationComponent,
     MobileRegistrationComponent,
     AdditionalInfoComponent,
@@ -95,7 +94,6 @@ export function usersProviderFactory(provider: AuthLoadService) {
     StoreDevtoolsModule.instrument({
       maxAge: 25
     }),
-    FileUploadModule,
     MatButtonModule,
     MatCardModule,
     MatCheckboxModule,
