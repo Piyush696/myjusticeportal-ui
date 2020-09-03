@@ -1,5 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { PublicDefenderService } from 'app/services/registration/public-defender.service';
+import { ToasterService } from 'app/services/toaster.service';
+import { Router } from '@angular/router';
+import { LawyerService } from 'app/services/registration/lawyer.service';
+import { CacheService } from 'app/services/cache.service';
+import { LoginService } from 'app/services/login.service';
+import { Store } from '@ngrx/store';
 
 
 @Component({
@@ -13,6 +19,7 @@ export class PublicDefenderRegistrationComponent implements OnInit {
   totalSteps: number = 4;
   roleId: number = 2;
   userName: string;
+  authCodeField: boolean;
   registrationData = {
     'user': {},
     'organization': {
@@ -21,7 +28,8 @@ export class PublicDefenderRegistrationComponent implements OnInit {
     'facilityIds': []
   }
 
-  constructor(private publicDefenderService: PublicDefenderService) { }
+  constructor(private defenderService: PublicDefenderService, private cacheService: CacheService,
+    private store: Store<any>, private toaterService: ToasterService, private toasterService: ToasterService, private router: Router, private loginService: LoginService,) { }
 
   ngOnInit(): void {
   }
@@ -48,7 +56,7 @@ export class PublicDefenderRegistrationComponent implements OnInit {
   onSelectedfacility(selectedfacility) {
     if (selectedfacility) {
       this.registrationData.facilityIds = selectedfacility;
-      this.publicDefenderService.onRegistration(this.registrationData).subscribe((res: any) => {
+      this.defenderService.onRegistration(this.registrationData).subscribe((res: any) => {
         if (res.success) {
           this.userName = res.data.userName;
           this.step = 4;
@@ -57,5 +65,52 @@ export class PublicDefenderRegistrationComponent implements OnInit {
     } else {
       this.step = 3;
     }
+  }
+
+  mobileDetails(mobileDetails) {
+    const mobileData = {
+      "mobile": mobileDetails.mobile,
+      "countryCode": mobileDetails.countryCode,
+      "userName": this.userName
+    }
+    this.defenderService.authenticateMobile(mobileData).subscribe((generateCode: any) => {
+      console.log(generateCode)
+      if (generateCode.success) {
+        this.authCodeField = true;
+      }
+    })
+  }
+
+  onAuthCodeValidate(authcode) {
+    console.log(authcode)
+    const authData = {
+      "otp": authcode,
+      "userName": this.userName
+    }
+    this.defenderService.verifySms(authData).subscribe((verified: any) => {
+      console.log(verified)
+      if (verified.success) {
+        this.authCodeField = false;
+        this.cacheService.setCache('token', verified.token);
+        this.loginService.checkToken().then((data: any) => {
+          console.log(data)
+          if (data.success) {
+            if (data.user.status) {
+              this.router.navigateByUrl('/lawyer-dashboard')
+            }
+            else {
+              this.router.navigateByUrl('/account-review')
+              this.toaterService.showWarningToater("Account under review.")
+            }
+          }
+          else {
+            this.toaterService.showWarningToater('Something Wrong.')
+          }
+        })
+      }
+      else {
+        this.toasterService.showErrorToater(verified.data)
+      }
+    })
   }
 }

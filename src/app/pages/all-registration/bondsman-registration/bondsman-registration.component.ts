@@ -1,5 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { BondsmanService } from 'app/services/registration/bondsman.service';
+import { ToasterService } from 'app/services/toaster.service';
+import { Router } from '@angular/router';
+import { CacheService } from 'app/services/cache.service';
+import { LoginService } from 'app/services/login.service';
+import { Store } from '@ngrx/store';
 
 @Component({
   selector: 'app-bondsman-registration',
@@ -10,8 +15,9 @@ import { BondsmanService } from 'app/services/registration/bondsman.service';
 export class BondsmanRegistrationComponent implements OnInit {
   step: number = 1;
   totalSteps: number = 4;
-  roleId: number = 2;
+  roleId: number = 6;
   userName: string;
+  authCodeField: boolean;
   registrationData = {
     'user': {},
     'organization': {
@@ -20,7 +26,9 @@ export class BondsmanRegistrationComponent implements OnInit {
     'facilityIds': []
   }
 
-  constructor(private bondsmanService: BondsmanService) { }
+  constructor(private cacheService: CacheService,
+    private store: Store<any>, private toasterService: ToasterService,
+    private router: Router, private loginService: LoginService, private bondsmanService: BondsmanService) { }
 
   ngOnInit(): void {
   }
@@ -56,5 +64,52 @@ export class BondsmanRegistrationComponent implements OnInit {
     } else {
       this.step = 3;
     }
+  }
+
+  mobileDetails(mobileDetails) {
+    const mobileData = {
+      "mobile": mobileDetails.mobile,
+      "countryCode": mobileDetails.countryCode,
+      "userName": this.userName
+    }
+    this.bondsmanService.authenticateMobile(mobileData).subscribe((generateCode: any) => {
+      console.log(generateCode)
+      if (generateCode.success) {
+        this.authCodeField = true;
+      }
+    })
+  }
+
+  onAuthCodeValidate(authcode) {
+    console.log(authcode)
+    const authData = {
+      "otp": authcode,
+      "userName": this.userName
+    }
+    this.bondsmanService.verifySms(authData).subscribe((verified: any) => {
+      console.log(verified)
+      if (verified.success) {
+        this.authCodeField = false;
+        this.cacheService.setCache('token', verified.token);
+        this.loginService.checkToken().then((data: any) => {
+          console.log(data)
+          if (data.success) {
+            if (data.user.status) {
+              this.router.navigateByUrl('/lawyer-dashboard')
+            }
+            else {
+              this.router.navigateByUrl('/account-review')
+              this.toasterService.showWarningToater("Account under review.")
+            }
+          }
+          else {
+            this.toasterService.showWarningToater('Something Wrong.')
+          }
+        })
+      }
+      else {
+        this.toasterService.showErrorToater(verified.data)
+      }
+    })
   }
 }

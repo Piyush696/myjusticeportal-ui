@@ -8,6 +8,7 @@
     <app-select-facility *ngIf="step == 3" [totalSteps]="totalSteps"
         (selectedFacilityEventEmitter)="onSelectedfacility($event)">
     </app-select-facility>
-    <app-mobile-registration *ngIf="step == 4" [totalSteps]="totalSteps" [userName]="userName">
+    <app-mobile-registration *ngIf="step == 4" [authCodeField]="authCodeField" [totalSteps]="totalSteps"
+        (isMobileEvent)="mobileDetails($event)" (isOtpEvent)="onAuthCodeValidate($event)">
     </app-mobile-registration>
 </div>

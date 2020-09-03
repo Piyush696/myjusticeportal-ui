@@ -49,6 +49,7 @@ import { LawyerRegistrationComponent } from './pages/all-registration/lawyer-reg
 import { ParalegalRegistrationComponent } from './pages/all-registration/paralegal-registration/paralegal-registration.component';
 import { PublicDefenderRegistrationComponent } from './pages/all-registration/public-defender-registration/public-defender-registration.component';
 import { BondsmanRegistrationComponent } from './pages/all-registration/bondsman-registration/bondsman-registration.component';
+import { AccountReviewComponent } from './pages/account-review/account-review.component';
 // import { ViewCaseFilesComponent } from './pages/case/view-case-files/view-case-files.component';
 
 export function usersProviderFactory(provider: AuthLoadService) {
@@ -76,7 +77,8 @@ export function usersProviderFactory(provider: AuthLoadService) {
     ResetPasswordComponent,
     OrganisationComponent,
     SelectFacilityComponent,
-    UserLoginComponent
+    UserLoginComponent,
+    AccountReviewComponent
   ],
   imports: [
     BrowserModule,
