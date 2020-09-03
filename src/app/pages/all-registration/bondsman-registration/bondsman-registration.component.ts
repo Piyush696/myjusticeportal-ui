@@ -75,6 +75,7 @@ export class BondsmanRegistrationComponent implements OnInit {
     this.bondsmanService.authenticateMobile(mobileData).subscribe((generateCode: any) => {
       if (generateCode.success) {
         this.authCodeField = true;
+        this.toasterService.showWarningToater("Your code has been sent, please check your mobile device.")
       }
     })
   }

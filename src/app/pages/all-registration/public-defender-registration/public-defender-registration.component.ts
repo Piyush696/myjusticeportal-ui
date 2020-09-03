@@ -76,6 +76,7 @@ export class PublicDefenderRegistrationComponent implements OnInit {
     this.defenderService.authenticateMobile(mobileData).subscribe((generateCode: any) => {
       if (generateCode.success) {
         this.authCodeField = true;
+        this.toaterService.showWarningToater("Your code has been sent, please check your mobile device.")
       }
     })
   }
