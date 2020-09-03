@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { ToasterService } from 'app/services/toaster.service';
 import { Router } from '@angular/router';
-import { LawerService } from 'app/services/registration/lawer.service';
+import { LawyerService } from 'app/services/registration/lawyer.service';
 
 @Component({
   selector: 'app-lawyer-registration',
   templateUrl: './lawyer-registration.component.html',
-  styleUrls: ['./lawyer-registration.component.css']
+  styleUrls: ['./lawyer-registration.component.scss']
 })
 
 export class LawyerRegistrationComponent implements OnInit {
@@ -22,7 +22,7 @@ export class LawyerRegistrationComponent implements OnInit {
     'facilityIds': []
   }
 
-  constructor(private lawerService: LawerService) { }
+  constructor(private lawyerService: LawyerService) { }
 
   ngOnInit(): void {
   }
@@ -49,11 +49,9 @@ export class LawyerRegistrationComponent implements OnInit {
   onSelectedfacility(selectedfacility) {
     if (selectedfacility) {
       this.registrationData.facilityIds = selectedfacility;
-      console.log(this.registrationData);
-      this.lawerService.onRegistration(this.registrationData).subscribe((res: any) => {
+      this.lawyerService.onRegistration(this.registrationData).subscribe((res: any) => {
         if (res.success) {
-          console.log(res.data.userName)
-          this.userName = res.data.userName
+          this.userName = res.data.userName;
           this.step = 4;
         }
       });

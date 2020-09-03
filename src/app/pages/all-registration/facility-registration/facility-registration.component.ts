@@ -3,13 +3,15 @@ import { Component, OnInit } from '@angular/core';
 @Component({
   selector: 'app-facility-registration',
   templateUrl: './facility-registration.component.html',
-  styleUrls: ['./facility-registration.component.css']
+  styleUrls: ['./facility-registration.component.scss']
 })
+
 export class FacilityRegistrationComponent implements OnInit {
   step: number = 1;
   roleId: number = 3;
-  userName;
+  userName: string;
   totalSteps: number = 2;
+
   constructor() { }
 
   ngOnInit(): void {
@@ -19,8 +21,7 @@ export class FacilityRegistrationComponent implements OnInit {
     if (value) {
       this.userName = value;
       this.step = 2;
-    }
-    else {
+    } else {
       this.step = 1;
     }
   }

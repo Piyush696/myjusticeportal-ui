@@ -5,10 +5,12 @@ import { CaseService } from 'app/services/case.service';
 @Component({
   selector: 'app-edit-case',
   templateUrl: './edit-case.component.html',
-  styleUrls: ['./edit-case.component.css']
+  styleUrls: ['./edit-case.component.scss']
 })
+
 export class EditCaseComponent implements OnInit {
   caseDetails: any;
+
   constructor(private route: ActivatedRoute, private caseService: CaseService) { }
 
   ngOnInit(): void {

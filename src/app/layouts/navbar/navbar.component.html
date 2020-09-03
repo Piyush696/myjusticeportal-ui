@@ -13,8 +13,8 @@
     <div class="navbar-toggler" [attr.aria-expanded]="!isCollapsed" aria-controls="collapseExample">
       <!-- style="margin-top: -18px!important" -->
       <!-- <span class="navbar-toggler-bar navbar-kebab"></span>
-      <span class="navbar-toggler-bar navbar-kebab"></span>
-      <span class="navbar-toggler-bar navbar-kebab"></span> -->
+        <span class="navbar-toggler-bar navbar-kebab"></span>
+        <span class="navbar-toggler-bar navbar-kebab"></span> -->
       <ul class="navbar-nav">
         <li class="cursor-pointer color-grey nav-item btn-rotate d-flex justify-content-end" ngbDropdown
           placement="bottom-left">
@@ -22,13 +22,12 @@
             <i class="cursor-pointer nc-icon nc-single-02"></i>
           </a>
           <div ngbDropdownMenu aria-labelledby="navbarDropdownMenuLink" class="dropdown-menu dropdown-menu-right"
-            style="top: 28px; margin-right: 0px; ">
+            style="top: 28px; margin-right: 0px;">
             <a [routerLink]="'/my-account'" ngbDropdownItem href="javascript:void(0)">My Account</a>
             <a ngbDropdownItem (click)="logout()">Logout</a>
           </div>
         </li>
       </ul>
-
     </div>
     <div class="collapse navbar-collapse justify-content-end" id="collapseExample" [ngbCollapse]="isCollapsed">
       <!-- <form>
