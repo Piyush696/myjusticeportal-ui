@@ -74,7 +74,7 @@ export class LawyerRegistrationComponent implements OnInit {
     this.lawyerService.authenticateMobile(mobileData).subscribe((generateCode: any) => {
       if (generateCode.success) {
         this.authCodeField = true;
-        this.toaterService.showWarningToater("Your code has been sent, please check your mobile device.")
+        this.toaterService.showSuccessToater("Your code has been sent, please check your mobile device.")
       }
     })
   }
