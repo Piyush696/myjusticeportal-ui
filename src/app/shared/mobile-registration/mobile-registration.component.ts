@@ -42,7 +42,7 @@ export class MobileRegistrationComponent implements OnInit {
         this.mobileRegistrationForm.get('mobile').disable()
         this.mobileRegistrationForm.get('countryCode').disable()
         this.OtpField = true;
-        this.toasterService.showSuccessToater('Please submit your otp.')
+        this.toasterService.showSuccessToater('Your code has been sent, please check your mobile device.')
       }
       else {
         this.OtpField = false;
@@ -54,9 +54,15 @@ export class MobileRegistrationComponent implements OnInit {
     this.twilioService.verifyRegisterCode({ otp: this.mobileRegistrationForm.get('otp').value, userName: this.userName }).subscribe((verifyData: any) => {
       console.log(verifyData)
       if (verifyData.success) {
+        console.log(verifyData)
         this.OtpField = false;
-        this.toaterService.showWarningToater("Your account is under review. Please contact Administrator to activate your account.")
-        this.router.navigateByUrl('/login')
+        this.cacheService.setCache('token', verifyData.token);
+        this.loginService.checkToken().then((data: any) => {
+          if (data.success) {
+            this.router.navigateByUrl('/lawyer-dashboard')
+            this.toaterService.showWarningToater("Account under review.")
+          }
+        })
       }
       else {
         this.toasterService.showErrorToater(verifyData.data)
