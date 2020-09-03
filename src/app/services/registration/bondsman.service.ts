@@ -20,8 +20,8 @@ export class BondsmanService {
     return this.httpClient.post<object>(`${this.apiPath}/bondsman-registration/registration`, registrationData);
   }
 
-  authenticateMobile(otpData) {
-    return this.httpClient.post<object>(`${this.apiPath}/bondsman-registration/authenticate/registration`, otpData);
+  authenticateMobile(mobileData) {
+    return this.httpClient.post<object>(`${this.apiPath}/bondsman-registration/authenticate/registration`, mobileData);
   }
 
   verifySms(verifyData) {

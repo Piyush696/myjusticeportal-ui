@@ -1,23 +1,27 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
-import { LoginService } from 'app/services/login.service';
-import { ToasterService } from 'app/services/toaster.service';
-import { TwilioService } from 'app/services/twilio.service';
-import { Store } from '@ngrx/store';
-import { CacheService } from 'app/services/cache.service';
 
 @Component({
   selector: 'app-mobile-registration',
   templateUrl: './mobile-registration.component.html',
   styleUrls: ['./mobile-registration.component.scss']
 })
-export class MobileRegistrationComponent implements OnInit {
+export class MobileRegistrationComponent implements OnInit, OnChanges {
   mobileRegistrationForm: FormGroup;
   OtpField: boolean;
-  @Input() userName;
+  @Output() isMobileEvent = new EventEmitter();
+  @Output() isOtpEvent = new EventEmitter();
+  @Input() authCodeField: boolean;
 
-  constructor(private cacheService: CacheService, private store: Store<any>, private toaterService: ToasterService, private fb: FormBuilder, private loginService: LoginService, private twilioService: TwilioService, private toasterService: ToasterService, private router: Router) { }
+  constructor(private fb: FormBuilder) { }
+  ngOnChanges() {
+    if (this.authCodeField) {
+      this.OtpField = true;
+    }
+    else {
+      this.OtpField = false;
+    }
+  }
 
   ngOnInit(): void {
     this.createControl();
@@ -35,33 +39,12 @@ export class MobileRegistrationComponent implements OnInit {
     const data = {
       "mobile": this.mobileRegistrationForm.get('mobile').value,
       "countryCode": this.mobileRegistrationForm.get('countryCode').value,
-      "userName": this.userName,
     }
-    this.twilioService.getRegisterOtp(data).subscribe((otp: any) => {
-      if (otp.success) {
-        this.mobileRegistrationForm.get('mobile').disable()
-        this.mobileRegistrationForm.get('countryCode').disable()
-        this.OtpField = true;
-        this.toasterService.showSuccessToater('Please submit your otp.')
-      }
-      else {
-        this.OtpField = false;
-      }
-    })
+    this.isMobileEvent.emit(data)
   }
 
   onVerifySms() {
-    this.twilioService.verifyRegisterCode({ otp: this.mobileRegistrationForm.get('otp').value, userName: this.userName }).subscribe((verifyData: any) => {
-      console.log(verifyData)
-      if (verifyData.success) {
-        this.OtpField = false;
-        this.toaterService.showWarningToater("Your account is under review. Please contact Administrator to activate your account.")
-        this.router.navigateByUrl('/login')
-      }
-      else {
-        this.toasterService.showErrorToater(verifyData.data)
-      }
-    })
+    this.isOtpEvent.emit(this.mobileRegistrationForm.get('otp').value)
   }
 
 

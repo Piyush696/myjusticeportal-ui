@@ -6,8 +6,7 @@ import { environment } from 'environments/environment';
 @Injectable({
   providedIn: 'root'
 })
-
-export class ParalegalService {
+export class FacilityService {
   private apiPath: string;
   allUsers: string;
 
@@ -17,14 +16,14 @@ export class ParalegalService {
   }
 
   onRegistration(registrationData) {
-    return this.httpClient.post<object>(`${this.apiPath}/paralegal-registration/registration`, registrationData);
+    return this.httpClient.post<object>(`${this.apiPath}/facility-registration/registration`, registrationData);
   }
 
   authenticateMobile(mobileData) {
-    return this.httpClient.post<object>(`${this.apiPath}/paralegal-registration/authenticate/registration`, mobileData);
+    return this.httpClient.post<object>(`${this.apiPath}/facility-registration/authenticate/registration`, mobileData);
   }
 
   verifySms(verifyData) {
-    return this.httpClient.post<object>(`${this.apiPath}/paralegal-registration/verify-sms/registration`, verifyData);
+    return this.httpClient.post<object>(`${this.apiPath}/facility-registration/verify-sms/registration`, verifyData);
   }
 }
