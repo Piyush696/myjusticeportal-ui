@@ -20,8 +20,8 @@ export class ParalegalService {
     return this.httpClient.post<object>(`${this.apiPath}/paralegal-registration/registration`, registrationData);
   }
 
-  authenticateMobile(otpData) {
-    return this.httpClient.post<object>(`${this.apiPath}/paralegal-registration/authenticate/registration`, otpData);
+  authenticateMobile(mobileData) {
+    return this.httpClient.post<object>(`${this.apiPath}/paralegal-registration/authenticate/registration`, mobileData);
   }
 
   verifySms(verifyData) {

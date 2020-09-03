@@ -20,8 +20,8 @@ export class LawyerService {
     return this.httpClient.post<object>(`${this.apiPath}/lawyer-registration/registration`, registrationData);
   }
 
-  authenticateMobile(otpData) {
-    return this.httpClient.post<object>(`${this.apiPath}/lawyer-registration/authenticate/registration`, otpData);
+  authenticateMobile(mobileData) {
+    return this.httpClient.post<object>(`${this.apiPath}/lawyer-registration/authenticate/registration`, mobileData);
   }
 
   verifySms(verifyData) {
