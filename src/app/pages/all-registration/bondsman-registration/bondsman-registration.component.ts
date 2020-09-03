@@ -9,21 +9,52 @@ import { BondsmanService } from 'app/services/registration/bondsman.service';
 
 export class BondsmanRegistrationComponent implements OnInit {
   step: number = 1;
-  roleId: number = 6;
+  totalSteps: number = 4;
+  roleId: number = 2;
   userName: string;
-  totalSteps: number = 2;
+  registrationData = {
+    'user': {},
+    'organization': {
+      'address': {}
+    },
+    'facilityIds': []
+  }
 
   constructor(private bondsmanService: BondsmanService) { }
 
   ngOnInit(): void {
   }
 
-  onNextClick(value) {
-    if (value) {
-      this.userName = value;
+  onNextClick(userData) {
+    if (userData) {
+      this.registrationData.user = userData;
       this.step = 2;
     } else {
       this.step = 1;
+    }
+  }
+
+  onCreateOrganisation(orgData) {
+    if (orgData) {
+      this.step = 3;
+      this.registrationData.organization = orgData.name;
+      this.registrationData.organization.address = orgData.address;
+    } else {
+      this.step = 2;
+    }
+  }
+
+  onSelectedfacility(selectedfacility) {
+    if (selectedfacility) {
+      this.registrationData.facilityIds = selectedfacility;
+      this.bondsmanService.onRegistration(this.registrationData).subscribe((res: any) => {
+        if (res.success) {
+          this.userName = res.data.userName;
+          this.step = 4;
+        }
+      });
+    } else {
+      this.step = 3;
     }
   }
 }

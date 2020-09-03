@@ -10,22 +10,52 @@ import { PublicDefenderService } from 'app/services/registration/public-defender
 
 export class PublicDefenderRegistrationComponent implements OnInit {
   step: number = 1;
-  roleId: number = 5;
-  userName: string = '';
-  totalSteps: number = 2;
+  totalSteps: number = 4;
+  roleId: number = 2;
+  userName: string;
+  registrationData = {
+    'user': {},
+    'organization': {
+      'address': {}
+    },
+    'facilityIds': []
+  }
 
   constructor(private publicDefenderService: PublicDefenderService) { }
 
   ngOnInit(): void {
   }
 
-  onNextClick(value) {
-    if (value) {
-      this.userName = value;
+  onNextClick(userData) {
+    if (userData) {
+      this.registrationData.user = userData;
+      this.step = 2;
+    } else {
+      this.step = 1;
+    }
+  }
+
+  onCreateOrganisation(orgData) {
+    if (orgData) {
+      this.step = 3;
+      this.registrationData.organization = orgData.name;
+      this.registrationData.organization.address = orgData.address;
+    } else {
       this.step = 2;
     }
-    else {
-      this.step = 1;
+  }
+
+  onSelectedfacility(selectedfacility) {
+    if (selectedfacility) {
+      this.registrationData.facilityIds = selectedfacility;
+      this.publicDefenderService.onRegistration(this.registrationData).subscribe((res: any) => {
+        if (res.success) {
+          this.userName = res.data.userName;
+          this.step = 4;
+        }
+      });
+    } else {
+      this.step = 3;
     }
   }
 }
