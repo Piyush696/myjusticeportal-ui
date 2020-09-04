@@ -9,8 +9,10 @@
             </div>
             <div class="col-4 offset-4">
                 <div class="d-flex justify-content-end">
-                    <button class="background-color px-5 py-1" mat-raised-button color="primary"
-                        (click)="openModal(AddFacilityModel,true)">Create Facility</button>
+                    <button class="button-purple px-5 py-1" mat-raised-button
+                        (click)="openModal(AddFacilityModel,true)">
+                        Create Facility
+                    </button>
                 </div>
             </div>
         </div>
@@ -18,21 +20,21 @@
             <ng-container matColumnDef="facilityCode">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header>Facility Code</th>
                 <td mat-cell *matCellDef="let facility">
-                    {{facility.facilityCode}}
+                    {{facility?.facilityCode}}
                 </td>
             </ng-container>
             <ng-container matColumnDef="facilityName">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header>Facility Name</th>
-                <td mat-cell *matCellDef="let facility">{{facility.facilityName}}</td>
+                <td mat-cell *matCellDef="let facility">{{facility?.facilityName}}</td>
             </ng-container>
 
-            <ng-container matColumnDef="libraryLinks">
+            <ng-container matColumnDef="libraryLink">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header>Library Link</th>
-                <td mat-cell *matCellDef="let facility">{{facility.libraryLink}}</td>
+                <td mat-cell *matCellDef="let facility">{{facility?.libraryLink}}</td>
             </ng-container>
 
             <ng-container matColumnDef="action">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header>Action</th>
+                <th mat-header-cell *matHeaderCellDef>Action</th>
                 <td mat-cell *matCellDef="let facility">
                     <button (click)="facilityView(facility);openModal(AddFacilityModel, false)" class="mr-1"
                         mat-mini-fab color="primary" title="View Facility Details">
@@ -49,7 +51,6 @@
         <mat-paginator [pageSizeOptions]="[10, 20, 30]" showFirstLastButtons></mat-paginator>
     </mat-card>
 </div>
-
 
 <ng-template #AddFacilityModel>
     <div class="d-flex justify-content-start">
@@ -68,11 +69,11 @@
                         <mat-error>
                             <div
                                 *ngIf="facilityForm.controls['facilityCode'].invalid &&
-                                (facilityForm.controls['facilityCode'].touched  && facilityForm.controls['facilityCode'].hasError('taken'))">
+                                (facilityForm.controls['facilityCode'].touched && facilityForm.controls['facilityCode'].hasError('taken'))">
                                 <small class="font13">Facility Code already taken.</small>
                             </div>
                             <div *ngIf="facilityForm.controls['facilityCode'].invalid && facilityForm.controls['facilityCode'].touched
-                            &&facilityForm.controls['facilityCode'].errors?.required">
+                                && facilityForm.controls['facilityCode'].errors?.required">
                                 <small class="font13">
                                     Facility Code is Required
                                 </small>
@@ -203,19 +204,23 @@
         </div>
     </div>
     <div class="d-flex justify-content-end p-0" *ngIf="addHide">
-        <button [disabled]="facilityForm.invalid || addressForm.invalid" mat-raised-button color="primary" type="button"
-            class="mt-2 px-4 py-1" (click)="AddFacility()">Add Facility</button>
+        <button mat-raised-button class="button-purple mt-2 px-4 py-1"
+            [disabled]="facilityForm.invalid || addressForm.invalid" (click)="AddFacility()">
+            Add Facility
+        </button>
     </div>
 
     <div class="d-flex justify-content-end p-0" *ngIf="!addHide">
-        <button *ngIf="buttonText === 'Edit'" [disabled]="facilityForm.invalid || addressForm.invalid" mat-raised-button
-            color="primary" type="button" class="mt-2 px-4 py-1"
-            (click)="this.facilityForm.enable();addressForm.enable(); buttonText = 'Save'">{{buttonText}}</button>
-        <button *ngIf="buttonText === 'Save'"
+        <button *ngIf="buttonText === 'Edit'" mat-raised-button class="button-purple mt-2 px-4 py-1"
+            [disabled]="facilityForm.invalid || addressForm.invalid"
+            (click)="this.facilityForm.enable();addressForm.enable(); buttonText = 'Save'">
+            {{buttonText}}
+        </button>
+        <button *ngIf="buttonText === 'Save'" mat-raised-button color="primary" class="px-4 py-1 mt-2"
             [disabled]="(facilityForm.controls['facilityCode'].dirty && facilityForm.controls['facilityCode'].hasError('taken')) ||
              facilityForm.controls['libraryLink'].invalid || facilityForm.controls['facilityName'].invalid || addressForm.controls['street1'].invalid || addressForm.controls['city'].invalid 
-             || addressForm.controls['state'].invalid || addressForm.controls['zip'].invalid || addressForm.controls['country'].invalid"
-            mat-raised-button color="primary" type="button" class="px-4 py-1 mt-2"
-            (click)="onSaveChanges(facility)">{{buttonText}}</button>
+             || addressForm.controls['state'].invalid || addressForm.controls['zip'].invalid || addressForm.controls['country'].invalid" (click)="onSaveChanges(facility)">
+            {{buttonText}}
+        </button>
     </div>
 </ng-template>

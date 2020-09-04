@@ -2,7 +2,8 @@
     <div class="w-100 my-3">
         <div>
             <h1 class="line-height font-weight-bold">Postage Credentials</h1>
-            <h4 class="line-height header-sub-text">View and Manage all the Postage Credentials.
+            <h4 class="line-height header-sub-text">
+                View and Manage all the Postage Credentials.
             </h4>
         </div>
         <mat-card class="w-100 p-5">
@@ -38,7 +39,7 @@
             </div>
             <div class="row">
                 <div class="col-6 pl-0">
-                    <mat-form-field appearance="fill" class="w-100 p-2">
+                    <mat-form-field appearance="fill" class="w-100 pl-2 pt-2">
                         <mat-label>Project</mat-label>
                         <input type="text" matInput placeholder="Project"
                             [formControl]="postageCredentialForm.controls['project']" required>
@@ -52,8 +53,8 @@
                         </mat-error>
                     </mat-form-field>
                 </div>
-                <div class="col-6 pr-0">
-                    <mat-form-field appearance="fill" class="w-100 p-2">
+                <div class="col-6 px-0">
+                    <mat-form-field appearance="fill" class="w-100 pr-2 pt-2">
                         <mat-label>Template</mat-label>
                         <input type="text" matInput placeholder="Template"
                             [formControl]="postageCredentialForm.controls['template']" required>
@@ -68,12 +69,12 @@
                     </mat-form-field>
                 </div>
             </div>
-            <div class="row d-flex justify-content-between">
-                <button class="px-4 py-1 ml-2" mat-raised-button color="primary"
-                    (click)="this.postageCredentialForm.enable(); enableSave()">
+            <div class="row d-flex justify-content-between mt-2">
+                <button class="button-purple px-4 py-1 ml-2" mat-raised-button
+                    (click)="this.postageCredentialForm.enable();enableSave()">
                     Edit Changes
                 </button>
-                <button [disabled]="isDisabled" class="px-4 py-1 mr-2" mat-raised-button color="primary"
+                <button class="px-4 py-1 mr-2" mat-raised-button color="primary" [disabled]="isDisabled"
                     (click)="updateCendencialChanges()">
                     Save
                 </button>

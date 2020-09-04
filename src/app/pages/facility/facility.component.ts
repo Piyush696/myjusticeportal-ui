@@ -12,13 +12,8 @@ import { FormBuilder, FormGroup, Validators, AbstractControl } from '@angular/fo
   templateUrl: './facility.component.html',
   styleUrls: ['./facility.component.css']
 })
+
 export class FacilityComponent implements OnInit {
-
-  displayedColumns: string[] = ["facilityCode", "facilityName", "libraryLinks", "action"];
-  dataSource = new MatTableDataSource();
-  @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
-  @ViewChild(MatSort, { static: true }) sort: MatSort;
-
   facilityForm: FormGroup;
   buttonText: string = 'Edit';
   addHide: boolean = true;
@@ -26,7 +21,13 @@ export class FacilityComponent implements OnInit {
   addressForm: FormGroup;
   facilityAddressId: number;
 
-  constructor(private toasterService: ToasterService, private facilityService: FacilityService, public dialog: MatDialog, private fb: FormBuilder) { }
+  displayedColumns: string[] = ["facilityCode", "facilityName", "libraryLink", "action"];
+  dataSource = new MatTableDataSource();
+  @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
+  @ViewChild(MatSort, { static: true }) sort: MatSort;
+
+  constructor(private toasterService: ToasterService, private facilityService: FacilityService,
+    public dialog: MatDialog, private fb: FormBuilder) { }
 
   ngOnInit(): void {
     this.facilityForm = this.fb.group({
@@ -92,22 +93,22 @@ export class FacilityComponent implements OnInit {
       } else {
         this.toasterService.showErrorToater('Facility is not Added.');
       }
-      this.facilityForm.reset()
-      this.addressForm.reset()
+      this.facilityForm.reset();
+      this.addressForm.reset();
     })
   }
 
   openModal(templateRef, value) {
-    this.addHide = value
+    this.addHide = value;
     this.buttonText = 'Edit';
     if (value) {
-      this.facilityForm.reset()
-      this.addressForm.reset()
-      this.addressForm.enable()
-      this.facilityForm.enable()
+      this.facilityForm.reset();
+      this.addressForm.reset();
+      this.addressForm.enable();
+      this.facilityForm.enable();
     } else {
-      this.facilityForm.disable()
-      this.addressForm.disable()
+      this.facilityForm.disable();
+      this.addressForm.disable();
     }
     let dialogRef = this.dialog.open(templateRef, {
       width: '80vh',
@@ -116,17 +117,19 @@ export class FacilityComponent implements OnInit {
   }
 
   facilityView(facility) {
-    this.facilityId = facility.facilityId
-    this.facilityAddressId = facility.Address.addressId
-    this.facilityForm.get('facilityCode').setValue(facility.facilityCode)
-    this.facilityForm.get('facilityName').setValue(facility.facilityName)
-    this.facilityForm.get('libraryLink').setValue(facility.libraryLink)
-    this.addressForm.get('street1').setValue(facility.Address.street1)
-    this.addressForm.get('street2').setValue(facility.Address.street2)
-    this.addressForm.get('city').setValue(facility.Address.city)
-    this.addressForm.get('state').setValue(facility.Address.state)
-    this.addressForm.get('zip').setValue(facility.Address.zip)
-    this.addressForm.get('country').setValue(facility.Address.country)
+    this.facilityId = facility.facilityId;
+    this.facilityForm.get('facilityCode').setValue(facility.facilityCode);
+    this.facilityForm.get('facilityName').setValue(facility.facilityName);
+    this.facilityForm.get('libraryLink').setValue(facility.libraryLink);
+    if (facility.Address) {
+      this.facilityAddressId = facility.Address.addressId;
+      this.addressForm.get('street1').setValue(facility.Address.street1);
+      this.addressForm.get('street2').setValue(facility.Address.street2);
+      this.addressForm.get('city').setValue(facility.Address.city);
+      this.addressForm.get('state').setValue(facility.Address.state);
+      this.addressForm.get('zip').setValue(facility.Address.zip);
+      this.addressForm.get('country').setValue(facility.Address.country);
+    }
   }
 
   onSaveChanges(facility) {

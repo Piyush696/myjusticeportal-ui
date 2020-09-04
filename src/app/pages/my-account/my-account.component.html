@@ -96,9 +96,12 @@
 
         <div class="row pl-2">
             <div class="col-9">
-                <div class="d-flex justify-content-start pb-2">
-                    <mat-slide-toggle [checked]="user?.isMFA" (change)="onMfaSelect()"
-                        [formControl]="profileForm.controls['isMFA']">isMFA</mat-slide-toggle>
+                <div class="d-flex align-items-center pb-3">
+                    MFA
+                    <mat-slide-toggle class="pl-2" color="warn" [checked]="user?.isMFA" (change)="onMfaSelect()"
+                        [formControl]="profileForm.controls['isMFA']">
+                        {{user?.isMFA ? 'Enabled' : 'Disabled'}}
+                    </mat-slide-toggle>
                 </div>
             </div>
         </div>
@@ -106,30 +109,36 @@
         <div class="row px-1">
             <div class="col-9 col-sm-9">
                 <div class="form-control d-flex justify-content-center">
-                    <a class="anchor-style" mat-flat-button (click)="openModal(passwordModal)">Click
-                        here to reset your password</a>
+                    <a class="anchor-style" mat-flat-button (click)="openModal(passwordModal)">
+                        Click here to reset your password
+                    </a>
                 </div>
             </div>
         </div>
         <div class="row">
             <div class="col-9 col-sm-9 d-flex justify-content-end justify-content-sm-end">
                 <div class="pr-3">
-                    <button class="px-4 py-1" mat-raised-button color="primary"
-                        (click)="openModal(manageSecurityQuestionModal)">Manage Security Questions</button>
+                    <button class="button-purple px-4 py-1" mat-raised-button
+                        (click)="openModal(manageSecurityQuestionModal)">
+                        Manage Security Questions
+                    </button>
                 </div>
                 <div>
-                    <button class="px-4 py-1" mat-raised-button color="primary" (click)="editChanges()">Edit
-                        Changes</button>
+                    <button class="button-purple px-4 py-1" mat-raised-button (click)="editChanges()">
+                        Edit Changes
+                    </button>
                 </div>
             </div>
         </div>
     </div>
 </div>
 
-<!-- Password Reset Modal  -->
+<!-- Password Reset Modal -->
+
 <ng-template #passwordModal>
     <div class="d-flex justify-content-center modal-header">
-        <mat-label class="font-weight-bold">Update Password
+        <mat-label class="font-weight-bold">
+            Update Password
         </mat-label>
     </div>
     <div>
@@ -176,7 +185,9 @@
             color="primary">Save</button>
     </div>
 </ng-template>
+
 <!-- Manage Security Modal -->
+
 <ng-template #manageSecurityQuestionModal>
     <div class="d-flex justify-content-center modal-header">
         <mat-label class="font-weight-bold">Manage Security Questions</mat-label>
@@ -188,7 +199,9 @@
                     <select class="dropdown" [formControl]="securityQuestionForm.controls['securityQuestionId']">
                         <option [selected]="true">Select Question</option>
                         <option *ngFor="let securityQuestion of securityQuestionList"
-                            [value]="securityQuestion.securityQuestionId">{{securityQuestion.question}}</option>
+                            [value]="securityQuestion.securityQuestionId">
+                            {{securityQuestion.question}}
+                        </option>
                     </select>
                 </div>
 

@@ -83,8 +83,8 @@
     </mat-form-field>
   </div>
   <div mat-dialog-actions class="float-right pb-4">
-    <button mat-raised-button color="accent" (click)="onCloseModal()">Close</button>
-    <button mat-raised-button color="primary" [mat-dialog-close]="selectedRoleId" cdkFocusInitial>
+    <button mat-raised-button (click)="onCloseModal()">Close</button>
+    <button mat-raised-button class="button-purple" [mat-dialog-close]="selectedRoleId" cdkFocusInitial>
       Save
     </button>
   </div>

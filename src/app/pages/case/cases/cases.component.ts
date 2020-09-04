@@ -14,7 +14,7 @@ import { ToasterService } from 'app/services/toaster.service';
 export class CasesComponent implements OnInit {
   caseList: any;
   caseNoteForm: FormGroup;
-  buttonText: string = 'Edit';
+  enableEditBtn: boolean = true;
   currentCaseId: any;
 
   constructor(private router: Router,
@@ -59,7 +59,7 @@ export class CasesComponent implements OnInit {
       this.caseNoteForm.disable();
       this.dialog.closeAll();
       this.getCases();
-      this.buttonText = 'Edit';
+      this.enableEditBtn = true;
       this.toasterService.showSuccessToater('Notes Updated Successfully.');
     })
   }
