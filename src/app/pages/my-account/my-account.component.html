@@ -93,6 +93,38 @@
                 </mat-form-field>
             </div>
         </div>
+        <div class="row">
+            <div class="col-9">
+                <mat-form-field appearance="fill" class="w-100 p-1">
+                    <mat-label>Housing Unit</mat-label>
+                    <input type="text" matInput placeholder="Legal Last Name"
+                        [formControl]="profileForm.controls['housing_unit']" required>
+                    <mat-error>
+                        <div
+                            *ngIf="profileForm.controls['housing_unit'].invalid && profileForm.controls['housing_unit'].touched">
+                            <small class="font13">
+                                Lastname is Required
+                            </small>
+                        </div>
+                    </mat-error>
+                </mat-form-field>
+            </div>
+            <div class="col-9">
+                <mat-form-field appearance="fill" class="w-100 p-1">
+                    <mat-label>Facility</mat-label>
+                    <input type="text" matInput placeholder="Legal Last Name"
+                        [formControl]="profileForm.controls['facility']" required>
+                    <mat-error>
+                        <div
+                            *ngIf="profileForm.controls['facility'].invalid && profileForm.controls['facility'].touched">
+                            <small class="font13">
+                                Lastname is Required
+                            </small>
+                        </div>
+                    </mat-error>
+                </mat-form-field>
+            </div>
+        </div>
 
         <div class="row pl-2">
             <div class="col-9">
@@ -145,6 +177,18 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="form-group">
+                    <mat-form-field appearance="fill" class="w-100 p-2">
+                        <mat-label>Enter old Password</mat-label>
+                        <input type="password" matInput [formControl]="passwordForm.controls['oldPassword']" required>
+                        <mat-error>
+                            <div
+                                *ngIf="passwordForm.controls['oldPassword'].invalid && passwordForm.controls['oldPassword'].touched">
+                                <small class="font13">
+                                    Old Password is Required
+                                </small>
+                            </div>
+                        </mat-error>
+                    </mat-form-field>
                     <mat-form-field appearance="fill" class="w-100 p-2">
                         <mat-label>New Password</mat-label>
                         <input type="password" matInput placeholder="password"
