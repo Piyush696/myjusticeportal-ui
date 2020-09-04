@@ -93,7 +93,7 @@
                 </mat-form-field>
             </div>
         </div>
-        <div class="row">
+        <div class="row" *ngIf="!isUser">
             <div class="col-12 col-sm-9 col-md-9 col-lg-9 col-xl-9">
                 <mat-form-field appearance="fill" class="w-100 p-1">
                     <mat-label>Housing Unit</mat-label>
@@ -180,7 +180,7 @@
             <div class="col-md-12">
                 <div class="form-group">
                     <mat-form-field appearance="fill" class="w-100 p-2">
-                        <mat-label>Enter old Password</mat-label>
+                        <mat-label>Enter Current Password</mat-label>
                         <input type="password" matInput [formControl]="passwordForm.controls['oldPassword']" required>
                         <mat-error>
                             <div
@@ -227,8 +227,8 @@
     <div class="d-flex justify-content-between modal-footer">
         <button type="button" class="px-4 py-1" mat-raised-button color="primary" type="button"
             (click)="closeModal()">Close</button>
-        <button type="button" class="px-4 py-1" (click)="passwordChange()" mat-raised-button
-            color="primary">Save</button>
+        <button type="button" class="px-4 py-1" [disabled]="passwordForm.invalid" (click)="passwordChange()"
+            mat-raised-button color="primary">Save</button>
     </div>
 </ng-template>
 

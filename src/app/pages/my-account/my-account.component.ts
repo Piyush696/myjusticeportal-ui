@@ -115,19 +115,16 @@ export class MyAccountComponent implements OnInit {
   }
 
   editChanges() {
-    let userData = {
-      profileData: this.profileForm.value,
-      metaData: this.userMetaForm.value
-    }
-    this.userService.updateUserInfo(userData).subscribe((result: any) => {
+    this.userService.updateUserInfo(this.profileForm.value,).subscribe((result: any) => {
       this.toasterService.showSuccessToater('User Updated Successfully.')
       this.getSingleUser();
     })
+
+    this.userMetaService.updateUserMeta
   }
 
   getLoginDetails() {
     this.store.select(s => s.userInfo).subscribe(x => {
-
       this.getSingleUser();
     })
   }
@@ -168,7 +165,7 @@ export class MyAccountComponent implements OnInit {
         this.toasterService.showSuccessToater('Password Reset Successfully.');
         this.closeModal();
       } else {
-        this.toasterService.showErrorToater('Old Password is Incorrect');
+        this.toasterService.showErrorToater('Current Password is Incorrect');
         this.closeModal();
       }
       this.passwordForm.reset()
