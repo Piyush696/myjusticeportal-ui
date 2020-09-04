@@ -63,7 +63,7 @@
                     <mat-form-field appearance="fill" class="w-100 pl-2">
                         <mat-label>Facility Code</mat-label>
                         <input type="text" matInput placeholder="Facility Code"
-                            [formControl]="facilityForm.controls['facilityCode']" maxlength='6' minlength="6"
+                            [formControl]="facilityForm.controls['facilityCode']" maxlength='5' minlength="5"
                             onkeypress='return (event.charCode > 96 && event.charCode < 123) || (event.charCode > 64 && event.charCode < 91) || (event.charCode >= 48 && event.charCode <= 57) || event.charCode <= 31'
                             required>
                         <mat-error>
@@ -80,7 +80,7 @@
                             </div>
                             <div *ngIf="facilityForm.controls['facilityCode'].errors?.minlength">
                                 <small class="font13">
-                                    Facility Code Must be 6 Characters.
+                                    Facility Code Must be 5 Characters.
                                 </small>
                             </div>
                         </mat-error>

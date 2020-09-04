@@ -45,6 +45,8 @@ export class MyAccountComponent implements OnInit {
       firstName: ['', [Validators.required]],
       lastName: ['', [Validators.required]],
       middleName: ['', [Validators.required]],
+      housing_unit: ['', [Validators.required]],
+      facility: ['', [Validators.required]],
       isMFA: [''],
     })
     this.createPasswordControl();
@@ -81,6 +83,7 @@ export class MyAccountComponent implements OnInit {
 
   createPasswordControl() {
     this.passwordForm = this.fb.group({
+      oldPassword: ['', [Validators.required]],
       password: ['', [Validators.required]],
       confirmPassword: ['', [Validators.required]],
     }, { validator: this.checkIfMatchingPasswords('password', 'confirmPassword') })
@@ -114,6 +117,7 @@ export class MyAccountComponent implements OnInit {
 
   getLoginDetails() {
     this.store.select(s => s.userInfo).subscribe(x => {
+
       this.getSingleUser();
     })
   }
@@ -140,17 +144,23 @@ export class MyAccountComponent implements OnInit {
       this.profileForm.get('middleName').setValue(result.data.middleName)
       this.profileForm.get('lastName').setValue(result.data.lastName)
       this.profileForm.get('userName').setValue(result.data.userName)
+      this.profileForm.get('housing_unit').setValue(result.data.userMeta[0].metaValue)
+      this.profileForm.get('facility').setValue(result.data.userMeta[1].metaValue)
       this.profileForm.get('isMFA').setValue(result.data.isMFA)
 
     })
   }
 
   passwordChange() {
-    this.userService.resetPassword(this.passwordForm.get('password').value).subscribe((reset: any) => {
+    this.userService.resetPassword({ oldPassword: this.passwordForm.get('oldPassword').value, password: this.passwordForm.get('password').value }).subscribe((reset: any) => {
       if (reset.success) {
         this.toasterService.showSuccessToater('Password Reset Successfully.');
         this.closeModal();
+      } else {
+        this.toasterService.showErrorToater('Old Password is Incorrect');
+        this.closeModal();
       }
+      this.passwordForm.reset()
     })
   }
 
