@@ -7,6 +7,7 @@ import { ToasterService } from 'app/services/toaster.service';
 import { TwilioService } from 'app/services/twilio.service';
 import { UserService } from '../../services/user.service';
 import { RegistrationService } from 'app/services/registration.service';
+import { UserMetaService } from 'app/services/user-meta.service';
 
 @Component({
   selector: 'app-my-account',
@@ -28,9 +29,12 @@ export class MyAccountComponent implements OnInit {
   count: number = 0;
   isUser: boolean = false;
   roleId: number;
+  userMetaForm: FormGroup;
 
 
-  constructor(private registrationService: RegistrationService, public dialog: MatDialog, private twilioService: TwilioService, private toasterService: ToasterService, private securityService: SecurityService, private userService: UserService, private store: Store<any>, private fb: FormBuilder) { }
+  constructor(private registrationService: RegistrationService, public dialog: MatDialog, private twilioService: TwilioService,
+    private toasterService: ToasterService, private securityService: SecurityService, private userService: UserService, private store: Store<any>,
+    private fb: FormBuilder, private userMetaService: UserMetaService) { }
 
   ngOnInit() {
     this.createControl();
@@ -45,9 +49,11 @@ export class MyAccountComponent implements OnInit {
       firstName: ['', [Validators.required]],
       lastName: ['', [Validators.required]],
       middleName: ['', [Validators.required]],
+      isMFA: ['']
+    })
+    this.userMetaForm = this.fb.group({
       housing_unit: ['', [Validators.required]],
-      facility: ['', [Validators.required]],
-      isMFA: [''],
+      facility: ['', [Validators.required]]
     })
     this.createPasswordControl();
   }
@@ -109,7 +115,11 @@ export class MyAccountComponent implements OnInit {
   }
 
   editChanges() {
-    this.userService.updateUserInfo(this.profileForm.value).subscribe((result: any) => {
+    let userData = {
+      profileData: this.profileForm.value,
+      metaData: this.userMetaForm.value
+    }
+    this.userService.updateUserInfo(userData).subscribe((result: any) => {
       this.toasterService.showSuccessToater('User Updated Successfully.')
       this.getSingleUser();
     })
@@ -130,6 +140,7 @@ export class MyAccountComponent implements OnInit {
 
   getSingleUser() {
     this.userService.getSingleUser().subscribe((result: any) => {
+      console.log(result)
       this.roleId = result.data.roles[0].roleId;
       if (result.data.roles[0].name == 'User') {
         this.isUser = true
@@ -144,9 +155,9 @@ export class MyAccountComponent implements OnInit {
       this.profileForm.get('middleName').setValue(result.data.middleName)
       this.profileForm.get('lastName').setValue(result.data.lastName)
       this.profileForm.get('userName').setValue(result.data.userName)
-      this.profileForm.get('housing_unit').setValue(result.data.userMeta[0].metaValue)
-      this.profileForm.get('facility').setValue(result.data.userMeta[1].metaValue)
       this.profileForm.get('isMFA').setValue(result.data.isMFA)
+      this.userMetaForm.get('housing_unit').setValue(result.data.userMeta[0].metaValue)
+      this.userMetaForm.get('facility').setValue(result.data.userMeta[1].metaValue)
 
     })
   }
