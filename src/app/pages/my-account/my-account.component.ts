@@ -7,6 +7,7 @@ import { ToasterService } from 'app/services/toaster.service';
 import { TwilioService } from 'app/services/twilio.service';
 import { UserService } from '../../services/user.service';
 import { RegistrationService } from 'app/services/registration.service';
+import { UserMetaService } from 'app/services/user-meta.service';
 
 @Component({
   selector: 'app-my-account',
@@ -28,9 +29,13 @@ export class MyAccountComponent implements OnInit {
   count: number = 0;
   isUser: boolean = false;
   roleId: number;
+  userMetaForm: FormGroup;
+  userMeta: any;
 
 
-  constructor(private registrationService: RegistrationService, public dialog: MatDialog, private twilioService: TwilioService, private toasterService: ToasterService, private securityService: SecurityService, private userService: UserService, private store: Store<any>, private fb: FormBuilder) { }
+  constructor(private registrationService: RegistrationService, public dialog: MatDialog, private twilioService: TwilioService,
+    private toasterService: ToasterService, private securityService: SecurityService, private userService: UserService, private store: Store<any>,
+    private fb: FormBuilder, private userMetaService: UserMetaService) { }
 
   ngOnInit() {
     this.createControl();
@@ -45,9 +50,11 @@ export class MyAccountComponent implements OnInit {
       firstName: ['', [Validators.required]],
       lastName: ['', [Validators.required]],
       middleName: ['', [Validators.required]],
+      isMFA: ['']
+    })
+    this.userMetaForm = this.fb.group({
       housing_unit: ['', [Validators.required]],
-      facility: ['', [Validators.required]],
-      isMFA: [''],
+      facility: ['', [Validators.required]]
     })
     this.createPasswordControl();
   }
@@ -109,15 +116,35 @@ export class MyAccountComponent implements OnInit {
   }
 
   editChanges() {
-    this.userService.updateUserInfo(this.profileForm.value).subscribe((result: any) => {
+    this.userService.updateUserInfo(this.profileForm.value,).subscribe((result: any) => {
       this.toasterService.showSuccessToater('User Updated Successfully.')
       this.getSingleUser();
     })
+
+
+  }
+
+  userMetaUpdate() {
+    if (this.isUser) {
+      let meta = this.userMeta
+      let formData = this.userMetaForm.value
+      for (let item of meta) {
+        if (item.metaKey == 'housing_unit') {
+          item.metaValue = formData.housing_unit
+        }
+        if (item.metaKey == 'facility') {
+          item.metaValue = formData.facility
+        }
+      }
+      this.userMetaService.updateUserMeta(meta).subscribe((result: any) => {
+        this.toasterService.showSuccessToater('User Updated Successfully.')
+        this.getSingleUser();
+      })
+    }
   }
 
   getLoginDetails() {
     this.store.select(s => s.userInfo).subscribe(x => {
-
       this.getSingleUser();
     })
   }
@@ -140,13 +167,14 @@ export class MyAccountComponent implements OnInit {
         this.getAllSecurityQuestion(element.roleId)
       });
       this.user = result.data;
+      this.userMeta = result.data.userMeta
       this.profileForm.get('firstName').setValue(result.data.firstName)
       this.profileForm.get('middleName').setValue(result.data.middleName)
       this.profileForm.get('lastName').setValue(result.data.lastName)
       this.profileForm.get('userName').setValue(result.data.userName)
-      this.profileForm.get('housing_unit').setValue(result.data.userMeta[0].metaValue)
-      this.profileForm.get('facility').setValue(result.data.userMeta[1].metaValue)
       this.profileForm.get('isMFA').setValue(result.data.isMFA)
+      this.userMetaForm.get('housing_unit').setValue(result.data?.userMeta[0].metaValue)
+      this.userMetaForm.get('facility').setValue(result.data?.userMeta[1].metaValue)
 
     })
   }
@@ -157,7 +185,7 @@ export class MyAccountComponent implements OnInit {
         this.toasterService.showSuccessToater('Password Reset Successfully.');
         this.closeModal();
       } else {
-        this.toasterService.showErrorToater('Old Password is Incorrect');
+        this.toasterService.showErrorToater('Current Password is Incorrect');
         this.closeModal();
       }
       this.passwordForm.reset()
