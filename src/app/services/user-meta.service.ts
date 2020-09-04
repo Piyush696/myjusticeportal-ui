@@ -28,6 +28,6 @@ export class UserMetaService {
   }
 
   updateUserMeta(userMetaData) {
-    return this.httpClient.post<object>(`${this.apiPath}/userMeta/update`, userMetaData)
+    return this.httpClient.put<object>(`${this.apiPath}/userMeta/update`, userMetaData, this.getHeaders())
   }
 }

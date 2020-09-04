@@ -30,6 +30,7 @@ export class MyAccountComponent implements OnInit {
   isUser: boolean = false;
   roleId: number;
   userMetaForm: FormGroup;
+  userMeta: any;
 
 
   constructor(private registrationService: RegistrationService, public dialog: MatDialog, private twilioService: TwilioService,
@@ -120,7 +121,26 @@ export class MyAccountComponent implements OnInit {
       this.getSingleUser();
     })
 
-    this.userMetaService.updateUserMeta
+
+  }
+
+  userMetaUpdate() {
+    if (this.isUser) {
+      let meta = this.userMeta
+      let formData = this.userMetaForm.value
+      for (let item of meta) {
+        if (item.metaKey == 'housing_unit') {
+          item.metaValue = formData.housing_unit
+        }
+        if (item.metaKey == 'facility') {
+          item.metaValue = formData.facility
+        }
+      }
+      this.userMetaService.updateUserMeta(meta).subscribe((result: any) => {
+        this.toasterService.showSuccessToater('User Updated Successfully.')
+        this.getSingleUser();
+      })
+    }
   }
 
   getLoginDetails() {
@@ -137,7 +157,6 @@ export class MyAccountComponent implements OnInit {
 
   getSingleUser() {
     this.userService.getSingleUser().subscribe((result: any) => {
-      console.log(result)
       this.roleId = result.data.roles[0].roleId;
       if (result.data.roles[0].name == 'User') {
         this.isUser = true
@@ -148,13 +167,14 @@ export class MyAccountComponent implements OnInit {
         this.getAllSecurityQuestion(element.roleId)
       });
       this.user = result.data;
+      this.userMeta = result.data.userMeta
       this.profileForm.get('firstName').setValue(result.data.firstName)
       this.profileForm.get('middleName').setValue(result.data.middleName)
       this.profileForm.get('lastName').setValue(result.data.lastName)
       this.profileForm.get('userName').setValue(result.data.userName)
       this.profileForm.get('isMFA').setValue(result.data.isMFA)
-      this.userMetaForm.get('housing_unit').setValue(result.data.userMeta[0].metaValue)
-      this.userMetaForm.get('facility').setValue(result.data.userMeta[1].metaValue)
+      this.userMetaForm.get('housing_unit').setValue(result.data?.userMeta[0].metaValue)
+      this.userMetaForm.get('facility').setValue(result.data?.userMeta[1].metaValue)
 
     })
   }

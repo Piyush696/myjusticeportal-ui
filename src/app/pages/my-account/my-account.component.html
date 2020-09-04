@@ -3,6 +3,8 @@
 
 <div class="row pl-2">
     <div class="col-12 col-sm-9 col-md-9 col-lg-9 col-xl-9 pl-1">
+        <!-- <mat-card>
+            <mat-card-content> -->
         <div class="row">
             <!-- <div class="w-100 p-4"> -->
             <div class="col-4 col-sm-3 col-md-3 col-lg-3 col-xl-3 p-0 pl-3">
@@ -93,7 +95,7 @@
                 </mat-form-field>
             </div>
         </div>
-        <div class="row" *ngIf="!isUser">
+        <div class="row" *ngIf="isUser">
             <div class="col-12 col-sm-9 col-md-9 col-lg-9 col-xl-9">
                 <mat-form-field appearance="fill" class="w-100 p-1">
                     <mat-label>Housing Unit</mat-label>
@@ -147,26 +149,27 @@
                 </div>
             </div>
         </div>
-        <div class="row button-group">
-            <div class="col-8 col-sm-4 col-md-4 col-lg-4 col-xl-4">
-                <div>
+        <div class="row pr-1">
+            <div class="col-12 col-sm-9 d-flex justify-content-end justify-content-sm-end">
+                <div class="pr-4">
                     <button class="button-purple px-sm-4 px-md-4 px-lg-4 px-xl-4 py-1" mat-raised-button
                         (click)="openModal(manageSecurityQuestionModal)">
                         Manage Security Questions
                     </button>
                 </div>
-            </div>
-            <div class="col-4 col-sm-4 col-md-4 col-lg-4 col-xl-4">
                 <div>
-                    <button class="button-purple px-sm-4 px-md-4 px-lg-4 px-xl-4 py-1 py-1" mat-raised-button
-                        (click)="editChanges()">
+                    <button class="button-purple px-sm-4 px-md-4 px-lg-4 px-xl-4 py-1" mat-raised-button
+                        (click)="editChanges(); userMetaUpdate()">
                         Edit Changes
                     </button>
                 </div>
             </div>
         </div>
+        <!-- </mat-card-content>
+        </mat-card> -->
     </div>
 </div>
+
 <!-- Password Reset Modal -->
 
 <ng-template #passwordModal>
