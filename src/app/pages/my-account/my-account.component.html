@@ -228,10 +228,10 @@
         </div>
     </div>
     <div class="d-flex justify-content-between modal-footer">
-        <button type="button" class="px-4 py-1" mat-raised-button color="primary" type="button"
+        <button type="button" class="button-purple px-4 py-1" mat-raised-button color="primary" type="button"
             (click)="closeModal()">Close</button>
-        <button type="button" class="px-4 py-1" [disabled]="passwordForm.invalid" (click)="passwordChange()"
-            mat-raised-button color="primary">Save</button>
+        <button type="button" class="button-purple px-4 py-1" [disabled]="passwordForm.invalid"
+            (click)="passwordChange()" mat-raised-button color="primary">Save</button>
     </div>
 </ng-template>
 
@@ -274,11 +274,12 @@
     </div>
     <div class="d-flex justify-content-between modal-footer">
         <button [disabled]="securityQuestionForm.get('answer').invalid" mat-raised-button color="primary" type="button"
-            class="px-4 py-1" *ngIf="count != 2" (click)="onSaveChanges()">Save</button>
+            class="button-purple px-4 py-1" *ngIf="count != 2" (click)="onSaveChanges()">Save</button>
 
         <button [disabled]="securityQuestionForm.get('answer').invalid" *ngIf="count == 2" class="px-4 py-1"
             mat-raised-button color="primary" (click)="onSaveChanges()">Submit</button>
 
-        <button type="button" class="px-4 py-1" mat-raised-button color="primary" (click)="closeModal()">Close</button>
+        <button type="button" class="button-purple px-4 py-1" mat-raised-button color="primary"
+            (click)="closeModal()">Close</button>
     </div>
 </ng-template>
