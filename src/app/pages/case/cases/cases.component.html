@@ -12,14 +12,12 @@
                 <div class="d-flex justify-content-between">
                     <div>
                         <mat-label>
-                            <span class="case-heading color">
-                                Case {{i+1}}: {{case?.otherInformation}}
-                            </span>
+                            <span class="case-heading color">Case
+                                {{i+1}}: {{case.briefDescriptionOfChargeOrLegalMatter}}</span>
+                            <span class="case-heading color"> </span>
                         </mat-label>
                         <br>
-                        <span class="color">
-                            {{case?.briefDescriptionOfChargeOrLegalMatter}}
-                        </span>
+                        <span class="color">{{case?.otherInformation}}</span>
                     </div>
                     <div class="d-flex">
                         <div class="pr-2">

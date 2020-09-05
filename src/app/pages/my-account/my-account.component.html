@@ -2,10 +2,12 @@
 <label class="header-sub-text">Manage your account information</label>
 
 <div class="row pl-2">
-    <div class="col-9 pl-1">
+    <div class="col-12 col-sm-9 col-md-9 col-lg-9 col-xl-9 pl-1">
+        <!-- <mat-card>
+            <mat-card-content> -->
         <div class="row">
             <!-- <div class="w-100 p-4"> -->
-            <div class="col-3 p-0 pl-3">
+            <div class="col-4 col-sm-3 col-md-3 col-lg-3 col-xl-3 p-0 pl-3">
                 <mat-form-field appearance="fill" class="w-100 p-1">
                     <mat-label>First Name</mat-label>
                     <input type="text" matInput placeholder="Legal First Name"
@@ -20,7 +22,7 @@
                     </mat-error>
                 </mat-form-field>
             </div>
-            <div class="col-3 p-0">
+            <div class="col-4 col-sm-3 col-md-3 col-lg-3 col-xl-3 p-0">
                 <mat-form-field appearance="fill" class="w-100 p-1">
                     <mat-label>Middle Name</mat-label>
                     <input type="text" matInput placeholder="Legal Middle Name"
@@ -35,7 +37,7 @@
                     </mat-error>
                 </mat-form-field>
             </div>
-            <div class="col-3 p-0 pr-3">
+            <div class="col-4 col-sm-3 col-md-3 col-lg-3 col-xl-3 p-0 pr-3">
                 <mat-form-field appearance="fill" class="w-100 p-1">
                     <mat-label>Last Name</mat-label>
                     <input type="text" matInput placeholder="Legal Last Name"
@@ -53,7 +55,7 @@
         </div>
         <!-- </div> -->
         <div class="row">
-            <div class="col-9" *ngIf="isUser">
+            <div class="col-12 col-sm-9 col-md-9 col-lg-9 col-xl-9" *ngIf="isUser">
                 <mat-form-field appearance="fill" class="w-100 p-1">
                     <mat-label>User Name</mat-label>
                     <input matInput placeholder="User Name" [formControl]="profileForm.controls['userName']" required>
@@ -73,7 +75,7 @@
                 </mat-form-field>
             </div>
 
-            <div class="col-9" *ngIf="!isUser">
+            <div class="col-12 col-sm-9 col-md-9 col-lg-9 col-xl-9" *ngIf="!isUser">
                 <mat-form-field appearance="fill" class="w-100 p-1">
                     <mat-label>Email</mat-label>
                     <input matInput placeholder="Email" [formControl]="profileForm.controls['userName']" required>
@@ -93,9 +95,41 @@
                 </mat-form-field>
             </div>
         </div>
+        <div class="row" *ngIf="isUser">
+            <div class="col-12 col-sm-9 col-md-9 col-lg-9 col-xl-9">
+                <mat-form-field appearance="fill" class="w-100 p-1">
+                    <mat-label>Housing Unit</mat-label>
+                    <input type="text" matInput placeholder="Legal Last Name"
+                        [formControl]="userMetaForm.controls['housing_unit']" required>
+                    <mat-error>
+                        <div
+                            *ngIf="userMetaForm.controls['housing_unit'].invalid && userMetaForm.controls['housing_unit'].touched">
+                            <small class="font13">
+                                Lastname is Required
+                            </small>
+                        </div>
+                    </mat-error>
+                </mat-form-field>
+            </div>
+            <div class="col-12 col-sm-9 col-md-9 col-lg-9 col-xl-9">
+                <mat-form-field appearance="fill" class="w-100 p-1">
+                    <mat-label>Facility</mat-label>
+                    <input type="text" matInput placeholder="Legal Last Name"
+                        [formControl]="userMetaForm.controls['facility']" required>
+                    <mat-error>
+                        <div
+                            *ngIf="userMetaForm.controls['facility'].invalid && userMetaForm.controls['facility'].touched">
+                            <small class="font13">
+                                Lastname is Required
+                            </small>
+                        </div>
+                    </mat-error>
+                </mat-form-field>
+            </div>
+        </div>
 
         <div class="row pl-2">
-            <div class="col-9">
+            <div class="col-12 col-sm-9 col-md-9 col-lg-9 col-xl-9">
                 <div class="d-flex align-items-center pb-3">
                     MFA
                     <mat-slide-toggle class="pl-2" color="warn" [checked]="user?.isMFA" (change)="onMfaSelect()"
@@ -107,7 +141,7 @@
         </div>
 
         <div class="row px-1">
-            <div class="col-9 col-sm-9">
+            <div class="col-12 col-sm-9 col-md-9 col-lg-9 col-xl-9">
                 <div class="form-control d-flex justify-content-center">
                     <a class="anchor-style" mat-flat-button (click)="openModal(passwordModal)">
                         Click here to reset your password
@@ -115,21 +149,24 @@
                 </div>
             </div>
         </div>
-        <div class="row">
-            <div class="col-9 col-sm-9 d-flex justify-content-end justify-content-sm-end">
-                <div class="pr-3">
-                    <button class="button-purple px-4 py-1" mat-raised-button
+        <div class="row pr-1">
+            <div class="col-12 col-sm-9 d-flex justify-content-end justify-content-sm-end">
+                <div class="pr-4">
+                    <button class="button-purple px-sm-4 px-md-4 px-lg-4 px-xl-4 py-1" mat-raised-button
                         (click)="openModal(manageSecurityQuestionModal)">
                         Manage Security Questions
                     </button>
                 </div>
                 <div>
-                    <button class="button-purple px-4 py-1" mat-raised-button (click)="editChanges()">
+                    <button class="button-purple px-sm-4 px-md-4 px-lg-4 px-xl-4 py-1" mat-raised-button
+                        (click)="editChanges(); userMetaUpdate()">
                         Edit Changes
                     </button>
                 </div>
             </div>
         </div>
+        <!-- </mat-card-content>
+        </mat-card> -->
     </div>
 </div>
 
@@ -145,6 +182,18 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="form-group">
+                    <mat-form-field appearance="fill" class="w-100 p-2">
+                        <mat-label>Enter Current Password</mat-label>
+                        <input type="password" matInput [formControl]="passwordForm.controls['oldPassword']" required>
+                        <mat-error>
+                            <div
+                                *ngIf="passwordForm.controls['oldPassword'].invalid && passwordForm.controls['oldPassword'].touched">
+                                <small class="font13">
+                                    Old Password is Required
+                                </small>
+                            </div>
+                        </mat-error>
+                    </mat-form-field>
                     <mat-form-field appearance="fill" class="w-100 p-2">
                         <mat-label>New Password</mat-label>
                         <input type="password" matInput placeholder="password"
@@ -179,10 +228,10 @@
         </div>
     </div>
     <div class="d-flex justify-content-between modal-footer">
-        <button type="button" class="px-4 py-1" mat-raised-button color="primary" type="button"
+        <button type="button" class="button-purple px-4 py-1" mat-raised-button color="primary" type="button"
             (click)="closeModal()">Close</button>
-        <button type="button" class="px-4 py-1" (click)="passwordChange()" mat-raised-button
-            color="primary">Save</button>
+        <button type="button" class="button-purple px-4 py-1" [disabled]="passwordForm.invalid"
+            (click)="passwordChange()" mat-raised-button color="primary">Save</button>
     </div>
 </ng-template>
 
@@ -225,11 +274,12 @@
     </div>
     <div class="d-flex justify-content-between modal-footer">
         <button [disabled]="securityQuestionForm.get('answer').invalid" mat-raised-button color="primary" type="button"
-            class="px-4 py-1" *ngIf="count != 2" (click)="onSaveChanges()">Save</button>
+            class="button-purple px-4 py-1" *ngIf="count != 2" (click)="onSaveChanges()">Save</button>
 
         <button [disabled]="securityQuestionForm.get('answer').invalid" *ngIf="count == 2" class="px-4 py-1"
             mat-raised-button color="primary" (click)="onSaveChanges()">Submit</button>
 
-        <button type="button" class="px-4 py-1" mat-raised-button color="primary" (click)="closeModal()">Close</button>
+        <button type="button" class="button-purple px-4 py-1" mat-raised-button color="primary"
+            (click)="closeModal()">Close</button>
     </div>
 </ng-template>
