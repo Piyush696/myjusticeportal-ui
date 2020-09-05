@@ -20,6 +20,7 @@ export class EmailRegistrationComponent implements OnInit {
   @Input() roleId;
   @Output() isNextEvent = new EventEmitter();
   @Input() totalSteps: any;
+  @Input() message: string
 
   constructor(public securityService: SecurityService, public dialog: MatDialog, private fb: FormBuilder,
     private registrationService: RegistrationService, private store: Store<any>) {
@@ -28,11 +29,11 @@ export class EmailRegistrationComponent implements OnInit {
   ngOnInit(): void {
     this.store.dispatch(new LoadRole());
     this.registrationForm = this.fb.group({
-      firstName: ['', [Validators.required]],
-      lastName: ['', [Validators.required]],
-      middleName: ['', [Validators.required]],
-      userName: ['', [Validators.required, this.validateEmail.bind(this)], this.validateUserNotTaken.bind(this)],
-      password: ['', [Validators.required, Validators.minLength(6)]],
+      firstName: ['', [Validators.required, Validators.maxLength(50), Validators.pattern('^[a-zA-Z ]*$')]],
+      lastName: ['', [Validators.required, Validators.maxLength(50), Validators.pattern('^[a-zA-Z ]*$')]],
+      middleName: ['', [Validators.required, Validators.maxLength(50), Validators.pattern('^[a-zA-Z ]*$')]],
+      userName: ['', [Validators.required, Validators.maxLength(25), Validators.minLength(8), this.validateEmail.bind(this)], this.validateUserNotTaken.bind(this)],
+      password: ['', [Validators.required, Validators.minLength(8), this.validatePassword.bind(this)]],
       confirmPassword: ['', [Validators.required, Validators.minLength(6)]],
       roleId: ['', [Validators.required]],
       termCondition: ['', [Validators.required]]
@@ -47,6 +48,16 @@ export class EmailRegistrationComponent implements OnInit {
       }
       return null;
     }
+  }
+
+  validatePassword(control: AbstractControl) {
+    const pattern = /(?=.*[A-Z])(?=.*[a-z])(?=.*\W).{8,18}$/
+
+    if (!control.value.match(pattern) && control.value !== '') {
+      console.log(!control.value.match(pattern))
+      return { invalidPassword: true };
+    }
+    return null;
   }
 
   async validateUserNotTaken(control: AbstractControl) {

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
+import { Router } from '@angular/router';
 
 export interface RouteInfo {
     path: string;
@@ -39,14 +40,16 @@ export class SidebarComponent implements OnInit {
     userRole: any;
     // libraryLink: any;
 
-    constructor(private store: Store<any>) { };
+    constructor(private store: Store<any>, private router: Router) { };
 
     ngOnInit() {
         this.store.select(s => s.userInfo).subscribe(x => {
             this.userRole = x.role[0];
-            // this.libraryLink = x.facility[0].libraryLink
         });
         this.filterMenuByUser();
+        if (this.userRole.roleId == 1) {
+            this.router.navigateByUrl("case");
+        }
     }
 
     filterMenuByUser() {
