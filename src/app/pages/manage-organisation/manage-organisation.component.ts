@@ -22,7 +22,6 @@ export class ManageOrganisationComponent implements OnInit {
 
   getOrganisationAddress() {
     this.organisationService.getOrganisationAddressDetails().subscribe((orgDetails: any) => {
-      console.log(orgDetails)
       this.organisationForm.get('name').setValue(orgDetails.data.Organization.name)
       this.organisationForm.get('street1').setValue(orgDetails.data.Organization.Address.street1)
       this.organisationForm.get('street2').setValue(orgDetails.data.Organization.Address.street2)
@@ -74,7 +73,6 @@ export class ManageOrganisationComponent implements OnInit {
   saveChanges() {
     if (this.buttonText === 'Save') {
       this.buttonText = 'Edit';
-      console.log('sdcsd')
       const data = {
         organisation: {
           "name": this.organisationForm.get('name').value
@@ -88,7 +86,6 @@ export class ManageOrganisationComponent implements OnInit {
           "zip": this.organisationForm.get('zip').value,
         }
       }
-      console.log(data)
       this.organisationForm.disable();
     }
     this.organisationForm.enable();
@@ -97,7 +94,6 @@ export class ManageOrganisationComponent implements OnInit {
 
   onEmailInvite() {
     this.organisationService.inviteUserOrganisation(this.inviteMailForm.get('email').value).subscribe((emailSent: any) => {
-      console.log(emailSent)
       if (emailSent.success) {
         this.toasterService.showSuccessToater('Email Sent.')
         this.dialog.closeAll();

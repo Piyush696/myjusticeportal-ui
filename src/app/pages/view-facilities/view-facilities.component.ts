@@ -31,11 +31,9 @@ export class ViewFacilitiesComponent implements OnInit {
 
   getOrgFacilities() {
     this.organisationService.getOrganisationFacilities().subscribe((facilities: any) => {
-      console.log(facilities)
       this.originalData = facilities.data.facilities;
       this.dataSource = new MatTableDataSource(facilities.data.facilities);
       this.getAllFacility();
-      console.log(this.dataSource)
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
     })
@@ -76,7 +74,6 @@ export class ViewFacilitiesComponent implements OnInit {
 
   onSaveChanges() {
     this.organisationService.addFacilitiesOrganisation(this.facilityIds).subscribe((facilityAdded: any) => {
-      console.log(facilityAdded)
       if (facilityAdded.success) {
         this.getOrgFacilities();
         this.toasterService.showSuccessToater('Facility Added.')
@@ -87,7 +84,6 @@ export class ViewFacilitiesComponent implements OnInit {
 
   onDeleteFacility(facilityId) {
     this.organisationService.removeFacilitiesOrganisation(facilityId).subscribe((facilityRemove: any) => {
-      console.log(facilityRemove)
       if (facilityRemove.success) {
         this.getOrgFacilities();
         this.toasterService.showSuccessToater('Facility removed.')
