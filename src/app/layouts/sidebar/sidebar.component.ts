@@ -45,7 +45,7 @@ export class SidebarComponent implements OnInit {
     ngOnInit() {
         this.store.select(s => s.userInfo).subscribe(x => {
             this.userRole = x.role[0];
-            this.libraryLink = x.facilities[0].libraryLink
+            this.libraryLink = x.facilities[0].libraryLink;
         });
         this.filterMenuByUser();
     }
