@@ -33,9 +33,9 @@ export class ViewFacilitiesComponent implements OnInit {
     this.organisationService.getOrganisationFacilities().subscribe((facilities: any) => {
       this.originalData = facilities.data.facilities;
       this.dataSource = new MatTableDataSource(facilities.data.facilities);
-      this.getAllFacility();
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
+      this.getAllFacility();
     })
   }
 

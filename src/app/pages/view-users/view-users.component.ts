@@ -26,7 +26,6 @@ export class ViewUsersComponent implements OnInit {
 
   getAllUsers() {
     this.organisationService.getOrganisationUsers().subscribe((users: any) => {
-      console.log(users)
       this.dataSource = new MatTableDataSource(users.data.users);
       this.dataSource.sortingDataAccessor = (item: any, property) => {
         switch (property) {

@@ -145,7 +145,7 @@
 </div>
 
 <ng-template #inviteEmail>
-    <div class="d-flex justify-content-center modal-header">
+    <div class="d-flex justify-content-center">
         <mat-label class="font-weight-bold">Invite User.</mat-label>
     </div>
     <div>
@@ -169,7 +169,7 @@
             </div>
         </div>
     </div>
-    <div class="d-flex justify-content-between modal-footer">
+    <div class="d-flex justify-content-between">
         <button [disabled]="inviteMailForm.get('email').invalid" class="button-purple px-4 py-1" mat-raised-button
             (click)="onEmailInvite()">Submit</button>
 

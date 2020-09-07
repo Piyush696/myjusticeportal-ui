@@ -22,7 +22,7 @@
                 <td mat-cell *matCellDef="let facility">{{facility?.facilityName}}</td>
             </ng-container>
             <ng-container matColumnDef="action">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header>Action</th>
+                <th mat-header-cell *matHeaderCellDef>Action</th>
                 <td mat-cell *matCellDef="let facility">
                     <button mat-mini-fab color="warn" title="Delete Facilities"
                         (click)="onDeleteFacility(facility.facilityId)">
