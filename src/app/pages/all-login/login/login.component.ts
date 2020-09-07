@@ -43,16 +43,7 @@ export class LoginComponent implements OnInit {
       (res: any) => {
         if (res.success) {
           this.cacheService.setCache('token', res.token);
-          this.loginService.checkToken().then((data: any) => {
-            this.store.dispatch(new AddUserInfo(Object.assign({}, data.user)));
-            if (data.success) {
-              this.router.navigateByUrl('/lawyer-dashboard')
-              this.toasterService.showSuccessToater('Welcome to My Justice Portal.');
-            }
-            else {
-              this.toasterService.showErrorToater(data.error.name);
-            }
-          })
+          this.checkToken();
         }
         else {
           if (res.data === 'Please Enter Your auth code.') {
@@ -95,7 +86,24 @@ export class LoginComponent implements OnInit {
     this.loginService.checkToken().then((data: any) => {
       if (data.success) {
         this.store.dispatch(new AddUserInfo(Object.assign({}, data.user)));
-        this.router.navigateByUrl('/lawyer-dashboard')
+        if (data.user.role[0].roleId === 1) {
+          this.router.navigateByUrl('/user-dashboard')
+        }
+        else if (data.user.role[0].roleId === 2) {
+          this.router.navigateByUrl('/facility-dashboard')
+        }
+        else if (data.user.role[0].roleId === 3) {
+          this.router.navigateByUrl('/lawyer-dashboard')
+        }
+        else if (data.user.role[0].roleId === 4) {
+          this.router.navigateByUrl('/paralegal-dashboard')
+        }
+        else if (data.user.role[0].roleId === 5) {
+          this.router.navigateByUrl('/defender-dashboard')
+        }
+        else if (data.user.role[0].roleId === 6) {
+          this.router.navigateByUrl('/bondsman-dashboard')
+        }
         this.toasterService.showSuccessToater('Welcome to My Justice Portal.');
       }
       else {

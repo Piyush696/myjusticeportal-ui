@@ -16,6 +16,12 @@
                             <small class="font13" *ngIf="registrationForm.get('firstName').errors?.required">
                                 Legal First Name is Required
                             </small>
+                            <small class="font13" *ngIf="registrationForm.get('firstName').errors?.maxlength">
+                                Legal First Name should be less than 50 chracters
+                            </small>
+                            <small class="font13" *ngIf="registrationForm.get('firstName').errors?.pattern">
+                                Legal First Name should contain only alphabets.
+                            </small>
                         </mat-error>
                     </mat-form-field>
                 </div>
@@ -29,6 +35,12 @@
                             <small class="font13" *ngIf="registrationForm.get('middleName').errors?.required">
                                 Legal Middle Name is Required
                             </small>
+                            <small class="font13" *ngIf="registrationForm.get('middleName').errors?.maxlength">
+                                Legal Middle Name should be less than 50 chracters
+                            </small>
+                            <small class="font13" *ngIf="registrationForm.get('middleName').errors?.pattern">
+                                Legal Middle Name should contain only alphabets.
+                            </small>
                         </mat-error>
                     </mat-form-field>
                 </div>
@@ -41,6 +53,12 @@
                             *ngIf="registrationForm.controls['lastName'].invalid && registrationForm.controls['lastName'].touched">
                             <small class="font13" *ngIf="registrationForm.get('lastName').errors?.required">
                                 Legal Last Name is Required
+                            </small>
+                            <small class="font13" *ngIf="registrationForm.get('lastName').errors?.maxlength">
+                                Legal Last Name should be less than 50 chracters
+                            </small>
+                            <small class="font13" *ngIf="registrationForm.get('lastName').errors?.pattern">
+                                Legal Last Name should contain only alphabets.
                             </small>
                         </mat-error>
                     </mat-form-field>
@@ -58,12 +76,16 @@
                                 registrationForm.controls['userName'].touched && registrationForm.controls['userName'].hasError('taken')">
                                 <small class="font13">User Name already taken.</small>
                             </div>
-                            <div
-                                *ngIf="registrationForm.controls['userName'].invalid && 
-                                registrationForm.controls['userName'].touched && registrationForm.get('userName').errors?.required">
-                                <small class="font13">
+                            <div *ngIf="registrationForm.controls['userName'].invalid && 
+                                registrationForm.controls['userName'].touched">
+                                <small class="font13" *ngIf="registrationForm.get('userName').errors?.required">
                                     User Name is Required
                                 </small>
+                                <small class="font13" *ngIf="registrationForm.get('userName').errors?.maxlength">
+                                    User Name Name should be less than 25 chracters
+                                </small>
+                                <small class="font13" *ngIf="registrationForm.get('userName').errors?.minlength">
+                                    User Name Name should be at least 8 chracters</small>
                             </div>
                         </mat-error>
                     </mat-form-field>
@@ -97,9 +119,18 @@
                         [formControl]="registrationForm.controls['password']" required>
                     <mat-error>
                         <div
-                            *ngIf="registrationForm.controls['password'].invalid && registrationForm.controls['password'].touched">
+                            *ngIf="registrationForm.get('password').invalid && registrationForm.get('password').touched">
+                            <small class="font13" *ngIf="registrationForm.get('password').errors?.minlength">
+                                password
+                                must be at least 8 Characters.</small>
+                            <small class="font13" *ngIf="registrationForm.get('password').errors?.required ">Password
+                                required.</small>
+                        </div>
+                        <div
+                            *ngIf="registrationForm.controls['password'].invalid && registrationForm.controls['password'].touched  &&registrationForm.controls['password'].hasError('invalidPassword')">
                             <small class="font13">
-                                Password is Required
+                                Password should contain at least 1 capital, at least 1 lowercase
+                                and at least 1 special character.
                             </small>
                         </div>
                     </mat-error>
@@ -121,6 +152,9 @@
                     </mat-error>
                 </mat-form-field>
             </div>
+            <p class="font-weight-bold text-center" *ngIf="message">
+                {{message}}
+            </p>
             <div class="row">
                 <mat-checkbox class="termCondition-margin" [formControl]="registrationForm.controls['termCondition']"
                     (click)="openModal(mytemplate)" color="primary">
