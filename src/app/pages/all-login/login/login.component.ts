@@ -95,7 +95,6 @@ export class LoginComponent implements OnInit {
     this.loginService.checkToken().then((data: any) => {
       if (data.success) {
         this.store.dispatch(new AddUserInfo(Object.assign({}, data.user)));
-        console.log(data)
         if (data.user.role[0].roleId === 2) {
           this.router.navigateByUrl('/facility-dashboard')
         }
