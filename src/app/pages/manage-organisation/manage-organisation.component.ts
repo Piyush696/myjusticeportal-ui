@@ -9,12 +9,15 @@ import { ToasterService } from 'app/services/toaster.service';
   templateUrl: './manage-organisation.component.html',
   styleUrls: ['./manage-organisation.component.css']
 })
+
 export class ManageOrganisationComponent implements OnInit {
   organisationForm: FormGroup;
   inviteMailForm: FormGroup;
   buttonText: string = 'Edit'
   addressId: any;
-  constructor(private fb: FormBuilder, private toasterService: ToasterService, public dialog: MatDialog, private organisationService: OrganisationService) { }
+
+  constructor(private fb: FormBuilder, private toasterService: ToasterService,
+    public dialog: MatDialog, private organisationService: OrganisationService) { }
 
   ngOnInit(): void {
     this.createControl()
@@ -90,7 +93,7 @@ export class ManageOrganisationComponent implements OnInit {
       }
       this.organisationService.updateOrganisation(data, this.addressId).subscribe((updatedOrg: any) => {
         if (updatedOrg.success) {
-          this.toasterService.showSuccessToater('Organization updated successfully.')
+          this.toasterService.showSuccessToater('Organization updated successfully.');
           this.organisationForm.disable();
           this.buttonText = 'Edit';
         }
@@ -103,7 +106,7 @@ export class ManageOrganisationComponent implements OnInit {
   onEmailInvite() {
     this.organisationService.inviteUserOrganisation(this.inviteMailForm.get('email').value).subscribe((emailSent: any) => {
       if (emailSent.success) {
-        this.toasterService.showSuccessToater('Email Sent.')
+        this.toasterService.showSuccessToater('Email Sent.');
         this.dialog.closeAll();
       }
     })

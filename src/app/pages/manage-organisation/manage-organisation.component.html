@@ -4,13 +4,15 @@
         <label class="header-sub-text">Manage your Organisation information.</label>
     </div>
     <div>
-        <button mat-raised-button class="button-purple px-4 py-1" (click)="openModal(inviteEmail)">Invite New
-            User</button>
+        <button mat-raised-button class="button-purple px-4 py-1" (click)="openModal(inviteEmail)">
+            Invite New User
+        </button>
     </div>
 </div>
+
 <div class="row">
     <div class="col-8 pt-2">
-        <mat-card>
+        <mat-card class="mat-elevation-z10">
             <div class="row px-3">
                 <mat-form-field appearance="fill" class="w-100 p-1">
                     <mat-label>Organisation Name</mat-label>
@@ -134,25 +136,27 @@
     </div>
     <div class="col-4 p-2">
         <div class="d-flex justify-content-end pr-3">
-            <button [routerLink]="'/organisation/users'" class="button-purple px-4 py-1" mat-raised-button>View All
-                Users</button>
+            <button [routerLink]="'/organisation/users'" class="button-purple px-4 py-1" mat-raised-button>
+                View All Users
+            </button>
         </div>
         <div class="d-flex justify-content-end pr-3 pt-2">
-            <button [routerLink]="'/organisation/facilities'" class="button-purple px-4 py-1" mat-raised-button>Manage
-                Facilities</button>
+            <button [routerLink]="'/organisation/facilities'" class="button-purple px-4 py-1" mat-raised-button>
+                Manage Facilities
+            </button>
         </div>
     </div>
 </div>
 
 <ng-template #inviteEmail>
-    <div class="d-flex justify-content-center">
-        <mat-label class="font-weight-bold">Invite User.</mat-label>
+    <div>
+        <h2 class="font-weight-bold">Invite User.</h2>
     </div>
     <div>
         <div class="row">
             <div class="col-md-12">
                 <div class="form-group">
-                    <mat-form-field appearance="fill" class="w-100 p-1">
+                    <mat-form-field appearance="fill" class="w-100 py-1">
                         <mat-label>Email</mat-label>
                         <input type="Email" matInput placeholder="Email"
                             [formControl]="inviteMailForm.controls['email']" required>
@@ -171,9 +175,11 @@
     </div>
     <div class="d-flex justify-content-between">
         <button [disabled]="inviteMailForm.get('email').invalid" class="button-purple px-4 py-1" mat-raised-button
-            (click)="onEmailInvite()">Submit</button>
-
-        <button type="button" class="px-4 py-1" mat-raised-button class="button-purple px-4 py-1"
-            (click)="closeModal()">Close</button>
+            (click)="onEmailInvite()">
+            Submit
+        </button>
+        <button mat-raised-button class="button-purple px-4 py-1" (click)="closeModal()">
+            Close
+        </button>
     </div>
 </ng-template>

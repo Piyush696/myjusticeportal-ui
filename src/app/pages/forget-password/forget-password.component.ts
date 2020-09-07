@@ -48,11 +48,13 @@ export class ForgetPasswordComponent implements OnInit {
   getAllUserSecurityQuestions() {
     this.isSentMail = true;
     this.securityService.getUserSecurityQuestions(this.passwordResetForm.get('userName').value).subscribe((res: any) => {
-      if (res.data == 'Mail sent' || res.data == 'Mail not sent') { // for not user.
-        this.toasterService.showSuccessToater(
-          'Your password reset link has been sent to ' + this.passwordResetForm.get('userName').value +
+      if (res.data == 'Invalid input') {
+        this.toasterService.showErrorToater('Invalid input entered!. Please give valid input');
+      }
+      else if (res.data == 'Mail sent' || res.data == 'Mail not sent') { // for other.
+        this.toasterService.showSuccessToater('Your password reset link has been sent to ' + this.passwordResetForm.get('userName').value +
           ', if did not received the email please wait sometime and try again');
-      } else { // for others.
+      } else { // for user.
         this.securityQuestions = res.data.securityQuestions;
         this.step = 2;
       }

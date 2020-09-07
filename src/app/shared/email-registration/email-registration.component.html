@@ -4,7 +4,7 @@
             <img src="assets/img/logo.png" alt="logo" class="logo">
         </div>
         <h3 class="text-center font-weight-bold">Step 1/{{totalSteps}}</h3>
-        <mat-card class="p-5">
+        <mat-card class="mat-elevation-z10 p-5">
             <div class="row mb-1">
                 <div class="col-4 pl-2 mb-1">
                     <mat-form-field appearance="fill" class="w-100">
@@ -73,7 +73,7 @@
                     <mat-form-field appearance="fill" class="w-100">
                         <mat-label>Email</mat-label>
                         <input matInput placeholder="abc@xyz.com" [formControl]="registrationForm.controls['userName']"
-                            required>
+                            required />
                         <mat-error>
                             <div
                                 *ngIf="registrationForm.controls['userName'].invalid &&
@@ -83,7 +83,7 @@
                             <div
                                 *ngIf="registrationForm.controls['userName'].invalid &&
                                                                    registrationForm.controls['userName'].touched && !registrationForm.controls['userName'].hasError('taken')">
-                                <small class=" font13">That doesn't look right.</small>
+                                <small class="font13">That doesn't look right.</small>
                             </div>
                         </mat-error>
                     </mat-form-field>
@@ -137,10 +137,11 @@
                 </button>
                 <button
                     [disabled]="registrationForm.get('userName').invalid || registrationForm.get('lastName').invalid 
-                || registrationForm.get('firstName').invalid || registrationForm.get('password').invalid ||  
-                registrationForm.get('confirmPassword').invalid ||  registrationForm.get('termCondition').invalid || isNextDisabled"
-                    class="px-4 py-1 float-right" mat-raised-button color="primary"
-                    (click)="onNextClick()">NEXT</button>
+                        || registrationForm.get('firstName').invalid || registrationForm.get('password').invalid ||  
+                        registrationForm.get('confirmPassword').invalid ||  registrationForm.get('termCondition').invalid || isNextDisabled"
+                    class="px-4 py-1 float-right" mat-raised-button color="primary" (click)="onNextClick()">
+                    NEXT
+                </button>
             </div>
         </mat-card>
     </div>
