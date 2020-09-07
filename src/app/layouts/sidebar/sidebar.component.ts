@@ -38,14 +38,14 @@ export const ROUTES: RouteInfo[] = [
 export class SidebarComponent implements OnInit {
     public filteredMenuItems: any[];
     userRole: any;
-    // libraryLink: any;
+    libraryLink: any;
 
     constructor(private store: Store<any>) { };
 
     ngOnInit() {
         this.store.select(s => s.userInfo).subscribe(x => {
             this.userRole = x.role[0];
-            // this.libraryLink = x.facility[0].libraryLink
+            this.libraryLink = x.facilities[0].libraryLink
         });
         this.filterMenuByUser();
     }
