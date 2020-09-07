@@ -44,7 +44,6 @@ export class EmailRegistrationComponent implements OnInit, OnChanges {
       userName: ['', [Validators.required, Validators.maxLength(25), Validators.minLength(8), this.validateEmail.bind(this)], this.validateUserNotTaken.bind(this)],
       password: ['', [Validators.required, Validators.minLength(8), this.validatePassword.bind(this)]],
       confirmPassword: ['', [Validators.required, Validators.minLength(6)]],
-      roleId: ['', [Validators.required]],
       termCondition: ['', [Validators.required]]
     }, { validator: this.checkIfMatchingPasswords('password', 'confirmPassword') });
   }
@@ -92,10 +91,6 @@ export class EmailRegistrationComponent implements OnInit, OnChanges {
     let dialogRef = this.dialog.open(templateRef, {
       width: '500px',
     });
-
-    // dialogRef.afterClosed().subscribe(result => {
-    //   console.log('The dialog was closed');
-    // });
   }
 
   onScroll(event: any) {
@@ -123,7 +118,13 @@ export class EmailRegistrationComponent implements OnInit, OnChanges {
   }
 
   onAcceptTerms() {
-    this.isNextDisabled = false;
     this.registrationForm.get('termCondition').setValue(true);
+    this.isNextDisabled = false;
+  }
+
+  onDeclineTerms() {
+    this.dialog.closeAll();
+    this.isNextDisabled = true;
+    this.registrationForm.get('termCondition').setValue(false);
   }
 }
