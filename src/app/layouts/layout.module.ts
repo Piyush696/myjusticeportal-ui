@@ -30,8 +30,6 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 import { FacilityComponent } from 'app/pages/facility/facility.component';
-import { UserDashboardComponent } from 'app/pages/user-dashboard/user-dashboard.component';
-import { LawyerdashboardComponent } from 'app/pages/lawyerdashboard/lawyerdashboard.component';
 import { UsersComponent } from 'app/pages/all-users/users/users.component';
 import { UserDetailsComponent } from 'app/pages/all-users/user-details/user-details.component';
 import { CasesComponent } from 'app/pages/case/cases/cases.component';
@@ -45,6 +43,12 @@ import { ManageOrganisationComponent } from 'app/pages/manage-organisation/manag
 import { ViewFacilitiesComponent } from 'app/pages/view-facilities/view-facilities.component';
 import { ViewUsersComponent } from 'app/pages/view-users/view-users.component';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { BondsmanDashboardComponent } from 'app/pages/all-dashboards/bondsman-dashboard/bondsman-dashboard.component';
+import { ParalegalDashboardComponent } from 'app/pages/all-dashboards/paralegal-dashboard/paralegal-dashboard.component';
+import { FacilityDashboardComponent } from 'app/pages/all-dashboards/facility-dashboard/facility-dashboard.component';
+import { DefenderDashboardComponent } from 'app/pages/all-dashboards/defender-dashboard/defender-dashboard.component';
+import { UserDashboardComponent } from 'app/pages/all-dashboards/user-dashboard/user-dashboard.component';
+import { LawyerdashboardComponent } from 'app/pages/all-dashboards/lawyerdashboard/lawyerdashboard.component';
 
 @NgModule({
   imports: [
@@ -96,7 +100,11 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
     LawyerdashboardComponent,
     ManageOrganisationComponent,
     ViewFacilitiesComponent,
-    ViewUsersComponent
+    ViewUsersComponent,
+    BondsmanDashboardComponent,
+    ParalegalDashboardComponent,
+    FacilityDashboardComponent,
+    DefenderDashboardComponent
   ],
   providers: [
     MatDatepickerModule,
