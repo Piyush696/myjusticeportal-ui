@@ -107,7 +107,7 @@
                                 <div
                                     *ngIf="userMetaForm.controls['housing_unit'].invalid && userMetaForm.controls['housing_unit'].touched">
                                     <small class="font13">
-                                        Lastname is Required
+                                        Housing Unit is Required
                                     </small>
                                 </div>
                             </mat-error>
@@ -122,7 +122,7 @@
                                 <div
                                     *ngIf="userMetaForm.controls['facility'].invalid && userMetaForm.controls['facility'].touched">
                                     <small class="font13">
-                                        Lastname is Required
+                                        Facility is Required
                                     </small>
                                 </div>
                             </mat-error>
@@ -132,38 +132,37 @@
 
                 <div class="row pl-2">
                     <div class="col-12">
-                        <div class="d-flex align-items-center pb-3">
+                        <div class="d-flex align-items-center pb-3" *ngIf="!isUser">
                             MFA
                             <mat-slide-toggle class="pl-2" color="warn" [checked]="user?.isMFA" (change)="onMfaSelect()"
                                 [formControl]="profileForm.controls['isMFA']">
                                 {{user?.isMFA ? 'Enabled' : 'Disabled'}}
                             </mat-slide-toggle>
                         </div>
-                    </div>
-                </div>
-
-                <div class="row px-1">
-                    <div class="col-12">
-                        <div class="form-control d-flex justify-content-center">
-                            <a class="anchor-style" mat-flat-button (click)="openModal(passwordModal)">
-                                Click here to reset your password
-                            </a>
+                        <div class="row px-1">
+                            <div class="col-12">
+                                <div class="form-control d-flex justify-content-center">
+                                    <a class="anchor-style" mat-flat-button (click)="openModal(passwordModal)">
+                                        Click here to reset your password
+                                    </a>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                </div>
-                <div class="row pr-1">
-                    <div class="col-12 d-flex justify-content-end justify-content-sm-end">
-                        <div class="pr-4">
-                            <button class="button-purple px-sm-4 px-md-4 px-lg-4 px-xl-4 py-1" mat-raised-button
-                                (click)="openModal(manageSecurityQuestionModal)">
-                                Manage Security Questions
-                            </button>
-                        </div>
-                        <div>
-                            <button class="button-purple px-sm-4 px-md-4 px-lg-4 px-xl-4 py-1" mat-raised-button
-                                (click)="editChanges(); userMetaUpdate()">
-                                Edit Changes
-                            </button>
+                        <div class="row pr-1">
+                            <div class="col-12 d-flex justify-content-end justify-content-sm-end">
+                                <div class="pr-4" *ngIf="isUser">
+                                    <button class="button-purple px-sm-4 px-md-4 px-lg-4 px-xl-4 py-1" mat-raised-button
+                                        (click)="openModal(manageSecurityQuestionModal)">
+                                        Manage Security Questions
+                                    </button>
+                                </div>
+                                <div>
+                                    <button class="button-purple px-sm-4 px-md-4 px-lg-4 px-xl-4 py-1" mat-raised-button
+                                        (click)="editChanges(); userMetaUpdate()">
+                                        Edit Changes
+                                    </button>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
