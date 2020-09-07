@@ -42,7 +42,7 @@ export const LayoutRoutes: Routes = [
     { path: 'notifications', canActivate: [AuthGuard], component: NotificationsComponent },
     { path: 'my-account', canActivate: [AuthGuard], component: MyAccountComponent },
     { path: 'manage-organisation', canActivate: [AuthGuard], component: ManageOrganisationComponent },
-    { path: 'userdashboard', canActivate: [AuthGuard], component: UserDashboardComponent },
+    { path: 'user-dashboard', canActivate: [AuthGuard], component: UserDashboardComponent },
     { path: 'case', canActivate: [AuthGuard], component: CasesComponent },
     { path: 'case/create', canActivate: [AuthGuard], component: CreateCaseComponent },
     { path: 'case/:caseId/edit', canActivate: [AuthGuard], component: EditCaseComponent },

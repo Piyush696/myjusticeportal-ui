@@ -49,7 +49,7 @@ export class UserRegistrationComponent implements OnInit {
           if (data.success) {
             this.store.dispatch(new AddUserInfo(Object.assign({}, data.user)));
             this.toasterService.showSuccessToater('Welcome to My Justice Portal.');
-            this.router.navigateByUrl('/userdashboard');
+            this.router.navigateByUrl('/case');
           }
         })
       }

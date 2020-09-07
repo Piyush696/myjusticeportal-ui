@@ -47,7 +47,7 @@ export class UserLoginComponent implements OnInit {
         this.loginService.checkToken().then((data: any) => {
           this.store.dispatch(new AddUserInfo(Object.assign({}, data.user)));
           if (data.success) {
-            this.router.navigateByUrl('/userdashboard')
+            this.router.navigateByUrl('/user-dashboard')
             this.toasterService.showSuccessToater('Welcome to My Justice Portal.');
           }
           else {

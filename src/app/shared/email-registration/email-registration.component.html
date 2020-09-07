@@ -158,7 +158,7 @@
             <div class="row">
                 <mat-checkbox class="termCondition-margin" [formControl]="registrationForm.controls['termCondition']"
                     (click)="openModal(mytemplate)" color="primary">
-                    <a (click)="openModal(mytemplate)">
+                    <a>
                         <div>I accept the <span class="font-weight-bold">Terms and Conditions</span>
                             of using this website and agree</div>
                         <div>to abide by all applicable laws and standards.</div>
@@ -169,12 +169,8 @@
                 <button [routerLink]="'/login'" mat-button color="primary">
                     Back to Login
                 </button>
-                <button
-                    [disabled]="registrationForm.get('userName').invalid || registrationForm.get('lastName').invalid 
-                || registrationForm.get('firstName').invalid || registrationForm.get('password').invalid ||  
-                registrationForm.get('confirmPassword').invalid ||  registrationForm.get('termCondition').invalid || isNextDisabled"
-                    class="px-4 py-1 float-right" mat-raised-button color="primary"
-                    (click)="onNextClick()">NEXT</button>
+                <button [disabled]="registrationForm.invalid || isNextDisabled" class="px-4 py-1 float-right"
+                    mat-raised-button color="primary" (click)="onNextClick()">NEXT</button>
             </div>
         </mat-card>
     </div>
@@ -237,7 +233,7 @@
 
             <div>
                 <div class="d-flex justify-content-between p-2">
-                    <button mat-dialog-close class="px-4 py-1" mat-button color="primary">
+                    <button mat-dialog-close class="px-4 py-1" mat-button color="primary" (click)="onDeclineTerms()">
                         DECLINE
                     </button>
                     <button [disabled]="isAcceptDisabled" class="px-4 py-1" mat-raised-button color="primary"
