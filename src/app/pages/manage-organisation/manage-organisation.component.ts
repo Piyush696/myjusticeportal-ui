@@ -13,6 +13,7 @@ export class ManageOrganisationComponent implements OnInit {
   organisationForm: FormGroup;
   inviteMailForm: FormGroup;
   buttonText: string = 'Edit'
+  addressId: any;
   constructor(private fb: FormBuilder, private toasterService: ToasterService, public dialog: MatDialog, private organisationService: OrganisationService) { }
 
   ngOnInit(): void {
@@ -29,6 +30,7 @@ export class ManageOrganisationComponent implements OnInit {
       this.organisationForm.get('state').setValue(orgDetails.data.Organization.Address.state)
       this.organisationForm.get('zip').setValue(orgDetails.data.Organization.Address.zip)
       this.organisationForm.get('country').setValue(orgDetails.data.Organization.Address.country)
+      this.addressId = orgDetails.data.Organization.Address.addressId
       this.organisationForm.disable();
     })
   }
@@ -74,7 +76,7 @@ export class ManageOrganisationComponent implements OnInit {
     if (this.buttonText === 'Save') {
       this.buttonText = 'Edit';
       const data = {
-        organisation: {
+        organization: {
           "name": this.organisationForm.get('name').value
         },
         address: {
@@ -86,7 +88,13 @@ export class ManageOrganisationComponent implements OnInit {
           "zip": this.organisationForm.get('zip').value,
         }
       }
-      this.organisationForm.disable();
+      this.organisationService.updateOrganisation(data, this.addressId).subscribe((updatedOrg: any) => {
+        if (updatedOrg.success) {
+          this.toasterService.showSuccessToater('Organization updated successfully.')
+          this.organisationForm.disable();
+          this.buttonText = 'Edit';
+        }
+      })
     }
     this.organisationForm.enable();
     this.buttonText = 'Save';

@@ -46,4 +46,8 @@ export class OrganisationService {
   removeFacilitiesOrganisation(facilityId) {
     return this.httpClient.post<object>(`${this.apiPath}/organization/remove-facility`, { facilityId }, this.getHeaders())
   }
+
+  updateOrganisation(data, addressId) {
+    return this.httpClient.put<object>(`${this.apiPath}/organization/${addressId}`, data, this.getHeaders())
+  }
 }
