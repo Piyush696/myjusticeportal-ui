@@ -106,6 +106,7 @@ export function usersProviderFactory(provider: AuthLoadService) {
     MatProgressBarModule,
     MatSelectModule,
   ],
+
   providers: [
     RegistrationService,
     CacheService,

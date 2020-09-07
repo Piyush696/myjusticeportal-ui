@@ -41,6 +41,10 @@ import { CreateCaseComponent } from 'app/pages/case/create-case/create-case.comp
 import { EditCaseComponent } from 'app/pages/case/edit-case/edit-case.component';
 import { ViewCaseFilesComponent } from 'app/pages/case/view-case-files/view-case-files.component';
 import { FileUploadModule } from 'ng2-file-upload';
+import { ManageOrganisationComponent } from 'app/pages/manage-organisation/manage-organisation.component';
+import { ViewFacilitiesComponent } from 'app/pages/view-facilities/view-facilities.component';
+import { ViewUsersComponent } from 'app/pages/view-users/view-users.component';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 @NgModule({
   imports: [
@@ -65,7 +69,8 @@ import { FileUploadModule } from 'ng2-file-upload';
     MatProgressBarModule,
     MatNativeDateModule,
     MatDialogModule,
-    MatIconModule
+    MatIconModule,
+    MatCheckboxModule,
   ],
   declarations: [
     DashboardComponent,
@@ -88,7 +93,10 @@ import { FileUploadModule } from 'ng2-file-upload';
     TwilioCredentialsComponent,
     FacilityComponent,
     UserDashboardComponent,
-    LawyerdashboardComponent
+    LawyerdashboardComponent,
+    ManageOrganisationComponent,
+    ViewFacilitiesComponent,
+    ViewUsersComponent
   ],
   providers: [
     MatDatepickerModule,
