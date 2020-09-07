@@ -50,8 +50,6 @@ import { ParalegalRegistrationComponent } from './pages/all-registration/paraleg
 import { PublicDefenderRegistrationComponent } from './pages/all-registration/public-defender-registration/public-defender-registration.component';
 import { BondsmanRegistrationComponent } from './pages/all-registration/bondsman-registration/bondsman-registration.component';
 import { AccountReviewComponent } from './pages/account-review/account-review.component';
-// import { ViewCaseFilesComponent } from './pages/case/view-case-files/view-case-files.component';
-
 export function usersProviderFactory(provider: AuthLoadService) {
   return () => provider.setUserbyAPI();
 }

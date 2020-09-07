@@ -95,7 +95,22 @@ export class LoginComponent implements OnInit {
     this.loginService.checkToken().then((data: any) => {
       if (data.success) {
         this.store.dispatch(new AddUserInfo(Object.assign({}, data.user)));
-        this.router.navigateByUrl('/lawyer-dashboard')
+        console.log(data)
+        if (data.user.role[0].roleId === 2) {
+          this.router.navigateByUrl('/facility-dashboard')
+        }
+        else if (data.user.role[0].roleId === 3) {
+          this.router.navigateByUrl('/lawyer-dashboard')
+        }
+        else if (data.user.role[0].roleId === 4) {
+          this.router.navigateByUrl('/paralegal-dashboard')
+        }
+        else if (data.user.role[0].roleId === 5) {
+          this.router.navigateByUrl('/defender-dashboard')
+        }
+        else if (data.user.role[0].roleId === 6) {
+          this.router.navigateByUrl('/bondsman-dashboard')
+        }
         this.toasterService.showSuccessToater('Welcome to My Justice Portal.');
       }
       else {
