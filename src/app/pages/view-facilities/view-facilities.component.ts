@@ -13,14 +13,16 @@ import { FacilityService } from 'app/services/facility.service';
   templateUrl: './view-facilities.component.html',
   styleUrls: ['./view-facilities.component.css']
 })
+
 export class ViewFacilitiesComponent implements OnInit {
+  facilityList: any[];
+  facilityIds = [];
+  originalData: any[];
+
   displayedColumns: string[] = ["facilityCode", "facilityName", "action"];
   dataSource = new MatTableDataSource();
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort: MatSort;
-  facilityList: any[];
-  facilityIds = [];
-  originalData: any[];
 
   constructor(private store: Store<any>, public dialog: MatDialog, private facilityService: FacilityService,
     private toasterService: ToasterService, private organisationService: OrganisationService) { }
@@ -90,5 +92,4 @@ export class ViewFacilitiesComponent implements OnInit {
       }
     })
   }
-
 }

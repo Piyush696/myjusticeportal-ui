@@ -27,4 +27,8 @@ export class ParalegalService {
   verifySms(verifyData) {
     return this.httpClient.post<object>(`${this.apiPath}/paralegal-registration/verify-sms/registration`, verifyData);
   }
+
+  updateInvitedUserData(emailRegistrationData) {
+    return this.httpClient.post<object>(`${this.apiPath}/paralegal-registration/invitedUserUpdate`, emailRegistrationData);
+  }
 }

@@ -27,4 +27,8 @@ export class PublicDefenderService {
   verifySms(verifyData) {
     return this.httpClient.post<object>(`${this.apiPath}/public-defender-registration/verify-sms/registration`, verifyData);
   }
+
+  updateInvitedUserData(emailRegistrationData) {
+    return this.httpClient.post<object>(`${this.apiPath}/public-defender-registration/invitedUserUpdate`, emailRegistrationData);
+  }
 }

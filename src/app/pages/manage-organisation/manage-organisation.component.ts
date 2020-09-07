@@ -53,19 +53,23 @@ export class ManageOrganisationComponent implements OnInit {
 
   createInviteMailFormControl() {
     this.inviteMailForm = this.fb.group({
-      email: ['', [Validators.required, this.validateEmail.bind(this)]]
+      userName: ['', [Validators.required, this.validateEmail.bind(this)]],
+      isSelfPaid: ['', [Validators.required]]
     })
   }
 
   validateEmail(control: AbstractControl) {
     const pattern = /^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,15})$/;
-    if (!control.value.match(pattern) && control.value !== '') {
-      return { invalidEmail: true };
+    if (control.value) {
+      if (!control.value.match(pattern) && control.value !== '') {
+        return { invalidEmail: true };
+      }
     }
     return null;
   }
 
   openModal(templateRef) {
+    this.inviteMailForm.reset();
     let dialogRef = this.dialog.open(templateRef, {
       width: '500px',
     });
@@ -104,10 +108,16 @@ export class ManageOrganisationComponent implements OnInit {
   }
 
   onEmailInvite() {
-    this.organisationService.inviteUserOrganisation(this.inviteMailForm.get('email').value).subscribe((emailSent: any) => {
-      if (emailSent.success) {
+    this.organisationService.inviteUserOrganisation(this.inviteMailForm.value).subscribe((res: any) => {
+      if (res.success) {
         this.toasterService.showSuccessToater('Email Sent.');
         this.dialog.closeAll();
+      }
+      if (res.data == 'Email exist') {
+        this.toasterService.showErrorToater('This email is already exist, please give another!');
+      }
+      else if (res.data == 'Something went wrong') {
+        this.toasterService.showErrorToater('Something went wrong, please try again.');
       }
     })
   }

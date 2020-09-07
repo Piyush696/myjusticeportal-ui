@@ -27,4 +27,8 @@ export class LawyerService {
   verifySms(verifyData) {
     return this.httpClient.post<object>(`${this.apiPath}/lawyer-registration/verify-sms/registration`, verifyData);
   }
+
+  updateInvitedUserData(emailRegistrationData) {
+    return this.httpClient.post<object>(`${this.apiPath}/lawyer-registration/invitedUserUpdate`, emailRegistrationData);
+  }
 }

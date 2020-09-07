@@ -39,8 +39,8 @@ export class OrganisationService {
     return this.httpClient.post<object>(`${this.apiPath}/organization/add-facility`, { facilityIds }, this.getHeaders())
   }
 
-  inviteUserOrganisation(email) {
-    return this.httpClient.post<object>(`${this.apiPath}/organization/invite-user`, { email }, this.getHeaders())
+  inviteUserOrganisation(inviteUserData) {
+    return this.httpClient.post<object>(`${this.apiPath}/organization/invite-user`, inviteUserData, this.getHeaders())
   }
 
   removeFacilitiesOrganisation(facilityId) {

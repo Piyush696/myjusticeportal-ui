@@ -50,6 +50,11 @@ import { ParalegalRegistrationComponent } from './pages/all-registration/paraleg
 import { PublicDefenderRegistrationComponent } from './pages/all-registration/public-defender-registration/public-defender-registration.component';
 import { BondsmanRegistrationComponent } from './pages/all-registration/bondsman-registration/bondsman-registration.component';
 import { AccountReviewComponent } from './pages/account-review/account-review.component';
+import { InvitedLawyerComponent } from './pages/all-registration/invited-lawyer/invited-lawyer.component';
+import { InvitedParalegalComponent } from './pages/all-registration/invited-paralegal/invited-paralegal.component';
+import { InvitedPublicDefenderComponent } from './pages/all-registration/invited-public-defender/invited-public-defender.component';
+import { InvitedBondsmanComponent } from './pages/all-registration/invited-bondsman/invited-bondsman.component';
+
 export function usersProviderFactory(provider: AuthLoadService) {
   return () => provider.setUserbyAPI();
 }
@@ -76,7 +81,11 @@ export function usersProviderFactory(provider: AuthLoadService) {
     OrganisationComponent,
     SelectFacilityComponent,
     UserLoginComponent,
-    AccountReviewComponent
+    AccountReviewComponent,
+    InvitedLawyerComponent,
+    InvitedParalegalComponent,
+    InvitedPublicDefenderComponent,
+    InvitedBondsmanComponent
   ],
   imports: [
     BrowserModule,

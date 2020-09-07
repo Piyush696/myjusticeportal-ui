@@ -2,11 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { PublicDefenderService } from 'app/services/registration/public-defender.service';
 import { ToasterService } from 'app/services/toaster.service';
 import { Router } from '@angular/router';
-import { LawyerService } from 'app/services/registration/lawyer.service';
 import { CacheService } from 'app/services/cache.service';
 import { LoginService } from 'app/services/login.service';
-import { Store } from '@ngrx/store';
-
 
 @Component({
   selector: 'app-public-defender-registration',
@@ -29,7 +26,8 @@ export class PublicDefenderRegistrationComponent implements OnInit {
   }
 
   constructor(private defenderService: PublicDefenderService, private cacheService: CacheService,
-    private store: Store<any>, private toaterService: ToasterService, private toasterService: ToasterService, private router: Router, private loginService: LoginService,) { }
+    private toaterService: ToasterService, private toasterService: ToasterService,
+    private router: Router, private loginService: LoginService) { }
 
   ngOnInit(): void {
   }

@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, OnChanges } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
@@ -12,18 +12,27 @@ import { LoadRole } from 'app/store/actions/role.actions';
   styleUrls: ['./email-registration.component.scss']
 })
 
-export class EmailRegistrationComponent implements OnInit {
+export class EmailRegistrationComponent implements OnInit, OnChanges {
   registrationForm: FormGroup;
   isAcceptDisabled: boolean = true;
   isNextDisabled: boolean = true;
 
   @Input() roleId;
-  @Output() isNextEvent = new EventEmitter();
   @Input() totalSteps: any;
-  @Input() message: string
+  @Input() message: string;
+  @Input() email: string;
+  @Output() isNextEvent = new EventEmitter();
 
   constructor(public securityService: SecurityService, public dialog: MatDialog, private fb: FormBuilder,
     private registrationService: RegistrationService, private store: Store<any>) {
+  }
+
+  ngOnChanges(): void {
+    if (this.email) {
+      this.ngOnInit();
+      this.registrationForm.get('userName').setValue(this.email);
+      this.registrationForm.get('userName').disable();
+    }
   }
 
   ngOnInit(): void {
@@ -51,10 +60,8 @@ export class EmailRegistrationComponent implements OnInit {
   }
 
   validatePassword(control: AbstractControl) {
-    const pattern = /(?=.*[A-Z])(?=.*[a-z])(?=.*\W).{8,18}$/
-
+    const pattern = /(?=.*[A-Z])(?=.*[a-z])(?=.*\W).{8,18}$/;
     if (!control.value.match(pattern) && control.value !== '') {
-      console.log(!control.value.match(pattern))
       return { invalidPassword: true };
     }
     return null;
@@ -102,13 +109,16 @@ export class EmailRegistrationComponent implements OnInit {
   }
 
   onNextClick() {
-    const userData = {
-      "firstName": this.registrationForm.get('firstName').value,
-      "middleName": this.registrationForm.get('middleName').value,
-      "lastName": this.registrationForm.get('lastName').value,
-      "userName": this.registrationForm.get('userName').value,
-      "password": this.registrationForm.get('password').value
+    let userData: any = {};
+    userData.firstName = this.registrationForm.get('firstName').value;
+    userData.middleName = this.registrationForm.get('middleName').value;
+    userData.lastName = this.registrationForm.get('lastName').value;
+    if (this.email) {
+      userData.userName = this.email;
+    } else {
+      userData.userName = this.registrationForm.get('userName').value;
     }
+    userData.password = this.registrationForm.get('password').value;
     this.isNextEvent.emit(userData);
   }
 
