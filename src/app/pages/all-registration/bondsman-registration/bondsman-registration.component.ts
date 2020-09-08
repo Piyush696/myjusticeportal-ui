@@ -4,7 +4,6 @@ import { ToasterService } from 'app/services/toaster.service';
 import { Router } from '@angular/router';
 import { CacheService } from 'app/services/cache.service';
 import { LoginService } from 'app/services/login.service';
-import { Store } from '@ngrx/store';
 
 @Component({
   selector: 'app-bondsman-registration',
@@ -26,8 +25,7 @@ export class BondsmanRegistrationComponent implements OnInit {
     'facilityIds': []
   }
 
-  constructor(private cacheService: CacheService,
-    private store: Store<any>, private toasterService: ToasterService,
+  constructor(private cacheService: CacheService, private toasterService: ToasterService,
     private router: Router, private loginService: LoginService, private bondsmanService: BondsmanService) { }
 
   ngOnInit(): void {

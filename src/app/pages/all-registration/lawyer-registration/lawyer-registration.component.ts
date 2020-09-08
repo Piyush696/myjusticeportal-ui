@@ -4,7 +4,6 @@ import { Router } from '@angular/router';
 import { LawyerService } from 'app/services/registration/lawyer.service';
 import { CacheService } from 'app/services/cache.service';
 import { LoginService } from 'app/services/login.service';
-import { Store } from '@ngrx/store';
 
 @Component({
   selector: 'app-lawyer-registration',
@@ -18,7 +17,7 @@ export class LawyerRegistrationComponent implements OnInit {
   roleId: number = 2;
   userName: string;
   authCodeField: boolean;
-  message: string = '* Use legal name of the facility for registration.'
+  message: string = '* Use legal name of the facility for registration.';
   registrationData = {
     'user': {},
     'organization': {
@@ -28,7 +27,8 @@ export class LawyerRegistrationComponent implements OnInit {
   }
 
   constructor(private lawyerService: LawyerService, private cacheService: CacheService,
-    private store: Store<any>, private toaterService: ToasterService, private toasterService: ToasterService, private router: Router, private loginService: LoginService,) { }
+    private toaterService: ToasterService, private toasterService: ToasterService,
+    private router: Router, private loginService: LoginService) { }
 
   ngOnInit(): void {
   }

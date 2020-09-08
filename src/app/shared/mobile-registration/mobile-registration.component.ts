@@ -6,14 +6,17 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   templateUrl: './mobile-registration.component.html',
   styleUrls: ['./mobile-registration.component.scss']
 })
+
 export class MobileRegistrationComponent implements OnInit, OnChanges {
   mobileRegistrationForm: FormGroup;
   OtpField: boolean;
+
+  @Input() authCodeField: boolean;
   @Output() isMobileEvent = new EventEmitter();
   @Output() isOtpEvent = new EventEmitter();
-  @Input() authCodeField: boolean;
 
   constructor(private fb: FormBuilder) { }
+
   ngOnChanges() {
     if (this.authCodeField) {
       this.OtpField = true;
@@ -40,12 +43,10 @@ export class MobileRegistrationComponent implements OnInit, OnChanges {
       "mobile": this.mobileRegistrationForm.get('mobile').value,
       "countryCode": this.mobileRegistrationForm.get('countryCode').value,
     }
-    this.isMobileEvent.emit(data)
+    this.isMobileEvent.emit(data);
   }
 
   onVerifySms() {
-    this.isOtpEvent.emit(this.mobileRegistrationForm.get('otp').value)
+    this.isOtpEvent.emit(this.mobileRegistrationForm.get('otp').value);
   }
-
-
 }

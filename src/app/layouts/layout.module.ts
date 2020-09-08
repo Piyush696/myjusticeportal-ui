@@ -49,6 +49,7 @@ import { FacilityDashboardComponent } from 'app/pages/all-dashboards/facility-da
 import { DefenderDashboardComponent } from 'app/pages/all-dashboards/defender-dashboard/defender-dashboard.component';
 import { UserDashboardComponent } from 'app/pages/all-dashboards/user-dashboard/user-dashboard.component';
 import { LawyerdashboardComponent } from 'app/pages/all-dashboards/lawyerdashboard/lawyerdashboard.component';
+import { MatRadioModule } from '@angular/material/radio';
 
 @NgModule({
   imports: [
@@ -75,6 +76,7 @@ import { LawyerdashboardComponent } from 'app/pages/all-dashboards/lawyerdashboa
     MatDialogModule,
     MatIconModule,
     MatCheckboxModule,
+    MatRadioModule
   ],
   declarations: [
     DashboardComponent,
