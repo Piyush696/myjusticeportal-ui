@@ -25,6 +25,7 @@ import { ParalegalDashboardComponent } from 'app/pages/all-dashboards/paralegal-
 import { DefenderDashboardComponent } from 'app/pages/all-dashboards/defender-dashboard/defender-dashboard.component';
 import { LawyerdashboardComponent } from 'app/pages/all-dashboards/lawyerdashboard/lawyerdashboard.component';
 import { UserDashboardComponent } from 'app/pages/all-dashboards/user-dashboard/user-dashboard.component';
+import { SuperadminDashboardComponent } from 'app/pages/all-registration/superadmin-dashboard/superadmin-dashboard.component';
 
 export const LayoutRoutes: Routes = [
     { path: 'dashboard', canActivate: [AuthGuard], component: DashboardComponent },
@@ -37,6 +38,7 @@ export const LayoutRoutes: Routes = [
     { path: 'bondsman-dashboard', canActivate: [AuthGuard], component: BondsmanDashboardComponent },
     { path: 'paralegal-dashboard', canActivate: [AuthGuard], component: ParalegalDashboardComponent },
     { path: 'defender-dashboard', canActivate: [AuthGuard], component: DefenderDashboardComponent },
+    { path: 'superadmin-dashboard', canActivate: [AuthGuard], component: SuperadminDashboardComponent },
     { path: 'icons', canActivate: [AuthGuard], component: IconsComponent },
     { path: 'maps', canActivate: [AuthGuard], component: MapsComponent },
     { path: 'notifications', canActivate: [AuthGuard], component: NotificationsComponent },

@@ -104,6 +104,9 @@ export class LoginComponent implements OnInit {
         else if (data.user.role[0].roleId === 6) {
           this.router.navigateByUrl('/bondsman-dashboard')
         }
+        else {
+          this.router.navigateByUrl('/superadmin-dashboard')
+        }
         this.toasterService.showSuccessToater('Welcome to My Justice Portal.');
       }
       else {
