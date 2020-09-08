@@ -65,10 +65,6 @@ export class FacilityComponent implements OnInit {
     })
   }
 
-  search(searchValue: string) {
-    this.dataSource.filter = searchValue.trim().toLowerCase();
-  }
-
   onDeletefacility(facility) {
     this.facilityService.deleteFacility(facility.facilityId).subscribe((res: any) => {
       if (res.success) {
@@ -149,5 +145,27 @@ export class FacilityComponent implements OnInit {
         this.toasterService.showErrorToater('Facility is not updated.');
       }
     })
+  }
+
+  search(searchValue: string) {
+    this.dataSource.filter = searchValue.trim().toLowerCase();
+  }
+
+  // pagination.
+  getPageSizeOptions(): number[] {
+    if (this.dataSource.data.length > 500)
+      return [10, 50, 100, 500, this.dataSource.paginator.length];
+    else if (this.dataSource.data.length > 100) {
+      return [10, 50, 100, this.dataSource.paginator.length];
+    }
+    else if (this.dataSource.data.length > 50) {
+      return [10, 50, this.dataSource.paginator.length];
+    }
+    else if (this.dataSource.data.length > 10) {
+      return [10, this.dataSource.paginator.length];
+    }
+    else {
+      return [10];
+    }
   }
 }
