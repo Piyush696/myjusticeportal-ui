@@ -87,7 +87,7 @@ export class LoginComponent implements OnInit {
       if (data.success) {
         this.store.dispatch(new AddUserInfo(Object.assign({}, data.user)));
         if (data.user.role[0].roleId === 1) {
-          this.router.navigateByUrl('/user-dashboard')
+          this.router.navigateByUrl('/case')
         }
         else if (data.user.role[0].roleId === 2) {
           this.router.navigateByUrl('/facility-dashboard')

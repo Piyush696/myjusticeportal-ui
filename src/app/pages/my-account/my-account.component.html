@@ -9,9 +9,8 @@
                     <!-- <div class="w-100 p-4"> -->
                     <div class="col-4 p-0 pl-3">
                         <mat-form-field appearance="fill" class="w-100 p-1">
-                            <mat-label>First Name</mat-label>
-                            <input type="text" matInput placeholder="Legal First Name"
-                                [formControl]="profileForm.controls['firstName']" required>
+                            <mat-label>Legal First Name</mat-label>
+                            <input type="text" matInput [formControl]="profileForm.controls['firstName']" required>
                             <mat-error>
                                 <div
                                     *ngIf="profileForm.controls['firstName'].invalid && profileForm.controls['firstName'].touched">
@@ -24,9 +23,8 @@
                     </div>
                     <div class="col-4 p-0">
                         <mat-form-field appearance="fill" class="w-100 p-1">
-                            <mat-label>Middle Name</mat-label>
-                            <input type="text" matInput placeholder="Legal Middle Name"
-                                [formControl]="profileForm.controls['middleName']" required>
+                            <mat-label>Legal Middle Name</mat-label>
+                            <input type="text" matInput [formControl]="profileForm.controls['middleName']" required>
                             <mat-error>
                                 <div
                                     *ngIf="profileForm.controls['middleName'].invalid && profileForm.controls['middleName'].touched">
@@ -39,9 +37,8 @@
                     </div>
                     <div class="col-4 p-0 pr-3">
                         <mat-form-field appearance="fill" class="w-100 p-1">
-                            <mat-label>Last Name</mat-label>
-                            <input type="text" matInput placeholder="Legal Last Name"
-                                [formControl]="profileForm.controls['lastName']" required>
+                            <mat-label>Legal Last Name</mat-label>
+                            <input type="text" matInput [formControl]="profileForm.controls['lastName']" required>
                             <mat-error>
                                 <div
                                     *ngIf="profileForm.controls['lastName'].invalid && profileForm.controls['lastName'].touched">

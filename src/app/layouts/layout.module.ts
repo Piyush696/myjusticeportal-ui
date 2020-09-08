@@ -50,6 +50,7 @@ import { DefenderDashboardComponent } from 'app/pages/all-dashboards/defender-da
 import { UserDashboardComponent } from 'app/pages/all-dashboards/user-dashboard/user-dashboard.component';
 import { LawyerdashboardComponent } from 'app/pages/all-dashboards/lawyerdashboard/lawyerdashboard.component';
 import { SuperadminDashboardComponent } from 'app/pages/all-registration/superadmin-dashboard/superadmin-dashboard.component';
+import { MatRadioModule } from '@angular/material/radio';
 
 @NgModule({
   imports: [
@@ -76,6 +77,7 @@ import { SuperadminDashboardComponent } from 'app/pages/all-registration/superad
     MatDialogModule,
     MatIconModule,
     MatCheckboxModule,
+    MatRadioModule
   ],
   declarations: [
     DashboardComponent,

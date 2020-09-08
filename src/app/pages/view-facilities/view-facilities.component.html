@@ -8,8 +8,9 @@
                 </mat-form-field>
             </div>
             <div class="pr-2">
-                <button mat-raised-button class="button-purple px-4 py-1" (click)="openModal(addFacility)">Add
-                    Facility</button>
+                <button mat-raised-button class="button-purple px-4 py-1" (click)="openModal(addFacility)">
+                    Add Facility
+                </button>
             </div>
         </div>
         <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8 w-100">
@@ -36,7 +37,6 @@
         <mat-paginator [pageSizeOptions]="[10, 20, 30]" showFirstLastButtons></mat-paginator>
     </mat-card>
 </div>
-
 
 <ng-template #addFacility>
     <div class="d-flex justify-content-center">

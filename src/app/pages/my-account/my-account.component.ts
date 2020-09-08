@@ -175,7 +175,9 @@ export class MyAccountComponent implements OnInit {
       this.profileForm.get('isMFA').setValue(result.data.isMFA)
       this.userMetaForm.get('housing_unit').setValue(result.data?.userMeta[0].metaValue)
       this.userMetaForm.get('facility').setValue(result.data?.userMeta[1].metaValue)
-
+      this.profileForm.get('firstName').disable();
+      this.profileForm.get('middleName').disable();
+      this.profileForm.get('lastName').disable();
     })
   }
 
