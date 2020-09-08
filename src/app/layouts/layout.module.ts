@@ -49,6 +49,7 @@ import { FacilityDashboardComponent } from 'app/pages/all-dashboards/facility-da
 import { DefenderDashboardComponent } from 'app/pages/all-dashboards/defender-dashboard/defender-dashboard.component';
 import { UserDashboardComponent } from 'app/pages/all-dashboards/user-dashboard/user-dashboard.component';
 import { LawyerdashboardComponent } from 'app/pages/all-dashboards/lawyerdashboard/lawyerdashboard.component';
+import { SuperadminDashboardComponent } from 'app/pages/all-registration/superadmin-dashboard/superadmin-dashboard.component';
 import { MatRadioModule } from '@angular/material/radio';
 
 @NgModule({
@@ -106,7 +107,8 @@ import { MatRadioModule } from '@angular/material/radio';
     BondsmanDashboardComponent,
     ParalegalDashboardComponent,
     FacilityDashboardComponent,
-    DefenderDashboardComponent
+    DefenderDashboardComponent,
+    SuperadminDashboardComponent
   ],
   providers: [
     MatDatepickerModule,
