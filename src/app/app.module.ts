@@ -1,12 +1,7 @@
 import { HttpClientModule } from '@angular/common/http';
 import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MatButtonModule } from '@angular/material/button';
-import { MatCardModule } from '@angular/material/card';
 import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
-import { MatListModule } from '@angular/material/list';
-import { MatSelectModule } from '@angular/material/select';
 import { BrowserModule } from '@angular/platform-browser';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
@@ -28,12 +23,8 @@ import { LoginService } from './services/login.service';
 import { RegistrationService } from './services/registration.service';
 import { effects } from './store/effects';
 import { rootReducer } from './store/reducers';
-import { MatCheckboxModule } from '@angular/material/checkbox';
-import { MatDialogModule } from '@angular/material/dialog';
-import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { ForgetPasswordComponent } from './pages/forget-password/forget-password.component';
 import { SecurityQuestionComponent } from './pages/security-question/security-question.component';
-import { MatIconModule } from '@angular/material/icon';
 import { EmailRegistrationComponent } from './shared/email-registration/email-registration.component';
 import { MobileRegistrationComponent } from './shared/mobile-registration/mobile-registration.component';
 import { AdditionalInfoComponent } from './shared/additional-info/additional-info.component';
@@ -54,6 +45,7 @@ import { InvitedLawyerComponent } from './pages/all-registration/invited-lawyer/
 import { InvitedParalegalComponent } from './pages/all-registration/invited-paralegal/invited-paralegal.component';
 import { InvitedPublicDefenderComponent } from './pages/all-registration/invited-public-defender/invited-public-defender.component';
 import { InvitedBondsmanComponent } from './pages/all-registration/invited-bondsman/invited-bondsman.component';
+import { SharedMaterialModule } from './shared-material/shared-material.module';
 
 export function usersProviderFactory(provider: AuthLoadService) {
   return () => provider.setUserbyAPI();
@@ -103,17 +95,8 @@ export function usersProviderFactory(provider: AuthLoadService) {
     StoreDevtoolsModule.instrument({
       maxAge: 25
     }),
-    MatButtonModule,
-    MatCardModule,
-    MatCheckboxModule,
-    MatDialogModule,
-    MatIconModule,
-    MatInputModule,
-    MatListModule,
-    MatProgressBarModule,
-    MatSelectModule,
+    SharedMaterialModule
   ],
-
   providers: [
     RegistrationService,
     CacheService,
