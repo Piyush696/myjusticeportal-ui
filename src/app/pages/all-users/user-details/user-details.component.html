@@ -8,11 +8,17 @@
             <tr>
               <th>Name:&nbsp;</th>
               <td>
-                {{selectedUserData?.firstName | titlecase}}
-                <span *ngIf="selectedUserData?.middleName">
-                  &nbsp;{{selectedUserData?.middleName | titlecase}}
+                <span>
+                  {{selectedUserData?.firstName | titlecase}}
+                  <span *ngIf="selectedUserData?.middleName">
+                    &nbsp;{{selectedUserData?.middleName | titlecase}}
+                  </span>
+                  &nbsp;{{selectedUserData?.lastName | titlecase}}
                 </span>
-                &nbsp;{{selectedUserData?.lastName | titlecase}}
+                <span
+                  *ngIf="!selectedUserData?.firstName && !selectedUserData?.middleName && !selectedUserData?.lastName">
+                  N/A
+                </span>
               </td>
             </tr>
             <tr>

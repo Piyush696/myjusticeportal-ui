@@ -24,7 +24,7 @@ export class ViewFacilitiesComponent implements OnInit {
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort: MatSort;
 
-  constructor(private store: Store<any>, public dialog: MatDialog, private facilityService: FacilityService,
+  constructor(public dialog: MatDialog, private facilityService: FacilityService,
     private toasterService: ToasterService, private organisationService: OrganisationService) { }
 
   ngOnInit(): void {
@@ -39,10 +39,6 @@ export class ViewFacilitiesComponent implements OnInit {
       this.dataSource.sort = this.sort;
       this.getAllFacility();
     })
-  }
-
-  search(searchValue: string) {
-    this.dataSource.filter = searchValue.trim().toLowerCase();
   }
 
   openModal(templateRef) {
@@ -91,5 +87,27 @@ export class ViewFacilitiesComponent implements OnInit {
         this.toasterService.showSuccessToater('Facility removed.')
       }
     })
+  }
+
+  search(searchValue: string) {
+    this.dataSource.filter = searchValue.trim().toLowerCase();
+  }
+
+  // pagination.
+  getPageSizeOptions(): number[] {
+    if (this.dataSource.data.length > 500)
+      return [10, 50, 100, 500, this.dataSource.paginator.length];
+    else if (this.dataSource.data.length > 100) {
+      return [10, 50, 100, this.dataSource.paginator.length];
+    }
+    else if (this.dataSource.data.length > 50) {
+      return [10, 50, this.dataSource.paginator.length];
+    }
+    else if (this.dataSource.data.length > 10) {
+      return [10, this.dataSource.paginator.length];
+    }
+    else {
+      return [10];
+    }
   }
 }

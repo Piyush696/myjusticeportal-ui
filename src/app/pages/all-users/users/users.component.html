@@ -12,11 +12,16 @@
             <ng-container matColumnDef="name">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header>User</th>
                 <td mat-cell *matCellDef="let user">
-                    {{user?.firstName | titlecase}}
-                    <span *ngIf="user?.middleName">
-                        &nbsp;{{user?.middleName | titlecase}}
+                    <span>
+                        {{user?.firstName | titlecase}}
+                        <span *ngIf="user?.middleName">
+                            &nbsp;{{user?.middleName | titlecase}}
+                        </span>
+                        &nbsp;{{user?.lastName | titlecase}}
                     </span>
-                    &nbsp;{{user?.lastName | titlecase}}
+                    <span *ngIf="!user?.firstName && !user?.middleName && !user?.lastName">
+                        N/A
+                    </span>
                 </td>
             </ng-container>
             <ng-container matColumnDef="userName">
@@ -50,6 +55,6 @@
             <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
             <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
         </table>
-        <mat-paginator [pageSizeOptions]="[10, 20, 30]" showFirstLastButtons></mat-paginator>
+        <mat-paginator [pageSizeOptions]="getPageSizeOptions()" showFirstLastButtons></mat-paginator>
     </mat-card>
 </div>
