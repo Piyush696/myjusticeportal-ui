@@ -143,15 +143,18 @@ textarea[disabled] {
     white-space: nowrap;
     width: 100%;
   }
+
   .navbar .navbar-nav .nav-link i.nc-icon {
     top: -11px;
     font-size: 22px;
     font-weight: bold;
     transition: all 0.3s cubic-bezier(0.215, 0.61, 0.355, 1) 0s, opacity 0.3s ease 0s, height 0s linear 0.35s !important;
   }
+
   .dropdown .dropdown-toggle:after {
     position: absolute;
   }
+
   .dropdown-menu {
     visibility: hidden !important;
     opacity: 0 !important;
@@ -163,6 +166,7 @@ textarea[disabled] {
     margin-top: 0px !important;
     padding-left: 0px !important;
   }
+
   .dropdown-menu.show {
     display: flex !important;
     visibility: visible !important;
