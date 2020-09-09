@@ -9,12 +9,15 @@ import { ToasterService } from 'app/services/toaster.service';
   templateUrl: './forget-password.component.html',
   styleUrls: ['./forget-password.component.css']
 })
+
 export class ForgetPasswordComponent implements OnInit {
   passwordResetForm: FormGroup;
   step: number = 1;
   securityQuestions: any;
+  isSentMail: boolean = false;
 
-  constructor(private fb: FormBuilder, private router: Router, private securityService: SecurityService, private toasterService: ToasterService) { }
+  constructor(private fb: FormBuilder, private router: Router,
+    private securityService: SecurityService, private toasterService: ToasterService) { }
 
   ngOnInit(): void {
     this.createFormControl();
@@ -22,7 +25,7 @@ export class ForgetPasswordComponent implements OnInit {
 
   createFormControl() {
     this.passwordResetForm = this.fb.group({
-      user: ['', [Validators.required]],
+      userName: ['', [Validators.required]],
       securityQuestionId: ['', [Validators.required]],
       answer: ['', [Validators.required]],
       password: ['', [Validators.required, Validators.minLength(6)]],
@@ -43,20 +46,24 @@ export class ForgetPasswordComponent implements OnInit {
   }
 
   getAllUserSecurityQuestions() {
-    this.securityService.getUserSecurityQuestions(this.passwordResetForm.get('user').value).subscribe((securityQuestions: any) => {
-      if (securityQuestions.data) {
-        this.securityQuestions = securityQuestions.data.securityQuestions
-        this.step = 2;
+    this.isSentMail = true;
+    this.securityService.getUserSecurityQuestions(this.passwordResetForm.get('userName').value).subscribe((res: any) => {
+      if (res.data == 'Invalid input') {
+        this.toasterService.showErrorToater('Invalid input entered!. Please give valid input');
       }
-      else {
-        this.toasterService.showErrorToater('Invalid User.')
+      else if (res.data == 'Mail sent' || res.data == 'Mail not sent') { // for other.
+        this.toasterService.showSuccessToater('Your password reset link has been sent to ' + this.passwordResetForm.get('userName').value +
+          ', if did not received the email please wait sometime and try again');
+      } else { // for user.
+        this.securityQuestions = res.data.securityQuestions;
+        this.step = 2;
       }
     })
   }
 
   onSelectQuestion() {
     const data = {
-      "user": this.passwordResetForm.get('user').value,
+      "userName": this.passwordResetForm.get('userName').value,
       "answer": this.passwordResetForm.get('answer').value,
       "securityQuestionId": this.passwordResetForm.get('securityQuestionId').value,
     }
@@ -80,13 +87,13 @@ export class ForgetPasswordComponent implements OnInit {
 
   resetPassword() {
     const data = {
-      "user": this.passwordResetForm.get('user').value,
+      "userName": this.passwordResetForm.get('userName').value,
       "password": this.passwordResetForm.get('password').value
     }
     this.securityService.resetPassword(data).subscribe((res: any) => {
       if (res.success) {
-        this.toasterService.showSuccessToater('Password Reset Successfully.')
-        this.router.navigateByUrl('/login')
+        this.toasterService.showSuccessToater('Password Reset Successfully.');
+        this.router.navigateByUrl('/login');
       }
     })
   }

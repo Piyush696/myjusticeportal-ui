@@ -10,12 +10,25 @@
       </div>
       <!-- <a class="navbar-brand" href="javascript:void(0)">{{getTitle()}}</a> -->
     </div>
-    <button class="navbar-toggler" type="button" (click)="collapse()" [attr.aria-expanded]="!isCollapsed"
-      aria-controls="collapseExample">
-      <span class="navbar-toggler-bar navbar-kebab"></span>
-      <span class="navbar-toggler-bar navbar-kebab"></span>
-      <span class="navbar-toggler-bar navbar-kebab"></span>
-    </button>
+    <div class="navbar-toggler" [attr.aria-expanded]="!isCollapsed" aria-controls="collapseExample">
+      <!-- style="margin-top: -18px!important" -->
+      <!-- <span class="navbar-toggler-bar navbar-kebab"></span>
+        <span class="navbar-toggler-bar navbar-kebab"></span>
+        <span class="navbar-toggler-bar navbar-kebab"></span> -->
+      <ul class="navbar-nav">
+        <li class="cursor-pointer color-grey nav-item btn-rotate d-flex justify-content-end" ngbDropdown
+          placement="bottom-left">
+          <a class="nav-link pt-0" ngbDropdownToggle id="navbarDropdownMenuLink">
+            <i class="cursor-pointer nc-icon nc-single-02"></i>
+          </a>
+          <div ngbDropdownMenu aria-labelledby="navbarDropdownMenuLink" class="dropdown-menu dropdown-menu-right"
+            style="top: 28px; margin-right: 0px;">
+            <a [routerLink]="'/my-account'" ngbDropdownItem href="javascript:void(0)">My Account</a>
+            <a ngbDropdownItem (click)="logout()">Logout</a>
+          </div>
+        </li>
+      </ul>
+    </div>
     <div class="collapse navbar-collapse justify-content-end" id="collapseExample" [ngbCollapse]="isCollapsed">
       <!-- <form>
         <div class="input-group no-border">
@@ -37,7 +50,8 @@
           </a>
         </li> -->
 
-        <li class="cursor-pointer color-grey nav-item btn-rotate" ngbDropdown placement="bottom-left">
+        <li class="cursor-pointer color-grey nav-item btn-rotate d-flex justify-content-end" ngbDropdown
+          placement="bottom-right">
           <a class="nav-link" ngbDropdownToggle id="navbarDropdownMenuLink">
             <i class="cursor-pointer nc-icon nc-single-02"></i>
             <!-- <p>

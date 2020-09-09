@@ -1,0 +1,50 @@
+.card-style {
+  border: 1px solid #333442;
+  color: #333442;
+  background: #e4e4ec;
+}
+
+.case-heading {
+  font-weight: bolder;
+  letter-spacing: 1px;
+}
+
+.sponser-card {
+  border: 1px solid #333442;
+}
+
+.color {
+  color: #333442;
+}
+
+.button-play {
+  border-radius: 50%;
+  border: 3px solid #333442;
+  background: #333442;
+}
+
+.fa-play:before {
+  content: "\f04b";
+  color: #fff;
+  position: relative;
+  left: 2px;
+  font-size: 30px;
+}
+
+.white-btn {
+  background: #e4e4ec;
+  color: #333442;
+}
+
+.px-perc {
+  padding-left: 13%;
+  padding-right: 13%;
+}
+
+.mat-dialog-container {
+  padding: 21px 15px 7px 15px !important;
+}
+
+.notes-height {
+  height: 10px;
+}

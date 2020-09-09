@@ -29,11 +29,11 @@ export class SecurityService {
   }
 
   createSecurityAnswers(securityQuestionAnswer) {
-    return this.httpClient.post<object>(`${this.apiPath}/${this.allSecurityQuestion}`, securityQuestionAnswer, this.getHeaders())
+    return this.httpClient.post<object>(`${this.apiPath}/${this.allSecurityQuestion}`, securityQuestionAnswer)
   }
 
-  getUserSecurityQuestions(user: string) {
-    return this.httpClient.post<object>(`${this.apiPath}/${this.allSecurityQuestion}/securityQues`, { user })
+  getUserSecurityQuestions(userName: string) {
+    return this.httpClient.post<object>(`${this.apiPath}/${this.allSecurityQuestion}/forgot-password`, { userName });
   }
 
   checkAnswer(data) {
@@ -52,5 +52,7 @@ export class SecurityService {
     return this.httpClient.post<object>(`${this.apiPath}/${this.allSecurityQuestion}/user/update/securityQuestion`, { securityQuestionData }, this.getHeaders())
   }
 
-
+  onResetPassword(resetData) {
+    return this.httpClient.patch<Object>(`${this.apiPath}/securityQuestion`, resetData);
+  }
 }

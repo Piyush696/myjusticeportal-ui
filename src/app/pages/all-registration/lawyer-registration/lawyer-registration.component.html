@@ -1,0 +1,14 @@
+<div class="bg-color">
+    <app-email-registration *ngIf="step == 1" [totalSteps]="totalSteps" [message]="message"
+        (isNextEvent)="onNextClick($event)" [roleId]="roleId">
+    </app-email-registration>
+    <app-organisation *ngIf="step == 2" [totalSteps]="totalSteps"
+        (orgAddressEventEmitter)="onCreateOrganisation($event)">
+    </app-organisation>
+    <app-select-facility *ngIf="step == 3" [totalSteps]="totalSteps"
+        (selectedFacilityEventEmitter)="onSelectedfacility($event)">
+    </app-select-facility>
+    <app-mobile-registration *ngIf="step == 4" [authCodeField]="authCodeField" [totalSteps]="totalSteps"
+        (isMobileEvent)="mobileDetails($event)" (isOtpEvent)="onAuthCodeValidate($event)">
+    </app-mobile-registration>
+</div>
