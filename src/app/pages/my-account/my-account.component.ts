@@ -32,9 +32,9 @@ export class MyAccountComponent implements OnInit {
   userMetaForm: FormGroup;
   userMeta: any;
 
-
-  constructor(private registrationService: RegistrationService, public dialog: MatDialog, private twilioService: TwilioService,
-    private toasterService: ToasterService, private securityService: SecurityService, private userService: UserService, private store: Store<any>,
+  constructor(private registrationService: RegistrationService, public dialog: MatDialog,
+    private toasterService: ToasterService, private securityService: SecurityService,
+    private userService: UserService, private store: Store<any>,
     private fb: FormBuilder, private userMetaService: UserMetaService) { }
 
   ngOnInit() {
@@ -87,7 +87,6 @@ export class MyAccountComponent implements OnInit {
     });
   }
 
-
   createPasswordControl() {
     this.passwordForm = this.fb.group({
       oldPassword: ['', [Validators.required]],
@@ -120,8 +119,6 @@ export class MyAccountComponent implements OnInit {
       this.toasterService.showSuccessToater('User Updated Successfully.')
       this.getSingleUser();
     })
-
-
   }
 
   userMetaUpdate() {
@@ -173,8 +170,10 @@ export class MyAccountComponent implements OnInit {
       this.profileForm.get('lastName').setValue(result.data.lastName)
       this.profileForm.get('userName').setValue(result.data.userName)
       this.profileForm.get('isMFA').setValue(result.data.isMFA)
-      this.userMetaForm.get('housing_unit').setValue(result.data?.userMeta[0].metaValue)
-      this.userMetaForm.get('facility').setValue(result.data?.userMeta[1].metaValue)
+      if (result.data.userMeta.length) {
+        this.userMetaForm.get('housing_unit').setValue(result.data.userMeta[0].metaValue);
+        this.userMetaForm.get('facility').setValue(result.data.userMeta[1].metaValue);
+      }
       this.profileForm.get('firstName').disable();
       this.profileForm.get('middleName').disable();
       this.profileForm.get('lastName').disable();

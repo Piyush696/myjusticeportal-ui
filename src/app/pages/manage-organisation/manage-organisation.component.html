@@ -169,12 +169,16 @@
                 </mat-form-field>
             </div>
             <div class="col-12 pt-1">
-                <mat-label class="font-weight-bold">Self Paid:</mat-label>
+                <mat-label class="font-weight-bold">Billing Option:</mat-label>
                 <div class="pt-1 pb-3">
                     <mat-radio-group color="primary" aria-label="Select an option"
                         [formControl]="inviteMailForm.controls['isSelfPaid']">
-                        <mat-radio-button value="true" class="pr-3">Yes</mat-radio-button>
-                        <mat-radio-button value="false">No</mat-radio-button>
+                        <mat-radio-button value="true" class="pr-3">
+                            Pay Bill Directly
+                        </mat-radio-button>
+                        <mat-radio-button value="false">
+                            Bill Paid by Organization
+                        </mat-radio-button>
                     </mat-radio-group>
                 </div>
             </div>

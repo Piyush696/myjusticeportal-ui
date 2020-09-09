@@ -1,16 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MatButtonModule } from '@angular/material/button';
-import { MatCardModule } from '@angular/material/card';
-import { MatNativeDateModule } from '@angular/material/core';
-import { MatDatepickerModule } from '@angular/material/datepicker';
-import { MatInputModule } from '@angular/material/input';
-import { MatListModule } from '@angular/material/list';
-import { MatPaginatorModule } from '@angular/material/paginator';
-import { MatSelectModule } from '@angular/material/select';
-import { MatSortModule } from '@angular/material/sort';
-import { MatTableModule } from '@angular/material/table';
 import { RouterModule } from '@angular/router';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AppSettingsComponent } from 'app/pages/app-settings/app-settings.component';
@@ -25,10 +15,6 @@ import { NotificationsComponent } from '../pages/notifications/notifications.com
 import { TableComponent } from '../pages/table/table.component';
 import { TypographyComponent } from '../pages/typography/typography.component';
 import { LayoutRoutes } from './layout.routing';
-import { MatSlideToggleModule } from '@angular/material/slide-toggle';
-import { MatProgressBarModule } from '@angular/material/progress-bar';
-import { MatDialogModule } from '@angular/material/dialog';
-import { MatIconModule } from '@angular/material/icon';
 import { FacilityComponent } from 'app/pages/facility/facility.component';
 import { UsersComponent } from 'app/pages/all-users/users/users.component';
 import { UserDetailsComponent } from 'app/pages/all-users/user-details/user-details.component';
@@ -42,7 +28,6 @@ import { FileUploadModule } from 'ng2-file-upload';
 import { ManageOrganisationComponent } from 'app/pages/manage-organisation/manage-organisation.component';
 import { ViewFacilitiesComponent } from 'app/pages/view-facilities/view-facilities.component';
 import { ViewUsersComponent } from 'app/pages/view-users/view-users.component';
-import { MatCheckboxModule } from '@angular/material/checkbox';
 import { BondsmanDashboardComponent } from 'app/pages/all-dashboards/bondsman-dashboard/bondsman-dashboard.component';
 import { ParalegalDashboardComponent } from 'app/pages/all-dashboards/paralegal-dashboard/paralegal-dashboard.component';
 import { FacilityDashboardComponent } from 'app/pages/all-dashboards/facility-dashboard/facility-dashboard.component';
@@ -50,7 +35,9 @@ import { DefenderDashboardComponent } from 'app/pages/all-dashboards/defender-da
 import { UserDashboardComponent } from 'app/pages/all-dashboards/user-dashboard/user-dashboard.component';
 import { LawyerdashboardComponent } from 'app/pages/all-dashboards/lawyerdashboard/lawyerdashboard.component';
 import { SuperadminDashboardComponent } from 'app/pages/all-registration/superadmin-dashboard/superadmin-dashboard.component';
-import { MatRadioModule } from '@angular/material/radio';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { SharedMaterialModule } from 'app/shared-material/shared-material.module';
 
 @NgModule({
   imports: [
@@ -61,23 +48,7 @@ import { MatRadioModule } from '@angular/material/radio';
     ReactiveFormsModule,
     FileUploadModule,
     ToastrModule.forRoot(),
-    MatInputModule,
-    MatCardModule,
-    MatListModule,
-    MatPaginatorModule,
-    MatSortModule,
-    MatTableModule,
-    MatIconModule,
-    MatSelectModule,
-    MatButtonModule,
-    MatSlideToggleModule,
-    MatDatepickerModule,
-    MatProgressBarModule,
-    MatNativeDateModule,
-    MatDialogModule,
-    MatIconModule,
-    MatCheckboxModule,
-    MatRadioModule
+    SharedMaterialModule
   ],
   declarations: [
     DashboardComponent,
