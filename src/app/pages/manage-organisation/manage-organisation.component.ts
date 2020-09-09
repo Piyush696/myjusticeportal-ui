@@ -26,12 +26,14 @@ export class ManageOrganisationComponent implements OnInit {
 
   getOrganisationAddress() {
     this.organisationService.getOrganisationAddressDetails().subscribe((orgDetails: any) => {
+      console.log(orgDetails);
       this.organisationForm.get('name').setValue(orgDetails.data.Organization.name)
       this.organisationForm.get('street1').setValue(orgDetails.data.Organization.Address.street1)
       this.organisationForm.get('street2').setValue(orgDetails.data.Organization.Address.street2)
       this.organisationForm.get('city').setValue(orgDetails.data.Organization.Address.city)
       this.organisationForm.get('state').setValue(orgDetails.data.Organization.Address.state)
       this.organisationForm.get('zip').setValue(orgDetails.data.Organization.Address.zip)
+      console.log(this.organisationForm.get('zip').value);
       this.organisationForm.get('country').setValue(orgDetails.data.Organization.Address.country)
       this.addressId = orgDetails.data.Organization.Address.addressId
       this.organisationForm.disable();
