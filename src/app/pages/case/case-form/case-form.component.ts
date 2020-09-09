@@ -30,10 +30,10 @@ export class CaseFormComponent implements OnInit, OnChanges {
       firstName: ['', [Validators.required]],
       lastName: ['', [Validators.required]],
       countyOfArrest: [''],
-      dateOfArrest: [''],
+      dateOfArrest: [null],
       briefDescriptionOfChargeOrLegalMatter: ['', [Validators.required]],
       attorneyName: [''],
-      nextCourtDate: [''],
+      nextCourtDate: [null],
       otherInformation: ['']
     });
 
