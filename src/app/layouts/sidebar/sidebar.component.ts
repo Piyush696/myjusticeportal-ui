@@ -10,12 +10,12 @@ export interface RouteInfo {
 }
 
 export const ROUTES: RouteInfo[] = [
-    { path: '/case', title: 'My Cases', icon: 'nc-bank', class: '', roleIds: [1, 4] },
+    { path: '/user/case', title: 'My Cases', icon: 'nc-bank', class: '', roleIds: [1, 4] },
     // { path: '/dashboard', title: 'Dashboard', icon: 'nc-bank', class: '', roleIds: [] },
     // { path: ':facilityCode/userdashboard', title: 'Dashboard', icon: 'nc-bank', class: '', roleIds: [1] },
-    { path: '/users', title: 'All Users', icon: 'nc-bank', class: '', roleIds: [7] },
+    { path: '/superadmin/users', title: 'All Users', icon: 'nc-bank', class: '', roleIds: [7] },
     { path: '/my-dockets', title: 'My Dockets', icon: 'nc-bank', class: '', roleIds: [2, 5] },
-    { path: '/app-setting', title: 'Application Settings', icon: 'nc-bank', class: '', roleIds: [7] },
+    { path: '/superadmin/app-setting', title: 'Application Settings', icon: 'nc-bank', class: '', roleIds: [7] },
     { path: '', title: 'Law Library', icon: 'nc-bank', class: '', roleIds: [1] },
     { path: '/manage-organisation', title: 'Manage Organisation', icon: 'nc-bank', class: '', roleIds: [3, 4, 5, 6] },
     { path: '/legal-research-Assistance', title: 'Legal Research Assistance', icon: 'nc-bank', class: '', roleIds: [4, 6] },
@@ -25,7 +25,7 @@ export const ROUTES: RouteInfo[] = [
     { path: '/message-lawyer', title: 'Message My lawyer', icon: 'nc-bank', class: '', roleIds: [1, 3, 5] },
     { path: '/video-lawyer', title: 'Video My lawyer', icon: 'nc-bank', class: '', roleIds: [1, 3, 7] },
     { path: '/bail-bonds', title: 'Bail Bonds', icon: 'nc-bank', class: '', roleIds: [1, 4, 6, 7] },
-    { path: '/facility', title: 'Facility', icon: 'nc-bank', class: '', roleIds: [7] }
+    { path: '/superadmin/facility', title: 'Facility', icon: 'nc-bank', class: '', roleIds: [7] }
 ];
 
 @Component({
@@ -40,7 +40,7 @@ export class SidebarComponent implements OnInit {
     userRole: any;
     libraryLink: any;
 
-    constructor(private store: Store<any>) { };
+    constructor(private store: Store<any>) { }
 
     ngOnInit() {
         this.store.select(s => s.userInfo).subscribe(x => {

@@ -15,11 +15,11 @@ import { InvitedLawyerComponent } from './pages/all-registration/invited-lawyer/
 import { InvitedParalegalComponent } from './pages/all-registration/invited-paralegal/invited-paralegal.component';
 import { InvitedPublicDefenderComponent } from './pages/all-registration/invited-public-defender/invited-public-defender.component';
 import { InvitedBondsmanComponent } from './pages/all-registration/invited-bondsman/invited-bondsman.component';
+import { AuthGuard } from './guards/auth.guard';
 
 export const AppRoutes: Routes = [
-  { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
   {
-    path: '', component: LayoutComponent,
+    path: '', canActivate: [AuthGuard], component: LayoutComponent,
     children: [{
       path: '', loadChildren: './layouts/layout.module#LayoutModule'
     }]
@@ -42,5 +42,6 @@ export const AppRoutes: Routes = [
   { path: ':facilityCode/facility/registration', component: FacilityRegistrationComponent },
   { path: 'forget-password', component: ForgetPasswordComponent },
   { path: 'reset-password/:token', component: ResetPasswordComponent },
-  { path: '**', redirectTo: 'dashboard' }
+  // { path: '**', redirectTo: 'dashboard' }
+  { path: '**', redirectTo: 'login' }
 ]
