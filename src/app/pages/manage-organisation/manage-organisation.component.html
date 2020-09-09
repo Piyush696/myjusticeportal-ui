@@ -111,8 +111,7 @@
                 <div class="col-6 pr-3">
                     <mat-form-field appearance="fill" class="w-100 p-1">
                         <mat-label>Zip</mat-label>
-                        <input type="number" matInput placeholder="Zip"
-                            [formControl]="organisationForm.controls['zip']">
+                        <input type="text" matInput placeholder="Zip" [formControl]="organisationForm.controls['zip']">
                         <mat-error>
                             <div
                                 *ngIf="organisationForm.controls['zip'].invalid && organisationForm.controls['zip'].touched">
