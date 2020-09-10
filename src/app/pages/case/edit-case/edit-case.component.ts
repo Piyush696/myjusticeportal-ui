@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { CaseService } from 'app/services/case.service';
+import { ToasterService } from 'app/services/toaster.service';
 
 @Component({
   selector: 'app-edit-case',
@@ -11,7 +12,7 @@ import { CaseService } from 'app/services/case.service';
 export class EditCaseComponent implements OnInit {
   caseDetails: any;
 
-  constructor(private route: ActivatedRoute, private caseService: CaseService) { }
+  constructor(private toasterService: ToasterService, private route: ActivatedRoute, private caseService: CaseService) { }
 
   ngOnInit(): void {
     this.getCase();
@@ -19,7 +20,13 @@ export class EditCaseComponent implements OnInit {
 
   getCase() {
     this.caseService.getCase(this.route.snapshot.params['caseId']).subscribe((result: any) => {
-      this.caseDetails = result.data;
+      if (result.success) {
+        this.caseDetails = result.data;
+      } else {
+        this.toasterService.showErrorToater(result.statusText);
+      }
+    }, (error: any) => {
+      this.toasterService.showErrorToater(error.statusText);
     })
   }
 }

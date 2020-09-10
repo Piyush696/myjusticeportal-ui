@@ -17,7 +17,7 @@ export const ROUTES: RouteInfo[] = [
     { path: '/my-dockets', title: 'My Dockets', icon: 'nc-bank', class: '', roleIds: [2, 5] },
     { path: '/app-setting', title: 'Application Settings', icon: 'nc-bank', class: '', roleIds: [7] },
     { path: '', title: 'Law Library', icon: 'nc-bank', class: '', roleIds: [1] },
-    { path: '/manage-organisation', title: 'Manage Organisation', icon: 'nc-bank', class: '', roleIds: [3, 4, 5, 6] },
+    { path: '/manage-organization', title: 'Manage Organization', icon: 'nc-bank', class: '', roleIds: [3, 4, 5, 6] },
     { path: '/legal-research-Assistance', title: 'Legal Research Assistance', icon: 'nc-bank', class: '', roleIds: [4, 6] },
     { path: '/legal-forms', title: 'Legal Forms', icon: 'nc-bank', class: '', roleIds: [1, 2] },
     { path: '/ask-lawyer', title: 'Ask a lawyer', icon: 'nc-bank', class: '', roleIds: [3, 4, 7] },
