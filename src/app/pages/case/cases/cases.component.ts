@@ -35,7 +35,14 @@ export class CasesComponent implements OnInit {
 
   getCases() {
     this.caseService.getCases().subscribe((cases: any) => {
-      this.caseList = cases.data;
+      if (cases.success) {
+        this.caseList = cases.data;
+      }
+      else {
+        this.toasterService.showErrorToater(cases.data)
+      }
+    }, (error: any) => {
+      this.toasterService.showErrorToater(error.statusText);
     })
   }
 
@@ -56,11 +63,17 @@ export class CasesComponent implements OnInit {
 
   onSaveChanges() {
     this.caseService.updateCase(this.caseNoteForm.value, this.currentCaseId).subscribe((res: any) => {
-      this.caseNoteForm.disable();
-      this.dialog.closeAll();
-      this.getCases();
-      this.enableEditBtn = true;
-      this.toasterService.showSuccessToater('Notes Updated Successfully.');
+      if (res.success) {
+        this.caseNoteForm.disable();
+        this.dialog.closeAll();
+        this.getCases();
+        this.enableEditBtn = true;
+        this.toasterService.showSuccessToater('Notes Updated Successfully.');
+      } else {
+        this.toasterService.showErrorToater(res.data);
+      }
+    }, (error: any) => {
+      this.toasterService.showErrorToater(error.statusText);
     })
   }
 }

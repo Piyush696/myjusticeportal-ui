@@ -52,7 +52,7 @@ export const LayoutRoutes: Routes = [
     // { path: 'maps', canActivate: [AuthGuard], component: MapsComponent },
     // { path: 'notifications', canActivate: [AuthGuard], component: NotificationsComponent },
     // { path: 'my-account', canActivate: [AuthGuard], component: MyAccountComponent },
-    // { path: 'manage-organisation', canActivate: [AuthGuard], component: ManageOrganisationComponent },
+    // { path: 'manage-organization', canActivate: [AuthGuard], component: ManageOrganisationComponent },
     // { path: 'user-dashboard', canActivate: [AuthGuard], component: UserDashboardComponent },
     // { path: 'case', canActivate: [AuthGuard], component: CasesComponent },
     // { path: 'case/create', canActivate: [AuthGuard], component: CreateCaseComponent },
@@ -61,6 +61,6 @@ export const LayoutRoutes: Routes = [
     // { path: 'case/:caseId/files', canActivate: [AuthGuard], component: ViewCaseFilesComponent },
     // { path: 'facility', canActivate: [AuthGuard], component: FacilityComponent },
     // { path: 'app-setting', canActivate: [AuthGuard], component: AppSettingsComponent },
-    // { path: 'organisation/users', canActivate: [AuthGuard], component: ViewUsersComponent },
-    // { path: 'organisation/facilities', canActivate: [AuthGuard], component: ViewFacilitiesComponent },
+    // { path: 'organization/users', canActivate: [AuthGuard], component: ViewUsersComponent },
+    // { path: 'organization/facilities', canActivate: [AuthGuard], component: ViewFacilitiesComponent },
 ];

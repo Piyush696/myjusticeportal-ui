@@ -1,7 +1,7 @@
 <div class="col-12 col-sm-12 p-0 d-flex justify-content-between justify-content-sm-between">
     <div>
-        <h1 class="header-title font-weight-bold">Manage Organisation.</h1>
-        <label class="header-sub-text">Manage your Organisation information.</label>
+        <h1 class="header-title font-weight-bold">Manage Organization.</h1>
+        <label class="header-sub-text">Manage your Organization information.</label>
     </div>
     <div>
         <button mat-raised-button class="button-purple px-4 py-1" (click)="openModal(inviteEmail)">
@@ -15,14 +15,14 @@
         <mat-card class="mat-elevation-z10">
             <div class="row px-3">
                 <mat-form-field appearance="fill" class="w-100 p-1">
-                    <mat-label>Organisation Name</mat-label>
-                    <input type="text" matInput placeholder="Organisation Name"
+                    <mat-label>Organization Name</mat-label>
+                    <input type="text" matInput placeholder="Organization Name"
                         [formControl]="organisationForm.controls['name']" required>
                     <mat-error>
                         <div
                             *ngIf="organisationForm.controls['name'].invalid && organisationForm.controls['name'].touched">
                             <small class="font13">
-                                Organisation Name is Required
+                                Organization Name is Required
                             </small>
                         </div>
                     </mat-error>
@@ -135,12 +135,12 @@
     </div>
     <div class="col-4 p-2">
         <div class="d-flex justify-content-end pr-3">
-            <button [routerLink]="'/organisation/users'" class="button-purple px-4 py-1" mat-raised-button>
+            <button [routerLink]="'/organization/users'" class="button-purple px-4 py-1" mat-raised-button>
                 View All Users
             </button>
         </div>
         <div class="d-flex justify-content-end pr-3 pt-2">
-            <button [routerLink]="'/organisation/facilities'" class="button-purple px-4 py-1" mat-raised-button>
+            <button [routerLink]="'/organization/facilities'" class="button-purple px-4 py-1" mat-raised-button>
                 Manage Facilities
             </button>
         </div>
