@@ -3,6 +3,7 @@ import { OrganisationService } from 'app/services/organisation.service';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
+import { ToasterService } from 'app/services/toaster.service';
 
 @Component({
   selector: 'app-view-users',
@@ -12,12 +13,12 @@ import { MatSort } from '@angular/material/sort';
 
 export class ViewUsersComponent implements OnInit {
 
-  displayedColumns: string[] = ["name", "userName", "roles", "createdAt", "action"];
+  displayedColumns: string[] = ["name", "userName", "roles", "createdAt"];
   dataSource = new MatTableDataSource();
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort: MatSort;
 
-  constructor(private organisationService: OrganisationService) { }
+  constructor(private organisationService: OrganisationService, private toasterService: ToasterService,) { }
 
   ngOnInit(): void {
     this.getAllUsers();
@@ -25,16 +26,23 @@ export class ViewUsersComponent implements OnInit {
 
   getAllUsers() {
     this.organisationService.getOrganisationUsers().subscribe((users: any) => {
-      this.dataSource = new MatTableDataSource(users.data.users);
-      this.dataSource.sortingDataAccessor = (item: any, property) => {
-        switch (property) {
-          case 'name': if (item) return item.firstName + item.middleName + item.lastName;
-          case 'roles': if (item) return item.roles[0].name;
-          default: return item[property];
-        }
-      };
-      this.dataSource.paginator = this.paginator;
-      this.dataSource.sort = this.sort;
+      if (users.success) {
+        this.dataSource = new MatTableDataSource(users.data.users);
+        this.dataSource.sortingDataAccessor = (item: any, property) => {
+          switch (property) {
+            case 'name': if (item) return item.firstName + item.middleName + item.lastName;
+            case 'roles': if (item) return item.roles[0].name;
+            default: return item[property];
+          }
+        };
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
+      }
+      else {
+        this.toasterService.showErrorToater(users.data)
+      }
+    }, (error: any) => {
+      this.toasterService.showErrorToater(error.statusText);
     })
   }
 

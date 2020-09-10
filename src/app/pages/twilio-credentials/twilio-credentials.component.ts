@@ -24,17 +24,30 @@ export class TwilioCredentialsComponent implements OnInit {
 
   getTwilioCredentials() {
     this.twilioService.getTwilioCredentials().subscribe((credentials: any) => {
-      this.twilioCredentialForm.get('accountSid').setValue(credentials.data.accountSid)
-      this.twilioCredentialForm.get('authToken').setValue(credentials.data.authToken)
-      this.twilioCredentialForm.disable();
-      this.isDisabled = true;
+      if (credentials.success) {
+        this.twilioCredentialForm.get('accountSid').setValue(credentials.data.accountSid)
+        this.twilioCredentialForm.get('authToken').setValue(credentials.data.authToken)
+        this.twilioCredentialForm.disable();
+        this.isDisabled = true;
+      }
+      else {
+        this.toasterService.showErrorToater(credentials.data)
+      }
+    }, (error: any) => {
+      this.toasterService.showErrorToater(error.statusText);
     })
   }
 
   updateTwilioCendencialChanges() {
     this.twilioService.updateTwilioCredentials(this.twilioCredentialForm.value).subscribe((updatedData: any) => {
-      this.toasterService.showSuccessToater('Twilio Credentials updated.')
-      this.getTwilioCredentials();
+      if (updatedData.success) {
+        this.toasterService.showSuccessToater('Twilio Credentials updated.')
+        this.getTwilioCredentials();
+      } else {
+        this.toasterService.showErrorToater(updatedData.data)
+      }
+    }, (error: any) => {
+      this.toasterService.showErrorToater(error.statusText);
     })
   }
 

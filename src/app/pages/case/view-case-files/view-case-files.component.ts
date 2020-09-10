@@ -3,6 +3,7 @@ import { Location } from '@angular/common';
 import { FileUploader } from 'ng2-file-upload';
 import { CaseService } from 'app/services/case.service';
 import { ActivatedRoute } from '@angular/router';
+import { ToasterService } from 'app/services/toaster.service';
 const URL = 'https://evening-anchorage-3159.herokuapp.com/api/';
 
 @Component({
@@ -22,7 +23,7 @@ export class ViewCaseFilesComponent implements OnInit {
   }
 
   constructor(private activatedRoute: ActivatedRoute, private location: Location,
-    private caseService: CaseService) { }
+    private caseService: CaseService, private toasterService: ToasterService) { }
 
   ngOnInit(): void {
     this.onGetCase();
@@ -30,8 +31,14 @@ export class ViewCaseFilesComponent implements OnInit {
 
   onGetCase() {
     this.caseService.getCase(this.activatedRoute.snapshot.params['caseId']).subscribe((res: any) => {
-      this.uploadedCaseFiles = res.data;
-      // console.log(this.uploadedCaseFiles);
+      if (res.success) {
+        this.uploadedCaseFiles = res.data;
+        // console.log(this.uploadedCaseFiles);
+      } else {
+        this.toasterService.showErrorToater(res.data);
+      }
+    }, (error: any) => {
+      this.toasterService.showErrorToater(error.statusText);
     })
   }
 
@@ -52,16 +59,28 @@ export class ViewCaseFilesComponent implements OnInit {
     })
 
     this.caseService.uploadFile(formData).subscribe((res) => {
-      // this.loading = false;
-      this.onGetCase();
-      this.uploader1.queue = [];
-    });
+      if (res.success) {
+        // this.loading = false;
+        this.onGetCase();
+        this.uploader1.queue = [];
+      } else {
+        this.toasterService.showErrorToater(res.data);
+      }
+    }, (error: any) => {
+      this.toasterService.showErrorToater(error.statusText);
+    })
   }
 
   onDeleteCaseFile(fileId) {
     this.caseService.deleteFile(fileId).subscribe((res: any) => {
-      this.onGetCase();
-    });
+      if (res.success) {
+        this.onGetCase();
+      } else {
+        this.toasterService.showErrorToater(res.data);
+      }
+    }, (error: any) => {
+      this.toasterService.showErrorToater(error.statusText);
+    })
   }
 
   onDownloadCaseFile(fileId) {
@@ -70,7 +89,13 @@ export class ViewCaseFilesComponent implements OnInit {
     data.fileId = fileId;
 
     this.caseService.getDownloadLink(data).subscribe((res: any) => {
-      window.open(res.data, '_self ');
-    });
+      if (res.success) {
+        window.open(res.data, '_self ');
+      } else {
+        this.toasterService.showErrorToater(res.data);
+      }
+    }, (error: any) => {
+      this.toasterService.showErrorToater(error.statusText);
+    })
   }
 }
