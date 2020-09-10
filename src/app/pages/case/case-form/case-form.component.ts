@@ -61,16 +61,29 @@ export class CaseFormComponent implements OnInit, OnChanges {
   updateCase() {
     if (this.caseDetails) {
       this.caseService.updateCase(this.caseForm.value, this.caseDetails.caseId).subscribe((res: any) => {
-        this.toasterService.showSuccessToater('Case Updated Successfully.');
-        this.router.navigateByUrl('/case');
+        console.log(res)
+        if (res.success) {
+          this.toasterService.showSuccessToater('Case Updated Successfully.');
+          this.router.navigateByUrl('/case');
+        }
+        else {
+          this.toasterService.showErrorToater(res.data);
+        }
+      }, (error: any) => {
+        this.toasterService.showErrorToater(error.statusText);
       })
     }
     else {
       this.caseService.postCase(this.caseForm.value).subscribe((res: any) => {
+        console.log(res)
         if (res.success) {
           this.toasterService.showSuccessToater('Case Created Successfully.');
           this.router.navigateByUrl('/case');
+        } else {
+          this.toasterService.showErrorToater(res.data);
         }
+      }, (error: any) => {
+        this.toasterService.showErrorToater(error.statusText);
       })
     }
   }

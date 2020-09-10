@@ -33,11 +33,18 @@ export class ViewFacilitiesComponent implements OnInit {
 
   getOrgFacilities() {
     this.organisationService.getOrganisationFacilities().subscribe((facilities: any) => {
-      this.originalData = facilities.data.facilities;
-      this.dataSource = new MatTableDataSource(facilities.data.facilities);
-      this.dataSource.paginator = this.paginator;
-      this.dataSource.sort = this.sort;
-      this.getAllFacility();
+      if (facilities.success) {
+        this.originalData = facilities.data.facilities;
+        this.dataSource = new MatTableDataSource(facilities.data.facilities);
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
+        this.getAllFacility();
+      }
+      else {
+        this.toasterService.showErrorToater(facilities.data)
+      }
+    }, (error: any) => {
+      this.toasterService.showErrorToater(error.statusText);
     })
   }
 
@@ -52,10 +59,17 @@ export class ViewFacilitiesComponent implements OnInit {
 
   getAllFacility() {
     this.facilityService.getFacilities().subscribe((facilities: any) => {
-      let ids = this.originalData.map(({ facilityId }) => facilityId);
-      let includeList = facilities.data.filter(({ facilityId }) => !(ids.includes(facilityId)))
-      this.facilityList = includeList.filter((r) => r)
-    });
+      if (facilities.success) {
+        let ids = this.originalData.map(({ facilityId }) => facilityId);
+        let includeList = facilities.data.filter(({ facilityId }) => !(ids.includes(facilityId)))
+        this.facilityList = includeList.filter((r) => r)
+      }
+      else {
+        this.toasterService.showErrorToater(facilities.data)
+      }
+    }, (error: any) => {
+      this.toasterService.showErrorToater(error.statusText);
+    })
   }
 
   onNativeChange(event, facilityId) {
@@ -76,7 +90,11 @@ export class ViewFacilitiesComponent implements OnInit {
         this.getOrgFacilities();
         this.toasterService.showSuccessToater('Facility Added.')
         this.dialog.closeAll()
+      } else {
+        this.toasterService.showErrorToater(facilityAdded.data)
       }
+    }, (error: any) => {
+      this.toasterService.showErrorToater(error.statusText);
     })
   }
 
@@ -85,7 +103,11 @@ export class ViewFacilitiesComponent implements OnInit {
       if (facilityRemove.success) {
         this.getOrgFacilities();
         this.toasterService.showSuccessToater('Facility removed.')
+      } else {
+        this.toasterService.showErrorToater(facilityRemove.data)
       }
+    }, (error: any) => {
+      this.toasterService.showErrorToater(error.statusText);
     })
   }
 
