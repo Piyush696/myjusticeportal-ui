@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CaseService } from 'app/services/case.service';
+import { ToasterService } from 'app/services/toaster.service';
 
 @Component({
   selector: 'app-view-case',
@@ -12,7 +13,7 @@ export class ViewCaseComponent implements OnInit {
   caseDetails: any;
 
   constructor(private router: Router, private route: ActivatedRoute,
-    private caseService: CaseService) {
+    private caseService: CaseService, private toasterService: ToasterService) {
   }
 
   ngOnInit(): void {
@@ -21,7 +22,14 @@ export class ViewCaseComponent implements OnInit {
 
   getCase() {
     this.caseService.getCase(this.route.snapshot.params['caseId']).subscribe((result: any) => {
-      this.caseDetails = result.data;
+      if (result.success) {
+        this.caseDetails = result.data;
+      }
+      else {
+        this.toasterService.showErrorToater(result.data);
+      }
+    }, (error: any) => {
+      this.toasterService.showErrorToater(error.statusText);
     })
   }
 

@@ -25,19 +25,32 @@ export class PostageAppComponent implements OnInit {
 
   getPostageCredentials() {
     this.postageService.getCredentials().subscribe((credentials: any) => {
-      this.postageCredentialForm.get('apiUrl').setValue(credentials.data.apiUrl)
-      this.postageCredentialForm.get('apiKey').setValue(credentials.data.apiKey)
-      this.postageCredentialForm.get('project').setValue(credentials.data.project)
-      this.postageCredentialForm.get('template').setValue(credentials.data.template)
-      this.postageCredentialForm.disable();
-      this.isDisabled = true;
+      if (credentials.success) {
+        this.postageCredentialForm.get('apiUrl').setValue(credentials.data.apiUrl)
+        this.postageCredentialForm.get('apiKey').setValue(credentials.data.apiKey)
+        this.postageCredentialForm.get('project').setValue(credentials.data.project)
+        this.postageCredentialForm.get('template').setValue(credentials.data.template)
+        this.postageCredentialForm.disable();
+        this.isDisabled = true;
+      }
+      else {
+        this.toasterService.showErrorToater(credentials.data)
+      }
+    }, (error: any) => {
+      this.toasterService.showErrorToater(error.statusText);
     })
   }
 
   updateCendencialChanges() {
     this.postageService.updateCredentials(this.postageCredentialForm.value).subscribe((updatedData: any) => {
-      this.toasterService.showSuccessToater('Postage Credentials updated.')
-      this.getPostageCredentials();
+      if (updatedData.success) {
+        this.toasterService.showSuccessToater('Postage Credentials updated.')
+        this.getPostageCredentials();
+      } else {
+        this.toasterService.showErrorToater(updatedData.data)
+      }
+    }, (error: any) => {
+      this.toasterService.showErrorToater(error.statusText);
     })
   }
 
