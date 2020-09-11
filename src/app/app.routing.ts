@@ -19,7 +19,7 @@ import { AuthGuard } from './guards/auth.guard';
 
 export const AppRoutes: Routes = [
   {
-    path: '', canActivate: [AuthGuard], component: LayoutComponent,
+    path: 'mjp', component: LayoutComponent,
     children: [{
       path: '', loadChildren: './layouts/layout.module#LayoutModule'
     }]

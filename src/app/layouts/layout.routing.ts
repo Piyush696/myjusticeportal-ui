@@ -28,7 +28,7 @@ import { UserDashboardComponent } from 'app/pages/all-dashboards/user-dashboard/
 import { SuperadminDashboardComponent } from 'app/pages/all-registration/superadmin-dashboard/superadmin-dashboard.component';
 
 export const LayoutRoutes: Routes = [
-    { path: '', redirectTo: '/user', pathMatch: 'full' },
+    { path: '', redirectTo: 'user', pathMatch: 'full' },
     { path: 'user', loadChildren: '../routes/+user/user.module#UserModule' },
     { path: 'facility', loadChildren: '../routes/+facility/facility.module#FacilityModule' },
     { path: 'lawyer', loadChildren: '../routes/+lawyer/lawyer.module#LawyerModule' },
