@@ -38,6 +38,7 @@ import { SuperadminDashboardComponent } from 'app/pages/all-registration/superad
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { SharedMaterialModule } from 'app/shared-material/shared-material.module';
+import { HireLawyerComponent } from 'app/pages/hire-lawyer/hire-lawyer.component';
 
 @NgModule({
   imports: [
@@ -79,7 +80,8 @@ import { SharedMaterialModule } from 'app/shared-material/shared-material.module
     ParalegalDashboardComponent,
     FacilityDashboardComponent,
     DefenderDashboardComponent,
-    SuperadminDashboardComponent
+    SuperadminDashboardComponent,
+    HireLawyerComponent
   ],
   providers: [
     MatDatepickerModule,

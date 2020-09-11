@@ -26,6 +26,7 @@ import { DefenderDashboardComponent } from 'app/pages/all-dashboards/defender-da
 import { LawyerdashboardComponent } from 'app/pages/all-dashboards/lawyerdashboard/lawyerdashboard.component';
 import { UserDashboardComponent } from 'app/pages/all-dashboards/user-dashboard/user-dashboard.component';
 import { SuperadminDashboardComponent } from 'app/pages/all-registration/superadmin-dashboard/superadmin-dashboard.component';
+import { HireLawyerComponent } from 'app/pages/hire-lawyer/hire-lawyer.component';
 
 export const LayoutRoutes: Routes = [
     { path: 'dashboard', canActivate: [AuthGuard], component: DashboardComponent },
@@ -54,4 +55,5 @@ export const LayoutRoutes: Routes = [
     { path: 'app-setting', canActivate: [AuthGuard], component: AppSettingsComponent },
     { path: 'organization/users', canActivate: [AuthGuard], component: ViewUsersComponent },
     { path: 'organization/facilities', canActivate: [AuthGuard], component: ViewFacilitiesComponent },
+    { path: 'hire-lawyer', canActivate: [AuthGuard], component: HireLawyerComponent },
 ];
