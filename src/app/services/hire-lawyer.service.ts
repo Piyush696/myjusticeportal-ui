@@ -24,6 +24,10 @@ export class HireLawyerService {
   }
 
   getLawyers() {
-    return this.httpClient.get<object>(`${this.apiPath}/facility/users`, this.getHeaders());
+    return this.httpClient.get<object>(`${this.apiPath}/hirealawyer/users`, this.getHeaders());
+  }
+
+  getRequestedCases() {
+    return this.httpClient.get<object>(`${this.apiPath}/hirealawyer/requested-cases`, this.getHeaders());
   }
 }

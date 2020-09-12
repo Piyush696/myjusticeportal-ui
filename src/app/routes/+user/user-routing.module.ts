@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { UserDashboardComponent } from './user-dashboard/user-dashboard.component';
+import { MyAccountComponent } from '../+shared-components/my-account/my-account.component';
 import { CasesComponent } from './+cases/cases/cases.component';
 import { CreateCaseComponent } from './+cases/create-case/create-case.component';
 import { EditCaseComponent } from './+cases/edit-case/edit-case.component';
@@ -10,6 +11,7 @@ import { ViewCaseFilesComponent } from './+cases/view-case-files/view-case-files
 const routes: Routes = [
     { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
     { path: 'dashboard', component: UserDashboardComponent },
+    { path: 'my-account', component: MyAccountComponent },
     { path: 'case', component: CasesComponent },
     { path: 'case/create', component: CreateCaseComponent },
     { path: 'case/:caseId/edit', component: EditCaseComponent },
