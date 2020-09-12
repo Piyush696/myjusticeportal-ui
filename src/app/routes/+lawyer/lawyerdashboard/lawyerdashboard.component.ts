@@ -1,16 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 import { HireLawyerService } from '../../../services/hire-lawyer.service';
+import { ToasterService } from '../../../services/toaster.service';
 
 @Component({
   selector: 'app-lawyerdashboard',
   templateUrl: './lawyerdashboard.component.html',
-  styleUrls: ['./lawyerdashboard.component.css']
+  styleUrls: ['./lawyerdashboard.component.scss']
 })
 
 export class LawyerdashboardComponent implements OnInit {
   requestedCases: any;
 
-  constructor(private hireLawyerService: HireLawyerService) { }
+  constructor(private hireLawyerService: HireLawyerService, private toasterService: ToasterService) { }
 
   ngOnInit(): void {
     this.onGetRequestedCases();
@@ -23,5 +24,13 @@ export class LawyerdashboardComponent implements OnInit {
         console.log(this.requestedCases);
       }
     })
+  }
+
+  onApproveCase(caseId) {
+    console.log(caseId);
+  }
+
+  onRejectCase(caseId) {
+    console.log(caseId);
   }
 }

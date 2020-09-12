@@ -30,4 +30,12 @@ export class HireLawyerService {
   getRequestedCases() {
     return this.httpClient.get<object>(`${this.apiPath}/hirealawyer/requested-cases`, this.getHeaders());
   }
+
+  getRequestedCaseById(caseId) {
+    return this.httpClient.get<object>(`${this.apiPath}/hirealawyer/requested-cases/` + caseId, this.getHeaders());
+  }
+
+  getDownloadLink(data) {
+    return this.httpClient.post<any>(`${this.apiPath}/hirealawyer/fileDownloadLink`, data, this.getHeaders());
+  }
 }

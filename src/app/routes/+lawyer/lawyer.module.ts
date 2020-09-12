@@ -5,10 +5,12 @@ import { SharedMaterialModule } from 'app/shared-material/shared-material.module
 import { SharedComponentsModule } from '../+shared-components/shared-components.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LawyerdashboardComponent } from './lawyerdashboard/lawyerdashboard.component';
+import { ViewCaseDetailsComponent } from './view-case-details/view-case-details.component';
 
 @NgModule({
   declarations: [
-    LawyerdashboardComponent
+    LawyerdashboardComponent,
+    ViewCaseDetailsComponent
   ],
   imports: [
     CommonModule,

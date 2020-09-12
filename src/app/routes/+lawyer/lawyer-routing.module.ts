@@ -5,10 +5,12 @@ import { MyAccountComponent } from '../+shared-components/my-account/my-account.
 import { ManageOrganisationComponent } from '../+shared-components/+manage-organization/manage-organisation/manage-organisation.component';
 import { ViewUsersComponent } from '../+shared-components/+manage-organization/view-users/view-users.component';
 import { ViewFacilitiesComponent } from '../+shared-components/+manage-organization/view-facilities/view-facilities.component';
+import { ViewCaseDetailsComponent } from './view-case-details/view-case-details.component';
 
 const routes: Routes = [
     { path: '', redirectTo: 'lawyer-dashboard', pathMatch: 'full' },
     { path: 'lawyer-dashboard', component: LawyerdashboardComponent },
+    { path: 'lawyer-dashboard/:caseId', component: ViewCaseDetailsComponent },
     { path: 'my-account', component: MyAccountComponent },
     { path: 'manage-organization', component: ManageOrganisationComponent },
     { path: 'manage-organization/users', component: ViewUsersComponent },

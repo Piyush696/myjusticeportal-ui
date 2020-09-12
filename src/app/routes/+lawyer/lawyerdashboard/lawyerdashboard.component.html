@@ -1,1 +1,40 @@
-<p>lawyerdashboard works!</p>
+<div class="row">
+    <div class="col">
+        <h1 class="mb-0">Dashboard</h1>
+        <small>View and actions for requested cases.</small>
+    </div>
+</div>
+
+<div>
+    <mat-card class="outer-card mat-elevation-z10 mt-3">
+        <mat-label class="font-weight-bold">
+            Requested cases({{requestedCases?.length}}):
+        </mat-label>
+        <mat-card class="inner-card mt-2" *ngIf="!requestedCases?.length">
+            <span>No data available.</span>
+        </mat-card>
+        <mat-card class="d-flex flex-row justify-content-between align-items-center inner-card mt-2"
+            *ngFor="let case of requestedCases">
+            <div class="d-flex flex-column">
+                <span>{{case?.briefDescriptionOfChargeOrLegalMatter}}</span>
+                <span>Requested By:
+                    {{case?.inmate?.firstName}}
+                    <span *ngIf="case?.inmate?.middleName">&nbsp;{{case?.inmate?.middleName}}</span>
+                    &nbsp;{{case?.inmate?.lastName}}
+                </span>
+                <span>Files attached:{{case?.caseFile?.length}}</span>
+            </div>
+            <div>
+                <button [routerLink]="case?.caseId" class="button-purple mr-1" mat-mini-fab title="View Case Details">
+                    <mat-icon>remove_red_eye</mat-icon>
+                </button>
+                <button mat-mini-fab color="primary" title="Approve Case" (click)="onApproveCase(case?.caseId)">
+                    <mat-icon>done_outline</mat-icon>
+                </button>
+                <button class="ml-1" mat-mini-fab color="warn" title="Reject Case" (click)="onRejectCase(case?.caseId)">
+                    <mat-icon>delete</mat-icon>
+                </button>
+            </div>
+        </mat-card>
+    </mat-card>
+</div>
