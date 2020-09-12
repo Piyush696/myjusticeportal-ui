@@ -2,24 +2,33 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SuperadminRoutingModule } from './superadmin-routing.module';
 import { SharedMaterialModule } from 'app/shared-material/shared-material.module';
-import { DashboardComponent } from 'app/pages/dashboard/dashboard.component';
-import { UsersComponent } from 'app/pages/all-users/users/users.component';
-import { UserDetailsComponent } from 'app/pages/all-users/user-details/user-details.component';
-import { AppSettingsComponent } from 'app/pages/app-settings/app-settings.component';
-import { FacilityComponent } from 'app/pages/facility/facility.component';
+import { SuperadminDashboardComponent } from './superadmin-dashboard/superadmin-dashboard.component';
+import { UsersComponent } from './all-users/users/users.component';
+import { UserDetailsComponent } from './all-users/user-details/user-details.component';
+import { AppSettingsComponent } from './app-settings/app-settings.component';
+import { FacilityComponent } from './facility/facility.component';
+import { SharedComponentsModule } from '../+shared-components/shared-components.module';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { PostageAppComponent } from './app-settings/postage-app/postage-app.component';
+import { TwilioCredentialsComponent } from './app-settings/twilio-credentials/twilio-credentials.component';
 
 @NgModule({
   declarations: [
-    DashboardComponent,
+    SuperadminDashboardComponent,
     UsersComponent,
     UserDetailsComponent,
     AppSettingsComponent,
+    PostageAppComponent,
+    TwilioCredentialsComponent,
     FacilityComponent
   ],
   imports: [
     CommonModule,
     SuperadminRoutingModule,
-    SharedMaterialModule
+    SharedMaterialModule,
+    SharedComponentsModule,
+    FormsModule,
+    ReactiveFormsModule
   ]
 })
 

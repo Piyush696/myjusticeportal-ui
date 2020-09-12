@@ -2,16 +2,21 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { BondsmanRoutingModule } from './bondsman-routing.module';
 import { SharedMaterialModule } from 'app/shared-material/shared-material.module';
-import { DashboardComponent } from 'app/pages/dashboard/dashboard.component';
+import { SharedComponentsModule } from '../+shared-components/shared-components.module';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { BondsmanDashboardComponent } from './bondsman-dashboard/bondsman-dashboard.component';
 
 @NgModule({
   declarations: [
-    DashboardComponent
+    BondsmanDashboardComponent
   ],
   imports: [
     CommonModule,
     BondsmanRoutingModule,
-    SharedMaterialModule
+    SharedMaterialModule,
+    SharedComponentsModule,
+    FormsModule,
+    ReactiveFormsModule
   ]
 })
 

@@ -2,17 +2,19 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { UserRoutingModule } from './user-routing.module';
 import { SharedMaterialModule } from 'app/shared-material/shared-material.module';
-import { DashboardComponent } from 'app/pages/dashboard/dashboard.component';
-import { CasesComponent } from 'app/pages/case/cases/cases.component';
-import { ViewCaseComponent } from 'app/pages/case/view-case/view-case.component';
-import { CaseFormComponent } from 'app/pages/case/case-form/case-form.component';
-import { CreateCaseComponent } from 'app/pages/case/create-case/create-case.component';
-import { EditCaseComponent } from 'app/pages/case/edit-case/edit-case.component';
-import { ViewCaseFilesComponent } from 'app/pages/case/view-case-files/view-case-files.component';
+import { UserDashboardComponent } from './user-dashboard/user-dashboard.component';
+import { CasesComponent } from './+cases/cases/cases.component';
+import { ViewCaseComponent } from './+cases/view-case/view-case.component';
+import { CaseFormComponent } from './+cases/case-form/case-form.component';
+import { CreateCaseComponent } from './+cases/create-case/create-case.component';
+import { EditCaseComponent } from './+cases/edit-case/edit-case.component';
+import { ViewCaseFilesComponent } from './+cases/view-case-files/view-case-files.component';
+import { SharedComponentsModule } from '../+shared-components/shared-components.module';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
-    DashboardComponent,
+    UserDashboardComponent,
     CasesComponent,
     ViewCaseComponent,
     CaseFormComponent,
@@ -23,7 +25,10 @@ import { ViewCaseFilesComponent } from 'app/pages/case/view-case-files/view-case
   imports: [
     CommonModule,
     UserRoutingModule,
-    SharedMaterialModule
+    SharedMaterialModule,
+    SharedComponentsModule,
+    FormsModule,
+    ReactiveFormsModule
   ]
 })
 

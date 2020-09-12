@@ -1,11 +1,13 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { DashboardComponent } from 'app/pages/dashboard/dashboard.component';
+import { MyAccountComponent } from '../+shared-components/my-account/my-account.component';
+import { FacilityDashboardComponent } from './facility-dashboard/facility-dashboard.component';
 
 const routes: Routes = [
-    { path: '', component: DashboardComponent },
-    { path: 'dashboard', component: DashboardComponent },
-    { path: '**', component: DashboardComponent }
+    { path: '', redirectTo: 'facility-dashboard', pathMatch: 'full' },
+    { path: 'facility-dashboard', component: FacilityDashboardComponent },
+    { path: 'my-account', component: MyAccountComponent },
+    { path: '**', component: FacilityDashboardComponent }
 ];
 
 @NgModule({

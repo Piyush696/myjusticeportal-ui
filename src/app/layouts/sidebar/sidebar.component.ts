@@ -10,22 +10,25 @@ export interface RouteInfo {
 }
 
 export const ROUTES: RouteInfo[] = [
-    { path: '/user/case', title: 'My Cases', icon: 'nc-bank', class: '', roleIds: [1, 4] },
+    { path: 'user/case', title: 'My Cases', icon: 'nc-bank', class: '', roleIds: [1] },
     // { path: '/dashboard', title: 'Dashboard', icon: 'nc-bank', class: '', roleIds: [] },
     // { path: ':facilityCode/userdashboard', title: 'Dashboard', icon: 'nc-bank', class: '', roleIds: [1] },
-    { path: '/superadmin/users', title: 'All Users', icon: 'nc-bank', class: '', roleIds: [7] },
+    { path: 'superadmin/users', title: 'All Users', icon: 'nc-bank', class: '', roleIds: [7] },
     { path: '/my-dockets', title: 'My Dockets', icon: 'nc-bank', class: '', roleIds: [2, 5] },
-    { path: '/superadmin/app-setting', title: 'Application Settings', icon: 'nc-bank', class: '', roleIds: [7] },
+    { path: 'superadmin/app-setting', title: 'Application Settings', icon: 'nc-bank', class: '', roleIds: [7] },
     { path: '', title: 'Law Library', icon: 'nc-bank', class: '', roleIds: [1] },
-    { path: '/manage-organization', title: 'Manage Organization', icon: 'nc-bank', class: '', roleIds: [3, 4, 5, 6] },
+    { path: 'lawyer/manage-organization', title: 'Manage Organization', icon: 'nc-bank', class: '', roleIds: [3] },
+    { path: 'researcher/manage-organization', title: 'Manage Organization', icon: 'nc-bank', class: '', roleIds: [4] },
+    { path: 'public-defender/manage-organization', title: 'Manage Organization', icon: 'nc-bank', class: '', roleIds: [5] },
+    { path: 'bondsman/manage-organization', title: 'Manage Organization', icon: 'nc-bank', class: '', roleIds: [6] },
     { path: '/legal-research-Assistance', title: 'Legal Research Assistance', icon: 'nc-bank', class: '', roleIds: [4, 6] },
-    { path: '/legal-forms', title: 'Legal Forms', icon: 'nc-bank', class: '', roleIds: [1, 2] },
-    { path: '/ask-lawyer', title: 'Ask a lawyer', icon: 'nc-bank', class: '', roleIds: [3, 4, 7] },
-    { path: '/hire-lawyer', title: 'Hire a lawyer', icon: 'nc-bank', class: '', roleIds: [3, 6, 7] },
-    { path: '/message-lawyer', title: 'Message My lawyer', icon: 'nc-bank', class: '', roleIds: [1, 3, 5] },
-    { path: '/video-lawyer', title: 'Video My lawyer', icon: 'nc-bank', class: '', roleIds: [1, 3, 7] },
-    { path: '/bail-bonds', title: 'Bail Bonds', icon: 'nc-bank', class: '', roleIds: [1, 4, 6, 7] },
-    { path: '/superadmin/facility', title: 'Facility', icon: 'nc-bank', class: '', roleIds: [7] }
+    { path: '/legal-forms', title: 'Legal Forms', icon: 'nc-bank', class: '', roleIds: [2] },
+    { path: '/ask-lawyer', title: 'Ask a lawyer', icon: 'nc-bank', class: '', roleIds: [4] },
+    { path: '/hire-lawyer', title: 'Hire a lawyer', icon: 'nc-bank', class: '', roleIds: [1, 6] },
+    { path: '/message-lawyer', title: 'Message My lawyer', icon: 'nc-bank', class: '', roleIds: [5] },
+    { path: '/video-lawyer', title: 'Video My lawyer', icon: 'nc-bank', class: '', roleIds: [5] },
+    { path: '/bail-bonds', title: 'Bail Bonds', icon: 'nc-bank', class: '', roleIds: [4, 6] },
+    { path: 'superadmin/facility', title: 'Facility', icon: 'nc-bank', class: '', roleIds: [7] }
 ];
 
 @Component({

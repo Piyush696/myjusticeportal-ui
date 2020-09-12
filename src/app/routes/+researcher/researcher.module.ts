@@ -2,16 +2,21 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ResearcherRoutingModule } from './researcher-routing.module';
 import { SharedMaterialModule } from 'app/shared-material/shared-material.module';
-import { DashboardComponent } from 'app/pages/dashboard/dashboard.component';
+import { SharedComponentsModule } from '../+shared-components/shared-components.module';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ParalegalDashboardComponent } from './paralegal-dashboard/paralegal-dashboard.component';
 
 @NgModule({
   declarations: [
-    DashboardComponent
+    ParalegalDashboardComponent
   ],
   imports: [
     CommonModule,
     ResearcherRoutingModule,
-    SharedMaterialModule
+    SharedMaterialModule,
+    SharedComponentsModule,
+    FormsModule,
+    ReactiveFormsModule
   ]
 })
 
