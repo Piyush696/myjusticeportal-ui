@@ -23,7 +23,4 @@ export class HireLawyerComponent implements OnInit {
       this.organizationList = res.data;
     })
   }
-
-  onViewUserOrg() {
-  }
 }
