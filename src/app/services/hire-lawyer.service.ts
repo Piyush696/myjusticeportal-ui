@@ -20,10 +20,18 @@ export class HireLawyerService {
       headers: new HttpHeaders({
         'Authorization': `Bearer ${this.cacheService.getCache('token')}`
       })
-    }
+    };
   }
 
   getLawyers() {
-    return this.httpClient.get<object>(`${this.apiPath}/facility/users`, this.getHeaders());
+    return this.httpClient.get<any>(`${this.apiPath}/hirealawyer/users`, this.getHeaders());
+  }
+
+  getUsersLawyer(organizationId) {
+    return this.httpClient.get<any>(`${this.apiPath}/hirealawyer/users/${organizationId}`, this.getHeaders());
+  }
+
+  setCasesLawyer(caseIds) {
+    return this.httpClient.post<any>(`${this.apiPath}/hirealawyer`, { caseIds }, this.getHeaders());
   }
 }

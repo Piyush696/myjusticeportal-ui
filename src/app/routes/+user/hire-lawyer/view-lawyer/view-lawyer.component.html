@@ -1,6 +1,6 @@
 <div class="row d-flex justify-content-end">
     <div>
-        <button [routerLink]="'/hire-lawyer'" class="white-btn padding-btn btn-outline float-right py-1"
+        <button [routerLink]="'/mjp/user/hire-lawyer'" class="white-btn padding-btn btn-outline float-right py-1"
             mat-raised-button>
             Back To Hire a Lawyer
         </button>
@@ -83,23 +83,23 @@
 
 <ng-template #selectCases>
     <div>
-        <h2 class="font-weight-bold">Select Cases.</h2>
+        <h2 class="text-center font-weight-bold">Select Cases.</h2>
     </div>
     <div>
         <div class="row">
             <div class="col-12">
                 <ul class="pl-3">
-                    <li *ngFor="let case of caseList">
+                    <div *ngFor="let case of caseList">
                         <mat-checkbox color="primary" (change)="onNativeChange($event.checked,case?.caseId)">
                             {{case?.briefDescriptionOfChargeOrLegalMatter}}
                         </mat-checkbox>
-                    </li>
+                    </div>
                 </ul>
             </div>
         </div>
     </div>
     <div class="d-flex justify-content-between">
-        <button class="button-purple px-4 py-1" mat-raised-button>
+        <button class="button-purple px-4 py-1" mat-raised-button (click)="onselectCaseIds()">
             Submit
         </button>
         <button mat-raised-button class="button-purple px-4 py-1" (click)="closeModal()">

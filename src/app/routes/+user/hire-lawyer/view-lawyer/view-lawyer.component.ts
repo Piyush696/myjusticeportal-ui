@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
 import { CaseService } from 'app/services/case.service';
+import { HireLawyerService } from 'app/services/hire-lawyer.service';
+import { ToasterService } from 'app/services/toaster.service';
 
 @Component({
   selector: 'app-view-lawyer',
@@ -11,10 +13,12 @@ import { CaseService } from 'app/services/case.service';
 export class ViewLawyerComponent implements OnInit {
   organizationId: any;
   orgDetails: any;
-  cases = [];
+  caseIds = [];
   caseList: any;
 
-  constructor(public dialog: MatDialog, private caseService: CaseService, private activatedRoute: ActivatedRoute) {
+  constructor(private hireLawyerService: HireLawyerService, public dialog: MatDialog,
+    private caseService: CaseService, private activatedRoute: ActivatedRoute,
+    private toasterService: ToasterService) {
     this.organizationId = this.activatedRoute.snapshot.params.organizationId;
   }
 
@@ -23,8 +27,7 @@ export class ViewLawyerComponent implements OnInit {
   }
 
   getAllUsers() {
-    this.caseService.getuserLawyers(this.organizationId).subscribe((users: any) => {
-      console.log(users)
+    this.hireLawyerService.getUsersLawyer(this.organizationId).subscribe((users: any) => {
       this.orgDetails = users.data
     })
     this.getAllCases();
@@ -33,6 +36,7 @@ export class ViewLawyerComponent implements OnInit {
   openModal(templateRef) {
     let dialogRef = this.dialog.open(templateRef, {
       width: '500px',
+      height: '500px'
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -41,22 +45,37 @@ export class ViewLawyerComponent implements OnInit {
 
   onNativeChange(event, caseId) {
     if (event) {
-      this.cases.push(caseId);
+      this.caseIds.push({ caseId });
     } else {
-      this.cases.forEach((x, i, a) => {
+      this.caseIds.forEach((x, i, a) => {
         if (x == caseId) {
-          this.cases.splice(i, 1);
+          this.caseIds.splice(i, 1);
         }
       })
     }
-    console.log(this.cases)
   }
+
 
   getAllCases() {
     this.caseService.getCases().subscribe((cases: any) => {
-      console.log(cases)
       this.caseList = cases.data
     })
+  }
+
+  onselectCaseIds() {
+    this.hireLawyerService.setCasesLawyer(this.caseIds).subscribe((cases: any) => {
+      if (cases.success) {
+        this.dialog.closeAll();
+        this.toasterService.showSuccessToater('Cases Requested.')
+      }
+      else {
+        this.toasterService.showErrorToater('Cases not Requested.')
+      }
+    })
+  }
+
+  closeModal() {
+    this.dialog.closeAll();
   }
 
 }

@@ -52,12 +52,4 @@ export class CaseService {
   getDownloadLink(data) {
     return this.httpClient.post<any>(`${this.apiPath}/case-file/fileDownloadLink`, data, this.getHeaders());
   }
-
-  getLawyers() {
-    return this.httpClient.get<any>(`${this.apiPath}/case/users/hirealawyers`, this.getHeaders());
-  }
-
-  getuserLawyers(organizationId) {
-    return this.httpClient.get<any>(`${this.apiPath}/case/all-user/${organizationId}`, this.getHeaders());
-  }
 }

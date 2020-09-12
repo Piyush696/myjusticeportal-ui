@@ -19,14 +19,11 @@ export class HireLawyerComponent implements OnInit {
   }
 
   onGetLaywers() {
-    this.caseService.getLawyers().subscribe((res: any) => {
+    this.hireLawyerService.getLawyers().subscribe((res: any) => {
       this.lawyerList = res.data;
-      console.log(this.lawyerList);
     })
   }
 
-  onViewUserOrg(organizationId) {
-    let _url = '/hire-lawyer/' + organizationId
-    this.router.navigateByUrl(_url);
+  onViewUserOrg() {
   }
 }

@@ -4,7 +4,8 @@
         <small>Find lawyers and start working with then directly through My Justice Portal.</small>
     </div>
     <div class="col">
-        <button [routerLink]="'/case'" class="white-btn padding-btn btn-outline float-right py-1" mat-raised-button>
+        <button [routerLink]="'/mjp/user/case'" class="white-btn padding-btn btn-outline float-right py-1"
+            mat-raised-button>
             Back To My Cases
         </button>
     </div>
@@ -48,7 +49,8 @@
                             </span>
                         </div>
                     </div>
-                    <button class="button-purple" mat-raised-button (click)="onViewUserOrg(lawyer.organizationId)">
+                    <button [routerLink]="lawyer.organizationId" class="button-purple" mat-raised-button
+                        (click)="onViewUserOrg()">
                         View
                     </button>
                 </mat-card>
