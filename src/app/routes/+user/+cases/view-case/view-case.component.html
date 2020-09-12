@@ -1,0 +1,108 @@
+<div class="col-12">
+    <div class="d-flex justify-content-between">
+        <div>
+            <h1 class="line-height font-weight-bold">
+                Case: {{caseDetails?.briefDescriptionOfChargeOrLegalMatter}}
+            </h1>
+            <h4 class="line-height">Your case details at-a-glance</h4>
+        </div>
+        <div class="mr-3">
+            <button class="white-btn py-1 padding-btn" mat-raised-button (click)="backToCases()">
+                Back To My Cases
+            </button>
+        </div>
+    </div>
+
+    <div class="col-12 pl-0">
+        <div class="row">
+            <div class="col-7">
+                <mat-card class="view-card-color w-100 pt-4">
+                    <div class="d-flex justify-content-between pb-2">
+                        <div>
+                            <h3 class="line-height font-weight-bold m-0 pt-3">
+                                Case Information
+                            </h3>
+                        </div>
+                        <div>
+                            <button class="white-btn px-5 py-1" mat-raised-button [routerLink]="'edit'">
+                                Edit Cases
+                            </button>
+                        </div>
+                    </div>
+                    <div>
+                        <p class="text-default">First Name:
+                            <span class="font-weight-normal"> {{caseDetails?.user?.firstName}}</span>
+                        </p>
+                    </div>
+                    <div>
+                        <p class="text-default">Last Name:
+                            <span class="font-weight-normal"> {{caseDetails?.user?.lastName}}</span>
+                        </p>
+                    </div>
+                    <div>
+                        <p class="text-default">Charges or Legal Matter:
+                            <span class="font-weight-normal">Aggravated Assault</span>
+                        </p>
+                    </div>
+                    <div *ngIf="caseDetails?.countyOfArrest">
+                        <p class="text-default">County of Arrest:
+                            <span class="font-weight-normal"> {{caseDetails?.countyOfArrest}}</span>
+                        </p>
+                    </div>
+                    <div *ngIf="caseDetails?.attorneyName">
+                        <p class="text-default">Attorney Name:
+                            <span class="font-weight-normal"> {{caseDetails?.attorneyName}}</span>
+                        </p>
+                    </div>
+                    <div>
+                        <p class="text-default" div *ngIf="caseDetails?.nextCourtDate">
+                            Next Court Date:
+                            <span class="font-weight-normal"> {{caseDetails?.nextCourtDate |date: 'MM-dd-yyyy'}}</span>
+                        </p>
+                    </div>
+                    <div>
+                        <p class="text-default" *ngIf="caseDetails?.otherInformation">Other Information:
+                            <span class="font-weight-normal"> {{caseDetails?.otherInformation}}</span>
+                        </p>
+                    </div>
+                </mat-card>
+            </div>
+            <div class="col-5">
+                <div>
+                    <div class="d-flex justify-content-end">
+                        <button class="button-purple btn-group mt-1 py-1 btn-group" mat-raised-button
+                            [routerLink]="'files'">
+                            View My Case Files
+                        </button>
+                    </div>
+                    <div class="d-flex justify-content-end">
+                        <button class="button-purple  btn-group mt-1 py-1 btn-group" mat-raised-button>
+                            Legal Research Assistant
+                        </button>
+                    </div>
+                    <div class="d-flex justify-content-end">
+                        <button class="button-purple  btn-group mt-1 py-1 btn-group" mat-raised-button>
+                            Ask a Lawyer
+                        </button>
+                    </div>
+                    <div class="d-flex justify-content-end">
+                        <button class="button-purple btn-group mt-1 py-1 btn-group" mat-raised-button>
+                            Hire a Lawyer
+                        </button>
+                    </div>
+                    <div class="d-flex justify-content-end">
+                        <button class="button-purple btn-group mt-1 py-1 btn-group" mat-raised-button>
+                            Find a Bondsman
+                        </button>
+                    </div>
+                    <div class="d-flex justify-content-end pt-4 pr-4">
+                        <button class="white-btn py-1" mat-raised-button>
+                            <i class="nc-icon nc-single-02 pr-1"></i>
+                            <span>Message My Lawyer</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
