@@ -16,7 +16,6 @@ import { FooterModule } from './layouts/footer/footer.module';
 import { LayoutComponent } from './layouts/layout.component';
 import { NavbarModule } from './layouts/navbar/navbar.module';
 import { SidebarModule } from './layouts/sidebar/sidebar.module';
-// import { LoginComponent } from './routes/+shared-components/login/login.component';
 import { CacheService } from './services/cache.service';
 import { LoginService } from './services/login.service';
 import { RegistrationService } from './services/registration.service';
@@ -37,7 +36,6 @@ import { LawyerRegistrationComponent } from './pages/all-registration/lawyer-reg
 import { ParalegalRegistrationComponent } from './pages/all-registration/paralegal-registration/paralegal-registration.component';
 import { PublicDefenderRegistrationComponent } from './pages/all-registration/public-defender-registration/public-defender-registration.component';
 import { BondsmanRegistrationComponent } from './pages/all-registration/bondsman-registration/bondsman-registration.component';
-// import { AccountReviewComponent } from './routes/+shared-components/account-review/account-review.component';
 import { InvitedLawyerComponent } from './pages/all-registration/invited-lawyer/invited-lawyer.component';
 import { InvitedParalegalComponent } from './pages/all-registration/invited-paralegal/invited-paralegal.component';
 import { InvitedPublicDefenderComponent } from './pages/all-registration/invited-public-defender/invited-public-defender.component';
@@ -54,9 +52,6 @@ export function usersProviderFactory(provider: AuthLoadService) {
   declarations: [
     AppComponent,
     LayoutComponent,
-    // LoginComponent,
-    // RegistrationComponent,
-    // SecurityQuestionComponent,
     ForgetPasswordComponent,
     ResetPasswordComponent,
     UserRegistrationComponent,
@@ -70,7 +65,6 @@ export function usersProviderFactory(provider: AuthLoadService) {
     AdditionalInfoComponent,
     OrganisationComponent,
     SelectFacilityComponent,
-    // AccountReviewComponent,
     InvitedLawyerComponent,
     InvitedParalegalComponent,
     InvitedPublicDefenderComponent,

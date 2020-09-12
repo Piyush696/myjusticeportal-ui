@@ -63,6 +63,7 @@ export class ViewCaseFilesComponent implements OnInit {
         // this.loading = false;
         this.onGetCase();
         this.uploader1.queue = [];
+        this.toasterService.showSuccessToater('File uploaded successfully.');
       } else {
         this.toasterService.showErrorToater(res.data);
       }

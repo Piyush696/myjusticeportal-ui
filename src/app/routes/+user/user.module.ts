@@ -11,6 +11,7 @@ import { EditCaseComponent } from './+cases/edit-case/edit-case.component';
 import { ViewCaseFilesComponent } from './+cases/view-case-files/view-case-files.component';
 import { SharedComponentsModule } from '../+shared-components/shared-components.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FileUploadModule } from 'ng2-file-upload';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     SharedMaterialModule,
     SharedComponentsModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    FileUploadModule
   ]
 })
 
