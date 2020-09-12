@@ -73,7 +73,7 @@
                             </span>
                         </div> -->
             </div>
-            <button class="button-purple" mat-raised-button (click)="openModal(selectCases)">
+            <button class="button-purple" mat-raised-button (click)="openModal(selectCases,user.userId)">
                 Hire
             </button>
         </mat-card>
@@ -90,7 +90,7 @@
             <div class="col-12">
                 <ul class="pl-3">
                     <div *ngFor="let case of caseList">
-                        <mat-checkbox color="primary" (change)="onNativeChange($event.checked,case?.caseId)">
+                        <mat-checkbox color="primary" (change)="onSelectCaseIds($event.checked,case?.caseId)">
                             {{case?.briefDescriptionOfChargeOrLegalMatter}}
                         </mat-checkbox>
                     </div>
@@ -99,7 +99,7 @@
         </div>
     </div>
     <div class="d-flex justify-content-between">
-        <button class="button-purple px-4 py-1" mat-raised-button (click)="onselectCaseIds()">
+        <button class="button-purple px-4 py-1" mat-raised-button (click)="onSubmitCaseIds()">
             Submit
         </button>
         <button mat-raised-button class="button-purple px-4 py-1" (click)="closeModal()">

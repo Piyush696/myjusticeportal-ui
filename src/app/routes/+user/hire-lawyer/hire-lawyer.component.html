@@ -4,8 +4,7 @@
         <small>Find lawyers and start working with then directly through My Justice Portal.</small>
     </div>
     <div class="col">
-        <button [routerLink]="'/mjp/user/case'" class="white-btn padding-btn btn-outline float-right py-1"
-            mat-raised-button>
+        <button [routerLink]="'case'" class="white-btn padding-btn btn-outline float-right py-1" mat-raised-button>
             Back To My Cases
         </button>
     </div>
@@ -32,24 +31,24 @@
                     </mat-label>
                 </div>
                 <mat-card class="d-flex justify-content-between align-items-center inner-card mt-2"
-                    *ngFor="let lawyer of lawyerList">
+                    *ngFor="let org of organizationList">
                     <div>
                         <mat-label class="font-weight-bold">
-                            {{lawyer?.name}}
+                            {{org?.name}}
                         </mat-label>
                         <div class="pt-1">
                             <span>
-                                {{lawyer?.Address.city}}, {{lawyer?.Address.state}}
+                                {{org?.Address.city}}, {{org?.Address.state}}
                             </span>
                             <span class="pl-2">
-                                {{lawyer?.orgCode}}
+                                {{org?.orgCode}}
                             </span>
                             <span class="pl-2">
                                 Speciality: Assault
                             </span>
                         </div>
                     </div>
-                    <button [routerLink]="lawyer.organizationId" class="button-purple" mat-raised-button
+                    <button [routerLink]="org.organizationId" class="button-purple" mat-raised-button
                         (click)="onViewUserOrg()">
                         View
                     </button>

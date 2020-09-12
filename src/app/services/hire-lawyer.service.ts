@@ -23,15 +23,15 @@ export class HireLawyerService {
     };
   }
 
-  getLawyers() {
-    return this.httpClient.get<any>(`${this.apiPath}/hirealawyer/users`, this.getHeaders());
+  getOrganization() {
+    return this.httpClient.get<any>(`${this.apiPath}/hirealawyer/organizations`, this.getHeaders());
   }
 
   getUsersLawyer(organizationId) {
-    return this.httpClient.get<any>(`${this.apiPath}/hirealawyer/users/${organizationId}`, this.getHeaders());
+    return this.httpClient.get<any>(`${this.apiPath}/hirealawyer/organizations/${organizationId}`, this.getHeaders());
   }
 
-  setCasesLawyer(caseIds) {
-    return this.httpClient.post<any>(`${this.apiPath}/hirealawyer`, { caseIds }, this.getHeaders());
+  setCasesLawyer(selectedCases) {
+    return this.httpClient.post<any>(`${this.apiPath}/hirealawyer`, { selectedCases }, this.getHeaders());
   }
 }

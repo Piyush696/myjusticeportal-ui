@@ -10,17 +10,17 @@ import { HireLawyerService } from 'app/services/hire-lawyer.service';
 })
 
 export class HireLawyerComponent implements OnInit {
-  lawyerList: any;
+  organizationList: any;
 
-  constructor(private hireLawyerService: HireLawyerService, private caseService: CaseService, private router: Router) { }
+  constructor(private hireLawyerService: HireLawyerService, private caseService: CaseService) { }
 
   ngOnInit(): void {
     this.onGetLaywers();
   }
 
   onGetLaywers() {
-    this.hireLawyerService.getLawyers().subscribe((res: any) => {
-      this.lawyerList = res.data;
+    this.hireLawyerService.getOrganization().subscribe((res: any) => {
+      this.organizationList = res.data;
     })
   }
 

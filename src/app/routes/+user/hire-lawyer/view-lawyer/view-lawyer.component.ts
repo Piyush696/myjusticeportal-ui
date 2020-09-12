@@ -13,8 +13,9 @@ import { ToasterService } from 'app/services/toaster.service';
 export class ViewLawyerComponent implements OnInit {
   organizationId: any;
   orgDetails: any;
-  caseIds = [];
+  selectedCases = [];
   caseList: any;
+  userId: any;
 
   constructor(private hireLawyerService: HireLawyerService, public dialog: MatDialog,
     private caseService: CaseService, private activatedRoute: ActivatedRoute,
@@ -24,16 +25,17 @@ export class ViewLawyerComponent implements OnInit {
 
   ngOnInit(): void {
     this.getAllUsers();
+    this.getAllCases();
   }
 
   getAllUsers() {
     this.hireLawyerService.getUsersLawyer(this.organizationId).subscribe((users: any) => {
       this.orgDetails = users.data
     })
-    this.getAllCases();
   }
 
-  openModal(templateRef) {
+  openModal(templateRef, userId) {
+    this.userId = userId
     let dialogRef = this.dialog.open(templateRef, {
       width: '500px',
       height: '500px'
@@ -43,13 +45,16 @@ export class ViewLawyerComponent implements OnInit {
     });
   }
 
-  onNativeChange(event, caseId) {
+  onSelectCaseIds(event, caseId) {
     if (event) {
-      this.caseIds.push({ caseId });
+      this.selectedCases.push({ caseId });
+      this.selectedCases.map((x) => {
+        x['lawyerId'] = this.userId
+      })
     } else {
-      this.caseIds.forEach((x, i, a) => {
+      this.selectedCases.forEach((x, i, a) => {
         if (x == caseId) {
-          this.caseIds.splice(i, 1);
+          this.selectedCases.splice(i, 1);
         }
       })
     }
@@ -62,8 +67,8 @@ export class ViewLawyerComponent implements OnInit {
     })
   }
 
-  onselectCaseIds() {
-    this.hireLawyerService.setCasesLawyer(this.caseIds).subscribe((cases: any) => {
+  onSubmitCaseIds() {
+    this.hireLawyerService.setCasesLawyer(this.selectedCases).subscribe((cases: any) => {
       if (cases.success) {
         this.dialog.closeAll();
         this.toasterService.showSuccessToater('Cases Requested.')
