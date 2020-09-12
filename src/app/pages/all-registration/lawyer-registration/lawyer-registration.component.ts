@@ -92,7 +92,7 @@ export class LawyerRegistrationComponent implements OnInit {
         this.loginService.checkToken().then((data: any) => {
           if (data.success) {
             if (data.user.status) {
-              this.router.navigateByUrl('/lawyer-dashboard')
+              this.router.navigateByUrl('/mjp/lawyer/lawyer-dashboard');
             }
             else {
               this.router.navigateByUrl('/account-review')

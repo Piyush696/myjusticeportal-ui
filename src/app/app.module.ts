@@ -16,36 +16,33 @@ import { FooterModule } from './layouts/footer/footer.module';
 import { LayoutComponent } from './layouts/layout.component';
 import { NavbarModule } from './layouts/navbar/navbar.module';
 import { SidebarModule } from './layouts/sidebar/sidebar.module';
-import { LoginComponent } from './pages/all-login/login/login.component';
-import { RegistrationComponent } from './pages/registration/registration.component';
 import { CacheService } from './services/cache.service';
 import { LoginService } from './services/login.service';
 import { RegistrationService } from './services/registration.service';
 import { effects } from './store/effects';
 import { rootReducer } from './store/reducers';
-import { ForgetPasswordComponent } from './pages/forget-password/forget-password.component';
-import { SecurityQuestionComponent } from './pages/security-question/security-question.component';
+import { ForgetPasswordComponent } from './routes/+shared-components/forget-password/forget-password.component';
+import { ResetPasswordComponent } from './routes/+shared-components/reset-password/reset-password.component';
 import { EmailRegistrationComponent } from './shared/email-registration/email-registration.component';
 import { MobileRegistrationComponent } from './shared/mobile-registration/mobile-registration.component';
 import { AdditionalInfoComponent } from './shared/additional-info/additional-info.component';
-import { ResetPasswordComponent } from './pages/reset-password/reset-password.component';
 import { FacilityService } from './services/facility.service';
 import { AuthLoadService } from './services/auth/auth.service';
 import { OrganisationComponent } from './shared/organisation/organisation.component';
 import { SelectFacilityComponent } from './shared/select-facility/select-facility.component';
-import { UserLoginComponent } from './pages/all-login/user-login/user-login.component';
 import { UserRegistrationComponent } from './pages/all-registration/user-registration/user-registration.component';
 import { FacilityRegistrationComponent } from './pages/all-registration/facility-registration/facility-registration.component';
 import { LawyerRegistrationComponent } from './pages/all-registration/lawyer-registration/lawyer-registration.component';
 import { ParalegalRegistrationComponent } from './pages/all-registration/paralegal-registration/paralegal-registration.component';
 import { PublicDefenderRegistrationComponent } from './pages/all-registration/public-defender-registration/public-defender-registration.component';
 import { BondsmanRegistrationComponent } from './pages/all-registration/bondsman-registration/bondsman-registration.component';
-import { AccountReviewComponent } from './pages/account-review/account-review.component';
 import { InvitedLawyerComponent } from './pages/all-registration/invited-lawyer/invited-lawyer.component';
 import { InvitedParalegalComponent } from './pages/all-registration/invited-paralegal/invited-paralegal.component';
 import { InvitedPublicDefenderComponent } from './pages/all-registration/invited-public-defender/invited-public-defender.component';
 import { InvitedBondsmanComponent } from './pages/all-registration/invited-bondsman/invited-bondsman.component';
 import { SharedMaterialModule } from './shared-material/shared-material.module';
+import { CommonModule } from '@angular/common';
+import { SharedComponentsModule } from './routes/+shared-components/shared-components.module';
 
 export function usersProviderFactory(provider: AuthLoadService) {
   return () => provider.setUserbyAPI();
@@ -55,11 +52,8 @@ export function usersProviderFactory(provider: AuthLoadService) {
   declarations: [
     AppComponent,
     LayoutComponent,
-    LoginComponent,
-    RegistrationComponent,
-    SecurityQuestionComponent,
     ForgetPasswordComponent,
-    // ViewCaseFilesComponent,
+    ResetPasswordComponent,
     UserRegistrationComponent,
     FacilityRegistrationComponent,
     LawyerRegistrationComponent,
@@ -69,11 +63,8 @@ export function usersProviderFactory(provider: AuthLoadService) {
     EmailRegistrationComponent,
     MobileRegistrationComponent,
     AdditionalInfoComponent,
-    ResetPasswordComponent,
     OrganisationComponent,
     SelectFacilityComponent,
-    UserLoginComponent,
-    AccountReviewComponent,
     InvitedLawyerComponent,
     InvitedParalegalComponent,
     InvitedPublicDefenderComponent,
@@ -82,6 +73,7 @@ export function usersProviderFactory(provider: AuthLoadService) {
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
+    CommonModule,
     RouterModule.forRoot(AppRoutes),
     SidebarModule,
     NavbarModule,
@@ -95,7 +87,8 @@ export function usersProviderFactory(provider: AuthLoadService) {
     StoreDevtoolsModule.instrument({
       maxAge: 25
     }),
-    SharedMaterialModule
+    SharedMaterialModule,
+    SharedComponentsModule
   ],
   providers: [
     RegistrationService,

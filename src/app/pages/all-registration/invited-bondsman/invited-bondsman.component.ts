@@ -80,7 +80,7 @@ export class InvitedBondsmanComponent implements OnInit {
         this.loginService.checkToken().then((data: any) => {
           if (data.success) {
             if (data.user.status) {
-              this.router.navigateByUrl('/lawyer-dashboard');
+              this.router.navigateByUrl('/mjp/bondsman/bondsman-dashboard');
             }
             else {
               this.toasterService.showWarningToater("Account under review.");

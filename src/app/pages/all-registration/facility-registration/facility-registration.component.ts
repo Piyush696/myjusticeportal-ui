@@ -76,7 +76,7 @@ export class FacilityRegistrationComponent implements OnInit {
         this.loginService.checkToken().then((data: any) => {
           if (data.success) {
             if (data.user.status) {
-              this.router.navigateByUrl('/lawyer-dashboard')
+              this.router.navigateByUrl('/mjp/facility/facility-dashboard');
             }
             else {
               this.router.navigateByUrl('/account-review')

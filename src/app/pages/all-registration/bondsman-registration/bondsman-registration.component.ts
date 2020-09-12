@@ -73,7 +73,7 @@ export class BondsmanRegistrationComponent implements OnInit {
     this.bondsmanService.authenticateMobile(mobileData).subscribe((generateCode: any) => {
       if (generateCode.success) {
         this.authCodeField = true;
-        this.toasterService.showSuccessToater("Your code has been sent, please check your mobile device.")
+        this.toasterService.showSuccessToater("Your code has been sent, please check your mobile device.");
       }
     })
   }
@@ -90,20 +90,20 @@ export class BondsmanRegistrationComponent implements OnInit {
         this.loginService.checkToken().then((data: any) => {
           if (data.success) {
             if (data.user.status) {
-              this.router.navigateByUrl('/lawyer-dashboard')
+              this.router.navigateByUrl('/mjp/bondsman/bondsman-dashboard');
             }
             else {
-              this.router.navigateByUrl('/account-review')
-              this.toasterService.showWarningToater("Account under review.")
+              this.router.navigateByUrl('/account-review');
+              this.toasterService.showWarningToater("Account under review.");
             }
           }
           else {
-            this.toasterService.showWarningToater('Something Wrong.')
+            this.toasterService.showWarningToater('Something Wrong.');
           }
         })
       }
       else {
-        this.toasterService.showErrorToater(verified.data)
+        this.toasterService.showErrorToater(verified.data);
       }
     })
   }
