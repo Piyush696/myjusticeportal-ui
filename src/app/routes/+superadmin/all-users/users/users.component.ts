@@ -146,4 +146,27 @@ export class UsersComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.userInfoStoreSub.unsubscribe();
   }
+
+  closeModal() {
+    this.dialog.closeAll()
+  }
+
+  onCreateUser() {
+    const userData = {
+      "firstName": this.createUserForm.get('firstName').value,
+      "middleName": this.createUserForm.get('middleName').value,
+      "lastName": this.createUserForm.get('lastName').value,
+      "userName": this.createUserForm.get('userName').value,
+      "password": this.createUserForm.get('password').value
+    }
+    this.userService.addUser(userData).subscribe((user: any) => {
+      if (user.success) {
+        this.dialog.closeAll();
+        this.toasterService.showSuccessToater('User created.')
+      }
+      else {
+        this.toasterService.showErrorToater('User not created.')
+      }
+    })
+  }
 }
