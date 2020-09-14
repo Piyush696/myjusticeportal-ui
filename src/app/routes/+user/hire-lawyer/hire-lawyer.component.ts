@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { CaseService } from 'app/services/case.service';
 import { HireLawyerService } from 'app/services/hire-lawyer.service';
 
 @Component({
@@ -8,18 +10,17 @@ import { HireLawyerService } from 'app/services/hire-lawyer.service';
 })
 
 export class HireLawyerComponent implements OnInit {
-  lawyerList: any;
+  organizationList: any;
 
-  constructor(private hireLawyerService: HireLawyerService) { }
+  constructor(private hireLawyerService: HireLawyerService, private caseService: CaseService) { }
 
   ngOnInit(): void {
     this.onGetLaywers();
   }
 
   onGetLaywers() {
-    this.hireLawyerService.getLawyers().subscribe((res: any) => {
-      this.lawyerList = res.data;
-      console.log(this.lawyerList);
+    this.hireLawyerService.getOrganization().subscribe((res: any) => {
+      this.organizationList = res.data;
     })
   }
 }

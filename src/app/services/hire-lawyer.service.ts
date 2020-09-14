@@ -20,7 +20,7 @@ export class HireLawyerService {
       headers: new HttpHeaders({
         'Authorization': `Bearer ${this.cacheService.getCache('token')}`
       })
-    }
+    };
   }
 
   getLawyers() {
@@ -37,5 +37,17 @@ export class HireLawyerService {
 
   getDownloadLink(data) {
     return this.httpClient.post<any>(`${this.apiPath}/hirealawyer/fileDownloadLink`, data, this.getHeaders());
+  }
+
+  getOrganization() {
+    return this.httpClient.get<any>(`${this.apiPath}/hirealawyer/organizations`, this.getHeaders());
+  }
+
+  getUsersLawyer(organizationId) {
+    return this.httpClient.get<any>(`${this.apiPath}/hirealawyer/organizations/${organizationId}`, this.getHeaders());
+  }
+
+  setCasesLawyer(selectedCases) {
+    return this.httpClient.post<any>(`${this.apiPath}/hirealawyer`, { selectedCases }, this.getHeaders());
   }
 }
