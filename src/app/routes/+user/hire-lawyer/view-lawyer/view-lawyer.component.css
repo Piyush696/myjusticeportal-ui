@@ -23,3 +23,19 @@
   color: #333442;
   background: white;
 }
+
+.logo {
+  width: 225px;
+}
+
+.banner-style {
+  background: #333442;
+}
+
+.title-style {
+  font-size: 25px;
+  color: #aba6a6;
+  line-height: 25px;
+  letter-spacing: 1px;
+
+}
