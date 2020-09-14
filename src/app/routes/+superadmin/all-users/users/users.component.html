@@ -7,6 +7,13 @@
                     <input matInput (keyup)="search($event.target.value)">
                 </mat-form-field>
             </div>
+            <div class="col-4 offset-4">
+                <div class="d-flex justify-content-end">
+                    <button class="button-purple px-5 py-1" mat-raised-button (click)="openModal(addUsermodal)">
+                        Create superadmin user
+                    </button>
+                </div>
+            </div>
         </div>
         <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8 w-100">
             <ng-container matColumnDef="name">
@@ -57,3 +64,124 @@
         <mat-paginator [pageSizeOptions]="getPageSizeOptions()" showFirstLastButtons></mat-paginator>
     </mat-card>
 </div>
+
+<ng-template #addUsermodal>
+    <div class="d-flex justify-content-start">
+        <h3 class="font-weight-bold pl-2">Enter Facility Details</h3>
+    </div>
+    <div>
+        <div class="row" style="margin-right: -8px;">
+            <div class="row mb-1">
+                <div class="col-4 pl-2 mb-1">
+                    <mat-form-field appearance="fill" class="w-100">
+                        <mat-label>Legal First Name</mat-label>
+                        <input matInput placeholder="Legal First Name"
+                            [formControl]="createUserForm.controls['firstName']" required>
+                        <mat-error
+                            *ngIf="createUserForm.controls['firstName'].invalid && createUserForm.controls['firstName'].touched">
+                            <small class="font13" *ngIf="createUserForm.get('firstName').errors?.required">
+                                Legal First Name is Required
+                            </small>
+                            <small class="font13" *ngIf="createUserForm.get('firstName').errors?.maxlength">
+                                Legal First Name should be less than 50 chracters
+                            </small>
+                            <small class="font13" *ngIf="createUserForm.get('firstName').errors?.pattern">
+                                Legal First Name should contain only alphabets.
+                            </small>
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+                <div class="col-4 pl-0 mb-1">
+                    <mat-form-field appearance="fill" class="w-100">
+                        <mat-label>Legal Middle Name</mat-label>
+                        <input matInput placeholder="Legal Middle Name"
+                            [formControl]="createUserForm.controls['middleName']" required>
+                        <mat-error
+                            *ngIf="createUserForm.controls['middleName'].invalid && createUserForm.controls['middleName'].touched">
+                            <small class="font13" *ngIf="createUserForm.get('middleName').errors?.required">
+                                Legal Middle Name is Required
+                            </small>
+                            <small class="font13" *ngIf="createUserForm.get('middleName').errors?.maxlength">
+                                Legal Middle Name should be less than 50 chracters
+                            </small>
+                            <small class="font13" *ngIf="createUserForm.get('middleName').errors?.pattern">
+                                Legal Middle Name should contain only alphabets.
+                            </small>
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+                <div class="col-4 pl-0 pr-2 mb-1">
+                    <mat-form-field appearance="fill" class="w-100">
+                        <mat-label>Legal Last Name</mat-label>
+                        <input matInput placeholder="Legal Last Name"
+                            [formControl]="createUserForm.controls['lastName']" required>
+                        <mat-error
+                            *ngIf="createUserForm.controls['lastName'].invalid && createUserForm.controls['lastName'].touched">
+                            <small class="font13" *ngIf="createUserForm.get('lastName').errors?.required">
+                                Legal Last Name is Required
+                            </small>
+                            <small class="font13" *ngIf="createUserForm.get('lastName').errors?.maxlength">
+                                Legal Last Name should be less than 50 chracters
+                            </small>
+                            <small class="font13" *ngIf="createUserForm.get('lastName').errors?.pattern">
+                                Legal Last Name should contain only alphabets.
+                            </small>
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="col-12 p-2">
+                <mat-form-field appearance="fill" class="w-100">
+                    <mat-label>User Name</mat-label>
+                    <input matInput [formControl]="createUserForm.controls['userName']" autocomplete="new-userName"
+                        autocapitalize="off" required>
+                    <mat-error>
+                        <div
+                            *ngIf="createUserForm.controls['userName'].invalid && 
+                                            createUserForm.controls['userName'].touched && createUserForm.controls['userName'].hasError('taken')">
+                            <small class="font13">User Name already taken.</small>
+                        </div>
+                        <div *ngIf="createUserForm.controls['userName'].invalid && 
+                                            createUserForm.controls['userName'].touched">
+                            <small class="font13" *ngIf="createUserForm.get('userName').errors?.required">
+                                User Name is Required
+                            </small>
+                            <small class="font13" *ngIf="createUserForm.get('userName').errors?.maxlength">
+                                User Name Name should be less than 25 chracters
+                            </small>
+                            <small class="font13" *ngIf="createUserForm.get('userName').errors?.minlength">
+                                User Name Name should be at least 8 chracters
+                            </small>
+                        </div>
+                    </mat-error>
+                </mat-form-field>
+            </div>
+            <div class="col-12 p-0">
+                <mat-form-field appearance="fill" class="w-100 px-2">
+                    <mat-label>Password</mat-label>
+                    <input type="text" matInput [formControl]="createUserForm.controls['password']">
+                </mat-form-field>
+            </div>
+            <div class="col-12 p-0">
+                <mat-form-field appearance="fill" class="w-100 px-2">
+                    <mat-label>Password</mat-label>
+                    <input type="text" matInput [formControl]="createUserForm.controls['confirmPassword']">
+                </mat-form-field>
+            </div>
+        </div>
+    </div>
+    <div class="d-flex justify-content-end p-0" *ngIf="addHide">
+        <button mat-raised-button class="button-purple mt-2 px-4 py-1"
+            [disabled]="facilityForm.invalid || addressForm.invalid" (click)="AddFacility()">
+            Add Facility
+        </button>
+    </div>
+
+    <div class="d-flex justify-content-between p-0">
+        <button mat-raised-button color="primary" type="button" class="button-purple px-4 py-1"
+            (click)="onSaveChanges()">Save</button>
+
+        <button type="button" class="button-purple px-4 py-1" mat-raised-button color="primary"
+            (click)="closeModal()">Close</button>
+    </div>
+</ng-template>
