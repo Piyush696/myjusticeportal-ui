@@ -67,6 +67,6 @@ export class UserService {
   }
 
   addUser(userData) {
-    return this.httpClient.post<Object>(`${this.apiPath}/user/createUser/superadmin`, userData, this.getHeaders());
+    return this.httpClient.post<Object>(`${this.apiPath}/user/createUser`, userData, this.getHeaders());
   }
 }
