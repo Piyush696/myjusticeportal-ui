@@ -6,11 +6,13 @@ import { SharedComponentsModule } from '../+shared-components/shared-components.
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LawyerdashboardComponent } from './lawyerdashboard/lawyerdashboard.component';
 import { ViewCaseDetailsComponent } from './view-case-details/view-case-details.component';
+import { AcceptedCasesComponent } from './accepted-cases/accepted-cases.component';
 
 @NgModule({
   declarations: [
     LawyerdashboardComponent,
-    ViewCaseDetailsComponent
+    ViewCaseDetailsComponent,
+    AcceptedCasesComponent
   ],
   imports: [
     CommonModule,

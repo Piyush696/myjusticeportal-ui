@@ -18,19 +18,35 @@ export class LawyerdashboardComponent implements OnInit {
   }
 
   onGetRequestedCases() {
-    this.hireLawyerService.getRequestedCases().subscribe((res: any) => {
+    this.hireLawyerService.getRequestedCases({ status: 'Requested' }).subscribe((res: any) => {
       if (res.data) {
         this.requestedCases = res.data.lawyer;
-        console.log(this.requestedCases);
+        // console.log(this.requestedCases);
+      } else {
+        this.requestedCases = [];
       }
     })
   }
 
-  onApproveCase(caseId) {
-    console.log(caseId);
+  onApproveCase(lawyer_caseId) {
+    this.hireLawyerService.approveCase({ lawyer_caseId: lawyer_caseId }).subscribe((res: any) => {
+      if (res.success) {
+        this.onGetRequestedCases();
+        this.toasterService.showSuccessToater('Case approved successfully.');
+      } else {
+        this.toasterService.showErrorToater('Something went wrong, please try again.');
+      }
+    });
   }
 
-  onRejectCase(caseId) {
-    console.log(caseId);
+  onRejectCase(lawyer_caseId) {
+    this.hireLawyerService.rejectCase({ lawyer_caseId: lawyer_caseId }).subscribe((res: any) => {
+      if (res.success) {
+        this.onGetRequestedCases();
+        this.toasterService.showWarningToater('Case rejected successfully.');
+      } else {
+        this.toasterService.showErrorToater('Something went wrong, please try again.');
+      }
+    });
   }
 }

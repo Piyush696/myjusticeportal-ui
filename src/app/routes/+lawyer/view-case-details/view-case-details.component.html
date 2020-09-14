@@ -1,7 +1,12 @@
-<div class="row">
-    <div class="col">
+<div class="d-flex justify-content-between">
+    <div>
         <h1 class="mb-0">Case Details</h1>
-        <small>View requested case details.</small>
+        <h4>View requested case details.</h4>
+    </div>
+    <div>
+        <button mat-raised-button class="btn-background px-5 py-1" (click)="onGoBack()">
+            Go Back
+        </button>
     </div>
 </div>
 
@@ -10,56 +15,52 @@
         <mat-label class="font-weight-bold" *ngIf="!singleCaseData">
             <span>No data available, invalid url detected.</span>
         </mat-label>
-        <div class="d-flex flex-row justify-content-between align-items-center">
-            <div class="d-flex flex-column" *ngIf="singleCaseData">
-                <span>
-                    Description: {{singleCaseData?.briefDescriptionOfChargeOrLegalMatter}}
+        <div class="d-flex flex-column" *ngIf="singleCaseData">
+            <span>
+                Description: {{singleCaseData?.briefDescriptionOfChargeOrLegalMatter}}
+            </span>
+            <span>
+                Requested By: {{singleCaseData?.inmate?.firstName}}
+                <span *ngIf="singleCaseData?.inmate?.middleName">
+                    &nbsp;{{singleCaseData?.inmate?.middleName}}
                 </span>
-                <span>
-                    Requested By: {{singleCaseData?.inmate?.firstName}}
-                    <span *ngIf="singleCaseData?.inmate?.middleName">
-                        &nbsp;{{singleCaseData?.inmate?.middleName}}
-                    </span>
-                    &nbsp;{{singleCaseData?.inmate?.lastName}}
+                &nbsp;{{singleCaseData?.inmate?.lastName}}
+            </span>
+            <span>
+                Status:&nbsp;
+                <span class="font-weight-bold" [ngClass]="{'text-warning': singleCaseData?.lawyer_case?.status == 'Requested', 
+                        'text-success': singleCaseData?.lawyer_case?.status == 'Approved',
+                        'text-danger': singleCaseData?.lawyer_case?.status == 'Rejected'}">
+                    {{singleCaseData?.lawyer_case?.status}}
                 </span>
-                <span>
-                    Attorney Name: {{singleCaseData?.attorneyName}}
-                    <span *ngIf="!singleCaseData?.attorneyName">N/A</span>
-                </span>
-                <span>
-                    County Of Arrest: {{singleCaseData?.countyOfArrest}}
-                    <span *ngIf="!singleCaseData?.countyOfArrest">N/A</span>
-                </span>
-                <span>
-                    Other Information: {{singleCaseData?.otherInformation}}
-                    <span *ngIf="!singleCaseData?.otherInformation">N/A</span>
-                </span>
-                <span>
-                    Date Of Arrest: {{singleCaseData?.dateOfArrest | date:'longDate'}}
-                    <span *ngIf="!singleCaseData?.dateOfArrest">N/A</span>
-                </span>
-                <span>
-                    Next Court Date: {{singleCaseData?.nextCourtDate | date:'longDate'}}
-                    <span *ngIf="!singleCaseData?.nextCourtDate">N/A</span>
-                </span>
-                <span>
-                    Note: {{singleCaseData?.notes}}
-                    <span *ngIf="!singleCaseData?.notes">N/A</span>
-                </span>
-                <span>
-                    Files attached:{{singleCaseData?.caseFile?.length}}
-                </span>
-            </div>
-            <div>
-                <button mat-mini-fab color="primary" title="Approve Case"
-                    (click)="onApproveCase(singleCaseData?.caseId)">
-                    <mat-icon>done_outline</mat-icon>
-                </button>
-                <button class="ml-1" mat-mini-fab color="warn" title="Reject Case"
-                    (click)="onRejectCase(singleCaseData?.caseId)">
-                    <mat-icon>delete</mat-icon>
-                </button>
-            </div>
+            </span>
+            <span>
+                Attorney Name: {{singleCaseData?.attorneyName}}
+                <span *ngIf="!singleCaseData?.attorneyName">N/A</span>
+            </span>
+            <span>
+                County Of Arrest: {{singleCaseData?.countyOfArrest}}
+                <span *ngIf="!singleCaseData?.countyOfArrest">N/A</span>
+            </span>
+            <span>
+                Other Information: {{singleCaseData?.otherInformation}}
+                <span *ngIf="!singleCaseData?.otherInformation">N/A</span>
+            </span>
+            <span>
+                Date Of Arrest: {{singleCaseData?.dateOfArrest | date:'longDate'}}
+                <span *ngIf="!singleCaseData?.dateOfArrest">N/A</span>
+            </span>
+            <span>
+                Next Court Date: {{singleCaseData?.nextCourtDate | date:'longDate'}}
+                <span *ngIf="!singleCaseData?.nextCourtDate">N/A</span>
+            </span>
+            <span>
+                Note: {{singleCaseData?.notes}}
+                <span *ngIf="!singleCaseData?.notes">N/A</span>
+            </span>
+            <span class="pt-3">
+                Files attached:{{singleCaseData?.caseFile?.length}}
+            </span>
         </div>
         <mat-card class="d-flex justify-content-between align-items-center inner-card mt-2"
             *ngFor="let file of singleCaseData?.caseFile">
@@ -75,7 +76,7 @@
             </div>
             <div>
                 <button mat-mini-fab color="primary" title="Download" (click)="onDownloadCaseFile(file?.fileId)">
-                    <mat-icon>file_download</mat-icon>
+                    <mat-icon>cloud_download</mat-icon>
                 </button>
             </div>
         </mat-card>
