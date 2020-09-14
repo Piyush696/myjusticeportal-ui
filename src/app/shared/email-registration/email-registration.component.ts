@@ -43,7 +43,7 @@ export class EmailRegistrationComponent implements OnInit, OnChanges {
       middleName: ['', [Validators.required, Validators.maxLength(50), Validators.pattern('^[a-zA-Z ]*$')]],
       userName: ['', [Validators.required, Validators.maxLength(25), Validators.minLength(8), this.validateEmail.bind(this)], this.validateUserNotTaken.bind(this)],
       password: ['', [Validators.required, Validators.minLength(8), this.validatePassword.bind(this)]],
-      confirmPassword: ['', [Validators.required, Validators.minLength(6)]],
+      confirmPassword: ['', [Validators.required, Validators.minLength(8)]],
       termCondition: ['', [Validators.required]]
     }, { validator: this.checkIfMatchingPasswords('password', 'confirmPassword') });
   }

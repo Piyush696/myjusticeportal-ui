@@ -6,6 +6,9 @@ import { MatSort } from '@angular/material/sort';
 import { ToasterService } from 'app/services/toaster.service';
 import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs';
+import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { RegistrationService } from 'app/services/registration.service';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-users',
@@ -16,6 +19,7 @@ import { Subscription } from 'rxjs';
 export class UsersComponent implements OnInit, OnDestroy {
   userInfo: any;
   userInfoStoreSub: Subscription;
+  createUserForm: FormGroup;
 
   displayedColumns: string[] = ["name", "userName", "roles", "createdAt", "action"];
   dataSource = new MatTableDataSource();
@@ -23,12 +27,63 @@ export class UsersComponent implements OnInit, OnDestroy {
   @ViewChild(MatSort, { static: true }) sort: MatSort;
 
   constructor(private userService: UserService, private store: Store<any>,
-    private toasterService: ToasterService) { }
+    private toasterService: ToasterService, private registrationService: RegistrationService, private fb: FormBuilder, public dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.onGetAllUsers();
     this.onGetUserInfo();
+    this.createUserControl();
   }
+
+  createUserControl() {
+    this.createUserForm = this.fb.group({
+      firstName: ['', [Validators.required, Validators.maxLength(50), Validators.pattern('^[a-zA-Z ]*$')]],
+      middleName: ['', [Validators.required, Validators.maxLength(50), Validators.pattern('^[a-zA-Z ]*$')]],
+      lastName: ['', [Validators.required, Validators.maxLength(50), Validators.pattern('^[a-zA-Z ]*$')]],
+      userName: ['', [Validators.required, Validators.maxLength(25), Validators.minLength(8), this.validateUserNotTaken.bind(this)]],
+      password: ['', [Validators.required, Validators.minLength(8), this.validatePassword.bind(this)]],
+      confirmPassword: ['', [Validators.required, Validators.minLength(8)]],
+    }, { validator: this.checkIfMatchingPasswords('password', 'confirmPassword') })
+  }
+
+  checkIfMatchingPasswords(passwordKey: string, passwordConfirmationKey: string) {
+    return (group: FormGroup) => {
+      const passwordInput = group.controls[passwordKey];
+      const passwordConfirmationInput = group.controls[passwordConfirmationKey];
+      if (passwordInput.value !== passwordConfirmationInput.value) {
+        return passwordConfirmationInput.setErrors({ notSamePassword: true });
+      } else {
+        return passwordConfirmationInput.setErrors(null);
+      }
+    };
+  }
+
+  validatePassword(control: AbstractControl) {
+    const pattern = /(?=.*[A-Z])(?=.*[a-z])(?=.*\W).{8,18}$/;
+    if (!control.value.match(pattern) && control.value !== '') {
+      return { invalidPassword: true };
+    }
+    return null;
+  }
+
+  async validateUserNotTaken(control: AbstractControl) {
+    const result: any = await this.registrationService.checkUser({ userName: control.value }).toPromise();
+    if (result.taken) {
+      return { taken: true };
+    } else {
+      return null;
+    }
+  }
+
+  openModal(templateRef) {
+    let dialogRef = this.dialog.open(templateRef, {
+      width: '500px',
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+    });
+  }
+
 
   onGetUserInfo() {
     this.userInfoStoreSub = this.store.select(s => s.userInfo).subscribe(data => this.userInfo = data);
@@ -90,5 +145,28 @@ export class UsersComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.userInfoStoreSub.unsubscribe();
+  }
+
+  closeModal() {
+    this.dialog.closeAll()
+  }
+
+  onCreateUser() {
+    const userData = {
+      "firstName": this.createUserForm.get('firstName').value,
+      "middleName": this.createUserForm.get('middleName').value,
+      "lastName": this.createUserForm.get('lastName').value,
+      "userName": this.createUserForm.get('userName').value,
+      "password": this.createUserForm.get('password').value
+    }
+    this.userService.addUser(userData).subscribe((user: any) => {
+      if (user.success) {
+        this.dialog.closeAll();
+        this.toasterService.showSuccessToater('User created.')
+      }
+      else {
+        this.toasterService.showErrorToater('User not created.')
+      }
+    })
   }
 }
