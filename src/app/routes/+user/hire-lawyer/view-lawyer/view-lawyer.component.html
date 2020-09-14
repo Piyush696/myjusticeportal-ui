@@ -73,8 +73,9 @@
                             </span>
                         </div> -->
             </div>
-            <button class="button-purple" mat-raised-button (click)="openModal(selectCases,user.userId)">
-                Hire
+            <button [disabled]="buttonText == 'Hired'" class="button-purple" mat-raised-button
+                (click)="openModal(selectCases,user.userId)">
+                {{buttonText}}
             </button>
         </mat-card>
     </mat-card>
