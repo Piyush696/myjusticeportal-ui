@@ -33,7 +33,7 @@ export class FacilityComponent implements OnInit {
     this.facilityForm = this.fb.group({
       facilityCode: ['', [Validators.required], [this.validateUserNotTaken.bind(this)]],
       facilityName: ['', [Validators.required]],
-      libraryLink: ['', [Validators.required]]
+      libraryLink: ['']
     })
 
     this.addressForm = this.fb.group({

@@ -80,10 +80,24 @@
                 <button mat-mini-fab color="primary" title="Download" (click)="onDownloadCaseFile(file?.fileId)">
                     <mat-icon>file_download</mat-icon>
                 </button>
-                <button class="ml-1" mat-mini-fab color="warn" title="Delete" (click)="onDeleteCaseFile(file?.fileId)">
+                <button class="ml-1" mat-mini-fab color="warn" title="Delete"
+                    (click)="onOpenModal(confirmModal,file?.fileId)">
                     <mat-icon>delete</mat-icon>
                 </button>
             </div>
         </mat-card>
     </mat-card>
 </div>
+
+
+<ng-template #confirmModal>
+    <div class="d-flex justify-content-center p-2">
+        <mat-label class="font-weight-bold">Are you Sure You Want to Delete This ?.</mat-label>
+    </div>
+    <div class="d-flex justify-content-between p-2">
+        <button mat-raised-button color="primary" type="button" class="button-purple px-4 py-1"
+            (click)="onDeleteCaseFile()">Yes</button>
+        <button type="button" class="button-purple px-4 py-1" mat-raised-button color="primary"
+            (click)="closeModal()">No</button>
+    </div>
+</ng-template>

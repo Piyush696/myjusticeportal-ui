@@ -4,6 +4,7 @@ import { FileUploader } from 'ng2-file-upload';
 import { CaseService } from 'app/services/case.service';
 import { ActivatedRoute } from '@angular/router';
 import { ToasterService } from 'app/services/toaster.service';
+import { MatDialog } from '@angular/material/dialog';
 const URL = 'https://evening-anchorage-3159.herokuapp.com/api/';
 
 @Component({
@@ -17,13 +18,14 @@ export class ViewCaseFilesComponent implements OnInit {
 
   public uploader1: FileUploader = new FileUploader({ url: URL });
   public hasAnotherDropZoneOver: boolean = false;
+  fileId: any;
 
   public fileOverAnother(e: any): void {
     this.hasAnotherDropZoneOver = e;
   }
 
   constructor(private activatedRoute: ActivatedRoute, private location: Location,
-    private caseService: CaseService, private toasterService: ToasterService) { }
+    private caseService: CaseService, private toasterService: ToasterService, public dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.onGetCase();
@@ -72,9 +74,25 @@ export class ViewCaseFilesComponent implements OnInit {
     })
   }
 
-  onDeleteCaseFile(fileId) {
-    this.caseService.deleteFile(fileId).subscribe((res: any) => {
+  onOpenModal(templateRef, fileId) {
+    this.fileId = fileId
+    let dialogRef = this.dialog.open(templateRef, {
+      width: '500px',
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+    });
+  }
+
+  closeModal() {
+    this.dialog.closeAll();
+  }
+
+  onDeleteCaseFile() {
+    this.caseService.deleteFile(this.fileId).subscribe((res: any) => {
       if (res.success) {
+        this.dialog.closeAll();
+        this.toasterService.showSuccessToater('Case file deleted. ');
         this.onGetCase();
       } else {
         this.toasterService.showErrorToater(res.data);
