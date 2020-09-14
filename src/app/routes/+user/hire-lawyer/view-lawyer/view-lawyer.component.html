@@ -73,9 +73,9 @@
                             </span>
                         </div> -->
             </div>
-            <button [disabled]="buttonText == 'Hired'" class="button-purple" mat-raised-button
+            <button class="button-purple" mat-raised-button [disabled]="isHired"
                 (click)="openModal(selectCases,user.userId)">
-                {{buttonText}}
+                {{isHired?'Hired':'Hire'}}
             </button>
         </mat-card>
     </mat-card>

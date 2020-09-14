@@ -16,7 +16,7 @@ export class ViewLawyerComponent implements OnInit {
   selectedCases = [];
   caseList: any;
   userId: any;
-  buttonText: string = 'Hire'
+  isHired: boolean = false;
 
   constructor(private hireLawyerService: HireLawyerService, public dialog: MatDialog,
     private caseService: CaseService, private activatedRoute: ActivatedRoute,
@@ -72,7 +72,7 @@ export class ViewLawyerComponent implements OnInit {
     this.hireLawyerService.setCasesLawyer(this.selectedCases).subscribe((cases: any) => {
       if (cases.success) {
         this.dialog.closeAll();
-        this.buttonText = 'Hired'
+        this.isHired = true;
         this.toasterService.showSuccessToater('Cases Requested.')
       }
       else {
