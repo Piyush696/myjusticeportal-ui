@@ -58,4 +58,13 @@ export class UserRegistrationComponent implements OnInit {
       }
     })
   }
+
+  isPreviousClick(value) {
+    if (value) {
+      this.step = 2
+    }
+    else {
+      this.step = 3
+    }
+  }
 }

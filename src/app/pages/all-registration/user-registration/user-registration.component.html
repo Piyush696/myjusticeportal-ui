@@ -9,7 +9,7 @@
 
     <div class="row" *ngIf="step == 3" class="wpx-420">
         <app-security-question class="d-flex justify-content-center align-item-center"
-            (isRegisterEvent)="onUpdateRegisteredUser($event)">
+            (isRegisterEvent)="onUpdateRegisteredUser($event)" (isPreviousClick)="isPreviousClick($event)">
         </app-security-question>
     </div>
 </div>

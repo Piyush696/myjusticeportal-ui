@@ -37,7 +37,10 @@
             </mat-form-field>
 
             <div class="d-flex justify-content-between">
-                <button mat-button color="primary" [disabled]="!count" (click)="onClickBack()">
+                <button *ngIf="!count" mat-button color="primary" (click)="onPreviousClick()">
+                    BACK
+                </button>
+                <button *ngIf="count" mat-button color="primary" [disabled]="!count" (click)="onClickBack()">
                     BACK
                 </button>
                 <button *ngIf="count != 2" class="px-4 py-1" mat-raised-button color="primary"

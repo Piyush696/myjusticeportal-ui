@@ -159,13 +159,15 @@
                 {{message}}
             </p>
             <div class="row">
-                <mat-checkbox class="termCondition-margin" [formControl]="registrationForm.controls['termCondition']"
-                    (click)="openModal(mytemplate)" color="primary">
+                <mat-checkbox class="termCondition-margin ml-2"
+                    [formControl]="registrationForm.controls['termCondition']" (click)="openModal(mytemplate)"
+                    color="primary">
                     <a>
-                        <div>I accept the <span class="font-weight-bold">Terms and Conditions</span>
+                        <p class="p-0 m-0 line-height">I accept the <span class="font-weight-bold p-0 m-0">Terms and
+                                Conditions</span>
                             of using this website and agree
-                        </div>
-                        <div>to abide by all applicable laws and standards.</div>
+                        </p>
+                        <p class="p-0 m-0 line-height">to abide by all applicable laws and standards.</p>
                     </a>
                 </mat-checkbox>
             </div>
@@ -190,8 +192,9 @@
                     DISCLAIMER CONFIRMATION
                 </p>
                 <p>
-                    To confirm you have read and understood our terms and conditions,please read and scroll to the
-                    bottom to accept.
+                    To confirm you have read and understood our terms and conditions, please read and <span
+                        class="font-weight-bold">scroll to the
+                        bottom to accept.</span>
                 </p>
             </div>
             <div class="border border-dark">
