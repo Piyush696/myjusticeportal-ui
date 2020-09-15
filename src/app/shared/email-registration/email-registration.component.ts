@@ -1,10 +1,8 @@
 import { Component, EventEmitter, Input, OnInit, Output, OnChanges } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
-import { Store } from '@ngrx/store';
 import { RegistrationService } from 'app/services/registration.service';
 import { SecurityService } from 'app/services/security.service';
-import { LoadRole } from 'app/store/actions/role.actions';
 
 @Component({
   selector: 'app-email-registration',
@@ -21,22 +19,20 @@ export class EmailRegistrationComponent implements OnInit, OnChanges {
   @Input() totalSteps: any;
   @Input() message: string;
   @Input() email: string;
+  @Input() user;
   @Output() isNextEvent = new EventEmitter();
 
   constructor(public securityService: SecurityService, public dialog: MatDialog, private fb: FormBuilder,
-    private registrationService: RegistrationService, private store: Store<any>) {
-  }
-
-  ngOnChanges(): void {
-    if (this.email) {
-      this.ngOnInit();
-      this.registrationForm.get('userName').setValue(this.email);
-      this.registrationForm.get('userName').disable();
-    }
+    private registrationService: RegistrationService) {
   }
 
   ngOnInit(): void {
-    this.store.dispatch(new LoadRole());
+    if (!this.user) {
+      this.createFormControl();
+    }
+  }
+
+  createFormControl() {
     this.registrationForm = this.fb.group({
       firstName: ['', [Validators.required, Validators.maxLength(50), Validators.pattern('^[a-zA-Z ]*$')]],
       lastName: ['', [Validators.required, Validators.maxLength(50), Validators.pattern('^[a-zA-Z ]*$')]],
@@ -46,6 +42,26 @@ export class EmailRegistrationComponent implements OnInit, OnChanges {
       confirmPassword: ['', [Validators.required, Validators.minLength(8)]],
       termCondition: ['', [Validators.required]]
     }, { validator: this.checkIfMatchingPasswords('password', 'confirmPassword') });
+  }
+
+  ngOnChanges(): void {
+    if (this.email || this.user) {
+      this.createFormControl()
+    }
+    if (this.email) {
+      this.registrationForm.get('userName').setValue(this.email);
+      this.registrationForm.get('userName').disable();
+    }
+    if (this.user) {
+      this.registrationForm.get('firstName').setValue(this.user.firstName)
+      this.registrationForm.get('lastName').setValue(this.user.lastName)
+      this.registrationForm.get('middleName').setValue(this.user?.middleName)
+      this.registrationForm.get('userName').setValue(this.user?.userName)
+      this.registrationForm.get('password').setValue(this.user?.password)
+      this.registrationForm.get('confirmPassword').setValue(this.user?.password)
+      this.registrationForm.get('termCondition').setValue(true);
+      this.isNextDisabled = false;
+    }
   }
 
   validateEmail(control: AbstractControl) {
@@ -59,11 +75,13 @@ export class EmailRegistrationComponent implements OnInit, OnChanges {
   }
 
   validatePassword(control: AbstractControl) {
-    const pattern = /(?=.*[A-Z])(?=.*[a-z])(?=.*\W).{8,18}$/;
-    if (!control.value.match(pattern) && control.value !== '') {
-      return { invalidPassword: true };
+    if (!this.user) {
+      const pattern = /(?=.*[A-Z])(?=.*[a-z])(?=.*\W).{8,18}$/;
+      if (!control.value.match(pattern) && control.value !== '') {
+        return { invalidPassword: true };
+      }
+      return null;
     }
-    return null;
   }
 
   async validateUserNotTaken(control: AbstractControl) {

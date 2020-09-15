@@ -133,15 +133,16 @@
             <div class="col-12 p-2">
                 <mat-form-field appearance="fill" class="w-100">
                     <mat-label>User Name</mat-label>
-                    <input matInput [formControl]="createUserForm.controls['userName']" required>
+                    <input type="text" matInput [formControl]="createUserForm.controls['userName']" required>
                     <mat-error>
                         <div
                             *ngIf="createUserForm.controls['userName'].invalid && 
                                                 createUserForm.controls['userName'].touched && createUserForm.controls['userName'].hasError('taken')">
                             <small class="font13">User Name already taken.</small>
                         </div>
-                        <div *ngIf="createUserForm.controls['userName'].invalid && 
-                                                createUserForm.controls['userName'].touched">
+                        <div
+                            *ngIf="createUserForm.controls['userName'].invalid && 
+                                                createUserForm.controls['userName'].touched && !createUserForm.controls['userName'].hasError('taken')">
                             <small class="font13" *ngIf="createUserForm.get('userName').errors?.required">
                                 User Name is Required
                             </small>
@@ -155,16 +156,42 @@
                     </mat-error>
                 </mat-form-field>
             </div>
-            <div class="col-12 p-0">
+            <div class="col-12 p-0 mt-3">
                 <mat-form-field appearance="fill" class="w-100 px-2">
                     <mat-label>Password</mat-label>
                     <input type="password" matInput [formControl]="createUserForm.controls['password']">
+                    <mat-error>
+                        <div *ngIf="createUserForm.get('password').invalid && createUserForm.get('password').touched">
+                            <small class="font13" *ngIf="createUserForm.get('password').errors?.minlength">
+                                password must be at least 8 Characters.
+                            </small>
+                            <small class="font13" *ngIf="createUserForm.get('password').errors?.required ">
+                                Password required.
+                            </small>
+                        </div>
+                        <div
+                            *ngIf="createUserForm.controls['password'].invalid && createUserForm.controls['password'].touched  &&createUserForm.controls['password'].hasError('invalidPassword')">
+                            <small class="font13">
+                                Password should contain at least 1 capital, at least 1 lowercase
+                                and at least 1 special character.
+                            </small>
+                        </div>
+                    </mat-error>
                 </mat-form-field>
             </div>
-            <div class="col-12 p-0">
+            <div class="col-12 p-0 mt-3">
                 <mat-form-field appearance="fill" class="w-100 px-2">
                     <mat-label>Confirm Password</mat-label>
                     <input type="password" matInput [formControl]="createUserForm.controls['confirmPassword']">
+                    <mat-error>
+                        <div
+                            *ngIf="createUserForm.controls['confirmPassword'].invalid &&  createUserForm.controls['confirmPassword'].touched &&
+                                                   createUserForm.controls['confirmPassword'].hasError('notSamePassword')">
+                            <small class="font13">
+                                Password does not match
+                            </small>
+                        </div>
+                    </mat-error>
                 </mat-form-field>
             </div>
         </div>

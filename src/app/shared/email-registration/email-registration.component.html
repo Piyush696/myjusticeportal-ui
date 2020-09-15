@@ -9,7 +9,7 @@
                 <div class="col-4 pl-2 mb-1">
                     <mat-form-field appearance="fill" class="w-100">
                         <mat-label>Legal First Name</mat-label>
-                        <input matInput placeholder="Legal First Name"
+                        <input type="text" matInput placeholder="Legal First Name"
                             [formControl]="registrationForm.controls['firstName']" required>
                         <mat-error
                             *ngIf="registrationForm.controls['firstName'].invalid && registrationForm.controls['firstName'].touched">
@@ -28,7 +28,7 @@
                 <div class="col-4 pl-0 mb-1">
                     <mat-form-field appearance="fill" class="w-100">
                         <mat-label>Legal Middle Name</mat-label>
-                        <input matInput placeholder="Legal Middle Name"
+                        <input type="text" matInput placeholder="Legal Middle Name"
                             [formControl]="registrationForm.controls['middleName']" required>
                         <mat-error
                             *ngIf="registrationForm.controls['middleName'].invalid && registrationForm.controls['middleName'].touched">
@@ -47,7 +47,7 @@
                 <div class="col-4 pl-0 pr-2 mb-1">
                     <mat-form-field appearance="fill" class="w-100">
                         <mat-label>Legal Last Name</mat-label>
-                        <input matInput placeholder="Legal Last Name"
+                        <input type="text" matInput placeholder="Legal Last Name"
                             [formControl]="registrationForm.controls['lastName']" required>
                         <mat-error
                             *ngIf="registrationForm.controls['lastName'].invalid && registrationForm.controls['lastName'].touched">
@@ -69,7 +69,7 @@
                 <div *ngIf="roleId == 1" class="col px-2">
                     <mat-form-field appearance="fill" class="w-100">
                         <mat-label>User Name</mat-label>
-                        <input matInput [formControl]="registrationForm.controls['userName']"
+                        <input type="text" matInput [formControl]="registrationForm.controls['userName']"
                             autocomplete="new-userName" autocapitalize="off" required>
                         <mat-error>
                             <div
@@ -83,10 +83,10 @@
                                     User Name is Required
                                 </small>
                                 <small class="font13" *ngIf="registrationForm.get('userName').errors?.maxlength">
-                                    User Name Name should be less than 25 chracters
+                                    User Name should be less than 25 chracters
                                 </small>
                                 <small class="font13" *ngIf="registrationForm.get('userName').errors?.minlength">
-                                    User Name Name should be at least 8 chracters
+                                    User Name should be at least 8 chracters
                                 </small>
                             </div>
                         </mat-error>
@@ -159,13 +159,15 @@
                 {{message}}
             </p>
             <div class="row">
-                <mat-checkbox class="termCondition-margin" [formControl]="registrationForm.controls['termCondition']"
-                    (click)="openModal(mytemplate)" color="primary">
+                <mat-checkbox class="termCondition-margin ml-2"
+                    [formControl]="registrationForm.controls['termCondition']" (click)="openModal(mytemplate)"
+                    color="primary">
                     <a>
-                        <div>I accept the <span class="font-weight-bold">Terms and Conditions</span>
+                        <p class="p-0 m-0 line-height">I accept the <span class="font-weight-bold p-0 m-0">Terms and
+                                Conditions</span>
                             of using this website and agree
-                        </div>
-                        <div>to abide by all applicable laws and standards.</div>
+                        </p>
+                        <p class="p-0 m-0 line-height">to abide by all applicable laws and standards.</p>
                     </a>
                 </mat-checkbox>
             </div>
@@ -190,8 +192,9 @@
                     DISCLAIMER CONFIRMATION
                 </p>
                 <p>
-                    To confirm you have read and understood our terms and conditions,please read and scroll to the
-                    bottom to accept.
+                    To confirm you have read and understood our terms and conditions, please read and <span
+                        class="font-weight-bold">scroll to the
+                        bottom to accept.</span>
                 </p>
             </div>
             <div class="border border-dark">
