@@ -19,6 +19,7 @@ export class SecurityQuestionComponent implements OnInit {
   securityQuestionAnswered = [];
 
   @Output() isRegisterEvent = new EventEmitter();
+  @Output() isPreviousClick = new EventEmitter();
 
   constructor(private fb: FormBuilder, public securityService: SecurityService) { }
 
@@ -75,5 +76,9 @@ export class SecurityQuestionComponent implements OnInit {
   onClickRegister() {
     this.setAnswers();
     this.isRegisterEvent.emit(this.securityQuestionAnswered);
+  }
+
+  onPreviousClick() {
+    this.isPreviousClick.emit(true)
   }
 }

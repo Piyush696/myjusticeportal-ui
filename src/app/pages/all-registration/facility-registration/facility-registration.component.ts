@@ -34,11 +34,9 @@ export class FacilityRegistrationComponent implements OnInit {
   }
 
   onNextClick(facilityDetails) {
-    console.log(facilityDetails)
     this.userName = facilityDetails.userName
     this.facililityRegistrationData.user = facilityDetails;
     this.facilityService.onRegistration(this.facililityRegistrationData).subscribe((register: any) => {
-      console.log(register)
       if (register.success) {
         this.step = 2;
       } else {
@@ -53,7 +51,6 @@ export class FacilityRegistrationComponent implements OnInit {
       "countryCode": mobileDetails.countryCode,
       "userName": this.userName
     }
-    console.log(mobileData)
     this.facilityService.authenticateMobile(mobileData).subscribe((generateCode: any) => {
       if (generateCode.success) {
         this.authCodeField = true;
@@ -67,8 +64,6 @@ export class FacilityRegistrationComponent implements OnInit {
       "otp": authcode,
       "userName": this.userName
     }
-    console.log(authData)
-    console.log(this.facililityRegistrationData)
     this.facilityService.verifySms(authData).subscribe((verified: any) => {
       if (verified.success) {
         this.authCodeField = false;
