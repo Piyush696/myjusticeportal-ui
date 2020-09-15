@@ -23,6 +23,30 @@ export class HireLawyerService {
     };
   }
 
+  getLawyers() {
+    return this.httpClient.get<object>(`${this.apiPath}/hirealawyer/users`, this.getHeaders());
+  }
+
+  getRequestedCases(status) {
+    return this.httpClient.post<object>(`${this.apiPath}/hirealawyer/requested-cases`, status, this.getHeaders());
+  }
+
+  getRequestedCaseById(caseId) {
+    return this.httpClient.get<object>(`${this.apiPath}/hirealawyer/requested-case/` + caseId, this.getHeaders());
+  }
+
+  approveCase(lawyer_caseId) {
+    return this.httpClient.post<any>(`${this.apiPath}/hirealawyer/approve-case`, lawyer_caseId, this.getHeaders());
+  }
+
+  rejectCase(lawyer_caseId) {
+    return this.httpClient.post<any>(`${this.apiPath}/hirealawyer/reject-case`, lawyer_caseId, this.getHeaders());
+  }
+
+  getDownloadLink(data) {
+    return this.httpClient.post<any>(`${this.apiPath}/hirealawyer/fileDownloadLink`, data, this.getHeaders());
+  }
+
   getOrganization() {
     return this.httpClient.get<any>(`${this.apiPath}/hirealawyer/organizations`, this.getHeaders());
   }

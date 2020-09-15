@@ -1,7 +1,13 @@
 <div class="d-flex justify-content-between">
     <div>
-        <h1 class="mb-0">Dashboard</h1>
-        <h4>View and actions for requested cases.</h4>
+        <h1 class="mb-0">View Accepted Cases:</h1>
+        <h4>View accepted/rejected cases.</h4>
+    </div>
+    <div class="mat-card align-self-center pb-1">
+        <mat-checkbox class="check-style" color="primary" title="View Rejected Cases"
+            (change)="onViewRejectedCases($event.checked)">
+            View Rejected
+        </mat-checkbox>
     </div>
 </div>
 
@@ -26,8 +32,7 @@
                 </span>
                 <span>
                     Status:&nbsp;
-                    <span class="font-weight-bold" [ngClass]="{'text-warning': case?.lawyer_case?.status == 'Requested', 
-                        'text-success': case?.lawyer_case?.status == 'Approved',
+                    <span class="font-weight-bold" [ngClass]="{'text-success': case?.lawyer_case?.status == 'Approved',
                         'text-danger': case?.lawyer_case?.status == 'Rejected'}">
                         {{case?.lawyer_case?.status}}
                     </span>
@@ -37,13 +42,9 @@
                 </span>
             </div>
             <div>
-                <button mat-mini-fab color="primary" title="Approve Case"
-                    (click)="onApproveCase(case?.lawyer_case?.lawyer_caseId)">
-                    <mat-icon>done_outline</mat-icon>
-                </button>
-                <button class="ml-1" mat-mini-fab color="warn" title="Reject Case"
-                    (click)="onRejectCase(case?.lawyer_case?.lawyer_caseId)">
-                    <mat-icon>clear</mat-icon>
+                <button *ngIf="case?.lawyer_case?.status == 'Approved'" [routerLink]="case?.caseId"
+                    class="button-purple mr-1" mat-mini-fab title="View Case Details">
+                    <mat-icon>remove_red_eye</mat-icon>
                 </button>
             </div>
         </mat-card>
