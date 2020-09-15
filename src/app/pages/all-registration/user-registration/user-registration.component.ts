@@ -42,7 +42,9 @@ export class UserRegistrationComponent implements OnInit {
   onUpdateRegisteredUser(userSecurityQuestionData) {
     this.userRegData['securityQuestionData'] = userSecurityQuestionData;
     this.userRegData['facilityCode'] = this.facilityCode;
+    console.log(this.userRegData);
     this.userRegistrationService.userRegistration(this.userRegData).subscribe((user: any) => {
+      console.log(user);
       if (user.token) {
         this.cacheService.setCache('token', user.token);
         this.loginService.checkToken().then((data: any) => {
