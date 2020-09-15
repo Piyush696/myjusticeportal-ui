@@ -24,8 +24,20 @@ export class CaseFormComponent implements OnInit, OnChanges {
   }
 
   ngOnInit(): void {
-    this.store.select(s => s.userInfo).subscribe(user => this.userData = user);
+    this.createFormControl();
+    this.getUserFromStore();
+    console.log(this.caseDetails)
+  }
 
+  getUserFromStore() {
+    this.store.select(s => s.userInfo).subscribe(user => this.userData = user);
+    this.caseForm.get('firstName').setValue(this.userData.firstName);
+    this.caseForm.get('lastName').setValue(this.userData.lastName);
+    this.caseForm.get('firstName').disable();
+    this.caseForm.get('lastName').disable();
+  }
+
+  createFormControl() {
     this.caseForm = this.fb.group({
       firstName: ['', [Validators.required]],
       lastName: ['', [Validators.required]],
@@ -36,19 +48,16 @@ export class CaseFormComponent implements OnInit, OnChanges {
       nextCourtDate: [null],
       otherInformation: ['']
     });
-
-    this.caseForm.get('firstName').setValue(this.userData.firstName);
-    this.caseForm.get('lastName').setValue(this.userData.lastName);
-    this.caseForm.get('firstName').disable();
-    this.caseForm.get('lastName').disable();
   }
 
   ngOnChanges() {
     if (this.caseDetails) {
+      this.createFormControl();
+      this.getUserFromStore();
       this.buttonText = 'Update Case';
       this.headerText = 'Edit a Case';
-      this.caseForm.get('firstName').setValue(this.caseDetails.user.firstName);
-      this.caseForm.get('lastName').setValue(this.caseDetails.user.lastName);
+      this.caseForm.get('firstName').setValue(this.caseDetails.inmate.firstName);
+      this.caseForm.get('lastName').setValue(this.caseDetails.inmate.lastName);
       this.caseForm.get('countyOfArrest').setValue(this.caseDetails.countyOfArrest);
       this.caseForm.get('dateOfArrest').setValue(this.caseDetails.dateOfArrest);
       this.caseForm.get('briefDescriptionOfChargeOrLegalMatter').setValue(this.caseDetails.briefDescriptionOfChargeOrLegalMatter);

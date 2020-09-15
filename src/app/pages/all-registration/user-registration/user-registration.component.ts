@@ -18,7 +18,7 @@ export class UserRegistrationComponent implements OnInit {
   roleId: number = 1;
   totalSteps: number = 3;
   facilityCode: any;
-  userRegData = {};
+  user = {};
 
   constructor(private loginService: LoginService, private activatedRoute: ActivatedRoute,
     private store: Store<any>, private userRegistrationService: UserService,
@@ -31,18 +31,18 @@ export class UserRegistrationComponent implements OnInit {
 
   onNextClick(userDetails) {
     this.step = 2;
-    this.userRegData = userDetails;
+    this.user = userDetails;
   }
 
   userMetaData(userMetaData) {
     this.step = 3;
-    this.userRegData['userMeta'] = userMetaData;
+    this.user['userMeta'] = userMetaData;
   }
 
   onUpdateRegisteredUser(userSecurityQuestionData) {
-    this.userRegData['securityQuestionData'] = userSecurityQuestionData;
-    this.userRegData['facilityCode'] = this.facilityCode;
-    this.userRegistrationService.userRegistration(this.userRegData).subscribe((user: any) => {
+    this.user['securityQuestionData'] = userSecurityQuestionData;
+    this.user['facilityCode'] = this.facilityCode;
+    this.userRegistrationService.userRegistration(this.user).subscribe((user: any) => {
       if (user.token) {
         this.cacheService.setCache('token', user.token);
         this.loginService.checkToken().then((data: any) => {
@@ -65,6 +65,14 @@ export class UserRegistrationComponent implements OnInit {
     }
     else {
       this.step = 3
+    }
+  }
+
+  onUserPageClick(user) {
+    if (user) {
+      this.step = 1
+    } else {
+      this.step = 2;
     }
   }
 }
