@@ -13,6 +13,7 @@ export class SelectFacilityComponent implements OnInit {
 
   @Input() totalSteps: any;
   @Output() selectedFacilityEventEmitter = new EventEmitter();
+  @Output() perviousClick = new EventEmitter();
 
   constructor(private facilityService: FacilityService) { }
 
@@ -36,6 +37,10 @@ export class SelectFacilityComponent implements OnInit {
         }
       })
     }
+  }
+
+  onPeviousClick() {
+    this.perviousClick.emit(true)
   }
 
   submit() {

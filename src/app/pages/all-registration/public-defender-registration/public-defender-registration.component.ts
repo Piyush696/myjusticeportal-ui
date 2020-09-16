@@ -24,6 +24,8 @@ export class PublicDefenderRegistrationComponent implements OnInit {
     },
     'facilityIds': []
   }
+  user: any;
+  orgAddress: {};
 
   constructor(private defenderService: PublicDefenderService, private cacheService: CacheService,
     private toaterService: ToasterService, private toasterService: ToasterService,
@@ -107,5 +109,22 @@ export class PublicDefenderRegistrationComponent implements OnInit {
         this.toasterService.showErrorToater(verified.data)
       }
     })
+  }
+
+  onPreviousClick(back) {
+    if (back) {
+      this.step = 1;
+      this.user = this.registrationData.user
+    } else {
+      this.step = 2;
+    }
+  }
+  onBackClick(back) {
+    if (back) {
+      this.step = 2;
+      this.orgAddress = this.registrationData.organization
+    } else {
+      this.step = 3;
+    }
   }
 }

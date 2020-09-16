@@ -103,8 +103,11 @@
                     </mat-form-field>
                 </div>
             </div>
-            <div class="d-flex justify-content-end mt-2 pr-2">
-                <button class="px-4 py-1" mat-raised-button color="primary"
+            <div class="d-flex justify-content-between mt-2 pr-2">
+                <button class="button-purple px-4 py-1" mat-raised-button (click)="onPreviousClick()">
+                    Back
+                </button>
+                <button class="button-purple px-4 py-1" mat-raised-button color="primary"
                     [disabled]="organisationForm.invalid || this.addressForm.invalid" (click)="submit()">
                     Next
                 </button>

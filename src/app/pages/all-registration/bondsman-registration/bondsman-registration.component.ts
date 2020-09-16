@@ -24,6 +24,8 @@ export class BondsmanRegistrationComponent implements OnInit {
     },
     'facilityIds': []
   }
+  user: any;
+  orgAddress: {};
 
   constructor(private cacheService: CacheService, private toasterService: ToasterService,
     private router: Router, private loginService: LoginService, private bondsmanService: BondsmanService) { }
@@ -106,5 +108,22 @@ export class BondsmanRegistrationComponent implements OnInit {
         this.toasterService.showErrorToater(verified.data);
       }
     })
+  }
+
+  onPreviousClick(back) {
+    if (back) {
+      this.step = 1;
+      this.user = this.registrationData.user
+    } else {
+      this.step = 2;
+    }
+  }
+  onBackClick(back) {
+    if (back) {
+      this.step = 2;
+      this.orgAddress = this.registrationData.organization
+    } else {
+      this.step = 3;
+    }
   }
 }

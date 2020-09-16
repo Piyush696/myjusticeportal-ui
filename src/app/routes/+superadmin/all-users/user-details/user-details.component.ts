@@ -88,7 +88,6 @@ export class UserDetailsComponent implements OnInit, OnDestroy {
         let data: any = {};
         data.userId = this.selectedUserId;
         data.status = this.userDetailsForm.get('status').value;
-        console.log(data)
         this.userService.updateStatus(data).subscribe((res: any) => {
             if (res.success) {
                 this.toasterService.showSuccessToater('Status changed successfully.');
