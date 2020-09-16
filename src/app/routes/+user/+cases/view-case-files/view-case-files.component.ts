@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Location } from '@angular/common';
 import { FileUploader } from 'ng2-file-upload';
 import { CaseService } from 'app/services/case.service';
 import { ActivatedRoute } from '@angular/router';
@@ -24,8 +23,8 @@ export class ViewCaseFilesComponent implements OnInit {
     this.hasAnotherDropZoneOver = e;
   }
 
-  constructor(private activatedRoute: ActivatedRoute, private location: Location,
-    private caseService: CaseService, private toasterService: ToasterService, public dialog: MatDialog) { }
+  constructor(private activatedRoute: ActivatedRoute, private caseService: CaseService,
+    private toasterService: ToasterService, public dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.onGetCase();
@@ -41,10 +40,6 @@ export class ViewCaseFilesComponent implements OnInit {
     }, (error: any) => {
       this.toasterService.showErrorToater(error.statusText);
     })
-  }
-
-  backToCases() {
-    this.location.back();
   }
 
   onUploadCaseFile() {
@@ -91,7 +86,7 @@ export class ViewCaseFilesComponent implements OnInit {
     this.caseService.deleteFile(this.fileId).subscribe((res: any) => {
       if (res.success) {
         this.dialog.closeAll();
-        this.toasterService.showSuccessToater('Case file deleted. ');
+        this.toasterService.showSuccessToater('Case file deleted.');
         this.onGetCase();
       } else {
         this.toasterService.showErrorToater(res.data);
@@ -108,7 +103,7 @@ export class ViewCaseFilesComponent implements OnInit {
 
     this.caseService.getDownloadLink(data).subscribe((res: any) => {
       if (res.success) {
-        window.open(res.data, '_self ');
+        window.open(res.data, '_self');
       } else {
         this.toasterService.showErrorToater(res.data);
       }
