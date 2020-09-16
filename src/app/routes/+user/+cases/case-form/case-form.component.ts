@@ -23,32 +23,6 @@ export class CaseFormComponent implements OnInit, OnChanges {
     private fb: FormBuilder, private caseService: CaseService, private store: Store<any>) {
   }
 
-  ngOnInit(): void {
-    this.createFormControl();
-    this.getUserFromStore();
-  }
-
-  getUserFromStore() {
-    this.store.select(s => s.userInfo).subscribe(user => this.userData = user);
-    this.caseForm.get('firstName').setValue(this.userData.firstName);
-    this.caseForm.get('lastName').setValue(this.userData.lastName);
-    this.caseForm.get('firstName').disable();
-    this.caseForm.get('lastName').disable();
-  }
-
-  createFormControl() {
-    this.caseForm = this.fb.group({
-      firstName: ['', [Validators.required]],
-      lastName: ['', [Validators.required]],
-      countyOfArrest: [''],
-      dateOfArrest: [null],
-      briefDescriptionOfChargeOrLegalMatter: ['', [Validators.required]],
-      attorneyName: [''],
-      nextCourtDate: [null],
-      otherInformation: ['']
-    });
-  }
-
   ngOnChanges() {
     if (this.caseDetails) {
       this.createFormControl();
@@ -64,6 +38,32 @@ export class CaseFormComponent implements OnInit, OnChanges {
       this.caseForm.get('nextCourtDate').setValue(this.caseDetails.nextCourtDate);
       this.caseForm.get('otherInformation').setValue(this.caseDetails.otherInformation);
     }
+  }
+
+  ngOnInit(): void {
+    this.createFormControl();
+    this.getUserFromStore();
+  }
+
+  createFormControl() {
+    this.caseForm = this.fb.group({
+      firstName: ['', [Validators.required]],
+      lastName: ['', [Validators.required]],
+      countyOfArrest: [''],
+      dateOfArrest: [null],
+      briefDescriptionOfChargeOrLegalMatter: ['', [Validators.required]],
+      attorneyName: [''],
+      nextCourtDate: [null],
+      otherInformation: ['']
+    });
+  }
+
+  getUserFromStore() {
+    this.store.select(s => s.userInfo).subscribe(user => this.userData = user);
+    this.caseForm.get('firstName').setValue(this.userData.firstName);
+    this.caseForm.get('lastName').setValue(this.userData.lastName);
+    this.caseForm.get('firstName').disable();
+    this.caseForm.get('lastName').disable();
   }
 
   updateCase() {
