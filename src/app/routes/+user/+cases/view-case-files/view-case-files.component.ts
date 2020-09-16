@@ -35,7 +35,6 @@ export class ViewCaseFilesComponent implements OnInit {
     this.caseService.getCase(this.activatedRoute.snapshot.params['caseId']).subscribe((res: any) => {
       if (res.success) {
         this.uploadedCaseFiles = res.data;
-        // console.log(this.uploadedCaseFiles);
       } else {
         this.toasterService.showErrorToater(res.data);
       }
