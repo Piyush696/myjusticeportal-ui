@@ -84,12 +84,20 @@
             <mat-form-field appearance="fill" class="w-100 pl-2">
                 <mat-label>Brief Description of Charge(s) or Legal Matter</mat-label>
                 <input type="text" matInput placeholder="Brief Description of Charges"
-                    [formControl]="caseForm.controls['briefDescriptionOfChargeOrLegalMatter']" required>
+                    [formControl]="caseForm.controls['briefDescriptionOfChargeOrLegalMatter']" minlength="3"
+                    maxlength="500" required />
                 <mat-error>
-                    <div
-                        *ngIf="caseForm.controls['briefDescriptionOfChargeOrLegalMatter'].invalid && caseForm.controls['briefDescriptionOfChargeOrLegalMatter'].touched">
+                    <div *ngIf="caseForm.controls['briefDescriptionOfChargeOrLegalMatter'].invalid && 
+                        caseForm.controls['briefDescriptionOfChargeOrLegalMatter'].touched">
                         <small class="font13">
-                            This Case is Related To is Required
+                            This case field is required.
+                        </small>
+                    </div>
+                    <div *ngIf="caseForm.controls['briefDescriptionOfChargeOrLegalMatter'].touched && 
+                        (caseForm.controls['briefDescriptionOfChargeOrLegalMatter'].errors?.minlength ||
+                        caseForm.controls['briefDescriptionOfChargeOrLegalMatter'].errors?.maxlength)">
+                        <small class="font13">
+                            This case field should be in range of (3-500) characters.
                         </small>
                     </div>
                 </mat-error>
@@ -124,13 +132,13 @@
         </div>
         <div class="col-6 pl-0">
             <mat-form-field appearance="fill" class="w-100 pl-2">
-                <mat-label>Other Information</mat-label>
-                <input type="email" matInput placeholder="Other Information"
+                <mat-label>Other Case Details</mat-label>
+                <input type="email" matInput placeholder="Other Case Details"
                     [formControl]="caseForm.controls['otherInformation']">
                 <!-- <mat-error>
                     <div
                         *ngIf="caseForm.controls['otherInformation'].invalid && caseForm.controls['otherInformation'].touched">
-                        <small class="font13">Other Information is Required</small>
+                        <small class="font13">Other Case Details is Required</small>
                     </div>
                 </mat-error> -->
             </mat-form-field>

@@ -12,9 +12,15 @@
                 <div class="d-flex justify-content-between">
                     <div>
                         <mat-label>
-                            <span class="case-heading color">Case
-                                {{i+1}}: {{case.briefDescriptionOfChargeOrLegalMatter}}</span>
-                            <span class="case-heading color"> </span>
+                            <span class="case-heading color">
+                                Case {{i+1}}:&nbsp;
+                                <span *ngIf="case?.briefDescriptionOfChargeOrLegalMatter.length < 45">
+                                    {{case?.briefDescriptionOfChargeOrLegalMatter}}
+                                </span>
+                                <span *ngIf="case?.briefDescriptionOfChargeOrLegalMatter.length > 45">
+                                    {{case?.briefDescriptionOfChargeOrLegalMatter | slice:0:45}}...
+                                </span>
+                            </span>
                         </mat-label>
                         <br>
                         <span class="color">{{case?.otherInformation}}</span>
