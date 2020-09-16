@@ -28,9 +28,6 @@
                 </mat-form-field>
 
                 <div class="d-flex justify-content-end px-3 mt-2">
-                    <!-- <button mat-button color="primary">
-                        Create an account
-                    </button> -->
                     <button
                         [disabled]="this.loginForm.get('userName').invalid || this.loginForm.get('password').invalid"
                         class="px-4 py-1" mat-raised-button color="primary" (click)="onLogin()">
@@ -60,7 +57,7 @@
             </app-mobile-registration>
             <div class="d-flex justify-content-center p-3">
                 <a [routerLink]="'/forget-password'" class="text-dark">
-                    Forgot Password? Click here to reset?
+                    Forgot Password? Click here to reset
                 </a>
             </div>
         </div>

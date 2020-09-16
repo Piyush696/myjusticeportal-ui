@@ -25,7 +25,6 @@ export class ViewCaseDetailsComponent implements OnInit {
       this.hireLawyerService.getRequestedCaseById(this.activatedRoute.snapshot.params['caseId']).subscribe((res: any) => {
         if (res.data) {
           this.singleCaseData = res.data.lawyer[0];
-          // console.log(this.singleCaseData);
         } else {
           this.toasterService.showErrorToater('No data found, invalid url detected.');
         }
