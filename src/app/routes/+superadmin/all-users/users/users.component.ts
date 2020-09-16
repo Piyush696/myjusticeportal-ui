@@ -25,6 +25,7 @@ export class UsersComponent implements OnInit, OnDestroy {
   dataSource = new MatTableDataSource();
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort: MatSort;
+  user: any;
 
   constructor(private userService: UserService, private store: Store<any>,
     private toasterService: ToasterService, private registrationService: RegistrationService, private fb: FormBuilder, public dialog: MatDialog) { }
@@ -77,7 +78,7 @@ export class UsersComponent implements OnInit, OnDestroy {
 
   openModal(templateRef) {
     let dialogRef = this.dialog.open(templateRef, {
-      width: '500px',
+      width: '368px',
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -105,18 +106,20 @@ export class UsersComponent implements OnInit, OnDestroy {
     })
   }
 
-  onDeleteUser(user) {
-    if (user.userId != this.userInfo.userId) {
-      this.userService.deleteUser(+user.userId).subscribe((res: any) => {
-        // console.log(res);
+  onDeleteUser() {
+    if (this.user.userId != this.userInfo.userId) {
+      this.userService.deleteUser(this.user.userId).subscribe((res: any) => {
         if (res.success) {
-          this.toasterService.showSuccessToater('User(' + user.firstName + ' ' + user.lastName + ') successfully deleted.');
+          this.toasterService.showSuccessToater('User(' + this.user.firstName + ' ' + this.user.lastName + ') successfully deleted.');
           this.onGetAllUsers();
+          this.dialog.closeAll();
         } else {
-          this.toasterService.showErrorToater('User(' + user.firstName + ' ' + user.lastName + ') is not deleted.');
+          this.dialog.closeAll();
+          this.toasterService.showErrorToater('User(' + this.user.firstName + ' ' + this.user.lastName + ') is not deleted.');
         }
       });
     } else {
+      this.dialog.closeAll();
       this.toasterService.showErrorToater('You can not delete yourself. You are logged in.');
     }
   }
@@ -141,6 +144,16 @@ export class UsersComponent implements OnInit, OnDestroy {
     else {
       return [10];
     }
+  }
+
+  onOpenModal(templateRef, user) {
+    this.user = user
+    let dialogRef = this.dialog.open(templateRef, {
+      width: '500px',
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+    });
   }
 
   ngOnDestroy(): void {
