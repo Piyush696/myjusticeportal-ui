@@ -26,7 +26,6 @@ export class CaseFormComponent implements OnInit, OnChanges {
   ngOnInit(): void {
     this.createFormControl();
     this.getUserFromStore();
-    console.log(this.caseDetails)
   }
 
   getUserFromStore() {
