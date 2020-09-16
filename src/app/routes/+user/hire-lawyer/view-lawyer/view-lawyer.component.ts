@@ -38,8 +38,7 @@ export class ViewLawyerComponent implements OnInit {
   openModal(templateRef, userId) {
     this.userId = userId
     let dialogRef = this.dialog.open(templateRef, {
-      width: '500px',
-      height: '500px'
+      width: '500px'
     });
 
     dialogRef.afterClosed().subscribe(result => {

@@ -1,7 +1,6 @@
 import { Component, OnInit, EventEmitter, Output, Input, OnChanges } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { UserMetaService } from 'app/services/user-meta.service';
 
 @Component({
   selector: 'app-additional-info',
@@ -17,10 +16,9 @@ export class AdditionalInfoComponent implements OnInit, OnChanges {
   @Input('userName') userName: string;
   @Input() userMeta;
   facilityCode: any;
-  constructor(private fb: FormBuilder, private userMetaService: UserMetaService, private activatedRoute: ActivatedRoute) {
+  constructor(private fb: FormBuilder, private activatedRoute: ActivatedRoute) {
     this.facilityCode = this.activatedRoute.snapshot.params.facilityCode;
   }
-
 
   ngOnInit(): void {
     if (!this.userMeta) {
@@ -28,6 +26,8 @@ export class AdditionalInfoComponent implements OnInit, OnChanges {
       this.additionalInfo.get('facility').setValue(this.facilityCode)
     }
   }
+
+
   ngOnChanges(): void {
     if (this.userMeta) {
       this.createFormControl();
