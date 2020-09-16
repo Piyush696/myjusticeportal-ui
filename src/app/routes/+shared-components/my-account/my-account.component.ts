@@ -40,7 +40,6 @@ export class MyAccountComponent implements OnInit {
     this.createControl();
     this.getLoginDetails();
     this.securityQuestionControl();
-    // this.getAllSecurityQuestion()
   }
 
   createControl() {

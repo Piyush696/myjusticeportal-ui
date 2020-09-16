@@ -44,7 +44,7 @@
                 </td>
             </ng-container>
             <ng-container matColumnDef="createdAt">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header>Created At</th>
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Date Created</th>
                 <td mat-cell *matCellDef="let user">{{user?.createdAt | date:'longDate'}}</td>
             </ng-container>
             <ng-container matColumnDef="action">
@@ -53,7 +53,7 @@
                     <button [routerLink]="user?.userId" class="button-purple mr-1" mat-mini-fab title="View Details">
                         <mat-icon>remove_red_eye</mat-icon>
                     </button>
-                    <button mat-mini-fab color="warn" title="Delete User" (click)="onDeleteUser(user)">
+                    <button mat-mini-fab color="warn" title="Delete User" (click)="onOpenModal(confirmModal,user)">
                         <mat-icon>delete</mat-icon>
                     </button>
                 </td>
@@ -201,5 +201,16 @@
             (click)="closeModal()">Close</button>
         <button mat-raised-button color="primary" type="button" class="button-purple px-4 py-1"
             (click)="onCreateUser()">Save</button>
+    </div>
+</ng-template>
+
+
+<ng-template #confirmModal>
+    <div class="d-flex justify-content-center p-2">
+        <mat-label class="font-weight-bold">Are you sure you want to delete this user? </mat-label>
+    </div>
+    <div class="d-flex justify-content-between p-2">
+        <button mat-raised-button type="button" class="button-purple px-4 py-1" (click)="onDeleteUser()">Yes</button>
+        <button type="button" class="button-purple px-4 py-1" mat-raised-button (click)="closeModal()">No</button>
     </div>
 </ng-template>
