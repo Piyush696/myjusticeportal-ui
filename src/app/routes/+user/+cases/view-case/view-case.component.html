@@ -16,7 +16,7 @@
     <div class="col-12 pl-0">
         <div class="row">
             <div class="col-7">
-                <mat-card class="view-card-color w-100 pt-4">
+                <mat-card class="mat-elevation-z10 view-card-color w-100 pt-4">
                     <div class="d-flex justify-content-between pb-2">
                         <div>
                             <h3 class="line-height font-weight-bold m-0 pt-3">
@@ -31,12 +31,12 @@
                     </div>
                     <div>
                         <p class="text-default">First Name:
-                            <span class="font-weight-normal"> {{caseDetails?.user?.firstName}}</span>
+                            <span class="font-weight-normal"> {{caseDetails?.inmate?.firstName}}</span>
                         </p>
                     </div>
                     <div>
                         <p class="text-default">Last Name:
-                            <span class="font-weight-normal"> {{caseDetails?.user?.lastName}}</span>
+                            <span class="font-weight-normal"> {{caseDetails?.inmate?.lastName}}</span>
                         </p>
                     </div>
                     <div>
@@ -55,15 +55,33 @@
                         </p>
                     </div>
                     <div>
-                        <p class="text-default" div *ngIf="caseDetails?.nextCourtDate">
+                        <p class="text-default" *ngIf="caseDetails?.nextCourtDate">
                             Next Court Date:
                             <span class="font-weight-normal"> {{caseDetails?.nextCourtDate |date: 'MM-dd-yyyy'}}</span>
                         </p>
                     </div>
                     <div>
-                        <p class="text-default" *ngIf="caseDetails?.otherInformation">Other Information:
+                        <p class="text-default" *ngIf="caseDetails?.otherInformation">
+                            Other Information:
                             <span class="font-weight-normal"> {{caseDetails?.otherInformation}}</span>
                         </p>
+                    </div>
+                </mat-card>
+                <mat-card class="d-flex justify-content-between mat-elevation-z10 view-card-color mt-3">
+                    <div>
+                        <h3 class="font-weight-bold mb-2">Note:</h3>
+                        <div>
+                            <span>{{caseDetails?.notes}}</span>
+                            <span *ngIf="!caseDetails?.notes" class="text-danger">
+                                There is no Note added. Please add the same.
+                            </span>
+                        </div>
+                    </div>
+                    <div class="d-flex align-items-center pl-2">
+                        <button class="button-purple" mat-mini-fab title="Edit Note"
+                            (click)="openModal(managenotesModel)">
+                            <mat-icon>edit</mat-icon>
+                        </button>
                     </div>
                 </mat-card>
             </div>
@@ -106,3 +124,33 @@
         </div>
     </div>
 </div>
+
+<ng-template #managenotesModel>
+    <div class="d-flex justify-content-start p-0">
+        <h3 class="font-weight-bold pl-2">Note:</h3>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <mat-form-field appearance="fill" class="w-100 p-2">
+                <textarea rows="10" matInput [formControl]="caseNoteForm.controls['notes']"></textarea>
+                <mat-error>
+                    <div *ngIf="caseNoteForm.controls['notes'].invalid && caseNoteForm.controls['notes'].touched">
+                        <small class="font13">
+                            Notes is Required
+                        </small>
+                    </div>
+                </mat-error>
+            </mat-form-field>
+        </div>
+    </div>
+    <div class="d-flex justify-content-end p-0">
+        <button *ngIf="enableEditBtn" mat-raised-button class="button-purple mt-2 px-4 py-1"
+            [disabled]="caseNoteForm.get('notes').invalid" (click)="this.caseNoteForm.enable();enableEditBtn = false">
+            Edit
+        </button>
+        <button *ngIf="!enableEditBtn" mat-raised-button color="primary" class="px-4 py-1 mt-2"
+            [disabled]="caseNoteForm.get('notes').invalid" (click)="onSaveChanges()">
+            Save
+        </button>
+    </div>
+</ng-template>

@@ -35,9 +35,8 @@ export class CasesComponent implements OnInit {
     this.caseService.getCases().subscribe((cases: any) => {
       if (cases.success) {
         this.caseList = cases.data;
-      }
-      else {
-        this.toasterService.showErrorToater(cases.data)
+      } else {
+        this.toasterService.showErrorToater(cases.data);
       }
     }, (error: any) => {
       this.toasterService.showErrorToater(error.statusText);
@@ -49,7 +48,7 @@ export class CasesComponent implements OnInit {
     let dialogRef = this.dialog.open(templateRef, {
       width: '500px',
     });
-    this.caseNoteForm.get('notes').setValue(value.notes)
+    this.caseNoteForm.get('notes').setValue(value.notes);
     this.caseNoteForm.get('notes').disable();
     dialogRef.afterClosed().subscribe(result => {
     });
