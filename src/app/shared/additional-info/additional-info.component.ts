@@ -1,5 +1,6 @@
 import { Component, OnInit, EventEmitter, Output, Input, OnChanges } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 import { UserMetaService } from 'app/services/user-meta.service';
 
 @Component({
@@ -15,13 +16,16 @@ export class AdditionalInfoComponent implements OnInit, OnChanges {
   @Output() isPreviousClick = new EventEmitter();
   @Input('userName') userName: string;
   @Input() userMeta;
-
-  constructor(private fb: FormBuilder, private userMetaService: UserMetaService) { }
+  facilityCode: any;
+  constructor(private fb: FormBuilder, private userMetaService: UserMetaService, private activatedRoute: ActivatedRoute) {
+    this.facilityCode = this.activatedRoute.snapshot.params.facilityCode;
+  }
 
 
   ngOnInit(): void {
     if (!this.userMeta) {
       this.createFormControl();
+      this.additionalInfo.get('facility').setValue(this.facilityCode)
     }
   }
   ngOnChanges(): void {

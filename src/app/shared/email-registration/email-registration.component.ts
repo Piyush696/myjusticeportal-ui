@@ -59,7 +59,7 @@ export class EmailRegistrationComponent implements OnInit, OnChanges {
       this.registrationForm.get('userName').setValue(this.user?.userName)
       this.registrationForm.get('password').setValue(this.user?.password)
       this.registrationForm.get('confirmPassword').setValue(this.user?.password)
-      this.registrationForm.get('termCondition').setValue(true);
+      this.isNextDisabled = false;
     }
   }
 
