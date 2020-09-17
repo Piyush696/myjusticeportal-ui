@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
 import { HireLawyerService } from '../../../services/hire-lawyer.service';
 import { ToasterService } from '../../../services/toaster.service';
 
@@ -10,10 +11,18 @@ import { ToasterService } from '../../../services/toaster.service';
 
 export class LawyerdashboardComponent implements OnInit {
   requestedCases: any;
-
-  constructor(private hireLawyerService: HireLawyerService, private toasterService: ToasterService) { }
+  isAuthorized: boolean;
+  constructor(private hireLawyerService: HireLawyerService, private toasterService: ToasterService, private store: Store<any>) { }
 
   ngOnInit(): void {
+    this.store.select(s => s.userInfo).subscribe(x => {
+      if (x.status) {
+        this.isAuthorized = true;
+      }
+      else {
+        this.isAuthorized = false;
+      }
+    });
     this.onGetRequestedCases();
   }
 

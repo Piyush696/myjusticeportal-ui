@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
 
 @Component({
   selector: 'app-defender-dashboard',
@@ -7,10 +8,18 @@ import { Component, OnInit } from '@angular/core';
 })
 
 export class DefenderDashboardComponent implements OnInit {
-
-  constructor() { }
+  isAuthorized: boolean;
+  constructor(private store: Store<any>) { }
 
   ngOnInit(): void {
+    this.store.select(s => s.userInfo).subscribe(x => {
+      if (x.status) {
+        this.isAuthorized = true;
+      }
+      else {
+        this.isAuthorized = false;
+      }
+    });
   }
 
 }

@@ -6,7 +6,6 @@ import { FacilityRegistrationComponent } from './pages/all-registration/facility
 import { LawyerRegistrationComponent } from './pages/all-registration/lawyer-registration/lawyer-registration.component';
 import { ParalegalRegistrationComponent } from './pages/all-registration/paralegal-registration/paralegal-registration.component';
 import { BondsmanRegistrationComponent } from './pages/all-registration/bondsman-registration/bondsman-registration.component';
-import { AccountReviewComponent } from './routes/+shared-components/account-review/account-review.component';
 import { ForgetPasswordComponent } from './routes/+shared-components/forget-password/forget-password.component';
 import { ResetPasswordComponent } from './routes/+shared-components/reset-password/reset-password.component';
 import { PublicDefenderRegistrationComponent } from './pages/all-registration/public-defender-registration/public-defender-registration.component';
@@ -24,7 +23,6 @@ export const AppRoutes: Routes = [
   },
   { path: 'login', component: LoginComponent },
   { path: 'lawyer/registration', component: LawyerRegistrationComponent },
-  { path: 'account-review', component: AccountReviewComponent },
   { path: 'paralegal/registration', component: ParalegalRegistrationComponent },
   { path: 'defender/registration', component: PublicDefenderRegistrationComponent },
   { path: 'bondsman/registration', component: BondsmanRegistrationComponent },
