@@ -17,6 +17,7 @@ export class InvitedPublicDefenderComponent implements OnInit {
   totalSteps: number = 2;
   roleId: number = 4;
   authCodeField: boolean;
+  message: string;
 
   constructor(private activatedRoute: ActivatedRoute, private loginService: LoginService,
     private defenderService: PublicDefenderService, private toasterService: ToasterService,
@@ -33,8 +34,10 @@ export class InvitedPublicDefenderComponent implements OnInit {
         this.tokenEmail = res.data;
       }
       else if (!res.success) {
+        this.tokenEmail = 'EXPIRED_TOKEN';
         if (res.error.name == 'EXPIRED_TOKEN') {
-          this.toasterService.showErrorToater('Sorry your token has been expired, please contact support for more information.');
+          this.message = 'Sorry the link has been expired, please contact support for more information.';
+          this.toasterService.showErrorToater(this.message);
         }
       }
     });
