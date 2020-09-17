@@ -4,7 +4,7 @@
     </app-email-registration>
 
     <div class="row" *ngIf="step == 2" class="wpx-420">
-        <app-additional-info (userMetaEventEmitter)="userMetaData($event)" [userMeta]="user.userMeta"
+        <app-additional-info (userMetaEventEmitter)="userMetaData($event)" [userMeta]="user.userMeta" [roleId]="roleId"
             (isPreviousClick)="onUserPageClick($event)">
         </app-additional-info>
     </div>

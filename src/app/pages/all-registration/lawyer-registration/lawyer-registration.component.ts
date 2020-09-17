@@ -14,7 +14,7 @@ import { LoginService } from 'app/services/login.service';
 export class LawyerRegistrationComponent implements OnInit {
   step: number = 1;
   totalSteps: number = 4;
-  roleId: number = 2;
+  roleId: number = 3;
   userName: string;
   authCodeField: boolean;
   message: string = '* Use Bar name of the facility for registration.';
@@ -44,13 +44,26 @@ export class LawyerRegistrationComponent implements OnInit {
     }
   }
 
+  userMetaData(userMetaData) {
+    this.step = 3;
+    this.registrationData['userMeta'] = userMetaData;
+  }
+
+  onUserPageClick(user) {
+    if (user) {
+      this.step = 1
+    } else {
+      this.step = 2;
+    }
+  }
+
   onCreateOrganisation(orgData) {
     if (orgData) {
-      this.step = 3;
+      this.step = 4;
       this.registrationData.organization = orgData.name;
       this.registrationData.organization.address = orgData.address;
     } else {
-      this.step = 2;
+      this.step = 3;
     }
   }
 
@@ -60,11 +73,11 @@ export class LawyerRegistrationComponent implements OnInit {
       this.lawyerService.onRegistration(this.registrationData).subscribe((res: any) => {
         if (res.success) {
           this.userName = res.data.userName;
-          this.step = 4;
+          this.step = 5;
         }
       });
     } else {
-      this.step = 3;
+      this.step = 4;
     }
   }
 
@@ -114,18 +127,18 @@ export class LawyerRegistrationComponent implements OnInit {
 
   onPreviousClick(back) {
     if (back) {
-      this.step = 1;
+      this.step = 2;
       this.user = this.registrationData.user
     } else {
-      this.step = 2;
+      this.step = 3;
     }
   }
   onBackClick(back) {
     if (back) {
-      this.step = 2;
+      this.step = 3;
       this.orgAddress = this.registrationData.organization
     } else {
-      this.step = 3;
+      this.step = 4;
     }
   }
 }

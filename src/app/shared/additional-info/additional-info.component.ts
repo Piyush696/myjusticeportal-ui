@@ -13,9 +13,11 @@ export class AdditionalInfoComponent implements OnInit, OnChanges {
 
   @Output() userMetaEventEmitter = new EventEmitter();
   @Output() isPreviousClick = new EventEmitter();
-  @Input('userName') userName: string;
   @Input() userMeta;
+  @Input() roleId;
   facilityCode: any;
+  fieldName: string = 'Housing Unit';
+  fieldOption: string = 'Facility';
   constructor(private fb: FormBuilder, private activatedRoute: ActivatedRoute) {
     this.facilityCode = this.activatedRoute.snapshot.params.facilityCode;
   }
@@ -24,6 +26,15 @@ export class AdditionalInfoComponent implements OnInit, OnChanges {
     if (!this.userMeta) {
       this.createFormControl();
       this.additionalInfo.get('facility').setValue(this.facilityCode)
+    }
+
+    if (this.roleId == 3) {
+      this.fieldName = 'State'
+      this.fieldOption = 'Bar Exam Id'
+    }
+    else {
+      this.fieldName = 'Housing Unit'
+      this.fieldOption = 'Facility'
     }
   }
 
@@ -40,13 +51,21 @@ export class AdditionalInfoComponent implements OnInit, OnChanges {
     this.additionalInfo = this.fb.group({
       housing_unit: ['', [Validators.required]],
       facility: ['', [Validators.required]],
+      speciality: ['', [Validators.required]],
     })
   }
 
 
   submit() {
-    var userMetaList = [{ metaKey: 'housing_unit', metaValue: this.additionalInfo.get('housing_unit').value },
-    { metaKey: 'facility', metaValue: this.additionalInfo.get('facility').value }]
+    if (this.roleId == 3) {
+      var userMetaList = [{ metaKey: 'state', metaValue: this.additionalInfo.get('housing_unit').value },
+      { metaKey: 'bar Exam Id', metaValue: this.additionalInfo.get('facility').value },
+      { metaKey: 'speciality', metaValue: this.additionalInfo.get('speciality').value }]
+    }
+    else {
+      var userMetaList = [{ metaKey: 'housing_unit', metaValue: this.additionalInfo.get('housing_unit').value },
+      { metaKey: 'facility', metaValue: this.additionalInfo.get('facility').value }]
+    }
     this.userMetaEventEmitter.emit(userMetaList);
   }
 
