@@ -62,11 +62,10 @@ export class SidebarComponent implements OnInit {
         this.filteredMenuItems = ROUTES.filter(menu => {
             let isExist = menu.roleIds.find(roleId => roleId == this.userInfo.roles[0].roleId);
             if (isExist) {
-                if (menu.isAdmin) {
-                    if (this.userInfo.isAdmin) {
-                        return menu;
-                    }
-                } else {
+                if (!menu.isAdmin) {
+                    return menu;
+                }
+                else if (menu.isAdmin && this.userInfo.isAdmin) {
                     return menu;
                 }
             }
