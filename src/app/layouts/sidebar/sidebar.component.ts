@@ -7,31 +7,31 @@ export interface RouteInfo {
     icon: string;
     class: string;
     roleIds: number[];
-    isAdmin: boolean;
+    isAdmin?: boolean;
 }
 
 export const ROUTES: RouteInfo[] = [
-    { path: 'user/case', title: 'My Cases', icon: 'nc-bank', class: '', roleIds: [1], isAdmin: false },
-    { path: 'user/hire-lawyer', title: 'Hire a lawyer', icon: 'nc-bank', class: '', roleIds: [1], isAdmin: false },
+    { path: 'user/case', title: 'My Cases', icon: 'nc-bank', class: '', roleIds: [1] },
+    { path: 'user/hire-lawyer', title: 'Hire a lawyer', icon: 'nc-bank', class: '', roleIds: [1] },
     // { path: '/dashboard', title: 'Dashboard', icon: 'nc-bank', class: '', roleIds: [] },
     // { path: ':facilityCode/userdashboard', title: 'Dashboard', icon: 'nc-bank', class: '', roleIds: [1] },
-    { path: 'superadmin/users', title: 'All Users', icon: 'nc-bank', class: '', roleIds: [7], isAdmin: false },
-    { path: '/my-dockets', title: 'My Dockets', icon: 'nc-bank', class: '', roleIds: [2, 5], isAdmin: false },
-    { path: 'superadmin/app-setting', title: 'Application Settings', icon: 'nc-bank', class: '', roleIds: [7], isAdmin: false },
-    { path: '', title: 'Law Library', icon: 'nc-bank', class: '', roleIds: [1], isAdmin: false },
-    { path: 'lawyer/lawyer-dashboard', title: 'Dashboard', icon: 'nc-bank', class: '', roleIds: [3], isAdmin: false },
-    { path: 'lawyer/accepted-cases', title: 'Accepted Cases', icon: 'nc-bank', class: '', roleIds: [3], isAdmin: false },
+    { path: 'superadmin/users', title: 'All Users', icon: 'nc-bank', class: '', roleIds: [7] },
+    { path: '/my-dockets', title: 'My Dockets', icon: 'nc-bank', class: '', roleIds: [2, 5] },
+    { path: 'superadmin/app-setting', title: 'Application Settings', icon: 'nc-bank', class: '', roleIds: [7] },
+    { path: '', title: 'Law Library', icon: 'nc-bank', class: '', roleIds: [1] },
+    { path: 'lawyer/lawyer-dashboard', title: 'Dashboard', icon: 'nc-bank', class: '', roleIds: [3] },
+    { path: 'lawyer/accepted-cases', title: 'Accepted Cases', icon: 'nc-bank', class: '', roleIds: [3] },
     { path: 'lawyer/manage-organization', title: 'Manage Organization', icon: 'nc-bank', class: '', roleIds: [3], isAdmin: true },
     { path: 'researcher/manage-organization', title: 'Manage Organization', icon: 'nc-bank', class: '', roleIds: [4], isAdmin: true },
     { path: 'public-defender/manage-organization', title: 'Manage Organization', icon: 'nc-bank', class: '', roleIds: [5], isAdmin: true },
     { path: 'bondsman/manage-organization', title: 'Manage Organization', icon: 'nc-bank', class: '', roleIds: [6], isAdmin: true },
-    { path: '/legal-research-Assistance', title: 'Legal Research Assistance', icon: 'nc-bank', class: '', roleIds: [4, 6], isAdmin: false },
-    { path: '/legal-forms', title: 'Legal Forms', icon: 'nc-bank', class: '', roleIds: [2], isAdmin: false },
-    { path: '/ask-lawyer', title: 'Ask a lawyer', icon: 'nc-bank', class: '', roleIds: [4], isAdmin: false },
-    { path: '/message-lawyer', title: 'Message My lawyer', icon: 'nc-bank', class: '', roleIds: [5], isAdmin: false },
-    { path: '/video-lawyer', title: 'Video My lawyer', icon: 'nc-bank', class: '', roleIds: [5], isAdmin: false },
-    { path: '/bail-bonds', title: 'Bail Bonds', icon: 'nc-bank', class: '', roleIds: [4, 6], isAdmin: false },
-    { path: 'superadmin/facility', title: 'Facility', icon: 'nc-bank', class: '', roleIds: [7], isAdmin: false }
+    { path: '/legal-research-Assistance', title: 'Legal Research Assistance', icon: 'nc-bank', class: '', roleIds: [4, 6] },
+    { path: '/legal-forms', title: 'Legal Forms', icon: 'nc-bank', class: '', roleIds: [2] },
+    { path: '/ask-lawyer', title: 'Ask a lawyer', icon: 'nc-bank', class: '', roleIds: [4] },
+    { path: '/message-lawyer', title: 'Message My lawyer', icon: 'nc-bank', class: '', roleIds: [5] },
+    { path: '/video-lawyer', title: 'Video My lawyer', icon: 'nc-bank', class: '', roleIds: [5] },
+    { path: '/bail-bonds', title: 'Bail Bonds', icon: 'nc-bank', class: '', roleIds: [4, 6] },
+    { path: 'superadmin/facility', title: 'Facility', icon: 'nc-bank', class: '', roleIds: [7] }
 ];
 
 @Component({
