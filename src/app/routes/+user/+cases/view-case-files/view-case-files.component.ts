@@ -13,11 +13,13 @@ const URL = 'https://evening-anchorage-3159.herokuapp.com/api/';
 })
 
 export class ViewCaseFilesComponent implements OnInit {
-  uploadedCaseFiles: any;
+  sharedCaseFiles: any;
+  privateCaseFiles: any;
+  fileId: number;
+  fileType: string = 'private';
 
   public uploader1: FileUploader = new FileUploader({ url: URL });
   public hasAnotherDropZoneOver: boolean = false;
-  fileId: any;
 
   public fileOverAnother(e: any): void {
     this.hasAnotherDropZoneOver = e;
@@ -33,7 +35,7 @@ export class ViewCaseFilesComponent implements OnInit {
   onGetCase() {
     this.caseService.getCase(this.activatedRoute.snapshot.params['caseId']).subscribe((res: any) => {
       if (res.success) {
-        this.uploadedCaseFiles = res.data;
+        this.filterCases(res.data.caseFile);
       } else {
         this.toasterService.showErrorToater(res.data);
       }
@@ -42,21 +44,24 @@ export class ViewCaseFilesComponent implements OnInit {
     })
   }
 
-  onUploadCaseFile() {
-    // this.loading = true;
-    let formData = new FormData();
-    if (this.uploadedCaseFiles) {
-      formData.append('caseId', this.uploadedCaseFiles.caseId);
-    } else {
-      formData.append('caseId', this.activatedRoute.snapshot.params['caseId']);
+  filterCases(data: any) {
+    if (data) {
+      this.sharedCaseFiles = data.filter(data => data.file_case.type == "shared");
+      this.privateCaseFiles = data.filter(data => data.file_case.type == "private");
     }
+  }
+
+  onUploadCaseFile() {
+    let formData = new FormData();
+    formData.append('caseId', this.activatedRoute.snapshot.params['caseId']);
     this.uploader1.queue.forEach((file) => {
       formData.append('file', file._file);
     })
+    formData.append('type', this.fileType);
 
     this.caseService.uploadFile(formData).subscribe((res) => {
+      this.fileType = 'private';
       if (res.success) {
-        // this.loading = false;
         this.onGetCase();
         this.uploader1.queue = [];
         this.toasterService.showSuccessToater('File uploaded successfully.');
@@ -86,7 +91,7 @@ export class ViewCaseFilesComponent implements OnInit {
     this.caseService.deleteFile(this.fileId).subscribe((res: any) => {
       if (res.success) {
         this.dialog.closeAll();
-        this.toasterService.showSuccessToater('Case file deleted.');
+        this.toasterService.showSuccessToater('Case file deleted successfully.');
         this.onGetCase();
       } else {
         this.toasterService.showErrorToater(res.data);
@@ -98,9 +103,8 @@ export class ViewCaseFilesComponent implements OnInit {
 
   onDownloadCaseFile(fileId) {
     let data: any = {};
-    data.caseId = this.uploadedCaseFiles.caseId;
+    data.caseId = this.activatedRoute.snapshot.params['caseId'];
     data.fileId = fileId;
-
     this.caseService.getDownloadLink(data).subscribe((res: any) => {
       if (res.success) {
         window.open(res.data, '_self');
