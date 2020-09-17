@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { LoginComponent } from './login/login.component';
-import { AccountReviewComponent } from './account-review/account-review.component';
 import { MyAccountComponent } from './my-account/my-account.component';
 import { ManageOrganisationComponent } from './+manage-organization/manage-organisation/manage-organisation.component';
 import { ViewUsersComponent } from './+manage-organization/view-users/view-users.component';
@@ -14,7 +13,6 @@ import { RouterModule } from '@angular/router';
 @NgModule({
   declarations: [
     LoginComponent,
-    AccountReviewComponent,
     MyAccountComponent,
     ManageOrganisationComponent,
     ViewUsersComponent,
@@ -30,7 +28,6 @@ import { RouterModule } from '@angular/router';
   ],
   exports: [
     LoginComponent,
-    AccountReviewComponent,
     MyAccountComponent,
     ManageOrganisationComponent,
     ViewUsersComponent,

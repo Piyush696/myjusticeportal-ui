@@ -59,16 +59,21 @@ export class SidebarComponent implements OnInit {
     }
 
     filterMenuByUser() {
-        this.filteredMenuItems = ROUTES.filter(menu => {
-            let isExist = menu.roleIds.find(roleId => roleId == this.userInfo.roles[0].roleId);
-            if (isExist) {
-                if (!menu.isAdmin) {
-                    return menu;
+        if (this.userInfo.status) {
+            this.filteredMenuItems = ROUTES.filter(menu => {
+                let isExist = menu.roleIds.find(roleId => roleId == this.userInfo.roles[0].roleId);
+                if (isExist) {
+                    if (!menu.isAdmin) {
+                        return menu;
+                    }
+                    else if (menu.isAdmin && this.userInfo.isAdmin) {
+                        return menu;
+                    }
                 }
-                else if (menu.isAdmin && this.userInfo.isAdmin) {
-                    return menu;
-                }
-            }
-        });
+            });
+        }
+        else {
+            this.filteredMenuItems = null;
+        }
     }
 }

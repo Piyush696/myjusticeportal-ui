@@ -4,6 +4,8 @@ import { Router } from '@angular/router';
 import { LawyerService } from 'app/services/registration/lawyer.service';
 import { CacheService } from 'app/services/cache.service';
 import { LoginService } from 'app/services/login.service';
+import { Store } from '@ngrx/store';
+import { AddUserInfo } from 'app/store/actions/userInfo.actions';
 
 @Component({
   selector: 'app-lawyer-registration',
@@ -30,7 +32,7 @@ export class LawyerRegistrationComponent implements OnInit {
 
   constructor(private lawyerService: LawyerService, private cacheService: CacheService,
     private toaterService: ToasterService, private toasterService: ToasterService,
-    private router: Router, private loginService: LoginService) { }
+    private router: Router, private loginService: LoginService, private store: Store<any>) { }
 
   ngOnInit(): void {
   }
@@ -106,13 +108,9 @@ export class LawyerRegistrationComponent implements OnInit {
         this.cacheService.setCache('token', verified.token);
         this.loginService.checkToken().then((data: any) => {
           if (data.success) {
-            if (data.user.status) {
-              this.router.navigateByUrl('/mjp/lawyer/lawyer-dashboard');
-            }
-            else {
-              this.router.navigateByUrl('/account-review')
-              this.toaterService.showWarningToater("Account under review.")
-            }
+            this.store.dispatch(new AddUserInfo(Object.assign({}, data.user)));
+            this.router.navigateByUrl('/mjp/lawyer/lawyer-dashboard');
+            this.toaterService.showWarningToater("Account under review.")
           }
           else {
             this.toaterService.showWarningToater('Something Wrong.')
