@@ -156,7 +156,9 @@
                 </mat-form-field>
             </div>
             <p class="font-weight-bold text-center" *ngIf="message">
-                {{message}}
+                <span [ngClass]="{'text-danger' : email == 'EXPIRED_TOKEN'}">
+                    {{message}}
+                </span>
             </p>
             <div class="row">
                 <mat-checkbox class="termCondition-margin ml-2"

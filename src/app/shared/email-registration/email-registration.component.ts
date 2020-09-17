@@ -22,8 +22,8 @@ export class EmailRegistrationComponent implements OnInit, OnChanges {
   @Input() user;
   @Output() isNextEvent = new EventEmitter();
 
-  constructor(public securityService: SecurityService, public dialog: MatDialog, private fb: FormBuilder,
-    private registrationService: RegistrationService) {
+  constructor(public securityService: SecurityService, public dialog: MatDialog,
+    private fb: FormBuilder, private registrationService: RegistrationService) {
   }
 
   ngOnInit(): void {
@@ -46,11 +46,17 @@ export class EmailRegistrationComponent implements OnInit, OnChanges {
 
   ngOnChanges(): void {
     if (this.email || this.user) {
-      this.createFormControl()
+      this.createFormControl();
     }
     if (this.email) {
-      this.registrationForm.get('userName').setValue(this.email);
-      this.registrationForm.get('userName').disable();
+      if (this.email == 'EXPIRED_TOKEN') {
+        this.registrationForm.reset();
+        this.registrationForm.disable();
+        this.isNextDisabled = true;
+      } else {
+        this.registrationForm.get('userName').setValue(this.email);
+        this.registrationForm.get('userName').disable();
+      }
     }
     if (this.user) {
       this.registrationForm.get('firstName').setValue(this.user.firstName)
@@ -64,7 +70,7 @@ export class EmailRegistrationComponent implements OnInit, OnChanges {
   }
 
   validateEmail(control: AbstractControl) {
-    if (this.roleId != 1) {
+    if (this.roleId != 1 && control.value) {
       const pattern = /^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,15})$/;
       if (!control.value.match(pattern) && control.value !== '') {
         return { invalidEmail: true };
@@ -74,7 +80,7 @@ export class EmailRegistrationComponent implements OnInit, OnChanges {
   }
 
   validatePassword(control: AbstractControl) {
-    if (!this.user) {
+    if (!this.user && control.value) {
       const pattern = /(?=.*[A-Z])(?=.*[a-z])(?=.*\W).{8,18}$/;
       if (!control.value.match(pattern) && control.value !== '') {
         return { invalidPassword: true };
@@ -135,8 +141,13 @@ export class EmailRegistrationComponent implements OnInit, OnChanges {
   }
 
   onAcceptTerms() {
-    this.registrationForm.get('termCondition').setValue(true);
-    this.isNextDisabled = false;
+    if (this.email == 'EXPIRED_TOKEN') {
+      this.registrationForm.get('termCondition').setValue(false);
+      this.isNextDisabled = true;
+    } else {
+      this.registrationForm.get('termCondition').setValue(true);
+      this.isNextDisabled = false;
+    }
   }
 
   onDeclineTerms() {
