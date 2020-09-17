@@ -10,34 +10,48 @@
                     <h2 class=" text-center font-weight-bold">Additional Information</h2>
                 </div>
                 <mat-form-field appearance="fill" class="w-100 p-3">
-                    <mat-label>Housing Unit</mat-label>
+                    <mat-label>{{fieldName}}</mat-label>
                     <input type="text" matInput placeholder="Housing Unit"
                         [formControl]="additionalInfo.controls['housing_unit']" required>
                     <mat-error
                         *ngIf="additionalInfo.controls['housing_unit'].invalid && additionalInfo.controls['housing_unit'].touched">
                         <div class="font13" *ngIf="additionalInfo.get('housing_unit').errors?.required">
-                            Housing unit is required.
+                            {{fieldName}} is required.
                         </div>
                     </mat-error>
                 </mat-form-field>
 
                 <mat-form-field appearance="fill" class="w-100 p-3">
-                    <mat-label>Facility</mat-label>
+                    <mat-label>{{fieldOption}}</mat-label>
                     <input type="text" matInput placeholder="Facility"
                         [formControl]="additionalInfo.controls['facility']" required>
                     <mat-error
                         *ngIf="additionalInfo.controls['facility'].invalid && additionalInfo.controls['facility'].touched">
                         <small class="font13" *ngIf="additionalInfo.get('facility').errors?.required">
-                            Facility is required.
+                            {{fieldOption}} is required.
                         </small>
                     </mat-error>
                 </mat-form-field>
+
+                <mat-form-field *ngIf="roleId == 3" appearance="fill" class="w-100 p-3">
+                    <mat-label>Speciality</mat-label>
+                    <input type="text" matInput placeholder="Speciality"
+                        [formControl]="additionalInfo.controls['speciality']" required>
+                    <mat-error
+                        *ngIf="additionalInfo.controls['speciality'].invalid && additionalInfo.controls['speciality'].touched">
+                        <small class="font13" *ngIf="additionalInfo.get('speciality').errors?.required">
+                            Speciality is required.
+                        </small>
+                    </mat-error>
+                </mat-form-field>
+
                 <div class="d-flex justify-content-between px-3 mt-2">
                     <button mat-button color="primary" (click)="onPreviousClick()">
                         BACK
                     </button>
-                    <button [disabled]="this.additionalInfo.invalid" class="px-4 py-1" mat-raised-button color="primary"
-                        (click)="submit()">Next</button>
+                    <button
+                        [disabled]="additionalInfo.controls['housing_unit'].invalid || additionalInfo.controls['facility'].invalid"
+                        class="px-4 py-1" mat-raised-button color="primary" (click)="submit()">Next</button>
                 </div>
             </mat-card>
         </div>
