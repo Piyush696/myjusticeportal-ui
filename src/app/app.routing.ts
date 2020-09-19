@@ -30,8 +30,8 @@ export const AppRoutes: Routes = [
   { path: 'paralegal/registration/:token', component: InvitedParalegalComponent },
   { path: 'public-defender/registration/:token', component: InvitedPublicDefenderComponent },
   { path: 'bondsman/registration/:token', component: InvitedBondsmanComponent },
-  { path: ':facilityCode/registration', component: UserRegistrationComponent },
-  { path: ':facilityCode/facility/registration', component: FacilityRegistrationComponent },
+  { path: 'registration', component: UserRegistrationComponent },
+  { path: 'facility/registration', component: FacilityRegistrationComponent },
   { path: 'forget-password', component: ForgetPasswordComponent },
   { path: 'reset-password/:token', component: ResetPasswordComponent },
   { path: '**', redirectTo: 'login' }

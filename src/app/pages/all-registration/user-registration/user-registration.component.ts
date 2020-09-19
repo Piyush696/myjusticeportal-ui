@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
 import { CacheService } from 'app/services/cache.service';
 import { ToasterService } from 'app/services/toaster.service';
 import { Store } from '@ngrx/store';
 import { LoginService } from 'app/services/login.service';
 import { AddUserInfo } from 'app/store/actions/userInfo.actions';
 import { UserService } from 'app/services/registration/user.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-user-registration',
@@ -20,10 +20,9 @@ export class UserRegistrationComponent implements OnInit {
   facilityCode: any;
   user = {};
 
-  constructor(private loginService: LoginService, private activatedRoute: ActivatedRoute,
+  constructor(private loginService: LoginService,
     private store: Store<any>, private userRegistrationService: UserService,
     private cacheService: CacheService, private toasterService: ToasterService, private router: Router) {
-    this.facilityCode = this.activatedRoute.snapshot.params.facilityCode;
   }
 
   ngOnInit(): void {
@@ -42,7 +41,6 @@ export class UserRegistrationComponent implements OnInit {
 
   onUpdateRegisteredUser(userSecurityQuestionData) {
     this.user['securityQuestionData'] = userSecurityQuestionData;
-    this.user['facilityCode'] = this.facilityCode;
     this.userRegistrationService.userRegistration(this.user).subscribe((user: any) => {
       if (user.token) {
         this.cacheService.setCache('token', user.token);
