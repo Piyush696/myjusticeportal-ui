@@ -123,7 +123,7 @@
                         <div
                             *ngIf="registrationForm.get('password').invalid && registrationForm.get('password').touched">
                             <small class="font13" *ngIf="registrationForm.get('password').errors?.minlength">
-                                password must be at least 8 Characters.
+                                Password must be at least 8 Characters.
                             </small>
                             <small class="font13" *ngIf="registrationForm.get('password').errors?.required ">
                                 Password required.
