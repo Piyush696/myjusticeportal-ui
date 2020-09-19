@@ -1,3 +1,4 @@
+@import '../../../../assets/scss/variable';
 .bg-color {
-    background-color: #FF6700 !important;
+    background-color: $custom-bg-color;
 }

@@ -1,9 +1,10 @@
+@import '../../../../assets/scss/variable';
 .logo {
   width: 225px;
 }
 
 .bg-color {
-  background-color: #FF6700 !important;
+  background-color: $custom-bg-color;
 }
 
 .mat-border {
