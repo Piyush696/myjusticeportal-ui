@@ -30,7 +30,6 @@ export class LawyerdashboardComponent implements OnInit {
     this.hireLawyerService.getRequestedCases({ status: 'Requested' }).subscribe((res: any) => {
       if (res.data) {
         this.requestedCases = res.data.lawyer;
-        // console.log(this.requestedCases);
       } else {
         this.requestedCases = [];
       }

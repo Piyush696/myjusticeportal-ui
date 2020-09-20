@@ -5,10 +5,14 @@ import { SharedMaterialModule } from 'app/shared-material/shared-material.module
 import { SharedComponentsModule } from '../+shared-components/shared-components.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BondsmanDashboardComponent } from './bondsman-dashboard/bondsman-dashboard.component';
+import { FindBondsmanComponent } from './find-bondsman/find-bondsman.component';
+import { ViewBondsmanComponent } from './view-bondsman/view-bondsman.component';
 
 @NgModule({
   declarations: [
-    BondsmanDashboardComponent
+    BondsmanDashboardComponent,
+    FindBondsmanComponent,
+    ViewBondsmanComponent
   ],
   imports: [
     CommonModule,
