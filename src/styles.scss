@@ -1,5 +1,5 @@
 /* You can add global styles to this file, and also import other style files */
-
+@import './assets/scss/variable';
 body {
   background-color: #ffffff;
 }
@@ -197,4 +197,22 @@ textarea[disabled] {
   border: none !important;
   -webkit-tap-highlight-color: transparent !important;
   box-shadow: none !important;
+}
+.mat-form-field.mat-focused .mat-form-field-ripple{
+  background-color: $custom-orange;
+}
+.mat-form-field.mat-focused .mat-form-field-label{
+  color: $custom-orange;
+}
+.mat-flat-button.mat-primary, .mat-raised-button.mat-primary, .mat-fab.mat-primary, .mat-mini-fab.mat-primary {
+  background-color: $custom-orange;
+}
+.mat-button.mat-primary, .mat-icon-button.mat-primary, .mat-stroked-button.mat-primary{
+  color: $custom-orange;
+}
+.mat-checkbox-indeterminate.mat-primary .mat-checkbox-background, .mat-checkbox-checked.mat-primary .mat-checkbox-background {
+  background-color: $custom-orange;
+}
+.mat-checkbox-inner-container{
+  margin-top: 2px !important;
 }
