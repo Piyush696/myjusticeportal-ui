@@ -26,7 +26,9 @@ export class OrganisationComponent implements OnInit, OnChanges {
 
   createFormControl() {
     this.organisationForm = this.fb.group({
-      name: ['', [Validators.required]]
+      name: ['', [Validators.required]],
+      tagline: ['', [Validators.required]],
+      description: ['', [Validators.required]]
     });
 
     this.addressForm = this.fb.group({
@@ -58,7 +60,9 @@ export class OrganisationComponent implements OnInit, OnChanges {
 
   submit() {
     let data: any = {};
-    data.name = this.organisationForm.value;
+    data.name = this.organisationForm.get('name').value;
+    data.tagline = this.organisationForm.get('tagline').value;
+    data.description = this.organisationForm.get('description').value;
     data.address = this.addressForm.value;
     this.orgAddressEventEmitter.emit(data);
   }
