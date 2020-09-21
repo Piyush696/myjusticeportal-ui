@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { CacheService } from 'app/services/cache.service';
 import { FacilityService } from 'app/services/registration/facility.service';
 import { LoginService } from 'app/services/login.service';
@@ -27,8 +27,7 @@ export class FacilityRegistrationComponent implements OnInit {
   }
   constructor(private facilityService: FacilityService, private cacheService: CacheService,
     private store: Store<any>, private toasterService: ToasterService,
-    private router: Router, private loginService: LoginService, private activatedRoute: ActivatedRoute) {
-    this.facililityRegistrationData.facilityCode = this.activatedRoute.snapshot.params.facilityCode;
+    private router: Router, private loginService: LoginService) {
   }
 
   ngOnInit(): void {
