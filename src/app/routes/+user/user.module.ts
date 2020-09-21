@@ -14,6 +14,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FileUploadModule } from 'ng2-file-upload';
 import { HireLawyerComponent } from './hire-lawyer/hire-lawyer.component';
 import { ViewLawyerComponent } from './hire-lawyer/view-lawyer/view-lawyer.component';
+import { FindBondsmanComponent } from './find-bondsman/find-bondsman.component';
+import { ViewBondsmanComponent } from './view-bondsman/view-bondsman.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +27,9 @@ import { ViewLawyerComponent } from './hire-lawyer/view-lawyer/view-lawyer.compo
     EditCaseComponent,
     ViewCaseFilesComponent,
     HireLawyerComponent,
-    ViewLawyerComponent
+    ViewLawyerComponent,
+    FindBondsmanComponent,
+    ViewBondsmanComponent
   ],
   imports: [
     CommonModule,

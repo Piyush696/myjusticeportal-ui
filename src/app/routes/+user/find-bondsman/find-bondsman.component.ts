@@ -23,7 +23,7 @@ export class FindBondsmanComponent implements OnInit {
   }
 
   onViewClick(organzationId) {
-    let _url = '/mjp/bondsman/organization/' + organzationId
+    let _url = '/mjp/user/organization/' + organzationId
     this.router.navigateByUrl(_url)
   }
 
