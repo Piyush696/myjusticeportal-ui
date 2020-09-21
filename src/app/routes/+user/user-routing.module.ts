@@ -21,8 +21,8 @@ const routes: Routes = [
     { path: 'case/:caseId', component: ViewCaseComponent },
     { path: 'hire-lawyer', component: HireLawyerComponent },
     { path: 'hire-lawyer/:organizationId', component: ViewLawyerComponent },
-    { path: 'organization', component: FindBondsmanComponent },
-    { path: 'organization/:organizationId', component: ViewBondsmanComponent },
+    { path: 'find-bondsman', component: FindBondsmanComponent },
+    { path: 'find-bondsman/:organizationId', component: ViewBondsmanComponent },
     { path: '**', component: UserDashboardComponent }
 ];
 
