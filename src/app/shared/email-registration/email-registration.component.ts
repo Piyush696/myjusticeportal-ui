@@ -80,7 +80,7 @@ export class EmailRegistrationComponent implements OnInit, OnChanges {
   }
 
   validatePassword(control: AbstractControl) {
-    if (!this.user && control.value) {
+    if (control.value) {
       const pattern = /(?=.*[A-Z])(?=.*[a-z])(?=.*\W).{8,18}$/;
       if (!control.value.match(pattern) && control.value !== '') {
         return { invalidPassword: true };
