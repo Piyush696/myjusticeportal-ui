@@ -22,8 +22,8 @@
                 </mat-form-field>
 
                 <mat-form-field appearance="fill" class="w-100 p-3">
-                    <mat-label>{{fieldOption}}</mat-label>
-                    <input type="text" matInput placeholder="Facility"
+                    <mat-label>Bar info - Exam Id</mat-label>
+                    <input type="text" matInput
                         [formControl]="additionalInfo.controls['facility']" required>
                     <mat-error
                         *ngIf="additionalInfo.controls['facility'].invalid && additionalInfo.controls['facility'].touched">
@@ -34,13 +34,13 @@
                 </mat-form-field>
 
                 <mat-form-field *ngIf="roleId == 3" appearance="fill" class="w-100 p-3">
-                    <mat-label>Speciality</mat-label>
-                    <input type="text" matInput placeholder="Speciality"
+                    <mat-label>Specialty</mat-label>
+                    <input type="text" matInput placeholder="Specialty"
                         [formControl]="additionalInfo.controls['speciality']" required>
                     <mat-error
                         *ngIf="additionalInfo.controls['speciality'].invalid && additionalInfo.controls['speciality'].touched">
                         <small class="font13" *ngIf="additionalInfo.get('speciality').errors?.required">
-                            Speciality is required.
+                            Specialty is required.
                         </small>
                     </mat-error>
                 </mat-form-field>
