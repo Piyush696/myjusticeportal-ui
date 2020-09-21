@@ -18,7 +18,7 @@ export class FindBondsmanComponent implements OnInit {
 
   getOrganisations() {
     this.bondsmanService.getBondsmanOrganisation().subscribe((org: any) => {
-      this.organizationList = org.data.Organization;
+      this.organizationList = org.data;
     })
   }
 
