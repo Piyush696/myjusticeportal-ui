@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import { BondsmanService } from 'app/services/bondsman.service';
 
 @Component({
@@ -10,7 +9,7 @@ import { BondsmanService } from 'app/services/bondsman.service';
 export class FindBondsmanComponent implements OnInit {
   organizationList: any;
 
-  constructor(private bondsmanService: BondsmanService, private router: Router) { }
+  constructor(private bondsmanService: BondsmanService) { }
 
   ngOnInit(): void {
     this.getOrganisations();
@@ -20,11 +19,6 @@ export class FindBondsmanComponent implements OnInit {
     this.bondsmanService.getBondsmanOrganisation().subscribe((org: any) => {
       this.organizationList = org.data;
     })
-  }
-
-  onViewClick(organzationId) {
-    let _url = '/mjp/user/find-bondsman/' + organzationId
-    this.router.navigateByUrl(_url)
   }
 
 }

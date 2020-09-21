@@ -32,8 +32,7 @@
                             </span>
                         </div>
                     </div>
-                    <button class="button-purple" mat-raised-button (click)="onViewClick(org.organizationId)">
-                        View
+                    <button [routerLink]="org?.organizationId" class="button-purple" mat-raised-button> View
                     </button>
                 </mat-card>
             </mat-card>
