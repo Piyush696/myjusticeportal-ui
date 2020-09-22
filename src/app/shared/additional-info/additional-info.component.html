@@ -9,10 +9,18 @@
                 <div>
                     <h2 class=" text-center font-weight-bold">Additional Information</h2>
                 </div>
+
                 <mat-form-field appearance="fill" class="w-100 p-3">
                     <mat-label>{{fieldName}}</mat-label>
-                    <input type="text" matInput placeholder="Housing Unit"
+                    <input *ngIf="roleId != 3" type="text" matInput placeholder="Housing Unit"
                         [formControl]="additionalInfo.controls['housing_unit']" required>
+
+                    <mat-select *ngIf="roleId == 3" [(value)]="housing_unit"
+                        [formControl]="additionalInfo.controls['housing_unit']" required>
+                        <mat-option value="barInfo">Select state</mat-option>
+                        <mat-option value="state">State</mat-option>
+                    </mat-select>
+
                     <mat-error
                         *ngIf="additionalInfo.controls['housing_unit'].invalid && additionalInfo.controls['housing_unit'].touched">
                         <div class="font13" *ngIf="additionalInfo.get('housing_unit').errors?.required">

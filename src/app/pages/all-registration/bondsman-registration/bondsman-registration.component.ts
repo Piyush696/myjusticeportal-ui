@@ -48,7 +48,7 @@ export class BondsmanRegistrationComponent implements OnInit {
   onCreateOrganisation(orgData) {
     if (orgData) {
       this.step = 3;
-      this.registrationData.organization = orgData.name;
+      this.registrationData.organization = orgData;
       this.registrationData.organization.address = orgData.address;
     } else {
       this.step = 2;
