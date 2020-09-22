@@ -14,8 +14,8 @@
                         placeholder="Housing Unit" [formControl]="additionalInfo.controls['housing_unit']" required>
                     <mat-select *ngIf="roleId == 3" [(value)]="housing_unit"
                         [formControl]="additionalInfo.controls['housing_unit']" required>
-                        <mat-option value="barInfo">Select state</mat-option>
-                        <mat-option value="state">State</mat-option>
+                        <mat-option >Select state</mat-option>
+                        <mat-option *ngFor="let state of states" value="{{state.name}}">{{state.name}}</mat-option>
                     </mat-select>
                     <mat-error
                         *ngIf="additionalInfo.controls['housing_unit'].invalid && additionalInfo.controls['housing_unit'].touched">
