@@ -102,6 +102,39 @@
                         </mat-error>
                     </mat-form-field>
                 </div>
+
+            </div>
+            <div>
+
+            </div>
+            <div class="row p-1">
+                <mat-form-field appearance="fill" class="w-100 px-3 mb-1">
+                    <mat-label>Tagline</mat-label>
+                    <input type="text" matInput [formControl]="organisationForm.controls['tagline']" required>
+                    <mat-error>
+                        <div
+                            *ngIf="organisationForm.controls['tagline'].invalid && organisationForm.controls['tagline'].touched">
+                            <small class="font13">
+                                Tagline is Required
+                            </small>
+                        </div>
+                    </mat-error>
+                </mat-form-field>
+            </div>
+            <div class="row p-1">
+                <mat-form-field appearance="fill" class="w-100 px-3 mb-1">
+                    <mat-label>Description</mat-label>
+                    <textarea rows="10" matInput [formControl]="organisationForm.controls['description']"
+                        required></textarea>
+                    <mat-error>
+                        <div
+                            *ngIf="organisationForm.controls['description'].invalid && organisationForm.controls['description'].touched">
+                            <small class="font13">
+                                Description is Required
+                            </small>
+                        </div>
+                    </mat-error>
+                </mat-form-field>
             </div>
             <div class="d-flex justify-content-between mt-2 pr-2">
                 <button class="button-purple px-4 py-1" mat-raised-button (click)="onPreviousClick()">

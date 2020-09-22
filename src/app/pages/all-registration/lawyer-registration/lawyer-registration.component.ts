@@ -62,7 +62,7 @@ export class LawyerRegistrationComponent implements OnInit {
   onCreateOrganisation(orgData) {
     if (orgData) {
       this.step = 4;
-      this.registrationData.organization = orgData.name;
+      this.registrationData.organization = orgData;
       this.registrationData.organization.address = orgData.address;
     } else {
       this.step = 3;
