@@ -30,7 +30,7 @@ export class AdditionalInfoComponent implements OnInit, OnChanges {
 
     if (this.roleId == 3) {
       this.fieldName = 'State'
-      this.fieldOption = 'Bar Exam Id'
+      this.fieldOption = 'Bar info - Exam Id'
     }
     else {
       this.fieldName = 'Housing Unit'
