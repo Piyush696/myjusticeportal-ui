@@ -1,3 +1,4 @@
+import { StatesService } from '../../services/states.service';
 import { Component, OnInit, EventEmitter, Output, Input, OnChanges } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
@@ -17,27 +18,34 @@ export class AdditionalInfoComponent implements OnInit, OnChanges {
   @Input() roleId;
   facilityCode: any;
   fieldName: string = 'Housing Unit';
-  fieldOption: string = 'Facility';
-  constructor(private fb: FormBuilder, private activatedRoute: ActivatedRoute) {
+  fieldOption: string = 'Bar info - Exam Id';
+  public states = [];
+  constructor(private fb: FormBuilder, private activatedRoute: ActivatedRoute, private _statesService : StatesService) {
     this.facilityCode = this.activatedRoute.snapshot.params.facilityCode;
   }
 
-  ngOnInit(): void {
+  ngOnInit(): void {   
+    
     if (!this.userMeta) {
       this.createFormControl();
       this.additionalInfo.get('facility').setValue(this.facilityCode)
     }
-
     if (this.roleId == 3) {
       this.fieldName = 'State'
-      this.fieldOption = 'Bar Exam Id'
+      this.fieldOption = 'Bar info - Exam Id'
+      this.stateData()
     }
     else {
       this.fieldName = 'Housing Unit'
       this.fieldOption = 'Facility'
     }
   }
-
+  stateData(){
+    this._statesService.getStates()
+  .subscribe(data => {
+    this.states = data
+  });
+  }
 
   ngOnChanges(): void {
     if (this.userMeta) {
@@ -72,5 +80,5 @@ export class AdditionalInfoComponent implements OnInit, OnChanges {
   onPreviousClick() {
     this.isPreviousClick.emit(true)
   }
-
+ 
 }
