@@ -30,7 +30,6 @@ export class UserRegistrationComponent implements OnInit {
 
   onNextClick(userDetails) {
     this.step = 2;
-    console.log(this.user)
     this.user = userDetails;
   }
 
