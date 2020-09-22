@@ -17,7 +17,7 @@ export class AdditionalInfoComponent implements OnInit, OnChanges {
   @Input() roleId;
   facilityCode: any;
   fieldName: string = 'Housing Unit';
-  fieldOption: string = 'Facility';
+  fieldOption: string = 'Bar info - Exam Id';
   constructor(private fb: FormBuilder, private activatedRoute: ActivatedRoute) {
     this.facilityCode = this.activatedRoute.snapshot.params.facilityCode;
   }
