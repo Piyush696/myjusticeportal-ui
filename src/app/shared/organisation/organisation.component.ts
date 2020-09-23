@@ -61,7 +61,7 @@ export class OrganisationComponent implements OnInit, OnChanges {
       this.addressForm.get('zip').setValue(this.orgAddress.address.zip)
       this.addressForm.get('country').setValue(this.orgAddress.address.country)
       this.addressForm.get('tagline').setValue(this.orgAddress.tagline)
-      this.addressForm.get('description').setValue(this.orgAddress.zdescriptionip)
+      this.addressForm.get('description').setValue(this.orgAddress.description)
     }
   }
 
