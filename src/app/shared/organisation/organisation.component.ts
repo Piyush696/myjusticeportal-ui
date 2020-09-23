@@ -1,3 +1,4 @@
+import { StatesService } from './../../services/states.service';
 import { Component, EventEmitter, OnInit, Output, Input, OnChanges } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
@@ -15,13 +16,21 @@ export class OrganisationComponent implements OnInit, OnChanges {
   @Input() orgAddress: any;
   @Output() orgAddressEventEmitter = new EventEmitter();
   @Output() previousClick = new EventEmitter();
+  public states = [];
 
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder, private _statesService : StatesService) { }
 
   ngOnInit(): void {
+    this.stateData()
     if (!this.orgAddress) {
       this.createFormControl();
     }
+  }
+  stateData(){
+    this._statesService.getStates()
+  .subscribe(data => {
+    this.states = data
+  });
   }
 
   createFormControl() {
@@ -37,7 +46,7 @@ export class OrganisationComponent implements OnInit, OnChanges {
       city: ['', [Validators.required]],
       state: ['', [Validators.required]],
       zip: ['', [Validators.required]],
-      country: ['', [Validators.required]]
+      country: ['United States', [Validators.required]]
     });
   }
 
@@ -51,6 +60,8 @@ export class OrganisationComponent implements OnInit, OnChanges {
       this.addressForm.get('state').setValue(this.orgAddress.address.state)
       this.addressForm.get('zip').setValue(this.orgAddress.address.zip)
       this.addressForm.get('country').setValue(this.orgAddress.address.country)
+      this.addressForm.get('tagline').setValue(this.orgAddress.tagline)
+      this.addressForm.get('description').setValue(this.orgAddress.zdescriptionip)
     }
   }
 
