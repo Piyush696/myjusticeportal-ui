@@ -32,7 +32,7 @@ export const ROUTES: RouteInfo[] = [
     { path: '/message-lawyer', title: 'Message My lawyer', icon: 'nc-bank', class: '', roleIds: [5] },
     { path: '/video-lawyer', title: 'Video My lawyer', icon: 'nc-bank', class: '', roleIds: [5] },
     { path: '/bail-bonds', title: 'Bail Bonds', icon: 'nc-bank', class: '', roleIds: [4, 6] },
-    { path: 'superadmin/facility', title: 'Facility', icon: 'nc-bank', class: '', roleIds: [7] }
+    { path: 'superadmin/facility', title: 'Facilities', icon: 'nc-bank', class: '', roleIds: [7] }
 ];
 
 @Component({
