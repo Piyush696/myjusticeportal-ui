@@ -1,0 +1,220 @@
+<div>
+    <mat-card class="w-100">
+        <div class="row">
+            <div class="col-4">
+                <mat-form-field class="w-100">
+                    <mat-label>Search</mat-label>
+                    <input matInput (keyup)="search($event.target.value)">
+                </mat-form-field>
+            </div>
+            <div class="col-4 offset-4">
+                <div class="d-flex justify-content-end">
+                    <button class="button-purple px-5 py-1" mat-raised-button (click)="openModal(addUsermodal)">
+                        Create superadmin user
+                    </button>
+                </div>
+            </div>
+        </div>
+        <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8 w-100">
+            <ng-container matColumnDef="name">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>User</th>
+                <td mat-cell *matCellDef="let user">
+                    <span>
+                        {{user?.firstName | titlecase}}
+                        <span *ngIf="user?.middleName">
+                            &nbsp;{{user?.middleName | titlecase}}
+                        </span>
+                        &nbsp;{{user?.lastName | titlecase}}
+                    </span>
+                    <span *ngIf="!user?.firstName && !user?.middleName && !user?.lastName">
+                        N/A
+                    </span>
+                </td>
+            </ng-container>
+            <ng-container matColumnDef="userName">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>User Name</th>
+                <td mat-cell *matCellDef="let user">{{user?.userName}}</td>
+            </ng-container>
+            <ng-container matColumnDef="status">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Status</th>
+                <td mat-cell *matCellDef="let user">{{user.status ? 'Enabled' : 'Disabled'}}</td>
+            </ng-container>
+            <ng-container matColumnDef="roles">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Role</th>
+                <td mat-cell *matCellDef="let user">
+                    <ng-container *ngFor="let role of user?.roles;let isLast=last">
+                        <span>{{role?.name}}{{isLast ? '' : ', '}}</span>
+                    </ng-container>
+                </td>
+            </ng-container>
+            <ng-container matColumnDef="createdAt">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Date Created</th>
+                <td mat-cell *matCellDef="let user">{{user?.createdAt | date:'longDate'}}</td>
+            </ng-container>
+            <ng-container matColumnDef="action">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Action</th>
+                <td mat-cell *matCellDef="let user">
+                    <button [routerLink]="user?.userId" class="button-purple mr-1" mat-mini-fab title="View Details">
+                        <mat-icon>remove_red_eye</mat-icon>
+                    </button>
+                    <button mat-mini-fab color="warn" title="Delete User" (click)="onOpenModal(confirmModal,user)">
+                        <mat-icon>delete</mat-icon>
+                    </button>
+                </td>
+            </ng-container>
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+        <mat-paginator [pageSizeOptions]="getPageSizeOptions()" showFirstLastButtons></mat-paginator>
+    </mat-card>
+</div>
+
+<ng-template #addUsermodal>
+    <div class="d-flex justify-content-start">
+        <h3 class="font-weight-bold pl-2">Enter User Details</h3>
+    </div>
+    <div>
+        <div class="row" style="margin-right: -8px;">
+            <div class="row mb-1 px-3">
+                <div class="col-4 pl-2 mb-1">
+                    <mat-form-field appearance="fill" class="w-100">
+                        <mat-label>Legal First Name</mat-label>
+                        <input matInput placeholder="Legal First Name"
+                            [formControl]="createUserForm.controls['firstName']" required>
+                        <mat-error
+                            *ngIf="createUserForm.controls['firstName'].invalid && createUserForm.controls['firstName'].touched">
+                            <small class="font13" *ngIf="createUserForm.get('firstName').errors?.required">
+                                Legal First Name is Required
+                            </small>
+                            <small class="font13" *ngIf="createUserForm.get('firstName').errors?.maxlength">
+                                Legal First Name should be less than 50 chracters
+                            </small>
+                            <small class="font13" *ngIf="createUserForm.get('firstName').errors?.pattern">
+                                Legal First Name should contain only alphabets.
+                            </small>
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+                <div class="col-4 pl-0 mb-1">
+                    <mat-form-field appearance="fill" class="w-100">
+                        <mat-label>Legal Middle Name</mat-label>
+                        <input matInput placeholder="Legal Middle Name"
+                            [formControl]="createUserForm.controls['middleName']" required>
+                        <mat-error
+                            *ngIf="createUserForm.controls['middleName'].invalid && createUserForm.controls['middleName'].touched">
+                            <small class="font13" *ngIf="createUserForm.get('middleName').errors?.required">
+                                Legal Middle Name is Required
+                            </small>
+                            <small class="font13" *ngIf="createUserForm.get('middleName').errors?.maxlength">
+                                Legal Middle Name should be less than 50 chracters
+                            </small>
+                            <small class="font13" *ngIf="createUserForm.get('middleName').errors?.pattern">
+                                Legal Middle Name should contain only alphabets.
+                            </small>
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+                <div class="col-4 pl-0 pr-2 mb-1">
+                    <mat-form-field appearance="fill" class="w-100">
+                        <mat-label>Legal Last Name</mat-label>
+                        <input matInput placeholder="Legal Last Name"
+                            [formControl]="createUserForm.controls['lastName']" required>
+                        <mat-error
+                            *ngIf="createUserForm.controls['lastName'].invalid && createUserForm.controls['lastName'].touched">
+                            <small class="font13" *ngIf="createUserForm.get('lastName').errors?.required">
+                                Legal Last Name is Required
+                            </small>
+                            <small class="font13" *ngIf="createUserForm.get('lastName').errors?.maxlength">
+                                Legal Last Name should be less than 50 chracters
+                            </small>
+                            <small class="font13" *ngIf="createUserForm.get('lastName').errors?.pattern">
+                                Legal Last Name should contain only alphabets.
+                            </small>
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="col-12 p-2">
+                <mat-form-field appearance="fill" class="w-100">
+                    <mat-label>User Name</mat-label>
+                    <input type="text" matInput [formControl]="createUserForm.controls['userName']" required>
+                    <mat-error>
+                        <div
+                            *ngIf="createUserForm.controls['userName'].invalid && 
+                                                createUserForm.controls['userName'].touched && createUserForm.controls['userName'].hasError('taken')">
+                            <small class="font13">User Name already taken.</small>
+                        </div>
+                        <div
+                            *ngIf="createUserForm.controls['userName'].invalid && 
+                                                createUserForm.controls['userName'].touched && !createUserForm.controls['userName'].hasError('taken')">
+                            <small class="font13" *ngIf="createUserForm.get('userName').errors?.required">
+                                User Name is Required
+                            </small>
+                            <small class="font13" *ngIf="createUserForm.get('userName').errors?.maxlength">
+                                User Name Name should be less than 25 chracters
+                            </small>
+                            <small class="font13" *ngIf="createUserForm.get('userName').errors?.minlength">
+                                User Name Name should be at least 8 chracters
+                            </small>
+                        </div>
+                    </mat-error>
+                </mat-form-field>
+            </div>
+            <div class="col-12 p-0 mt-3">
+                <mat-form-field appearance="fill" class="w-100 px-2">
+                    <mat-label>Password</mat-label>
+                    <input type="password" matInput [formControl]="createUserForm.controls['password']">
+                    <mat-error>
+                        <div *ngIf="createUserForm.get('password').invalid && createUserForm.get('password').touched">
+                            <small class="font13" *ngIf="createUserForm.get('password').errors?.minlength">
+                                password must be at least 8 Characters.
+                            </small>
+                            <small class="font13" *ngIf="createUserForm.get('password').errors?.required ">
+                                Password required.
+                            </small>
+                        </div>
+                        <div
+                            *ngIf="createUserForm.controls['password'].invalid && createUserForm.controls['password'].touched  &&createUserForm.controls['password'].hasError('invalidPassword')">
+                            <small class="font13">
+                                Password should contain at least 1 capital, at least 1 lowercase
+                                and at least 1 special character.
+                            </small>
+                        </div>
+                    </mat-error>
+                </mat-form-field>
+            </div>
+            <div class="col-12 p-0 mt-3">
+                <mat-form-field appearance="fill" class="w-100 px-2">
+                    <mat-label>Confirm Password</mat-label>
+                    <input type="password" matInput [formControl]="createUserForm.controls['confirmPassword']">
+                    <mat-error>
+                        <div
+                            *ngIf="createUserForm.controls['confirmPassword'].invalid &&  createUserForm.controls['confirmPassword'].touched &&
+                                                   createUserForm.controls['confirmPassword'].hasError('notSamePassword')">
+                            <small class="font13">
+                                Password does not match
+                            </small>
+                        </div>
+                    </mat-error>
+                </mat-form-field>
+            </div>
+        </div>
+    </div>
+    <div class="d-flex justify-content-between p-0">
+        <button type="button" class="button-purple px-4 py-1" mat-raised-button color="primary"
+            (click)="closeModal()">Close</button>
+        <button mat-raised-button color="primary" type="button" class="button-purple px-4 py-1"
+            (click)="onCreateUser()">Save</button>
+    </div>
+</ng-template>
+
+
+<ng-template #confirmModal>
+    <div class="d-flex justify-content-center p-2">
+        <mat-label class="font-weight-bold">Are you sure you want to delete this user? </mat-label>
+    </div>
+    <div class="d-flex justify-content-between p-2">
+        <button mat-raised-button type="button" class="button-purple px-4 py-1" (click)="onDeleteUser()">Yes</button>
+        <button type="button" class="button-purple px-4 py-1" mat-raised-button (click)="closeModal()">No</button>
+    </div>
+</ng-template>

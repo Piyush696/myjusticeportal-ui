@@ -3,6 +3,7 @@ import { ROUTES } from '../sidebar/sidebar.component';
 import { Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { CacheService } from 'app/services/cache.service';
+import { Store } from '@ngrx/store';
 
 @Component({
   moduleId: module.id,
@@ -16,11 +17,13 @@ export class NavbarComponent implements OnInit {
   private nativeElement: Node;
   private toggleButton;
   private sidebarVisible: boolean;
+  myAccountLink: string;
 
   public isCollapsed = true;
   @ViewChild("navbar-cmp", { static: false }) button;
 
-  constructor(location: Location, private cacheService: CacheService, private element: ElementRef, private router: Router) {
+  constructor(location: Location, private cacheService: CacheService,
+    private element: ElementRef, private router: Router, private store: Store<any>) {
     this.location = location;
     this.nativeElement = element.nativeElement;
     this.sidebarVisible = false;
@@ -32,6 +35,33 @@ export class NavbarComponent implements OnInit {
     this.toggleButton = navbar.getElementsByClassName('navbar-toggle')[0];
     this.router.events.subscribe((event) => {
       this.sidebarClose();
+    });
+    this.setMyAccountLink();
+  }
+
+  setMyAccountLink() {
+    this.store.select(s => s.userInfo).subscribe(x => {
+      if (x.roles[0].roleId == 1) {
+        this.myAccountLink = 'user/my-account';
+      }
+      else if (x.roles[0].roleId == 2) {
+        this.myAccountLink = 'facility/my-account';
+      }
+      else if (x.roles[0].roleId == 3) {
+        this.myAccountLink = 'lawyer/my-account';
+      }
+      else if (x.roles[0].roleId == 4) {
+        this.myAccountLink = 'researcher/my-account';
+      }
+      else if (x.roles[0].roleId == 5) {
+        this.myAccountLink = 'public-defender/my-account';
+      }
+      else if (x.roles[0].roleId == 6) {
+        this.myAccountLink = 'bondsman/my-account';
+      }
+      else if (x.roles[0].roleId == 7) {
+        this.myAccountLink = 'superadmin/my-account';
+      }
     });
   }
 

@@ -4,6 +4,8 @@ import { Router } from '@angular/router';
 import { LawyerService } from 'app/services/registration/lawyer.service';
 import { CacheService } from 'app/services/cache.service';
 import { LoginService } from 'app/services/login.service';
+import { Store } from '@ngrx/store';
+import { AddUserInfo } from 'app/store/actions/userInfo.actions';
 
 @Component({
   selector: 'app-lawyer-registration',
@@ -14,10 +16,10 @@ import { LoginService } from 'app/services/login.service';
 export class LawyerRegistrationComponent implements OnInit {
   step: number = 1;
   totalSteps: number = 4;
-  roleId: number = 2;
+  roleId: number = 3;
   userName: string;
   authCodeField: boolean;
-  message: string = '* Use legal name of the facility for registration.';
+  message: string = '* Please register with your legal name, as presented to the Bar Association in your state(s).';
   registrationData = {
     'user': {},
     'organization': {
@@ -25,10 +27,12 @@ export class LawyerRegistrationComponent implements OnInit {
     },
     'facilityIds': []
   }
+  user: any;
+  orgAddress: {};
 
   constructor(private lawyerService: LawyerService, private cacheService: CacheService,
     private toaterService: ToasterService, private toasterService: ToasterService,
-    private router: Router, private loginService: LoginService) { }
+    private router: Router, private loginService: LoginService, private store: Store<any>) { }
 
   ngOnInit(): void {
   }
@@ -42,13 +46,26 @@ export class LawyerRegistrationComponent implements OnInit {
     }
   }
 
-  onCreateOrganisation(orgData) {
-    if (orgData) {
-      this.step = 3;
-      this.registrationData.organization = orgData.name;
-      this.registrationData.organization.address = orgData.address;
+  userMetaData(userMetaData) {
+    this.step = 3;
+    this.registrationData['userMeta'] = userMetaData;
+  }
+
+  onUserPageClick(user) {
+    if (user) {
+      this.step = 1
     } else {
       this.step = 2;
+    }
+  }
+
+  onCreateOrganisation(orgData) {
+    if (orgData) {
+      this.step = 4;
+      this.registrationData.organization = orgData;
+      this.registrationData.organization.address = orgData.address;
+    } else {
+      this.step = 3;
     }
   }
 
@@ -58,11 +75,11 @@ export class LawyerRegistrationComponent implements OnInit {
       this.lawyerService.onRegistration(this.registrationData).subscribe((res: any) => {
         if (res.success) {
           this.userName = res.data.userName;
-          this.step = 4;
+          this.step = 5;
         }
       });
     } else {
-      this.step = 3;
+      this.step = 4;
     }
   }
 
@@ -91,13 +108,9 @@ export class LawyerRegistrationComponent implements OnInit {
         this.cacheService.setCache('token', verified.token);
         this.loginService.checkToken().then((data: any) => {
           if (data.success) {
-            if (data.user.status) {
-              this.router.navigateByUrl('/lawyer-dashboard')
-            }
-            else {
-              this.router.navigateByUrl('/account-review')
-              this.toaterService.showWarningToater("Account under review.")
-            }
+            this.store.dispatch(new AddUserInfo(Object.assign({}, data.user)));
+            this.router.navigateByUrl('/mjp/lawyer/lawyer-dashboard');
+            this.toaterService.showWarningToater("Account under review.")
           }
           else {
             this.toaterService.showWarningToater('Something Wrong.')
@@ -108,5 +121,22 @@ export class LawyerRegistrationComponent implements OnInit {
         this.toasterService.showErrorToater(verified.data)
       }
     })
+  }
+
+  onPreviousClick(back) {
+    if (back) {
+      this.step = 2;
+      this.user = this.registrationData.user
+    } else {
+      this.step = 3;
+    }
+  }
+  onBackClick(back) {
+    if (back) {
+      this.step = 3;
+      this.orgAddress = this.registrationData.organization
+    } else {
+      this.step = 4;
+    }
   }
 }

@@ -7,18 +7,20 @@ import { CacheService } from './../cache.service';
 @Injectable({
   providedIn: 'root'
 })
+
 export class LawyerService {
   private apiPath: string;
 
   constructor(private httpClient: HttpClient) {
     const env: any = environment;
-    this.apiPath = env.api
+    this.apiPath = env.api;
   }
 
   lawyerLogin(lawyerLoginData) {
-    return this.httpClient.post<object>(`${this.apiPath}/lawyerLogin/login`, lawyerLoginData)
+    return this.httpClient.post<object>(`${this.apiPath}/login/login`, lawyerLoginData);
   }
+
   verifylawyerLogin(verifyData) {
-    return this.httpClient.post<object>(`${this.apiPath}/lawyerLogin/verify-otp`, verifyData)
+    return this.httpClient.post<object>(`${this.apiPath}/login/verify-otp`, verifyData);
   }
 }

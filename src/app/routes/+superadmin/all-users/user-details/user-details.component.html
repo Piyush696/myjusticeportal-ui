@@ -1,0 +1,97 @@
+<div class="row">
+  <div class="col-xs-12 col-sm-12 col-md-7 col-lg-7 col-xl-7">
+    <mat-card>
+      <mat-card-title class="py-2">User Information:</mat-card-title>
+      <mat-card-content>
+        <table class="table table-striped table-bordered table-hover">
+          <tbody>
+            <tr>
+              <th>Name:&nbsp;</th>
+              <td>
+                <span>
+                  {{selectedUserData?.firstName | titlecase}}
+                  <span *ngIf="selectedUserData?.middleName">
+                    &nbsp;{{selectedUserData?.middleName | titlecase}}
+                  </span>
+                  &nbsp;{{selectedUserData?.lastName | titlecase}}
+                </span>
+                <span
+                  *ngIf="!selectedUserData?.firstName && !selectedUserData?.middleName && !selectedUserData?.lastName">
+                  N/A
+                </span>
+              </td>
+            </tr>
+            <tr>
+              <th>Role(s):&nbsp;</th>
+              <td class="d-flex align-items-center justify-content-between py-1">
+                <span *ngFor="let role of selectedUserData?.roles;let isLast=last">
+                  {{role?.name}}{{isLast ? '' : ', '}}
+                </span>
+                <span>
+                  <button mat-button color="primary" class="onHover" (click)="openChangeRoleModal(changeRoleModal)">
+                    Change Role
+                  </button>
+                </span>
+              </td>
+            </tr>
+            <tr>
+              <th>User Name:&nbsp;</th>
+              <td>{{selectedUserData?.userName}}</td>
+            </tr>
+            <tr>
+              <th>Date Created:&nbsp;</th>
+              <td>{{selectedUserData?.createdAt | date:'longDate'}}</td>
+            </tr>
+            <tr>
+              <th>Mobile:&nbsp;</th>
+              <td>
+                <span *ngIf="selectedUserData?.mobile">
+                  &#43;{{selectedUserData?.countryCode}}&#8208;{{selectedUserData?.mobile}}
+                </span>
+                <span *ngIf="!selectedUserData?.mobile">N/A</span>
+              </td>
+            </tr>
+            <tr>
+              <th>Status:&nbsp;</th>
+              <td>
+                <mat-slide-toggle color="warn" [checked]="selectedUserData?.status"
+                  [formControl]="userDetailsForm.controls['status']" (change)="onChangeStatus()">
+                  {{selectedUserData?.status ? 'Enabled' : 'Disabled'}}
+                </mat-slide-toggle>
+              </td>
+            </tr>
+            <tr>
+              <th>MFA:&nbsp;</th>
+              <td>
+                <mat-slide-toggle color="warn" [checked]="selectedUserData?.isMFA"
+                  [formControl]="userDetailsForm.controls['isMFA']" (change)="onChangeMfa()">
+                  {{selectedUserData?.isMFA ? 'Enabled' : 'Disabled'}}
+                </mat-slide-toggle>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>
+
+<ng-template #changeRoleModal>
+  <h2 mat-dialog-title>Change Role:</h2>
+  <div mat-dialog-content>
+    <mat-form-field appearance="fill">
+      <mat-label>Select Role</mat-label>
+      <mat-select [(ngModel)]="selectedRoleId" name="selectedRole">
+        <mat-option *ngFor="let role of roleList" [value]="role?.roleId">
+          {{role?.name}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+  <div mat-dialog-actions class="float-right pb-4">
+    <button mat-raised-button (click)="onCloseModal()">Close</button>
+    <button mat-raised-button class="button-purple" [mat-dialog-close]="selectedRoleId" cdkFocusInitial>
+      Save
+    </button>
+  </div>
+</ng-template>

@@ -1,0 +1,21 @@
+@import '../../../../assets/scss/variable';
+.logo {
+  width: 225px;
+}
+
+.bg-color {
+  background-color: $custom-bg-color;
+}
+
+.mat-border {
+  border: 1px solid #040b27;
+  border-radius: 5px;
+}
+
+.hpx {
+  height: 53px;
+}
+
+a:hover {
+  color: blue !important;
+}

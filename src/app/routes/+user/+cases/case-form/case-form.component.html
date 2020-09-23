@@ -1,0 +1,156 @@
+<div class="col-12 d-flex justify-content-between pl-0">
+    <div>
+        <h1 class="line-height font-weight-bold">{{headerText}}</h1>
+        <h4 class="line-height header-sub-text">Enter your basic case details.</h4>
+    </div>
+    <div>
+        <button class="white-btn px-5 py-1" mat-raised-button [routerLink]="'/mjp/user/case'">
+            Back To My Cases
+        </button>
+    </div>
+</div>
+
+<div class="col-12 pl-2">
+    <div class="row">
+        <div class="col-6 pl-0">
+            <mat-form-field appearance="fill" class="w-100 pl-2">
+                <mat-label>First Name</mat-label>
+                <input type="text" matInput placeholder="First Name" [formControl]="caseForm.controls['firstName']"
+                    required>
+                <mat-error>
+                    <div *ngIf="caseForm.controls['firstName'].invalid && caseForm.controls['firstName'].touched">
+                        <small class="font13">
+                            First Name is Required
+                        </small>
+                    </div>
+                </mat-error>
+            </mat-form-field>
+        </div>
+        <div class="col-6 pl-2">
+            <mat-form-field appearance="fill" class="w-100 p-0">
+                <mat-label>Last Name</mat-label>
+                <input type="text" matInput placeholder="Last Name" [formControl]="caseForm.controls['lastName']"
+                    required>
+                <mat-error>
+                    <div *ngIf="caseForm.controls['lastName'].invalid && caseForm.controls['lastName'].touched">
+                        <small class="font13">
+                            Last Name is Required
+                        </small>
+                    </div>
+                </mat-error>
+            </mat-form-field>
+        </div>
+    </div>
+</div>
+
+<div class="col-12 pl-2">
+    <div class="row pt-2">
+        <div class="col-6 pl-0">
+            <mat-form-field appearance="fill" class="w-100 pl-2">
+                <mat-label>County of Arrest (If Applicable)</mat-label>
+                <input type="text" matInput placeholder="County Of Arrest"
+                    [formControl]="caseForm.controls['countyOfArrest']">
+                <!-- <mat-error>
+                    <div
+                        *ngIf="caseForm.controls['countyOfArrest'].invalid && caseForm.controls['countyOfArrest'].touched">
+                        <small class="font13">
+                            County of Arrest is Required
+                        </small>
+                    </div>
+                </mat-error> -->
+            </mat-form-field>
+        </div>
+        <div class="col-6 pl-0">
+            <mat-form-field appearance="fill" class="w-100 pl-2">
+                <mat-label>Date of Arrest (If Applicable)</mat-label>
+                <input matInput [matDatepicker]="picker1" [formControl]="caseForm.controls['dateOfArrest']">
+                <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                <mat-datepicker #picker1></mat-datepicker>
+                <!-- <mat-error>
+                    <div *ngIf="caseForm.controls['dateOfArrest'].invalid && caseForm.controls['dateOfArrest'].touched">
+                        <small class="font13">
+                            Date of Arrest is Required
+                        </small>
+                    </div>
+                </mat-error> -->
+            </mat-form-field>
+        </div>
+    </div>
+</div>
+
+<div class="col-12 pl-2">
+    <div class="row pt-2">
+        <div class="col-6 pl-0">
+            <mat-form-field appearance="fill" class="w-100 pl-2">
+                <mat-label>Brief Description of Charge(s) or Legal Matter</mat-label>
+                <input type="text" matInput placeholder="Brief Description of Charges"
+                    [formControl]="caseForm.controls['briefDescriptionOfChargeOrLegalMatter']" minlength="3"
+                    maxlength="500" required />
+                <mat-error>
+                    <div *ngIf="caseForm.controls['briefDescriptionOfChargeOrLegalMatter'].invalid && 
+                        caseForm.controls['briefDescriptionOfChargeOrLegalMatter'].touched">
+                        <small class="font13">
+                            This case field is required.
+                        </small>
+                    </div>
+                    <div *ngIf="caseForm.controls['briefDescriptionOfChargeOrLegalMatter'].touched && 
+                        (caseForm.controls['briefDescriptionOfChargeOrLegalMatter'].errors?.minlength ||
+                        caseForm.controls['briefDescriptionOfChargeOrLegalMatter'].errors?.maxlength)">
+                        <small class="font13">
+                            This case field should be in range of (3-500) characters.
+                        </small>
+                    </div>
+                </mat-error>
+            </mat-form-field>
+        </div>
+        <div class="col-6 pl-0">
+            <mat-form-field appearance="fill" class="w-100 pl-2">
+                <mat-label>Attorney Name (If Applicable)</mat-label>
+                <input type="text" matInput placeholder="Attorney Name"
+                    [formControl]="caseForm.controls['attorneyName']">
+                <!-- <mat-error>
+                    <div
+                        *ngIf="caseForm.controls['caseJurisdiction'].invalid && caseForm.controls['caseJurisdiction'].touched">
+                        <small class="font13">
+                            Case Jurisdiction is Required
+                        </small>
+                    </div>
+                </mat-error> -->
+            </mat-form-field>
+        </div>
+    </div>
+</div>
+<div class="col-12 pl-2">
+    <div class="row pt-2">
+        <div class="col-6 pl-0">
+            <mat-form-field appearance="fill" class="w-100 pl-2">
+                <mat-label>Next Court Date (If Know)</mat-label>
+                <input matInput [matDatepicker]="picker" [formControl]="caseForm.controls['nextCourtDate']">
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+        </div>
+        <div class="col-6 pl-0">
+            <mat-form-field appearance="fill" class="w-100 pl-2">
+                <mat-label>Other Case Details</mat-label>
+                <input type="email" matInput placeholder="Other Case Details"
+                    [formControl]="caseForm.controls['otherInformation']">
+                <!-- <mat-error>
+                    <div
+                        *ngIf="caseForm.controls['otherInformation'].invalid && caseForm.controls['otherInformation'].touched">
+                        <small class="font13">Other Case Details is Required</small>
+                    </div>
+                </mat-error> -->
+            </mat-form-field>
+        </div>
+    </div>
+</div>
+
+<div class="py-3 pr-3 d-flex">
+    <button class="button-purple px-5 py-1" mat-raised-button [disabled]="caseForm.invalid" (click)="updateCase()">
+        {{buttonText}}
+    </button>
+    <button class="white-btn px-5 ml-3 py-1" mat-raised-button [routerLink]="'/mjp/user/case'">
+        Cancel
+    </button>
+</div>

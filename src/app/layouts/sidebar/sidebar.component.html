@@ -1,12 +1,12 @@
 <div class="sidebar-wrapper">
   <div class="logo bg-header logo-size p-0 d-flex justify-content-center">
-    <img [routerLink]="'/case'" src="assets/img/sidebar-logo.png" class="logo-size">
+    <img src="assets/img/sidebar-logo.png" class="logo-size">
   </div>
   <ul class="nav">
     <li *ngFor="let menuItem of filteredMenuItems;let isLast=last" class="{{menuItem?.class}} label-bg"
       [ngClass]="{'pb-3' : isLast}" title="{{menuItem?.title}}" routerLinkActive="active currentMenu">
       <a *ngIf="!(menuItem.title == 'Law Library')" class="d-flex justify-content-center sidebar-style" href="#"
-        [routerLink]="[menuItem.path]">
+        [routerLink]="menuItem.path">
         <p class="letter-spacing">{{menuItem.title}}</p>
       </a>
       <a *ngIf="menuItem.title =='Law Library'" class="d-flex justify-content-center sidebar-style"

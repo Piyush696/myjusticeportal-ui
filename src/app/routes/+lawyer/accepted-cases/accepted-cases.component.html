@@ -1,0 +1,52 @@
+<div class="d-flex justify-content-between">
+    <div>
+        <h1 class="mb-0">View Accepted Cases:</h1>
+        <h4>View accepted/rejected cases.</h4>
+    </div>
+    <div class="mat-card align-self-center pb-1">
+        <mat-checkbox class="check-style" color="primary" title="View Rejected Cases"
+            (change)="onViewRejectedCases($event.checked)">
+            View Rejected
+        </mat-checkbox>
+    </div>
+</div>
+
+<div>
+    <mat-card class="outer-card mat-elevation-z10 mt-3">
+        <mat-label class="font-weight-bold">
+            Requested cases({{requestedCases?.length}}):
+        </mat-label>
+        <mat-card class="inner-card mt-2" *ngIf="!requestedCases?.length">
+            <span>No data available.</span>
+        </mat-card>
+        <mat-card class="d-flex flex-row justify-content-between align-items-center inner-card mt-2"
+            *ngFor="let case of requestedCases">
+            <div class="d-flex flex-column">
+                <span>{{case?.briefDescriptionOfChargeOrLegalMatter}}</span>
+                <span>
+                    Requested By: {{case?.inmate?.firstName}}
+                    <span *ngIf="case?.inmate?.middleName">
+                        &nbsp;{{case?.inmate?.middleName}}
+                    </span>
+                    &nbsp;{{case?.inmate?.lastName}}
+                </span>
+                <span>
+                    Status:&nbsp;
+                    <span class="font-weight-bold" [ngClass]="{'text-success': case?.lawyer_case?.status == 'Approved',
+                        'text-danger': case?.lawyer_case?.status == 'Rejected'}">
+                        {{case?.lawyer_case?.status}}
+                    </span>
+                </span>
+                <span>
+                    Files attached:{{case?.caseFile?.length}}
+                </span>
+            </div>
+            <div>
+                <button *ngIf="case?.lawyer_case?.status == 'Approved'" [routerLink]="case?.caseId"
+                    class="button-purple mr-1" mat-mini-fab title="View Case Details">
+                    <mat-icon>remove_red_eye</mat-icon>
+                </button>
+            </div>
+        </mat-card>
+    </mat-card>
+</div>

@@ -34,8 +34,10 @@ export class InvitedLawyerComponent implements OnInit {
         this.tokenEmail = res.data;
       }
       else if (!res.success) {
+        this.tokenEmail = 'EXPIRED_TOKEN';
         if (res.error.name == 'EXPIRED_TOKEN') {
-          this.toasterService.showErrorToater('Sorry your token has been expired, please contact support for more information.');
+          this.message = 'Sorry the invited link has been expired, please contact support for more information.';
+          this.toasterService.showErrorToater(this.message);
         }
       }
     });
@@ -81,7 +83,7 @@ export class InvitedLawyerComponent implements OnInit {
         this.loginService.checkToken().then((data: any) => {
           if (data.success) {
             if (data.user.status) {
-              this.router.navigateByUrl('/lawyer-dashboard');
+              this.router.navigateByUrl('/mjp/lawyer/lawyer-dashboard');
             }
             else {
               this.toasterService.showWarningToater("Account under review.");

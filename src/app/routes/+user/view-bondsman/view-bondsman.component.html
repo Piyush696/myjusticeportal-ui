@@ -1,0 +1,70 @@
+<div class="row">
+    <div class="col">
+        <h1 class="mb-0">Bondsman Users</h1>
+        <small>All bondsman related to organization.</small>
+    </div>
+</div>
+
+<div class="row pt-3">
+    <div class="col-8">
+        <div class="pt-3">
+            <mat-card class="outer-card">
+                <mat-label class="font-weight-bold">
+                    Filtered Results:
+                </mat-label>
+                <div *ngIf="!userList?.length">
+                    <mat-label class="font-weight-bold text-danger">
+                        No data found.
+                    </mat-label>
+                </div>
+                <mat-card class="d-flex justify-content-between align-items-center inner-card mt-2"
+                    *ngFor="let user of userList">
+                    <div>
+                        <mat-label class="font-weight-bold">
+                            {{user?.firstName}} {{user?.middleName}} {{user?.lastName}}
+                        </mat-label>
+                        <div class="pt-1">
+                            <span>
+                                {{org?.Address.city}}, {{org?.Address.state}}
+                            </span>
+                            <span class="pl-2">
+                                {{org?.orgCode}}
+                            </span>
+                            <span class="pl-2">
+                                Speciality: Assault
+                            </span>
+                        </div>
+                    </div>
+                    <button class="button-purple" mat-raised-button>
+                        View
+                    </button>
+                </mat-card>
+            </mat-card>
+        </div>
+    </div>
+    <div class="col-4">
+        <mat-card class="outer-card">
+            <mat-label class="font-weight-bold">
+                Sponsored:
+            </mat-label>
+            <mat-card class="d-flex flex-column align-items-center inner-card mt-2">
+                <div class="row">
+                    <img src="assets/img/sidebar-logo.png">
+                </div>
+                <div class="row">
+                    <mat-label class="font-weight-bold">
+                        We Specialize in
+                    </mat-label>
+                </div>
+            </mat-card>
+            <mat-card class="d-flex flex-column align-items-center inner-card mt-2">
+                <img src="assets/img/sidebar-logo.png">
+                <div>
+                    <mat-label class="font-weight-bold">
+                        Experienced Criminal
+                    </mat-label>
+                </div>
+            </mat-card>
+        </mat-card>
+    </div>
+</div>

@@ -1,15 +1,17 @@
 <div class="bg-color">
-    <app-email-registration [roleId]="roleId" [totalSteps]="totalSteps" *ngIf="step == 1"
+    <app-email-registration [roleId]="roleId" [totalSteps]="totalSteps" [user]="user" *ngIf="step == 1"
         (isNextEvent)="onNextClick($event)">
     </app-email-registration>
 
     <div class="row" *ngIf="step == 2" class="wpx-420">
-        <app-additional-info (userMetaEventEmitter)="userMetaData($event)"></app-additional-info>
+        <app-additional-info (userMetaEventEmitter)="userMetaData($event)" [userMeta]="user.userMeta" [roleId]="roleId"
+            (isPreviousClick)="onUserPageClick($event)">
+        </app-additional-info>
     </div>
 
     <div class="row" *ngIf="step == 3" class="wpx-420">
         <app-security-question class="d-flex justify-content-center align-item-center"
-            (isRegisterEvent)="onUpdateRegisteredUser($event)">
+            (isRegisterEvent)="onUpdateRegisteredUser($event)" (isPreviousClick)="isPreviousClick($event)">
         </app-security-question>
     </div>
 </div>

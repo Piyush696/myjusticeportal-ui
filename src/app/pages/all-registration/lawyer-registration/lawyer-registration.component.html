@@ -1,14 +1,17 @@
 <div class="bg-color">
     <app-email-registration *ngIf="step == 1" [totalSteps]="totalSteps" [message]="message"
-        (isNextEvent)="onNextClick($event)" [roleId]="roleId">
+        (isNextEvent)="onNextClick($event)" [roleId]="roleId" [user]="user">
     </app-email-registration>
-    <app-organisation *ngIf="step == 2" [totalSteps]="totalSteps"
-        (orgAddressEventEmitter)="onCreateOrganisation($event)">
+    <app-additional-info *ngIf="step == 2" (userMetaEventEmitter)="userMetaData($event)"
+        (isPreviousClick)="onUserPageClick($event)" [roleId]="roleId" [userMeta]="registrationData.userMeta">
+    </app-additional-info>
+    <app-organisation *ngIf="step == 3" [totalSteps]="totalSteps" [orgAddress]="orgAddress"
+        (orgAddressEventEmitter)="onCreateOrganisation($event)" (previousClick)="onPreviousClick($event)">
     </app-organisation>
-    <app-select-facility *ngIf="step == 3" [totalSteps]="totalSteps"
-        (selectedFacilityEventEmitter)="onSelectedfacility($event)">
+    <app-select-facility *ngIf="step == 4" [totalSteps]="totalSteps"
+        (selectedFacilityEventEmitter)="onSelectedfacility($event)" (perviousClick)="onBackClick($event)">
     </app-select-facility>
-    <app-mobile-registration *ngIf="step == 4" [authCodeField]="authCodeField" [totalSteps]="totalSteps"
+    <app-mobile-registration *ngIf="step == 5" [authCodeField]="authCodeField" [totalSteps]="totalSteps"
         (isMobileEvent)="mobileDetails($event)" (isOtpEvent)="onAuthCodeValidate($event)">
     </app-mobile-registration>
 </div>

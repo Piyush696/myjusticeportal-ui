@@ -1,4 +1,5 @@
 /* You can add global styles to this file, and also import other style files */
+@import './assets/scss/variable';
 
 body {
   background-color: #ffffff;
@@ -83,17 +84,18 @@ input[type="number"]::-webkit-outer-spin-button {
   font-size: 14px;
 }
 
-mat-option:last-child:before {
-  float: left;
-  text-transform: none;
-  top: 4px;
-  position: relative;
-}
+// mat-option:last-child:before {
+//   content: "All";
+//   float: left;
+//   text-transform: none;
+//   top: 4px;
+//   position: relative;
+// }
 
-mat-option:last-child .mat-option-text {
-  display: none;
-  position: relative;
-}
+// mat-option:last-child .mat-option-text {
+//   display: none;
+//   position: relative;
+// }
 
 [mat-mini-fab]:focus {
   outline: 0 !important;
@@ -196,4 +198,47 @@ textarea[disabled] {
   border: none !important;
   -webkit-tap-highlight-color: transparent !important;
   box-shadow: none !important;
+}
+
+.mat-form-field.mat-focused .mat-form-field-ripple {
+  background-color: $custom-orange;
+}
+
+.mat-form-field.mat-focused .mat-form-field-label {
+  color: $custom-orange;
+}
+
+.mat-flat-button.mat-primary,
+.mat-raised-button.mat-primary,
+.mat-fab.mat-primary,
+.mat-mini-fab.mat-primary {
+  background-color: $custom-orange;
+}
+
+.mat-button.mat-primary,
+.mat-icon-button.mat-primary,
+.mat-stroked-button.mat-primary {
+  color: $custom-orange;
+}
+
+.mat-checkbox-indeterminate.mat-primary .mat-checkbox-background,
+.mat-checkbox-checked.mat-primary .mat-checkbox-background {
+  background-color: $custom-orange;
+}
+
+.button-purple {
+  background-color: $custom-orange !important;
+  color: #ffffff !important;
+}
+
+.mat-checkbox-inner-container {
+  margin-top: 2px !important;
+}
+
+.mat-radio-button.mat-primary .mat-radio-inner-circle {
+  background-color: #333442 !important;
+}
+
+.mat-radio-button.mat-primary.mat-radio-checked .mat-radio-outer-circle {
+  border-color: #333442 !important;
 }

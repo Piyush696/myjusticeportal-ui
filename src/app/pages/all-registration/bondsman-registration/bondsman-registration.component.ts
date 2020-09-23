@@ -4,6 +4,9 @@ import { ToasterService } from 'app/services/toaster.service';
 import { Router } from '@angular/router';
 import { CacheService } from 'app/services/cache.service';
 import { LoginService } from 'app/services/login.service';
+import { Store } from '@ngrx/store';
+import { AddUserInfo } from 'app/store/actions/userInfo.actions';
+
 
 @Component({
   selector: 'app-bondsman-registration',
@@ -24,9 +27,11 @@ export class BondsmanRegistrationComponent implements OnInit {
     },
     'facilityIds': []
   }
+  user: any;
+  orgAddress: {};
 
   constructor(private cacheService: CacheService, private toasterService: ToasterService,
-    private router: Router, private loginService: LoginService, private bondsmanService: BondsmanService) { }
+    private router: Router, private loginService: LoginService, private bondsmanService: BondsmanService, private store: Store<any>) { }
 
   ngOnInit(): void {
   }
@@ -43,7 +48,7 @@ export class BondsmanRegistrationComponent implements OnInit {
   onCreateOrganisation(orgData) {
     if (orgData) {
       this.step = 3;
-      this.registrationData.organization = orgData.name;
+      this.registrationData.organization = orgData;
       this.registrationData.organization.address = orgData.address;
     } else {
       this.step = 2;
@@ -73,7 +78,7 @@ export class BondsmanRegistrationComponent implements OnInit {
     this.bondsmanService.authenticateMobile(mobileData).subscribe((generateCode: any) => {
       if (generateCode.success) {
         this.authCodeField = true;
-        this.toasterService.showSuccessToater("Your code has been sent, please check your mobile device.")
+        this.toasterService.showSuccessToater("Your code has been sent, please check your mobile device.");
       }
     })
   }
@@ -89,22 +94,35 @@ export class BondsmanRegistrationComponent implements OnInit {
         this.cacheService.setCache('token', verified.token);
         this.loginService.checkToken().then((data: any) => {
           if (data.success) {
-            if (data.user.status) {
-              this.router.navigateByUrl('/lawyer-dashboard')
-            }
-            else {
-              this.router.navigateByUrl('/account-review')
-              this.toasterService.showWarningToater("Account under review.")
-            }
+            this.store.dispatch(new AddUserInfo(Object.assign({}, data.user)));
+            this.router.navigateByUrl('/mjp/bondsman/bondsman-dashboard');
+            this.toasterService.showWarningToater("Account under review.")
           }
           else {
-            this.toasterService.showWarningToater('Something Wrong.')
+            this.toasterService.showWarningToater('Something Wrong.');
           }
         })
       }
       else {
-        this.toasterService.showErrorToater(verified.data)
+        this.toasterService.showErrorToater(verified.data);
       }
     })
+  }
+
+  onPreviousClick(back) {
+    if (back) {
+      this.step = 1;
+      this.user = this.registrationData.user
+    } else {
+      this.step = 2;
+    }
+  }
+  onBackClick(back) {
+    if (back) {
+      this.step = 2;
+      this.orgAddress = this.registrationData.organization
+    } else {
+      this.step = 3;
+    }
   }
 }
