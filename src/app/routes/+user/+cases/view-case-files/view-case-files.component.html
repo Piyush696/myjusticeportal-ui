@@ -1,4 +1,4 @@
-<div class="card-body px-0 pt-3 pb-4">
+<!-- <div class="card-body px-0 pt-3 pb-4">
     <div class="drag-border p-3">
         <div ng2FileDrop [ngClass]="{'another-file-over-class': hasAnotherDropZoneOver}"
             (fileOver)="fileOverAnother($event)" [uploader]="uploader1"
@@ -38,14 +38,14 @@
             </button>
         </div>
     </div>
-</div>
+</div> -->
 
 <!-- To Show Uploaded Shared Files -->
 
 <div class="pb-3">
     <mat-card class="outer-card">
         <mat-label class="font-weight-bold">
-            Shared Files(with My Attorney)({{sharedCaseFiles?.length}}):
+            Shared Files (with my Lawyers)({{sharedCaseFiles?.length}}):
         </mat-label>
         <div *ngIf="!sharedCaseFiles?.length">
             <mat-label class="font-weight-bold text-info">
@@ -86,7 +86,7 @@
 <div class="pb-3">
     <mat-card class="outer-card">
         <mat-label class="font-weight-bold">
-            My Private Files({{privateCaseFiles?.length}}):
+            Share Files (with my Legal Researchers)({{privateCaseFiles?.length}}):
         </mat-label>
         <div *ngIf="!privateCaseFiles?.length">
             <mat-label class="font-weight-bold text-info">

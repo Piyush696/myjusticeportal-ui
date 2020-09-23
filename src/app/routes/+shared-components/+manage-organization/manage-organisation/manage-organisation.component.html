@@ -150,6 +150,14 @@
                         </mat-error>
                     </mat-form-field>
                 </div>  
+                <div class="col-12 pr-3 ml-1">
+                    <choose-file layout="row">
+                        <input id="fileInput" type="file" [formControl]="organisationForm.controls['logo_url']">
+                        <md-input-container flex class="md-block">
+                          <div class="hint">Select your Logo</div>
+                        </md-input-container>
+                      </choose-file> 
+                </div>
             </div>
             <div class="row">
                 <div class="col-12 col-sm-12 d-flex justify-content-end justify-content-sm-end">

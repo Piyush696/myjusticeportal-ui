@@ -4,7 +4,7 @@
             <div class="d-flex justify-content-center">
                 <img src="assets/img/logo.png" alt="logo" class="logo">
             </div>
-            <h3 class="text-center font-weight-bold">Step 2/3</h3>
+            <h3 class="text-center font-weight-bold">Step 2/4</h3>
             <mat-card class="p-4">
                 <div>
                     <h2 class=" text-center font-weight-bold">Additional Information</h2>
@@ -37,7 +37,7 @@
 
                 <mat-form-field *ngIf="roleId == 3" appearance="fill" class="w-100 p-3">
                     <mat-label>Specialty</mat-label>
-                    <input type="text" matInput placeholder="Specialty"
+                    <input type="text" matInput 
                         [formControl]="additionalInfo.controls['speciality']" required>
                     <mat-error
                         *ngIf="additionalInfo.controls['speciality'].invalid && additionalInfo.controls['speciality'].touched">
