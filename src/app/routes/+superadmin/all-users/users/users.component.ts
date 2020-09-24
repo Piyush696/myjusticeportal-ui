@@ -21,7 +21,7 @@ export class UsersComponent implements OnInit, OnDestroy {
   userInfoStoreSub: Subscription;
   createUserForm: FormGroup;
 
-  displayedColumns: string[] = ["name", "userName", "roles", "createdAt", "action"];
+  displayedColumns: string[] = ["name", "userName", "status", "roles", "createdAt", "action"];
   dataSource = new MatTableDataSource();
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort: MatSort;

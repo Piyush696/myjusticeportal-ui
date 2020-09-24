@@ -132,7 +132,7 @@ export class ManageOrganisationComponent implements OnInit {
       }
       else {
         if (res.data == 'Email exist') {
-          this.toasterService.showErrorToater('This email is already exist, please give another!');
+          this.toasterService.showErrorToater('That email address is already in use. Please try a different email.');
         }
         else if (res.data == 'Something went wrong') {
           this.toasterService.showErrorToater('Something went wrong, please try again.');
