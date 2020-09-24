@@ -4,7 +4,7 @@
         <div class="d-flex justify-content-center">
             <img src="assets/img/logo.png" alt="logo" class="logo">
         </div>
-        <h3 class="text-center font-weight-bold">Step 2/{{totalSteps}}</h3>
+        <h3 class="text-center font-weight-bold">Step 3/{{totalSteps}}</h3>
         <mat-card class="p-4">
             <h2 class="text-center">Enter your Organization details:</h2>
             <div class="row">
@@ -63,7 +63,10 @@
                 <div class="col-6 pl-0">
                     <mat-form-field appearance="fill" class="w-100 pr-2 mb-1">
                         <mat-label>State</mat-label>
-                        <input type="text" matInput [formControl]="addressForm.controls['state']" required>
+                        <mat-select [formControl]="addressForm.controls['state']" required>
+                            <mat-option>Select state</mat-option>
+                            <mat-option *ngFor="let state of states" value="{{state.name}}">{{state.name}}</mat-option>
+                        </mat-select>
                         <mat-error>
                             <div *ngIf="addressForm.controls['state'].invalid && addressForm.controls['state'].touched">
                                 <small class="font13">

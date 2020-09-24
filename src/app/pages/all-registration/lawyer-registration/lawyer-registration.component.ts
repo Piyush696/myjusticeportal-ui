@@ -19,7 +19,7 @@ export class LawyerRegistrationComponent implements OnInit {
   roleId: number = 3;
   userName: string;
   authCodeField: boolean;
-  message: string = '* Use Bar name of the facility for registration.';
+  message: string = '* Please register with your legal name, as presented to the Bar Association in your state(s).';
   registrationData = {
     'user': {},
     'organization': {

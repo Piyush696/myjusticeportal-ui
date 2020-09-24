@@ -6,12 +6,18 @@
     <div>
         <button mat-raised-button class="button-purple px-4 py-1" (click)="openModal(inviteEmail)">
             Invite New User
+        </button> &nbsp;
+        <button [routerLink]="'users'" class="button-purple px-4 py-1" mat-raised-button>
+            View All Users
+        </button> &nbsp;
+        <button [routerLink]="'facilities'" class="button-purple px-4 py-1" mat-raised-button>
+            Manage Facilities
         </button>
     </div>
 </div>
 
 <div class="row">
-    <div class="col-8 pt-2">
+    <div class="col-12 pt-2">
         <mat-card class="mat-elevation-z10">
             <div class="row px-3">
                 <mat-form-field appearance="fill" class="w-100 p-1">
@@ -122,6 +128,34 @@
                         </mat-error>
                     </mat-form-field>
                 </div>
+                <div class="col-12 pr-3">
+                    <mat-form-field appearance="fill" class="w-100 p-1">
+                        <mat-label>Tagline</mat-label>
+                        <input type="text" matInput [formControl]="organisationForm.controls['tagline']">
+                        <mat-error>
+                            <div
+                                *ngIf="organisationForm.controls['tagline'].invalid && organisationForm.controls['tagline'].touched">
+                                <small class="font13">
+                                    Tagline is Required
+                                </small>
+                            </div>
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+                <div class="col-12 pr-3">
+                    <mat-form-field appearance="fill" class="w-100 p-1">
+                        <mat-label>Description</mat-label>
+                        <textarea [formControl]="organisationForm.controls['description']" rows="4" cols="50" matInput placeholder="Description..." ></textarea>
+                        <mat-error>
+                            <div
+                                *ngIf="organisationForm.controls['description'].invalid && organisationForm.controls['description'].touched">
+                                <small class="font13">
+                                    Description Required
+                                </small>
+                            </div>
+                        </mat-error>
+                    </mat-form-field>
+                </div>  
             </div>
             <div class="row">
                 <div class="col-12 col-sm-12 d-flex justify-content-end justify-content-sm-end">
@@ -132,18 +166,6 @@
                 </div>
             </div>
         </mat-card>
-    </div>
-    <div class="col-4 p-2">
-        <div class="d-flex justify-content-end pr-3">
-            <button [routerLink]="'users'" class="button-purple px-4 py-1" mat-raised-button>
-                View All Users
-            </button>
-        </div>
-        <div class="d-flex justify-content-end pr-3 pt-2">
-            <button [routerLink]="'facilities'" class="button-purple px-4 py-1" mat-raised-button>
-                Manage Facilities
-            </button>
-        </div>
     </div>
 </div>
 

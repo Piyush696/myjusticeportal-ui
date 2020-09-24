@@ -33,6 +33,8 @@ export class ManageOrganisationComponent implements OnInit {
         this.organisationForm.get('city').setValue(orgDetails.data.Organization.Address.city)
         this.organisationForm.get('state').setValue(orgDetails.data.Organization.Address.state)
         this.organisationForm.get('zip').setValue(orgDetails.data.Organization.Address.zip)
+        this.organisationForm.get('tagline').setValue(orgDetails.data.Organization.tagline)
+        this.organisationForm.get('description').setValue(orgDetails.data.Organization.description)
         this.organisationForm.get('country').setValue(orgDetails.data.Organization.Address.country)
         this.addressId = orgDetails.data.Organization.Address.addressId
         this.organisationForm.disable();
@@ -52,6 +54,8 @@ export class ManageOrganisationComponent implements OnInit {
       city: ['', [Validators.required]],
       state: ['', [Validators.required]],
       zip: ['', [Validators.required]],
+      tagline: ['', [Validators.required]],
+      description: ['', [Validators.required]],
       country: ['', [Validators.required]]
     })
     this.createInviteMailFormControl();
@@ -90,7 +94,9 @@ export class ManageOrganisationComponent implements OnInit {
       this.buttonText = 'Edit';
       const data = {
         organization: {
-          "name": this.organisationForm.get('name').value
+          "name": this.organisationForm.get('name').value,
+          "tagline": this.organisationForm.get('tagline').value,
+          "description": this.organisationForm.get('description').value,
         },
         address: {
           "street1": this.organisationForm.get('street1').value,
@@ -126,7 +132,7 @@ export class ManageOrganisationComponent implements OnInit {
       }
       else {
         if (res.data == 'Email exist') {
-          this.toasterService.showErrorToater('This email is already exist, please give another!');
+          this.toasterService.showErrorToater('That email address is already in use. Please try a different email.');
         }
         else if (res.data == 'Something went wrong') {
           this.toasterService.showErrorToater('Something went wrong, please try again.');
