@@ -112,7 +112,7 @@ export class EmailRegistrationComponent implements OnInit, OnChanges {
 
   openModal(templateRef) {
     let dialogRef = this.dialog.open(templateRef, {
-      width: '500px',
+      width: '836px',
     });
   }
 
