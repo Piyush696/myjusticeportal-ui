@@ -17,7 +17,7 @@ export class ViewCaseComponent implements OnInit {
   caseNoteForm: FormGroup;
   enableEditBtn: boolean = true;
 
-  constructor(private route: ActivatedRoute, private caseService: CaseService,
+  constructor(private router: Router, private route: ActivatedRoute, private caseService: CaseService,
     private toasterService: ToasterService, private location: Location,
     public dialog: MatDialog, private fb: FormBuilder) {
   }
@@ -71,4 +71,8 @@ export class ViewCaseComponent implements OnInit {
       this.toasterService.showErrorToater(error.statusText);
     })
   }
+  bailbondsNavigate() {
+    this.router.navigateByUrl('/mjp/user/find-bondsman')
+  }
+
 }
