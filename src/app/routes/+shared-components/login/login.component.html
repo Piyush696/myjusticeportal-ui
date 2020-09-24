@@ -28,7 +28,7 @@
                 </mat-form-field>
 
                 <div class="d-flex justify-content-between px-3 mt-2">
-                    <a [routerLink]="'/registration'" mat-button>Create an Account</a>
+                    <a class="create_color" [routerLink]="'/registration'" mat-button>Create an Account</a>
                     <button
                         [disabled]="this.loginForm.get('userName').invalid || this.loginForm.get('password').invalid"
                         class="px-4 py-1" mat-raised-button color="primary" (click)="onLogin()">
