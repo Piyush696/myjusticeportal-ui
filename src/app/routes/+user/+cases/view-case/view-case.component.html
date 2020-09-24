@@ -71,7 +71,7 @@
             <mat-card class="d-flex justify-content-between mat-elevation-z10 view-card-color">
                 <div>
                     <h3 class="font-weight-bold mb-2">Note:</h3>
-                    <div>
+                    <div class="notes">
                         <span>{{caseDetails?.notes}}</span>
                         <span *ngIf="!caseDetails?.notes" class="text-danger">
                             There is no Note added. Please add the same.
@@ -110,7 +110,8 @@
                 </button>
             </div>
             <div class="d-flex justify-content-end">
-                <button class="button-purple btn-group mt-1 py-1 btn-group" mat-raised-button>
+                <button (click)="bailbondsNavigate()" class="button-purple btn-group mt-1 py-1 btn-group"
+                    mat-raised-button>
                     Find a Bondsman
                 </button>
             </div>

@@ -78,6 +78,10 @@
                         </button>
                     </div>
                 </div>
+                <div class="text-center" *ngIf="OtpField">
+                    <span>Didn't get your code? or Expired? <p (click)="onGetOtp()" style="color: blue;cursor: pointer">
+                            Resend Code</p></span>
+                </div>
                 <div class="d-flex justify-content-end pr-5" style="margin-right: 21px;">
                     <button *ngIf="!OtpField"
                         [disabled]="mobileRegistrationForm.get('countryCode').invalid || mobileRegistrationForm.get('mobile').invalid"
