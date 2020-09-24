@@ -37,6 +37,12 @@
                 </div>
             </mat-card>
             <mat-card *ngIf="step === 2" class="mat-elevation-z10 p-4">
+                <div>
+                    <h3 class="text-center font-weight-bold">Please check your phone</h3>
+                    <h5 class="line-height header-sub-text">
+                        We have texted an "Auth Code" to your mobile phone. Please enter the code below to continue.
+                    </h5>
+                </div>
                 <mat-form-field appearance="fill" class="w-100 p-3">
                     <mat-label>Please Enter Your Auth Code</mat-label>
                     <input matInput placeholder="Enter Auth Code" [formControl]="loginForm.controls['otp']" required>
