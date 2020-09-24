@@ -1,4 +1,5 @@
 @import '../../../../assets/scss/variable';
+
 .logo {
   width: 225px;
 }
@@ -21,4 +22,8 @@ a:hover {
 }
 .create_color{
   color: $custom-orange;
+}
+.line-height {
+  line-height: 10px !important;
+  font-size: 10px;
 }
