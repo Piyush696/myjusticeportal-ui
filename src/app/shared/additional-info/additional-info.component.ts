@@ -2,6 +2,7 @@ import { StatesService } from '../../services/states.service';
 import { Component, OnInit, EventEmitter, Output, Input, OnChanges } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
+import { FacilityService } from 'app/services/registration/facility.service';
 
 @Component({
   selector: 'app-additional-info',
@@ -20,12 +21,14 @@ export class AdditionalInfoComponent implements OnInit, OnChanges {
   fieldName: string = 'Housing Unit';
   fieldOption: string = 'Bar info - Exam Id';
   public states = [];
-  constructor(private fb: FormBuilder, private activatedRoute: ActivatedRoute, private _statesService : StatesService) {
+  facilityList: any;
+
+  constructor(private fb: FormBuilder, private activatedRoute: ActivatedRoute, private _statesService: StatesService, private facilityService: FacilityService) {
     this.facilityCode = this.activatedRoute.snapshot.params.facilityCode;
   }
 
-  ngOnInit(): void {   
-    
+  ngOnInit(): void {
+
     if (!this.userMeta) {
       this.createFormControl();
       this.additionalInfo.get('facility').setValue(this.facilityCode)
@@ -39,12 +42,13 @@ export class AdditionalInfoComponent implements OnInit, OnChanges {
       this.fieldName = 'Housing Unit'
       this.fieldOption = 'Facility'
     }
+    this.getAllFacilities()
   }
-  stateData(){
+  stateData() {
     this._statesService.getStates()
-  .subscribe(data => {
-    this.states = data
-  });
+      .subscribe(data => {
+        this.states = data
+      });
   }
 
   ngOnChanges(): void {
@@ -80,5 +84,11 @@ export class AdditionalInfoComponent implements OnInit, OnChanges {
   onPreviousClick() {
     this.isPreviousClick.emit(true)
   }
- 
+
+  getAllFacilities() {
+    this.facilityService.getAllFacility().subscribe((res: any) => {
+      this.facilityList = res.data
+    })
+  }
+
 }
