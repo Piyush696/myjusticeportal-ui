@@ -1,4 +1,3 @@
-import { HireLawyerService } from 'app/services/hire-lawyer.service';
 import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
 import { UserService } from 'app/services/user.service';
 import { MatPaginator } from '@angular/material/paginator';
@@ -29,7 +28,7 @@ export class UsersComponent implements OnInit, OnDestroy {
   user: any;
   filterStatus: any;
 
-  constructor(private userService: UserService, private store: Store<any>, private hireLawyerService: HireLawyerService,
+  constructor(private userService: UserService, private store: Store<any>,
     private toasterService: ToasterService, private registrationService: RegistrationService, private fb: FormBuilder, public dialog: MatDialog) { }
 
   ngOnInit(): void {
