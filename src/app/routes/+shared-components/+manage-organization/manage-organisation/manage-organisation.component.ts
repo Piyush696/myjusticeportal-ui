@@ -3,6 +3,8 @@ import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/fo
 import { MatDialog } from '@angular/material/dialog';
 import { OrganisationService } from 'app/services/organisation.service';
 import { ToasterService } from 'app/services/toaster.service';
+import { FileUploader } from 'ng2-file-upload';
+const URL = 'https://evening-anchorage-3159.herokuapp.com/api/';
 
 @Component({
   selector: 'app-manage-organisation',
@@ -15,6 +17,15 @@ export class ManageOrganisationComponent implements OnInit {
   inviteMailForm: FormGroup;
   buttonText: string = 'Edit'
   addressId: any;
+  fileType: string = 'private';
+  sharedCaseFiles: any;
+  privateCaseFiles: any;
+  organisationId:any;
+  public uploader1: FileUploader = new FileUploader({ url: URL });
+  public hasAnotherDropZoneOver: boolean = false;
+  public fileOverAnother(e: any): void {
+    this.hasAnotherDropZoneOver = e;
+  }
 
   constructor(private fb: FormBuilder, private toasterService: ToasterService,
     public dialog: MatDialog, private organisationService: OrganisationService) { }
@@ -23,9 +34,36 @@ export class ManageOrganisationComponent implements OnInit {
     this.createControl()
     this.getOrganisationAddress()
   }
+  onUploadLogo() {
+    let formData = new FormData();
+    formData.append('this.organisationId',this.organisationId);
+    this.uploader1.queue.forEach((file) => {
+      formData.append('file', file._file);
+    })
+    formData.append('type', this.fileType);
+    this.organisationService.uploadFile(formData).subscribe((res) => {
+      console.log(res)
+      this.fileType = 'private';
+      if (res.success) {
+        this.uploader1.queue = [];
+        this.toasterService.showSuccessToater('File uploaded successfully.');
+      } else {
+        this.toasterService.showErrorToater(res.data);
+      }
+    }, (error: any) => {
+      this.toasterService.showErrorToater(error.statusText);
+    })
+  }
+  filterCases(data: any) {
+    if (data) {
+      this.sharedCaseFiles = data.filter(data => data.file_case.type == "shared");
+      this.privateCaseFiles = data.filter(data => data.file_case.type == "private");
+    }
+  }
 
   getOrganisationAddress() {
     this.organisationService.getOrganisationAddressDetails().subscribe((orgDetails: any) => {
+      this.organisationId=orgDetails.data.Organization.organizationId
       if (orgDetails.success) {
         this.organisationForm.get('name').setValue(orgDetails.data.Organization.name)
         this.organisationForm.get('street1').setValue(orgDetails.data.Organization.Address.street1)
