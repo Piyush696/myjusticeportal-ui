@@ -3,7 +3,6 @@ import { Router } from '@angular/router';
 import { CaseService } from 'app/services/case.service';
 import { HireLawyerService } from 'app/services/hire-lawyer.service';
 import { StatesService } from 'app/services/states.service';
-import { UserMetaService } from 'app/services/user-meta.service';
 
 @Component({
   selector: 'app-hire-lawyer',
