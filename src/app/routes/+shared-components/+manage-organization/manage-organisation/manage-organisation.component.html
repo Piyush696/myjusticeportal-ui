@@ -171,7 +171,7 @@
                     </div>
                     <table class="table m-0">
                         <tbody>
-                            <tr class="pr-0" *ngFor="let item of uploader1?.queue">
+                            <tr class="pr-0" *ngFor="let item of uploader1?.queue">                                
                                 <td class="pr-0"><strong>{{item?.file?.name}}</strong></td>
                                 <td nowrap class="pr-0">
                                     <button mat-raised-button color="warn" (click)="item.remove()">

@@ -35,6 +35,7 @@ export class ManageOrganisationComponent implements OnInit {
     this.getOrganisationAddress()
   }
   onUploadLogo() {
+    if(this.uploader1.queue.length <= 1){
     let formData = new FormData();
     formData.append('this.organisationId',this.organisationId);
     this.uploader1.queue.forEach((file) => {
@@ -53,7 +54,10 @@ export class ManageOrganisationComponent implements OnInit {
     }, (error: any) => {
       this.toasterService.showErrorToater(error.statusText);
     })
+  }else{
+    this.toasterService.showErrorToater('You can upload only one Logo.');
   }
+}
   filterCases(data: any) {
     if (data) {
       this.sharedCaseFiles = data.filter(data => data.file_case.type == "shared");
