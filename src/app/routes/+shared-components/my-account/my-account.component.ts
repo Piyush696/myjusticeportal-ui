@@ -30,6 +30,8 @@ export class MyAccountComponent implements OnInit {
   roleId: number;
   userMetaForm: FormGroup;
   userMeta: any;
+  buttonText: string = 'Edit'
+
 
   constructor(private registrationService: RegistrationService, public dialog: MatDialog,
     private toasterService: ToasterService, private securityService: SecurityService,
@@ -113,10 +115,19 @@ export class MyAccountComponent implements OnInit {
   }
 
   editChanges() {
-    this.userService.updateUserInfo(this.profileForm.value,).subscribe((result: any) => {
-      this.toasterService.showSuccessToater('User Updated Successfully.')
-      this.getSingleUser();
-    })
+    if (this.buttonText === 'Save') {
+      this.buttonText = 'Edit';
+      this.userMetaUpdate()
+      this.userService.updateUserInfo(this.profileForm.value,).subscribe((result: any) => {
+        this.toasterService.showSuccessToater('User Updated Successfully.')
+        this.buttonText = 'Edit';
+        this.getSingleUser();
+      })
+    }
+    this.buttonText = 'Save';
+    this.profileForm.get('userName').enable()
+
+    this.userMetaForm.enable()
   }
 
   userMetaUpdate() {
@@ -171,7 +182,9 @@ export class MyAccountComponent implements OnInit {
       if (result.data.userMeta.length) {
         this.userMetaForm.get('housing_unit').setValue(result.data.userMeta[0].metaValue);
         this.userMetaForm.get('facility').setValue(result.data.userMeta[1].metaValue);
+        this.userMetaForm.disable()
       }
+      this.profileForm.get('userName').disable()
       this.profileForm.get('firstName').disable();
       this.profileForm.get('middleName').disable();
       this.profileForm.get('lastName').disable();

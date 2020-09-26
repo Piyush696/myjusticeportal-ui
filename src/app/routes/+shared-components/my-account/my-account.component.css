@@ -46,6 +46,11 @@
   border: 2px solid #031903;
 }
 
+.button-green {
+  background-color: green !important;
+  color: #ffffff !important;
+}
+
 @media screen and (max-width: 728px) {
   .anchor-style {
     font-size: 12px;

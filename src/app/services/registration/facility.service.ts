@@ -26,4 +26,8 @@ export class FacilityService {
   verifySms(verifyData) {
     return this.httpClient.post<object>(`${this.apiPath}/facility-registration/verify-sms/registration`, verifyData);
   }
+
+  getAllFacility() {
+    return this.httpClient.get<object>(`${this.apiPath}/facility-registration/allFacility`)
+  }
 }

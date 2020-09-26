@@ -165,7 +165,7 @@
             </p>
             <div class="row">
                 <mat-checkbox class="termCondition-margin ml-2"
-                    [formControl]="registrationForm.controls['termCondition']" (click)="openModal(mytemplate)"
+                    [formControl]="registrationForm.controls['termCondition']" (click)="alertModel(myAlert)"
                     color="primary">
                     <a>
                         <p class="p-0 m-0 line-height">I accept the <span class="font-weight-bold p-0 m-0">Terms and
@@ -188,7 +188,22 @@
         </mat-card>
     </div>
 </div>
-
+<ng-template #myAlert>
+    <div>
+        <p class="disclaimer-heading text-uppercase">
+            You must scroll to the bottom
+        </p>
+        <p class="text-justify">
+            Please read the agreement entirely and scroll to the bottom to Accept our terms.
+        </p>
+        <div class="text-center">
+            <button class="px-4 py-1" mat-raised-button color="primary" mat-dialog-close
+                (click)="openModal(mytemplate)">
+                GOT IT
+            </button>
+        </div>
+    </div>
+</ng-template>
 <div>
     <ng-template #mytemplate>
         <div class="col-12">

@@ -26,6 +26,7 @@ export class UsersComponent implements OnInit, OnDestroy {
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort: MatSort;
   user: any;
+  filterStatus: any;
 
   constructor(private userService: UserService, private store: Store<any>,
     private toasterService: ToasterService, private registrationService: RegistrationService, private fb: FormBuilder, public dialog: MatDialog) { }
@@ -36,6 +37,24 @@ export class UsersComponent implements OnInit, OnDestroy {
     this.createUserControl();
   }
 
+
+  onViewRejectedCases(e) {
+    if(e){
+      this.userService.getUsers().subscribe((res: any) =>{
+        if (res.data) {
+          this.filterStatus = res.data.filter((res) => {
+            if(res.status == false){              
+              return res;
+            }  
+          });
+        }
+        this.dataSource = new MatTableDataSource(this.filterStatus);
+      })
+    }else{
+      this.onGetAllUsers();
+    }
+  }
+ 
   createUserControl() {
     this.createUserForm = this.fb.group({
       firstName: ['', [Validators.required, Validators.maxLength(50), Validators.pattern('^[a-zA-Z ]*$')]],
