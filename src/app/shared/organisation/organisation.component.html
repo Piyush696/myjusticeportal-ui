@@ -132,36 +132,14 @@
             <div class="row p-1">
                 <mat-form-field appearance="fill" class="w-100 px-3 mb-1">
                     <mat-label>Tagline</mat-label>
-                    <input type="text" matInput [formControl]="organisationForm.controls['tagline']" required>
-                    <mat-error>
-                        <div
-                            *ngIf="organisationForm.controls['tagline'].invalid && organisationForm.controls['tagline'].touched">
-                            <small class="font13">
-                                Tagline is Required
-                            </small>
-                            <small class="font13" *ngIf="organisationForm.get('tagline').errors?.maxlength">
-                                Tagline should be less than 500 chracters
-                            </small>
-                        </div>
-                    </mat-error>
+                    <input type="text" matInput [formControl]="organisationForm.controls['tagline']">                    
                 </mat-form-field>
             </div>
             <div class="row p-1">
                 <mat-form-field appearance="fill" class="w-100 px-3 mb-1">
                     <mat-label>Description</mat-label>
                     <textarea rows="10" matInput [formControl]="organisationForm.controls['description']"
-                        required></textarea>
-                    <mat-error>
-                        <div
-                            *ngIf="organisationForm.controls['description'].invalid && organisationForm.controls['description'].touched">
-                            <small class="font13">
-                                Description is Required
-                            </small>
-                            <small class="font13" *ngIf="organisationForm.get('description').errors?.maxlength">
-                                Description should be less than 5000 chracters
-                            </small>
-                        </div>
-                    </mat-error>
+                        ></textarea>                    
                 </mat-form-field>
             </div>
             <div class="d-flex justify-content-between mt-2 pr-2">
