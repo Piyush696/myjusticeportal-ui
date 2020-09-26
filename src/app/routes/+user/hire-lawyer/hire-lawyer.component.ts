@@ -42,7 +42,6 @@ export class HireLawyerComponent implements OnInit {
 
   onSpeciality(value) {
     this.currentSpeciality = value.value
-    console.log(value.value)
     if (this.currentSpeciality && this.currentLocation) {
       this.organizationList = this.filteredOrganizationList.filter((org) => {
         return org.Address.state == this.currentLocation && org.specialty == this.currentSpeciality
