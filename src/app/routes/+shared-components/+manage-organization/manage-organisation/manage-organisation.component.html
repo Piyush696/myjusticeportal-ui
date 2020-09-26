@@ -145,7 +145,8 @@
                 <div class="col-12 pr-3">
                     <mat-form-field appearance="fill" class="w-100 p-1">
                         <mat-label>Description</mat-label>
-                        <textarea [formControl]="organisationForm.controls['description']" rows="4" cols="50" matInput placeholder="Description..." ></textarea>
+                        <textarea [formControl]="organisationForm.controls['description']" rows="4" cols="50" matInput
+                            placeholder="Description..."></textarea>
                         <mat-error>
                             <div
                                 *ngIf="organisationForm.controls['description'].invalid && organisationForm.controls['description'].touched">
@@ -155,8 +156,52 @@
                             </div>
                         </mat-error>
                     </mat-form-field>
-                </div>  
+                </div>
+                <!--  uplode Files -->
+                <div class="card-body px-0 pt-3 pb-4">
+                    <div class="drag-border p-3">
+                        <div ng2FileDrop [ngClass]="{'another-file-over-class': hasAnotherDropZoneOver}"
+                            (fileOver)="fileOverAnother($event)" [uploader]="uploader1"
+                            class="box-placeholder my-drop-zone font-weight-bold pb-2">
+                            Drag and drop files here (or) Choose below to attach.
+                        </div>
+                        <label for="file1" class="file-upload mb-0">
+                            <input id="file1" type="file" ng2FileSelect [uploader]="uploader1" />
+                        </label>
+                    </div>
+                    <table class="table m-0">
+                        <tbody>
+                            <tr class="pr-0" *ngFor="let item of uploader1?.queue">                                
+                                <td class="pr-0"><strong>{{item?.file?.name}}</strong></td>
+                                <td nowrap class="pr-0">
+                                    <button mat-raised-button color="warn" (click)="item.remove()">
+                                        <mat-icon>delete</mat-icon>Remove
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div *ngIf="uploader1?.queue?.length > 0"
+                        class="d-flex align-items-end justify-content-center pr-2">
+                        <div class="pr-3">
+                            <mat-radio-group color="primary" aria-label="Select an option" [(ngModel)]="fileType">
+                                <mat-radio-button value="private" class="pr-3">
+                                    Upload as private
+                                </mat-radio-button>
+                                <mat-radio-button value="shared" class="pr-3">
+                                    Upload as shared
+                                </mat-radio-button>
+                            </mat-radio-group>
+                        </div>
+                        <div>
+                            <button mat-raised-button color="primary" (click)="onUploadLogo()">
+                                <mat-icon>file_upload</mat-icon>Upload
+                            </button>
+                        </div>
+                    </div>
+                </div>
             </div>
+
             <div class="row">
                 <div class="col-12 col-sm-12 d-flex justify-content-end justify-content-sm-end">
                     <div>

@@ -9,6 +9,7 @@ import { SecurityQuestionComponent } from './security-question/security-question
 import { SharedMaterialModule } from 'app/shared-material/shared-material.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+import { FileUploadModule } from 'ng2-file-upload';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { RouterModule } from '@angular/router';
     FormsModule,
     ReactiveFormsModule,
     SharedMaterialModule,
-    RouterModule
+    RouterModule,
+    FileUploadModule
   ],
   exports: [
     LoginComponent,
