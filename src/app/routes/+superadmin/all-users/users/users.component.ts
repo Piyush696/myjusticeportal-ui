@@ -38,7 +38,7 @@ export class UsersComponent implements OnInit, OnDestroy {
   }
 
 
-  onViewRejectedCases(e) {
+  onViewRejectedUsers(e) {
     if(e){
       this.userService.getUsers().subscribe((res: any) =>{
         if (res.data) {
@@ -49,6 +49,8 @@ export class UsersComponent implements OnInit, OnDestroy {
           });
         }
         this.dataSource = new MatTableDataSource(this.filterStatus);
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
       })
     }else{
       this.onGetAllUsers();
@@ -148,16 +150,16 @@ export class UsersComponent implements OnInit, OnDestroy {
 
   // pagination.
   getPageSizeOptions(): number[] {
-    if (this.dataSource.data.length > 500)
-      return [10, 50, 100, 500, this.dataSource.paginator.length];
+    if (this.dataSource.data.length > 500)    
+      return [10, 50, 100, 500, this.dataSource.paginator?.length];
     else if (this.dataSource.data.length > 100) {
-      return [10, 50, 100, this.dataSource.paginator.length];
+      return [10, 50, 100, this.dataSource.paginator?.length];
     }
     else if (this.dataSource.data.length > 50) {
-      return [10, 50, this.dataSource.paginator.length];
+      return [10, 50, this.dataSource.paginator?.length];
     }
     else if (this.dataSource.data.length > 10) {
-      return [10, this.dataSource.paginator.length];
+      return [10, this.dataSource.paginator?.length];
     }
     else {
       return [10];
