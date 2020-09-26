@@ -180,8 +180,8 @@ export class MyAccountComponent implements OnInit {
       this.profileForm.get('userName').setValue(result.data.userName)
       this.profileForm.get('isMFA').setValue(result.data.isMFA)
       if (result.data.userMeta.length) {
-        this.userMetaForm.get('housing_unit').setValue(result.data.userMeta[0].metaValue);
-        this.userMetaForm.get('facility').setValue(result.data.userMeta[1].metaValue);
+        this.userMetaForm.get('housing_unit').setValue(result.data.userMeta[0]?.metaValue);
+        this.userMetaForm.get('facility').setValue(result.data.userMeta[1]?.metaValue);
         this.userMetaForm.disable()
       }
       this.profileForm.get('userName').disable()

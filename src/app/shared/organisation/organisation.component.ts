@@ -36,8 +36,8 @@ export class OrganisationComponent implements OnInit, OnChanges {
   createFormControl() {
     this.organisationForm = this.fb.group({
       name: ['', [Validators.required, Validators.maxLength(100)]],
-      tagline: [''],
-      description: ['']
+      tagline: ['', Validators.maxLength(1000)],
+      description: ['', Validators.maxLength(5000)]
     });
 
     this.addressForm = this.fb.group({
