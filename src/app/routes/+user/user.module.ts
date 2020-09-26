@@ -17,7 +17,6 @@ import { ViewLawyerComponent } from './hire-lawyer/view-lawyer/view-lawyer.compo
 import { FindBondsmanComponent } from './find-bondsman/find-bondsman.component';
 import { ViewBondsmanComponent } from './view-bondsman/view-bondsman.component';
 import { MessagingLawyerComponent } from './messaging-lawyer/messaging-lawyer.component';
-import { ChatComponent } from 'app/shared/chat/chat.component';
 
 @NgModule({
   declarations: [
@@ -32,8 +31,7 @@ import { ChatComponent } from 'app/shared/chat/chat.component';
     ViewLawyerComponent,
     FindBondsmanComponent,
     ViewBondsmanComponent,
-    MessagingLawyerComponent,
-    ChatComponent
+    MessagingLawyerComponent
   ],
   imports: [
     CommonModule,

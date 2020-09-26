@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { HireLawyerService } from 'app/services/hire-lawyer.service';
 
 const SOCKET_ENDPOINT = 'localhost:8810';
 
@@ -9,11 +10,40 @@ const SOCKET_ENDPOINT = 'localhost:8810';
 })
 
 export class MessagingLawyerComponent implements OnInit {
+  organizationList: any;
+  orgDetails: any;
+  isMessage: boolean;
+  lawyerId: any;
 
-  constructor() { }
+  constructor(private hireLawyerService: HireLawyerService) { }
 
   ngOnInit() {
+    this.onGetLaywers();
   }
 
+  onGetLaywers() {
+    this.hireLawyerService.getOrganization().subscribe((res: any) => {
+      this.organizationList = res.data;
+    })
+  }
+
+  onSelectOrg(checked, organizationId) {
+    if (checked) {
+      this.getAllUsers(organizationId)
+    } else {
+      this.orgDetails = '';
+    }
+  }
+
+  getAllUsers(organizationId) {
+    this.hireLawyerService.getUsersLawyer(organizationId).subscribe((users: any) => {
+      this.orgDetails = users.data
+    })
+  }
+
+  onClicklawyer(lawyerId) {
+    this.isMessage = true;
+    this.lawyerId = lawyerId
+  }
 
 }

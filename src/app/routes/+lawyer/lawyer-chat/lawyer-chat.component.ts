@@ -12,6 +12,7 @@ export class LawyerChatComponent implements OnInit {
 
   socket;
   message: string;
+  messageData: any;
 
   constructor() { }
 
@@ -21,11 +22,11 @@ export class LawyerChatComponent implements OnInit {
 
   setupSocketConnection() {
     this.socket = io(SOCKET_ENDPOINT);
-    this.socket.on('message-broadcast', (data: string) => {
-      console.log(data)
+    this.socket.on('message-broadcast', (data: any) => {
+      this.messageData = data;
       if (data) {
         const element = document.createElement('li');
-        element.innerHTML = data;
+        element.innerHTML = data.message;
         element.style.background = '#ededed';
         element.style.color = '#333442';
         element.style.padding = '15px 30px';
@@ -36,8 +37,12 @@ export class LawyerChatComponent implements OnInit {
   }
 
   SendMessage() {
-    console.log(this.message)
-    this.socket.emit('message', this.message);
+    const data = {
+      "receiverId": this.messageData.senderId,
+      "senderId": this.messageData.receiverId,
+      "message": this.message
+    }
+    this.socket.emit('message', data);
     const element = document.createElement('li');
     element.innerHTML = this.message;
     element.style.background = '#333442';

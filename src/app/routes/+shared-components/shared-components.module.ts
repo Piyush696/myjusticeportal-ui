@@ -9,6 +9,7 @@ import { SecurityQuestionComponent } from './security-question/security-question
 import { SharedMaterialModule } from 'app/shared-material/shared-material.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+import { ChatComponent } from './chat/chat.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { RouterModule } from '@angular/router';
     ManageOrganisationComponent,
     ViewUsersComponent,
     ViewFacilitiesComponent,
-    SecurityQuestionComponent
+    SecurityQuestionComponent,
+    ChatComponent
   ],
   imports: [
     CommonModule,
@@ -32,7 +34,8 @@ import { RouterModule } from '@angular/router';
     ManageOrganisationComponent,
     ViewUsersComponent,
     ViewFacilitiesComponent,
-    SecurityQuestionComponent
+    SecurityQuestionComponent,
+    ChatComponent
   ]
 })
 

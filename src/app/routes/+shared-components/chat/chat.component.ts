@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { UserService } from 'app/services/user.service';
 import * as io from 'socket.io-client';
 
 const SOCKET_ENDPOINT = 'localhost:8810';
@@ -11,20 +12,28 @@ const SOCKET_ENDPOINT = 'localhost:8810';
 export class ChatComponent implements OnInit {
   socket;
   message: string;
+  @Input() lawyerId;
+  userId;
 
-  constructor() { }
+  constructor(private userService: UserService) { }
 
   ngOnInit() {
     this.setupSocketConnection();
+    this.getSingleUser();
+  }
+
+  getSingleUser() {
+    this.userService.getSingleUser().subscribe((user: any) => {
+      this.userId = user.data.userId
+    })
   }
 
   setupSocketConnection() {
     this.socket = io(SOCKET_ENDPOINT);
-    this.socket.on('message-broadcast', (data: string) => {
-      console.log(data)
+    this.socket.on('message-broadcast', (data: any) => {
       if (data) {
         const element = document.createElement('li');
-        element.innerHTML = data;
+        element.innerHTML = data.message;
         element.style.background = '#ededed';
         element.style.color = '#333442';
         element.style.padding = '15px 30px';
@@ -35,8 +44,12 @@ export class ChatComponent implements OnInit {
   }
 
   SendMessage() {
-    console.log(this.message)
-    this.socket.emit('message', this.message);
+    const data = {
+      "receiverId": this.lawyerId,
+      "senderId": this.userId,
+      "message": this.message
+    }
+    this.socket.emit('message', data);
     const element = document.createElement('li');
     element.innerHTML = this.message;
     element.style.background = '#333442';
@@ -47,5 +60,7 @@ export class ChatComponent implements OnInit {
     document.getElementById('message-list').appendChild(element);
     this.message = '';
   }
+
+
 
 }
