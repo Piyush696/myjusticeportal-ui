@@ -23,25 +23,19 @@ export class AdditionalInfoComponent implements OnInit, OnChanges {
   public states = [];
   facilityList: any;
   lawyerInfoArray: any[] = [];
+  additionalInfoLawyer: FormGroup;
+  isDisable: boolean = true
 
   constructor(private fb: FormBuilder, private activatedRoute: ActivatedRoute, private _statesService: StatesService, private facilityService: FacilityService) {
     this.facilityCode = this.activatedRoute.snapshot.params.facilityCode;
   }
 
   ngOnInit(): void {
-
+    this.stateData()
     if (!this.userMeta) {
       this.createFormControl();
+      this.createFormControlLawyer()
       this.additionalInfo.get('facility').setValue(this.facilityCode)
-    }
-    if (this.roleId == 3) {
-      this.fieldName = 'State'
-      this.fieldOption = 'Bar info - Exam Id'
-      this.stateData()
-    }
-    else {
-      this.fieldName = 'Housing Unit'
-      this.fieldOption = 'Facility'
     }
     this.getAllFacilities()
   }
@@ -59,22 +53,37 @@ export class AdditionalInfoComponent implements OnInit, OnChanges {
       this.additionalInfo.get('facility').setValue(this.userMeta[1].metaValue)
     }
     if (this.userMeta && this.roleId == 3) {
-      this.userMeta.forEach(element => {
-        let splitArray = element.metaValue.split(":")
-        this.createFormControl();
-        this.additionalInfo.get('housing_unit').setValue(splitArray[0])
-        this.additionalInfo.get('facility').setValue(splitArray[1])
-        this.additionalInfo.get('speciality').setValue(splitArray[2])
-
-      });
+      this.createFormControlLawyer()
+      this.lawyerInfoArray = this.userMeta.map((item) => {
+        let lawyer = {}
+        let splitArray = item.metaValue.split(":")
+        lawyer['state'] = splitArray[0],
+          lawyer['bar_info_Exam_Id'] = splitArray[1],
+          lawyer['speciality'] = splitArray[2]
+        return lawyer
+      })
     }
+  }
+
+  deleteInfo(value) {
+    var index = this.lawyerInfoArray.map(function (element) {
+      return element.bar_info_Exam_Id;
+    }).indexOf(value)
+    let info = this.lawyerInfoArray.splice(index, 1)
   }
 
   createFormControl() {
     this.additionalInfo = this.fb.group({
       housing_unit: ['', [Validators.required]],
-      facility: ['', [Validators.required]],
-      speciality: ['', [Validators.required]],
+      facility: ['', [Validators.required]]
+    })
+  }
+
+  createFormControlLawyer() {
+    this.additionalInfoLawyer = this.fb.group({
+      state: ['', [Validators.required]],
+      bar_info_Exam_Id: ['', [Validators.required]],
+      speciality: ['', [Validators.required]]
     })
   }
 
@@ -82,10 +91,10 @@ export class AdditionalInfoComponent implements OnInit, OnChanges {
   submit() {
     var userMetaList: any
     if (this.roleId == 3) {
-      this.lawyerInfoArray.push(this.additionalInfo.value)
+      this.lawyerInfoArray.push(this.additionalInfoLawyer.value)
       let lawyerInfo = this.lawyerInfoArray.map((item) => {
         let userMetaInfo = {}
-        let str = item.housing_unit + ':' + item.facility + ':' + item.speciality
+        let str = item.state + ':' + item.bar_info_Exam_Id + ':' + item.speciality
         userMetaInfo['metaKey'] = 'lawyerInfo'
         userMetaInfo['metaValue'] = str
 
@@ -111,8 +120,9 @@ export class AdditionalInfoComponent implements OnInit, OnChanges {
   }
 
   addMoreStates() {
-    this.lawyerInfoArray.push(this.additionalInfo.value)
-    this.additionalInfo.reset()
+    this.lawyerInfoArray.push(this.additionalInfoLawyer.value)
+    this.isDisable = false
+    this.additionalInfoLawyer.reset()
   }
 
 }
