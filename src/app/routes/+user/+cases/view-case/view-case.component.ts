@@ -15,9 +15,9 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 export class ViewCaseComponent implements OnInit {
   caseDetails: any;
   caseNoteForm: FormGroup;
-  enableEditBtn: boolean = true;
+  // enableEditBtn: boolean = true;
 
-  constructor(private route: ActivatedRoute, private caseService: CaseService,
+  constructor(private router: Router, private route: ActivatedRoute, private caseService: CaseService,
     private toasterService: ToasterService, private location: Location,
     public dialog: MatDialog, private fb: FormBuilder) {
   }
@@ -51,7 +51,7 @@ export class ViewCaseComponent implements OnInit {
       width: '500px',
     });
     this.caseNoteForm.get('notes').setValue(this.caseDetails.notes);
-    this.caseNoteForm.get('notes').disable();
+    // this.caseNoteForm.get('notes').disable();
     dialogRef.afterClosed().subscribe(result => {
     });
   }
@@ -59,10 +59,10 @@ export class ViewCaseComponent implements OnInit {
   onSaveChanges() {
     this.caseService.updateCase(this.caseNoteForm.value, this.caseDetails.caseId).subscribe((res: any) => {
       if (res.success) {
-        this.caseNoteForm.disable();
+        // this.caseNoteForm.disable();
         this.dialog.closeAll();
         this.getCase();
-        this.enableEditBtn = true;
+        // this.enableEditBtn = true;
         this.toasterService.showSuccessToater('Note Updated Successfully.');
       } else {
         this.toasterService.showErrorToater(res.data);
@@ -71,4 +71,11 @@ export class ViewCaseComponent implements OnInit {
       this.toasterService.showErrorToater(error.statusText);
     })
   }
+  bailbondsNavigate() {
+    this.router.navigateByUrl('/mjp/user/find-bondsman')
+  }
+  hireLayer() {
+    this.router.navigateByUrl('/mjp/user/hire-lawyer')
+  }
+
 }

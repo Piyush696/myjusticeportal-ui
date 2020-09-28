@@ -18,7 +18,7 @@ export class OrganisationComponent implements OnInit, OnChanges {
   @Output() previousClick = new EventEmitter();
   public states = [];
 
-  constructor(private fb: FormBuilder, private _statesService : StatesService) { }
+  constructor(private fb: FormBuilder, private _statesService: StatesService) { }
 
   ngOnInit(): void {
     this.stateData()
@@ -26,27 +26,27 @@ export class OrganisationComponent implements OnInit, OnChanges {
       this.createFormControl();
     }
   }
-  stateData(){
+  stateData() {
     this._statesService.getStates()
-  .subscribe(data => {
-    this.states = data
-  });
+      .subscribe(data => {
+        this.states = data
+      });
   }
 
   createFormControl() {
     this.organisationForm = this.fb.group({
-      name: ['', [Validators.required]],
-      tagline: ['', [Validators.required]],
-      description: ['', [Validators.required]]
+      name: ['', [Validators.required, Validators.maxLength(100)]],
+      tagline: ['', Validators.maxLength(1000)],
+      description: ['', Validators.maxLength(5000)]
     });
 
     this.addressForm = this.fb.group({
-      street1: ['', [Validators.required]],
+      street1: ['', [Validators.required, Validators.maxLength(100)]],
       street2: [''],
-      city: ['', [Validators.required]],
-      state: ['', [Validators.required]],
-      zip: ['', [Validators.required]],
-      country: ['United States', [Validators.required]]
+      city: ['', [Validators.required, Validators.maxLength(50)]],
+      state: ['', [Validators.required, Validators.maxLength(50)]],
+      zip: ['', [Validators.required, Validators.maxLength(20)]],
+      country: ['United States', [Validators.required, Validators.maxLength(50)]]
     });
   }
 

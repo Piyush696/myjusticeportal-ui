@@ -71,7 +71,7 @@
             <mat-card class="d-flex justify-content-between mat-elevation-z10 view-card-color">
                 <div>
                     <h3 class="font-weight-bold mb-2">Note:</h3>
-                    <div>
+                    <div class="notes">
                         <span>{{caseDetails?.notes}}</span>
                         <span *ngIf="!caseDetails?.notes" class="text-danger">
                             There is no Note added. Please add the same.
@@ -105,12 +105,13 @@
                 </button>
             </div>
             <div class="d-flex justify-content-end">
-                <button class="button-purple btn-group mt-1 py-1 btn-group" mat-raised-button>
+                <button class="button-purple btn-group mt-1 py-1 btn-group" mat-raised-button (click)="hireLayer()">
                     Hire a Lawyer
                 </button>
             </div>
             <div class="d-flex justify-content-end">
-                <button class="button-purple btn-group mt-1 py-1 btn-group" mat-raised-button>
+                <button (click)="bailbondsNavigate()" class="button-purple btn-group mt-1 py-1 btn-group"
+                    mat-raised-button>
                     Find a Bondsman
                 </button>
             </div>
@@ -126,7 +127,7 @@
 
 <ng-template #managenotesModel>
     <div class="d-flex justify-content-start p-0">
-        <h3 class="font-weight-bold pl-2">Note:</h3>
+        <h3 class="font-weight-bold pl-2">My Private Case Notes:</h3>
     </div>
     <div class="row">
         <div class="col-md-12">
@@ -143,12 +144,12 @@
         </div>
     </div>
     <div class="d-flex justify-content-end p-0">
-        <button *ngIf="enableEditBtn" mat-raised-button class="button-purple mt-2 px-4 py-1"
+        <!-- <button *ngIf="enableEditBtn" mat-raised-button class="button-purple mt-2 px-4 py-1"
             [disabled]="caseNoteForm.get('notes').invalid" (click)="this.caseNoteForm.enable();enableEditBtn = false">
             Edit
-        </button>
-        <button *ngIf="!enableEditBtn" mat-raised-button color="primary" class="px-4 py-1 mt-2"
-            [disabled]="caseNoteForm.get('notes').invalid" (click)="onSaveChanges()">
+        </button> -->
+        <button mat-raised-button color="primary" class="px-4 py-1 mt-2" [disabled]="caseNoteForm.get('notes').invalid"
+            (click)="onSaveChanges()">
             Save
         </button>
     </div>

@@ -13,7 +13,7 @@ import { ToasterService } from 'app/services/toaster.service';
 export class CasesComponent implements OnInit {
   caseList: any;
   caseNoteForm: FormGroup;
-  enableEditBtn: boolean = true;
+  // enableEditBtn: boolean = true;
   currentCaseId: any;
 
   constructor(private toasterService: ToasterService, public dialog: MatDialog,
@@ -49,7 +49,7 @@ export class CasesComponent implements OnInit {
       width: '500px',
     });
     this.caseNoteForm.get('notes').setValue(value.notes);
-    this.caseNoteForm.get('notes').disable();
+    // this.caseNoteForm.get('notes').disable();
     dialogRef.afterClosed().subscribe(result => {
     });
   }
@@ -57,10 +57,10 @@ export class CasesComponent implements OnInit {
   onSaveChanges() {
     this.caseService.updateCase(this.caseNoteForm.value, this.currentCaseId).subscribe((res: any) => {
       if (res.success) {
-        this.caseNoteForm.disable();
+        // this.caseNoteForm.disable();
         this.dialog.closeAll();
         this.getCases();
-        this.enableEditBtn = true;
+        // this.enableEditBtn = true;
         this.toasterService.showSuccessToater('Notes Updated Successfully.');
       } else {
         this.toasterService.showErrorToater(res.data);

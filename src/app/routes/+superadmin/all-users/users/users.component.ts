@@ -26,6 +26,7 @@ export class UsersComponent implements OnInit, OnDestroy {
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort: MatSort;
   user: any;
+  filterStatus: any;
 
   constructor(private userService: UserService, private store: Store<any>,
     private toasterService: ToasterService, private registrationService: RegistrationService, private fb: FormBuilder, public dialog: MatDialog) { }
@@ -36,6 +37,26 @@ export class UsersComponent implements OnInit, OnDestroy {
     this.createUserControl();
   }
 
+
+  onViewRejectedUsers(e) {
+    if(e){
+      this.userService.getUsers().subscribe((res: any) =>{
+        if (res.data) {
+          this.filterStatus = res.data.filter((res) => {
+            if(res.status == false){              
+              return res;
+            }  
+          });
+        }
+        this.dataSource = new MatTableDataSource(this.filterStatus);
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
+      })
+    }else{
+      this.onGetAllUsers();
+    }
+  }
+ 
   createUserControl() {
     this.createUserForm = this.fb.group({
       firstName: ['', [Validators.required, Validators.maxLength(50), Validators.pattern('^[a-zA-Z ]*$')]],
@@ -129,16 +150,16 @@ export class UsersComponent implements OnInit, OnDestroy {
 
   // pagination.
   getPageSizeOptions(): number[] {
-    if (this.dataSource.data.length > 500)
-      return [10, 50, 100, 500, this.dataSource.paginator.length];
+    if (this.dataSource.data.length > 500)    
+      return [10, 50, 100, 500, this.dataSource.paginator?.length];
     else if (this.dataSource.data.length > 100) {
-      return [10, 50, 100, this.dataSource.paginator.length];
+      return [10, 50, 100, this.dataSource.paginator?.length];
     }
     else if (this.dataSource.data.length > 50) {
-      return [10, 50, this.dataSource.paginator.length];
+      return [10, 50, this.dataSource.paginator?.length];
     }
     else if (this.dataSource.data.length > 10) {
-      return [10, this.dataSource.paginator.length];
+      return [10, this.dataSource.paginator?.length];
     }
     else {
       return [10];

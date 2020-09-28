@@ -112,10 +112,14 @@ export class EmailRegistrationComponent implements OnInit, OnChanges {
 
   openModal(templateRef) {
     let dialogRef = this.dialog.open(templateRef, {
-      width: '500px',
+      width: '836px',
     });
   }
-
+  alertModel(templateRef) {
+    let dialogRef = this.dialog.open(templateRef, {
+      width: '311px',
+    });
+  }
   onScroll(event: any) {
     // visible height + pixel scrolled >= total height 
     if (event.target.offsetHeight + event.target.scrollTop >= event.target.scrollHeight) {

@@ -24,7 +24,13 @@
         </div>
         <div class="row p-4">
             <div class="col-4">
-                <h3 class="font-weight-bold">Lawyer’s Information:</h3>
+                <h3 class="font-weight-bold">Organization Information:</h3>
+                <span class="font-weight-bold">Organization:
+                    <span class="font-weight-light text-dark">{{orgDetails?.name}}
+                         {{orgDetails?.orgCode}}</span>
+                    <span class="font-weight-light text-dark"> {{orgDetails?.tagline}}
+                        </span>
+                </span><br><br>
                 <span class="font-weight-bold">Address:
                     <span class="font-weight-light text-dark"> {{orgDetails?.Address?.street1}}
                         {{orgDetails?.Address?.street2}}</span>
@@ -47,18 +53,8 @@
                 </div>
             </div>
             <div class="col-8">
-                <h3 class="font-weight-bold">Lawyer’s Statement:</h3>
-                <span class="text-dark">Are you facing criminal charges in Atlanta area? Don’t face this unnerving
-                    process alone—call The
-                    Lawyer Firm. With your
-                    future on the line, you need the guidance of an experienced and dedicated advocate. Our criminal
-                    defense team never
-                    loses sight of the severe penalties you face if you are convicted, and we are committed to
-                    protecting your rights &
-                    crafting an effective defense on your behalf. We take the time to collect all the facts and evidence
-                    so that we can
-                    build a strong case capable of withstanding the prosecution. You can trust our track record and
-                    commitment to justice.</span>
+                <h3 class="font-weight-bold">Organization Statement:</h3>
+                <span class="text-dark">{{orgDetails?.description}}</span>
             </div>
         </div>
     </mat-card>
@@ -80,7 +76,7 @@
             </div>
             <button class="button-purple" mat-raised-button [disabled]="isHired"
                 (click)="openModal(selectCases,user.userId)">
-                {{isHired?'Hired':'Hire'}}
+                {{isHired?'Request Pending':'Hire'}}
             </button>
         </mat-card>
     </mat-card>

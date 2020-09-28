@@ -28,7 +28,7 @@
                 </mat-form-field>
 
                 <div class="d-flex justify-content-between px-3 mt-2">
-                    <a [routerLink]="'/registration'" mat-button>Create an Account</a>
+                    <a class="create_color" [routerLink]="'/registration'" mat-button>Create an Account</a>
                     <button
                         [disabled]="this.loginForm.get('userName').invalid || this.loginForm.get('password').invalid"
                         class="px-4 py-1" mat-raised-button color="primary" (click)="onLogin()">
@@ -37,6 +37,12 @@
                 </div>
             </mat-card>
             <mat-card *ngIf="step === 2" class="mat-elevation-z10 p-4">
+                <div>
+                    <h3 class="text-center font-weight-bold">Please check your phone</h3>
+                    <h5 class="line-height header-sub-text">
+                        We have texted an "Auth Code" to your mobile phone. Please enter the code below to continue.
+                    </h5>
+                </div>
                 <mat-form-field appearance="fill" class="w-100 p-3">
                     <mat-label>Please Enter Your Auth Code</mat-label>
                     <input matInput placeholder="Enter Auth Code" [formControl]="loginForm.controls['otp']" required>

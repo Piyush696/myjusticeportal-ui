@@ -12,13 +12,33 @@
 
 <div class="row pt-3">
     <div class="col-8">
-        <div>
-            <button class="btn-outline mr-2" mat-raised-button>
-                Filter: Speciality
-            </button>
-            <button class="btn-outline" mat-raised-button>
-                Filter: Location
-            </button>
+        <div class="d-flex">
+            <div class="pr-2">
+                <mat-form-field appearance="fill">
+                    <mat-label>Filter: Speciality</mat-label>
+                    <mat-select (selectionChange)="onSpeciality($event)">
+                        <mat-option [value]=" ">
+                            Select speciality
+                        </mat-option>
+                        <mat-option *ngFor="let speciality of specialityData" [value]="speciality">
+                            {{speciality}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            <div class="">
+                <mat-form-field appearance="fill">
+                    <mat-label>Filter: Location</mat-label>
+                    <mat-select (selectionChange)="onLocation($event)">
+                        <mat-option [value]=" ">
+                            Select location
+                        </mat-option>
+                        <mat-option *ngFor="let state of states" [value]="state.name">
+                            {{state.name}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
         </div>
         <div class="pt-3">
             <mat-card class="outer-card">
@@ -44,7 +64,7 @@
                                 {{org?.orgCode}}
                             </span>
                             <span class="pl-2">
-                                Speciality: Assault
+                                Speciality: {{org?.specialty}}
                             </span>
                         </div>
                     </div>

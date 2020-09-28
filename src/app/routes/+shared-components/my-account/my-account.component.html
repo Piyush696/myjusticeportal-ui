@@ -155,8 +155,8 @@
                                 </div>
                                 <div>
                                     <button class="button-purple px-sm-4 px-md-4 px-lg-4 px-xl-4 py-1" mat-raised-button
-                                        (click)="editChanges(); userMetaUpdate()">
-                                        Edit Changes
+                                        (click)="editChanges()" [ngClass]="{'button-green': buttonText == 'Save'}">
+                                        {{buttonText}}
                                     </button>
                                 </div>
                             </div>
