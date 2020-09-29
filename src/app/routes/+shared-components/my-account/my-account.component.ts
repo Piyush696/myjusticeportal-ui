@@ -90,9 +90,19 @@ export class MyAccountComponent implements OnInit {
   createPasswordControl() {
     this.passwordForm = this.fb.group({
       oldPassword: ['', [Validators.required]],
-      password: ['', [Validators.required]],
+      password: ['', [Validators.required, Validators.minLength(8), this.validatePassword.bind(this)]],
       confirmPassword: ['', [Validators.required]],
     }, { validator: this.checkIfMatchingPasswords('password', 'confirmPassword') })
+  }
+
+  validatePassword(control: AbstractControl) {
+    if (control.value) {
+      const pattern = /(?=.*[A-Z])(?=.*[a-z])(?=.*\W).{8,18}$/;
+      if (!control.value.match(pattern) && control.value !== '') {
+        return { invalidPassword: true };
+      }
+      return null;
+    }
   }
 
   securityQuestionControl() {
@@ -119,7 +129,7 @@ export class MyAccountComponent implements OnInit {
       this.buttonText = 'Edit';
       this.userMetaUpdate()
       this.userService.updateUserInfo(this.profileForm.value,).subscribe((result: any) => {
-        this.toasterService.showSuccessToater('User Updated Successfully.')
+        // this.toasterService.showSuccessToater('User Updated Successfully.')
         this.buttonText = 'Edit';
         this.getSingleUser();
       })
