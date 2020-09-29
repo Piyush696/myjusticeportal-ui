@@ -52,9 +52,9 @@
                         </div>
                         <div class="col-4 p-0">
                             <mat-form-field appearance="fill" class="w-100 p-3">
-                                <mat-label>Bar info Exam Id</mat-label>
+                                <mat-label>Bar info Exam Id (If Applicable)</mat-label>
                                 <input type="text" matInput
-                                    [formControl]="additionalInfoLawyer.controls['bar_info_Exam_Id']" required>
+                                    [formControl]="additionalInfoLawyer.controls['bar_info_Exam_Id']">
                                 <mat-error
                                     *ngIf="additionalInfoLawyer.controls['bar_info_Exam_Id'].invalid && additionalInfoLawyer.controls['bar_info_Exam_Id'].touched">
                                     <small class="font13"
@@ -120,7 +120,7 @@
 
                     <button *ngIf="roleId == 3"
                         [disabled]="
-                        (additionalInfoLawyer.controls['state'].invalid || additionalInfoLawyer.controls['speciality'].invalid || additionalInfoLawyer.controls['bar_info_Exam_Id'].invalid)"
+                        additionalInfoLawyer.controls['state'].invalid || additionalInfoLawyer.controls['speciality'].invalid"
                         class="px-4 py-1" mat-raised-button color="primary" (click)="submit()">Next</button>
                 </div>
             </mat-card>
