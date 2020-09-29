@@ -29,23 +29,24 @@
                     </div>
                 </div>
                 <div>
-                    <p class="text-default">First Name:
+                    <p class="text-default">User Name:
                         <span class="font-weight-normal"> {{caseDetails?.inmate?.firstName}}</span>
                     </p>
                 </div>
                 <div>
-                    <p class="text-default">Last Name:
-                        <span class="font-weight-normal"> {{caseDetails?.inmate?.lastName}}</span>
-                    </p>
-                </div>
-                <div>
                     <p class="text-default">Charges or Legal Matter:
-                        <span class="font-weight-normal">Aggravated Assault</span>
+                        <span class="font-weight-normal">{{caseDetails?.leaglMatter}}</span>
                     </p>
                 </div>
                 <div *ngIf="caseDetails?.countyOfArrest">
                     <p class="text-default">County of Arrest:
                         <span class="font-weight-normal"> {{caseDetails?.countyOfArrest}}</span>
+                    </p>
+                </div>
+                <div>
+                    <p class="text-default" *ngIf="caseDetails?.briefDescriptionOfChargeOrLegalMatter">
+                        Brief Description:
+                        <span class="font-weight-normal"> {{caseDetails?.briefDescriptionOfChargeOrLegalMatter}}</span>
                     </p>
                 </div>
                 <div *ngIf="caseDetails?.attorneyName">
@@ -57,12 +58,6 @@
                     <p class="text-default" *ngIf="caseDetails?.nextCourtDate">
                         Next Court Date:
                         <span class="font-weight-normal"> {{caseDetails?.nextCourtDate |date: 'MM-dd-yyyy'}}</span>
-                    </p>
-                </div>
-                <div>
-                    <p class="text-default" *ngIf="caseDetails?.otherInformation">
-                        Other Information:
-                        <span class="font-weight-normal"> {{caseDetails?.otherInformation}}</span>
                     </p>
                 </div>
             </mat-card>

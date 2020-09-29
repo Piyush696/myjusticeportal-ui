@@ -32,7 +32,7 @@ export class CaseFormComponent implements OnInit, OnChanges {
       this.buttonText = 'Update Case';
       this.headerText = 'Edit a Case';
       this.caseForm.get('firstName').setValue(this.caseDetails.inmate.firstName);
-      this.caseForm.get('leaglMatter').setValue(this.caseDetails.inmate.leaglMatter);
+      this.caseForm.get('leaglMatter').setValue(this.caseDetails.leaglMatter);
       this.caseForm.get('countyOfArrest').setValue(this.caseDetails.countyOfArrest);
       this.caseForm.get('dateOfArrest').setValue(this.caseDetails.dateOfArrest);
       this.caseForm.get('briefDescriptionOfChargeOrLegalMatter').setValue(this.caseDetails.briefDescriptionOfChargeOrLegalMatter);
