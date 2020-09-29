@@ -1,5 +1,14 @@
-<h1 class="header-title">My Account</h1>
-<label class="header-sub-text">Manage your account information</label>
+<div class="col-12 d-flex justify-content-between pl-0">
+    <div>
+        <h1 class="line-height font-weight-bold">My Account</h1>
+        <h4 class="line-height header-sub-text">Manage your account information.</h4>
+    </div>
+    <div *ngIf="isUser">
+        <button class="button-purple px-5 py-1" mat-raised-button [routerLink]="'/mjp/user/case'">
+            Back To My Cases
+        </button>
+    </div>
+</div>
 
 <div class="row pl-2">
     <div class="col-12 col-sm-8 col-md-8 col-lg-8 col-xl-8 pl-1">
@@ -136,7 +145,7 @@
                                 {{user?.isMFA ? 'Enabled' : 'Disabled'}}
                             </mat-slide-toggle>
                         </div>
-                        <div class="row px-1">
+                        <!-- <div class="row px-1">
                             <div class="col-12">
                                 <div class="form-control d-flex justify-content-center">
                                     <a class="anchor-style" mat-flat-button (click)="openModal(passwordModal)">
@@ -144,9 +153,15 @@
                                     </a>
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
                         <div class="row pr-1">
-                            <div class="col-12 d-flex justify-content-end justify-content-sm-end">
+                            <div class="col-12 d-flex justify-content-between justify-content-sm-between">
+                                <div class="pr-4" *ngIf="isUser">
+                                    <button class="button-purple px-sm-4 px-md-4 px-lg-4 px-xl-4 py-1" mat-raised-button
+                                        (click)="openModal(passwordModal)">
+                                        Click here to reset your password
+                                    </button>
+                                </div>
                                 <div class="pr-4" *ngIf="isUser">
                                     <button class="button-purple px-sm-4 px-md-4 px-lg-4 px-xl-4 py-1" mat-raised-button
                                         (click)="openModal(manageSecurityQuestionModal)">
