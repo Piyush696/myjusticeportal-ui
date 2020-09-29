@@ -143,7 +143,6 @@ export class MyAccountComponent implements OnInit {
         }
       }
       this.userMetaService.updateUserMeta(meta).subscribe((result: any) => {
-        this.toasterService.showSuccessToater('User Updated Successfully.')
         this.getSingleUser();
       })
     }
