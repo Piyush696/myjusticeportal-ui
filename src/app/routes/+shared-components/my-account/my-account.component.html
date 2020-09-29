@@ -187,7 +187,7 @@
                             <div
                                 *ngIf="passwordForm.controls['oldPassword'].invalid && passwordForm.controls['oldPassword'].touched">
                                 <small class="font13">
-                                    Old Password is Required
+                                    Current password is Required
                                 </small>
                             </div>
                         </mat-error>
@@ -199,8 +199,18 @@
                         <mat-error>
                             <div
                                 *ngIf="passwordForm.controls['password'].invalid && passwordForm.controls['password'].touched">
+                                <small class="font13" *ngIf="passwordForm.get('password').errors?.required">
+                                    Password required.
+                                </small>
+                                <small class="font13" *ngIf="passwordForm.get('password').errors?.minlength">
+                                    Password must be at least 8 Characters.
+                                </small>
+                            </div>
+                            <div
+                                *ngIf="passwordForm.controls['password'].invalid && passwordForm.controls['password'].touched  && passwordForm.controls['password'].hasError('invalidPassword')">
                                 <small class="font13">
-                                    Password is Required
+                                    Password should contain at least 1 capital, at least 1 lowercase
+                                    and at least 1 special character.
                                 </small>
                             </div>
                         </mat-error>
