@@ -17,6 +17,7 @@ export class CaseFormComponent implements OnInit, OnChanges {
   buttonText: string = 'Add Case';
   headerText: string = 'Create a Case';
   userData: any;
+  fullName:string;
 
   @Input() caseDetails;
   public states = [];
@@ -31,8 +32,8 @@ export class CaseFormComponent implements OnInit, OnChanges {
       this.getUserFromStore();
       this.buttonText = 'Update Case';
       this.headerText = 'Edit a Case';
-      this.caseForm.get('firstName').setValue(this.caseDetails.inmate.firstName);
-      this.caseForm.get('leaglMatter').setValue(this.caseDetails.inmate.leaglMatter);
+      this.caseForm.get('firstName').setValue(this.fullName);
+      this.caseForm.get('leaglMatter').setValue(this.caseDetails.leaglMatter);
       this.caseForm.get('countyOfArrest').setValue(this.caseDetails.countyOfArrest);
       this.caseForm.get('dateOfArrest').setValue(this.caseDetails.dateOfArrest);
       this.caseForm.get('briefDescriptionOfChargeOrLegalMatter').setValue(this.caseDetails.briefDescriptionOfChargeOrLegalMatter);
@@ -70,10 +71,9 @@ export class CaseFormComponent implements OnInit, OnChanges {
 
   getUserFromStore() {
     this.store.select(s => s.userInfo).subscribe(user => this.userData = user);
-    this.caseForm.get('firstName').setValue(this.userData.firstName);
-    // this.caseForm.get('lastName').setValue(this.userData.lastName);
+    this.fullName=`${this.userData.firstName} ${ this.userData.lastName}`;
+    this.caseForm.get('firstName').setValue(this.fullName);
     this.caseForm.get('firstName').disable();
-    // this.caseForm.get('lastName').disable();
   }
 
   updateCase() {
