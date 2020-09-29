@@ -1,6 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { UserService } from 'app/services/user.service';
 import * as io from 'socket.io-client';
+import { Location } from '@angular/common';
 
 const SOCKET_ENDPOINT = 'localhost:8810';
 
@@ -15,9 +17,19 @@ export class ChatComponent implements OnInit {
   @Input() lawyerId;
   userId;
 
-  constructor(private userService: UserService) { }
+  constructor(private userService: UserService, private loc: Location, private router: Router) { }
 
   ngOnInit() {
+    // console.log(location.pathname);
+    // console.log(location.href);
+    // console.log(location.origin);
+    // console.log(this.router.url);
+    console.log(window.location.href.replace(/^http(s?):\/\//i, "").split(':'));
+    // const angularRoute = this.loc.path();
+    // const url = window.location.href;
+    // console.log(url)
+    // const domainAndApp = url.replace(angularRoute, '');
+    // console.log(domainAndApp)
     this.setupSocketConnection();
     this.getSingleUser();
   }
