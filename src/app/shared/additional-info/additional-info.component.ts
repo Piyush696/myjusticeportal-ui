@@ -3,6 +3,7 @@ import { Component, OnInit, EventEmitter, Output, Input, OnChanges } from '@angu
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { FacilityService } from 'app/services/registration/facility.service';
+import { UserService } from 'app/services/registration/user.service';
 
 @Component({
   selector: 'app-additional-info',
@@ -25,17 +26,28 @@ export class AdditionalInfoComponent implements OnInit, OnChanges {
   lawyerInfoArray: any[] = [];
   additionalInfoLawyer: FormGroup;
   isDisable: boolean = true
+  isFacility: boolean;
 
-  constructor(private fb: FormBuilder, private activatedRoute: ActivatedRoute, private _statesService: StatesService, private facilityService: FacilityService) {
+  constructor(private fb: FormBuilder, private activatedRoute: ActivatedRoute, private _statesService: StatesService, private facilityService: FacilityService, private userService: UserService) {
     this.facilityCode = this.activatedRoute.snapshot.params.facilityCode;
   }
 
   ngOnInit(): void {
+
+    if (this.roleId == 1) {
+      this.userService.userFacility().subscribe((res: any) => {
+        console.log(res)
+        this.isFacility = res.data ? true : false
+        if (res.data) {
+          this.additionalInfo.get('facility').setValue(res.data)
+          this.additionalInfo.get('facility').disable()
+        }
+      })
+    }
     this.stateData()
     if (!this.userMeta) {
       this.createFormControl();
       this.createFormControlLawyer()
-      this.additionalInfo.get('facility').setValue(this.facilityCode)
     }
     this.getAllFacilities()
   }
@@ -48,11 +60,16 @@ export class AdditionalInfoComponent implements OnInit, OnChanges {
 
   ngOnChanges(): void {
     if (this.userMeta && this.roleId !== 3) {
+      this.additionalInfo.get('additionalInfo').valid
+      this.additionalInfo.get('bar_info_Exam_Id').valid
+      this.additionalInfo.get('speciality').valid
+
       this.createFormControl();
       this.additionalInfo.get('housing_unit').setValue(this.userMeta[0].metaValue)
       this.additionalInfo.get('facility').setValue(this.userMeta[1].metaValue)
     }
     if (this.userMeta && this.roleId == 3) {
+      this.isDisable = false
       this.createFormControlLawyer()
       this.lawyerInfoArray = this.userMeta.map((item) => {
         let lawyer = {}

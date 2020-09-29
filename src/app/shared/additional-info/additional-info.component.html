@@ -8,7 +8,10 @@
             <mat-card class="p-4">
                 <div>
                     <h2 class=" text-center font-weight-bold">Additional Information</h2>
-                    <p class="text-center">Add Information about state and bar info</p>
+                    <p class="text-center" *ngIf="roleId == 3">Add Information about state and bar info</p>
+                    <p class="text-center" *ngIf="isFacility">Please enter the housing unit, if you remember it.</p>
+                    <p class="text-center" *ngIf="!isFacility">Please select your most recent Facility, and enter the
+                        housing unit, if you remember it.</p>
                 </div>
                 <div class="">
                     <div *ngIf="roleId != 3">
@@ -87,7 +90,7 @@
                                     <th>Specialty</th>
                                 </tr>
                             </thead> -->
-                            <tbody style="border: none;">
+                            <tbody class="p-1" style="border: none; ">
                                 <tr *ngFor="let info of lawyerInfoArray">
                                     <td class="p-0 w-25">{{info.state}}</td>
                                     <td class="p-0 w-25">{{info.bar_info_Exam_Id}}</td>
