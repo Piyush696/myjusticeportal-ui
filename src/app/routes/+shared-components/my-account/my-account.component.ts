@@ -119,7 +119,7 @@ export class MyAccountComponent implements OnInit {
       this.buttonText = 'Edit';
       this.userMetaUpdate()
       this.userService.updateUserInfo(this.profileForm.value,).subscribe((result: any) => {
-        this.toasterService.showSuccessToater('User Updated Successfully.')
+        // this.toasterService.showSuccessToater('User Updated Successfully.')
         this.buttonText = 'Edit';
         this.getSingleUser();
       })
@@ -143,6 +143,7 @@ export class MyAccountComponent implements OnInit {
         }
       }
       this.userMetaService.updateUserMeta(meta).subscribe((result: any) => {
+        this.toasterService.showSuccessToater('User Updated Successfully.')
         this.getSingleUser();
       })
     }
