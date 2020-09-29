@@ -48,11 +48,16 @@ export class AdditionalInfoComponent implements OnInit, OnChanges {
 
   ngOnChanges(): void {
     if (this.userMeta && this.roleId !== 3) {
+      this.additionalInfo.get('additionalInfo').valid
+      this.additionalInfo.get('bar_info_Exam_Id').valid
+      this.additionalInfo.get('speciality').valid
+
       this.createFormControl();
       this.additionalInfo.get('housing_unit').setValue(this.userMeta[0].metaValue)
       this.additionalInfo.get('facility').setValue(this.userMeta[1].metaValue)
     }
     if (this.userMeta && this.roleId == 3) {
+      this.isDisable = false
       this.createFormControlLawyer()
       this.lawyerInfoArray = this.userMeta.map((item) => {
         let lawyer = {}
