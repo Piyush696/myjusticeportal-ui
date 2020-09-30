@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
 import * as io from 'socket.io-client';
 
 const SOCKET_ENDPOINT = 'localhost:8810';
@@ -13,16 +14,20 @@ export class LawyerChatComponent implements OnInit {
   socket;
   message: string;
   messageData: any;
+  userInfo: any;
 
-  constructor() { }
+  constructor(private store: Store<any>) { }
 
   ngOnInit() {
+    this.store.select(s => s.userInfo).subscribe(x => {
+      this.userInfo = x
+    })
     this.setupSocketConnection();
   }
 
   setupSocketConnection() {
     this.socket = io(SOCKET_ENDPOINT);
-    this.socket.on('message-broadcast', (data: any) => {
+    this.socket.on('message-broadcast' + this.userInfo.userId, (data: any) => {
       this.messageData = data;
       if (data) {
         const element = document.createElement('li');

@@ -18,11 +18,12 @@ export class MessagingLawyerComponent implements OnInit {
   constructor(private hireLawyerService: HireLawyerService) { }
 
   ngOnInit() {
-    this.onGetLaywers();
+    this.getOrganizations();
   }
 
-  onGetLaywers() {
+  getOrganizations() {
     this.hireLawyerService.getOrganization().subscribe((res: any) => {
+      console.log(res)
       this.organizationList = res.data;
     })
   }

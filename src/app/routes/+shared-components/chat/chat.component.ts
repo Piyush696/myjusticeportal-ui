@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { UserService } from 'app/services/user.service';
 import * as io from 'socket.io-client';
 import { Location } from '@angular/common';
+import { Store } from '@ngrx/store';
 
 const SOCKET_ENDPOINT = 'localhost:8810';
 
@@ -16,20 +17,15 @@ export class ChatComponent implements OnInit {
   message: string;
   @Input() lawyerId;
   userId;
+  userInfo: any;
 
-  constructor(private userService: UserService, private loc: Location, private router: Router) { }
+  constructor(private userService: UserService, private loc: Location, private router: Router, private store: Store<any>) { }
 
   ngOnInit() {
-    // console.log(location.pathname);
-    // console.log(location.href);
-    // console.log(location.origin);
-    // console.log(this.router.url);
+    this.store.select(s => s.userInfo).subscribe(x => {
+      this.userInfo = x
+    })
     console.log(window.location.href.replace(/^http(s?):\/\//i, "").split(':'));
-    // const angularRoute = this.loc.path();
-    // const url = window.location.href;
-    // console.log(url)
-    // const domainAndApp = url.replace(angularRoute, '');
-    // console.log(domainAndApp)
     this.setupSocketConnection();
     this.getSingleUser();
   }
@@ -42,7 +38,7 @@ export class ChatComponent implements OnInit {
 
   setupSocketConnection() {
     this.socket = io(SOCKET_ENDPOINT);
-    this.socket.on('message-broadcast', (data: any) => {
+    this.socket.on('message-broadcast' + this.userInfo.userId, (data: any) => {
       if (data) {
         const element = document.createElement('li');
         element.innerHTML = data.message;
@@ -61,6 +57,7 @@ export class ChatComponent implements OnInit {
       "senderId": this.userId,
       "message": this.message
     }
+    console.log(data)
     this.socket.emit('message', data);
     const element = document.createElement('li');
     element.innerHTML = this.message;
