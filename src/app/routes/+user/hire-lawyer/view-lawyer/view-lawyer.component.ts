@@ -32,7 +32,6 @@ export class ViewLawyerComponent implements OnInit {
 
   getAllUsers() {
     this.hireLawyerService.getUsersLawyer(this.organizationId).subscribe((users: any) => {
-      console.log(users)
       this.orgDetails = users.data
       this.logo = this.orgDetails.logo
     })
