@@ -5,3 +5,8 @@
 .bg-color {
   background-color: #fffbfb !important;
 }
+
+.table th,
+.table td {
+  border: none;
+}

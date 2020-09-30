@@ -1,3 +1,4 @@
+import { StatesService } from './../../../../services/states.service';
 import { Component, Input, OnChanges, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -16,10 +17,12 @@ export class CaseFormComponent implements OnInit, OnChanges {
   buttonText: string = 'Add Case';
   headerText: string = 'Create a Case';
   userData: any;
+  fullName:string;
 
   @Input() caseDetails;
+  public states = [];
 
-  constructor(private toasterService: ToasterService, private router: Router,
+  constructor(private toasterService: ToasterService, private router: Router, private _statesService: StatesService,
     private fb: FormBuilder, private caseService: CaseService, private store: Store<any>) {
   }
 
@@ -29,8 +32,8 @@ export class CaseFormComponent implements OnInit, OnChanges {
       this.getUserFromStore();
       this.buttonText = 'Update Case';
       this.headerText = 'Edit a Case';
-      this.caseForm.get('firstName').setValue(this.caseDetails.inmate.firstName);
-      this.caseForm.get('lastName').setValue(this.caseDetails.inmate.lastName);
+      this.caseForm.get('firstName').setValue(this.fullName);
+      this.caseForm.get('leaglMatter').setValue(this.caseDetails.leaglMatter);
       this.caseForm.get('countyOfArrest').setValue(this.caseDetails.countyOfArrest);
       this.caseForm.get('dateOfArrest').setValue(this.caseDetails.dateOfArrest);
       this.caseForm.get('briefDescriptionOfChargeOrLegalMatter').setValue(this.caseDetails.briefDescriptionOfChargeOrLegalMatter);
@@ -43,12 +46,20 @@ export class CaseFormComponent implements OnInit, OnChanges {
   ngOnInit(): void {
     this.createFormControl();
     this.getUserFromStore();
+    this.stateData()
+  }
+
+  stateData() {
+    this._statesService.getStates()
+      .subscribe(data => {
+        this.states = data
+      });
   }
 
   createFormControl() {
     this.caseForm = this.fb.group({
       firstName: ['', [Validators.required]],
-      lastName: ['', [Validators.required]],
+      leaglMatter: ['', [Validators.required]],
       countyOfArrest: [''],
       dateOfArrest: [null],
       briefDescriptionOfChargeOrLegalMatter: ['', [Validators.required]],
@@ -60,10 +71,9 @@ export class CaseFormComponent implements OnInit, OnChanges {
 
   getUserFromStore() {
     this.store.select(s => s.userInfo).subscribe(user => this.userData = user);
-    this.caseForm.get('firstName').setValue(this.userData.firstName);
-    this.caseForm.get('lastName').setValue(this.userData.lastName);
+    this.fullName=`${this.userData.firstName} ${ this.userData.lastName}`;
+    this.caseForm.get('firstName').setValue(this.fullName);
     this.caseForm.get('firstName').disable();
-    this.caseForm.get('lastName').disable();
   }
 
   updateCase() {

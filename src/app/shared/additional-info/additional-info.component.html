@@ -8,71 +8,102 @@
             <mat-card class="p-4">
                 <div>
                     <h2 class=" text-center font-weight-bold">Additional Information</h2>
-                    <p class="text-center">Add Information about state and bar info</p>
+                    <p class="text-center" *ngIf="roleId == 3">Add Information about state and bar info</p>
+                    <p class="text-center" *ngIf="isFacility">Please enter the housing unit, if you remember it.</p>
+                    <p class="text-center" *ngIf="!isFacility">Please select your most recent Facility, and enter the
+                        housing unit, if you remember it.</p>
                 </div>
-                <div class="row">
-                    <mat-form-field appearance="fill" class="w-100 p-3" *ngIf="roleId != 3">
-                        <mat-label>{{fieldName}}</mat-label> <input *ngIf="roleId != 3" type="text" matInput
-                            placeholder="Housing Unit" [formControl]="additionalInfo.controls['housing_unit']" required>
-                        <mat-error
-                            *ngIf="additionalInfo.controls['housing_unit'].invalid && additionalInfo.controls['housing_unit'].touched">
-                            <div class="font13" *ngIf="additionalInfo.get('housing_unit').errors?.required">
-                                {{fieldName}}
-                                is required. </div>
-                        </mat-error>
-                    </mat-form-field>
-
-                    <div class="col-4 p-0" *ngIf="roleId == 3">
+                <div class="">
+                    <div *ngIf="roleId != 3">
                         <mat-form-field appearance="fill" class="w-100 p-3">
-                            <mat-label>{{fieldName}}</mat-label>
-                            <mat-select *ngIf="roleId == 3" [(value)]="housing_unit"
+                            <mat-label>Housing unit</mat-label> <input type="text" matInput placeholder="Housing Unit"
                                 [formControl]="additionalInfo.controls['housing_unit']" required>
-                                <mat-option>Select state</mat-option>
-                                <mat-option *ngFor="let state of states" value="{{state.name}}">{{state.name}}
+                            <mat-error
+                                *ngIf="additionalInfo.controls['housing_unit'].invalid && additionalInfo.controls['housing_unit'].touched">
+                                <div class="font13" *ngIf="additionalInfo.get('housing_unit').errors?.required">
+                                    Housing unit
+                                    is required. </div>
+                            </mat-error>
+                        </mat-form-field>
+
+                        <mat-form-field class="w-100 p-3">
+                            <mat-label>Facility</mat-label>
+                            <input type="text" matInput [formControl]="additionalInfo.controls['facility']"
+                                [matAutocomplete]="auto">
+                            <mat-autocomplete #auto="matAutocomplete">
+                                <mat-option *ngFor="let facility of facilityList" [value]="facility.facilityName">
+                                    {{facility.facilityName}}
                                 </mat-option>
-                            </mat-select>
+                            </mat-autocomplete>
                         </mat-form-field>
                     </div>
 
-                    <mat-form-field class="w-100 p-3" *ngIf="roleId !== 3">
-                        <mat-label>{{fieldOption}}</mat-label>
-                        <input type="text" matInput [formControl]="additionalInfo.controls['facility']"
-                            [matAutocomplete]="auto">
-                        <mat-autocomplete #auto="matAutocomplete">
-                            <mat-option *ngFor="let facility of facilityList" [value]="facility.facilityName">
-                                {{facility.facilityName}}
-                            </mat-option>
-                        </mat-autocomplete>
-                    </mat-form-field>
+                    <div class="d-flex" *ngIf="roleId == 3">
+                        <div class="col-4 p-0">
+                            <mat-form-field appearance="fill" class="w-100 p-3">
+                                <mat-label>State</mat-label>
+                                <mat-select [formControl]="additionalInfoLawyer.controls['state']" required>
+                                    <mat-option>Select state</mat-option>
+                                    <mat-option *ngFor="let state of states" value="{{state.name}}">
+                                        {{state.name}}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                        <div class="col-4 p-0">
+                            <mat-form-field appearance="fill" class="w-100 p-3">
+                                <mat-label>Bar info Exam Id (If Applicable)</mat-label>
+                                <input type="text" matInput
+                                    [formControl]="additionalInfoLawyer.controls['bar_info_Exam_Id']">
+                                <mat-error
+                                    *ngIf="additionalInfoLawyer.controls['bar_info_Exam_Id'].invalid && additionalInfoLawyer.controls['bar_info_Exam_Id'].touched">
+                                    <small class="font13"
+                                        *ngIf="additionalInfoLawyer.get('bar_info_Exam_Id').errors?.required">
+                                        Bar info Exam Id is required.
+                                    </small>
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
 
-
-                    <div class="col-4 p-0" *ngIf="roleId == 3">
-                        <mat-form-field appearance="fill" class="w-100 p-3">
-                            <mat-label>{{fieldOption}}</mat-label>
-                            <input type="text" matInput [formControl]="additionalInfo.controls['facility']" required>
-                            <mat-error
-                                *ngIf="additionalInfo.controls['facility'].invalid && additionalInfo.controls['facility'].touched">
-                                <small class="font13" *ngIf="additionalInfo.get('facility').errors?.required">
-                                    {{fieldOption}} is required.
-                                </small>
-                            </mat-error>
-                        </mat-form-field>
+                        <div class="col-4 p-0">
+                            <mat-form-field appearance="fill" class="w-100 p-3">
+                                <mat-label>Specialty</mat-label>
+                                <input type="text" matInput [formControl]="additionalInfoLawyer.controls['speciality']"
+                                    required>
+                                <mat-error
+                                    *ngIf="additionalInfoLawyer.controls['speciality'].invalid && additionalInfoLawyer.controls['speciality'].touched">
+                                    <small class="font13"
+                                        *ngIf="additionalInfoLawyer.get('speciality').errors?.required">
+                                        Specialty is required.
+                                    </small>
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
                     </div>
-
-                    <div class="col-4 p-0">
-                        <mat-form-field *ngIf="roleId == 3" appearance="fill" class="w-100 p-3">
-                            <mat-label>Specialty</mat-label>
-                            <input type="text" matInput [formControl]="additionalInfo.controls['speciality']" required>
-                            <mat-error
-                                *ngIf="additionalInfo.controls['speciality'].invalid && additionalInfo.controls['speciality'].touched">
-                                <small class="font13" *ngIf="additionalInfo.get('speciality').errors?.required">
-                                    Specialty is required.
-                                </small>
-                            </mat-error>
-                        </mat-form-field>
+                    <div class="row" style="margin-right: -100px;
+                    margin-left: 26px;">
+                        <table class="table">
+                            <!-- <thead>
+                                <tr>
+                                    <th>State</th>
+                                    <th>Exam id</th>
+                                    <th>Specialty</th>
+                                </tr>
+                            </thead> -->
+                            <tbody class="p-1" style="border: none; ">
+                                <tr *ngFor="let info of lawyerInfoArray">
+                                    <td class="p-0 w-25">{{info.state}}</td>
+                                    <td class="p-0 w-25">{{info.bar_info_Exam_Id}}</td>
+                                    <td class="p-0 w-25">@{{info.speciality}}</td>
+                                    <td class="p-0 w-25" (click)="deleteInfo(info.bar_info_Exam_Id)"
+                                        style="cursor: pointer;">X</td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
-                <div class="row" *ngIf="roleId == 3">
+
+                <div class="row pl-3" *ngIf="roleId == 3">
                     <div class="pl-3">
                         <button class="px-4 py-1" mat-raised-button color="primary" (click)="addMoreStates()">Add
                             more
@@ -83,8 +114,13 @@
                     <button mat-button color="primary" (click)="onPreviousClick()">
                         BACK
                     </button>
-                    <button
+                    <button *ngIf="roleId != 3"
                         [disabled]="additionalInfo.controls['housing_unit'].invalid || additionalInfo.controls['facility'].invalid"
+                        class="px-4 py-1" mat-raised-button color="primary" (click)="submit()">Next</button>
+
+                    <button *ngIf="roleId == 3"
+                        [disabled]="
+                        additionalInfoLawyer.controls['state'].invalid || additionalInfoLawyer.controls['speciality'].invalid"
                         class="px-4 py-1" mat-raised-button color="primary" (click)="submit()">Next</button>
                 </div>
             </mat-card>

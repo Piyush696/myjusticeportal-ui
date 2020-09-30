@@ -10,6 +10,7 @@ import { SharedMaterialModule } from 'app/shared-material/shared-material.module
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { ChatComponent } from './chat/chat.component';
+import { FileUploadModule } from 'ng2-file-upload';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { ChatComponent } from './chat/chat.component';
     FormsModule,
     ReactiveFormsModule,
     SharedMaterialModule,
-    RouterModule
+    RouterModule,
+    FileUploadModule
   ],
   exports: [
     LoginComponent,

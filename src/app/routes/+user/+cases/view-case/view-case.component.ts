@@ -48,7 +48,7 @@ export class ViewCaseComponent implements OnInit {
 
   openModal(templateRef) {
     let dialogRef = this.dialog.open(templateRef, {
-      width: '500px',
+      width: '836px',
     });
     this.caseNoteForm.get('notes').setValue(this.caseDetails.notes);
     // this.caseNoteForm.get('notes').disable();
@@ -78,4 +78,7 @@ export class ViewCaseComponent implements OnInit {
     this.router.navigateByUrl('/mjp/user/hire-lawyer')
   }
 
+  onCancelNotesModal() {
+    this.dialog.closeAll();
+  }
 }

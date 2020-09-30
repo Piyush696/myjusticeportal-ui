@@ -29,23 +29,24 @@
                     </div>
                 </div>
                 <div>
-                    <p class="text-default">First Name:
-                        <span class="font-weight-normal"> {{caseDetails?.inmate?.firstName}}</span>
-                    </p>
-                </div>
-                <div>
-                    <p class="text-default">Last Name:
-                        <span class="font-weight-normal"> {{caseDetails?.inmate?.lastName}}</span>
+                    <p class="text-default">Name:
+                        <span class="font-weight-normal"> {{caseDetails?.inmate?.firstName}} {{caseDetails?.inmate?.lastName}}</span>
                     </p>
                 </div>
                 <div>
                     <p class="text-default">Charges or Legal Matter:
-                        <span class="font-weight-normal">Aggravated Assault</span>
+                        <span class="font-weight-normal">{{caseDetails?.leaglMatter}}</span>
                     </p>
                 </div>
                 <div *ngIf="caseDetails?.countyOfArrest">
                     <p class="text-default">County of Arrest:
                         <span class="font-weight-normal"> {{caseDetails?.countyOfArrest}}</span>
+                    </p>
+                </div>
+                <div>
+                    <p class="text-default" *ngIf="caseDetails?.briefDescriptionOfChargeOrLegalMatter">
+                        Brief Description:
+                        <span class="font-weight-normal"> {{caseDetails?.briefDescriptionOfChargeOrLegalMatter}}</span>
                     </p>
                 </div>
                 <div *ngIf="caseDetails?.attorneyName">
@@ -57,12 +58,6 @@
                     <p class="text-default" *ngIf="caseDetails?.nextCourtDate">
                         Next Court Date:
                         <span class="font-weight-normal"> {{caseDetails?.nextCourtDate |date: 'MM-dd-yyyy'}}</span>
-                    </p>
-                </div>
-                <div>
-                    <p class="text-default" *ngIf="caseDetails?.otherInformation">
-                        Other Information:
-                        <span class="font-weight-normal"> {{caseDetails?.otherInformation}}</span>
                     </p>
                 </div>
             </mat-card>
@@ -127,7 +122,7 @@
 
 <ng-template #managenotesModel>
     <div class="d-flex justify-content-start p-0">
-        <h3 class="font-weight-bold pl-2">Notes:</h3>
+        <h3 class="font-weight-bold pl-2">My Private Case Notes:</h3>
     </div>
     <div class="row">
         <div class="col-md-12">
@@ -143,11 +138,10 @@
             </mat-form-field>
         </div>
     </div>
-    <div class="d-flex justify-content-end p-0">
-        <!-- <button *ngIf="enableEditBtn" mat-raised-button class="button-purple mt-2 px-4 py-1"
-            [disabled]="caseNoteForm.get('notes').invalid" (click)="this.caseNoteForm.enable();enableEditBtn = false">
-            Edit
-        </button> -->
+    <div class="d-flex justify-content-between p-1">
+        <button mat-raised-button class="button-purple mt-2 px-4 py-1" (click)="onCancelNotesModal()">
+            Cancel
+        </button>
         <button mat-raised-button color="primary" class="px-4 py-1 mt-2" [disabled]="caseNoteForm.get('notes').invalid"
             (click)="onSaveChanges()">
             Save

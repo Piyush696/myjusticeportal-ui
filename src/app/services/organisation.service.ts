@@ -50,4 +50,7 @@ export class OrganisationService {
   updateOrganisation(data, addressId) {
     return this.httpClient.put<object>(`${this.apiPath}/organization/${addressId}`, data, this.getHeaders())
   }
+  uploadFile(formData) {
+    return this.httpClient.post<any>(`${this.apiPath}/organization/uploadLogo`, formData, this.getHeaders());
+  }
 }
