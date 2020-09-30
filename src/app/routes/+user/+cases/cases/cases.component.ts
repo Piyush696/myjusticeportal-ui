@@ -46,7 +46,7 @@ export class CasesComponent implements OnInit {
   openModal(templateRef, value) {
     this.currentCaseId = value.caseId
     let dialogRef = this.dialog.open(templateRef, {
-      width: '500px',
+      width: '836px',
     });
     this.caseNoteForm.get('notes').setValue(value.notes);
     // this.caseNoteForm.get('notes').disable();
@@ -68,5 +68,9 @@ export class CasesComponent implements OnInit {
     }, (error: any) => {
       this.toasterService.showErrorToater(error.statusText);
     })
+  }
+
+  onCancelNotesModal() {
+    this.dialog.closeAll();
   }
 }
