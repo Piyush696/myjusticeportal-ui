@@ -10,6 +10,11 @@
   background: #c0c6f3;
 }
 
+.btn-black {
+  background: #333442 !important;
+  color: #fff !important;
+}
+
 .header-title {
   font-weight: bold !important;
   line-height: 10px !important;
