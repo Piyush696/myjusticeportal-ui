@@ -11,14 +11,14 @@
     <mat-card class="border border-dark px-3 py-0">
         <div class="row banner-style">
             <div class="col-4">
-                <div class="d-flex justify-content-center">
-                    <img src="assets/img/logo.png" alt="logo" class="logo">
+                <div class="d-flex justify-content-center" style="height: 200px;
+                width: 250px;">
+                    <img src="{{logo?.downloadLink}}" alt="logo" class="logo">
                 </div>
             </div>
             <div class="col-8 d-flex align-items-center">
                 <span class="title-style">
-                    Lawyer Firm. There when you need us
-                    and always ready to fight on your behalf.
+                    {{orgDetails?.tagline}}
                 </span>
             </div>
         </div>
@@ -27,9 +27,9 @@
                 <h3 class="font-weight-bold">Organization Information:</h3>
                 <span class="font-weight-bold">Organization:
                     <span class="font-weight-light text-dark">{{orgDetails?.name}}
-                         {{orgDetails?.orgCode}}</span>
+                        {{orgDetails?.orgCode}}</span>
                     <span class="font-weight-light text-dark"> {{orgDetails?.tagline}}
-                        </span>
+                    </span>
                 </span><br><br>
                 <span class="font-weight-bold">Address:
                     <span class="font-weight-light text-dark"> {{orgDetails?.Address?.street1}}

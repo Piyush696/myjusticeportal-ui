@@ -17,7 +17,7 @@ export class CaseFormComponent implements OnInit, OnChanges {
   buttonText: string = 'Add Case';
   headerText: string = 'Create a Case';
   userData: any;
-  fullName:string;
+  fullName: string;
 
   @Input() caseDetails;
   public states = [];
@@ -61,17 +61,17 @@ export class CaseFormComponent implements OnInit, OnChanges {
       firstName: ['', [Validators.required]],
       leaglMatter: ['', [Validators.required]],
       countyOfArrest: [''],
-      dateOfArrest: [null],
+      dateOfArrest: [''],
       briefDescriptionOfChargeOrLegalMatter: ['', [Validators.required]],
       attorneyName: [''],
-      nextCourtDate: [null],
-      otherInformation: ['']
+      nextCourtDate: [''],
+      // otherInformation: ['']
     });
   }
 
   getUserFromStore() {
     this.store.select(s => s.userInfo).subscribe(user => this.userData = user);
-    this.fullName=`${this.userData.firstName} ${ this.userData.lastName}`;
+    this.fullName = `${this.userData.firstName} ${this.userData.lastName}`;
     this.caseForm.get('firstName').setValue(this.fullName);
     this.caseForm.get('firstName').disable();
   }
