@@ -8,7 +8,10 @@
             <mat-card class="p-4">
                 <div>
                     <h2 class=" text-center font-weight-bold">Additional Information</h2>
-                    <p class="text-center">Add Information about state and bar info</p>
+                    <p class="text-center" *ngIf="roleId == 3">Add Information about state and bar info</p>
+                    <p class="text-center" *ngIf="isFacility">Please enter the housing unit, if you remember it.</p>
+                    <p class="text-center" *ngIf="!isFacility">Please select your most recent Facility, and enter the
+                        housing unit, if you remember it.</p>
                 </div>
                 <div class="">
                     <div *ngIf="roleId != 3">
@@ -49,9 +52,9 @@
                         </div>
                         <div class="col-4 p-0">
                             <mat-form-field appearance="fill" class="w-100 p-3">
-                                <mat-label>Bar info Exam Id</mat-label>
+                                <mat-label>Bar info Exam Id (If Applicable)</mat-label>
                                 <input type="text" matInput
-                                    [formControl]="additionalInfoLawyer.controls['bar_info_Exam_Id']" required>
+                                    [formControl]="additionalInfoLawyer.controls['bar_info_Exam_Id']">
                                 <mat-error
                                     *ngIf="additionalInfoLawyer.controls['bar_info_Exam_Id'].invalid && additionalInfoLawyer.controls['bar_info_Exam_Id'].touched">
                                     <small class="font13"
@@ -87,7 +90,7 @@
                                     <th>Specialty</th>
                                 </tr>
                             </thead> -->
-                            <tbody style="border: none;">
+                            <tbody class="p-1" style="border: none; ">
                                 <tr *ngFor="let info of lawyerInfoArray">
                                     <td class="p-0 w-25">{{info.state}}</td>
                                     <td class="p-0 w-25">{{info.bar_info_Exam_Id}}</td>
@@ -117,7 +120,7 @@
 
                     <button *ngIf="roleId == 3"
                         [disabled]="
-                        (additionalInfoLawyer.controls['state'].invalid || additionalInfoLawyer.controls['speciality'].invalid || additionalInfoLawyer.controls['bar_info_Exam_Id'].invalid)"
+                        additionalInfoLawyer.controls['state'].invalid || additionalInfoLawyer.controls['speciality'].invalid"
                         class="px-4 py-1" mat-raised-button color="primary" (click)="submit()">Next</button>
                 </div>
             </mat-card>

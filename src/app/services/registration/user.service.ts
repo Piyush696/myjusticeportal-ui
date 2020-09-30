@@ -19,4 +19,8 @@ export class UserService {
   userRegistration(userRegistrationData) {
     return this.httpClient.post<object>(`${this.apiPath}/userRegistration`, userRegistrationData)
   }
+
+  userFacility() {
+    return this.httpClient.get<object>(`${this.apiPath}/userRegistration/checkFacility`)
+  }
 }
