@@ -15,8 +15,7 @@
         <div class="col-6 pl-0">
             <mat-form-field appearance="fill" class="w-100 pl-2">
                 <mat-label>Name</mat-label>
-                <input type="text" matInput placeholder="Name" [formControl]="caseForm.controls['firstName']" 
-                    required>
+                <input type="text" matInput placeholder="Name" [formControl]="caseForm.controls['firstName']" required>
                 <mat-error>
                     <div *ngIf="caseForm.controls['firstName'].invalid && caseForm.controls['firstName'].touched">
                         <small class="font13">
@@ -29,10 +28,10 @@
         <div class="col-6 pl-2">
             <mat-form-field appearance="fill" class="w-100 p-0">
                 <mat-label>Charges or Leagl Matter</mat-label>
-                <input type="text" matInput placeholder="Charges or Leagl Matter" [formControl]="caseForm.controls['leaglMatter']"
-                    required>
+                <input type="text" matInput placeholder="Charges or Leagl Matter"
+                    [formControl]="caseForm.controls['legalMatter']" required>
                 <mat-error>
-                    <div *ngIf="caseForm.controls['leaglMatter'].invalid && caseForm.controls['leaglMatter'].touched">
+                    <div *ngIf="caseForm.controls['legalMatter'].invalid && caseForm.controls['legalMatter'].touched">
                         <small class="font13">
                             Charges or Leagl Matter is Required
                         </small>

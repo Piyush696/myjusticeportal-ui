@@ -24,18 +24,19 @@
                     </div>
                     <div>
                         <button class="white-btn px-5 py-1" mat-raised-button [routerLink]="'edit'">
-                            Edit Cases
+                            Edit Case
                         </button>
                     </div>
                 </div>
                 <div>
                     <p class="text-default">Name:
-                        <span class="font-weight-normal"> {{caseDetails?.inmate?.firstName}} {{caseDetails?.inmate?.lastName}}</span>
+                        <span class="font-weight-normal"> {{caseDetails?.inmate?.firstName}}
+                            {{caseDetails?.inmate?.lastName}}</span>
                     </p>
                 </div>
                 <div>
                     <p class="text-default">Charges or Legal Matter:
-                        <span class="font-weight-normal">{{caseDetails?.leaglMatter}}</span>
+                        <span class="font-weight-normal">{{caseDetails?.legalMatter}}</span>
                     </p>
                 </div>
                 <div *ngIf="caseDetails?.countyOfArrest">
@@ -92,11 +93,6 @@
             <div class="d-flex justify-content-end">
                 <button class="button-purple  btn-group mt-1 py-1 btn-group" mat-raised-button>
                     Legal Research Assistant
-                </button>
-            </div>
-            <div class="d-flex justify-content-end">
-                <button class="button-purple  btn-group mt-1 py-1 btn-group" mat-raised-button>
-                    Ask a Lawyer
                 </button>
             </div>
             <div class="d-flex justify-content-end">
