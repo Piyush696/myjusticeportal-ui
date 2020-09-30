@@ -33,7 +33,7 @@ export class CaseFormComponent implements OnInit, OnChanges {
       this.buttonText = 'Update Case';
       this.headerText = 'Edit a Case';
       this.caseForm.get('firstName').setValue(this.fullName);
-      this.caseForm.get('leaglMatter').setValue(this.caseDetails.leaglMatter);
+      this.caseForm.get('legalMatter').setValue(this.caseDetails.legalMatter);
       this.caseForm.get('countyOfArrest').setValue(this.caseDetails.countyOfArrest);
       this.caseForm.get('dateOfArrest').setValue(this.caseDetails.dateOfArrest);
       this.caseForm.get('briefDescriptionOfChargeOrLegalMatter').setValue(this.caseDetails.briefDescriptionOfChargeOrLegalMatter);
@@ -59,7 +59,7 @@ export class CaseFormComponent implements OnInit, OnChanges {
   createFormControl() {
     this.caseForm = this.fb.group({
       firstName: ['', [Validators.required]],
-      leaglMatter: ['', [Validators.required]],
+      legalMatter: ['', [Validators.required]],
       countyOfArrest: [''],
       dateOfArrest: [''],
       briefDescriptionOfChargeOrLegalMatter: ['', [Validators.required]],
