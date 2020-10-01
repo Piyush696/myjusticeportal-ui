@@ -24,18 +24,19 @@
                     </div>
                     <div>
                         <button class="white-btn px-5 py-1" mat-raised-button [routerLink]="'edit'">
-                            Edit Cases
+                            Edit Case
                         </button>
                     </div>
                 </div>
                 <div>
                     <p class="text-default">Name:
-                        <span class="font-weight-normal"> {{caseDetails?.inmate?.firstName}} {{caseDetails?.inmate?.lastName}}</span>
+                        <span class="font-weight-normal"> {{caseDetails?.inmate?.firstName}}
+                            {{caseDetails?.inmate?.lastName}}</span>
                     </p>
                 </div>
                 <div>
                     <p class="text-default">Charges or Legal Matter:
-                        <span class="font-weight-normal">{{caseDetails?.leaglMatter}}</span>
+                        <span class="font-weight-normal">{{caseDetails?.legalMatter}}</span>
                     </p>
                 </div>
                 <div *ngIf="caseDetails?.countyOfArrest">
@@ -65,7 +66,7 @@
         <div class="col-12 p-0 mt-3">
             <mat-card class="d-flex justify-content-between mat-elevation-z10 view-card-color">
                 <div>
-                    <h3 class="font-weight-bold mb-2">Note:</h3>
+                    <h3 class="font-weight-bold mb-2">My Private Case Notes:</h3>
                     <div class="notes">
                         <span>{{caseDetails?.notes}}</span>
                         <span *ngIf="!caseDetails?.notes" class="text-danger">
@@ -73,7 +74,7 @@
                         </span>
                     </div>
                 </div>
-                <div class="d-flex align-items-center pl-2">
+                <div class="pl-2">
                     <button class="button-purple" mat-mini-fab title="Add/Edit Note"
                         (click)="openModal(managenotesModel)">
                         <mat-icon>edit</mat-icon>
@@ -92,11 +93,6 @@
             <div class="d-flex justify-content-end">
                 <button class="button-purple  btn-group mt-1 py-1 btn-group" mat-raised-button>
                     Legal Research Assistant
-                </button>
-            </div>
-            <div class="d-flex justify-content-end">
-                <button class="button-purple  btn-group mt-1 py-1 btn-group" mat-raised-button>
-                    Ask a Lawyer
                 </button>
             </div>
             <div class="d-flex justify-content-end">
