@@ -56,6 +56,12 @@
                     </p>
                 </div>
                 <div>
+                    <p class="text-default" *ngIf="caseDetails?.dateOfArrest">
+                        Date of Arrest:
+                        <span class="font-weight-normal"> {{caseDetails?.dateOfArrest |date: 'MM-dd-yyyy'}}</span>
+                    </p>
+                </div>
+                <div>
                     <p class="text-default" *ngIf="caseDetails?.nextCourtDate">
                         Next Court Date:
                         <span class="font-weight-normal"> {{caseDetails?.nextCourtDate |date: 'MM-dd-yyyy'}}</span>

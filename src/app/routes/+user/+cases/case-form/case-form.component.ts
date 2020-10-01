@@ -39,7 +39,7 @@ export class CaseFormComponent implements OnInit, OnChanges {
       this.caseForm.get('briefDescriptionOfChargeOrLegalMatter').setValue(this.caseDetails.briefDescriptionOfChargeOrLegalMatter);
       this.caseForm.get('attorneyName').setValue(this.caseDetails.attorneyName);
       this.caseForm.get('nextCourtDate').setValue(this.caseDetails.nextCourtDate);
-      this.caseForm.get('otherInformation').setValue(this.caseDetails.otherInformation);
+      // this.caseForm.get('otherInformation').setValue(this.caseDetails.otherInformation);
     }
   }
 
