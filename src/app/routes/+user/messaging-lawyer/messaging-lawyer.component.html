@@ -1,4 +1,19 @@
-<div *ngIf="!isMessage">
+<div class="row">
+    <div class="col-4">
+        <app-mesage-list [userMessageList]="userMessageList" (messageEvent)="messageEvent($event)"></app-mesage-list>
+    </div>
+    <div class="col-8">
+        <app-chat *ngIf="isMessage" [lawyerId]="lawyerId" [allMessages]="allMessages"></app-chat>
+
+    </div>
+</div>
+
+
+
+
+
+
+<!-- <div *ngIf="!isMessage">
     <mat-card class="p-4">
         <h2 class="text-center">Select Organization:</h2>
         <p class="pl-3">Please choose Organization.</p>
@@ -9,15 +24,16 @@
                 </mat-checkbox>
             </li>
         </ul>
-        <!-- <div class="mx-3 row d-flex justify-content-end mt-2">
+    </mat-card> -->
+
+<!-- <div class="mx-3 row d-flex justify-content-end mt-2">
             <button class="button-purple px-4 py-1" mat-raised-button (click)="submit()">
                 Submit
             </button>
         </div> -->
-    </mat-card>
 
 
-    <div *ngIf="orgDetails">
+<!-- <div *ngIf="orgDetails">
         <h2 class="text-center">Select lawyer:</h2>
         <p class="pl-3">Please choose lawyer.</p>
         <mat-card *ngFor="let user of orgDetails?.users"
@@ -32,5 +48,4 @@
             </button>
         </mat-card>
     </div>
-</div>
-<app-chat *ngIf="isMessage" [lawyerId]="lawyerId"></app-chat>
+</div> -->
