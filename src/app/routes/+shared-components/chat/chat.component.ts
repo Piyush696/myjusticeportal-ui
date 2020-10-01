@@ -15,7 +15,7 @@ const SOCKET_ENDPOINT = 'localhost:8810';
 export class ChatComponent implements OnInit, OnChanges {
 
   @Input() lawyerId;
-  @Input() allMessages: any;
+  @Input() allMessages = [];
 
   socket;
   message: string;
@@ -33,7 +33,6 @@ export class ChatComponent implements OnInit, OnChanges {
     console.log(window.location.href.replace(/^http(s?):\/\//i, "").split(':'));
     this.setupSocketConnection();
     this.getSingleUser();
-
   }
 
   ngOnChanges(): void {
@@ -42,13 +41,14 @@ export class ChatComponent implements OnInit, OnChanges {
       myNode.removeChild(myNode.lastElementChild);
     }
     console.log(this.allMessages)
-    this.loadMessage()
+    setTimeout(() => {
+      this.loadMessage()
+    }, 3000)
   }
 
   loadMessage() {
-    console.log(this.allMessages)
     this.allMessages.forEach(item => {
-      if (item.receiverId !== this.userInfo?.userId) {
+      if (item.senderId !== this.userInfo?.userId) {
         this.messageList = item.message
         const element = document.createElement('li');
         element.innerHTML = item.message;
@@ -56,17 +56,17 @@ export class ChatComponent implements OnInit, OnChanges {
         element.style.color = '#333442';
         element.style.padding = '15px 30px';
         element.style.margin = '10px';
-        element.style.float = 'left';
+        element.style.textAlign = 'left';
         document.getElementById('message-list').appendChild(element);
       } else {
         this.messageList = item.message
         const element = document.createElement('li');
         element.innerHTML = item.message;
-        element.style.background = '#ededed';
-        element.style.color = '#333442';
+        element.style.background = '#333442';
+        element.style.color = '#ffff';
         element.style.padding = '15px 30px';
         element.style.margin = '10px';
-        element.style.float = 'right';
+        element.style.textAlign = 'right';
         document.getElementById('message-list').appendChild(element);
 
       }
