@@ -8,11 +8,14 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 export class MesageListComponent implements OnInit {
   @Input() userMessageList: any
   @Output() messageEvent = new EventEmitter()
+  selectedUser: any;
   constructor() { }
 
   ngOnInit(): void {
   }
+
   onClicklawyer(lawyerId) {
+    this.selectedUser = lawyerId;
     let data = {
       isMessage: true,
       lawyerId: lawyerId

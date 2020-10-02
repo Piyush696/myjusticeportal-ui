@@ -13,7 +13,7 @@ const SOCKET_ENDPOINT = 'localhost:8810';
 export class MessagingLawyerComponent implements OnInit {
   organizationList: any;
   orgDetails: any;
-  isMessage: boolean;
+  isMessage: boolean = false;
   lawyerId: any;
   userMessageList = [];
   allMessages: any;

@@ -43,7 +43,7 @@ export class ChatComponent implements OnInit, OnChanges {
     console.log(this.allMessages)
     setTimeout(() => {
       this.loadMessage()
-    }, 3000)
+    }, 5000)
   }
 
   loadMessage() {

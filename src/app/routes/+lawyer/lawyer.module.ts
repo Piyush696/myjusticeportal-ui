@@ -8,13 +8,15 @@ import { LawyerdashboardComponent } from './lawyerdashboard/lawyerdashboard.comp
 import { ViewCaseDetailsComponent } from './view-case-details/view-case-details.component';
 import { AcceptedCasesComponent } from './accepted-cases/accepted-cases.component';
 import { LawyerChatComponent } from './lawyer-chat/lawyer-chat.component';
+import { MesageListComponent } from '../+user/messaging-lawyer/mesage-list/mesage-list.component';
 
 @NgModule({
   declarations: [
     LawyerdashboardComponent,
     ViewCaseDetailsComponent,
     AcceptedCasesComponent,
-    LawyerChatComponent
+    LawyerChatComponent,
+    MesageListComponent
   ],
   imports: [
     CommonModule,

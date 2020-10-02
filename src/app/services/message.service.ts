@@ -29,4 +29,8 @@ export class MessageService {
   getAllMessages(receiverId) {
     return this.httpClient.get<object>(`${this.apiPath}/message/allMessages/` + receiverId, this.getHeaders());
   }
+
+  getAllUserMessages() {
+    return this.httpClient.get<object>(`${this.apiPath}/message/users`, this.getHeaders());
+  }
 }
