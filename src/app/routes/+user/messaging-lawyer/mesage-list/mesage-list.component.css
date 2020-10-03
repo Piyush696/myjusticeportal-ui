@@ -1,15 +1,7 @@
-.login {
-    position: absolute;
-    width: 100%;
-    max-width: 600px;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-}
-
 .container {
     max-width: 1170px;
     margin: auto;
+    padding: 0px;
 }
 
 img {
@@ -17,7 +9,7 @@ img {
 }
 
 .inbox_people {
-    background: #f8f8f8 none repeat scroll 0 0;
+    background: #ededed none repeat scroll 0 0;
     float: left;
     overflow: hidden;
     width: 100%;
@@ -25,7 +17,7 @@ img {
 }
 
 .inbox_msg {
-    border: 1px solid #c4c4c4;
+    border: 1px solid #333442;
     clear: both;
     overflow: hidden;
 }
@@ -111,14 +103,14 @@ img {
 }
 
 .chat_list {
-    border-bottom: 1px solid #c4c4c4;
+    border-bottom: 1px solid #333442;
     margin: 0;
     padding: 18px 16px 10px;
 }
 
 .inbox_chat {
-    height: 550px;
-    overflow-y: scroll;
+    height: 32.3em;
+    overflow-y: auto !important;
 }
 
 .active_chat {
@@ -223,4 +215,8 @@ img {
 
 .message {
     list-style-type: none;
+}
+
+.active {
+    background-color: #eded;
 }
