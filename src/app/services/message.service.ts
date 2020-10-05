@@ -33,4 +33,8 @@ export class MessageService {
   getAllUserMessages() {
     return this.httpClient.get<object>(`${this.apiPath}/message/users`, this.getHeaders());
   }
+
+  getOldUsers() {
+    return this.httpClient.get<object>(`${this.apiPath}/message/oldUser`, this.getHeaders());
+  }
 }

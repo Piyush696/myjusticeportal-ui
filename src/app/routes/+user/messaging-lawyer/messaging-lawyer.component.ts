@@ -17,6 +17,7 @@ export class MessagingLawyerComponent implements OnInit {
   lawyerId: any;
   userMessageList = [];
   allMessages: any;
+  oldUserList = [];
 
   constructor(private hireLawyerService: HireLawyerService, private messageService: MessageService) { }
 
@@ -31,14 +32,35 @@ export class MessagingLawyerComponent implements OnInit {
       res.data.forEach(item => {
         this.userMessageList.push(...item.users)
       })
+      this.getOldUserList()
+
     })
   }
+
+
 
   getMessageHistory(id) {
     this.messageService.getAllMessages(id).subscribe((res: any) => {
       console.log(res)
       this.allMessages = res.data
+
+
     })
+  }
+
+  getOldUserList() {
+    this.messageService.getOldUsers().subscribe((res: any) => {
+      console.log(res)
+      this.oldUserList = res.data
+      this.filterData()
+    })
+  }
+
+  filterData() {
+    console.log('woek')
+    this.userMessageList = this.userMessageList.filter(item1 =>
+      !this.oldUserList.some(item2 => (item2.userId === item1.userId)))
+    console.log(this.userMessageList)
   }
 
   getOrganizations() {

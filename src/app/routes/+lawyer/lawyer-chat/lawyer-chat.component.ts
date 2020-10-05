@@ -17,9 +17,9 @@ export class LawyerChatComponent implements OnInit {
   messageData: any;
   userInfo: any;
   allMessages: any;
-  userMessageList = [];
   isMessage: boolean = false;
   lawyerId: any;
+  userList = [];
 
 
   constructor(private store: Store<any>, private messageService: MessageService) { }
@@ -37,6 +37,7 @@ export class LawyerChatComponent implements OnInit {
     while (myNode.lastElementChild) {
       myNode.removeChild(myNode.lastElementChild);
     }
+
   }
 
   loadMessage() {
@@ -68,8 +69,8 @@ export class LawyerChatComponent implements OnInit {
 
   allusers() {
     this.messageService.getAllUserMessages().subscribe((res: any) => {
-      this.userMessageList = res.data
-      console.log(this.userMessageList)
+      this.userList = res.data
+      console.log(this.userList)
     })
   }
 
