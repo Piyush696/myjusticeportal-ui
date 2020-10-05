@@ -5,8 +5,12 @@
         <mat-spinner *ngIf="isLoading" class="spinner-style" [diameter]="50"></mat-spinner>
     </div>
     <div class="chat-messages-create-container">
-        <input class="chat-messages-create-input" type="text" [(ngModel)]="message">
-        <button class="chat-messages-create-button" (click)="SendMessage()"> Send </button>
+        <div class="col-12 d-flex justify-content-between">
+            <input class="chat-messages-create-input" placeholder="Type a message" type="text" [(ngModel)]="message">
+            <button mat-raised-button class="px-4 send-msg-btn" (click)="SendMessage()">
+                Send
+            </button>
+        </div>
     </div>
 </div>
 
