@@ -22,7 +22,7 @@
 .chat-messages-create-input {
   padding: 12px;
   margin: 29px 30px;
-  flex: 2
+  flex: 2;
 }
 
 .chat-messages-create-button {
@@ -36,4 +36,13 @@
   left: 45%;
   top: 32%;
   z-index: 100;
+}
+
+.right-class {
+  display: flex !important;
+  justify-content: flex-end !important;
+}
+.left-class {
+  display: flex !important;
+  justify-content: flex-start !important;
 }
