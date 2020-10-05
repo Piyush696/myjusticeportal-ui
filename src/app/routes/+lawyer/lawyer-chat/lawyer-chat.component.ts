@@ -20,6 +20,7 @@ export class LawyerChatComponent implements OnInit {
   isMessage: boolean = false;
   lawyerId: any;
   userList = [];
+  headerText = "Users"
 
 
   constructor(private store: Store<any>, private messageService: MessageService) { }
@@ -70,13 +71,11 @@ export class LawyerChatComponent implements OnInit {
   allusers() {
     this.messageService.getAllUserMessages().subscribe((res: any) => {
       this.userList = res.data
-      console.log(this.userList)
     })
   }
 
   getMessageHistory(id) {
     this.messageService.getAllMessages(id).subscribe((res: any) => {
-      console.log(res)
       this.allMessages = res.data
       this.loadMessage()
     })
@@ -117,7 +116,6 @@ export class LawyerChatComponent implements OnInit {
   }
 
   messageEvent(value) {
-    console.log(value)
     this.isMessage = value.isMessage;
     this.lawyerId = value.lawyerId
     this.getMessageHistory(this.lawyerId)

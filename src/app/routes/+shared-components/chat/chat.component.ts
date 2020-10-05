@@ -31,7 +31,7 @@ export class ChatComponent implements OnInit, OnChanges {
     this.store.select(s => s.userInfo).subscribe(x => {
       this.userInfo = x
     })
-    console.log(window.location.href.replace(/^http(s?):\/\//i, "").split(':'));
+    // console.log(window.location.href.replace(/^http(s?):\/\//i, "").split(':'));
     this.setupSocketConnection();
     this.getSingleUser();
   }
@@ -104,7 +104,6 @@ export class ChatComponent implements OnInit, OnChanges {
       "senderId": this.userId,
       "message": this.message
     }
-    console.log(data)
     this.socket.emit('message', data);
     const element = document.createElement('li');
     element.innerHTML = this.message;
