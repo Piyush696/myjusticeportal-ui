@@ -6,19 +6,19 @@
                     <div class="col-12 d-flex justify-content-between">
                         <h4 class="text-center">Lawyers</h4>
                         <button class="button-purple padding-btn float-right py-1" mat-raised-button
-                            (click)="onOpenModal(lawyerlistModal)">
+                            (click)="onOpenModal(lawyerlistModal)" *ngIf="show">
                             Message New Lawyers
                         </button>
                     </div>
                 </div>
                 <div class="inbox_chat">
-                    <div class="channels" *ngFor="let user of userMessageList">
-                        <div class="chat_list" [ngClass]="{'active': selectedUser == user?.userId}">
+                    <div class="channels" *ngFor="let old of oldUserList">
+                        <div class="chat_list" [ngClass]="{'active': selectedUser == old?.userId}">
                             <div class="chat_people">
                                 <div class="chat_ib">
-                                    <h5 (click)="onClicklawyer(user?.userId)" style="cursor: pointer;">
-                                        {{user?.firstName}} {{user?.middleName}}
-                                        {{user?.lastName}}
+                                    <h5 (click)="onClicklawyer(old?.userId)" style="cursor: pointer;">
+                                        {{old?.firstName}} {{old?.middleName}}
+                                        {{old?.lastName}}
                                     </h5>
                                 </div>
                             </div>
@@ -37,16 +37,21 @@
     <div>
         <div class="row">
             <div class="col-12">
-                <mat-form-field appearance="fill" class="w-100 py-1">
-                    <mat-label>Email</mat-label>
-                    <input type="email" matInput placeholder="Email" required>
-                </mat-form-field>
+                <h2 class="text-center">Select lawyers:</h2>
+                <p class="pl-3">Please choose lawyers.</p>
+                <ul class="pl-3">
+                    <li *ngFor="let user of userMessageList">
+                        <mat-checkbox color="primary" (change)="onNativeChange($event.checked,user)">
+                            {{user?.firstName}} {{user?.middleName}}
+                            {{user?.lastName}}
+                        </mat-checkbox>
+                    </li>
+                </ul>
             </div>
         </div>
     </div>
     <div class="d-flex justify-content-between">
-        <button class="button-purple px-4 py-1" mat-raised-button [disabled]="inviteMailForm.invalid"
-            (click)="onEmailInvite()">
+        <button class="button-purple px-4 py-1" mat-raised-button (click)="onEmailInvite()">
             Submit
         </button>
         <button mat-raised-button class="button-purple px-4 py-1" (click)="closeModal()">
