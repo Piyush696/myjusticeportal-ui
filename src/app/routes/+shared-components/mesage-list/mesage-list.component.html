@@ -4,12 +4,11 @@
             <div class="inbox_people">
                 <div class="headind_srch">
                     <div class="col-12 d-flex justify-content-between">
-                        <h4 class="text-center pt-2"><strong>{{headerText}}</strong></h4>
-                        <button class="button-purple padding-btn float-right py-1" mat-raised-button
-                            (click)="onOpenModal(lawyerlistModal)" *ngIf="show">
-                            <mat-icon>contacts</mat-icon>
+                        <h4 class="text-center pt-2"><strong>{{headerText}}</strong></h4><i class="fa fa-user-plus pt-2"
+                            *ngIf="show" (click)="onOpenModal(lawyerlistModal)" aria-hidden="true"
+                            style="font-size: 20px"></i>
 
-                        </button>
+
                     </div>
                 </div>
                 <div class="inbox_chat">

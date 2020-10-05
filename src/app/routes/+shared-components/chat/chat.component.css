@@ -21,8 +21,8 @@
 
 .chat-messages-create-input {
   padding: 12px;
-  margin: 27px 18px;
-  flex: 2
+  margin: 29px 30px;
+  flex: 2;
 }
 
 .send-msg-btn {
@@ -40,4 +40,14 @@
   left: 45%;
   top: 32%;
   z-index: 100;
+}
+
+.right-class {
+  display: flex !important;
+  justify-content: flex-end !important;
+}
+
+.left-class {
+  display: flex !important;
+  justify-content: flex-start !important;
 }
