@@ -43,7 +43,6 @@
                         <p>Curently no lawyers is present in Organization</p>
                     </li>
                     <li *ngFor="let user of userMessageList">
-                        <p class="pl-3">Please choose lawyers.</p>
                         <mat-checkbox color="primary" (change)="onNativeChange($event.checked,user)">
                             {{user?.firstName}} {{user?.middleName}}
                             {{user?.lastName}}
