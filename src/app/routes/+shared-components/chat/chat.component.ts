@@ -73,6 +73,7 @@ export class ChatComponent implements OnInit, OnChanges {
       }
       this.isLoading = false;
     })
+    this.isLoading = false;
   }
 
   getSingleUser() {
