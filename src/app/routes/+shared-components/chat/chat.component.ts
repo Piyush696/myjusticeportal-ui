@@ -22,6 +22,7 @@ export class ChatComponent implements OnInit, OnChanges {
   userId;
   userInfo: any;
   messageList: any;
+  isLoading: boolean;
 
   constructor(private userService: UserService, private loc: Location, private router: Router, private store: Store<any>) { }
 
@@ -36,11 +37,12 @@ export class ChatComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(): void {
+    this.isLoading = true;
     const myNode = document.getElementById("message-list");
     while (myNode.lastElementChild) {
       myNode.removeChild(myNode.lastElementChild);
     }
-    console.log(this.allMessages)
+    this.isLoading = true;
     setTimeout(() => {
       this.loadMessage()
     }, 5000)
@@ -68,8 +70,8 @@ export class ChatComponent implements OnInit, OnChanges {
         element.style.margin = '10px';
         element.style.textAlign = 'right';
         document.getElementById('message-list').appendChild(element);
-
       }
+      this.isLoading = false;
     })
   }
 

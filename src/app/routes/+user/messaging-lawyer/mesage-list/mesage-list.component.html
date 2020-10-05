@@ -3,8 +3,12 @@
         <div class="inbox_msg">
             <div class="inbox_people">
                 <div class="headind_srch">
-                    <div class="channel_heading">
-                        <h4>Lawyers</h4>
+                    <div class="col-12 d-flex justify-content-between">
+                        <h4 class="text-center">Lawyers</h4>
+                        <button class="button-purple padding-btn float-right py-1" mat-raised-button
+                            (click)="onOpenModal(lawyerlistModal)">
+                            Message New Lawyers
+                        </button>
                     </div>
                 </div>
                 <div class="inbox_chat">
@@ -25,3 +29,28 @@
         </div>
     </div>
 </div>
+
+<ng-template #lawyerlistModal>
+    <div>
+        <h2 class="font-weight-bold">Select lawyer</h2>
+    </div>
+    <div>
+        <div class="row">
+            <div class="col-12">
+                <mat-form-field appearance="fill" class="w-100 py-1">
+                    <mat-label>Email</mat-label>
+                    <input type="email" matInput placeholder="Email" required>
+                </mat-form-field>
+            </div>
+        </div>
+    </div>
+    <div class="d-flex justify-content-between">
+        <button class="button-purple px-4 py-1" mat-raised-button [disabled]="inviteMailForm.invalid"
+            (click)="onEmailInvite()">
+            Submit
+        </button>
+        <button mat-raised-button class="button-purple px-4 py-1" (click)="closeModal()">
+            Close
+        </button>
+    </div>
+</ng-template>

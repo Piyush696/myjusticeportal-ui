@@ -2,6 +2,7 @@
     <div class="chat-messages-show-container">
         <ul class="chat-messages-show-list d-flex flex-column" id="message-list">
         </ul>
+        <mat-spinner *ngIf="isLoading" class="spinner-style" [diameter]="50"></mat-spinner>
     </div>
     <div class="chat-messages-create-container">
         <input class="chat-messages-create-input" type="text" [(ngModel)]="message">

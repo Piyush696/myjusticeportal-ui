@@ -2,16 +2,7 @@
     <div class="col-4">
         <app-mesage-list [userMessageList]="userMessageList" (messageEvent)="messageEvent($event)"></app-mesage-list>
     </div>
-    <div class="col-8" *ngIf="isMessage">
-        <div class="chat-messages">
-            <div class="chat-messages-show-container">
-                <ul class="chat-messages-show-list" id="message-list">
-                </ul>
-            </div>
-            <div class="chat-messages-create-container">
-                <input class="chat-messages-create-input" type="text" [(ngModel)]="message">
-                <button class="chat-messages-create-button" (click)="SendMessage()"> Send </button>
-            </div>
-        </div>
+    <div class="col-8 p-0">
+        <app-chat *ngIf="isMessage" [lawyerId]="lawyerId" [allMessages]="allMessages"></app-chat>
     </div>
 </div>

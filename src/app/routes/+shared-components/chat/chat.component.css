@@ -30,3 +30,10 @@
   margin: auto 40px;
   width: 100px;
 }
+
+.spinner-style {
+  position: absolute;
+  left: 45%;
+  top: 32%;
+  z-index: 100;
+}

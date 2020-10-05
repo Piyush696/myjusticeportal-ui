@@ -68,11 +68,7 @@ export class LawyerChatComponent implements OnInit {
 
   allusers() {
     this.messageService.getAllUserMessages().subscribe((res: any) => {
-      console.log(res)
-      res.data.forEach(item => {
-        this.userMessageList.push(item.inmate)
-      })
-      this.userMessageList = this.userMessageList.filter((v, i, a) => a.findIndex(t => (t.userId === v.userId)) === i)
+      this.userMessageList = res.data
       console.log(this.userMessageList)
     })
   }

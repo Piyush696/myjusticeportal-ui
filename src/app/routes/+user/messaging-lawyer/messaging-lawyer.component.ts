@@ -30,9 +30,7 @@ export class MessagingLawyerComponent implements OnInit {
       console.log(res)
       res.data.forEach(item => {
         this.userMessageList.push(...item.users)
-
       })
-      // console.log(this.userMessageList)
     })
   }
 
