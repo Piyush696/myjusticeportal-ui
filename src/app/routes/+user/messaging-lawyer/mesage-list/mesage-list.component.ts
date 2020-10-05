@@ -8,6 +8,7 @@ import { MatDialog } from '@angular/material/dialog';
 })
 export class MesageListComponent implements OnInit, OnChanges {
   @Input() userMessageList: any
+  @Input() headerText: string;
   @Input() oldUserList: any
   @Input() userList: any;
   @Output() messageEvent = new EventEmitter()
@@ -18,7 +19,6 @@ export class MesageListComponent implements OnInit, OnChanges {
 
   constructor(public dialog: MatDialog,) { }
   ngOnChanges(): void {
-    console.log(this.userList)
     if (this.userList) {
       this.oldUserList = this.userList
       this.show = false
@@ -28,12 +28,10 @@ export class MesageListComponent implements OnInit, OnChanges {
   }
 
   ngOnInit(): void {
-    console.log(this.userMessageList)
   }
 
   onNativeChange(event, user) {
     this.selectedLawyer = user
-    console.log(event, user)
     if (event) {
       this.oldUserList.push(user);
     } else {
@@ -63,7 +61,6 @@ export class MesageListComponent implements OnInit, OnChanges {
 
   onEmailInvite() {
     let lawyerArray = [this.selectedLawyer]
-    console.log(this.selectedLawyer)
     let dialogRef = this.dialog.closeAll()
     this.userMessageList = this.userMessageList.filter(item1 =>
       !lawyerArray.some(item2 => (item2.userId === item1.userId)))

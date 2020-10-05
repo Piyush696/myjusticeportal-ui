@@ -1,6 +1,7 @@
 <div class="row">
     <div class="col-4">
-        <app-mesage-list [userList]="userList" (messageEvent)="messageEvent($event)"></app-mesage-list>
+        <app-mesage-list [userList]="userList" (messageEvent)="messageEvent($event)" [headerText]="headerText">
+        </app-mesage-list>
     </div>
     <div class="col-8 p-0">
         <app-chat *ngIf="isMessage" [lawyerId]="lawyerId" [allMessages]="allMessages"></app-chat>

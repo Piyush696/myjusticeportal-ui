@@ -18,17 +18,17 @@ export class MessagingLawyerComponent implements OnInit {
   userMessageList = [];
   allMessages: any;
   oldUserList = [];
+  headerText = "Lawyers";
 
   constructor(private hireLawyerService: HireLawyerService, private messageService: MessageService) { }
 
   ngOnInit() {
-    this.getOrganizations();
+    // this.getOrganizations();
     this.getMessagedUser();
   }
 
   getMessagedUser() {
     this.messageService.getMessageUsers().subscribe((res: any) => {
-      console.log(res)
       res.data.forEach(item => {
         this.userMessageList.push(...item.users)
       })
@@ -41,7 +41,6 @@ export class MessagingLawyerComponent implements OnInit {
 
   getMessageHistory(id) {
     this.messageService.getAllMessages(id).subscribe((res: any) => {
-      console.log(res)
       this.allMessages = res.data
 
 
@@ -50,32 +49,29 @@ export class MessagingLawyerComponent implements OnInit {
 
   getOldUserList() {
     this.messageService.getOldUsers().subscribe((res: any) => {
-      console.log(res)
       this.oldUserList = res.data
       this.filterData()
     })
   }
 
   filterData() {
-    console.log('woek')
     this.userMessageList = this.userMessageList.filter(item1 =>
       !this.oldUserList.some(item2 => (item2.userId === item1.userId)))
-    console.log(this.userMessageList)
   }
 
-  getOrganizations() {
-    this.hireLawyerService.getOrganization().subscribe((res: any) => {
-      this.organizationList = res.data.users;
-    })
-  }
+  // getOrganizations() {
+  //   this.hireLawyerService.getOrganization().subscribe((res: any) => {
+  //     this.organizationList = res.data.users;
+  //   })
+  // }
 
-  onSelectOrg(checked, organizationId) {
-    if (checked) {
-      this.getAllUsers(organizationId)
-    } else {
-      this.orgDetails = '';
-    }
-  }
+  // onSelectOrg(checked, organizationId) {
+  //   if (checked) {
+  //     this.getAllUsers(organizationId)
+  //   } else {
+  //     this.orgDetails = '';
+  //   }
+  // }
 
   getAllUsers(organizationId) {
     this.hireLawyerService.getUsersLawyer(organizationId).subscribe((users: any) => {
@@ -84,7 +80,6 @@ export class MessagingLawyerComponent implements OnInit {
   }
 
   messageEvent(value) {
-    console.log(value)
     this.isMessage = value.isMessage;
     this.lawyerId = value.lawyerId
     this.getMessageHistory(this.lawyerId)
