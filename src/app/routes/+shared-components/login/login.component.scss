@@ -1,7 +1,8 @@
-@import '../../../../assets/scss/variable';
+@import "../../../../assets/scss/variable";
 
 .logo {
   width: 225px;
+  height: 135px;
 }
 
 .bg-color {
@@ -20,7 +21,7 @@
 a:hover {
   color: blue !important;
 }
-.create_color{
+.create_color {
   color: $custom-orange;
 }
 .line-height {
