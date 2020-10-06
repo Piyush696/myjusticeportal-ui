@@ -11,6 +11,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { ChatComponent } from './chat/chat.component';
 import { FileUploadModule } from 'ng2-file-upload';
+import { MesageListComponent } from './mesage-list/mesage-list.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { FileUploadModule } from 'ng2-file-upload';
     ViewUsersComponent,
     ViewFacilitiesComponent,
     SecurityQuestionComponent,
-    ChatComponent
+    ChatComponent,
+    MesageListComponent
   ],
   imports: [
     CommonModule,
@@ -37,7 +39,8 @@ import { FileUploadModule } from 'ng2-file-upload';
     ViewUsersComponent,
     ViewFacilitiesComponent,
     SecurityQuestionComponent,
-    ChatComponent
+    ChatComponent,
+    MesageListComponent
   ]
 })
 

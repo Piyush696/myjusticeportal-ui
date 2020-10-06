@@ -17,7 +17,6 @@ import { ViewLawyerComponent } from './hire-lawyer/view-lawyer/view-lawyer.compo
 import { FindBondsmanComponent } from './find-bondsman/find-bondsman.component';
 import { ViewBondsmanComponent } from './view-bondsman/view-bondsman.component';
 import { MessagingLawyerComponent } from './messaging-lawyer/messaging-lawyer.component';
-import { MesageListComponent } from '../+shared-components/mesage-list/mesage-list.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +32,6 @@ import { MesageListComponent } from '../+shared-components/mesage-list/mesage-li
     FindBondsmanComponent,
     ViewBondsmanComponent,
     MessagingLawyerComponent,
-    // MesageListComponent
   ],
   imports: [
     CommonModule,
