@@ -1,12 +1,12 @@
 .logo {
   width: 225px;
+  height: 135px;
 }
 
 .bg-color {
   background-color: #fffbfb !important;
 }
 
-.table th,
-.table td {
+.table th, .table td {
   border: none;
 }
