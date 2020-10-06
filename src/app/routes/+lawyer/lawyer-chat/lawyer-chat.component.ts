@@ -3,6 +3,7 @@ import { Store } from '@ngrx/store';
 import { MessageService } from 'app/services/message.service';
 
 
+
 @Component({
   selector: 'app-lawyer-chat',
   templateUrl: './lawyer-chat.component.html',
@@ -29,14 +30,24 @@ export class LawyerChatComponent implements OnInit {
     })
     this.allusers()
   }
+
+
+
   allusers() {
     this.messageService.getAllUserMessages().subscribe((res: any) => {
       this.userList = res.data
     })
   }
 
+  getMessageHistory(id) {
+    this.messageService.getAllMessages(id).subscribe((res: any) => {
+      this.allMessages = res.data
+    })
+  }
+
   messageEvent(value) {
     this.isMessage = value.isMessage;
     this.lawyerId = value.lawyerId
+    this.getMessageHistory(this.lawyerId)
   }
 }
