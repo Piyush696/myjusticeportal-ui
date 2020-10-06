@@ -7,12 +7,16 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LawyerdashboardComponent } from './lawyerdashboard/lawyerdashboard.component';
 import { ViewCaseDetailsComponent } from './view-case-details/view-case-details.component';
 import { AcceptedCasesComponent } from './accepted-cases/accepted-cases.component';
+import { LawyerChatComponent } from './lawyer-chat/lawyer-chat.component';
+import { MesageListComponent } from '../+shared-components/mesage-list/mesage-list.component';
 
 @NgModule({
   declarations: [
     LawyerdashboardComponent,
     ViewCaseDetailsComponent,
-    AcceptedCasesComponent
+    AcceptedCasesComponent,
+    LawyerChatComponent,
+    MesageListComponent
   ],
   imports: [
     CommonModule,

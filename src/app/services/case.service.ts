@@ -52,4 +52,8 @@ export class CaseService {
   getDownloadLink(data) {
     return this.httpClient.post<any>(`${this.apiPath}/case-file/fileDownloadLink`, data, this.getHeaders());
   }
+
+  messageLawyer() {
+    return this.httpClient.get<any>(`${this.apiPath}/message`);
+  }
 }

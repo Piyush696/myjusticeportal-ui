@@ -1,0 +1,63 @@
+<div class="container">
+    <div class="messaging">
+        <div class="inbox_msg">
+            <div class="inbox_people">
+                <div class="headind_srch">
+                    <div class="col-12 d-flex justify-content-between">
+                        <h4 class="text-center pt-2"><strong>{{headerText}}</strong></h4><i class="fa fa-user-plus pt-2"
+                            *ngIf="show" (click)="onOpenModal(lawyerlistModal)" aria-hidden="true"
+                            style="font-size: 20px"></i>
+
+
+                    </div>
+                </div>
+                <div class="inbox_chat">
+                    <div class="channels" *ngFor="let old of oldUserList">
+                        <div class="chat_list" [ngClass]="{'active': selectedUser == old?.userId}">
+                            <div class="chat_people">
+                                <div class="chat_ib">
+                                    <h5 (click)="onClicklawyer(old?.userId)" style="cursor: pointer;">
+                                        {{old?.firstName}} {{old?.middleName}}
+                                        {{old?.lastName}}
+                                    </h5>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<ng-template #lawyerlistModal>
+    <div>
+        <h2 class="font-weight-bold text-center">Select lawyer</h2>
+    </div>
+    <div>
+        <div class="row">
+            <div class="col-12">
+                <ul class="pl-3">
+                    <li *ngIf="!userMessageList.length">
+                        <p>Curently no lawyers is present in Organization</p>
+                    </li>
+                    <li *ngFor="let user of userMessageList">
+                        <mat-checkbox color="primary" (change)="onNativeChange($event.checked,user)">
+                            {{user?.firstName}} {{user?.middleName}}
+                            {{user?.lastName}}
+                        </mat-checkbox>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="d-flex justify-content-between">
+        <button [disabled]="!userMessageList.length ||  !this.selectedLawyer" class="button-purple px-4 py-1"
+            mat-raised-button (click)="onEmailInvite()">
+            Submit
+        </button>
+        <button mat-raised-button class="button-purple px-4 py-1" (click)="closeModal()">
+            Close
+        </button>
+    </div>
+</ng-template>

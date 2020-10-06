@@ -9,6 +9,7 @@ import { SecurityQuestionComponent } from './security-question/security-question
 import { SharedMaterialModule } from 'app/shared-material/shared-material.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+import { ChatComponent } from './chat/chat.component';
 import { FileUploadModule } from 'ng2-file-upload';
 
 @NgModule({
@@ -18,7 +19,8 @@ import { FileUploadModule } from 'ng2-file-upload';
     ManageOrganisationComponent,
     ViewUsersComponent,
     ViewFacilitiesComponent,
-    SecurityQuestionComponent
+    SecurityQuestionComponent,
+    ChatComponent
   ],
   imports: [
     CommonModule,
@@ -34,7 +36,8 @@ import { FileUploadModule } from 'ng2-file-upload';
     ManageOrganisationComponent,
     ViewUsersComponent,
     ViewFacilitiesComponent,
-    SecurityQuestionComponent
+    SecurityQuestionComponent,
+    ChatComponent
   ]
 })
 
