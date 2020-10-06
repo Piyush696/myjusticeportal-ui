@@ -56,6 +56,7 @@ export class MesageListComponent implements OnInit, OnChanges {
   onOpenModal(templateRef) {
     let dialogRef = this.dialog.open(templateRef, {
       width: '500px',
+      height: '470px'
     });
   }
 
