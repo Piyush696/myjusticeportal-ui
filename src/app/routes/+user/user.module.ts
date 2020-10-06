@@ -33,7 +33,7 @@ import { MesageListComponent } from './messaging-lawyer/mesage-list/mesage-list.
     FindBondsmanComponent,
     ViewBondsmanComponent,
     MessagingLawyerComponent,
-    MesageListComponent
+    // MesageListComponent
   ],
   imports: [
     CommonModule,

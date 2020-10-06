@@ -16,7 +16,7 @@ import { MesageListComponent } from '../+user/messaging-lawyer/mesage-list/mesag
     ViewCaseDetailsComponent,
     AcceptedCasesComponent,
     LawyerChatComponent,
-    MesageListComponent
+    // MesageListComponent
   ],
   imports: [
     CommonModule,
