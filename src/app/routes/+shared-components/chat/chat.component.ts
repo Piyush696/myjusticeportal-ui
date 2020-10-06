@@ -5,7 +5,7 @@ import * as io from 'socket.io-client';
 import { Location } from '@angular/common';
 import { Store } from '@ngrx/store';
 
-const SOCKET_ENDPOINT = 'https://dev-mjp-ui.herokuapp.com:8810';
+const SOCKET_ENDPOINT = 'localhost:8810';
 
 @Component({
   selector: 'app-chat',
@@ -59,7 +59,7 @@ export class ChatComponent implements OnInit, OnChanges {
         element.style.padding = '15px 30px';
         element.style.margin = '10px';
         // element.style.textAlign = 'left';
-        element.style.width = '250px';
+        element.style.width = '465px';
         const elementDiv = document.createElement('div');
         elementDiv.style.display = 'flex';
         elementDiv.style.justifyContent = 'flex-start';
@@ -76,7 +76,7 @@ export class ChatComponent implements OnInit, OnChanges {
         element.style.color = '#ffff';
         element.style.padding = '15px 30px';
         element.style.margin = '10px';
-        element.style.width = '250px';
+        element.style.width = '465px';
         // element.style.textAlign = 'right';
         const elementDiv = document.createElement('div');
         elementDiv.style.display = 'flex';
@@ -109,7 +109,7 @@ export class ChatComponent implements OnInit, OnChanges {
         element.style.color = '#333442';
         element.style.padding = '15px 30px';
         element.style.margin = '10px';
-        element.style.width = '250px';
+        element.style.width = '465px';
         const elementDiv = document.createElement('div');
         elementDiv.style.display = 'flex';
         elementDiv.style.wordBreak = 'break-all';
@@ -138,7 +138,7 @@ export class ChatComponent implements OnInit, OnChanges {
     element.style.padding = '15px 30px';
     element.style.margin = '10px';
     // element.style.textAlign = 'right';
-    element.style.width = '250px';
+    element.style.width = '465px';
     const elementDiv = document.createElement('div');
     elementDiv.style.display = 'flex';
     elementDiv.style.wordBreak = 'break-all';
