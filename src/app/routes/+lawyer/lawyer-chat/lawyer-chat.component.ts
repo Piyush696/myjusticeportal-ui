@@ -3,7 +3,7 @@ import { Store } from '@ngrx/store';
 import { MessageService } from 'app/services/message.service';
 import * as io from 'socket.io-client';
 
-const SOCKET_ENDPOINT = 'dev-mjp-ui.herokuapp.com:8810';
+const SOCKET_ENDPOINT = 'localhost:8810';
 
 @Component({
   selector: 'app-lawyer-chat',

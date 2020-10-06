@@ -4,9 +4,10 @@ import { UserService } from 'app/services/user.service';
 import * as io from 'socket.io-client';
 import { Location } from '@angular/common';
 import { Store } from '@ngrx/store';
+import { environment } from '../../../../environments/environment';
 
-const SOCKET_ENDPOINT = 'dev-mjp-ui.herokuapp.com:8810';
-// const SOCKET_ENDPOINT = 'localhost:8810';
+//const SOCKET_ENDPOINT = 'dev-mjp-ui.herokuapp.com:8810';
+const SOCKET_ENDPOINT = environment.socketEndpoint;
 
 @Component({
   selector: 'app-chat',
@@ -100,8 +101,10 @@ export class ChatComponent implements OnInit, OnChanges {
   }
 
   setupSocketConnection() {
+    console.log(SOCKET_ENDPOINT);
     this.socket = io(SOCKET_ENDPOINT);
     this.socket.on('message-broadcast' + this.userInfo.userId, (data: any) => {
+      console.log(data);
       if (data) {
         this.messageList = data.message
         const element = document.createElement('li');
