@@ -6,5 +6,55 @@
         receive an email notification to complete the registration process.</h2>
 </div>
 <div *ngIf="isAuthorized">
-    <p>bondsman dashboard works</p>
+    <div class="d-flex justify-content-between">
+        <div>
+            <h1 class="mb-0">Dashboard</h1>
+            <h4>View and actions for requested users.</h4>
+        </div>
+    </div>
+
+    <div>
+        <mat-card class="outer-card mat-elevation-z10 mt-3">
+            <!-- <mat-label class="font-weight-bold">
+                Requested cases({{requestedCases?.length}}):
+            </mat-label> -->
+            <mat-card class="inner-card mt-2" *ngIf="!requestedCases?.length">
+                <span>No data available.</span>
+            </mat-card>
+            <mat-card class="d-flex flex-row justify-content-between align-items-center inner-card mt-2"
+                *ngFor="let user of requestedCases">
+                <div class="d-flex flex-column">
+                    <!-- <span>{{case?.briefDescriptionOfChargeOrLegalMatter}}</span> -->
+                    <span>
+                        Requested By: {{user?.user?.firstName}}
+                        <span *ngIf="user?.user?.middleName">
+                            &nbsp;{{user?.user?.middleName}}
+                        </span>
+                        &nbsp;{{user?.user?.lastName}}
+                    </span>
+                    <span>
+                        Status:&nbsp;
+                        <span class="font-weight-bold" [ngClass]="{'text-warning': user?.status == 'Requested', 
+                        'text-success': user?.status == 'Approved',
+                        'text-danger': user?.status == 'Rejected'}">
+                            {{user?.status}}
+                        </span>
+                    </span>
+                    <!-- <span>
+                        Files attached:{{case?.caseFile?.length}}
+                    </span> -->
+                </div>
+                <div>
+                    <button mat-mini-fab color="primary" title="Approve Case"
+                        (click)="onApproveUser(user?.bondsman_userId)">
+                        <mat-icon>done_outline</mat-icon>
+                    </button>
+                    <button class="ml-1" mat-mini-fab color="warn" title="Reject Case"
+                        (click)="onRejectUser(user?.bondsman_userId)">
+                        <mat-icon>clear</mat-icon>
+                    </button>
+                </div>
+            </mat-card>
+        </mat-card>
+    </div>
 </div>
