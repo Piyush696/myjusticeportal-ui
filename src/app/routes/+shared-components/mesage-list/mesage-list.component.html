@@ -5,8 +5,9 @@
                 <div class="headind_srch">
                     <div class="col-12 d-flex justify-content-between">
                         <h4 class="text-center pt-2"><strong>{{headerText}}</strong></h4><i class="fa fa-user-plus pt-2"
-                            *ngIf="show" (click)="onOpenModal(lawyerlistModal)" aria-hidden="true"
-                            style="font-size: 20px"></i>
+                            *ngIf="show" (click)="onOpenModal(lawyerlistModal)" aria-hidden="true" data-toggle="tooltip"
+                            data-placement="top" title="Add more lawyers to the chat"
+                            style="font-size: 20px;cursor: pointer;"></i>
 
 
                     </div>
