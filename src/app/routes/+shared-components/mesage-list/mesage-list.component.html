@@ -33,14 +33,15 @@
 
 <ng-template #lawyerlistModal>
     <div>
-        <h2 class="font-weight-bold">Select lawyer</h2>
+        <h2 class="font-weight-bold text-center">Select lawyer</h2>
     </div>
     <div>
         <div class="row">
             <div class="col-12">
-                <h2 class="text-center">Select lawyers:</h2>
-                <p class="pl-3">Please choose lawyers.</p>
                 <ul class="pl-3">
+                    <li *ngIf="!userMessageList.length">
+                        <p>Curently no lawyers is present in Organization</p>
+                    </li>
                     <li *ngFor="let user of userMessageList">
                         <mat-checkbox color="primary" (change)="onNativeChange($event.checked,user)">
                             {{user?.firstName}} {{user?.middleName}}
@@ -52,7 +53,8 @@
         </div>
     </div>
     <div class="d-flex justify-content-between">
-        <button class="button-purple px-4 py-1" mat-raised-button (click)="onEmailInvite()">
+        <button [disabled]="!userMessageList.length ||  !this.selectedLawyer" class="button-purple px-4 py-1"
+            mat-raised-button (click)="onEmailInvite()">
             Submit
         </button>
         <button mat-raised-button class="button-purple px-4 py-1" (click)="closeModal()">

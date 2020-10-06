@@ -1,6 +1,6 @@
 .chat-messages-show-container {
   background: #c3c3c3;
-  height: 400px;
+  height: 419px;
   display: flex;
   flex-direction: column;
   overflow: auto;
@@ -25,6 +25,10 @@
   flex: 2;
 }
 
+.send-msg-btn {
+  margin: 27px 18px;
+}
+
 .chat-messages-create-button {
   height: 50px;
   margin: auto 40px;
@@ -42,6 +46,7 @@
   display: flex !important;
   justify-content: flex-end !important;
 }
+
 .left-class {
   display: flex !important;
   justify-content: flex-start !important;
