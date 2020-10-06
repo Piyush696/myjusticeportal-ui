@@ -19,6 +19,7 @@ export const ROUTES: RouteInfo[] = [
     { path: '/my-dockets', title: 'My Dockets', icon: 'nc-bank', class: '', roleIds: [2, 5] },
     { path: '', title: 'Law Library', icon: 'nc-bank', class: '', roleIds: [1] },
     { path: 'lawyer/lawyer-dashboard', title: 'Dashboard', icon: 'nc-bank', class: '', roleIds: [3] },
+    { path: 'bondsman/bondsman-dashboard', title: 'Dashboard', icon: 'nc-bank', class: '', roleIds: [6] },
     { path: 'lawyer/lawyer-chat', title: 'Message', icon: 'nc-bank', class: '', roleIds: [3] },
     { path: 'lawyer/accepted-cases', title: 'Accepted Cases', icon: 'nc-bank', class: '', roleIds: [3] },
     { path: 'lawyer/manage-organization', title: 'Manage Organization', icon: 'nc-bank', class: '', roleIds: [3], isAdmin: true },

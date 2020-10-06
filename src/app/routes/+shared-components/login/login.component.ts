@@ -71,6 +71,7 @@ export class LoginComponent implements OnInit {
       "otp": this.loginForm.get('otp').value
     }
     this.lawyerService.verifylawyerLogin(loginData).subscribe((isVerified: any) => {
+      console.log(isVerified)
       if (isVerified.success) {
         this.cacheService.setCache('token', isVerified.token);
         this.checkToken();

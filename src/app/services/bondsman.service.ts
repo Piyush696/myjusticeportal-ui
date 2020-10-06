@@ -29,4 +29,19 @@ export class BondsmanService {
     return this.httpClient.get<object>(`${this.apiPath}/bondsman/${organizationId}`, this.getHeaders());
   }
 
+  contactBondsman(data) {
+    return this.httpClient.post<object>(`${this.apiPath}/bondsmanUser`, data, this.getHeaders());
+  }
+
+  getRequestedUser(status) {
+    return this.httpClient.post<object>(`${this.apiPath}/bondsmanUser/requested-users`, status, this.getHeaders());
+  }
+
+  approveUser(bondsman_userId) {
+    return this.httpClient.put<any>(`${this.apiPath}/bondsmanUser/approve-user/${bondsman_userId}`, this.getHeaders());
+  }
+
+  rejectUser(bondsman_userId) {
+    return this.httpClient.put<any>(`${this.apiPath}/bondsmanUser/reject-user/` + bondsman_userId, this.getHeaders());
+  }
 }
