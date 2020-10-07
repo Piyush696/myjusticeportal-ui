@@ -46,6 +46,8 @@ export class ChatComponent implements OnInit, OnChanges {
     setTimeout(() => {
       this.loadMessage()
     }, 5000)
+    // this.loadMessage()
+
   }
 
   loadMessage() {
@@ -99,7 +101,6 @@ export class ChatComponent implements OnInit, OnChanges {
   setupSocketConnection() {
     this.socket = io(SOCKET_ENDPOINT);
     this.socket.on('message-broadcast' + this.userInfo.userId, (data: any) => {
-      console.log(data);
       if (data) {
         this.messageList = data.message
         const element = document.createElement('li');

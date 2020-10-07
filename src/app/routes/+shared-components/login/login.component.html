@@ -59,6 +59,10 @@
                         Verify
                     </button>
                 </div>
+                <div class="text-center pt-2">
+                    <span>Didn't get your code? or Expired? <p (click)="onGetOtp()" style="color: blue;cursor: pointer">
+                            Resend Code</p></span>
+                </div>
             </mat-card>
             <app-mobile-registration *ngIf="step === 3" [userName]="loginForm.get('userName').value">
             </app-mobile-registration>
