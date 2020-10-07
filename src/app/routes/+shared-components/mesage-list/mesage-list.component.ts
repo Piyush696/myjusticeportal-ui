@@ -38,11 +38,12 @@ export class MesageListComponent implements OnInit, OnChanges {
     this.selectedLawyer = user
   }
 
-  onClicklawyer(lawyerId) {
-    this.selectedUser = lawyerId;
+  onClicklawyer(receiverId) {
+    console.log(receiverId)
+    this.selectedUser = receiverId;
     let data = {
       isMessage: true,
-      lawyerId: lawyerId
+      receiverId: receiverId
     }
     this.messageEvent.emit(data)
   }
@@ -69,11 +70,7 @@ export class MesageListComponent implements OnInit, OnChanges {
 
   previouslyTextedUser() {
     this.messageService.getLastTextedUser().subscribe((res: any) => {
-      console.log(res)
-
       this.lastChat = res.data[0]
-      console.log(this.lastChat)
-
       this.selectedUser = this.lastChat.receiverId;
       let data = {
         isMessage: true,

@@ -15,7 +15,7 @@ const SOCKET_ENDPOINT = environment.socketEndpoint;
 })
 export class ChatComponent implements OnInit, OnChanges {
 
-  @Input() lawyerId;
+  @Input() receiverId;
   @Input() allMessages = [];
 
   socket;
@@ -37,59 +37,7 @@ export class ChatComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(): void {
-    this.isLoading = true;
-    const myNode = document.getElementById("message-list");
-    while (myNode.lastElementChild) {
-      myNode.removeChild(myNode.lastElementChild);
-    }
-    this.isLoading = true;
-    setTimeout(() => {
-      this.loadMessage()
-    }, 5000)
-    // this.loadMessage()
-
-  }
-
-  loadMessage() {
-    this.allMessages.forEach(item => {
-      if (item.senderId !== this.userInfo?.userId) {
-        this.messageList = item.message
-        const element = document.createElement('li');
-        element.innerHTML = item.message;
-        element.style.background = '#ededed';
-        element.style.color = '#333442';
-        element.style.padding = '15px 30px';
-        element.style.margin = '10px';
-        element.style.width = '465px';
-        const elementDiv = document.createElement('div');
-        elementDiv.style.display = 'flex';
-        elementDiv.style.justifyContent = 'flex-start';
-        elementDiv.style.wordBreak = 'break-all';
-        element.style.borderRadius = '7px';
-
-        elementDiv.appendChild(element)
-        document.getElementById('message-list').appendChild(elementDiv);
-      } else {
-        this.messageList = item.message
-        const element = document.createElement('li');
-        element.innerHTML = item.message;
-        element.style.background = '#333442';
-        element.style.color = '#ffff';
-        element.style.padding = '15px 30px';
-        element.style.margin = '10px';
-        element.style.width = '465px';
-        const elementDiv = document.createElement('div');
-        elementDiv.style.display = 'flex';
-        elementDiv.style.justifyContent = 'flex-end';
-        element.style.borderRadius = '7px';
-        elementDiv.style.wordBreak = 'break-all';
-
-        elementDiv.appendChild(element)
-        document.getElementById('message-list').appendChild(elementDiv);
-      }
-      this.isLoading = false;
-    })
-    this.isLoading = false;
+    console.log(this.allMessages)
   }
 
   getSingleUser() {
@@ -102,47 +50,27 @@ export class ChatComponent implements OnInit, OnChanges {
     this.socket = io(SOCKET_ENDPOINT);
     this.socket.on('message-broadcast' + this.userInfo.userId, (data: any) => {
       if (data) {
-        this.messageList = data.message
-        const element = document.createElement('li');
-        element.innerHTML = data.message;
-        element.style.background = '#ededed';
-        element.style.color = '#333442';
-        element.style.padding = '15px 30px';
-        element.style.margin = '10px';
-        element.style.width = '465px';
-        const elementDiv = document.createElement('div');
-        elementDiv.style.display = 'flex';
-        elementDiv.style.wordBreak = 'break-all';
-        element.style.borderRadius = '7px';
-        elementDiv.style.justifyContent = 'flex-start';
-        elementDiv.appendChild(element)
-        document.getElementById('message-list').appendChild(elementDiv);
+        let x = {
+          "message": data.message
+        }
+        this.allMessages.push(x)
       }
     });
   }
 
   SendMessage() {
     const data = {
-      "receiverId": this.lawyerId,
+      "receiverId": this.receiverId,
       "senderId": this.userId,
       "message": this.message
     }
+    console.log(data)
+    let x = {
+      "message": data.message
+    }
+    this.allMessages.push(x)
+    console.log(this.allMessages)
     this.socket.emit('message', data);
-    const element = document.createElement('li');
-    element.innerHTML = this.message;
-    element.style.background = '#333442';
-    element.style.color = 'white';
-    element.style.padding = '15px 30px';
-    element.style.margin = '10px';
-    element.style.width = '465px';
-    const elementDiv = document.createElement('div');
-    elementDiv.style.display = 'flex';
-    elementDiv.style.wordBreak = 'break-all';
-    element.style.borderRadius = '7px';
-    elementDiv.style.justifyContent = 'flex-end';
-    elementDiv.appendChild(element)
-    document.getElementById('message-list').appendChild(elementDiv);
-    this.message = '';
   }
 
 }
