@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { MessageService } from 'app/services/message.service';
+import { MessageService } from '../../../services/message.service';
 
 @Component({
   selector: 'app-mesage-list',
@@ -8,6 +8,7 @@ import { MessageService } from 'app/services/message.service';
   styleUrls: ['./mesage-list.component.css']
 })
 export class MesageListComponent implements OnInit, OnChanges {
+
   @Input() userMessageList: any
   @Input() headerText: string;
   @Input() oldUserList: any
@@ -30,19 +31,21 @@ export class MesageListComponent implements OnInit, OnChanges {
   }
 
   ngOnInit(): void {
-    this.previouslyTextedUser()
+    if (this.userList || this.userMessageList) {
+      this.previouslyTextedUser()
+
+    }
   }
 
   onNativeChange(user) {
-    console.log(user)
     this.selectedLawyer = user
   }
 
-  onClicklawyer(lawyerId) {
-    this.selectedUser = lawyerId;
+  onClicklawyer(receiverId) {
+    this.selectedUser = receiverId;
     let data = {
       isMessage: true,
-      lawyerId: lawyerId
+      receiverId: receiverId
     }
     this.messageEvent.emit(data)
   }
@@ -69,17 +72,14 @@ export class MesageListComponent implements OnInit, OnChanges {
 
   previouslyTextedUser() {
     this.messageService.getLastTextedUser().subscribe((res: any) => {
-      console.log(res)
-
       this.lastChat = res.data[0]
-      console.log(this.lastChat)
-
-      this.selectedUser = this.lastChat?.receiverId;
+      this.selectedUser = this.lastChat.receiverId;
       let data = {
         isMessage: true,
-        lawyerId: this.lastChat?.receiverId
+        receiverId: this.lastChat.receiverId
       }
       this.messageEvent.emit(data)
+
     })
 
   }

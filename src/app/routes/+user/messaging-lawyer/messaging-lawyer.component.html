@@ -4,7 +4,7 @@
             (messageEvent)="messageEvent($event)" [headerText]="headerText"></app-mesage-list>
     </div>
     <div class="col-8 p-0">
-        <app-chat *ngIf="isMessage" [lawyerId]="lawyerId" [allMessages]="allMessages">
+        <app-chat *ngIf="isMessage" [receiverId]="receiverId" [allMessages]="allMessages">
         </app-chat>
     </div>
 </div>
