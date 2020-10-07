@@ -8,6 +8,7 @@ import { MessageService } from '../../../services/message.service';
   styleUrls: ['./mesage-list.component.css']
 })
 export class MesageListComponent implements OnInit, OnChanges {
+
   @Input() userMessageList: any
   @Input() headerText: string;
   @Input() oldUserList: any
@@ -30,16 +31,17 @@ export class MesageListComponent implements OnInit, OnChanges {
   }
 
   ngOnInit(): void {
-    this.previouslyTextedUser()
+    if (this.userList || this.userMessageList) {
+      this.previouslyTextedUser()
+
+    }
   }
 
   onNativeChange(user) {
-    console.log(user)
     this.selectedLawyer = user
   }
 
   onClicklawyer(receiverId) {
-    console.log(receiverId)
     this.selectedUser = receiverId;
     let data = {
       isMessage: true,
@@ -74,9 +76,10 @@ export class MesageListComponent implements OnInit, OnChanges {
       this.selectedUser = this.lastChat.receiverId;
       let data = {
         isMessage: true,
-        lawyerId: this.lastChat.receiverId
+        receiverId: this.lastChat.receiverId
       }
       this.messageEvent.emit(data)
+
     })
 
   }

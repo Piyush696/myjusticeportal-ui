@@ -50,10 +50,7 @@ export class ChatComponent implements OnInit, OnChanges {
     this.socket = io(SOCKET_ENDPOINT);
     this.socket.on('message-broadcast' + this.userInfo.userId, (data: any) => {
       if (data) {
-        let x = {
-          "message": data.message
-        }
-        this.allMessages.push(x)
+        this.allMessages.push(data)
       }
     });
   }
@@ -64,13 +61,9 @@ export class ChatComponent implements OnInit, OnChanges {
       "senderId": this.userId,
       "message": this.message
     }
-    console.log(data)
-    let x = {
-      "message": data.message
-    }
-    this.allMessages.push(x)
-    console.log(this.allMessages)
+    this.allMessages.push(data)
     this.socket.emit('message', data);
+    this.message = ''
   }
 
 }

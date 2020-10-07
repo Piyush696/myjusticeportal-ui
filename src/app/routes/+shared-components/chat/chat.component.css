@@ -58,9 +58,9 @@
   padding: 15px 30px;
   margin: 10px;
   width: 550px;
-  display: flex;
-  justify-content: flex-end;
-  word-wrap: break-word;
+  /* display: flex;
+  justify-content: flex-end; */
+  word-wrap: break-word !important;
   border-radius: 7px;
 }
 
@@ -70,8 +70,16 @@
   padding: 15px 30px;
   margin: 10px;
   width: 550px;
+
+  word-wrap: break-word !important;
+  border-radius: 7px;
+}
+
+.receiver-align {
+  display: flex;
+  justify-content: flex-end;
+}
+.sender-align {
   display: flex;
   justify-content: flex-start;
-  word-wrap: break-word;
-  border-radius: 7px;
 }
