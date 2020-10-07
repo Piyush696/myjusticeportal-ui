@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { MessageService } from 'app/services/message.service';
+import { MessageService } from '../../../services/message.service';
 
 @Component({
   selector: 'app-mesage-list',
@@ -74,10 +74,10 @@ export class MesageListComponent implements OnInit, OnChanges {
       this.lastChat = res.data[0]
       console.log(this.lastChat)
 
-      this.selectedUser = this.lastChat?.receiverId;
+      this.selectedUser = this.lastChat.receiverId;
       let data = {
         isMessage: true,
-        lawyerId: this.lastChat?.receiverId
+        lawyerId: this.lastChat.receiverId
       }
       this.messageEvent.emit(data)
     })
