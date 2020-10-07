@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HireLawyerService } from 'app/services/hire-lawyer.service';
 import { MessageService } from 'app/services/message.service';
 
-const SOCKET_ENDPOINT = 'localhost:8810';
+// const SOCKET_ENDPOINT = 'localhost:8810';
 
 @Component({
   selector: 'app-messaging-lawyer',

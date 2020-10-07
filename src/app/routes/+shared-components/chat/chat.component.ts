@@ -6,7 +6,6 @@ import { Location } from '@angular/common';
 import { Store } from '@ngrx/store';
 import { environment } from '../../../../environments/environment';
 
-//const SOCKET_ENDPOINT = 'dev-mjp-ui.herokuapp.com:8810';
 const SOCKET_ENDPOINT = environment.socketEndpoint;
 
 @Component({
@@ -33,7 +32,6 @@ export class ChatComponent implements OnInit, OnChanges {
     this.store.select(s => s.userInfo).subscribe(x => {
       this.userInfo = x
     })
-    // console.log(window.location.href.replace(/^http(s?):\/\//i, "").split(':'));
     this.setupSocketConnection();
     this.getSingleUser();
   }
@@ -60,7 +58,6 @@ export class ChatComponent implements OnInit, OnChanges {
         element.style.color = '#333442';
         element.style.padding = '15px 30px';
         element.style.margin = '10px';
-        // element.style.textAlign = 'left';
         element.style.width = '465px';
         const elementDiv = document.createElement('div');
         elementDiv.style.display = 'flex';
@@ -79,7 +76,6 @@ export class ChatComponent implements OnInit, OnChanges {
         element.style.padding = '15px 30px';
         element.style.margin = '10px';
         element.style.width = '465px';
-        // element.style.textAlign = 'right';
         const elementDiv = document.createElement('div');
         elementDiv.style.display = 'flex';
         elementDiv.style.justifyContent = 'flex-end';
@@ -101,7 +97,6 @@ export class ChatComponent implements OnInit, OnChanges {
   }
 
   setupSocketConnection() {
-    console.log(SOCKET_ENDPOINT);
     this.socket = io(SOCKET_ENDPOINT);
     this.socket.on('message-broadcast' + this.userInfo.userId, (data: any) => {
       console.log(data);
@@ -119,10 +114,7 @@ export class ChatComponent implements OnInit, OnChanges {
         elementDiv.style.wordBreak = 'break-all';
         element.style.borderRadius = '7px';
         elementDiv.style.justifyContent = 'flex-start';
-
         elementDiv.appendChild(element)
-
-
         document.getElementById('message-list').appendChild(elementDiv);
       }
     });
@@ -141,14 +133,12 @@ export class ChatComponent implements OnInit, OnChanges {
     element.style.color = 'white';
     element.style.padding = '15px 30px';
     element.style.margin = '10px';
-    // element.style.textAlign = 'right';
     element.style.width = '465px';
     const elementDiv = document.createElement('div');
     elementDiv.style.display = 'flex';
     elementDiv.style.wordBreak = 'break-all';
     element.style.borderRadius = '7px';
     elementDiv.style.justifyContent = 'flex-end';
-
     elementDiv.appendChild(element)
     document.getElementById('message-list').appendChild(elementDiv);
     this.message = '';
