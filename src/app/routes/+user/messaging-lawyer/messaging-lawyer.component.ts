@@ -29,7 +29,6 @@ export class MessagingLawyerComponent implements OnInit {
 
   getMessagedUser() {
     this.messageService.getMessageUsers().subscribe((res: any) => {
-      console.log(res)
       this.userMessageList = res.data
       this.getOldUserList()
 
