@@ -74,6 +74,7 @@ export class SecurityQuestionComponent implements OnInit {
   }
 
   onClickRegister() {
+    this.onClickNext()
     this.setAnswers();
     this.isRegisterEvent.emit(this.securityQuestionAnswered);
   }
