@@ -17,6 +17,7 @@ import { ViewLawyerComponent } from './hire-lawyer/view-lawyer/view-lawyer.compo
 import { FindBondsmanComponent } from './find-bondsman/find-bondsman.component';
 import { ViewBondsmanComponent } from './view-bondsman/view-bondsman.component';
 import { MessagingLawyerComponent } from './messaging-lawyer/messaging-lawyer.component';
+import { LegalResearchComponent } from './legal-research/legal-research.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { MessagingLawyerComponent } from './messaging-lawyer/messaging-lawyer.co
     FindBondsmanComponent,
     ViewBondsmanComponent,
     MessagingLawyerComponent,
+    LegalResearchComponent,
   ],
   imports: [
     CommonModule,
