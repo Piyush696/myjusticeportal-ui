@@ -57,4 +57,38 @@
             </mat-card>
         </mat-card>
     </div>
+
+    <div>
+        <div class="pt-4 pb-0">
+            <mat-form-field appearance="fill">
+                <mat-label>Filter: Facility</mat-label>
+                <mat-select (selectionChange)="onFacilityFiltered($event)">
+                    <mat-option>
+                        Select speciality
+                    </mat-option>
+                    <mat-option *ngFor="let facility of facilities" [value]="facility.facilityId">
+                        {{facility.facilityName}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+        <mat-card class="outer-card mat-elevation-z10 mt-3">
+            <mat-label class="font-weight-bold">
+                Approved Clients({{clients?.length}}):
+            </mat-label>
+            <mat-card class="inner-card mt-2" *ngIf="!clients?.length">
+                <span>inmate must try to hire you for you to see cases.</span>
+            </mat-card>
+            <mat-card class="d-flex flex-row justify-content-between align-items-center inner-card mt-2"
+                *ngFor="let client of clients">
+                <div class="d-flex flex-column">
+                    <span>{{client?.inmate?.firstName}} {{client?.inmate?.middleName}}
+                        {{client?.inmate?.lastName}}</span>
+                    <span *ngFor="let facility of client?.inmate?.facilities">
+                        <label>Facility: {{facility.facilityName}}</label>
+                    </span>
+                </div>
+            </mat-card>
+        </mat-card>
+    </div>
 </div>
