@@ -16,7 +16,9 @@ export class OrganisationComponent implements OnInit, OnChanges {
   @Input() orgAddress: any;
   @Output() orgAddressEventEmitter = new EventEmitter();
   @Output() previousClick = new EventEmitter();
+  @Output() stateEvent = new EventEmitter();
   public states = [];
+  currentState: any;
 
   constructor(private fb: FormBuilder, private _statesService: StatesService) { }
 
@@ -76,5 +78,7 @@ export class OrganisationComponent implements OnInit, OnChanges {
     data.description = this.organisationForm.get('description').value;
     data.address = this.addressForm.value;
     this.orgAddressEventEmitter.emit(data);
+    this.currentState = this.addressForm.get('state').value
+    this.stateEvent.emit(this.currentState)
   }
 }

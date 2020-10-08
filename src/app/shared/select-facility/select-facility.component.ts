@@ -1,5 +1,5 @@
 import { Component, EventEmitter, OnInit, Output, Input } from '@angular/core';
-import { FacilityService } from 'app/services/facility.service';
+import { FacilityService } from 'app/services/registration/facility.service';
 
 @Component({
   selector: 'app-select-facility',
@@ -10,7 +10,7 @@ import { FacilityService } from 'app/services/facility.service';
 export class SelectFacilityComponent implements OnInit {
   facilityList: any;
   facility = [];
-
+  @Input() currentState: any
   @Input() totalSteps: any;
   @Output() selectedFacilityEventEmitter = new EventEmitter();
   @Output() perviousClick = new EventEmitter();
@@ -22,8 +22,11 @@ export class SelectFacilityComponent implements OnInit {
   }
 
   getAllFacility() {
-    this.facilityService.getFacilities().subscribe((facilities: any) => {
-      this.facilityList = facilities.data;
+    this.facilityService.getAllFacility().subscribe((facilities: any) => {
+      this.facilityList = facilities.data.filter(facility => {
+        return facility.Address.state == this.currentState
+      })
+
     });
   }
 
