@@ -13,7 +13,8 @@
             <div class="col-4">
                 <div class="d-flex justify-content-center" style="height: 200px;
                 width: 250px;">
-                    <img src="{{logo?.downloadLink}}" alt="logo" class="logo">
+                    <img src="../../../../../assets/img/logo.png" alt="logo" class="logo" *ngIf="!logo?.downloadLink">
+                    <img src="{{logo?.downloadLink}}" alt="logo" class="logo" *ngIf="logo?.downloadLink">
                 </div>
             </div>
             <div class="col-8 d-flex align-items-center">
