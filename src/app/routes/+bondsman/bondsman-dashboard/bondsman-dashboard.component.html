@@ -16,13 +16,13 @@
     <div>
         <mat-card class="outer-card mat-elevation-z10 mt-3">
             <!-- <mat-label class="font-weight-bold">
-                Requested cases({{requestedCases?.length}}):
+                Requested cases({{requestedUser?.length}}):
             </mat-label> -->
-            <mat-card class="inner-card mt-2" *ngIf="!requestedCases?.length">
+            <mat-card class="inner-card mt-2" *ngIf="!requestedUser?.length">
                 <span>No data available.</span>
             </mat-card>
             <mat-card class="d-flex flex-row justify-content-between align-items-center inner-card mt-2"
-                *ngFor="let user of requestedCases">
+                *ngFor="let user of requestedUser">
                 <div class="d-flex flex-column">
                     <!-- <span>{{case?.briefDescriptionOfChargeOrLegalMatter}}</span> -->
                     <span>

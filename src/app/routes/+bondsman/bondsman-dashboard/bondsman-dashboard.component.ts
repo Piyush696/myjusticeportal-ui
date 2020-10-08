@@ -11,7 +11,7 @@ import { ToasterService } from 'app/services/toaster.service';
 
 export class BondsmanDashboardComponent implements OnInit {
   isAuthorized: boolean;
-  requestedCases: any;
+  requestedUser: any;
   constructor(private store: Store<any>, private toasterService: ToasterService, private bondsmanService: BondsmanService) { }
 
   ngOnInit(): void {
@@ -28,17 +28,16 @@ export class BondsmanDashboardComponent implements OnInit {
 
   onGetRequestedUser() {
     this.bondsmanService.getRequestedUser({ status: 'Requested' }).subscribe((res: any) => {
-      console.log(res)
       if (res.data) {
-        this.requestedCases = res.data;
+        this.requestedUser = res.data;
       } else {
-        this.requestedCases = [];
+        this.requestedUser = [];
       }
     })
   }
 
   onApproveUser(bondsman_userId) {
-    this.bondsmanService.approveUser(bondsman_userId).subscribe((res: any) => {
+    this.bondsmanService.approveUser({ bondsman_userId: bondsman_userId }).subscribe((res: any) => {
       if (res.success) {
         this.onGetRequestedUser();
         this.toasterService.showSuccessToater('User approved successfully.');
@@ -49,7 +48,7 @@ export class BondsmanDashboardComponent implements OnInit {
   }
 
   onRejectUser(bondsman_userId) {
-    this.bondsmanService.rejectUser(bondsman_userId).subscribe((res: any) => {
+    this.bondsmanService.rejectUser({ bondsman_userId: bondsman_userId }).subscribe((res: any) => {
       if (res.success) {
         this.onGetRequestedUser();
         this.toasterService.showWarningToater('User rejected successfully.');
