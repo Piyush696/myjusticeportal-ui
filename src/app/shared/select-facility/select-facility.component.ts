@@ -8,7 +8,7 @@ import { FacilityService } from 'app/services/registration/facility.service';
 })
 
 export class SelectFacilityComponent implements OnInit {
-  facilityList: any;
+  facilityList = [];
   facility = [];
   @Input() currentState: any
   @Input() totalSteps: any;
@@ -24,14 +24,18 @@ export class SelectFacilityComponent implements OnInit {
   getAllFacility() {
     this.facilityService.getAllFacility().subscribe((facilities: any) => {
       if (this.currentState) {
-        this.facilityList = facilities.data.filter(facility => {
-          return facility.Address.state == this.currentState
-        })
-      } else {
+        for (let i = 0; i <= this.currentState.length - 1; i++) {
+          for (let j = i; j <= facilities.data.length - 1; j++) {
+            if (this.currentState[i] === facilities.data[j].Address.state) {
+              this.facilityList.push(facilities.data[j])
+            }
+          }
+        }
+      }
+      else {
         this.facilityList = facilities.data
       }
-
-    });
+    })
   }
 
   onNativeChange(event, facilityId) {

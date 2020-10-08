@@ -16,7 +16,6 @@ export class OrganisationComponent implements OnInit, OnChanges {
   @Input() orgAddress: any;
   @Output() orgAddressEventEmitter = new EventEmitter();
   @Output() previousClick = new EventEmitter();
-  @Output() stateEvent = new EventEmitter();
   public states = [];
   currentState: any;
 
@@ -53,6 +52,7 @@ export class OrganisationComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(): void {
+    console.log(this.orgAddress)
     if (this.orgAddress) {
       this.createFormControl();
       this.organisationForm.get('name').setValue(this.orgAddress.name)
@@ -62,8 +62,8 @@ export class OrganisationComponent implements OnInit, OnChanges {
       this.addressForm.get('state').setValue(this.orgAddress.address.state)
       this.addressForm.get('zip').setValue(this.orgAddress.address.zip)
       this.addressForm.get('country').setValue(this.orgAddress.address.country)
-      this.addressForm.get('tagline').setValue(this.orgAddress.tagline)
-      this.addressForm.get('description').setValue(this.orgAddress.description)
+      this.organisationForm.get('tagline').setValue(this.orgAddress?.tagline)
+      this.organisationForm.get('description').setValue(this.orgAddress?.description)
     }
   }
 
@@ -78,7 +78,6 @@ export class OrganisationComponent implements OnInit, OnChanges {
     data.description = this.organisationForm.get('description').value;
     data.address = this.addressForm.value;
     this.orgAddressEventEmitter.emit(data);
-    this.currentState = this.addressForm.get('state').value
-    this.stateEvent.emit(this.currentState)
+
   }
 }
