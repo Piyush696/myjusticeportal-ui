@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
+import { LawyerService } from 'app/services/lawyer.service';
+import { FacilityService } from 'app/services/facility.service';
 import { HireLawyerService } from '../../../services/hire-lawyer.service';
-import { ToasterService } from '../../../services/toaster.service';
+import { ToasterService } from 'app/services/toaster.service';
+
 
 @Component({
   selector: 'app-lawyerdashboard',
@@ -12,7 +15,11 @@ import { ToasterService } from '../../../services/toaster.service';
 export class LawyerdashboardComponent implements OnInit {
   requestedCases: any;
   isAuthorized: boolean;
-  constructor(private hireLawyerService: HireLawyerService, private toasterService: ToasterService, private store: Store<any>) { }
+  clients: any;
+  facilities: any;
+  allClients: any;
+  constructor(private hireLawyerService: HireLawyerService, private facilityService: FacilityService,
+    private lawyerService: LawyerService, private toasterService: ToasterService, private store: Store<any>) { }
 
   ngOnInit(): void {
     this.store.select(s => s.userInfo).subscribe(x => {
@@ -24,6 +31,16 @@ export class LawyerdashboardComponent implements OnInit {
       }
     });
     this.onGetRequestedCases();
+    this.getAllClients();
+    this.getALLFacilities();
+  }
+
+  getAllClients() {
+    this.lawyerService.getClients().subscribe((clients: any) => {
+      console.log(clients)
+      this.clients = clients.data
+      this.allClients = clients.data
+    })
   }
 
   onGetRequestedCases() {
@@ -33,6 +50,25 @@ export class LawyerdashboardComponent implements OnInit {
       } else {
         this.requestedCases = [];
       }
+    })
+  }
+
+  onFacilityFiltered(facility) {
+    console.log(facility.value)
+    this.clients = this.allClients.filter((client) => {
+      console.log(client)
+      console.log(client.inmate.facilities[0].facilityId == facility.value)
+      console.log(client.inmate.facilities.facilityId)
+      console.log(facility.value)
+      return client.inmate.facilities[0].facilityId == facility.value
+    })
+  }
+
+
+  getALLFacilities() {
+    this.facilityService.getFacilities().subscribe((facilities: any) => {
+      console.log(facilities)
+      this.facilities = facilities.data;
     })
   }
 
