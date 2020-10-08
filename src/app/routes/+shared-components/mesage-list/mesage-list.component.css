@@ -226,3 +226,7 @@ img {
 .selected {
   color: #c1c1c1 !important;
 }
+
+ul {
+  text-decoration: none;
+}

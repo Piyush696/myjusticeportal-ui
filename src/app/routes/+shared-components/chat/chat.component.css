@@ -51,3 +51,35 @@
   display: flex !important;
   justify-content: flex-start !important;
 }
+
+.sender-messages {
+  background-color: #ededed;
+  color: #333442;
+  padding: 15px 30px;
+  margin: 10px;
+  width: 550px;
+  /* display: flex;
+  justify-content: flex-end; */
+  word-wrap: break-word !important;
+  border-radius: 7px;
+}
+
+.receiver-messages {
+  background-color: #333442;
+  color: #ffff;
+  padding: 15px 30px;
+  margin: 10px;
+  width: 550px;
+
+  word-wrap: break-word !important;
+  border-radius: 7px;
+}
+
+.receiver-align {
+  display: flex;
+  justify-content: flex-end;
+}
+.sender-align {
+  display: flex;
+  justify-content: flex-start;
+}

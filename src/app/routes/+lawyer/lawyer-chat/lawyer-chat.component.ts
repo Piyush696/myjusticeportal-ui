@@ -17,7 +17,7 @@ export class LawyerChatComponent implements OnInit {
   userInfo: any;
   allMessages: any;
   isMessage: boolean = false;
-  lawyerId: any;
+  receiverId: any;
   userList = [];
   headerText = "Users"
 
@@ -47,7 +47,7 @@ export class LawyerChatComponent implements OnInit {
 
   messageEvent(value) {
     this.isMessage = value.isMessage;
-    this.lawyerId = value.lawyerId
-    this.getMessageHistory(this.lawyerId)
+    this.receiverId = value.receiverId
+    this.getMessageHistory(this.receiverId)
   }
 }

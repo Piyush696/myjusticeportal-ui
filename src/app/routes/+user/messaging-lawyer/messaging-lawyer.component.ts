@@ -14,7 +14,7 @@ export class MessagingLawyerComponent implements OnInit {
   organizationList: any;
   orgDetails: any;
   isMessage: boolean = false;
-  lawyerId: any;
+  receiverId: any;
   userMessageList = [];
   allMessages: any;
   oldUserList = [];
@@ -23,15 +23,12 @@ export class MessagingLawyerComponent implements OnInit {
   constructor(private hireLawyerService: HireLawyerService, private messageService: MessageService) { }
 
   ngOnInit() {
-    // this.getOrganizations();
     this.getMessagedUser();
   }
 
   getMessagedUser() {
     this.messageService.getMessageUsers().subscribe((res: any) => {
-      res.data.forEach(item => {
-        this.userMessageList.push(...item.users)
-      })
+      this.userMessageList = res.data
       this.getOldUserList()
 
     })
@@ -42,8 +39,6 @@ export class MessagingLawyerComponent implements OnInit {
   getMessageHistory(id) {
     this.messageService.getAllMessages(id).subscribe((res: any) => {
       this.allMessages = res.data
-
-
     })
   }
 
@@ -59,20 +54,6 @@ export class MessagingLawyerComponent implements OnInit {
       !this.oldUserList.some(item2 => (item2.userId === item1.userId)))
   }
 
-  // getOrganizations() {
-  //   this.hireLawyerService.getOrganization().subscribe((res: any) => {
-  //     this.organizationList = res.data.users;
-  //   })
-  // }
-
-  // onSelectOrg(checked, organizationId) {
-  //   if (checked) {
-  //     this.getAllUsers(organizationId)
-  //   } else {
-  //     this.orgDetails = '';
-  //   }
-  // }
-
   getAllUsers(organizationId) {
     this.hireLawyerService.getUsersLawyer(organizationId).subscribe((users: any) => {
       this.orgDetails = users.data
@@ -81,8 +62,8 @@ export class MessagingLawyerComponent implements OnInit {
 
   messageEvent(value) {
     this.isMessage = value.isMessage;
-    this.lawyerId = value.lawyerId
-    this.getMessageHistory(this.lawyerId)
+    this.receiverId = value.receiverId
+    this.getMessageHistory(this.receiverId)
   }
 
 }

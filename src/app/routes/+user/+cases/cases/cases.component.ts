@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
+import { Router } from '@angular/router';
 import { CaseService } from 'app/services/case.service';
 import { ToasterService } from 'app/services/toaster.service';
 
@@ -17,7 +18,7 @@ export class CasesComponent implements OnInit {
   currentCaseId: any;
 
   constructor(private toasterService: ToasterService, public dialog: MatDialog,
-    private caseService: CaseService, private fb: FormBuilder) {
+    private caseService: CaseService, private fb: FormBuilder, private router: Router) {
   }
 
   ngOnInit(): void {
@@ -68,6 +69,9 @@ export class CasesComponent implements OnInit {
     }, (error: any) => {
       this.toasterService.showErrorToater(error.statusText);
     })
+  }
+  onContactLawyer() {
+    this.router.navigateByUrl('/mjp/user/hire-lawyer')
   }
 
   onCancelNotesModal() {

@@ -1,12 +1,19 @@
 <div class="chat-messages">
     <div class="chat-messages-show-container">
-        <ul class="chat-messages-show-list d-flex flex-column" id="message-list">
-        </ul>
+        <div *ngFor="let messages of allMessages"
+            [ngClass]="messages.senderId !== userInfo?.userId ? 'sender-align': 'receiver-align'">
+            <ul [ngClass]="messages.senderId !== userInfo?.userId ? 'sender-messages':'receiver-messages '"
+                class="chat-messages-show-list d-flex flex-column" id="message-list">
+                <li>
+                    {{messages.message}}</li>
+            </ul>
+        </div>
         <mat-spinner *ngIf="isLoading" class="spinner-style" [diameter]="50"></mat-spinner>
     </div>
     <div class="chat-messages-create-container">
         <div class="col-12 d-flex justify-content-between">
-            <input class="chat-messages-create-input" placeholder="Type a message" type="text" [(ngModel)]="message">
+            <input class="chat-messages-create-input" placeholder="Type a message" type="text" [(ngModel)]="message"
+                (keydown.enter)="SendMessage()">
             <button mat-raised-button class="px-4 send-msg-btn" (click)="SendMessage()">
                 Send
             </button>

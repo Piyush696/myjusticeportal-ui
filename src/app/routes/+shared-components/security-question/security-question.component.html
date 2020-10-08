@@ -9,10 +9,10 @@
             <h2 class="font-weight-bold mb-1 text-center">
                 Security Questions
             </h2>
-            <p class="text-dark">
+            <p class="text-dark text-center m-0">
                 Please set your security question so you can access
             </p>
-            <p class="text-dark">
+            <p class="text-dark text-center m-0 pb-2">
                 your account if you ever forget your password or ID.
             </p>
             <div class="mb-5">
@@ -21,7 +21,7 @@
                     <div class="mat-progress-section">{{count}}/3</div>
                 </section>
             </div>
-            <mat-form-field appearance="fill" class="w-100">
+            <mat-form-field appearance="fill" class="wpx-420">
                 <mat-label>Select Question</mat-label>
                 <mat-select [formControl]="securityQuestionForm.controls['securityQuestionId']">
                     <mat-option *ngFor="let question of securityQuestions" [value]="question.securityQuestionId">

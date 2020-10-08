@@ -13,6 +13,9 @@
                     </div>
                 </div>
                 <div class="inbox_chat">
+                    <div class="" *ngIf="!oldUserList.length">
+                        <h3 class="text-center text-dark font-weight-bold">Select lawyers from above list</h3>
+                    </div>
                     <div class="channels" *ngFor="let old of oldUserList">
                         <div class="chat_list" [ngClass]="{'active': selectedUser == old?.userId}">
                             <div class="chat_people">
@@ -33,32 +36,35 @@
 
 <ng-template #lawyerlistModal>
     <div>
-        <h2 class="font-weight-bold text-center">Select lawyer</h2>
+        <h2 class="font-weight-bold text-center mb-0">Select lawyer</h2>
     </div>
     <div>
-        <div class="row">
+        <div class="row pt-3">
             <div class="col-12">
-                <ul class="pl-3">
-                    <li *ngIf="!userMessageList.length">
-                        <p>Curently no lawyers is present in Organization</p>
-                    </li>
-                    <li *ngFor="let user of userMessageList">
-                        <mat-checkbox color="primary" (change)="onNativeChange($event.checked,user)">
-                            {{user?.firstName}} {{user?.middleName}}
-                            {{user?.lastName}}
-                        </mat-checkbox>
-                    </li>
-                </ul>
+                <mat-dialog-content class="pt-3">
+                    <div class="pl-3 d-flex flex-column">
+                        <label *ngIf="!userMessageList.length">
+                            <p>Curently no lawyers is present in Organization</p>
+                        </label>
+                        <label *ngFor="let user of userMessageList">
+                            <mat-radio-button color="primary" (change)="onNativeChange(user)">
+                                {{user?.firstName}} {{user?.middleName}}
+                                {{user?.lastName}}
+                            </mat-radio-button>
+                        </label>
+                    </div>
+                </mat-dialog-content>
             </div>
         </div>
     </div>
     <div class="d-flex justify-content-between">
-        <button [disabled]="!userMessageList.length ||  !this.selectedLawyer" class="button-purple px-4 py-1"
-            mat-raised-button (click)="onEmailInvite()">
-            Submit
-        </button>
         <button mat-raised-button class="button-purple px-4 py-1" (click)="closeModal()">
             Close
         </button>
+
+        <button class="button-purple px-4 py-1" mat-raised-button (click)="onEmailInvite()">
+            Submit
+        </button>
     </div>
 </ng-template>
+<!-- [disabled]="!userMessageList.length ||  !this.selectedLawyer" -->

@@ -23,4 +23,9 @@ export class LawyerService {
   verifylawyerLogin(verifyData) {
     return this.httpClient.post<object>(`${this.apiPath}/login/verify-otp`, verifyData);
   }
+
+  onGetOtp(userName: string) {
+    return this.httpClient.post<object>(`${this.apiPath}/login/resendCode`, { userName: userName })
+  }
+
 }
