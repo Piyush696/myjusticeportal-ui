@@ -35,8 +35,9 @@
                             </span>
                         </div>
                     </div>
-                    <button class="button-purple" mat-raised-button>
-                        View
+                    <button class="button-purple" mat-raised-button (click)="onHireBondsman(user?.userId)"
+                        [disabled]="isHired">
+                        {{isHired?'Request Pending':'Hire'}}
                     </button>
                 </mat-card>
             </mat-card>
