@@ -29,7 +29,7 @@ export class LawyerRegistrationComponent implements OnInit {
   }
   user: any;
   orgAddress: {};
-  currentState: any;
+  currentState = [];
 
   constructor(private lawyerService: LawyerService, private cacheService: CacheService,
     private toaterService: ToasterService, private toasterService: ToasterService,
@@ -71,7 +71,7 @@ export class LawyerRegistrationComponent implements OnInit {
   }
 
   stateEvent(state) {
-    this.currentState = state
+    this.currentState = [...state]
   }
 
   onSelectedfacility(selectedfacility) {
