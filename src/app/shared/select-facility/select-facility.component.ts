@@ -23,9 +23,13 @@ export class SelectFacilityComponent implements OnInit {
 
   getAllFacility() {
     this.facilityService.getAllFacility().subscribe((facilities: any) => {
-      this.facilityList = facilities.data.filter(facility => {
-        return facility.Address.state == this.currentState
-      })
+      if (this.currentState) {
+        this.facilityList = facilities.data.filter(facility => {
+          return facility.Address.state == this.currentState
+        })
+      } else {
+        this.facilityList = facilities.data
+      }
 
     });
   }
