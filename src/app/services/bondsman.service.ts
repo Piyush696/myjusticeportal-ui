@@ -38,10 +38,14 @@ export class BondsmanService {
   }
 
   approveUser(bondsman_userId) {
-    return this.httpClient.put<any>(`${this.apiPath}/bondsmanUser/approve-user/${bondsman_userId}`, this.getHeaders());
+    return this.httpClient.post<any>(`${this.apiPath}/bondsmanUser/approve-user`, bondsman_userId, this.getHeaders());
   }
 
   rejectUser(bondsman_userId) {
-    return this.httpClient.put<any>(`${this.apiPath}/bondsmanUser/reject-user/` + bondsman_userId, this.getHeaders());
+    return this.httpClient.post<any>(`${this.apiPath}/bondsmanUser/reject-user`, bondsman_userId, this.getHeaders());
   }
+  getRequestedCUserById(bondsman_userId) {
+    return this.httpClient.get<object>(`${this.apiPath}/bondsmanUser/requested-users/` + bondsman_userId, this.getHeaders());
+  }
+
 }
