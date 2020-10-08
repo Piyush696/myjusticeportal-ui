@@ -37,7 +37,6 @@ export class LawyerdashboardComponent implements OnInit {
 
   getAllClients() {
     this.lawyerService.getClients().subscribe((clients: any) => {
-      console.log(clients)
       this.clients = clients.data
       this.allClients = clients.data
     })
@@ -54,12 +53,7 @@ export class LawyerdashboardComponent implements OnInit {
   }
 
   onFacilityFiltered(facility) {
-    console.log(facility.value)
     this.clients = this.allClients.filter((client) => {
-      console.log(client)
-      console.log(client.inmate.facilities[0].facilityId == facility.value)
-      console.log(client.inmate.facilities.facilityId)
-      console.log(facility.value)
       return client.inmate.facilities[0].facilityId == facility.value
     })
   }
@@ -67,7 +61,6 @@ export class LawyerdashboardComponent implements OnInit {
 
   getALLFacilities() {
     this.facilityService.getFacilities().subscribe((facilities: any) => {
-      console.log(facilities)
       this.facilities = facilities.data;
     })
   }
