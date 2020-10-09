@@ -10,6 +10,8 @@ import { ViewLawyerComponent } from './hire-lawyer/view-lawyer/view-lawyer.compo
 import { HireLawyerComponent } from './hire-lawyer/hire-lawyer.component';
 import { FindBondsmanComponent } from './find-bondsman/find-bondsman.component';
 import { ViewBondsmanComponent } from './view-bondsman/view-bondsman.component';
+import { MessagingLawyerComponent } from './messaging-lawyer/messaging-lawyer.component';
+import { LegalResearchComponent } from './legal-research/legal-research.component';
 
 const routes: Routes = [
     { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
@@ -20,8 +22,10 @@ const routes: Routes = [
     { path: 'case/:caseId/edit', component: EditCaseComponent },
     { path: 'case/:caseId', component: ViewCaseComponent },
     { path: 'hire-lawyer', component: HireLawyerComponent },
+    { path: 'legal-research', component: LegalResearchComponent },
     { path: 'hire-lawyer/:organizationId', component: ViewLawyerComponent },
     { path: 'find-bondsman', component: FindBondsmanComponent },
+    { path: 'message-my-lawyer', component: MessagingLawyerComponent },
     { path: 'find-bondsman/:organizationId', component: ViewBondsmanComponent },
     { path: '**', component: UserDashboardComponent }
 ];

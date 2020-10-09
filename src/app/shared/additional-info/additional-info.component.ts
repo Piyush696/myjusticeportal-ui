@@ -14,6 +14,7 @@ export class AdditionalInfoComponent implements OnInit, OnChanges {
 
   additionalInfo: FormGroup;
 
+  @Output() stateEvent = new EventEmitter();
   @Output() userMetaEventEmitter = new EventEmitter();
   @Output() isPreviousClick = new EventEmitter();
   @Input() userMeta;
@@ -27,7 +28,8 @@ export class AdditionalInfoComponent implements OnInit, OnChanges {
   additionalInfoLawyer: FormGroup;
   isDisable: boolean = true
   isFacility: boolean;
-
+  currentState = []
+  buttonText: string = "Add State"
   constructor(private fb: FormBuilder, private activatedRoute: ActivatedRoute, private _statesService: StatesService, private facilityService: FacilityService, private userService: UserService) {
     this.facilityCode = this.activatedRoute.snapshot.params.facilityCode;
   }
@@ -106,6 +108,7 @@ export class AdditionalInfoComponent implements OnInit, OnChanges {
     if (this.roleId == 3) {
       this.lawyerInfoArray.push(this.additionalInfoLawyer.value)
       let lawyerInfo = this.lawyerInfoArray.map((item) => {
+        this.currentState.push(item.state)
         let userMetaInfo = {}
         let str = item.state + ':' + item.bar_info_Exam_Id + ':' + item.speciality
         userMetaInfo['metaKey'] = 'lawyerInfo'
@@ -113,6 +116,7 @@ export class AdditionalInfoComponent implements OnInit, OnChanges {
 
         return userMetaInfo
       })
+      this.stateEvent.emit(this.currentState)
       userMetaList = lawyerInfo
     }
     else {
@@ -133,7 +137,9 @@ export class AdditionalInfoComponent implements OnInit, OnChanges {
   }
 
   addMoreStates() {
+    // this.currentState.push(this.additionalInfoLawyer.get('state').value)
     this.lawyerInfoArray.push(this.additionalInfoLawyer.value)
+    this.buttonText = "Add more states"
     this.isDisable = false
     this.additionalInfoLawyer.reset()
   }

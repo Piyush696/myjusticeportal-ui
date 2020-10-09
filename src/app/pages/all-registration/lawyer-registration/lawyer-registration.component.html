@@ -3,12 +3,13 @@
         (isNextEvent)="onNextClick($event)" [roleId]="roleId" [user]="user">
     </app-email-registration>
     <app-additional-info *ngIf="step == 2" (userMetaEventEmitter)="userMetaData($event)"
-        (isPreviousClick)="onUserPageClick($event)" [roleId]="roleId" [userMeta]="registrationData.userMeta">
+        (stateEvent)="stateEvent($event)" (isPreviousClick)="onUserPageClick($event)" [roleId]="roleId"
+        [userMeta]="registrationData.userMeta">
     </app-additional-info>
     <app-organisation *ngIf="step == 3" [totalSteps]="totalSteps" [orgAddress]="orgAddress"
         (orgAddressEventEmitter)="onCreateOrganisation($event)" (previousClick)="onPreviousClick($event)">
     </app-organisation>
-    <app-select-facility *ngIf="step == 4" [totalSteps]="totalSteps"
+    <app-select-facility *ngIf="step == 4" [totalSteps]="totalSteps" [currentState]="currentState"
         (selectedFacilityEventEmitter)="onSelectedfacility($event)" (perviousClick)="onBackClick($event)">
     </app-select-facility>
     <app-mobile-registration *ngIf="step == 5" [authCodeField]="authCodeField" [totalSteps]="totalSteps"

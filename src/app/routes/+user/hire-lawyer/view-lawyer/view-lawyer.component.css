@@ -26,6 +26,7 @@
 
 .logo {
   width: 225px;
+  height: 135px;
 }
 
 .banner-style {
@@ -37,5 +38,4 @@
   color: #aba6a6;
   line-height: 25px;
   letter-spacing: 1px;
-
 }
