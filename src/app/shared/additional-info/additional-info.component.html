@@ -105,9 +105,9 @@
 
                 <div class="row pl-3" *ngIf="roleId == 3">
                     <div class="pl-3">
-                        <button class="px-4 py-1" mat-raised-button color="primary" (click)="addMoreStates()">Add
-                            more
-                            state</button>
+                        <button class="px-4 py-1"
+                            [disabled]="additionalInfoLawyer.controls['state'].inavlid || additionalInfoLawyer.controls['speciality'].inavlid"
+                            mat-raised-button color="primary" (click)="addMoreStates()">{{buttonText}}</button>
                     </div>
                 </div>
                 <div class="d-flex justify-content-between px-3 mt-2">
@@ -118,10 +118,8 @@
                         [disabled]="additionalInfo.controls['housing_unit'].invalid || additionalInfo.controls['facility'].invalid"
                         class="px-4 py-1" mat-raised-button color="primary" (click)="submit()">Next</button>
 
-                    <button *ngIf="roleId == 3"
-                        [disabled]="
-                        additionalInfoLawyer.controls['state'].invalid || additionalInfoLawyer.controls['speciality'].invalid"
-                        class="px-4 py-1" mat-raised-button color="primary" (click)="submit()">Next</button>
+                    <button *ngIf="roleId == 3" [disabled]="isDisable" class="px-4 py-1" mat-raised-button
+                        color="primary" (click)="submit()">Next</button>
                 </div>
             </mat-card>
         </div>
