@@ -29,6 +29,7 @@ export class AdditionalInfoComponent implements OnInit, OnChanges {
   isDisable: boolean = true
   isFacility: boolean;
   currentState = []
+  buttonText: string = "Add State"
   constructor(private fb: FormBuilder, private activatedRoute: ActivatedRoute, private _statesService: StatesService, private facilityService: FacilityService, private userService: UserService) {
     this.facilityCode = this.activatedRoute.snapshot.params.facilityCode;
   }
@@ -138,6 +139,7 @@ export class AdditionalInfoComponent implements OnInit, OnChanges {
   addMoreStates() {
     // this.currentState.push(this.additionalInfoLawyer.get('state').value)
     this.lawyerInfoArray.push(this.additionalInfoLawyer.value)
+    this.buttonText = "Add more states"
     this.isDisable = false
     this.additionalInfoLawyer.reset()
   }
