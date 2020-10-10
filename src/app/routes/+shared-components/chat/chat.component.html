@@ -1,5 +1,5 @@
 <div class="chat-messages">
-    <div class="chat-messages-show-container">
+    <div id="scroller" class="chat-messages-show-container">
         <div *ngFor="let messages of allMessages"
             [ngClass]="messages.senderId !== userInfo?.userId ? 'sender-align': 'receiver-align'">
             <ul [ngClass]="messages.senderId !== userInfo?.userId ? 'sender-messages':'receiver-messages '"
@@ -7,7 +7,7 @@
                 <li>
                     {{messages.message}}
                 </li>
-                <div class=""><span>{{messages.createdAt | date:'shortTime'}}</span></div>
+                <div><span>{{messages.createdAt | date:'shortTime'}}</span></div>
 
             </ul>
         </div>
