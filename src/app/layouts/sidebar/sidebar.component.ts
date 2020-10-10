@@ -13,6 +13,7 @@ export interface RouteInfo {
 export const ROUTES: RouteInfo[] = [
     { path: 'user/case', title: 'My Cases', icon: 'nc-bank', class: '', roleIds: [1] },
     { path: 'user/hire-lawyer', title: 'Hire a lawyer', icon: 'nc-bank', class: '', roleIds: [1] },
+    { path: 'user/legal-research', title: 'Legal Research', icon: 'nc-bank', class: '', roleIds: [1] },
     // { path: '/dashboard', title: 'Dashboard', icon: 'nc-bank', class: '', roleIds: [] },
     // { path: ':facilityCode/userdashboard', title: 'Dashboard', icon: 'nc-bank', class: '', roleIds: [1] },
     { path: 'superadmin/users', title: 'All Users', icon: 'nc-bank', class: '', roleIds: [7] },

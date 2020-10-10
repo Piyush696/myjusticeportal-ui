@@ -1,5 +1,5 @@
 import { Component, EventEmitter, OnInit, Output, Input } from '@angular/core';
-import { FacilityService } from 'app/services/facility.service';
+import { FacilityService } from 'app/services/registration/facility.service';
 
 @Component({
   selector: 'app-select-facility',
@@ -8,9 +8,9 @@ import { FacilityService } from 'app/services/facility.service';
 })
 
 export class SelectFacilityComponent implements OnInit {
-  facilityList: any;
+  facilityList = [];
   facility = [];
-
+  @Input() currentState: any
   @Input() totalSteps: any;
   @Output() selectedFacilityEventEmitter = new EventEmitter();
   @Output() perviousClick = new EventEmitter();
@@ -18,13 +18,26 @@ export class SelectFacilityComponent implements OnInit {
   constructor(private facilityService: FacilityService) { }
 
   ngOnInit(): void {
+    console.log(this.currentState)
     this.getAllFacility();
   }
 
   getAllFacility() {
-    this.facilityService.getFacilities().subscribe((facilities: any) => {
-      this.facilityList = facilities.data;
-    });
+    console.log(this.currentState)
+    this.facilityService.getAllFacility().subscribe((facilities: any) => {
+      if (this.currentState) {
+        for (let i = 0; i <= this.currentState.length - 1; i++) {
+          for (let j = i; j <= facilities.data.length - 1; j++) {
+            if (this.currentState[i] === facilities.data[j].Address.state) {
+              this.facilityList.push(facilities.data[j])
+            }
+          }
+        }
+      }
+      else {
+        this.facilityList = facilities.data
+      }
+    })
   }
 
   onNativeChange(event, facilityId) {

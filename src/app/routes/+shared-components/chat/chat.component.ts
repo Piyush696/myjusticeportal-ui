@@ -59,7 +59,8 @@ export class ChatComponent implements OnInit, OnChanges {
     const data = {
       "receiverId": this.receiverId,
       "senderId": this.userId,
-      "message": this.message
+      "message": this.message,
+      "createdAt": new Date()
     }
     this.allMessages.push(data)
     this.socket.emit('message', data);

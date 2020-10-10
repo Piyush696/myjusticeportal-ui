@@ -17,6 +17,11 @@ import { ViewLawyerComponent } from './hire-lawyer/view-lawyer/view-lawyer.compo
 import { FindBondsmanComponent } from './find-bondsman/find-bondsman.component';
 import { ViewBondsmanComponent } from './view-bondsman/view-bondsman.component';
 import { MessagingLawyerComponent } from './messaging-lawyer/messaging-lawyer.component';
+import { LegalResearchComponent } from './legal-research/legal-research.component';
+import { LegalResearchFormComponent } from './legal-research/legal-research-form/legal-research-form.component';
+import { LegalResearchListComponent } from './legal-research/legal-research-list/legal-research-list.component';
+import { LegalResearchFormViewComponent } from './legal-research/legal-research-form-view/legal-research-form-view.component';
+import { EditLegalResearchFormComponent } from './legal-research/edit-legal-research-form/edit-legal-research-form.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +37,11 @@ import { MessagingLawyerComponent } from './messaging-lawyer/messaging-lawyer.co
     FindBondsmanComponent,
     ViewBondsmanComponent,
     MessagingLawyerComponent,
+    LegalResearchComponent,
+    LegalResearchFormComponent,
+    LegalResearchListComponent,
+    LegalResearchFormViewComponent,
+    EditLegalResearchFormComponent,
   ],
   imports: [
     CommonModule,
