@@ -96,7 +96,7 @@ export class BondsmanRegistrationComponent implements OnInit {
           if (data.success) {
             this.store.dispatch(new AddUserInfo(Object.assign({}, data.user)));
             this.router.navigateByUrl('/mjp/bondsman/bondsman-dashboard');
-            this.toasterService.showWarningToater("Account under review.")
+            this.toasterService.showWarningToater("Welcome to Bondsman Dashboard")
           }
           else {
             this.toasterService.showWarningToater('Something Wrong.');
