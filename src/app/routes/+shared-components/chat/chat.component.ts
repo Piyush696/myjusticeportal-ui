@@ -56,7 +56,6 @@ export class ChatComponent implements OnInit, OnChanges {
   }
 
   SendMessage() {
-    console.log(this.message)
     if (this.message !== '') {
       const data = {
         "receiverId": this.receiverId,
