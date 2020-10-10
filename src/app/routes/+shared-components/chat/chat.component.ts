@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { Component, HostListener, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserService } from 'app/services/user.service';
 import * as io from 'socket.io-client';
@@ -7,12 +7,13 @@ import { Store } from '@ngrx/store';
 import { environment } from '../../../../environments/environment';
 
 const SOCKET_ENDPOINT = environment.socketEndpoint;
-
+@HostListener('scroll', ['$event'])
 @Component({
   selector: 'app-chat',
   templateUrl: './chat.component.html',
   styleUrls: ['./chat.component.css']
 })
+
 export class ChatComponent implements OnInit, OnChanges {
 
   @Input() receiverId;
@@ -25,7 +26,9 @@ export class ChatComponent implements OnInit, OnChanges {
   messageList: any;
   isLoading: boolean;
 
-  constructor(private userService: UserService, private loc: Location, private router: Router, private store: Store<any>) { }
+  constructor(private userService: UserService, private loc: Location, private router: Router, private store: Store<any>) {
+
+  }
 
 
   ngOnInit() {
