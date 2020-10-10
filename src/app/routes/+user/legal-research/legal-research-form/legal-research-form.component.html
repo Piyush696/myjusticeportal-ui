@@ -1,0 +1,230 @@
+<div class="row">
+    <div class="col">
+        <h1 class="mb-0">Legal Research Assistant</h1>
+        <small>Complete the form below to submit a request for legal research assistance.</small>
+    </div>
+    <div class="col">
+        <button [routerLink]="'../case'" class="white-btn padding-btn float-right py-1" mat-raised-button>
+            Back To My Cases
+        </button>
+    </div>
+</div>
+
+<div class="col-12 pl-2">
+    <div class="row">
+        <div class="col-6 pl-0">
+            <mat-form-field appearance="fill" class="w-100 pl-2">
+                <mat-label>First Name</mat-label>
+                <input type="text" matInput [formControl]="legalForm.controls['firstName']" required>
+                <mat-error>
+                    <div *ngIf="legalForm.controls['firstName'].invalid && legalForm.controls['firstName'].touched">
+                        <small class="font13">
+                            First Name is Required
+                        </small>
+                    </div>
+                </mat-error>
+            </mat-form-field>
+        </div>
+        <div class="col-6 pl-0">
+            <mat-form-field appearance="fill" class="w-100 pl-2">
+                <mat-label>Last Name</mat-label>
+                <input type="text" matInput [formControl]="legalForm.controls['lastName']" required>
+                <mat-error>
+                    <div *ngIf="legalForm.controls['lastName'].invalid && legalForm.controls['lastName'].touched">
+                        <small class="font13">
+                            Last Name is Required
+                        </small>
+                    </div>
+                </mat-error>
+            </mat-form-field>
+        </div>
+    </div>
+</div>
+
+<div class="col-12 pl-2">
+    <div class="row pt-2">
+        <div class="col-6 pl-0">
+            <mat-form-field appearance="fill" class="w-100 pl-2">
+                <mat-label>Middle Initial</mat-label>
+                <input type="text" matInput [formControl]="legalForm.controls['middleName']" required>
+                <mat-error>
+                    <div *ngIf="legalForm.controls['middleName'].invalid && legalForm.controls['middleName'].touched">
+                        <small class="font13">
+                            Middle Initial is Required
+                        </small>
+                    </div>
+                </mat-error>
+            </mat-form-field>
+        </div>
+        <div class="col-6 pl-0">
+            <mat-form-field appearance="fill" class="w-100 pl-2">
+                <mat-label>Inmate Id</mat-label>
+                <input type="text" matInput [formControl]="legalForm.controls['inmateId']" required>
+                <mat-error>
+                    <div *ngIf="legalForm.controls['inmateId'].invalid && legalForm.controls['inmateId'].touched">
+                        <small class="font13">
+                            Inmate Id is Required
+                        </small>
+                    </div>
+                </mat-error>
+            </mat-form-field>
+        </div>
+    </div>
+</div>
+
+<div class="col-12 pl-2">
+    <div class="row pt-2">
+        <div class="col-6 pl-2">
+            <mat-form-field appearance="fill" class="w-100 ">
+                <mat-label>Housing unit</mat-label> <input type="text" matInput
+                    [formControl]="legalForm.controls['housing_unit']" required>
+                <mat-error
+                    *ngIf="legalForm.controls['housing_unit'].invalid && legalForm.controls['housing_unit'].touched">
+                    <div class="font13" *ngIf="legalForm.get('housing_unit').errors?.required">
+                        Housing unit
+                        is required. </div>
+                </mat-error>
+            </mat-form-field>
+        </div>
+        <div class="col-6 pl-0">
+            <mat-form-field class="w-100 pl-2">
+                <mat-label>Who sent you to this jail?</mat-label>
+                <input type="text" matInput [formControl]="legalForm.controls['whoSentYouToJail']"
+                    [matAutocomplete]="auto">
+                <mat-autocomplete #auto="matAutocomplete">
+                    <mat-option *ngFor="let facility of userData.facilities" [value]="facility.facilityName">
+                        {{facility.facilityName}}
+                    </mat-option>
+                </mat-autocomplete>
+                <mat-error>
+                    <div
+                        *ngIf="legalForm.controls['whoSentYouToJail'].invalid && legalForm.controls['whoSentYouToJail'].touched">
+                        <small class="font13">
+                            Who sent you to this jail is Required
+                        </small>
+                    </div>
+                </mat-error>
+            </mat-form-field>
+
+        </div>
+    </div>
+</div>
+<div class="col-12 pl-2">
+    <div class="row pt-2">
+        <div class="col-6 pl-0">
+            <mat-form-field appearance="fill" class="w-100 pl-2">
+                <mat-label>Next Court Date (If Know)</mat-label>
+                <input matInput [matDatepicker]="picker" [formControl]="legalForm.controls['nextCourtDate']">
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+                <mat-error>
+                    <div
+                        *ngIf="legalForm.controls['nextCourtDate'].invalid && legalForm.controls['nextCourtDate'].touched">
+                        <small class="font13">
+                            Next Court Date is Required
+                        </small>
+                    </div>
+                </mat-error>
+            </mat-form-field>
+        </div>
+        <div class="col-6 pl-0">
+            <mat-form-field appearance="fill" class="w-100 pl-2">
+                <mat-label>List your current charges (comma separated)</mat-label>
+                <input type="email" matInput [formControl]="legalForm.controls['currentCharges']" required>
+                <mat-error>
+                    <div
+                        *ngIf="legalForm.controls['currentCharges'].invalid && legalForm.controls['currentCharges'].touched">
+                        <small class="font13">List your current charges is Required</small>
+                    </div>
+                </mat-error>
+            </mat-form-field>
+        </div>
+    </div>
+</div>
+
+<div class="col-12 pl-2">
+    <div class="row pt-2">
+        <div class="col-6 pl-0">
+            <mat-radio-group [formControl]="legalForm.controls['convicted']" class="w-100 pl-2"
+                (change)="OnConvictedSelect($event.value)">
+                <mat-label>Have you been convicted?</mat-label>
+                <div class="pl-2">
+                    <mat-radio-button class="pr-3" value="true" [checked]="(reSearchDetails?.convicted)==true">
+                        Yes</mat-radio-button>
+                    <mat-radio-button value="false" [checked]="(reSearchDetails?.convicted)==false">No
+                    </mat-radio-button>
+                </div>
+            </mat-radio-group>
+            <mat-error *ngIf="legalForm.controls['convicted'].invalid && legalForm.controls['convicted'].touched">
+                <div class="font13" *ngIf="legalForm.get('convicted').errors?.required">
+                    Have you been convicted
+                    is required. </div>
+            </mat-error>
+
+        </div>
+        <div class="col-6 pl-0" *ngIf="isSentensed">
+            <mat-radio-group [formControl]="legalForm.controls['sentenced']" class="w-100 pl-2">
+                <mat-label>If convicted, have you been sentenced?</mat-label>
+
+                <div class="pl-2">
+                    <mat-radio-button class="pr-3" [checked]="(reSearchDetails?.sentenced)==true" value="true">
+                        Yes</mat-radio-button>
+                    <mat-radio-button [checked]="(reSearchDetails?.sentenced)== false" value="false">No
+                    </mat-radio-button>
+                </div>
+            </mat-radio-group>
+            <mat-error>
+                <div *ngIf="legalForm.controls['sentenced'].invalid && legalForm.controls['sentenced'].touched">
+                    <small class="font13">
+                        If convicted, have you been sentenced is Required
+                    </small>
+                </div>
+            </mat-error>
+        </div>
+    </div>
+</div>
+<div class="col-12 pl-2">
+    <div class="row pt-2">
+        <div class="col-6 pl-0">
+            <mat-form-field appearance="fill" class="w-100 pl-2">
+                <mat-label>The matter I’m researching has to do with…</mat-label> <input type="text" matInput
+                    [formControl]="legalForm.controls['researchedMatter']" required>
+                <mat-error
+                    *ngIf="legalForm.controls['researchedMatter'].invalid && legalForm.controls['researchedMatter'].touched">
+                    <div class="font13" *ngIf="legalForm.get('researchedMatter').errors?.required">
+                        The matter I’m researching has to do with
+                        is required. </div>
+                </mat-error>
+            </mat-form-field>
+        </div>
+        <div class="col-6 pl-2">
+            <mat-radio-group [formControl]="legalForm.controls['areYou_Pro_se']" class="w-100">
+                <mat-label>Are you "Pro Se" in the matter you are researching? ("Pro Se" means you are representing
+                    yourself.)</mat-label>
+                <div class="pl-2">
+                    <mat-radio-button class="pr-3" [checked]="(reSearchDetails?.areYou_Pro_se) == true " value="true">
+                        Yes</mat-radio-button>
+                    <mat-radio-button [checked]="(reSearchDetails?.areYou_Pro_se) == false" value="false">No
+                    </mat-radio-button>
+                </div>
+            </mat-radio-group>
+            <mat-error>
+                <div *ngIf="legalForm.controls['areYou_Pro_se'].invalid && legalForm.controls['areYou_Pro_se'].touched">
+                    <small class="font13">
+                        Are you "Pro Se" in the matter you are researching? ("Pro Se" means you are representing
+                        yourself.) is Required
+                    </small>
+                </div>
+            </mat-error>
+        </div>
+    </div>
+</div>
+
+<div class="py-3 pr-3 d-flex">
+    <button class="button-purple px-5 py-1" mat-raised-button (click)="onLegalForm()" [disabled]="legalForm.invalid">
+        {{buttonText}}
+    </button>
+    <button class="white-btn px-5 ml-3 py-1" mat-raised-button [routerLink]="'/mjp/user/legal-form'">
+        Cancel
+    </button>
+</div>
