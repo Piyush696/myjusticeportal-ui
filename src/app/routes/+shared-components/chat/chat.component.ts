@@ -19,7 +19,7 @@ export class ChatComponent implements OnInit, OnChanges {
   @Input() allMessages = [];
 
   socket;
-  message: string;
+  message: string = "";
   userId;
   userInfo: any;
   messageList: any;
@@ -56,15 +56,18 @@ export class ChatComponent implements OnInit, OnChanges {
   }
 
   SendMessage() {
-    const data = {
-      "receiverId": this.receiverId,
-      "senderId": this.userId,
-      "message": this.message,
-      "createdAt": new Date()
+    console.log(this.message)
+    if (this.message !== '') {
+      const data = {
+        "receiverId": this.receiverId,
+        "senderId": this.userId,
+        "message": this.message,
+        "createdAt": new Date()
+      }
+      this.allMessages.push(data)
+      this.socket.emit('message', data);
+      this.message = ''
     }
-    this.allMessages.push(data)
-    this.socket.emit('message', data);
-    this.message = ''
   }
 
 }

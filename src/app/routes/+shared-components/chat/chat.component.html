@@ -18,7 +18,7 @@
         <div class="col-12 d-flex justify-content-between">
             <input class="chat-messages-create-input" placeholder="Type a message" type="text" [(ngModel)]="message"
                 (keydown.enter)="SendMessage()">
-            <button mat-raised-button class="px-4 send-msg-btn" [disabled]="message===''" (click)="SendMessage()">
+            <button mat-raised-button class="px-4 send-msg-btn" (click)="SendMessage()">
                 Send
             </button>
         </div>
