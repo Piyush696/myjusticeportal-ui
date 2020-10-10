@@ -1,10 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { LawyerService } from 'app/services/lawyer.service';
 import { FacilityService } from 'app/services/facility.service';
 import { HireLawyerService } from '../../../services/hire-lawyer.service';
 import { ToasterService } from 'app/services/toaster.service';
-
+import { MatPaginator } from '@angular/material/paginator';
+import { MatTableDataSource } from '@angular/material/table';
+import { MatSort } from '@angular/material/sort';
 
 @Component({
   selector: 'app-lawyerdashboard',
@@ -18,6 +20,11 @@ export class LawyerdashboardComponent implements OnInit {
   clients: any;
   facilities: any;
   allClients: any;
+  displayedColumns: string[] = ["name", "facilities"];
+  dataSource = new MatTableDataSource();
+  @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
+  @ViewChild(MatSort, { static: false }) sort: MatSort;
+
   constructor(private hireLawyerService: HireLawyerService, private facilityService: FacilityService,
     private lawyerService: LawyerService, private toasterService: ToasterService, private store: Store<any>) { }
 
@@ -39,6 +46,16 @@ export class LawyerdashboardComponent implements OnInit {
     this.lawyerService.getClients().subscribe((clients: any) => {
       this.clients = clients.data
       this.allClients = clients.data
+      this.dataSource = new MatTableDataSource(clients.data);
+      this.dataSource.sortingDataAccessor = (item: any, property) => {
+        switch (property) {
+          case 'name': if (item) return item.firstName + item.middleName + item.lastName;
+          case 'facilities': if (item) return item.facilities[0].facilityName;
+          default: return item[property];
+        }
+      };
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
     })
   }
 
@@ -54,8 +71,9 @@ export class LawyerdashboardComponent implements OnInit {
 
   onFacilityFiltered(facility) {
     this.clients = this.allClients.filter((client) => {
-      return client.inmate.facilities[0].facilityId == facility.value
+      return client.facilities[0].facilityId == facility.value
     })
+    this.dataSource = new MatTableDataSource(this.clients)
   }
 
 
@@ -85,5 +103,27 @@ export class LawyerdashboardComponent implements OnInit {
         this.toasterService.showErrorToater('Something went wrong, please try again.');
       }
     });
+  }
+
+  search(searchValue: string) {
+    this.dataSource.filter = searchValue.trim().toLowerCase();
+  }
+
+  // pagination.
+  getPageSizeOptions(): number[] {
+    if (this.dataSource.data.length > 500)
+      return [10, 50, 100, 500, this.dataSource.paginator?.length];
+    else if (this.dataSource.data.length > 100) {
+      return [10, 50, 100, this.dataSource.paginator?.length];
+    }
+    else if (this.dataSource.data.length > 50) {
+      return [10, 50, this.dataSource.paginator?.length];
+    }
+    else if (this.dataSource.data.length > 10) {
+      return [10, this.dataSource.paginator?.length];
+    }
+    else {
+      return [10];
+    }
   }
 }

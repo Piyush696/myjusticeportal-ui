@@ -4,7 +4,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
 import { ToasterService } from 'app/services/toaster.service';
-
+import { Location } from '@angular/common';
 @Component({
   selector: 'app-view-users',
   templateUrl: './view-users.component.html',
@@ -15,10 +15,10 @@ export class ViewUsersComponent implements OnInit {
 
   displayedColumns: string[] = ["name", "userName", "roles", "createdAt"];
   dataSource = new MatTableDataSource();
-  @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
-  @ViewChild(MatSort, { static: true }) sort: MatSort;
+  @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
+  @ViewChild(MatSort, { static: false }) sort: MatSort;
 
-  constructor(private organisationService: OrganisationService, private toasterService: ToasterService,) { }
+  constructor(private location: Location, private organisationService: OrganisationService, private toasterService: ToasterService,) { }
 
   ngOnInit(): void {
     this.getAllUsers();
@@ -66,5 +66,9 @@ export class ViewUsersComponent implements OnInit {
     else {
       return [10];
     }
+  }
+
+  backToCases() {
+    this.location.back();
   }
 }
