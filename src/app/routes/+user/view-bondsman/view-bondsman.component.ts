@@ -32,7 +32,6 @@ export class ViewBondsmanComponent implements OnInit {
       bondsmanId
     }
     this.bondsmanService.contactBondsman(data).subscribe((res: any) => {
-      console.log(res)
       if (res.success) {
         this.isHired = true
         this.toasterService.showSuccessToater('User Requested.')

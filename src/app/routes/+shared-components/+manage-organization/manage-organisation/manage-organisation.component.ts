@@ -20,7 +20,7 @@ export class ManageOrganisationComponent implements OnInit {
   fileType: string = 'private';
   sharedCaseFiles: any;
   privateCaseFiles: any;
-  organisationId:any;
+  organisationId: any;
   public uploader1: FileUploader = new FileUploader({ url: URL });
   public hasAnotherDropZoneOver: boolean = false;
   public fileOverAnother(e: any): void {
@@ -35,29 +35,28 @@ export class ManageOrganisationComponent implements OnInit {
     this.getOrganisationAddress()
   }
   onUploadLogo() {
-    if(this.uploader1.queue.length <= 1){
-    let formData = new FormData();
-    formData.append('this.organisationId',this.organisationId);
-    this.uploader1.queue.forEach((file) => {
-      formData.append('file', file._file);
-    })
-    formData.append('type', this.fileType);
-    this.organisationService.uploadFile(formData).subscribe((res) => {
-      console.log(res)
-      this.fileType = 'private';
-      if (res.success) {
-        this.uploader1.queue = [];
-        this.toasterService.showSuccessToater('File uploaded successfully.');
-      } else {
-        this.toasterService.showErrorToater(res.data);
-      }
-    }, (error: any) => {
-      this.toasterService.showErrorToater(error.statusText);
-    })
-  }else{
-    this.toasterService.showErrorToater('You can upload only one Logo.');
+    if (this.uploader1.queue.length <= 1) {
+      let formData = new FormData();
+      formData.append('this.organisationId', this.organisationId);
+      this.uploader1.queue.forEach((file) => {
+        formData.append('file', file._file);
+      })
+      formData.append('type', this.fileType);
+      this.organisationService.uploadFile(formData).subscribe((res) => {
+        this.fileType = 'private';
+        if (res.success) {
+          this.uploader1.queue = [];
+          this.toasterService.showSuccessToater('File uploaded successfully.');
+        } else {
+          this.toasterService.showErrorToater(res.data);
+        }
+      }, (error: any) => {
+        this.toasterService.showErrorToater(error.statusText);
+      })
+    } else {
+      this.toasterService.showErrorToater('You can upload only one Logo.');
+    }
   }
-}
   filterCases(data: any) {
     if (data) {
       this.sharedCaseFiles = data.filter(data => data.file_case.type == "shared");
@@ -67,7 +66,7 @@ export class ManageOrganisationComponent implements OnInit {
 
   getOrganisationAddress() {
     this.organisationService.getOrganisationAddressDetails().subscribe((orgDetails: any) => {
-      this.organisationId=orgDetails.data.Organization.organizationId
+      this.organisationId = orgDetails.data.Organization.organizationId
       if (orgDetails.success) {
         this.organisationForm.get('name').setValue(orgDetails.data.Organization.name)
         this.organisationForm.get('street1').setValue(orgDetails.data.Organization.Address.street1)

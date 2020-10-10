@@ -44,11 +44,9 @@ export class LawyerdashboardComponent implements OnInit {
 
   getAllClients() {
     this.lawyerService.getClients().subscribe((clients: any) => {
-      console.log(clients)
       this.clients = clients.data
       this.allClients = clients.data
       this.dataSource = new MatTableDataSource(clients.data);
-      console.log(this.dataSource)
       this.dataSource.sortingDataAccessor = (item: any, property) => {
         switch (property) {
           case 'name': if (item) return item.firstName + item.middleName + item.lastName;
@@ -72,8 +70,6 @@ export class LawyerdashboardComponent implements OnInit {
   }
 
   onFacilityFiltered(facility) {
-    console.log(facility)
-    console.log(this.allClients)
     this.clients = this.allClients.filter((client) => {
       return client.facilities[0].facilityId == facility.value
     })
@@ -110,7 +106,6 @@ export class LawyerdashboardComponent implements OnInit {
   }
 
   search(searchValue: string) {
-    console.log(this.dataSource)
     this.dataSource.filter = searchValue.trim().toLowerCase();
   }
 
