@@ -21,7 +21,7 @@ export class FacilityComponent implements OnInit {
   addressForm: FormGroup;
   facilityAddressId: number;
 
-  displayedColumns: string[] = ["facilityCode", "facilityName", "libraryLink", "action"];
+  displayedColumns: string[] = ["facilityCode", "facilityName", "ipAddress", "libraryLink", "action"];
   dataSource = new MatTableDataSource();
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort: MatSort;
@@ -32,8 +32,9 @@ export class FacilityComponent implements OnInit {
   ngOnInit(): void {
     this.facilityForm = this.fb.group({
       facilityCode: ['', [Validators.required], [this.validateUserNotTaken.bind(this)]],
-      facilityName: ['', [Validators.required]],
-      libraryLink: ['']
+      facilityName: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(50)]],
+      ipAddress: ['', [Validators.required, Validators.pattern('(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)')]],
+      libraryLink: ['',[Validators.required, Validators.pattern('(https?://)?([\\da-z.-]+)\\.([a-z.]{2,6})[/\\w .-]*/?')]]
     })
 
     this.addressForm = this.fb.group({
@@ -116,6 +117,7 @@ export class FacilityComponent implements OnInit {
     this.facilityId = facility.facilityId;
     this.facilityForm.get('facilityCode').setValue(facility.facilityCode);
     this.facilityForm.get('facilityName').setValue(facility.facilityName);
+    this.facilityForm.get('ipAddress').setValue(facility.ipAddress);
     this.facilityForm.get('libraryLink').setValue(facility.libraryLink);
     if (facility.Address) {
       this.facilityAddressId = facility.Address.addressId;

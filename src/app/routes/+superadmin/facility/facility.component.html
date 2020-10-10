@@ -27,7 +27,10 @@
                 <th mat-header-cell *matHeaderCellDef mat-sort-header>Facility Name</th>
                 <td mat-cell *matCellDef="let facility">{{facility?.facilityName}}</td>
             </ng-container>
-
+            <ng-container matColumnDef="ipAddress">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>IP Address</th>
+                <td mat-cell *matCellDef="let facility">{{facility?.ipAddress}}</td>
+            </ng-container>
             <ng-container matColumnDef="libraryLink">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header>Library Link</th>
                 <td mat-cell *matCellDef="let facility">{{facility?.libraryLink}}</td>
@@ -94,9 +97,30 @@
                         <mat-error>
                             <div
                                 *ngIf="facilityForm.controls['facilityName'].invalid && facilityForm.controls['facilityName'].touched">
-                                <small class="font13">
+                                <small class="font13" *ngIf="facilityForm.controls['facilityName'].errors?.required">
                                     Facility Name is Required
                                 </small>
+                                <small class="font13" *ngIf="facilityForm.controls['facilityName'].errors?.minlength">
+                                    Facility Name minumum 3 letter is Required
+                                </small>
+                            </div>
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+                <div class="col-12 mb-1 pr-3">
+                    <mat-form-field appearance="fill" class="w-100 pl-2">
+                        <mat-label>IP Address</mat-label>
+                        <input type="text" matInput placeholder="IP Address"
+                            [formControl]="facilityForm.controls['ipAddress']" required>
+                        <mat-error>
+                            <div
+                                *ngIf="facilityForm.controls['ipAddress'].invalid && facilityForm.controls['ipAddress'].touched">
+                                <small class="font13" *ngIf="facilityForm.controls['ipAddress'].errors?.required">
+                                    IP Address is Required
+                                </small>
+                                <span class="font13" *ngIf="facilityForm.controls['ipAddress'].errors?.pattern">
+                                    Invalid IP Address format
+                                </span>
                             </div>
                         </mat-error>
                     </mat-form-field>
@@ -186,7 +210,18 @@
             <div class="col-12 p-0">
                 <mat-form-field appearance="fill" class="w-100 px-2">
                     <mat-label>DIY Law Library Link</mat-label>
-                    <input type="text" matInput [formControl]="facilityForm.controls['libraryLink']">
+                    <input type="text" matInput [formControl]="facilityForm.controls['libraryLink']" required>
+                    <mat-error>
+                        <div
+                                *ngIf="facilityForm.controls['libraryLink'].invalid && facilityForm.controls['libraryLink'].touched">
+                                <small class="font13" *ngIf="facilityForm.controls['libraryLink'].errors?.required">
+                                    DIY Law Library Link is Required
+                                </small>
+                                <span class="font13" *ngIf="facilityForm.controls['libraryLink'].errors?.pattern">
+                                    Invalid DIY Law Library Link.
+                                </span>
+                            </div>
+                    </mat-error>
                 </mat-form-field>
             </div>
         </div>
