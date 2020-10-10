@@ -71,6 +71,7 @@ export class LawyerRegistrationComponent implements OnInit {
   }
 
   stateEvent(state) {
+    console.log(state)
     this.currentState = [...state]
   }
 

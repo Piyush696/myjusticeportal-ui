@@ -1,0 +1,111 @@
+<div class="d-flex justify-content-between">
+    <div>
+        <h1 class="font-weight-bold">
+            Legal Research Assistant
+        </h1>
+        <h4 class="line-height">Your completed research results. </h4>
+    </div>
+    <div>
+        <button class="white-btn py-1 padding-btn" mat-raised-button (click)="backToFormList()">
+            Back To My forms
+        </button>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-8">
+        <div class="col-12 p-0">
+            <mat-card class="mat-elevation-z10 view-card-color w-100 pt-4">
+                <div class="d-flex justify-content-between pb-2">
+                    <div>
+                        <h3 class="line-height font-weight-bold m-0 pt-3">
+                            Your Legal Research Request
+
+                        </h3>
+                    </div>
+                    <div>
+                        <button class="white-btn px-5 py-1" mat-raised-button [routerLink]="'edit'">
+                            Edit Form
+                        </button>
+                    </div>
+                </div>
+                <div>
+                    <p class="text-default"><strong class="pr-2">First Name:</strong>
+                        <span class="font-weight-normal"> {{reSearchDetails?.inmate?.firstName}}
+                            {{reSearchDetails?.inmate?.lastName}}</span>
+                    </p>
+                </div>
+                <div>
+                    <p class="text-default"><strong class="pr-2">Middle Initial:</strong>
+                        <span class="font-weight-normal">{{reSearchDetails?.inmate?.middleName}}</span>
+                    </p>
+                </div>
+                <div>
+                    <p class="text-default"><strong class="pr-2">Last Name:</strong>
+                        <span class="font-weight-normal"> {{reSearchDetails?.inmate?.lastName}}</span>
+                    </p>
+                </div>
+                <div>
+                    <p class="text-default" *ngIf="reSearchDetails?.inmate?.userId">
+                        <strong class="pr-2">Inmate No:</strong>
+                        <span class="font-weight-normal"> {{reSearchDetails?.inmate?.userId}}</span>
+                    </p>
+                </div>
+                <div *ngIf="reSearchDetails?.inmate?.userMeta[0].metaValue">
+                    <p class="text-default"><strong class="pr-2">Housing Unit:</strong>
+                        <span class="font-weight-normal"> {{reSearchDetails?.inmate?.userMeta[0].metaValue}}</span>
+                    </p>
+                </div>
+                <div>
+                    <p class="text-default" *ngIf="reSearchDetails?.whoSentYouToJail">
+                        <strong class="pr-2">Who sent you to this jail:</strong>
+                        <span class="font-weight-normal"> {{reSearchDetails?.whoSentYouToJail}}</span>
+                    </p>
+                </div>
+                <div>
+                    <p class="text-default" *ngIf="reSearchDetails?.nextCourtDate">
+                        <strong class="pr-2">Your next court date:</strong>
+                        <span class="font-weight-normal"> {{reSearchDetails?.nextCourtDate |date: 'MM-dd-yyyy'}}</span>
+                    </p>
+                </div>
+                <div>
+                    <p class="text-default" *ngIf="reSearchDetails?.currentCharges">
+                        <strong class="pr-2"> List your current charges:</strong>
+                        <span class="font-weight-normal"> {{reSearchDetails?.currentCharges}}</span>
+                    </p>
+                </div>
+                <div>
+                    <p class="text-default">
+                        <strong class="pr-2">Have you been convicted:</strong>
+                        <span class="font-weight-normal" *ngIf="reSearchDetails?.convicted == true">Yes</span>
+                        <span class="font-weight-normal" *ngIf="reSearchDetails?.convicted ==false">No</span>
+                    </p>
+                </div>
+                <div>
+                    <p class="text-default">
+                        <strong class="pr-2">Have you been sentenced:</strong>
+                        <span class="font-weight-normal" *ngIf="reSearchDetails?.sentenced == true">Yes</span>
+                        <span class="font-weight-normal" *ngIf="reSearchDetails?.sentenced ==false">No</span>
+                    </p>
+                </div>
+                <div>
+                    <p class="text-default" *ngIf="reSearchDetails?.researchedMatter">
+                        <strong class="pr-2"> The matter I’m researching has to do with:</strong>
+                        <span class="font-weight-normal"> {{reSearchDetails?.researchedMatter}}</span>
+                    </p>
+                </div>
+                <div>
+                    <p class="text-default">
+                        <strong class="pr-2">Are you "Pro Se" in the matter you are researching? ("Pro Se" means you are
+                            representing
+                            yourself.):</strong>
+                        <span class="font-weight-normal" *ngIf="reSearchDetails?.areYou_Pro_se == true">Yes</span>
+                        <span class="font-weight-normal" *ngIf="reSearchDetails?.areYou_Pro_se ==false">No</span>
+                    </p>
+                </div>
+
+            </mat-card>
+        </div>
+    </div>
+
+</div>
