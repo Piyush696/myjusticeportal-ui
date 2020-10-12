@@ -32,7 +32,7 @@ export class FacilityComponent implements OnInit {
   ngOnInit(): void {
     this.facilityForm = this.fb.group({
       facilityCode: ['', [Validators.required], [this.validateUserNotTaken.bind(this)]],
-      facilityName: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(50)]],
+      facilityName: ['', [Validators.required, Validators.minLength(1), Validators.maxLength(50)]],
       ipAddress: ['', [Validators.required, Validators.pattern('(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)')]],
       libraryLink: ['',[Validators.required, Validators.pattern('(https?://)?([\\da-z.-]+)\\.([a-z.]{2,6})[/\\w .-]*/?')]]
     })
