@@ -50,6 +50,10 @@ export class ChatComponent implements OnInit, OnChanges {
   }
 
   setupSocketConnection() {
+    // this.store.select(s => s.incomingMessages).subscribe(x => {
+    //   console.log(x)
+    //   this.allMessages.push(x)
+    // })
     this.socket = io(SOCKET_ENDPOINT);
     this.socket.on('message-broadcast' + this.userInfo.userId, (data: any) => {
       if (data) {
