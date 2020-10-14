@@ -21,7 +21,7 @@ export class CaseFormComponent implements OnInit, OnChanges {
 
   @Input() caseDetails;
   public states = [];
-  state:any=[];
+  state: any = [];
 
   constructor(private toasterService: ToasterService, private router: Router, private _statesService: StatesService,
     private fb: FormBuilder, private caseService: CaseService, private store: Store<any>) {
@@ -37,7 +37,7 @@ export class CaseFormComponent implements OnInit, OnChanges {
       this.caseForm.get('firstName').setValue(this.fullName);
       this.caseForm.get('legalMatter').setValue(this.caseDetails.legalMatter);
       this.caseForm.get('countyOfArrest').setValue(this.caseDetails.countyOfArrest);
-      this.caseForm.get('state').setValue(this.userData.state);
+      this.caseForm.get('stateOfArrest').setValue(this.userData.state);
       this.caseForm.get('dateOfArrest').setValue(this.caseDetails.dateOfArrest);
       this.caseForm.get('briefDescriptionOfChargeOrLegalMatter').setValue(this.caseDetails.briefDescriptionOfChargeOrLegalMatter);
       this.caseForm.get('attorneyName').setValue(this.caseDetails.attorneyName);
@@ -57,15 +57,14 @@ export class CaseFormComponent implements OnInit, OnChanges {
     this._statesService.getStates()
       .subscribe(data => {
         this.states = data
-        
       });
   }
+
   userState() {
-    this.caseService.getState()
-      .subscribe(data => {
-        this.state = data
-        console.log(this.state.facilities)
-      });
+    this.caseService.getState().subscribe((state: any) => {
+      this.caseForm.get('stateOfArrest').setValue(state.data.facilities[0].Address.state)
+      console.log(state.data.facilities[0].Address.state)
+    });
   }
 
   createFormControl() {
@@ -73,7 +72,7 @@ export class CaseFormComponent implements OnInit, OnChanges {
       firstName: ['', [Validators.required]],
       legalMatter: ['', [Validators.required]],
       countyOfArrest: [''],
-      state: [''],
+      stateOfArrest: [''],
       dateOfArrest: [''],
       briefDescriptionOfChargeOrLegalMatter: ['', [Validators.required]],
       attorneyName: [''],

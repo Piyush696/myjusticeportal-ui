@@ -64,7 +64,7 @@
         <div class="col-6 pl-0">
             <mat-form-field appearance="fill" class="w-100 pl-2">
                 <mat-label>State of Arrest (If Applicable)</mat-label>
-                <mat-select [formControl]="caseForm.controls['state']">
+                <mat-select [formControl]="caseForm.controls['stateOfArrest']">
                     <mat-option>Select state</mat-option>
                     <mat-option *ngFor="let state of states" value="{{state.name}}">{{state.name}}</mat-option>
                 </mat-select>
