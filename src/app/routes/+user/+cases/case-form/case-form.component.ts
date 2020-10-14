@@ -21,20 +21,23 @@ export class CaseFormComponent implements OnInit, OnChanges {
 
   @Input() caseDetails;
   public states = [];
+  state:any=[];
 
   constructor(private toasterService: ToasterService, private router: Router, private _statesService: StatesService,
     private fb: FormBuilder, private caseService: CaseService, private store: Store<any>) {
   }
 
   ngOnChanges() {
+    // console.log(this)
     if (this.caseDetails) {
       this.createFormControl();
       this.getUserFromStore();
-      this.buttonText = 'Update Case';
+      this.buttonText = 'Save Case';
       this.headerText = 'Edit a Case';
       this.caseForm.get('firstName').setValue(this.fullName);
       this.caseForm.get('legalMatter').setValue(this.caseDetails.legalMatter);
       this.caseForm.get('countyOfArrest').setValue(this.caseDetails.countyOfArrest);
+      this.caseForm.get('state').setValue(this.userData.state);
       this.caseForm.get('dateOfArrest').setValue(this.caseDetails.dateOfArrest);
       this.caseForm.get('briefDescriptionOfChargeOrLegalMatter').setValue(this.caseDetails.briefDescriptionOfChargeOrLegalMatter);
       this.caseForm.get('attorneyName').setValue(this.caseDetails.attorneyName);
@@ -46,13 +49,22 @@ export class CaseFormComponent implements OnInit, OnChanges {
   ngOnInit(): void {
     this.createFormControl();
     this.getUserFromStore();
-    this.stateData()
+    this.stateData();
+    this.userState();
   }
 
   stateData() {
     this._statesService.getStates()
       .subscribe(data => {
         this.states = data
+        
+      });
+  }
+  userState() {
+    this.caseService.getState()
+      .subscribe(data => {
+        this.state = data
+        console.log(this.state.facilities)
       });
   }
 
@@ -61,6 +73,7 @@ export class CaseFormComponent implements OnInit, OnChanges {
       firstName: ['', [Validators.required]],
       legalMatter: ['', [Validators.required]],
       countyOfArrest: [''],
+      state: [''],
       dateOfArrest: [''],
       briefDescriptionOfChargeOrLegalMatter: ['', [Validators.required]],
       attorneyName: [''],
