@@ -40,7 +40,9 @@ export class EmailRegistrationComponent implements OnInit, OnChanges {
       userName: ['', [Validators.required, Validators.maxLength(25), Validators.minLength(8), this.validateEmail.bind(this)], this.validateUserNotTaken.bind(this)],
       password: ['', [Validators.required, Validators.minLength(8), this.validatePassword.bind(this)]],
       confirmPassword: ['', [Validators.required, Validators.minLength(8)]],
-      termCondition: ['', [Validators.required]]
+      termCondition: ['', [Validators.required]],
+      mobile: [''],
+      userEmail: [''],
     }, { validator: this.checkIfMatchingPasswords('password', 'confirmPassword') });
   }
 
@@ -139,6 +141,7 @@ export class EmailRegistrationComponent implements OnInit, OnChanges {
       userData.userName = this.email;
     } else {
       userData.userName = this.registrationForm.get('userName').value;
+      userData.mobile = this.registrationForm.get('mobile').value;
     }
     userData.password = this.registrationForm.get('password').value;
     this.isNextEvent.emit(userData);

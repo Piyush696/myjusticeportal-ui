@@ -121,6 +121,27 @@
                     </mat-form-field>
                 </div>
             </div>
+            <h5 *ngIf="roleId === 1" class="text-center">Please give us your email and/or phone number as you can
+                connect to us when you
+                are
+                incarcerated.
+            </h5>
+            <div class="row">
+                <div *ngIf="roleId === 1" class="col-6 pr-2">
+                    <mat-form-field appearance="fill" class="w-100">
+                        <mat-label>Email</mat-label>
+                        <input matInput placeholder="abc@xyz.com" [formControl]="registrationForm.controls['userEmail']"
+                            autocomplete="new-Email" autocapitalize="off" />
+                    </mat-form-field>
+                </div>
+                <div *ngIf="roleId === 1" class="col-6 pl-2">
+                    <mat-form-field appearance="fill" class="w-100">
+                        <mat-label>Mobile</mat-label>
+                        <input type="number" matInput placeholder="8340172667"
+                            [formControl]="registrationForm.controls['mobile']" />
+                    </mat-form-field>
+                </div>
+            </div>
 
             <div class="row">
                 <mat-form-field appearance="fill" class="w-100 p-2">
@@ -180,8 +201,10 @@
                 <button [routerLink]="'/login'" mat-button color="primary">
                     Back to Login
                 </button>
-                <button class="button-purple px-4 py-1 float-right" mat-raised-button
-                    [disabled]="registrationForm.invalid || isNextDisabled" (click)="onNextClick()">
+                <button class="button-purple px-4 py-1 float-right" mat-raised-button [disabled]="registrationForm.get('firstName').invalid || registrationForm.get('lastName').invalid 
+                    || registrationForm.get('middleName').invalid || registrationForm.get('userName').invalid 
+                    || registrationForm.get('password').invalid  || registrationForm.get('confirmPassword').invalid
+                     || registrationForm.get('termCondition').invalid || isNextDisabled" (click)="onNextClick()">
                     NEXT
                 </button>
             </div>
