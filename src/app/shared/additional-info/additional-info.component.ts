@@ -42,6 +42,10 @@ export class AdditionalInfoComponent implements OnInit, OnChanges {
         this.isFacility = res.data ? true : false
         if (res.data) {
           this.additionalInfo.get('facility').setValue(res.data)
+          this.additionalInfo.get('facility').disable()
+        }
+        else {
+          this.additionalInfo.get('facility').enable()
         }
       })
     }
