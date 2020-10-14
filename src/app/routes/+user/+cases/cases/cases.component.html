@@ -15,10 +15,12 @@
                             <span class="case-heading color">
                                 Case {{i+1}}:&nbsp;
                                 <span *ngIf="case?.briefDescriptionOfChargeOrLegalMatter.length < 45">
-                                    {{case?.briefDescriptionOfChargeOrLegalMatter}}
+                                    OFFENSE
+                                    <p class="font-weight-normal">{{case?.briefDescriptionOfChargeOrLegalMatter}}</p>
                                 </span>
                                 <span *ngIf="case?.briefDescriptionOfChargeOrLegalMatter.length > 45">
-                                    {{case?.briefDescriptionOfChargeOrLegalMatter | slice:0:45}}...
+                                    OFFENSE
+                                    <p class="font-weight-normal">{{case?.briefDescriptionOfChargeOrLegalMatter | slice:0:45}}...</p>
                                 </span>
                             </span>
                         </mat-label>
