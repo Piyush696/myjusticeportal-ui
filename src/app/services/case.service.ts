@@ -56,4 +56,8 @@ export class CaseService {
   messageLawyer() {
     return this.httpClient.get<any>(`${this.apiPath}/message`);
   }
+
+  getState() {
+    return this.httpClient.get<object>(`${this.apiPath}/${this.case}/state/userFacility`, this.getHeaders());
+  }
 }
