@@ -20,7 +20,7 @@ export class ChatComponent implements OnInit, OnChanges {
   @Input() allMessages = [];
 
   socket;
-  message: string;
+  message: string = "";
   userId;
   userInfo: any;
   messageList: any;
@@ -50,10 +50,10 @@ export class ChatComponent implements OnInit, OnChanges {
   }
 
   setupSocketConnection() {
-    // this.store.select(s => s.incomingMessages).subscribe(x => {
-    //   console.log(x)
-    //   this.allMessages.push(x)
-    // })
+    this.store.select(s => s.incomingMessages).subscribe((x: any) => {
+      console.log(x)
+      // this.allMessages.push(x)
+    })
     this.socket = io(SOCKET_ENDPOINT);
     this.socket.on('message-broadcast' + this.userInfo.userId, (data: any) => {
       if (data) {
@@ -63,15 +63,17 @@ export class ChatComponent implements OnInit, OnChanges {
   }
 
   SendMessage() {
-    const data = {
-      "receiverId": this.receiverId,
-      "senderId": this.userId,
-      "message": this.message,
-      "createdAt": new Date()
+    if (this.message !== '') {
+      const data = {
+        "receiverId": this.receiverId,
+        "senderId": this.userId,
+        "message": this.message,
+        "createdAt": new Date()
+      }
+      this.allMessages.push(data)
+      this.socket.emit('message', data);
+      this.message = ''
     }
-    this.allMessages.push(data)
-    this.socket.emit('message', data);
-    this.message = ''
   }
 
 }

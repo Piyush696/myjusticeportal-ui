@@ -42,7 +42,6 @@ export class AdditionalInfoComponent implements OnInit, OnChanges {
         this.isFacility = res.data ? true : false
         if (res.data) {
           this.additionalInfo.get('facility').setValue(res.data)
-          this.additionalInfo.get('facility').disable()
         }
       })
     }
@@ -106,7 +105,6 @@ export class AdditionalInfoComponent implements OnInit, OnChanges {
   submit() {
     var userMetaList: any
     if (this.roleId == 3) {
-      this.lawyerInfoArray.push(this.additionalInfoLawyer.value)
       let lawyerInfo = this.lawyerInfoArray.map((item) => {
         this.currentState.push(item.state)
         let userMetaInfo = {}

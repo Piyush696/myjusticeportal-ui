@@ -19,7 +19,7 @@
                 <mat-form-field appearance="fill" class="w-100 p-3">
                     <mat-label>Enter your password</mat-label>
                     <input type="password" matInput placeholder="password"
-                        [formControl]="loginForm.controls['password']" required>
+                        [formControl]="loginForm.controls['password']" required (keydown.enter)="onLogin()">
                     <mat-error *ngIf="loginForm.controls['password'].invalid && loginForm.controls['password'].touched">
                         <small class="font13" *ngIf="loginForm.get('password').errors?.required">
                             Password is Required
