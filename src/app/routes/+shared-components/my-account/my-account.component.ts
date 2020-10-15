@@ -50,7 +50,9 @@ export class MyAccountComponent implements OnInit {
       firstName: ['', [Validators.required]],
       lastName: ['', [Validators.required]],
       middleName: ['', [Validators.required]],
-      isMFA: ['']
+      isMFA: [''],
+      userEmail: [''],
+      mobile: ['']
     })
     this.userMetaForm = this.fb.group({
       housing_unit: ['', [Validators.required]],
@@ -128,7 +130,7 @@ export class MyAccountComponent implements OnInit {
     if (this.buttonText === 'Save') {
       this.buttonText = 'Edit';
       this.userMetaUpdate()
-      this.userService.updateUserInfo(this.profileForm.value,).subscribe((result: any) => {
+      this.userService.updateUserInfo(this.profileForm.value).subscribe((result: any) => {
         // this.toasterService.showSuccessToater('User Updated Successfully.')
         this.buttonText = 'Edit';
         this.getSingleUser();
@@ -136,6 +138,8 @@ export class MyAccountComponent implements OnInit {
     }
     this.buttonText = 'Save';
     this.profileForm.get('userName').enable()
+    this.profileForm.get('userEmail').enable()
+    this.profileForm.get('mobile').enable()
 
     this.userMetaForm.enable()
   }
@@ -188,6 +192,8 @@ export class MyAccountComponent implements OnInit {
       this.profileForm.get('middleName').setValue(result.data.middleName)
       this.profileForm.get('lastName').setValue(result.data.lastName)
       this.profileForm.get('userName').setValue(result.data.userName)
+      this.profileForm.get('mobile').setValue(result.data.mobile)
+      this.profileForm.get('userEmail').setValue(result.data.email)
       this.profileForm.get('isMFA').setValue(result.data.isMFA)
       if (result.data.userMeta.length) {
         this.userMetaForm.get('housing_unit').setValue(result.data.userMeta[0]?.metaValue);
@@ -198,6 +204,8 @@ export class MyAccountComponent implements OnInit {
       this.profileForm.get('firstName').disable();
       this.profileForm.get('middleName').disable();
       this.profileForm.get('lastName').disable();
+      this.profileForm.get('userEmail').disable();
+      this.profileForm.get('mobile').disable();
     })
   }
 

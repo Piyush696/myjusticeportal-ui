@@ -134,6 +134,37 @@
                         </mat-form-field>
                     </div>
                 </div>
+                <div class="row" *ngIf="isUser">
+                    <div class="col-6">
+                        <mat-form-field appearance="fill" class="w-100 p-1">
+                            <mat-label>Email</mat-label>
+                            <input type="text" matInput placeholder="Legal Last Name"
+                                [formControl]="profileForm.controls['userEmail']" required>
+                            <mat-error>
+                                <div
+                                    *ngIf="profileForm.controls['userEmail'].invalid && profileForm.controls['userEmail'].touched">
+                                    <small class="font13">
+                                        Email is Required
+                                    </small>
+                                </div>
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-6">
+                        <mat-form-field appearance="fill" class="w-100 p-1">
+                            <mat-label>Mobile</mat-label>
+                            <input type="text" matInput [formControl]="profileForm.controls['mobile']" required>
+                            <mat-error>
+                                <div
+                                    *ngIf="profileForm.controls['mobile'].invalid && profileForm.controls['mobile'].touched">
+                                    <small class="font13">
+                                        Mobile is Required
+                                    </small>
+                                </div>
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+                </div>
 
                 <div class="row">
                     <div class="col-12">
@@ -154,11 +185,11 @@
                             </div>
                         </div> -->
                         <div class="row pr-1">
-                            <div class="col-12 d-flex justify-content-between justify-content-sm-between">
+                            <div class="col-6 d-flex justify-content-between justify-content-sm-between">
                                 <div class="pr-4" *ngIf="isUser">
-                                    <button class="button-purple px-sm-4 px-md-4 px-lg-4 px-xl-4 py-1" mat-raised-button
+                                    <button class="btn-black  px-sm-4 px-md-4 px-lg-4 px-xl-4 py-1" mat-raised-button
                                         (click)="openModal(passwordModal)">
-                                        Click here to reset your password
+                                        Reset your Password
                                     </button>
                                 </div>
                                 <div class="pr-4" *ngIf="isUser">
@@ -167,6 +198,8 @@
                                         Manage Security Questions
                                     </button>
                                 </div>
+                            </div>
+                            <div class="col-6 d-flex justify-content-end justify-content-sm-end">
                                 <div>
                                     <button class="button-purple px-sm-4 px-md-4 px-lg-4 px-xl-4 py-1" mat-raised-button
                                         (click)="editChanges()" [ngClass]="{'button-green': buttonText == 'Save'}">

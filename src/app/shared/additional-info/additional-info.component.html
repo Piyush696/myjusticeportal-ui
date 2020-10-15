@@ -10,8 +10,9 @@
                     <h2 class=" text-center font-weight-bold">Additional Information</h2>
                     <p class="text-center" *ngIf="roleId == 3">Add Information about state and bar info</p>
                     <p class="text-center" *ngIf="isFacility">Please enter the housing unit, if you remember it.</p>
-                    <p class="text-center" *ngIf="!isFacility">Please select your most recent Facility, and enter the
-                        housing unit, if you remember it.</p>
+                    <p class="text-center" *ngIf="!isFacility">It looks like you aren't currently in a facility. Please
+                        select the last facility you were in, or select which is
+                        closest to you.</p>
                 </div>
                 <div class="">
                     <div *ngIf="roleId != 3">
