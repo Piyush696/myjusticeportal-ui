@@ -142,6 +142,7 @@ export class EmailRegistrationComponent implements OnInit, OnChanges {
     } else {
       userData.userName = this.registrationForm.get('userName').value;
       userData.mobile = this.registrationForm.get('mobile').value;
+      userData.email = this.registrationForm.get('userEmail').value;
     }
     userData.password = this.registrationForm.get('password').value;
     this.isNextEvent.emit(userData);
