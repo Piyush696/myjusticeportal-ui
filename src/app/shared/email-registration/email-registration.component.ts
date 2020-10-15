@@ -41,8 +41,8 @@ export class EmailRegistrationComponent implements OnInit, OnChanges {
       password: ['', [Validators.required, Validators.minLength(8), this.validatePassword.bind(this)]],
       confirmPassword: ['', [Validators.required, Validators.minLength(8)]],
       termCondition: ['', [Validators.required]],
-      mobile: [''],
-      userEmail: [''],
+      mobile: ['',[Validators.required]],
+      userEmail: ['', [Validators.required,Validators.email]],
     }, { validator: this.checkIfMatchingPasswords('password', 'confirmPassword') });
   }
 
