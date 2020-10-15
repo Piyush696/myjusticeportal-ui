@@ -21,6 +21,7 @@ export class MyAccountComponent implements OnInit {
   securityQuestionForm: FormGroup;
   userId: any;
   securityQuestionList: any[];
+  addedSecurityQuestionList:any[];
   OtpField: boolean;
   isMfa: boolean;
   verifiedIcon: boolean;
@@ -42,6 +43,7 @@ export class MyAccountComponent implements OnInit {
     this.createControl();
     this.getLoginDetails();
     this.securityQuestionControl();
+    this.getAddUserSecurityQuestion()
   }
 
   createControl() {
@@ -81,6 +83,14 @@ export class MyAccountComponent implements OnInit {
   }
 
   openModal(templateRef) {
+    let dialogRef = this.dialog.open(templateRef, {
+      width: '500px',
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+    });
+  }
+  openQuestionModal(templateRef) {
     let dialogRef = this.dialog.open(templateRef, {
       width: '500px',
     });
@@ -172,6 +182,12 @@ export class MyAccountComponent implements OnInit {
   getAllSecurityQuestion(roleId?) {
     this.securityService.getAllSecurityRoles(roleId).subscribe((questions: any) => {
       this.securityQuestionList = questions.data
+    })
+  }
+  getAddUserSecurityQuestion() {
+    this.securityService.getUpdateUserSecurityQuestion().subscribe((questions: any) => {
+      this.addedSecurityQuestionList = questions.data.securityQuestions
+      console.log( this.addedSecurityQuestionList)
     })
   }
 

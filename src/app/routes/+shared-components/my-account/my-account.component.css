@@ -20,6 +20,9 @@
   line-height: 10px !important;
   letter-spacing: 2px !important;
 }
+.btn-bg-color{
+  background: #333442 !important;
+}
 
 .anchor-style {
   font-size: 18px;
