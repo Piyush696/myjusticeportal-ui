@@ -131,14 +131,33 @@
                     <mat-form-field appearance="fill" class="w-100">
                         <mat-label>Email</mat-label>
                         <input matInput placeholder="abc@xyz.com" [formControl]="registrationForm.controls['userEmail']"
-                            autocomplete="new-Email" autocapitalize="off" />
+                            autocomplete="new-Email" autocapitalize="off" required/>
+                            <mat-error>
+                                <div *ngIf="registrationForm.controls['userEmail'].invalid && 
+                                    registrationForm.controls['userEmail'].touched">
+                                    <small class="font13" *ngIf="registrationForm.get('userEmail').errors?.required">
+                                        Email is Required.
+                                    </small>
+                                    <small class="font13" *ngIf="registrationForm.get('userEmail').errors?.email">
+                                        Invalid Email.
+                                    </small>
+                                </div>
+                            </mat-error>
                     </mat-form-field>
                 </div>
                 <div *ngIf="roleId === 1" class="col-6 pl-2">
                     <mat-form-field appearance="fill" class="w-100">
                         <mat-label>Mobile</mat-label>
-                        <input type="number" matInput placeholder="8340172667"
-                            [formControl]="registrationForm.controls['mobile']" />
+                        <input type="number" matInput placeholder="Mobile"
+                            [formControl]="registrationForm.controls['mobile']" required/>
+                            <mat-error>
+                                <div *ngIf="registrationForm.controls['mobile'].invalid && 
+                                    registrationForm.controls['mobile'].touched">
+                                    <small class="font13" *ngIf="registrationForm.get('mobile').errors?.required">
+                                        Mobile number is Required.
+                                    </small>
+                                </div>
+                            </mat-error>
                     </mat-form-field>
                 </div>
             </div>
