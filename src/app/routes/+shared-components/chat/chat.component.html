@@ -1,5 +1,5 @@
 <div class="chat-messages">
-    <div id="scroller" class="chat-messages-show-container">
+    <div id="scroller" class="chat-messages-show-container chat-scroll" #scroll [scrollTop]="scroll.scrollHeight">
         <div *ngFor="let messages of allMessages"
             [ngClass]="messages.senderId !== userInfo?.userId ? 'sender-align': 'receiver-align'">
             <ul [ngClass]="messages.senderId !== userInfo?.userId ? 'sender-messages':'receiver-messages '"

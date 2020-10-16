@@ -18,13 +18,11 @@ export class CaseFormComponent implements OnInit, OnChanges {
   headerText: string = 'Create a Case';
   userData: any;
   fullName: string;
-  arrestDate:any='';
   @Input() caseDetails;
   public states = [];
   state: any = [];
   dateOfArrest=new Date()
-  nextCourtDate=new Date().setDate(this.arrestDate);
-  a=new Date(this.nextCourtDate)
+  nextCourtDate=new Date(+new Date() + 24*60*60*1000);
 
   constructor(private toasterService: ToasterService, private router: Router, private _statesService: StatesService,
     private fb: FormBuilder, private caseService: CaseService, private store: Store<any>) {
@@ -54,8 +52,6 @@ export class CaseFormComponent implements OnInit, OnChanges {
     this.getUserFromStore();
     this.stateData();
     this.userState();
-    console.log(this.nextCourtDate+this.arrestDate)
-    console.log(this.a)
   }
 
   stateData() {

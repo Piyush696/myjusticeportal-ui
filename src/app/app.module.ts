@@ -43,6 +43,7 @@ import { InvitedBondsmanComponent } from './pages/all-registration/invited-bonds
 import { SharedMaterialModule } from './shared-material/shared-material.module';
 import { CommonModule } from '@angular/common';
 import { SharedComponentsModule } from './routes/+shared-components/shared-components.module';
+import { TextMaskModule } from 'angular2-text-mask';
 
 export function usersProviderFactory(provider: AuthLoadService) {
   return () => provider.setUserbyAPI();
@@ -71,6 +72,7 @@ export function usersProviderFactory(provider: AuthLoadService) {
     InvitedBondsmanComponent
   ],
   imports: [
+    TextMaskModule,
     BrowserModule,
     BrowserAnimationsModule,
     CommonModule,

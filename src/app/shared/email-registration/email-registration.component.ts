@@ -14,6 +14,7 @@ export class EmailRegistrationComponent implements OnInit, OnChanges {
   registrationForm: FormGroup;
   isAcceptDisabled: boolean = true;
   isNextDisabled: boolean = true;
+  public mobileMask = ['(', /[1-9]/, /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/]
 
   @Input() roleId;
   @Input() totalSteps: any;
