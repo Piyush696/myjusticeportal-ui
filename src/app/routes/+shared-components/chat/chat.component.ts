@@ -1,4 +1,4 @@
-import { Component, HostListener, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { Component, HostListener, Input, OnChanges, OnInit, } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserService } from 'app/services/user.service';
 import * as io from 'socket.io-client';
@@ -29,7 +29,6 @@ export class ChatComponent implements OnInit, OnChanges {
   constructor(private userService: UserService, private loc: Location, private router: Router, private store: Store<any>) {
 
   }
-
 
   ngOnInit() {
     this.store.select(s => s.userInfo).subscribe(x => {
