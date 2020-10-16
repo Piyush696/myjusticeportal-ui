@@ -1,4 +1,4 @@
-import { Component, ElementRef, HostListener, Input, OnChanges, OnInit, SimpleChanges, ViewChild } from '@angular/core';
+import { Component, HostListener, Input, OnChanges, OnInit, } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserService } from 'app/services/user.service';
 import * as io from 'socket.io-client';
@@ -30,24 +30,12 @@ export class ChatComponent implements OnInit, OnChanges {
 
   }
 
-  @ViewChild('scrollMe') private myScrollContainer: ElementRef;
-
-  ngAfterViewChecked() {        
-      this.scrollToBottom();        
-  } 
-
-  scrollToBottom(): void {
-      try {
-          this.myScrollContainer.nativeElement.scrollTop = this.myScrollContainer.nativeElement.scrollHeight;
-      } catch(err) { }                 
-  }
   ngOnInit() {
     this.store.select(s => s.userInfo).subscribe(x => {
       this.userInfo = x
     })
     this.setupSocketConnection();
     this.getSingleUser();
-    this.scrollToBottom();
   }
 
   ngOnChanges(): void {
