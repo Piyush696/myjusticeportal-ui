@@ -16,11 +16,11 @@
                                 Case {{i+1}}:&nbsp;
                                 <span *ngIf="case?.briefDescriptionOfChargeOrLegalMatter.length < 45">
                                     OFFENSE
-                                    <p class="font-weight-normal">{{case?.briefDescriptionOfChargeOrLegalMatter}}</p>
+                                    <br><span class="font-weight-normal">{{case?.briefDescriptionOfChargeOrLegalMatter}}</span>
                                 </span>
                                 <span *ngIf="case?.briefDescriptionOfChargeOrLegalMatter.length > 45">
                                     OFFENSE
-                                    <p class="font-weight-normal">{{case?.briefDescriptionOfChargeOrLegalMatter | slice:0:45}}...</p>
+                                    <br><span class="font-weight-normal">{{case?.briefDescriptionOfChargeOrLegalMatter | slice:0:45}}...</span>
                                 </span>
                             </span>
                         </mat-label>

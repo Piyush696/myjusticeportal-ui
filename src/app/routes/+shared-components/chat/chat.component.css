@@ -89,3 +89,8 @@
   display: flex;
   justify-content: flex-start;
 }
+
+.chat-scroll{
+  overflow: scroll;
+  height: xyz;
+}
