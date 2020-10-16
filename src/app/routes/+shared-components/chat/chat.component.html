@@ -3,7 +3,7 @@
         <div *ngFor="let messages of allMessages"
             [ngClass]="messages.senderId !== userInfo?.userId ? 'sender-align': 'receiver-align'">
             <ul [ngClass]="messages.senderId !== userInfo?.userId ? 'sender-messages':'receiver-messages '"
-                #myList class="chat-messages-show-list d-flex flex-column" id="message-list">
+                class="chat-messages-show-list d-flex flex-column" id="message-list">
                 <li>
                     {{messages.message}}
                 </li>
