@@ -300,18 +300,19 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="form-group">
-                    <li class="d-flex justify-content-between" *ngFor="let securityQuestion of addedSecurityQuestionList; let i= index"
-                            [value]="securityQuestion.addedSecurityQuestionList">
-                            <span class="pt-3">{{i+1}}. {{securityQuestion.question}}</span>
-                        <button class="btn btn-bg-color float-right" (click)="openQuestionModal(manageSecurityQuestionModal)">Change</button>
-                    
-                    </li>                         
+                    <li class="d-flex justify-content-between"
+                        *ngFor="let securityQuestion of addedSecurityQuestionList; let i= index"
+                        [value]="securityQuestion.addedSecurityQuestionList">
+                        <span class="pt-3">{{i+1}}. {{securityQuestion.question}}</span>
+                        <button class="btn btn-bg-color float-right"
+                            (click)="openQuestionModal(manageSecurityQuestionModal,securityQuestion)">Change</button>
+
+                    </li>
                 </div>
             </div>
         </div>
     </div>
     <div class="d-flex justify-content-end modal-footer">
-
         <button type="button" class="button-purple px-4 py-1" mat-raised-button color="primary"
             (click)="closeModal()">Cancel</button>
     </div>
@@ -354,10 +355,10 @@
     </div>
     <div class="d-flex justify-content-between modal-footer">
         <button [disabled]="securityQuestionForm.get('answer').invalid" mat-raised-button color="primary" type="button"
-            class="button-purple px-4 py-1" *ngIf="count != 2" (click)="onSaveChanges()">Save</button>
+            class="button-purple px-4 py-1" (click)="onSaveChanges()">Save</button>
 
-        <button [disabled]="securityQuestionForm.get('answer').invalid" *ngIf="count == 2" class="px-4 py-1"
-            mat-raised-button color="primary" (click)="onSaveChanges()">Submit</button>
+        <!-- <button [disabled]="securityQuestionForm.get('answer').invalid" *ngIf="count == 2" class="px-4 py-1"
+            mat-raised-button color="primary" (click)="onSaveChanges()">Submit</button> -->
 
         <button type="button" class="button-purple px-4 py-1" mat-raised-button color="primary"
             (click)="closeModal()">Close</button>
