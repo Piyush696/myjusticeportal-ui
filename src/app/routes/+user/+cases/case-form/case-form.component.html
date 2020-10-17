@@ -47,7 +47,24 @@
         <div class="col-6 pl-0">
             <mat-form-field appearance="fill" class="w-100 pl-2">
                 <mat-label>County of Arrest (If Applicable)</mat-label>
-                <mat-select [formControl]="caseForm.controls['countyOfArrest']" required>
+                <input type="text" matInput placeholder="County of Arrest (If Applicable)"
+                    [formControl]="caseForm.controls['countyOfArrest']">
+                <!-- <input type="text" matInput placeholder="County Of Arrest"
+                    [formControl]="caseForm.controls['countyOfArrest']"> -->
+                <!-- <mat-error>
+                    <div
+                        *ngIf="caseForm.controls['countyOfArrest'].invalid && caseForm.controls['countyOfArrest'].touched">
+                        <small class="font13">
+                            County of Arrest is Required
+                        </small>
+                    </div>
+                </mat-error> -->
+            </mat-form-field>
+        </div>
+        <div class="col-6 pl-0">
+            <mat-form-field appearance="fill" class="w-100 pl-2">
+                <mat-label>State of Arrest (If Applicable)</mat-label>
+                <mat-select [formControl]="caseForm.controls['stateOfArrest']">
                     <mat-option>Select state</mat-option>
                     <mat-option *ngFor="let state of states" value="{{state.name}}">{{state.name}}</mat-option>
                 </mat-select>
@@ -63,10 +80,15 @@
                 </mat-error> -->
             </mat-form-field>
         </div>
+    </div>
+</div>
+
+<div class="col-12 pl-2">
+    <div class="row pt-2">
         <div class="col-6 pl-0">
             <mat-form-field appearance="fill" class="w-100 pl-2">
                 <mat-label>Date of Arrest (If Applicable)</mat-label>
-                <input matInput [matDatepicker]="picker1" [formControl]="caseForm.controls['dateOfArrest']">
+                <input matInput [matDatepicker]="picker1" [formControl]="caseForm.controls['dateOfArrest']" [min]="dateOfArrest">
                 <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
                 <mat-datepicker #picker1></mat-datepicker>
                 <!-- <mat-error>
@@ -76,8 +98,29 @@
                         </small>
                     </div>
                 </mat-error> -->
+            </mat-form-field>            
+        </div>
+        <div class="col-6 pl-0">
+            <mat-form-field appearance="fill" class="w-100 pl-2">
+                <mat-label>Next Court Date (If Know)</mat-label>
+                <input matInput [matDatepicker]="picker" [formControl]="caseForm.controls['nextCourtDate']" [min]="nextCourtDate">
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
             </mat-form-field>
         </div>
+        <!-- <div class="col-6 pl-0">
+            <mat-form-field appearance="fill" class="w-100 pl-2">
+                <mat-label>Other Case Details</mat-label>
+                <input type="email" matInput placeholder="Other Case Details"
+                    [formControl]="caseForm.controls['otherInformation']">
+                <mat-error>
+                    <div
+                        *ngIf="caseForm.controls['otherInformation'].invalid && caseForm.controls['otherInformation'].touched">
+                        <small class="font13">Other Case Details is Required</small>
+                    </div>
+                </mat-error>
+            </mat-form-field>
+        </div> -->
     </div>
 </div>
 
@@ -123,31 +166,7 @@
         </div>
     </div>
 </div>
-<div class="col-12 pl-2">
-    <div class="row pt-2">
-        <div class="col-6 pl-0">
-            <mat-form-field appearance="fill" class="w-100 pl-2">
-                <mat-label>Next Court Date (If Know)</mat-label>
-                <input matInput [matDatepicker]="picker" [formControl]="caseForm.controls['nextCourtDate']">
-                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                <mat-datepicker #picker></mat-datepicker>
-            </mat-form-field>
-        </div>
-        <!-- <div class="col-6 pl-0">
-            <mat-form-field appearance="fill" class="w-100 pl-2">
-                <mat-label>Other Case Details</mat-label>
-                <input type="email" matInput placeholder="Other Case Details"
-                    [formControl]="caseForm.controls['otherInformation']">
-                <mat-error>
-                    <div
-                        *ngIf="caseForm.controls['otherInformation'].invalid && caseForm.controls['otherInformation'].touched">
-                        <small class="font13">Other Case Details is Required</small>
-                    </div>
-                </mat-error>
-            </mat-form-field>
-        </div> -->
-    </div>
-</div>
+
 
 <div class="py-3 pr-3 d-flex">
     <button class="button-purple px-5 py-1" mat-raised-button [disabled]="caseForm.invalid" (click)="updateCase()">

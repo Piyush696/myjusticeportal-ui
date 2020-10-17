@@ -6,6 +6,7 @@ import { ToasterService } from 'app/services/toaster.service';
 import { FacilityService } from 'app/services/facility.service';
 import { MatDialog } from '@angular/material/dialog';
 import { FormBuilder, FormGroup, Validators, AbstractControl } from '@angular/forms';
+import { StatesService } from 'app/services/states.service';
 
 @Component({
   selector: 'app-facility',
@@ -20,19 +21,20 @@ export class FacilityComponent implements OnInit {
   facilityId: number;
   addressForm: FormGroup;
   facilityAddressId: number;
-
-  displayedColumns: string[] = ["facilityCode", "facilityName", "libraryLink", "action"];
+  states = []
+  displayedColumns: string[] = ["facilityCode", "facilityName", "ipAddress", "libraryLink", "action"];
   dataSource = new MatTableDataSource();
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort: MatSort;
 
   constructor(private toasterService: ToasterService, private facilityService: FacilityService,
-    public dialog: MatDialog, private fb: FormBuilder) { }
+    public dialog: MatDialog, private fb: FormBuilder, private _statesService: StatesService,) { }
 
   ngOnInit(): void {
     this.facilityForm = this.fb.group({
       facilityCode: ['', [Validators.required], [this.validateUserNotTaken.bind(this)]],
-      facilityName: ['', [Validators.required]],
+      facilityName: ['', [Validators.required, Validators.minLength(1), Validators.maxLength(50)]],
+      ipAddress: ['', [Validators.required, Validators.pattern('(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)')]],
       libraryLink: ['']
     })
 
@@ -44,8 +46,16 @@ export class FacilityComponent implements OnInit {
       zip: ['', [Validators.required]],
       country: ['', [Validators.required]]
     })
-
     this.getAllFacilities()
+    this.stateData()
+  }
+
+  stateData() {
+    this._statesService.getStates()
+      .subscribe((data: any) => {
+        console.log(data)
+        this.states = data
+      });
   }
 
   async validateUserNotTaken(control: AbstractControl) {
@@ -58,6 +68,8 @@ export class FacilityComponent implements OnInit {
   }
 
   getAllFacilities() {
+    this.addressForm.get('country').disable();
+    this.addressForm.get('country').setValue('United States')
     this.facilityService.getAllFacility().subscribe((res: any) => {
       this.dataSource = new MatTableDataSource(res.data);
       this.dataSource.paginator = this.paginator;
@@ -81,6 +93,7 @@ export class FacilityComponent implements OnInit {
       facility: this.facilityForm.value,
       facilityAddress: this.addressForm.value
     }
+    facilityDetails.facilityAddress['country'] = 'United States';
     this.facilityService.createFacility(facilityDetails).subscribe((res: any) => {
       this.dialog.closeAll();
       if (res.success) {
@@ -110,12 +123,15 @@ export class FacilityComponent implements OnInit {
       width: '80vh',
       height: '75vh'
     })
+    this.addressForm.get('country').setValue('United States')
+    this.addressForm.get('country').disable()
   }
 
   facilityView(facility) {
     this.facilityId = facility.facilityId;
     this.facilityForm.get('facilityCode').setValue(facility.facilityCode);
     this.facilityForm.get('facilityName').setValue(facility.facilityName);
+    this.facilityForm.get('ipAddress').setValue(facility.ipAddress);
     this.facilityForm.get('libraryLink').setValue(facility.libraryLink);
     if (facility.Address) {
       this.facilityAddressId = facility.Address.addressId;

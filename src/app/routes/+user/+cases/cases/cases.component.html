@@ -15,10 +15,12 @@
                             <span class="case-heading color">
                                 Case {{i+1}}:&nbsp;
                                 <span *ngIf="case?.briefDescriptionOfChargeOrLegalMatter.length < 45">
-                                    {{case?.briefDescriptionOfChargeOrLegalMatter}}
+                                    OFFENSE
+                                    <br><span class="font-weight-normal">{{case?.briefDescriptionOfChargeOrLegalMatter}}</span>
                                 </span>
                                 <span *ngIf="case?.briefDescriptionOfChargeOrLegalMatter.length > 45">
-                                    {{case?.briefDescriptionOfChargeOrLegalMatter | slice:0:45}}...
+                                    OFFENSE
+                                    <br><span class="font-weight-normal">{{case?.briefDescriptionOfChargeOrLegalMatter | slice:0:45}}...</span>
                                 </span>
                             </span>
                         </mat-label>
@@ -60,7 +62,7 @@
                 </div>
                 <h3 class="d-flex justify-content-center line-height color">Randall and Ranika Lawyers</h3>
                 <div class="d-flex justify-content-center">
-                    <button (click)="onContactLawyer()" class="blue-btn px-perc py-1" mat-raised-button>Contact</button>
+                    <button (click)="onContactLawyer()" class="btn bg-color px-perc py-1" mat-raised-button>Contact</button>
                 </div>
             </mat-card>
         </div>
@@ -79,15 +81,6 @@
                     </button>
                 </div>
             </mat-card>
-        </div>
-
-        <div>
-            <div class="d-flex justify-content-center line-height mt-3">
-                <button class="white-btn py-1" mat-raised-button>
-                    <i class="nc-icon nc-single-02 pr-1"></i>
-                    Message My Lawyer
-                </button>
-            </div>
         </div>
     </div>
 </div>

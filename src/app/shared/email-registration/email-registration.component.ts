@@ -14,6 +14,7 @@ export class EmailRegistrationComponent implements OnInit, OnChanges {
   registrationForm: FormGroup;
   isAcceptDisabled: boolean = true;
   isNextDisabled: boolean = true;
+  public mobileMask = ['(', /[1-9]/, /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/]
 
   @Input() roleId;
   @Input() totalSteps: any;
@@ -40,7 +41,9 @@ export class EmailRegistrationComponent implements OnInit, OnChanges {
       userName: ['', [Validators.required, Validators.maxLength(25), Validators.minLength(8), this.validateEmail.bind(this)], this.validateUserNotTaken.bind(this)],
       password: ['', [Validators.required, Validators.minLength(8), this.validatePassword.bind(this)]],
       confirmPassword: ['', [Validators.required, Validators.minLength(8)]],
-      termCondition: ['', [Validators.required]]
+      termCondition: ['', [Validators.required]],
+      mobile: ['',[Validators.required]],
+      userEmail: ['', [Validators.required,Validators.email]],
     }, { validator: this.checkIfMatchingPasswords('password', 'confirmPassword') });
   }
 
@@ -139,6 +142,8 @@ export class EmailRegistrationComponent implements OnInit, OnChanges {
       userData.userName = this.email;
     } else {
       userData.userName = this.registrationForm.get('userName').value;
+      userData.mobile = this.registrationForm.get('mobile').value;
+      userData.email = this.registrationForm.get('userEmail').value;
     }
     userData.password = this.registrationForm.get('password').value;
     this.isNextEvent.emit(userData);

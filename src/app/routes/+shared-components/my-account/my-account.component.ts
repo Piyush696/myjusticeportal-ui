@@ -21,6 +21,7 @@ export class MyAccountComponent implements OnInit {
   securityQuestionForm: FormGroup;
   userId: any;
   securityQuestionList: any[];
+  addedSecurityQuestionList: any[];
   OtpField: boolean;
   isMfa: boolean;
   verifiedIcon: boolean;
@@ -31,6 +32,7 @@ export class MyAccountComponent implements OnInit {
   userMetaForm: FormGroup;
   userMeta: any;
   buttonText: string = 'Edit'
+  previousSecurityId: any;
 
 
   constructor(private registrationService: RegistrationService, public dialog: MatDialog,
@@ -42,6 +44,7 @@ export class MyAccountComponent implements OnInit {
     this.createControl();
     this.getLoginDetails();
     this.securityQuestionControl();
+    this.getAddUserSecurityQuestion()
   }
 
   createControl() {
@@ -50,7 +53,9 @@ export class MyAccountComponent implements OnInit {
       firstName: ['', [Validators.required]],
       lastName: ['', [Validators.required]],
       middleName: ['', [Validators.required]],
-      isMFA: ['']
+      isMFA: [''],
+      userEmail: [''],
+      mobile: ['']
     })
     this.userMetaForm = this.fb.group({
       housing_unit: ['', [Validators.required]],
@@ -85,6 +90,19 @@ export class MyAccountComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
     });
+  }
+
+  openQuestionModal(templateRef, value) {
+    console.log(value)
+    this.previousSecurityId = value.securityQuestionId
+    let dialogRef = this.dialog.open(templateRef, {
+      width: '500px',
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+    });
+    this.securityQuestionForm.get('securityQuestionId').setValue(value.securityQuestionId)
+    this.securityQuestionForm.get('answer').setValue(value.answer)
   }
 
   createPasswordControl() {
@@ -128,7 +146,7 @@ export class MyAccountComponent implements OnInit {
     if (this.buttonText === 'Save') {
       this.buttonText = 'Edit';
       this.userMetaUpdate()
-      this.userService.updateUserInfo(this.profileForm.value,).subscribe((result: any) => {
+      this.userService.updateUserInfo(this.profileForm.value).subscribe((result: any) => {
         // this.toasterService.showSuccessToater('User Updated Successfully.')
         this.buttonText = 'Edit';
         this.getSingleUser();
@@ -136,6 +154,8 @@ export class MyAccountComponent implements OnInit {
     }
     this.buttonText = 'Save';
     this.profileForm.get('userName').enable()
+    this.profileForm.get('userEmail').enable()
+    this.profileForm.get('mobile').enable()
 
     this.userMetaForm.enable()
   }
@@ -171,6 +191,14 @@ export class MyAccountComponent implements OnInit {
     })
   }
 
+  getAddUserSecurityQuestion() {
+    this.securityService.getUpdateUserSecurityQuestion().subscribe((questions: any) => {
+      console.log(questions)
+      this.addedSecurityQuestionList = questions.data
+      console.log(this.addedSecurityQuestionList)
+    })
+  }
+
   getSingleUser() {
     this.userService.getSingleUser().subscribe((result: any) => {
       this.roleId = result.data.roles[0].roleId;
@@ -188,6 +216,8 @@ export class MyAccountComponent implements OnInit {
       this.profileForm.get('middleName').setValue(result.data.middleName)
       this.profileForm.get('lastName').setValue(result.data.lastName)
       this.profileForm.get('userName').setValue(result.data.userName)
+      this.profileForm.get('mobile').setValue(result.data.mobile)
+      this.profileForm.get('userEmail').setValue(result.data.email)
       this.profileForm.get('isMFA').setValue(result.data.isMFA)
       if (result.data.userMeta.length) {
         this.userMetaForm.get('housing_unit').setValue(result.data.userMeta[0]?.metaValue);
@@ -198,6 +228,8 @@ export class MyAccountComponent implements OnInit {
       this.profileForm.get('firstName').disable();
       this.profileForm.get('middleName').disable();
       this.profileForm.get('lastName').disable();
+      this.profileForm.get('userEmail').disable();
+      this.profileForm.get('mobile').disable();
     })
   }
 
@@ -217,28 +249,26 @@ export class MyAccountComponent implements OnInit {
   onSaveChanges() {
     const data = {
       "securityQuestionId": parseInt(this.securityQuestionForm.get('securityQuestionId').value),
-      "answer": this.securityQuestionForm.get('answer').value
+      "answer": this.securityQuestionForm.get('answer').value,
+      "previousSecurityId": parseInt(this.previousSecurityId)
     }
     this.securityQuestionData.push(data)
     this.securityQuestionList = this.securityQuestionList.filter(filteredquestion => filteredquestion.securityQuestionId != parseInt(this.securityQuestionForm.get('securityQuestionId').value))
     this.securityQuestionForm.get('answer').reset();
-    this.count = this.count + 1;
-    if (this.count === 3) {
-      this.securityService.updateSecurityQuestionAnswer(this.securityQuestionData).subscribe((data: any) => {
-        if (data.success) {
-          this.closeModal();
-          this.toasterService.showSuccessToater('Security Question Updated Successfully.')
-          this.securityQuestionForm.reset()
-        }
-        else {
-          this.toasterService.showErrorToater('Security Question not Updated.')
-        }
-      })
-    }
+    this.securityService.updateSecurityQuestion(data).subscribe((data: any) => {
+      if (data) {
+        this.getAddUserSecurityQuestion();
+        this.toasterService.showSuccessToater('Security Question Updated Successfully.')
+        this.securityQuestionForm.reset()
+        this.closeModal();
+      } else {
+        this.toasterService.showWarningToater('Security Question not Updated Successfully.')
+      }
+    })
   }
 
   closeModal(): void {
-    this.dialog.closeAll();
+    this.dialog.closeAll()
   }
 
   onMfaSelect() {

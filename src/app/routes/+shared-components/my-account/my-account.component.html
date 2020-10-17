@@ -11,7 +11,7 @@
 </div>
 
 <div class="row pl-2">
-    <div class="col-12 col-sm-8 col-md-8 col-lg-8 col-xl-8 pl-1">
+    <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 pl-1">
         <mat-card class="mat-elevation-z10">
             <mat-card-content>
                 <div class="row">
@@ -134,6 +134,37 @@
                         </mat-form-field>
                     </div>
                 </div>
+                <div class="row" *ngIf="isUser">
+                    <div class="col-6">
+                        <mat-form-field appearance="fill" class="w-100 p-1">
+                            <mat-label>Email</mat-label>
+                            <input type="text" matInput placeholder="Legal Last Name"
+                                [formControl]="profileForm.controls['userEmail']" required>
+                            <mat-error>
+                                <div
+                                    *ngIf="profileForm.controls['userEmail'].invalid && profileForm.controls['userEmail'].touched">
+                                    <small class="font13">
+                                        Email is Required
+                                    </small>
+                                </div>
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-6">
+                        <mat-form-field appearance="fill" class="w-100 p-1">
+                            <mat-label>Mobile</mat-label>
+                            <input type="text" matInput [formControl]="profileForm.controls['mobile']" required>
+                            <mat-error>
+                                <div
+                                    *ngIf="profileForm.controls['mobile'].invalid && profileForm.controls['mobile'].touched">
+                                    <small class="font13">
+                                        Mobile is Required
+                                    </small>
+                                </div>
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+                </div>
 
                 <div class="row">
                     <div class="col-12">
@@ -154,19 +185,21 @@
                             </div>
                         </div> -->
                         <div class="row pr-1">
-                            <div class="col-12 d-flex justify-content-between justify-content-sm-between">
+                            <div class="col-6 d-flex justify-content-between justify-content-sm-between">
                                 <div class="pr-4" *ngIf="isUser">
-                                    <button class="button-purple px-sm-4 px-md-4 px-lg-4 px-xl-4 py-1" mat-raised-button
+                                    <button class="btn-black  px-sm-4 px-md-4 px-lg-4 px-xl-4 py-1" mat-raised-button
                                         (click)="openModal(passwordModal)">
-                                        Click here to reset your password
+                                        Reset your Password
                                     </button>
                                 </div>
                                 <div class="pr-4" *ngIf="isUser">
                                     <button class="btn-black px-sm-4 px-md-4 px-lg-4 px-xl-4 py-1" mat-raised-button
-                                        (click)="openModal(manageSecurityQuestionModal)">
+                                        (click)="openModal(addedmanageSecurityQuestionModal)">
                                         Manage Security Questions
                                     </button>
                                 </div>
+                            </div>
+                            <div class="col-6 d-flex justify-content-end justify-content-sm-end">
                                 <div>
                                     <button class="button-purple px-sm-4 px-md-4 px-lg-4 px-xl-4 py-1" mat-raised-button
                                         (click)="editChanges()" [ngClass]="{'button-green': buttonText == 'Save'}">
@@ -259,6 +292,32 @@
 
 <!-- Manage Security Modal -->
 
+<ng-template #addedmanageSecurityQuestionModal>
+    <div class="d-flex justify-content-center modal-header">
+        <mat-label class="font-weight-bold">Manage Security Questions</mat-label>
+    </div>
+    <div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <li class="d-flex justify-content-between"
+                        *ngFor="let securityQuestion of addedSecurityQuestionList; let i= index"
+                        [value]="securityQuestion.addedSecurityQuestionList">
+                        <span class="pt-3">{{i+1}}. {{securityQuestion.question}}</span>
+                        <button class="btn btn-bg-color float-right"
+                            (click)="openQuestionModal(manageSecurityQuestionModal,securityQuestion)">Change</button>
+
+                    </li>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="d-flex justify-content-end modal-footer">
+        <button type="button" class="button-purple px-4 py-1" mat-raised-button color="primary"
+            (click)="closeModal()">Cancel</button>
+    </div>
+</ng-template>
+
 <ng-template #manageSecurityQuestionModal>
     <div class="d-flex justify-content-center modal-header">
         <mat-label class="font-weight-bold">Manage Security Questions</mat-label>
@@ -295,13 +354,9 @@
         </div>
     </div>
     <div class="d-flex justify-content-between modal-footer">
-        <button [disabled]="securityQuestionForm.get('answer').invalid" mat-raised-button color="primary" type="button"
-            class="button-purple px-4 py-1" *ngIf="count != 2" (click)="onSaveChanges()">Save</button>
-
-        <button [disabled]="securityQuestionForm.get('answer').invalid" *ngIf="count == 2" class="px-4 py-1"
-            mat-raised-button color="primary" (click)="onSaveChanges()">Submit</button>
-
         <button type="button" class="button-purple px-4 py-1" mat-raised-button color="primary"
             (click)="closeModal()">Close</button>
+        <button [disabled]="securityQuestionForm.get('answer').invalid" mat-raised-button color="primary" type="button"
+            class="button-purple px-4 py-1" (click)="onSaveChanges()">Save</button>
     </div>
 </ng-template>

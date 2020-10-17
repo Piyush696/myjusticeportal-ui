@@ -12,6 +12,10 @@ import { FindBondsmanComponent } from './find-bondsman/find-bondsman.component';
 import { ViewBondsmanComponent } from './view-bondsman/view-bondsman.component';
 import { MessagingLawyerComponent } from './messaging-lawyer/messaging-lawyer.component';
 import { LegalResearchComponent } from './legal-research/legal-research.component';
+import { LegalResearchFormComponent } from './legal-research/legal-research-form/legal-research-form.component';
+import { LegalResearchListComponent } from './legal-research/legal-research-list/legal-research-list.component';
+import { LegalResearchFormViewComponent } from './legal-research/legal-research-form-view/legal-research-form-view.component';
+import { EditLegalResearchFormComponent } from './legal-research/edit-legal-research-form/edit-legal-research-form.component';
 
 const routes: Routes = [
     { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
@@ -27,6 +31,11 @@ const routes: Routes = [
     { path: 'find-bondsman', component: FindBondsmanComponent },
     { path: 'message-my-lawyer', component: MessagingLawyerComponent },
     { path: 'find-bondsman/:organizationId', component: ViewBondsmanComponent },
+    { path: 'legal-form', component: LegalResearchListComponent },
+    { path: 'legal-form/create', component: LegalResearchFormComponent },
+    { path: 'legal-form/:legalResearchId', component: LegalResearchFormViewComponent },
+    { path: 'legal-form/:legalResearchId/edit', component: EditLegalResearchFormComponent },
+
     { path: '**', component: UserDashboardComponent }
 ];
 

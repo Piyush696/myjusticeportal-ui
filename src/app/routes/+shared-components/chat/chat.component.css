@@ -1,9 +1,14 @@
 .chat-messages-show-container {
   background: #c3c3c3;
-  height: 419px;
+  height: 420px;
   display: flex;
+  overflow-y: auto;
   flex-direction: column;
-  overflow: auto;
+}
+
+#scroll {
+  height: 420px;
+  overflow-y: auto;
 }
 
 .chat-messages-show-list {
@@ -79,7 +84,13 @@
   display: flex;
   justify-content: flex-end;
 }
+
 .sender-align {
   display: flex;
   justify-content: flex-start;
+}
+
+.chat-scroll{
+  overflow: scroll;
+  height: xyz;
 }

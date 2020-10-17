@@ -13,7 +13,7 @@
         </div>
     </div>
 
-    <div>
+    <div class="mt-4">
         <mat-card class="outer-card mat-elevation-z10 mt-3">
             <mat-label class="font-weight-bold">
                 Requested cases({{requestedCases?.length}}):
@@ -58,37 +58,58 @@
         </mat-card>
     </div>
 
-    <div>
-        <div class="pt-4 pb-0">
-            <mat-form-field appearance="fill">
-                <mat-label>Filter: Facility</mat-label>
-                <mat-select (selectionChange)="onFacilityFiltered($event)">
-                    <mat-option>
-                        Select speciality
-                    </mat-option>
-                    <mat-option *ngFor="let facility of facilities" [value]="facility.facilityId">
-                        {{facility.facilityName}}
-                    </mat-option>
-                </mat-select>
-            </mat-form-field>
-        </div>
-        <mat-card class="outer-card mat-elevation-z10 mt-3">
-            <mat-label class="font-weight-bold">
-                Approved Clients({{clients?.length}}):
-            </mat-label>
-            <mat-card class="inner-card mt-2" *ngIf="!clients?.length">
-                <span>inmate must try to hire you for you to see cases.</span>
-            </mat-card>
-            <mat-card class="d-flex flex-row justify-content-between align-items-center inner-card mt-2"
-                *ngFor="let client of clients">
-                <div class="d-flex flex-column">
-                    <span>{{client?.inmate?.firstName}} {{client?.inmate?.middleName}}
-                        {{client?.inmate?.lastName}}</span>
-                    <span *ngFor="let facility of client?.inmate?.facilities">
-                        <label>Facility: {{facility.facilityName}}</label>
-                    </span>
+    <div class="mt-4">
+        <mat-card class="w-100">
+            <div class="d-flex justify-content-between">
+                <div>
+                    <mat-form-field class="w-100">
+                        <mat-label>Search</mat-label>
+                        <input matInput (keyup)="search($event.target.value)">
+                    </mat-form-field>
                 </div>
-            </mat-card>
+                <div>
+                    <mat-form-field appearance="fill">
+                        <mat-label>Facility</mat-label>
+                        <mat-select (selectionChange)="onFacilityFiltered($event)">
+                            <mat-option>
+                                Select facility
+                            </mat-option>
+                            <mat-option *ngFor="let facility of facilities" [value]="facility.facilityId">
+                                {{facility.facilityName}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+            </div>
+            <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8 w-100">
+                <ng-container matColumnDef="name">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>User</th>
+                    <td mat-cell *matCellDef="let user">
+                        <span>
+                            {{user?.firstName | titlecase}}
+                            <span *ngIf="user?.middleName">
+                                &nbsp;{{user?.middleName | titlecase}}
+                            </span>
+                            &nbsp;{{user?.lastName | titlecase}}
+                        </span>
+                        <span *ngIf="!user?.firstName && !user?.middleName && !user?.lastName">
+                            N/A
+                        </span>
+                    </td>
+                </ng-container>
+
+                <ng-container matColumnDef="facilities">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Facility</th>
+                    <td mat-cell *matCellDef="let user">
+                        <ng-container *ngFor="let facility of user?.facilities;let isLast=last">
+                            <span>{{facility?.facilityName}}{{isLast ? '' : ', '}}</span>
+                        </ng-container>
+                    </td>
+                </ng-container>
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table>
+            <mat-paginator [pageSizeOptions]="getPageSizeOptions()" showFirstLastButtons></mat-paginator>
         </mat-card>
     </div>
 </div>

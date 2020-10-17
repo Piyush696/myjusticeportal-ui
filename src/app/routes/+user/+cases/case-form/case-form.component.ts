@@ -18,23 +18,27 @@ export class CaseFormComponent implements OnInit, OnChanges {
   headerText: string = 'Create a Case';
   userData: any;
   fullName: string;
-
   @Input() caseDetails;
   public states = [];
+  state: any = [];
+  dateOfArrest=new Date()
+  nextCourtDate=new Date(+new Date() + 24*60*60*1000);
 
   constructor(private toasterService: ToasterService, private router: Router, private _statesService: StatesService,
     private fb: FormBuilder, private caseService: CaseService, private store: Store<any>) {
   }
 
   ngOnChanges() {
+    // console.log(this)
     if (this.caseDetails) {
       this.createFormControl();
       this.getUserFromStore();
-      this.buttonText = 'Update Case';
+      this.buttonText = 'Save Case';
       this.headerText = 'Edit a Case';
       this.caseForm.get('firstName').setValue(this.fullName);
       this.caseForm.get('legalMatter').setValue(this.caseDetails.legalMatter);
       this.caseForm.get('countyOfArrest').setValue(this.caseDetails.countyOfArrest);
+      this.caseForm.get('stateOfArrest').setValue(this.userData.state);
       this.caseForm.get('dateOfArrest').setValue(this.caseDetails.dateOfArrest);
       this.caseForm.get('briefDescriptionOfChargeOrLegalMatter').setValue(this.caseDetails.briefDescriptionOfChargeOrLegalMatter);
       this.caseForm.get('attorneyName').setValue(this.caseDetails.attorneyName);
@@ -46,7 +50,8 @@ export class CaseFormComponent implements OnInit, OnChanges {
   ngOnInit(): void {
     this.createFormControl();
     this.getUserFromStore();
-    this.stateData()
+    this.stateData();
+    this.userState();
   }
 
   stateData() {
@@ -56,11 +61,19 @@ export class CaseFormComponent implements OnInit, OnChanges {
       });
   }
 
+  userState() {
+    this.caseService.getState().subscribe((state: any) => {
+      this.caseForm.get('stateOfArrest').setValue(state.data.facilities[0].Address.state)
+      console.log(state.data.facilities[0].Address.state)
+    });
+  }
+
   createFormControl() {
     this.caseForm = this.fb.group({
       firstName: ['', [Validators.required]],
       legalMatter: ['', [Validators.required]],
       countyOfArrest: [''],
+      stateOfArrest: [''],
       dateOfArrest: [''],
       briefDescriptionOfChargeOrLegalMatter: ['', [Validators.required]],
       attorneyName: [''],

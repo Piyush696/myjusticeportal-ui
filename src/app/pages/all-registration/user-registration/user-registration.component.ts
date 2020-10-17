@@ -29,6 +29,7 @@ export class UserRegistrationComponent implements OnInit {
   }
 
   onNextClick(userDetails) {
+    console.log(userDetails)
     this.step = 2;
     this.user = userDetails;
   }

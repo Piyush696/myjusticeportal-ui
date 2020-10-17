@@ -121,6 +121,46 @@
                     </mat-form-field>
                 </div>
             </div>
+            <h5 *ngIf="roleId === 1" class="text-center">Please give us your email and/or phone number as you can
+                connect to us when you
+                are no longer
+                incarcerated.
+            </h5>
+            <div class="row">
+                <div *ngIf="roleId === 1" class="col-6 pr-2">
+                    <mat-form-field appearance="fill" class="w-100">
+                        <mat-label>Email</mat-label>
+                        <input matInput placeholder="abc@xyz.com" [formControl]="registrationForm.controls['userEmail']"
+                            autocomplete="new-Email" autocapitalize="off" required/>
+                            <mat-error>
+                                <div *ngIf="registrationForm.controls['userEmail'].invalid && 
+                                    registrationForm.controls['userEmail'].touched">
+                                    <small class="font13" *ngIf="registrationForm.get('userEmail').errors?.required">
+                                        Email is Required.
+                                    </small>
+                                    <small class="font13" *ngIf="registrationForm.get('userEmail').errors?.email">
+                                        Invalid Email.
+                                    </small>
+                                </div>
+                            </mat-error>
+                    </mat-form-field>
+                </div>
+                <div *ngIf="roleId === 1" class="col-6 pl-2">
+                    <mat-form-field appearance="fill" class="w-100">
+                        <mat-label>Mobile</mat-label>
+                        <input type="text" matInput placeholder="(123) 456-7890" [textMask]="{mask: mobileMask}"
+                            [formControl]="registrationForm.controls['mobile']" required/>
+                            <mat-error>
+                                <div *ngIf="registrationForm.controls['mobile'].invalid && 
+                                    registrationForm.controls['mobile'].touched">
+                                    <small class="font13" *ngIf="registrationForm.get('mobile').errors?.required">
+                                        Mobile number is Required.
+                                    </small>
+                                </div>
+                            </mat-error>
+                    </mat-form-field>
+                </div>
+            </div>
 
             <div class="row">
                 <mat-form-field appearance="fill" class="w-100 p-2">
@@ -180,8 +220,10 @@
                 <button [routerLink]="'/login'" mat-button color="primary">
                     Back to Login
                 </button>
-                <button class="button-purple px-4 py-1 float-right" mat-raised-button
-                    [disabled]="registrationForm.invalid || isNextDisabled" (click)="onNextClick()">
+                <button class="button-purple px-4 py-1 float-right" mat-raised-button [disabled]="registrationForm.get('firstName').invalid || registrationForm.get('lastName').invalid 
+                    || registrationForm.get('middleName').invalid || registrationForm.get('userName').invalid 
+                    || registrationForm.get('password').invalid  || registrationForm.get('confirmPassword').invalid
+                     || registrationForm.get('termCondition').invalid || isNextDisabled" (click)="onNextClick()">
                     NEXT
                 </button>
             </div>

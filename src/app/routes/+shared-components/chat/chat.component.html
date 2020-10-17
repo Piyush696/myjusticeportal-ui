@@ -1,13 +1,17 @@
 <div class="chat-messages">
-    <div class="chat-messages-show-container">
+    <div id="scroller" class="chat-messages-show-container chat-scroll" #scroll [scrollTop]="scroll.scrollHeight">
         <div *ngFor="let messages of allMessages"
             [ngClass]="messages.senderId !== userInfo?.userId ? 'sender-align': 'receiver-align'">
             <ul [ngClass]="messages.senderId !== userInfo?.userId ? 'sender-messages':'receiver-messages '"
                 class="chat-messages-show-list d-flex flex-column" id="message-list">
                 <li>
-                    {{messages.message}}</li>
+                    {{messages.message}}
+                </li>
+                <div><span>{{messages.createdAt | date:'shortTime'}}</span></div>
+
             </ul>
         </div>
+
         <mat-spinner *ngIf="isLoading" class="spinner-style" [diameter]="50"></mat-spinner>
     </div>
     <div class="chat-messages-create-container">
