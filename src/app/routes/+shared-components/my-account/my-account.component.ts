@@ -260,7 +260,7 @@ export class MyAccountComponent implements OnInit {
         this.getAddUserSecurityQuestion();
         this.toasterService.showSuccessToater('Security Question Updated Successfully.')
         this.securityQuestionForm.reset()
-        // this.closeModal();
+        this.closeModal();
       } else {
         this.toasterService.showWarningToater('Security Question not Updated Successfully.')
       }

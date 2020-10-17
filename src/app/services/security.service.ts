@@ -55,6 +55,7 @@ export class SecurityService {
   onResetPassword(resetData) {
     return this.httpClient.patch<Object>(`${this.apiPath}/securityQuestion`, resetData);
   }
+
   getUpdateUserSecurityQuestion() {
     return this.httpClient.get<object>(`${this.apiPath}/securityQuestion/user/securityQuestions`, this.getHeaders())
   }

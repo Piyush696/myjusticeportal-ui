@@ -354,13 +354,9 @@
         </div>
     </div>
     <div class="d-flex justify-content-between modal-footer">
-        <button [disabled]="securityQuestionForm.get('answer').invalid" mat-raised-button color="primary" type="button"
-            class="button-purple px-4 py-1" (click)="onSaveChanges()">Save</button>
-
-        <!-- <button [disabled]="securityQuestionForm.get('answer').invalid" *ngIf="count == 2" class="px-4 py-1"
-            mat-raised-button color="primary" (click)="onSaveChanges()">Submit</button> -->
-
         <button type="button" class="button-purple px-4 py-1" mat-raised-button color="primary"
             (click)="closeModal()">Close</button>
+        <button [disabled]="securityQuestionForm.get('answer').invalid" mat-raised-button color="primary" type="button"
+            class="button-purple px-4 py-1" (click)="onSaveChanges()">Save</button>
     </div>
 </ng-template>
