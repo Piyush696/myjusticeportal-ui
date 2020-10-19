@@ -18,7 +18,8 @@ export class OrganisationComponent implements OnInit, OnChanges {
   @Output() previousClick = new EventEmitter();
   public states = [];
   currentState: any;
-
+  @Input() roleId;
+  
   constructor(private fb: FormBuilder, private _statesService: StatesService) { }
 
   ngOnInit(): void {
@@ -26,6 +27,10 @@ export class OrganisationComponent implements OnInit, OnChanges {
     if (!this.orgAddress) {
       this.createFormControl();
     }
+    this.countryDisable();
+  }
+  countryDisable(){
+    this.addressForm.get('country').disable()
   }
   stateData() {
     this._statesService.getStates()
