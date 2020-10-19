@@ -93,7 +93,6 @@ export class MyAccountComponent implements OnInit {
   }
 
   openQuestionModal(templateRef, value) {
-    console.log(value)
     this.previousSecurityId = value.securityQuestionId
     let dialogRef = this.dialog.open(templateRef, {
       width: '500px',
@@ -193,9 +192,7 @@ export class MyAccountComponent implements OnInit {
 
   getAddUserSecurityQuestion() {
     this.securityService.getUpdateUserSecurityQuestion().subscribe((questions: any) => {
-      console.log(questions)
       this.addedSecurityQuestionList = questions.data
-      console.log(this.addedSecurityQuestionList)
     })
   }
 

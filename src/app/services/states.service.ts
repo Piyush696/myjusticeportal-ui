@@ -6,12 +6,11 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class StatesService {
-  private _url:string = "assets/data/states.json"
-  constructor( private httpClint:HttpClient) { }
+  private _url: string = "assets/data/states.json"
+  constructor(private httpClint: HttpClient) { }
 
-  getStates(): Observable<any[]>{
-    console.log(this._url)
+  getStates(): Observable<any[]> {
     return this.httpClint.get<any[]>(this._url);
-}
+  }
 
 }

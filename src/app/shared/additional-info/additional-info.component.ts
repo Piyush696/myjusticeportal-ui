@@ -4,6 +4,9 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { FacilityService } from 'app/services/registration/facility.service';
 import { UserService } from 'app/services/registration/user.service';
+import { SpecialtyService } from 'app/services/specialty.service';
+import { MatDialog } from '@angular/material/dialog';
+import { ToasterService } from 'app/services/toaster.service';
 
 @Component({
   selector: 'app-additional-info',
@@ -26,19 +29,22 @@ export class AdditionalInfoComponent implements OnInit, OnChanges {
   facilityList: any;
   lawyerInfoArray: any[] = [];
   additionalInfoLawyer: FormGroup;
+  specialtyForm: FormGroup;
   isDisable: boolean = true
   isFacility: boolean;
   currentState = []
   buttonText: string = "Add State"
-  constructor(private fb: FormBuilder, private activatedRoute: ActivatedRoute, private _statesService: StatesService, private facilityService: FacilityService, private userService: UserService) {
+  specialtyList: any;
+  constructor(private toasterService: ToasterService, public dialog: MatDialog, private specialtyService: SpecialtyService, private fb: FormBuilder, private activatedRoute: ActivatedRoute, private _statesService: StatesService, private facilityService: FacilityService, private userService: UserService) {
     this.facilityCode = this.activatedRoute.snapshot.params.facilityCode;
   }
 
   ngOnInit(): void {
-
+    this.specialtyForm = this.fb.group({
+      specialty: ['', [Validators.required]]
+    })
     if (this.roleId == 1) {
       this.userService.userFacility().subscribe((res: any) => {
-        console.log(res)
         this.isFacility = res.data ? true : false
         if (res.data) {
           this.additionalInfo.get('facility').setValue(res.data)
@@ -55,12 +61,38 @@ export class AdditionalInfoComponent implements OnInit, OnChanges {
       this.createFormControlLawyer()
     }
     this.getAllFacilities()
+    this.getAllSpecialty()
   }
+
+  openModal(templateRef) {
+    let dialogRef = this.dialog.open(templateRef, {
+      width: '500px',
+    });
+  }
+
+  createSpecilaty() {
+    const specialtyType = {
+      "specialtyType": this.specialtyForm.get('specialty').value
+    }
+    this.specialtyService.createSpecialty(specialtyType).subscribe((specialty: any) => {
+      if (specialty) {
+        this.getAllSpecialty();
+        this.toasterService.showSuccessToater('Specialty added.')
+      }
+    })
+  }
+
   stateData() {
     this._statesService.getStates()
       .subscribe(data => {
         this.states = data
       });
+  }
+
+  getAllSpecialty() {
+    this.specialtyService.getAllSpecialty().subscribe((res: any) => {
+      this.specialtyList = res.data
+    })
   }
 
   ngOnChanges(): void {

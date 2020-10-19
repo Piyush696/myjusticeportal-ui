@@ -52,7 +52,6 @@ export class OrganisationComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(): void {
-    console.log(this.orgAddress)
     if (this.orgAddress) {
       this.createFormControl();
       this.organisationForm.get('name').setValue(this.orgAddress.name)

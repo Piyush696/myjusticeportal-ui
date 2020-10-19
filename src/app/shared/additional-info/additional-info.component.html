@@ -10,7 +10,8 @@
                     <h2 class=" text-center font-weight-bold">Additional Information</h2>
                     <p class="text-center" *ngIf="roleId == 3">Add Information about state and bar info</p>
                     <p class="text-center" *ngIf="isFacility">Please enter the housing unit, if you remember it.</p>
-                    <p class="text-center" *ngIf="!isFacility">It looks like you aren't currently in a facility. Please
+                    <p class="text-center" *ngIf="(roleId == 1 && !isFacility)">It looks like you aren't currently in a
+                        facility. Please
                         select the last facility you were in, or select which is
                         closest to you.</p>
                 </div>
@@ -39,7 +40,7 @@
                     </div>
 
                     <div class="d-flex" *ngIf="roleId == 3">
-                        <div class="col-4 p-0">
+                        <div class="col-3 p-0">
                             <mat-form-field appearance="fill" class="w-100 p-3">
                                 <mat-label>State</mat-label>
                                 <mat-select [formControl]="additionalInfoLawyer.controls['state']" required>
@@ -52,24 +53,29 @@
                         </div>
                         <div class="col-4 p-0">
                             <mat-form-field appearance="fill" class="w-100 p-3">
-                                <mat-label>Bar info Exam Id (If Applicable)</mat-label>
+                                <mat-label>Bar ID (If Applicable)</mat-label>
                                 <input type="text" matInput
                                     [formControl]="additionalInfoLawyer.controls['bar_info_Exam_Id']">
                                 <mat-error
                                     *ngIf="additionalInfoLawyer.controls['bar_info_Exam_Id'].invalid && additionalInfoLawyer.controls['bar_info_Exam_Id'].touched">
                                     <small class="font13"
                                         *ngIf="additionalInfoLawyer.get('bar_info_Exam_Id').errors?.required">
-                                        Bar info Exam Id is required.
+                                        Bar ID is required.
                                     </small>
                                 </mat-error>
                             </mat-form-field>
                         </div>
 
-                        <div class="col-4 p-0">
+                        <div class="col-3 p-0">
                             <mat-form-field appearance="fill" class="w-100 p-3">
                                 <mat-label>Specialty</mat-label>
-                                <input type="text" matInput [formControl]="additionalInfoLawyer.controls['speciality']"
-                                    required>
+                                <mat-select [formControl]="additionalInfoLawyer.controls['speciality']" required>
+                                    <mat-option>Select specialty</mat-option>
+                                    <mat-option *ngFor="let specialty of specialtyList"
+                                        value="{{specialty.specialtyType}}">
+                                        {{specialty.specialtyType}}
+                                    </mat-option>
+                                </mat-select>
                                 <mat-error
                                     *ngIf="additionalInfoLawyer.controls['speciality'].invalid && additionalInfoLawyer.controls['speciality'].touched">
                                     <small class="font13"
@@ -78,6 +84,9 @@
                                     </small>
                                 </mat-error>
                             </mat-form-field>
+                        </div>
+                        <div class="col-2">
+                            <button class="btn btn-primary" (click)="openModal(mytemplate)">Add New</button>
                         </div>
                     </div>
                     <div class="row" style="margin-right: -100px;
@@ -94,7 +103,7 @@
                                 <tr *ngFor="let info of lawyerInfoArray">
                                     <td class="p-0 w-25">{{info.state}}</td>
                                     <td class="p-0 w-25">{{info.bar_info_Exam_Id}}</td>
-                                    <td class="p-0 w-25">@{{info.speciality}}</td>
+                                    <td class="p-0 w-25">{{info.speciality}}</td>
                                     <td class="p-0 w-25" (click)="deleteInfo(info.bar_info_Exam_Id)"
                                         style="cursor: pointer;">X</td>
                                 </tr>
@@ -106,7 +115,7 @@
                 <div class="row pl-3" *ngIf="roleId == 3">
                     <div class="pl-3">
                         <button class="px-4 py-1"
-                            [disabled]="additionalInfoLawyer.controls['state'].inavlid || additionalInfoLawyer.controls['speciality'].inavlid"
+                            [disabled]="additionalInfoLawyer.controls['state'].invalid || additionalInfoLawyer.controls['speciality'].invalid"
                             mat-raised-button color="primary" (click)="addMoreStates()">{{buttonText}}</button>
                     </div>
                 </div>
@@ -125,3 +134,35 @@
         </div>
     </div>
 </div>
+
+<ng-template #mytemplate>
+    <div class="col-12">
+        <div class="">
+            <mat-form-field appearance="fill" class="w-100 p-4">
+                <mat-label>Specialty</mat-label>
+                <input matInput placeholder="specialty" [formControl]="specialtyForm.controls['specialty']"
+                    autocapitalize="off" required />
+                <mat-error>
+                    <div *ngIf="specialtyForm.controls['specialty'].invalid && 
+                                                specialtyForm.controls['specialty'].touched">
+                        <small class="font13" *ngIf="specialtyForm.get('specialty').errors?.required">
+                            specialty is Required.
+                        </small>
+                    </div>
+                </mat-error>
+            </mat-form-field>
+        </div>
+
+        <div>
+            <div class="d-flex justify-content-between p-2">
+                <button mat-dialog-close class="px-4 py-1" mat-button color="primary">
+                    Cancel
+                </button>
+                <button class="px-4 py-1" mat-raised-button color="primary" mat-dialog-close
+                    (click)="createSpecilaty()">
+                    Save
+                </button>
+            </div>
+        </div>
+    </div>
+</ng-template>
