@@ -25,6 +25,7 @@ export class SelectFacilityComponent implements OnInit {
   getAllFacility() {
     console.log(this.currentState)
     this.facilityService.getAllFacility().subscribe((facilities: any) => {
+      console.log(facilities)
       if (this.currentState) {
         for (let i = 0; i <= this.currentState.length - 1; i++) {
           for (let j = i; j <= facilities.data.length - 1; j++) {

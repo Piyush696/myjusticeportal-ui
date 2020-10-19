@@ -53,6 +53,7 @@ export class LawyerRegistrationComponent implements OnInit {
   }
 
   onUserPageClick(user) {
+    this.user = this.registrationData.user;
     if (user) {
       this.step = 1
     } else {
@@ -71,7 +72,6 @@ export class LawyerRegistrationComponent implements OnInit {
   }
 
   stateEvent(state) {
-    console.log(state)
     this.currentState = [...state]
   }
 

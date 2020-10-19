@@ -42,8 +42,8 @@ export class EmailRegistrationComponent implements OnInit, OnChanges {
       password: ['', [Validators.required, Validators.minLength(8), this.validatePassword.bind(this)]],
       confirmPassword: ['', [Validators.required, Validators.minLength(8)]],
       termCondition: ['', [Validators.required]],
-      mobile: ['',[Validators.required]],
-      userEmail: ['', [Validators.required,Validators.email]],
+      mobile: ['', [Validators.required]],
+      userEmail: ['', [Validators.required, Validators.email]],
     }, { validator: this.checkIfMatchingPasswords('password', 'confirmPassword') });
   }
 
@@ -66,6 +66,8 @@ export class EmailRegistrationComponent implements OnInit, OnChanges {
       this.registrationForm.get('lastName').setValue(this.user.lastName)
       this.registrationForm.get('middleName').setValue(this.user?.middleName)
       this.registrationForm.get('userName').setValue(this.user?.userName)
+      this.registrationForm.get('mobile').setValue(this.user?.mobile)
+      this.registrationForm.get('userEmail').setValue(this.user?.email)
       this.registrationForm.get('password').setValue(this.user?.password)
       this.registrationForm.get('confirmPassword').setValue(this.user?.password)
       this.isNextDisabled = false;
@@ -118,6 +120,7 @@ export class EmailRegistrationComponent implements OnInit, OnChanges {
       width: '836px',
     });
   }
+
   alertModel(templateRef) {
     let dialogRef = this.dialog.open(templateRef, {
       width: '311px',
