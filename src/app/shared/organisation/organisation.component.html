@@ -6,8 +6,16 @@
         </div>
         <h3 class="text-center font-weight-bold">Step 3/{{totalSteps}}</h3>
         <mat-card class="p-4">
-            <h2 class="text-center">Enter your Organization details:</h2>
-            <p class="text-center">Add information about organization and it's address</p>
+            <div *ngIf="roleId != 3">
+                <h2 class="text-center">Enter Your Company Information:</h2>
+                <p class="text-center">Please enter your corporate information. If you are a sole<br>
+                    proprietor, please list your name as your Company Name<br>
+                    and complete the rest of the form with your information.</p>
+            </div>
+            <div *ngIf="roleId == 3">
+                <h2 class="text-center">Enter your Organization details:</h2>
+                <p class="text-center">Add information about organization and it's address</p>
+            </div>
             <div class="row">
                 <div class="col-12">
                     <mat-form-field appearance="fill" class="w-100 px-2 mb-1">
@@ -129,7 +137,7 @@
             <div>
 
             </div>
-            <div class="row p-1">
+            <!-- <div class="row p-1">
                 <mat-form-field appearance="fill" class="w-100 px-3 mb-1">
                     <mat-label>Tagline</mat-label>
                     <input type="text" matInput [formControl]="organisationForm.controls['tagline']">
@@ -150,7 +158,7 @@
                         </small>
                     </mat-error>
                 </mat-form-field>
-            </div>
+            </div> -->
             <div class="d-flex justify-content-between mt-2 pr-2">
                 <button class="button-purple px-4 py-1" mat-raised-button (click)="onPreviousClick()">
                     Back
