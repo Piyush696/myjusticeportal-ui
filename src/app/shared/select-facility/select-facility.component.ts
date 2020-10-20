@@ -30,10 +30,12 @@ export class SelectFacilityComponent implements OnInit {
         for (let i = 0; i <= this.currentState.length - 1; i++) {
           for (let j = i; j <= facilities.data.length - 1; j++) {
             if (this.currentState[i] === facilities.data[j].Address.state) {
+              console.log(this.currentState[i] === facilities.data[j].Address.state)
               this.facilityList.push(facilities.data[j])
             }
           }
         }
+        console.log(this.facilityList)
       }
       else {
         this.facilityList = facilities.data
