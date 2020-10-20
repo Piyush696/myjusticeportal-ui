@@ -69,13 +69,15 @@ export class SecurityQuestionComponent implements OnInit {
   setAnswers() {
     this.questionId = this.securityQuestionForm.get('securityQuestionId').value;
     let formValue = this.securityQuestionForm.value;
-    this.securityQuestionAnswered.push(formValue)
+      this.securityQuestionAnswered.push(formValue)
     this.securityQuestionForm.reset();
   }
 
   onClickRegister() {
     this.onClickNext()
-    this.setAnswers();
+    if(this.count < 3){
+      this.setAnswers();
+    }
     this.isRegisterEvent.emit(this.securityQuestionAnswered);
   }
 
