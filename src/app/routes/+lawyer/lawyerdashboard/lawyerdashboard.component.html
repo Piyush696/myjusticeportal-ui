@@ -8,24 +8,68 @@
         <div class="row">
             <div class="col-12 pt-2">
                 <mat-card class="mat-elevation-z10">
-                    <h2>Account Status: <span>Panding Review</span></h2>
+                    <h2>Account Status: <span class="panding-review">Panding Review</span></h2>
                 </mat-card>
             </div>
         </div>
     </div>
+    <div *ngIf="count==1">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 py-5">
+                    <mat-card class="mat-elevation-z10">
+                        <h2>Select a Plan</h2>
+                        <div class="row px-3">
+                            <div class="col-6 pt-2">
+                                <mat-card class="mat-elevation-z10">
+                                    Full Package
+                                    <input class="circle" type="radio" name="package" value="">
+                                </mat-card>
+                            </div>
+                            <div class="col-6 pt-2">
+                                <mat-card class="mat-elevation-z10">
+                                    Limited Package
+                                    <input class="circle" type="radio" name="package" value="">
+                                </mat-card>
+                            </div>
+                            <!-- <mat-radio-group aria-label="Select an option">
+                                <mat-radio-button value="1">Full Package</mat-radio-button>
+                                <mat-radio-button value="2">Limited Package</mat-radio-button>
+                              </mat-radio-group> -->
+                        </div>
+                        <div class="d-flex justify-content-end mt-2 pr-2 pt-4">
+                            <button class="button-purple px-4 py-1" mat-raised-button (click)="yourFacilitys()">
+                                Next
+                            </button>
+                        </div>
+                    </mat-card>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div *ngIf="step==1">
     <div class="container">
         <div class="row">
             <div class="col-12 py-5">
                 <mat-card class="mat-elevation-z10">
-                    <h2>Select a Plan</h2>
+                    <h2>Your Facilitys</h2>
                     <div class="col-12 pt-2">
-                        <div class="row px-3">
-                            <button class="button-purple px-4 py-1" mat-raised-button (click)="closeModal()">
-                                Close
+                        <mat-card class="mat-elevation-z10">
+                            <div class="row">
+                                <mat-checkbox *ngFor="let facility of facilities" class="ml-2"
+                                    color="primary">
+                                        {{facility.facilityName}} 
+                                </mat-checkbox>
+                            </div>
+                        </mat-card>
+                        <div class="d-flex justify-content-between mt-2 pr-2">
+                            <button class="button-purple px-4 py-1" mat-raised-button (click)="backFacilitys()">
+                                Back
                             </button>
-                        </div>
-                        <div class="row px-3">
-                            <button class="button-purple px-4 py-1" mat-raised-button color="primary" (click)="openestimatadBillModal(estimatadBill)">
+                            <button class="button-purple px-4 py-1" mat-raised-button color="primary"
+                                (click)=" estimatadBill()">
                                 Next
                             </button>
                         </div>
@@ -35,69 +79,34 @@
         </div>
     </div>
 </div>
-<ng-template #fullPackage>
-    <div class="container">
-        <div class="row">
-            <div class="col-12 pt-2">
-                <h2>Your Facilities</h2>
-                <mat-card class="mat-elevation-z10">
-                    Game
-                </mat-card>
-            </div>
-        </div>
-        <div class="d-flex justify-content-between mt-2 pr-2">
-            <button class="button-purple px-4 py-1" mat-raised-button (click)="closeModal()">
-                Close
-            </button>
-            <button class="button-purple px-4 py-1" mat-raised-button color="primary" (click)="openestimatadBillModal(estimatadBill)">
-                Next
-            </button>
-        </div>
-    </div>
-</ng-template>
-<ng-template #limitedPackage>
-    <div class="container">
-        <div class="row">
-            <div class="col-12 pt-2">
-                <h2>Your Facilities</h2>
-                <mat-card class="mat-elevation-z10">
-                    Game
-                </mat-card>
-            </div>
-        </div>
-        <div class="d-flex justify-content-between mt-2 pr-2">
-            <button class="button-purple px-4 py-1" mat-raised-button (click)="closeModal()">
-                Close
-            </button>
-            <button class="button-purple px-4 py-1" mat-raised-button color="primary" (click)="openestimatadBillModal(estimatadBill)"> 
-                Next
-            </button>
-        </div>
-    </div>
-</ng-template>
 
 <!-- Estimatad Monthly Bill  -->
 
-<ng-template #estimatadBill>
+<div *ngIf="step==2">
     <div class="container">
         <div class="row">
-            <div class="col-12 pt-2">
-                <h2>Estimatad Monthly Bill : $100.00</h2>
+            <div class="col-12 py-5">
                 <mat-card class="mat-elevation-z10">
-                    Game
+                    <h2>Estimatad Monthly Bill : $100.00</h2>
+                    <div class="col-12 pt-2">
+                        <mat-card class="mat-elevation-z10">
+                            Game
+                        </mat-card>
+                        <div class="d-flex justify-content-between mt-2 pr-2">
+                            <button class="button-purple px-4 py-1" mat-raised-button (click)="backEstimatadBill()">
+                                Back
+                            </button>
+                            <button class="button-purple px-4 py-1" mat-raised-button color="primary"
+                                (click)="openPaymentCardModal(paymentCardDetails)">
+                                Payment
+                            </button>
+                        </div>
+                    </div>
                 </mat-card>
             </div>
         </div>
-        <div class="d-flex justify-content-between mt-2 pr-2">
-            <button class="button-purple px-4 py-1" mat-raised-button (click)="closeModal()">
-                Back
-            </button>
-            <button class="button-purple px-4 py-1" mat-raised-button color="primary" (click)="openPaymentCardModal(paymentCardDetails)">
-                Payment
-            </button>
-        </div>
     </div>
-</ng-template>
+</div>
 
 <!-- Payment Card  -->
 <ng-template #paymentCardDetails>
@@ -108,29 +117,41 @@
                 <div class="row px-3">
                     <mat-form-field appearance="fill" class="w-100 p-1">
                         <mat-label>Name On Card</mat-label>
-                        <input matInput >
+                        <input matInput>
                     </mat-form-field>
                 </div>
                 <div class="row px-3">
                     <mat-form-field appearance="fill" class="w-100 p-1">
                         <mat-label>Card Number</mat-label>
-                        <input matInput >
+                        <input matInput>
                     </mat-form-field>
                 </div>
                 <div class="row">
                     <div class="col-6">
                         <mat-form-field appearance="fill" class="w-100 p-1">
                             <mat-label>Valid On</mat-label>
-                            <input matInput >
+                            <input matInput>
                         </mat-form-field>
                     </div>
                     <div class="col-6">
                         <mat-form-field appearance="fill" class="w-100 p-1">
                             <mat-label>CVV Code</mat-label>
-                            <input matInput >
+                            <input matInput>
                         </mat-form-field>
                     </div>
                 </div>
+            </div>
+            <div class="row ml-2 my-2">
+                <mat-checkbox class="termCondition-margin ml-2"
+                    color="primary">
+                    <a>
+                        <p class="p-0 m-0 line-height">I accept the <span class="font-weight-bold p-0 m-0">Terms and
+                                Conditions</span>
+                            of using this website and
+                        </p>
+                        <p class="p-0 m-0 line-height">agree to abide by all applicable laws and standards.</p>
+                    </a>
+                </mat-checkbox>
             </div>
         </div>
         <div class="">

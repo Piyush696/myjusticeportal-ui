@@ -21,6 +21,8 @@ export class LawyerdashboardComponent implements OnInit {
   clients: any;
   facilities: any;
   allClients: any;
+  count:number=1;
+  step:number;
   displayedColumns: string[] = ["name", "facilities"];
   dataSource = new MatTableDataSource();
   @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
@@ -30,6 +32,7 @@ export class LawyerdashboardComponent implements OnInit {
     private lawyerService: LawyerService, private toasterService: ToasterService, private store: Store<any>) { }
 
   ngOnInit(): void {
+console.log(this.facilities)
     this.store.select(s => s.userInfo).subscribe(x => {
       if (x.status) {
         this.isAuthorized = true;
@@ -43,23 +46,28 @@ export class LawyerdashboardComponent implements OnInit {
     this.getALLFacilities();
   }
 
-  openFullModal(templateRef) {
-    let dialogRef = this.dialog.open(templateRef, {
-      width: '500px',
-    });
+  backFacilitys(){
+    this.count=1;
+    this.step=0;
+  }
+  yourFacilitys() {
+    this.step=1;
+    this.count=0;
+  }
+  backEstimatadBill() {
+    this.step=1;
+    this.count=0;
+  }
+  estimatadBill() {
+    this.step=2;
+    this.count=0;
   }
 
-  openLimitedModal(templateRef) {
-    let dialogRef = this.dialog.open(templateRef, {
-      width: '500px',
-    });
-  }
-
-  openestimatadBillModal(templateRef) {
-    let dialogRef = this.dialog.open(templateRef, {
-      width: '500px',
-    });
-  }
+  // openestimatadBillModal(templateRef) {
+  //   let dialogRef = this.dialog.open(templateRef, {
+  //     width: '500px',
+  //   });
+  // }
 
   openPaymentCardModal(templateRef) {
     let dialogRef = this.dialog.open(templateRef, {
