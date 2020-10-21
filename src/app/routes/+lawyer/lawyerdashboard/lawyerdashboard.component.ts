@@ -7,6 +7,7 @@ import { ToasterService } from 'app/services/toaster.service';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-lawyerdashboard',
@@ -25,7 +26,7 @@ export class LawyerdashboardComponent implements OnInit {
   @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: false }) sort: MatSort;
 
-  constructor(private hireLawyerService: HireLawyerService, private facilityService: FacilityService,
+  constructor(private hireLawyerService: HireLawyerService, private facilityService: FacilityService,public dialog: MatDialog,
     private lawyerService: LawyerService, private toasterService: ToasterService, private store: Store<any>) { }
 
   ngOnInit(): void {
@@ -40,6 +41,34 @@ export class LawyerdashboardComponent implements OnInit {
     this.onGetRequestedCases();
     this.getAllClients();
     this.getALLFacilities();
+  }
+
+  openFullModal(templateRef) {
+    let dialogRef = this.dialog.open(templateRef, {
+      width: '500px',
+    });
+  }
+
+  openLimitedModal(templateRef) {
+    let dialogRef = this.dialog.open(templateRef, {
+      width: '500px',
+    });
+  }
+
+  openestimatadBillModal(templateRef) {
+    let dialogRef = this.dialog.open(templateRef, {
+      width: '500px',
+    });
+  }
+
+  openPaymentCardModal(templateRef) {
+    let dialogRef = this.dialog.open(templateRef, {
+      width: '500px',
+    });
+  }
+
+  closeModal() {
+    this.dialog.closeAll();
   }
 
   getAllClients() {

@@ -78,9 +78,10 @@ export class OrganisationComponent implements OnInit, OnChanges {
   submit() {
     let data: any = {};
     data.name = this.organisationForm.get('name').value;
-    data.tagline = this.organisationForm.get('tagline').value;
-    data.description = this.organisationForm.get('description').value;
+    // data.tagline = this.organisationForm.get('tagline').value;
+    // data.description = this.organisationForm.get('description').value;
     data.address = this.addressForm.value;
+    data.address['country'] = 'United States';
     this.orgAddressEventEmitter.emit(data);
 
   }
