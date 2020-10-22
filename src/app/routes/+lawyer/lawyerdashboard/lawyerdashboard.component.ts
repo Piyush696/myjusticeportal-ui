@@ -62,6 +62,10 @@ console.log(this.facilities)
     this.step=2;
     this.count=0;
   }
+  cardPayment() {
+    this.step=3;
+    this.count=0;
+  }
 
   // openestimatadBillModal(templateRef) {
   //   let dialogRef = this.dialog.open(templateRef, {
