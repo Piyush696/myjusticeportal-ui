@@ -30,7 +30,13 @@ export class LawyerdashboardComponent implements OnInit {
   @ViewChild(MatSort, { static: false }) sort: MatSort;
   cardForm: FormGroup;
   selectPlanForm: FormGroup;
+<<<<<<< HEAD
   userData: any;
+=======
+  userDate: any;
+  public cardMask = [ /\d/, /\d/, /\d/, /\d/, '-',  /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/]
+  public cvvMask = [ /\d/, /\d/, /\d/]
+>>>>>>> develop
 
   constructor(private hireLawyerService: HireLawyerService, private facilityService: FacilityService, public dialog: MatDialog,
     private lawyerService: LawyerService, private toasterService: ToasterService, private store: Store<any>, private fb: FormBuilder,) { }
@@ -58,7 +64,7 @@ export class LawyerdashboardComponent implements OnInit {
       name: ['', [Validators.required]],
       cvv: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(3)]],
       valid: ['', [Validators.required]],
-      card: ['', [Validators.required, Validators.minLength(16), Validators.maxLength(16), this.cardPatternValidation.bind(this)], this.cardValidation.bind(this)],
+      card: ['', [Validators.required, this.cardPatternValidation.bind(this)], this.cardValidation.bind(this)],
     })
   }
 

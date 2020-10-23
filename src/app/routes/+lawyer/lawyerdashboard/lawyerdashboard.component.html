@@ -128,7 +128,7 @@
                             <div class="row px-3">
                                 <mat-form-field appearance="fill" class="w-100 p-1">
                                     <mat-label>Card Number</mat-label>
-                                    <input matInput [formControl]="cardForm.controls['card']">
+                                    <input matInput [formControl]="cardForm.controls['card']" placeholder="1234-5678-9101-1123" [textMask]="{mask: cardMask}" required>
                                     <mat-error>
                                         <div
                                             *ngIf="cardForm.controls['card'].invalid && cardForm.controls['card'].touched 
@@ -166,7 +166,7 @@
                                 <div class="col-6">
                                     <mat-form-field appearance="fill" class="w-100 p-1">
                                         <mat-label>CVV Code</mat-label>
-                                        <input type="number" matInput [formControl]="cardForm.controls['cvv']">
+                                        <input type="text" matInput [formControl]="cardForm.controls['cvv']" [textMask]="{mask: cvvMask}">
                                         <mat-error>
                                             <div
                                                 *ngIf="cardForm.controls['cvv'].invalid && cardForm.controls['cvv'].touched">
