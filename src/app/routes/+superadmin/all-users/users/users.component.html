@@ -1,3 +1,9 @@
+<div class="col-12 d-flex justify-content-between pl-0">
+    <div>
+        <h1 class="line-height font-weight-bold">All Users</h1>
+        <h4 class="line-height header-sub-text">You can see all the users of different roles.</h4>
+    </div>
+</div>
 <div>
     <mat-card class="w-100">
         <div class="row">
@@ -5,11 +11,10 @@
                 <mat-form-field class="w-100">
                     <mat-label>Search</mat-label>
                     <input matInput (keyup)="search($event.target.value)">
-                </mat-form-field>               
+                </mat-form-field>
             </div>
-            <div class="col-2 mt-3">                
-                <mat-checkbox class="check-style" color="primary"
-                    (change)="onViewRejectedUsers($event.checked)">
+            <div class="col-2 mt-3">
+                <mat-checkbox class="check-style" color="primary" (change)="onViewRejectedUsers($event.checked)">
                     View Pending
                 </mat-checkbox>
             </div>
@@ -44,7 +49,7 @@
             <ng-container matColumnDef="status">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header>Status</th>
                 <td mat-cell *matCellDef="let user">{{user.status ? 'Active' : 'Pending'}}</td>
-                
+
             </ng-container>
             <ng-container matColumnDef="roles">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header>Role</th>
