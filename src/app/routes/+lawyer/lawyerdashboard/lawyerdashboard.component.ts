@@ -30,14 +30,15 @@ export class LawyerdashboardComponent implements OnInit {
   @ViewChild(MatSort, { static: false }) sort: MatSort;
   cardForm: FormGroup;
   selectPlanForm: FormGroup;
-  userDate: any;
+  userData: any;
 
   constructor(private hireLawyerService: HireLawyerService, private facilityService: FacilityService, public dialog: MatDialog,
     private lawyerService: LawyerService, private toasterService: ToasterService, private store: Store<any>, private fb: FormBuilder,) { }
 
   ngOnInit(): void {
     this.store.select(s => s.userInfo).subscribe(x => {
-      this.userDate = x
+      console.log(x)
+      this.userData = x
       if (x.status) {
         this.isAuthorized = true;
       }
@@ -94,11 +95,15 @@ export class LawyerdashboardComponent implements OnInit {
       "exp_month": x.getMonth() + 1,
       "exp_year": x.getFullYear(),
       "cvc": this.cardForm.get('cvv').value,
-      "email": this.userDate.userName
+      "email": this.userData.userName
     }
     this.lawyerService.postPay(data).subscribe((addCard: any) => {
       if (addCard.data) {
-        this.lawyerService.subscribePlan(addCard.data.customer).subscribe((subscribePlan: any) => {
+        const data = {
+          "customer": addCard.data.customer,
+          "userId": this.userData.userId
+        }
+        this.lawyerService.subscribePlan(data).subscribe((subscribePlan: any) => {
           if (subscribePlan.data) {
             this.toasterService.showSuccessToater('Subscribe Successfully.')
           } else {

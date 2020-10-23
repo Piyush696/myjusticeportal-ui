@@ -32,10 +32,7 @@ export class LawyerService {
   }
 
   subscribePlan(customer) {
-    const body = {
-      customer: customer
-    }
-    return this.httpClient.post<object>(`${this.apiPath}/stripe/subscribe_plan`, body);
+    return this.httpClient.post<object>(`${this.apiPath}/stripe/subscribe_plan`, customer);
   }
 
   validateCard(data) {
