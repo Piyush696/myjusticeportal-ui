@@ -8,6 +8,7 @@ import { LawyerdashboardComponent } from './lawyerdashboard/lawyerdashboard.comp
 import { ViewCaseDetailsComponent } from './view-case-details/view-case-details.component';
 import { AcceptedCasesComponent } from './accepted-cases/accepted-cases.component';
 import { LawyerChatComponent } from './lawyer-chat/lawyer-chat.component';
+import { TextMaskModule } from 'angular2-text-mask';
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ import { LawyerChatComponent } from './lawyer-chat/lawyer-chat.component';
     LawyerChatComponent,
   ],
   imports: [
+    TextMaskModule,
     CommonModule,
     LawyerRoutingModule,
     SharedMaterialModule,
