@@ -1,10 +1,213 @@
-<div *ngIf="!isAuthorized">
+<div class="container" *ngIf="!isAuthorized">
     <h2 class="font-weight-bold p-3 unauthorized-text">Thank you for registering as an attorney for My Justice Portal.
         Your registration is being processed. Most registrations
         are processed withing 24 hours. Once we verify your active Bar membership, your account will be approved and you
         will
         receive an email notification to complete the registration process.</h2>
+    <div *ngIf="userDate.roles[0].roleId === 3">
+        <div class="d-flex justify-content-center align-items-center;">
+            <div class="col-6 pt-2">
+                <mat-card class="mat-elevation-z10">
+                    <h2>Account Status: <span class="panding-review">Panding Review</span></h2>
+                </mat-card>
+            </div>
+        </div>
+        <div *ngIf="count==1">
+            <div>
+                <div class="d-flex justify-content-center align-items-center;">
+                    <div class="col-6 py-5">
+                        <mat-card class="mat-elevation-z10">
+                            <div class="my-4">
+                                <h2 class="text-center">Select a Plan</h2>
+                                <div class="row px-3">
+                                    <div class="col-12 pt-2">
+                                        <mat-card class="mat-elevation-z10">
+                                            <input class="circle" type="radio" name="package" value="'6month'"
+                                                [formControl]="selectPlanForm.controls['plan']">
+                                            Full Package
+                                        </mat-card>
+                                    </div>
+                                    <div class="col-12 pt-2">
+                                        <mat-card class="mat-elevation-z10">
+                                            <input class="circle" type="radio" name="package" value="'1Year'"
+                                                [formControl]="selectPlanForm.controls['plan']">
+                                            Limited Package
+                                        </mat-card>
+                                    </div>
+                                </div>
+                                <div class="d-flex justify-content-end mt-2 pr-2 pt-4">
+                                    <button [disabled]="!selectPlanForm.valid" class="button-purple px-4 py-1"
+                                        mat-raised-button (click)="yourFacilitys()">
+                                        Next
+                                    </button>
+                                </div>
+                            </div>
+                        </mat-card>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div *ngIf="step==1">
+            <div>
+                <div class="d-flex justify-content-center align-items-center;">
+                    <div class="col-6 py-5">
+                        <mat-card class="mat-elevation-z10">
+                            <h2 class="text-center">Your Facilities</h2>
+                            <div class="col-12 pt-2">
+                                <ul *ngFor="let facility of facilities">
+                                    <div class="row">
+                                        <li>{{facility.facilityName}}</li>
+                                    </div>
+                                </ul>
+                                <div class="d-flex justify-content-between mt-2 pr-2">
+                                    <button class="button-purple px-4 py-1" mat-raised-button (click)="backFacilitys()">
+                                        Back
+                                    </button>
+                                    <button class="button-purple px-4 py-1" mat-raised-button color="primary"
+                                        (click)=" estimatadBill()">
+                                        Next
+                                    </button>
+                                </div>
+                            </div>
+                        </mat-card>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Estimatad Monthly Bill  -->
+
+        <div *ngIf="step==2">
+            <div>
+                <div class="d-flex justify-content-center align-items-center;">
+                    <div class="col-6 py-5">
+                        <mat-card class="mat-elevation-z10">
+                            <h2>Estimatad Monthly Bill : $100.00</h2>
+                            <div class="col-12 pt-2">
+                                <mat-card class="mat-elevation-z10">
+                                    Game
+                                </mat-card>
+                                <div class="d-flex justify-content-between mt-2 pr-2">
+                                    <button class="button-purple px-4 py-1" mat-raised-button
+                                        (click)="backEstimatadBill()">
+                                        Back
+                                    </button>
+                                    <button class="button-purple px-4 py-1" mat-raised-button color="primary"
+                                        (click)="cardPayment()">
+                                        Payment
+                                    </button>
+                                </div>
+                            </div>
+                        </mat-card>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Payment Card  -->
+        <div *ngIf="step==3">
+            <div>
+                <div class="d-flex justify-content-center align-items-center;">
+                    <div class="col-6 pt-2">
+                        <mat-card class="mat-elevation-z10">
+                            <h2>Credit Card Info</h2>
+                            <div class="row px-3">
+                                <mat-form-field appearance="fill" class="w-100 p-1">
+                                    <mat-label>Name on Card</mat-label>
+                                    <input matInput [formControl]="cardForm.controls['name']">
+                                    <mat-error>
+                                        <div *ngIf="cardForm.controls['name'].invalid && 
+                                                                        cardForm.controls['name'].touched">
+                                            <small class="font13" *ngIf="cardForm.get('name').errors?.required">
+                                                Name is Required.
+                                            </small>
+                                        </div>
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
+                            <div class="row px-3">
+                                <mat-form-field appearance="fill" class="w-100 p-1">
+                                    <mat-label>Card Number</mat-label>
+                                    <input matInput [formControl]="cardForm.controls['card']">
+                                    <mat-error>
+                                        <div
+                                            *ngIf="cardForm.controls['card'].invalid && cardForm.controls['card'].touched 
+                                               && !cardForm.controls['card'].hasError('invalidCardPattern') && !cardForm.controls['card'].hasError('invalidCard')">
+                                            <small class="font13">
+                                                Should be 16-digit card number.
+                                            </small>
+                                        </div>
+                                        <div
+                                            *ngIf="cardForm.controls['card'].invalid && cardForm.controls['card'].dirty && cardForm.controls['card'].hasError('invalidCardPattern') && !cardForm.controls['card'].hasError('invalidCard')">
+                                            <small class="font13">
+                                                Card number should be in digit .
+                                            </small>
+                                        </div>
+                                        <div
+                                            *ngIf="cardForm.controls['card'].invalid &&  cardForm.controls['card'].dirty &&
+                                           !cardForm.controls['card'].hasError('invalidCardPattern')&& cardForm.controls['card'].hasError('invalidCard') ">
+                                            <small class="font13">
+                                                Card number is not Valid.
+                                            </small>
+                                        </div>
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
+                            <div class="row">
+                                <div class="col-6">
+                                    <mat-form-field appearance="fill" class="w-100 pl-2">
+                                        <mat-label>Valid upto</mat-label>
+                                        <input matInput [matDatepicker]="picker1"
+                                            [formControl]="cardForm.controls['valid']" [min]="dateOfArrest">
+                                        <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                                        <mat-datepicker #picker1></mat-datepicker>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-6">
+                                    <mat-form-field appearance="fill" class="w-100 p-1">
+                                        <mat-label>CVV Code</mat-label>
+                                        <input type="number" matInput [formControl]="cardForm.controls['cvv']">
+                                        <mat-error>
+                                            <div
+                                                *ngIf="cardForm.controls['cvv'].invalid && cardForm.controls['cvv'].touched">
+                                                <small class="font13" *ngIf="cardForm.get('cvv').errors?.required">
+                                                    CVV is Required.
+                                                </small>
+                                            </div>
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <div class="row ml-2 my-2">
+                                <mat-checkbox class="termCondition-margin ml-2" color="primary">
+                                    <a>
+                                        <p class="p-0 m-0 line-height">I accept the <span
+                                                class="font-weight-bold p-0 m-0">Terms
+                                                and
+                                                Conditions</span>
+                                            of using this website and
+                                        </p>
+                                        <p class="p-0 m-0 line-height">agree to abide by all applicable laws and
+                                            standards.
+                                        </p>
+                                    </a>
+                                </mat-checkbox>
+                            </div>
+                            <div>
+                                <button [disabled]="!cardForm.valid" class="button-purple px-4 py-1 w-100"
+                                    mat-raised-button color="primary" (click)="onPay()">
+                                    Pay $100.00
+                                </button>
+                            </div>
+                        </mat-card>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
+
+
 <div *ngIf="isAuthorized">
     <div class="d-flex justify-content-between">
         <div>
