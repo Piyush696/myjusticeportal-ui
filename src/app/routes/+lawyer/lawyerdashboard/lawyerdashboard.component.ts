@@ -30,13 +30,9 @@ export class LawyerdashboardComponent implements OnInit {
   @ViewChild(MatSort, { static: false }) sort: MatSort;
   cardForm: FormGroup;
   selectPlanForm: FormGroup;
-<<<<<<< HEAD
   userData: any;
-=======
-  userDate: any;
-  public cardMask = [ /\d/, /\d/, /\d/, /\d/, '-',  /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/]
-  public cvvMask = [ /\d/, /\d/, /\d/]
->>>>>>> develop
+  public cardMask = [/\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/]
+  public cvvMask = [/\d/, /\d/, /\d/]
 
   constructor(private hireLawyerService: HireLawyerService, private facilityService: FacilityService, public dialog: MatDialog,
     private lawyerService: LawyerService, private toasterService: ToasterService, private store: Store<any>, private fb: FormBuilder,) { }
