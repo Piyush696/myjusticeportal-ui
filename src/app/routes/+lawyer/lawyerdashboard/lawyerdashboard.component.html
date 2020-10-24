@@ -18,7 +18,7 @@
                     <div class="col-6 py-5">
                         <mat-card class="mat-elevation-z10">
                             <div class="my-4">
-                                <h2 class="text-center">Select a Plan</h2>
+                                <h2 class="text-center">Explore Plans</h2>
                                 <div class="row px-3">
                                     <div class="col-12 pt-2">
                                         <mat-card class="mat-elevation-z10">
@@ -128,7 +128,8 @@
                             <div class="row px-3">
                                 <mat-form-field appearance="fill" class="w-100 p-1">
                                     <mat-label>Card Number</mat-label>
-                                    <input matInput [formControl]="cardForm.controls['card']" placeholder="1234-5678-9101-1123" [textMask]="{mask: cardMask}" required>
+                                    <input matInput [formControl]="cardForm.controls['card']"
+                                        placeholder="1234-5678-9101-1123" [textMask]="{mask: cardMask}" required>
                                     <mat-error>
                                         <div
                                             *ngIf="cardForm.controls['card'].invalid && cardForm.controls['card'].touched 
@@ -166,7 +167,8 @@
                                 <div class="col-6">
                                     <mat-form-field appearance="fill" class="w-100 p-1">
                                         <mat-label>CVV Code</mat-label>
-                                        <input type="text" matInput [formControl]="cardForm.controls['cvv']" [textMask]="{mask: cvvMask}">
+                                        <input type="text" matInput [formControl]="cardForm.controls['cvv']"
+                                            [textMask]="{mask: cvvMask}">
                                         <mat-error>
                                             <div
                                                 *ngIf="cardForm.controls['cvv'].invalid && cardForm.controls['cvv'].touched">
