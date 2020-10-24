@@ -7,6 +7,38 @@
   background-color: #fffbfb !important;
 }
 
-.table th, .table td {
-  border: none;
+
+table,
+th,
+td {
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+
+.table-color {
+  background: #ededed;
+  border: 1px solid #afaaaa;
+}
+
+.footer-line {
+  text-decoration: underline;
+  text-decoration-style: dashed;
+}
+
+.btn-group {
+  background: transparent;
+  border: 1px solid #fff;
+}
+
+.icon-font {
+  font-size: 16px;
+}
+
+.btn-size {
+  height: 33px;
+  width: 33px;
+}
+
+.anchor-style {
+  color: #00FFFF;
 }

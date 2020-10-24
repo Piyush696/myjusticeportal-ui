@@ -33,6 +33,10 @@
                 <th mat-header-cell *matHeaderCellDef mat-sort-header>Facility Name</th>
                 <td mat-cell *matCellDef="let facility">{{facility?.facilityName}}</td>
             </ng-container>
+            <ng-container matColumnDef="facilityUserCount">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>No.of Bilabe User</th>
+                <td mat-cell *matCellDef="let facility">{{facility?.facilityUserCount}}</td>
+            </ng-container>
             <ng-container matColumnDef="ipAddress">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header>IP Address</th>
                 <td mat-cell *matCellDef="let facility">{{facility?.ipAddress}}</td>
@@ -226,17 +230,20 @@
                 <mat-form-field appearance="fill" class="w-100 px-2">
                     <mat-label>DIY Law Library Link</mat-label>
                     <input type="text" matInput [formControl]="facilityForm.controls['libraryLink']">
-                    <!-- <mat-error>
+                </mat-form-field>
+            </div>
+            <div class="col-12 p-0">
+                <mat-form-field appearance="fill" class="w-100 px-2">
+                    <mat-label>Number of Bilable User</mat-label>
+                    <input type="number" matInput [formControl]="facilityForm.controls['facilityUserCount']" required>
+                    <mat-error>
                         <div
-                            *ngIf="facilityForm.controls['libraryLink'].invalid && facilityForm.controls['libraryLink'].touched">
-                            <small class="font13" *ngIf="facilityForm.controls['libraryLink'].errors?.required">
-                                DIY Law Library Link is Required
+                            *ngIf="facilityForm.controls['facilityUserCount'].invalid && facilityForm.controls['facilityUserCount'].touched">
+                            <small class="font13">
+                                Bilable user is Required
                             </small>
-                            <span class="font13" *ngIf="facilityForm.controls['libraryLink'].errors?.pattern">
-                                Invalid DIY Law Library Link.
-                            </span>
                         </div>
-                    </mat-error> -->
+                    </mat-error>
                 </mat-form-field>
             </div>
         </div>

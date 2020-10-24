@@ -7,9 +7,16 @@
             <h3 class="text-center font-weight-bold">Step 2/4</h3>
             <mat-card class="p-4">
                 <div>
-                    <div><h2 class=" text-center font-weight-bold" *ngIf="roleId != 3">Additional Information</h2></div>
-                    <div><h2 class=" text-center font-weight-bold" *ngIf="roleId == 3">Please Add Your Bar Information</h2></div>
-                    <p class="text-center" *ngIf="roleId == 3">Please add the states in which you are admitted to the bar.<br>If possible, include your Bar ID in that state. Then, add your specialties in that state, which will help users find you.</p>
+                    <div>
+                        <h2 class=" text-center font-weight-bold" *ngIf="roleId != 3">Additional Information</h2>
+                    </div>
+                    <div>
+                        <h2 class=" text-center font-weight-bold" *ngIf="roleId == 3">Please Add Your Bar Information
+                        </h2>
+                    </div>
+                    <p class="text-center" *ngIf="roleId == 3">Please add the states in which you are admitted to the
+                        bar.<br>If possible, include your Bar ID in that state. Then, add your specialties in that
+                        state, which will help users find you.</p>
                     <p class="text-center" *ngIf="isFacility">Please enter the housing unit, if you remember it.</p>
                     <p class="text-center" *ngIf="(roleId == 1 && !isFacility)">It looks like you aren't currently in a
                         facility. Please
@@ -17,6 +24,32 @@
                         closest to you.</p>
                 </div>
                 <div class="">
+                    <div class="px-2">
+                        <table class="table">
+                            <tbody class="p-1" style="border: none; ">
+                                <tr *ngFor="let info of lawyerInfoArray">
+                                    <td class="p-0 w-25 pl-5 py-1 table-color font-weight-bold">{{info.state}}</td>
+                                    <td class="p-0 w-25 pl-5 py-1 table-color">
+                                        <span class="font-weight-bold">Bar ID:-
+                                        </span>
+                                        {{info.bar_info_Exam_Id}}</td>
+                                    <td class="p-0 w-25 pl-5 py-1 table-color">
+                                        <span class="font-weight-bold">specialties:-</span> ({{info.speciality.length}})
+                                    </td>
+                                    <td class="btn-group">
+                                        <button class="mx-1 btn-size mt-2" mat-mini-fab color="primary"
+                                            title="View Specialty">
+                                            <mat-icon class="icon-font">remove_red_eye</mat-icon>
+                                        </button>
+                                        <button class="btn-size ml-1 mt-2" mat-mini-fab color="warn"
+                                            title="Delete Specialty" (click)="deleteInfo(info.bar_info_Exam_Id)">
+                                            <mat-icon class="icon-font">delete</mat-icon>
+                                        </button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                     <div *ngIf="roleId != 3">
                         <mat-form-field class="w-100 p-3">
                             <mat-label>Facility</mat-label>
@@ -41,8 +74,8 @@
                     </div>
 
                     <div class="d-flex" *ngIf="roleId == 3">
-                        <div class="col-3 p-0">
-                            <mat-form-field appearance="fill" class="w-100 p-3">
+                        <div class="col-4 p-0">
+                            <mat-form-field appearance="fill" class="w-100 p-1">
                                 <mat-label>State</mat-label>
                                 <mat-select [formControl]="additionalInfoLawyer.controls['state']" required>
                                     <mat-option>Select state</mat-option>
@@ -53,7 +86,7 @@
                             </mat-form-field>
                         </div>
                         <div class="col-4 p-0">
-                            <mat-form-field appearance="fill" class="w-100 p-3">
+                            <mat-form-field appearance="fill" class="w-100 p-1">
                                 <mat-label>Bar ID (If Applicable)</mat-label>
                                 <input type="text" matInput
                                     [formControl]="additionalInfoLawyer.controls['bar_info_Exam_Id']">
@@ -67,16 +100,23 @@
                             </mat-form-field>
                         </div>
 
-                        <div class="col-3 p-0">
-                            <mat-form-field appearance="fill" class="w-100 p-3">
+                        <div class="col-4 p-0">
+                            <mat-form-field appearance="fill" class="w-100 p-1">
+                                <!-- <mat-label>Specialty</mat-label> -->
                                 <mat-label>Specialty</mat-label>
-                                <mat-select [formControl]="additionalInfoLawyer.controls['speciality']" required>
+                                <mat-select [formControl]="toppings" multiple
+                                    [formControl]="additionalInfoLawyer.controls['speciality']" required>
+                                    <mat-option>Select specialty</mat-option>
+                                    <mat-option *ngFor="let specialty of specialtyList"
+                                        value="{{specialty.specialtyType}}">{{specialty.specialtyType}}</mat-option>
+                                </mat-select>
+                                <!-- <mat-select [formControl]="additionalInfoLawyer.controls['speciality']" required>
                                     <mat-option>Select specialty</mat-option>
                                     <mat-option *ngFor="let specialty of specialtyList"
                                         value="{{specialty.specialtyType}}">
                                         {{specialty.specialtyType}}
                                     </mat-option>
-                                </mat-select>
+                                </mat-select> -->
                                 <mat-error
                                     *ngIf="additionalInfoLawyer.controls['speciality'].invalid && additionalInfoLawyer.controls['speciality'].touched">
                                     <small class="font13"
@@ -86,30 +126,11 @@
                                 </mat-error>
                             </mat-form-field>
                         </div>
-                        <div class="col-2">
-                            <button class="btn btn-primary" (click)="openModal(mytemplate)">Add New</button>
-                        </div>
                     </div>
-                    <div class="row" style="margin-right: -100px;
-                    margin-left: 26px;">
-                        <table class="table">
-                            <!-- <thead>
-                                <tr>
-                                    <th>State</th>
-                                    <th>Exam id</th>
-                                    <th>Specialty</th>
-                                </tr>
-                            </thead> -->
-                            <tbody class="p-1" style="border: none; ">
-                                <tr *ngFor="let info of lawyerInfoArray">
-                                    <td class="p-0 w-25">{{info.state}}</td>
-                                    <td class="p-0 w-25">{{info.bar_info_Exam_Id}}</td>
-                                    <td class="p-0 w-25">{{info.speciality}}</td>
-                                    <td class="p-0 w-25" (click)="deleteInfo(info.bar_info_Exam_Id)"
-                                        style="cursor: pointer;">X</td>
-                                </tr>
-                            </tbody>
-                        </table>
+                    <div class="d-flex justify-content-end">
+                        <a class="anchor-style" mat-flat-button (click)="openModal(mytemplate)">
+                            + Add Speciality
+                        </a>
                     </div>
                 </div>
 
@@ -120,6 +141,7 @@
                             mat-raised-button color="primary" (click)="addMoreStates()">{{buttonText}}</button>
                     </div>
                 </div>
+                <hr class="footer-line">
                 <div class="d-flex justify-content-between px-3 mt-2">
                     <button mat-button color="primary" (click)="onPreviousClick()">
                         BACK

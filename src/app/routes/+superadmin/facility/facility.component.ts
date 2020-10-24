@@ -22,7 +22,7 @@ export class FacilityComponent implements OnInit {
   addressForm: FormGroup;
   facilityAddressId: number;
   states = []
-  displayedColumns: string[] = ["facilityCode", "facilityName", "ipAddress", "libraryLink", "action"];
+  displayedColumns: string[] = ["facilityCode", "facilityName", "facilityUserCount", "ipAddress", "libraryLink", "action"];
   dataSource = new MatTableDataSource();
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort: MatSort;
@@ -35,7 +35,8 @@ export class FacilityComponent implements OnInit {
       facilityCode: ['', [Validators.required], [this.validateUserNotTaken.bind(this)]],
       facilityName: ['', [Validators.required, Validators.minLength(1), Validators.maxLength(50)]],
       ipAddress: ['', [Validators.required, Validators.pattern('(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)')]],
-      libraryLink: ['']
+      libraryLink: [''],
+      facilityUserCount: ['', [Validators.required]],
     })
 
     this.addressForm = this.fb.group({
