@@ -31,7 +31,7 @@ export class LawyerdashboardComponent implements OnInit {
   cardForm: FormGroup;
   selectPlanForm: FormGroup;
   userData: any;
-  public cardMask = [/\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/]
+  public cardMask = [/\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/]
   public cvvMask = [/\d/, /\d/, /\d/]
 
   constructor(private hireLawyerService: HireLawyerService, private facilityService: FacilityService, public dialog: MatDialog,

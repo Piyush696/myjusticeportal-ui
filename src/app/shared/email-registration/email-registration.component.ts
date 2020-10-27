@@ -123,7 +123,8 @@ export class EmailRegistrationComponent implements OnInit, OnChanges {
 
   alertModel(templateRef) {
     let dialogRef = this.dialog.open(templateRef, {
-      width: '311px',
+      width: '120vh',
+      height: "70vh"
     });
   }
   onScroll(event: any) {

@@ -58,9 +58,9 @@
                 Note: {{singleCaseData?.notes}}
                 <span *ngIf="!singleCaseData?.notes">N/A</span>
             </span>
-            <span class="pt-3">
+            <!-- <span class="pt-3">
                 Files attached:{{singleCaseData?.caseFile?.length}}
-            </span>
+            </span> -->
         </div>
         <mat-card class="d-flex justify-content-between align-items-center inner-card mt-2"
             *ngFor="let file of singleCaseData?.caseFile">
