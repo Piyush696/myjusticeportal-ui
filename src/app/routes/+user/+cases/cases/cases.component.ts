@@ -48,6 +48,9 @@ export class CasesComponent implements OnInit {
     this.currentCaseId = value.caseId
     let dialogRef = this.dialog.open(templateRef, {
       width: '836px',
+      position: {
+        top: '80px',
+      }
     });
     this.caseNoteForm.get('notes').setValue(value.notes);
     // this.caseNoteForm.get('notes').disable();

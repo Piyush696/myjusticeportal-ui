@@ -80,7 +80,7 @@ export class ForgetPasswordComponent implements OnInit {
         }
       }
       else {
-        this.toasterService.showErrorToater('Security Question and Answer did not Matched.')
+        this.toasterService.showErrorToater('Your answer doesnot match our records.')
       }
     })
   }

@@ -15,6 +15,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 export class ViewCaseComponent implements OnInit {
   caseDetails: any;
   caseNoteForm: FormGroup;
+  assignedLawyer: any;
   // enableEditBtn: boolean = true;
 
   constructor(private router: Router, private route: ActivatedRoute, private caseService: CaseService,
@@ -23,10 +24,23 @@ export class ViewCaseComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.assignedLawyer = ''
     this.caseNoteForm = this.fb.group({
       notes: ['', [Validators.required]]
     })
     this.getCase();
+    this.getAssignedLawyer();
+  }
+
+  getAssignedLawyer() {
+    this.caseService.getAssignedLawyer(this.route.snapshot.params['caseId']).subscribe((lawyer: any) => {
+      console.log(lawyer.data)
+      if (lawyer.data != 'No lawyer assigned to this case.') {
+        this.assignedLawyer = lawyer.data
+      } else {
+        this.assignedLawyer = '';
+      }
+    })
   }
 
   getCase() {

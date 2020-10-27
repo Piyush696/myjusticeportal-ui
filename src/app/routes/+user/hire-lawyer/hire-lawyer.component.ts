@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { CaseService } from 'app/services/case.service';
 import { HireLawyerService } from 'app/services/hire-lawyer.service';
@@ -10,18 +11,24 @@ import { StatesService } from 'app/services/states.service';
   styleUrls: ['./hire-lawyer.component.scss']
 })
 
-export class HireLawyerComponent implements OnInit {
+export class HireLawyerComponent implements OnInit, AfterViewInit {
   organizationList: any;
   states: any[];
   specialityData: any;
   currentSpeciality: any;
   currentLocation: any;
   filteredOrganizationList: any;
+  @ViewChild('modalopen') modalopen: ElementRef
 
   constructor(private hireLawyerService: HireLawyerService, private caseService: CaseService,
-    private _statesService: StatesService) { }
+    private _statesService: StatesService, public dialog: MatDialog) { }
+  ngAfterViewInit(): void {
+    this.modalopen.nativeElement.click();
+  }
+
 
   ngOnInit(): void {
+    console.log('xasxsa')
     this.onGetLaywers();
     this.stateData()
   }
@@ -103,4 +110,5 @@ export class HireLawyerComponent implements OnInit {
       this.organizationList = this.filteredOrganizationList
     }
   }
+
 }
