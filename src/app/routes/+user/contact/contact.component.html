@@ -5,3 +5,59 @@
             review your information,you will receive a response here in the portal .</h4>
     </div>
 </div>
+<div>
+    <h3 class="font-weight-bold">You are contacting:</h3>
+    <div class="col-6 pl-0">
+        <mat-form-field appearance="fill" class="w-100">
+            <mat-label>Lawyer</mat-label>
+            <mat-select>
+                <mat-option>
+                    Select organization
+                </mat-option>
+                <mat-option *ngFor="let org of organizationList" [value]="org.name">
+                    {{org?.name}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+
+    <h3 class="font-weight-bold">Select Your Case:</h3>
+    <span class="font-italic">By allowing the lawyer to view your case info, they can provide you with a better
+        response.</span>
+    <div class="col-6 pl-0">
+        <mat-form-field appearance="fill" class="w-100">
+            <mat-label>Cases</mat-label>
+            <mat-select>
+                <mat-option>
+                    Select Case
+                </mat-option>
+                <mat-option *ngFor="let case of caseList" [value]="case.caseId">
+                    {{case?.briefDescriptionOfChargeOrLegalMatter}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+
+    <h3 class="font-weight-bold">Your Request</h3>
+    <span class="font-italic">Tell the lawyer what you need help with and provide as much detail as possible. This will
+        help them give you a
+        complete response and hopefully, allow you to hire them.</span>
+
+    <div class="col-8 p-0">
+        <mat-form-field appearance="fill" class="w-100 p-2">
+            <textarea rows="20" matInput></textarea>
+            <!-- <mat-error>
+                        <div *ngIf="caseNoteForm.controls['notes'].invalid && caseNoteForm.controls['notes'].touched">
+                            <small class="font13">
+                                Notes is Required
+                            </small>
+                        </div>
+                    </mat-error> -->
+        </mat-form-field>
+    </div>
+    <div class="pr-2 pb-2 pt-2 pl-0">
+        <button class="button-purple px-5 py-1 float-right" mat-raised-button>
+            Contact lawyer
+        </button>
+    </div>
+</div>

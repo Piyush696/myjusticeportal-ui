@@ -21,8 +21,8 @@ export class CaseFormComponent implements OnInit, OnChanges {
   @Input() caseDetails;
   public states = [];
   state: any = [];
-  dateOfArrest=new Date()
-  nextCourtDate=new Date(+new Date() + 24*60*60*1000);
+  dateOfArrest = new Date()
+  nextCourtDate = new Date(+new Date() + 24 * 60 * 60 * 1000);
 
   constructor(private toasterService: ToasterService, private router: Router, private _statesService: StatesService,
     private fb: FormBuilder, private caseService: CaseService, private store: Store<any>) {
@@ -54,6 +54,20 @@ export class CaseFormComponent implements OnInit, OnChanges {
     this.userState();
   }
 
+  createFormControl() {
+    this.caseForm = this.fb.group({
+      firstName: ['', [Validators.required]],
+      legalMatter: ['', [Validators.required]],
+      countyOfArrest: [''],
+      stateOfArrest: [''],
+      dateOfArrest: [''],
+      briefDescriptionOfChargeOrLegalMatter: ['', [Validators.required]],
+      attorneyName: [''],
+      nextCourtDate: [''],
+      // otherInformation: ['']
+    });
+  }
+
   stateData() {
     this._statesService.getStates()
       .subscribe(data => {
@@ -68,19 +82,7 @@ export class CaseFormComponent implements OnInit, OnChanges {
     });
   }
 
-  createFormControl() {
-    this.caseForm = this.fb.group({
-      firstName: ['', [Validators.required]],
-      legalMatter: ['', [Validators.required]],
-      countyOfArrest: [''],
-      stateOfArrest: [''],
-      dateOfArrest: [''],
-      briefDescriptionOfChargeOrLegalMatter: ['', [Validators.required]],
-      attorneyName: [''],
-      nextCourtDate: [''],
-      // otherInformation: ['']
-    });
-  }
+
 
   getUserFromStore() {
     this.store.select(s => s.userInfo).subscribe(user => this.userData = user);

@@ -28,44 +28,72 @@
                         </button>
                     </div>
                 </div>
-                <div>
-                    <p class="text-default">Name:
-                        <span class="font-weight-normal"> {{caseDetails?.inmate?.firstName}}
-                            {{caseDetails?.inmate?.lastName}}</span>
-                    </p>
-                </div>
-                <div>
-                    <p class="text-default">Charges or Legal:
-                        <span class="font-weight-normal">{{caseDetails?.legalMatter}}</span>
-                    </p>
-                </div>
-                <div *ngIf="caseDetails?.countyOfArrest">
-                    <p class="text-default">County of Arrest:
-                        <span class="font-weight-normal"> {{caseDetails?.countyOfArrest}}</span>
-                    </p>
-                </div>
-                <div>
-                    <p class="text-default" *ngIf="caseDetails?.briefDescriptionOfChargeOrLegalMatter">
-                        Brief Description:
-                        <span class="font-weight-normal"> {{caseDetails?.briefDescriptionOfChargeOrLegalMatter}}</span>
-                    </p>
-                </div>
-                <div *ngIf="caseDetails?.attorneyName">
-                    <p class="text-default">Attorney Name:
-                        <span class="font-weight-normal"> {{caseDetails?.attorneyName}}</span>
-                    </p>
-                </div>
-                <div>
-                    <p class="text-default" *ngIf="caseDetails?.dateOfArrest">
-                        Date of Arrest:
-                        <span class="font-weight-normal"> {{caseDetails?.dateOfArrest |date: 'MM-dd-yyyy'}}</span>
-                    </p>
-                </div>
-                <div>
-                    <p class="text-default" *ngIf="caseDetails?.nextCourtDate">
-                        Next Court Date:
-                        <span class="font-weight-normal"> {{caseDetails?.nextCourtDate |date: 'MM-dd-yyyy'}}</span>
-                    </p>
+                <div class="row">
+                    <div class="col-8">
+                        <div>
+                            <p class="text-default">Name:
+                                <span class="font-weight-normal"> {{caseDetails?.inmate?.firstName}}
+                                    {{caseDetails?.inmate?.lastName}}</span>
+                            </p>
+                        </div>
+                        <div>
+                            <p class="text-default">Charges or Legal Matter:
+                                <span class="font-weight-normal">{{caseDetails?.legalMatter}}</span>
+                            </p>
+                        </div>
+                        <div *ngIf="caseDetails?.countyOfArrest">
+                            <p class="text-default">County of Arrest:
+                                <span class="font-weight-normal"> {{caseDetails?.countyOfArrest}}</span>
+                            </p>
+                        </div>
+                        <div>
+                            <p class="text-default" *ngIf="caseDetails?.briefDescriptionOfChargeOrLegalMatter">
+                                Brief Description:
+                                <span class="font-weight-normal">
+                                    {{caseDetails?.briefDescriptionOfChargeOrLegalMatter}}</span>
+                            </p>
+                        </div>
+                        <div *ngIf="caseDetails?.attorneyName">
+                            <p class="text-default">Attorney Name:
+                                <span class="font-weight-normal"> {{caseDetails?.attorneyName}}</span>
+                            </p>
+                        </div>
+                        <div>
+                            <p class="text-default" *ngIf="caseDetails?.dateOfArrest">
+                                Date of Arrest:
+                                <span class="font-weight-normal">
+                                    {{caseDetails?.dateOfArrest |date: 'MM-dd-yyyy'}}</span>
+                            </p>
+                        </div>
+                        <div>
+                            <p class="text-default" *ngIf="caseDetails?.nextCourtDate">
+                                Next Court Date:
+                                <span class="font-weight-normal">
+                                    {{caseDetails?.nextCourtDate |date: 'MM-dd-yyyy'}}</span>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-4 d-flex justify-content-center align-items-center">
+                        <mat-card>
+                            <div *ngIf="!assignedLawyer" class=" px-4 py-4">
+                                <h4 class="text-center font-weight-bold">None</h4>
+                            </div>
+                            <div *ngIf="assignedLawyer">
+                                <h3 class="text-center font-weight-bold">Lawyer Details:</h3>
+                                <div>
+                                    <p class="text-default">Name:
+                                        <span class="font-weight-normal"> {{assignedLawyer?.firstName}}
+                                            {{assignedLawyer?.lastName}}</span>
+                                    </p>
+                                </div>
+                                <div>
+                                    <p class="text-default">Firm Name:
+                                        <span class="font-weight-normal">{{assignedLawyer?.Organization?.name}}</span>
+                                    </p>
+                                </div>
+                            </div>
+                        </mat-card>
+                    </div>
                 </div>
             </mat-card>
         </div>

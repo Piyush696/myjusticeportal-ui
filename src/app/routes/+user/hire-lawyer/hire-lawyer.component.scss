@@ -1,25 +1,29 @@
 .white-btn {
-    background: #e4e4ec;
-    color: #333442;
+  background: #e4e4ec;
+  color: #333442;
 }
 
 .padding-btn {
-    padding-left: 10%;
-    padding-right: 10%;
+  padding-left: 10%;
+  padding-right: 10%;
 }
 
 .btn-outline {
-    outline: 4px auto -webkit-focus-ring-color;
+  outline: 4px auto -webkit-focus-ring-color;
 }
 
 .outer-card {
-    border: 1px solid #333442;
-    color: #333442;
-    background: #e4e4ec;
+  border: 1px solid #333442;
+  color: #333442;
+  background: #e4e4ec;
 }
 
 .inner-card {
-    border: 1px solid #333442;
-    color: #333442;
-    background: white;
+  border: 1px solid #333442;
+  color: #333442;
+  background: white;
+}
+
+.modal-btn {
+  margin-left: 35%;
 }
