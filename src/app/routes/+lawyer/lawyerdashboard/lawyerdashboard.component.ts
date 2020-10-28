@@ -39,7 +39,6 @@ export class LawyerdashboardComponent implements OnInit {
 
   ngOnInit(): void {
     this.store.select(s => s.userInfo).subscribe(x => {
-      console.log(x)
       this.userData = x
       if (x.status) {
         this.isAuthorized = true;

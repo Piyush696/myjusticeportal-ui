@@ -61,6 +61,10 @@ export class CaseService {
     return this.httpClient.get<object>(`${this.apiPath}/${this.case}/state/userFacility`, this.getHeaders());
   }
 
+  getPendingCaseInfo() {
+    return this.httpClient.get<object>(`${this.apiPath}/${this.case}/getPendingCaseInfo`, this.getHeaders());
+  }
+
   getAssignedLawyer(caseId) {
     return this.httpClient.get<object>(`${this.apiPath}/${this.case}/lawyer-case/${caseId}`, this.getHeaders());
   }

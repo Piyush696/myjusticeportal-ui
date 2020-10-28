@@ -1,0 +1,26 @@
+<div class="col-12 pl-0">
+    <mat-card>
+        <h2 class="font-weight-bold m-0">Pending Inquiries</h2>
+        <small>These are lawyer you attempted to contact,View your conversation here and approve new
+            lawyers.</small>
+
+        <div>
+            <table style="width:100%">
+                <tr>
+                    <th class="text-center">Law Firm</th>
+                    <th class="text-center">Lawyer</th>
+                    <th class="text-center">Sent</th>
+                    <th class="text-center">Status</th>
+                    <th class="text-center">Action</th>
+                </tr>
+                <tr *ngFor="let case of pendingCasesList">
+                    <td>{{case.Organization.name}}</td>
+                    <td>{{case.firstName}} {{case.middleName}} {{case.lastName}}</td>
+                    <td>{{case.sent | date:'MM/dd/yyyy'}}</td>
+                    <td>{{case.status}}</td>
+                    <td>None</td>
+                </tr>
+            </table>
+        </div>
+    </mat-card>
+</div>

@@ -1,5 +1,5 @@
 <div class="row d-flex justify-content-end pr-3">
-    
+
 </div>
 
 <div class="pt-2">
@@ -18,12 +18,12 @@
                 </span>
             </div>
             <div class="col-1 mt-3">
-                <button [routerLink]="'/mjp/user/hire-lawyer'" class="white-btn padding-btn btn-outline float-right py-1"
-                    mat-raised-button>
+                <button [routerLink]="'/mjp/user/hire-lawyer'"
+                    class="white-btn padding-btn btn-outline float-right py-1" mat-raised-button>
                     Back
                 </button>
-            </div>  
-                      
+            </div>
+
         </div>
         <div class="row p-4">
             <div class="col-4">
@@ -34,21 +34,18 @@
                     <span class="font-weight-light text-dark"> {{orgDetails?.tagline}}
                     </span>
                 </span><br><br>
-                <span class="font-weight-bold">Address:
+                <span class="font-weight-bold">Primary Address:
                     <span class="font-weight-light text-dark"> {{orgDetails?.Address?.street1}}
                         {{orgDetails?.Address?.street2}}</span>
                     <span class="font-weight-light text-dark"> {{orgDetails?.Address?.city}}
                         {{orgDetails?.Address?.zip}}</span>
                 </span>
                 <br>
-                <span class="font-weight-bold">Speciality: </span>
+                <span class="font-weight-bold">Practise Areas: </span>
                 <br>
-                <span class="font-weight-bold"> - </span>
-                <span class="text-dark"> DUI </span>
-                <br>
-                <span class="font-weight-bold"> - </span>
-                <span class="text-dark"> Drug Charges </span>
-                <br>
+                <ul class="m-0" [hidden]="specialtyList?.length < 0 " *ngFor="let spec of specialtyList">
+                    <li class="text-dark">{{spec}}</li>
+                </ul>
                 <!-- <div class="p-3">
                     <button class="button-purple padding-btn btn-outline py-1" mat-raised-button>
                         Contact
