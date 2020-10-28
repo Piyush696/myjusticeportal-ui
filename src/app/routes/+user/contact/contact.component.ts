@@ -21,7 +21,6 @@ export class ContactComponent implements OnInit {
 
   onGetLaywers() {
     this.hireLawyerService.getOrganization().subscribe((res: any) => {
-      console.log(res)
       this.organizationList = res.data;
     })
   }
