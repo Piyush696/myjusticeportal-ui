@@ -9,6 +9,7 @@ import { ViewCaseDetailsComponent } from './view-case-details/view-case-details.
 import { AcceptedCasesComponent } from './accepted-cases/accepted-cases.component';
 import { LawyerChatComponent } from './lawyer-chat/lawyer-chat.component';
 import { TextMaskModule } from 'angular2-text-mask';
+import { ReversePipe } from './accepted-cases/reverse.pipe';
 
 @NgModule({
   declarations: [
@@ -16,6 +17,7 @@ import { TextMaskModule } from 'angular2-text-mask';
     ViewCaseDetailsComponent,
     AcceptedCasesComponent,
     LawyerChatComponent,
+    ReversePipe,
   ],
   imports: [
     TextMaskModule,

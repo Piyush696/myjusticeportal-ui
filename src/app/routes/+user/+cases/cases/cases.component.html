@@ -116,3 +116,32 @@
         </button>
     </div>
 </ng-template>
+
+
+<!-- Button trigger modal -->
+<button id="modalopen" #modalopen [hidden]="true" data-toggle="modal" data-target="#exampleModalCenter">
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered px-4 py-4" role="document">
+        <div class="modal-content px-4 py-4">
+            <div class="d-flex justify-content-end">
+                <button type="button" class="bg-button" data-dismiss="modal">
+                    X
+                </button>
+            </div>
+            <div class="mb-5">
+                <h2 class="text-center">Welcome to My Justice Portal!</h2>
+                <h2 class="text-center">How it works:</h2>
+            </div>
+            <div class="d-flex justify-content-center mt-5">
+                <div class="modal-btn">
+                    <button type="button" class="btn btn-secondary button-purple px-2" data-dismiss="modal">Accept and
+                        Continue</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
