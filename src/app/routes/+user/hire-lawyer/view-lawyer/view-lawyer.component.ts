@@ -18,6 +18,7 @@ export class ViewLawyerComponent implements OnInit {
   userId: any;
   isHired: boolean = false;
   logo: any;
+  specialtyList: any;
 
   constructor(private hireLawyerService: HireLawyerService, public dialog: MatDialog,
     private caseService: CaseService, private activatedRoute: ActivatedRoute,
@@ -32,6 +33,9 @@ export class ViewLawyerComponent implements OnInit {
 
   getAllUsers() {
     this.hireLawyerService.getUsersLawyer(this.organizationId).subscribe((users: any) => {
+      let specialty = [];
+      specialty.push(users.data.specialty.split(","))
+      this.specialtyList = specialty[0]
       this.orgDetails = users.data
       this.logo = this.orgDetails.logo
     })
