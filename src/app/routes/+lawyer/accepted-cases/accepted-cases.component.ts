@@ -11,7 +11,7 @@ import { ToasterService } from 'app/services/toaster.service';
 export class AcceptedCasesComponent implements OnInit {
   requestedCases: any;
   hideCases:any;
-  hide:boolean;
+  hide:boolean=true;
 
   constructor(private hireLawyerService: HireLawyerService, private toasterService: ToasterService) { }
   ngOnInit(): void {
@@ -41,7 +41,7 @@ export class AcceptedCasesComponent implements OnInit {
  viewhideCaseDetails(check){
     if (!check) {
       this.hide=true;
-      let statuses = ['Approved', 'Rejected'];
+      let statuses = 'Approved';
       this.onGetRequestedCases(statuses);
       this.toasterService.showSuccessToater('Showed Hide Cases.');
     }
@@ -52,9 +52,11 @@ export class AcceptedCasesComponent implements OnInit {
       this.toasterService.showSuccessToater('Hide Cases.');
     }
 }
-hideCaseDetails(lawyer_caseId) {
-  this.hireLawyerService.hideCase({ lawyer_caseId: lawyer_caseId}).subscribe((res: any) => {
+hideCaseDetails(caseId) {
+  this.hireLawyerService.hideCase({ caseId: caseId}).subscribe((res: any) => {
     if (res.success) {
+      let statuses = 'Approved';      
+      this.onGetRequestedCases(statuses);
       this.toasterService.showSuccessToater('Hide case successfully.');
     } else {
       this.toasterService.showErrorToater('Something went wrong, please try again.');
