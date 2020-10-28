@@ -3,15 +3,17 @@
         <h1 class="mb-0">View Accepted Cases:</h1>
         <h4>View accepted/rejected cases.</h4>
     </div>
-    <div class="d-flex justify-content-end">
-            <mat-checkbox class="mat-card check-style" color="primary" title="View Rejected Cases"
-            (change)="viewhideCaseDetails($event.checked)">
-            View Hide Cases
-            </mat-checkbox>&nbsp;
-            <mat-checkbox class="mat-card check-style" color="primary" title="View Rejected Cases"
-                (change)="onViewRejectedCases($event.checked)">
-                View Rejected
-            </mat-checkbox>
+    <div>
+            <div class="d-flex">
+                <mat-checkbox class="mat-card check-style" color="primary" title="View Rejected Cases"
+                (change)="viewhideCaseDetails($event.checked)">
+                View Hide Cases
+                </mat-checkbox>&nbsp;
+                <mat-checkbox class="mat-card check-style" color="primary" title="View Rejected Cases"
+                    (change)="onViewRejectedCases($event.checked)">
+                    View Rejected
+                </mat-checkbox>
+            </div>
     </div>
 </div>
 
