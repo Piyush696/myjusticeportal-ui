@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
@@ -16,6 +16,7 @@ export class CasesComponent implements OnInit {
   caseNoteForm: FormGroup;
   // enableEditBtn: boolean = true;
   currentCaseId: any;
+  @ViewChild('modalopen') modalopen: ElementRef
 
   constructor(private toasterService: ToasterService, public dialog: MatDialog,
     private caseService: CaseService, private fb: FormBuilder, private router: Router) {
@@ -25,7 +26,9 @@ export class CasesComponent implements OnInit {
     this.getCases();
     this.createCaseNotesForm();
   }
-
+  ngAfterViewInit(): void {
+    this.modalopen.nativeElement.click();
+  }
   createCaseNotesForm() {
     this.caseNoteForm = this.fb.group({
       notes: ['', [Validators.required]]
@@ -75,9 +78,5 @@ export class CasesComponent implements OnInit {
   }
   onContactLawyer() {
     this.router.navigateByUrl('/mjp/user/hire-lawyer')
-  }
-
-  onCancelNotesModal() {
-    this.dialog.closeAll();
   }
 }
