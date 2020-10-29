@@ -25,7 +25,7 @@
         <mat-card class="inner-card mt-2" *ngIf="!requestedCases?.length">
             <span>No data available.</span>
         </mat-card>
-        <div *ngFor="let case of requestedCases | reverse">
+        <div *ngFor="let case of requestedCases">
             <mat-card class="d-flex flex-row justify-content-between align-items-center inner-card mt-2"
             *ngIf="case?.lawyer_case?.isHide!=hide">
                 <div class="d-flex flex-column w-75">
@@ -74,27 +74,33 @@
         </div>
     </div>
     <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8 w-100">
-        <!-- <ng-container matColumnDef="inmate">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header>User</th>
-            <td mat-cell *matCellDef="let inmate">
+        <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>     Name    </th>
+            <td mat-cell *matCellDef="let user">
                 <span>
-                    {{inmate?.firstName}}
-                    <span *ngIf="inmate?.middleName">
-                        &nbsp;{{inmate?.middleName}}
+                    {{user.inmate?.firstName | titlecase}}
+                    <span *ngIf="user.inmate?.middleName">
+                        &nbsp;{{user.inmate?.middleName | titlecase}}
                     </span>
-                    &nbsp;{{inmate?.lastName}}
+                    &nbsp;{{user.inmate?.lastName | titlecase}}
                 </span>
-                <span *ngIf="!user?.firstName && !user?.middleName && !user?.lastName">
+                <span *ngIf="!user.inmate?.firstName && !user.inmate?.middleName && !user.inmate?.lastName">
                     N/A
                 </span>
             </td>
-        </ng-container> -->
+        </ng-container>
+           <ng-container matColumnDef="createdAt">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Created Date </th>
+            <td mat-cell *matCellDef="let createdAt">
+                <span>{{createdAt.lawyer_case?.createdAt | date:'longDate'}}</span>
+            </td>
+        </ng-container>
         <ng-container matColumnDef="briefDescriptionOfChargeOrLegalMatter">
             <th mat-header-cell *matHeaderCellDef mat-sort-header>Case Description</th>
             <td mat-cell *matCellDef="let briefDescriptionOfChargeOrLegalMatter">{{briefDescriptionOfChargeOrLegalMatter.briefDescriptionOfChargeOrLegalMatter}}</td>
         </ng-container>
         <ng-container matColumnDef="countyOfArrest">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header>countyOfArrest</th>
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>County of Arrest</th>
             <td mat-cell *matCellDef="let countyOfArrest">{{countyOfArrest.countyOfArrest}}</td>
         </ng-container>
         <ng-container matColumnDef="action">

@@ -12,7 +12,7 @@ import { ToasterService } from 'app/services/toaster.service';
 })
 
 export class AcceptedCasesComponent implements OnInit {
-  displayedColumns: string[] = ["briefDescriptionOfChargeOrLegalMatter", "countyOfArrest"];
+  displayedColumns: string[] = ["createdAt", "name","countyOfArrest", "briefDescriptionOfChargeOrLegalMatter"];
   dataSource = new MatTableDataSource();
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort: MatSort;
