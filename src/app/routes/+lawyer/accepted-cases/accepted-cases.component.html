@@ -75,7 +75,7 @@
     </div>
     <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8 w-100">
         <ng-container matColumnDef="name">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header>     Name    </th>
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Name</th>
             <td mat-cell *matCellDef="let user">
                 <span>
                     {{user.inmate?.firstName | titlecase}}
@@ -90,20 +90,20 @@
             </td>
         </ng-container>
            <ng-container matColumnDef="createdAt">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> Created Date </th>
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Created Date</th>
             <td mat-cell *matCellDef="let createdAt">
                 <span>{{createdAt.lawyer_case?.createdAt | date:'longDate'}}</span>
             </td>
         </ng-container>
         <ng-container matColumnDef="briefDescriptionOfChargeOrLegalMatter">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header>Case Description</th>
+            <th class="w-50" mat-header-cell *matHeaderCellDef mat-sort-header>Case Description</th>
             <td mat-cell *matCellDef="let briefDescriptionOfChargeOrLegalMatter">{{briefDescriptionOfChargeOrLegalMatter.briefDescriptionOfChargeOrLegalMatter}}</td>
         </ng-container>
         <ng-container matColumnDef="countyOfArrest">
             <th mat-header-cell *matHeaderCellDef mat-sort-header>County of Arrest</th>
             <td mat-cell *matCellDef="let countyOfArrest">{{countyOfArrest.countyOfArrest}}</td>
         </ng-container>
-        <ng-container matColumnDef="action">
+        <!-- <ng-container matColumnDef="action">
             <th mat-header-cell *matHeaderCellDef mat-sort-header>Action</th>
             <td mat-cell *matCellDef="let user">
                 <button [routerLink]="user?.userId" class="button-purple mr-1" mat-mini-fab title="View Details">
@@ -113,7 +113,7 @@
                     <mat-icon>delete</mat-icon>
                 </button>
             </td>
-        </ng-container>
+        </ng-container> -->
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
