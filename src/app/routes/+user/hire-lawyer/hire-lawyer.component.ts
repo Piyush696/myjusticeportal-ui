@@ -22,13 +22,13 @@ export class HireLawyerComponent implements OnInit, AfterViewInit {
 
   constructor(private hireLawyerService: HireLawyerService, private caseService: CaseService,
     private _statesService: StatesService, public dialog: MatDialog) { }
+
   ngAfterViewInit(): void {
     this.modalopen.nativeElement.click();
   }
 
 
   ngOnInit(): void {
-    console.log('xasxsa')
     this.onGetLaywers();
     this.stateData()
   }
@@ -40,6 +40,7 @@ export class HireLawyerComponent implements OnInit, AfterViewInit {
       this.specialityData = [...new Set(this.filteredOrganizationList.map(item => item.specialty))];
     })
   }
+
   stateData() {
     this._statesService.getStates()
       .subscribe(data => {
