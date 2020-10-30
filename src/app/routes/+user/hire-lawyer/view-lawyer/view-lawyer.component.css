@@ -39,3 +39,8 @@
   line-height: 25px;
   letter-spacing: 1px;
 }
+
+.padd_mat{
+  padding-left: 15px !important;
+  padding-right: 15px !important;
+}

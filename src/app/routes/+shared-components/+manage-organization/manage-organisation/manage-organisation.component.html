@@ -45,11 +45,11 @@
                 </tr>
                 <tr>
                     <th>Logo Upload:</th>
-                    <td>{{orgData?.Organization?.logo?.fileName}}</td>
+                   <img src="{{orgData?.Organization?.logo?.downloadLink}}" width="250px" height="150px" alt="logo"> 
                 </tr>
                 <tr>
                     <th>Header Color:</th>
-                    <td>555 77 855</td>
+                    <td>{{orgData?.Organization?.colorPiker}}</td>
                 </tr>
             </table>
 
@@ -303,6 +303,14 @@
                     </small>
                 </div>
             </mat-error>
+        </mat-form-field>
+    </div>
+    <div class="row px-3">
+        <mat-form-field appearance="fill" class="w-100 p-1">
+            <mat-label>Color Picker</mat-label>
+                <input matInput [(colorPicker)]="selectedColor" [value]="selectedColor" [cpCancelButton]="true"
+              [cpHeight]="'310px'" [formControl]="organisationForm.controls['colorPiker']"
+              (colorPickerChange)="buttonColor($event)" />
         </mat-form-field>
     </div>
     <div class="row px-3">

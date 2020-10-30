@@ -5,6 +5,7 @@ import { OrganisationService } from 'app/services/organisation.service';
 import { SpecialtyService } from 'app/services/specialty.service';
 import { ToasterService } from 'app/services/toaster.service';
 import { FileUploader } from 'ng2-file-upload';
+import { ThemePalette } from '@angular/material/core';
 const URL = 'https://evening-anchorage-3159.herokuapp.com/api/';
 
 @Component({
@@ -26,6 +27,10 @@ export class ManageOrganisationComponent implements OnInit {
   public hasAnotherDropZoneOver: boolean = false;
   orgData: any;
   specialtyList: any;
+  colorPiker = '';
+  public disabled = false;
+  public color: ThemePalette = 'primary';
+  public touchUi = false;
   public fileOverAnother(e: any): void {
     this.hasAnotherDropZoneOver = e;
   }
@@ -35,6 +40,11 @@ export class ManageOrganisationComponent implements OnInit {
 
   ngOnInit(): void {
     this.createControl()
+    this.getOrganisationAddress()
+    console.log(this.organisationForm.value)
+  }
+  ngOnChanges(){
+    console.log(this.getOrganisationAddress())
     this.getOrganisationAddress()
   }
 
@@ -71,6 +81,7 @@ export class ManageOrganisationComponent implements OnInit {
 
   getOrganisationAddress() {
     this.organisationService.getOrganisationAddressDetails().subscribe((orgDetails: any) => {
+      console.log(orgDetails.data)
       this.orgData = orgDetails.data
       this.organisationId = orgDetails.data.Organization.organizationId
       if (orgDetails.success) {
@@ -85,6 +96,7 @@ export class ManageOrganisationComponent implements OnInit {
         this.organisationForm.get('state').setValue(orgDetails.data.Organization.Address.state)
         this.organisationForm.get('zip').setValue(orgDetails.data.Organization.Address.zip)
         this.organisationForm.get('tagline').setValue(orgDetails.data.Organization.tagline)
+        this.organisationForm.get('colorPiker').setValue(orgDetails.data.Organization.colorPiker)
         this.organisationForm.get('specialty').setValue(specialty[0])
         this.organisationForm.get('description').setValue(orgDetails.data.Organization.description)
         this.organisationForm.get('country').setValue(orgDetails.data.Organization.Address.country)
@@ -110,6 +122,7 @@ export class ManageOrganisationComponent implements OnInit {
       zip: ['', [Validators.required]],
       specialty: ['', [Validators.required]],
       tagline: ['', [Validators.required]],
+      colorPiker: [''],
       description: ['', [Validators.required]],
       country: ['', [Validators.required]]
     })
@@ -167,6 +180,7 @@ export class ManageOrganisationComponent implements OnInit {
         organization: {
           "name": this.organisationForm.get('name').value,
           "tagline": this.organisationForm.get('tagline').value,
+          "colorPiker": this.organisationForm.get('colorPiker').value,
           "description": this.organisationForm.get('description').value,
           "specialty": (this.organisationForm.get('specialty').value).toString()
         },
@@ -215,5 +229,8 @@ export class ManageOrganisationComponent implements OnInit {
     }, (error: any) => {
       this.toasterService.showErrorToater(error.statusText);
     })
+  }
+  buttonColor(value) {
+    this.organisationForm.get('colorPiker').setValue(value);
   }
 }

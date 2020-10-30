@@ -11,6 +11,7 @@ import { LawyerChatComponent } from './lawyer-chat/lawyer-chat.component';
 import { TextMaskModule } from 'angular2-text-mask';
 import { ManageProfileComponent } from './manage-profile/manage-profile.component';
 import { FileUploadModule } from 'ng2-file-upload';
+import { ReversePipe } from './accepted-cases/reverse.pipe';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { FileUploadModule } from 'ng2-file-upload';
     AcceptedCasesComponent,
     LawyerChatComponent,
     ManageProfileComponent,
+    ReversePipe,
   ],
   imports: [
     TextMaskModule,
