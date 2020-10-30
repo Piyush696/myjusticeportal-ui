@@ -9,6 +9,8 @@ import { ViewCaseDetailsComponent } from './view-case-details/view-case-details.
 import { AcceptedCasesComponent } from './accepted-cases/accepted-cases.component';
 import { LawyerChatComponent } from './lawyer-chat/lawyer-chat.component';
 import { TextMaskModule } from 'angular2-text-mask';
+import { ManageProfileComponent } from './manage-profile/manage-profile.component';
+import { FileUploadModule } from 'ng2-file-upload';
 
 @NgModule({
   declarations: [
@@ -16,6 +18,7 @@ import { TextMaskModule } from 'angular2-text-mask';
     ViewCaseDetailsComponent,
     AcceptedCasesComponent,
     LawyerChatComponent,
+    ManageProfileComponent,
   ],
   imports: [
     TextMaskModule,
@@ -24,7 +27,8 @@ import { TextMaskModule } from 'angular2-text-mask';
     SharedMaterialModule,
     SharedComponentsModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    FileUploadModule
   ]
 })
 
