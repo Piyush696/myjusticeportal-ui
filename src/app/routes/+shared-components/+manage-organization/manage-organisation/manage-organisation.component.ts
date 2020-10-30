@@ -86,7 +86,9 @@ export class ManageOrganisationComponent implements OnInit {
       this.organisationId = orgDetails.data.Organization.organizationId
       if (orgDetails.success) {
         let specialty = [];
-        specialty.push(orgDetails.data.Organization.specialty.split(","))
+        if (orgDetails.data.Organization.specialty) {
+          specialty.push(orgDetails.data.Organization.specialty.split(","))
+        }
         this.organisationForm.get('name').setValue(orgDetails.data.Organization.name)
         this.organisationForm.get('street1').setValue(orgDetails.data.Organization.Address.street1)
         this.organisationForm.get('street2').setValue(orgDetails.data.Organization.Address.street2)
@@ -101,9 +103,11 @@ export class ManageOrganisationComponent implements OnInit {
         this.addressId = orgDetails.data.Organization.Address.addressId
         this.organisationForm.disable();
       } else {
+        console.log('csdc')
         this.toasterService.showErrorToater(orgDetails.data);
       }
     }, (error: any) => {
+      console.log('csdc')
       this.toasterService.showErrorToater(error.statusText);
     })
   }
@@ -155,6 +159,7 @@ export class ManageOrganisationComponent implements OnInit {
       width: '500px',
     });
   }
+
   openOrganizationModal(templateRef) {
     this.inviteMailForm.reset();
     let dialogRef = this.dialog.open(templateRef, {

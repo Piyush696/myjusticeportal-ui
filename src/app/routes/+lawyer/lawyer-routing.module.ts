@@ -8,6 +8,7 @@ import { ManageOrganisationComponent } from '../+shared-components/+manage-organ
 import { ViewUsersComponent } from '../+shared-components/+manage-organization/view-users/view-users.component';
 import { ViewFacilitiesComponent } from '../+shared-components/+manage-organization/view-facilities/view-facilities.component';
 import { LawyerChatComponent } from './lawyer-chat/lawyer-chat.component';
+import { ManageProfileComponent } from './manage-profile/manage-profile.component';
 
 const routes: Routes = [
     { path: '', redirectTo: 'lawyer-dashboard', pathMatch: 'full' },
@@ -16,6 +17,7 @@ const routes: Routes = [
     { path: 'accepted-cases/:caseId', component: ViewCaseDetailsComponent },
     { path: 'my-account', component: MyAccountComponent },
     { path: 'manage-organization', component: ManageOrganisationComponent },
+    { path: 'manage-profile', component: ManageProfileComponent },
     { path: 'manage-organization/users', component: ViewUsersComponent },
     { path: 'lawyer-chat', component: LawyerChatComponent },
     { path: 'manage-organization/facilities', component: ViewFacilitiesComponent },
