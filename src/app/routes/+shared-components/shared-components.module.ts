@@ -12,6 +12,7 @@ import { RouterModule } from '@angular/router';
 import { ChatComponent } from './chat/chat.component';
 import { FileUploadModule } from 'ng2-file-upload';
 import { MesageListComponent } from './mesage-list/mesage-list.component';
+import { ColorPickerModule } from 'ngx-color-picker';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { MesageListComponent } from './mesage-list/mesage-list.component';
     ReactiveFormsModule,
     SharedMaterialModule,
     RouterModule,
-    FileUploadModule
+    FileUploadModule,
+    ColorPickerModule
   ],
   exports: [
     LoginComponent,
