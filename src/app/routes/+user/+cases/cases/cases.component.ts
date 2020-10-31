@@ -4,6 +4,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { CaseService } from 'app/services/case.service';
 import { ToasterService } from 'app/services/toaster.service';
+import { UserAdditionInfoService } from 'app/services/user-addition-info.service';
 
 @Component({
   selector: 'app-cases',
@@ -13,25 +14,36 @@ import { ToasterService } from 'app/services/toaster.service';
 
 export class CasesComponent implements OnInit {
   caseList: any;
+  sponsorUserList: any;
   caseNoteForm: FormGroup;
   // enableEditBtn: boolean = true;
   currentCaseId: any;
   @ViewChild('modalopen') modalopen: ElementRef
 
   constructor(private toasterService: ToasterService, public dialog: MatDialog,
-    private caseService: CaseService, private fb: FormBuilder, private router: Router) {
+    private caseService: CaseService, private fb: FormBuilder, private router: Router, private userAdditionalService: UserAdditionInfoService) {
   }
 
   ngOnInit(): void {
     this.getCases();
+    this.getSponsors();
     this.createCaseNotesForm();
   }
+
   ngAfterViewInit(): void {
     this.modalopen.nativeElement.click();
   }
+
   createCaseNotesForm() {
     this.caseNoteForm = this.fb.group({
       notes: ['', [Validators.required]]
+    })
+  }
+
+  getSponsors() {
+    this.userAdditionalService.getSponsorUsers().subscribe((sponsorsUser: any) => {
+      console.log(sponsorsUser)
+      this.sponsorUserList = sponsorsUser.data
     })
   }
 
@@ -76,7 +88,7 @@ export class CasesComponent implements OnInit {
       this.toasterService.showErrorToater(error.statusText);
     })
   }
-  onContactLawyer() {
-    this.router.navigateByUrl('/mjp/user/hire-lawyer')
+  onContactLawyer(userId) {
+    this.router.navigateByUrl('/mjp/user/contact/' + userId)
   }
 }

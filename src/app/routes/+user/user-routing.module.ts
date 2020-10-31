@@ -23,7 +23,7 @@ const routes: Routes = [
     { path: 'dashboard', component: UserDashboardComponent },
     { path: 'my-account', component: MyAccountComponent },
     { path: 'case', component: CasesComponent },
-    { path: 'contact', component: ContactComponent },
+    { path: 'contact/:userId', component: ContactComponent },
     { path: 'case/create', component: CreateCaseComponent },
     { path: 'case/:caseId/edit', component: EditCaseComponent },
     { path: 'case/:caseId', component: ViewCaseComponent },

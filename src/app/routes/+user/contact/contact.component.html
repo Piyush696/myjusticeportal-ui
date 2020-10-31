@@ -8,16 +8,17 @@
 <div>
     <h3 class="font-weight-bold">You are contacting:</h3>
     <div class="col-6 pl-0">
-        <mat-form-field appearance="fill" class="w-100">
-            <mat-label>Lawyer</mat-label>
-            <mat-select>
-                <mat-option>
-                    Select organization
-                </mat-option>
-                <mat-option *ngFor="let org of organizationList" [value]="org.name">
-                    {{org?.name}}
-                </mat-option>
-            </mat-select>
+        <mat-form-field appearance="fill" class="w-100 p-0">
+            <mat-label>Organization Name</mat-label>
+            <input type="text" matInput placeholder="Organization Name" [formControl]="lawyerCaseForm.controls['name']"
+                required>
+            <mat-error>
+                <div *ngIf="lawyerCaseForm.controls['name'].invalid && lawyerCaseForm.controls['name'].touched">
+                    <small class="font13">
+                        Organization Name is Required
+                    </small>
+                </div>
+            </mat-error>
         </mat-form-field>
     </div>
 
@@ -27,7 +28,7 @@
     <div class="col-6 pl-0">
         <mat-form-field appearance="fill" class="w-100">
             <mat-label>Cases</mat-label>
-            <mat-select>
+            <mat-select [formControl]="lawyerCaseForm.controls['caseId']">
                 <mat-option>
                     Select Case
                 </mat-option>
@@ -56,7 +57,7 @@
         </mat-form-field>
     </div>
     <div class="pr-2 pb-2 pt-2 pl-0">
-        <button class="button-purple px-5 py-1 float-right" mat-raised-button>
+        <button class="button-purple px-5 py-1 float-right" mat-raised-button (click)="onContactLawyer()">
             Contact lawyer
         </button>
     </div>
