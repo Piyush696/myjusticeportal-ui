@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 import { CaseService } from 'app/services/case.service';
 import { HireLawyerService } from 'app/services/hire-lawyer.service';
 import { ToasterService } from 'app/services/toaster.service';
+import { UserAdditionInfoService } from 'app/services/user-addition-info.service';
 
 @Component({
   selector: 'app-contact',
@@ -11,17 +14,42 @@ import { ToasterService } from 'app/services/toaster.service';
 export class ContactComponent implements OnInit {
   organizationList: any;
   caseList: any;
+  userOrg: any;
+  lawyerCaseForm: FormGroup;
 
-  constructor(private hireLawyerService: HireLawyerService, private caseService: CaseService, private toasterService: ToasterService) { }
-
-  ngOnInit(): void {
-    this.onGetLaywers();
-    this.getCases();
+  constructor(private hireaLawyerService: HireLawyerService, private fb: FormBuilder, private additionalInfoService: UserAdditionInfoService, private activatedRoute: ActivatedRoute, private caseService: CaseService, private toasterService: ToasterService) {
+    this.activatedRoute.snapshot.params['userId']
   }
 
-  onGetLaywers() {
-    this.hireLawyerService.getOrganization().subscribe((res: any) => {
-      this.organizationList = res.data;
+  ngOnInit(): void {
+    this.createFormControl();
+    this.getCases();
+    this.getOrgUser();
+  }
+
+  createFormControl() {
+    this.lawyerCaseForm = this.fb.group({
+      name: ['', [Validators.required]],
+      caseId: ['', [Validators.required]]
+    });
+  }
+
+  getOrgUser() {
+    this.additionalInfoService.getSingleUsers(this.activatedRoute.snapshot.params['userId']).subscribe((userOrg: any) => {
+      console.log(userOrg)
+      this.userOrg = userOrg.data
+      this.lawyerCaseForm.get('name').setValue(userOrg.data?.Organization?.name)
+      this.lawyerCaseForm.get('name').disable();
+    })
+  }
+
+  onContactLawyer() {
+    const data = {
+      "lawyerId": this.userOrg.userId,
+      "caseId": this.lawyerCaseForm.get('caseId').value
+    }
+    this.additionalInfoService.setCasesLawyer(data).subscribe((data: any) => {
+      console.log(data)
     })
   }
 

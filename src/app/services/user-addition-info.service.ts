@@ -33,4 +33,16 @@ export class UserAdditionInfoService {
   updateAdditionalInfo(userData) {
     return this.httpClient.put<Object>(`${this.apiPath}/userAdditionalInfo`, userData, this.getHeaders());
   }
+
+  getSponsorUsers() {
+    return this.httpClient.get<object>(`${this.apiPath}/userAdditionalInfo/sponsorsUser`, this.getHeaders());
+  }
+
+  getSingleUsers(userId) {
+    return this.httpClient.get<object>(`${this.apiPath}/userAdditionalInfo/${userId}`, this.getHeaders());
+  }
+
+  setCasesLawyer(selectedCases) {
+    return this.httpClient.post<any>(`${this.apiPath}/userAdditionalInfo`, selectedCases, this.getHeaders());
+  }
 }
