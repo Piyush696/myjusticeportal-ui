@@ -22,6 +22,21 @@
         </mat-form-field>
     </div>
 
+    <div class="col-6 pl-0">
+        <mat-form-field appearance="fill" class="w-100 p-0">
+            <mat-label>Lawyer</mat-label>
+            <input type="text" matInput placeholder="Lawyer" [formControl]="lawyerCaseForm.controls['lawyerName']"
+                required>
+            <!-- <mat-error>
+                <div *ngIf="lawyerCaseForm.controls['name'].invalid && lawyerCaseForm.controls['name'].touched">
+                    <small class="font13">
+                        Organization Name is Required
+                    </small>
+                </div>
+            </mat-error> -->
+        </mat-form-field>
+    </div>
+
     <h3 class="font-weight-bold">Select Your Case:</h3>
     <span class="font-italic">By allowing the lawyer to view your case info, they can provide you with a better
         response.</span>
