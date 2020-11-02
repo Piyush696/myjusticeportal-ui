@@ -61,7 +61,7 @@
 
     <div class="col-8 p-0">
         <mat-form-field appearance="fill" class="w-100 p-2">
-            <textarea rows="20" matInput></textarea>
+            <textarea rows="20" matInput [formControl]="lawyerCaseForm.controls['notes']"></textarea>
             <!-- <mat-error>
                         <div *ngIf="caseNoteForm.controls['notes'].invalid && caseNoteForm.controls['notes'].touched">
                             <small class="font13">
