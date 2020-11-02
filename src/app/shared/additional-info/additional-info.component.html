@@ -103,10 +103,10 @@
                         <div class="col-4 p-0">
                             <mat-form-field appearance="fill" class="w-100 p-1">
                                 <!-- <mat-label>Specialty</mat-label> -->
-                                <mat-label>Specialty</mat-label>
+                                <mat-label>Practice Areas</mat-label>
                                 <mat-select [formControl]="toppings" multiple
                                     [formControl]="additionalInfoLawyer.controls['speciality']" required>
-                                    <mat-option>Select specialty</mat-option>
+                                    <mat-option>Select Practice Areas</mat-option>
                                     <mat-option *ngFor="let specialty of specialtyList"
                                         value="{{specialty.specialtyType}}">{{specialty.specialtyType}}</mat-option>
                                 </mat-select>
@@ -121,7 +121,7 @@
                                     *ngIf="additionalInfoLawyer.controls['speciality'].invalid && additionalInfoLawyer.controls['speciality'].touched">
                                     <small class="font13"
                                         *ngIf="additionalInfoLawyer.get('speciality').errors?.required">
-                                        Specialty is required.
+                                        Practice Areas is required.
                                     </small>
                                 </mat-error>
                             </mat-form-field>
@@ -129,7 +129,7 @@
                     </div>
                     <div class="d-flex justify-content-end">
                         <a class="anchor-style" mat-flat-button (click)="openModal(mytemplate)">
-                            + Add Speciality
+                            + Add Practice Areas
                         </a>
                     </div>
                 </div>
