@@ -17,7 +17,6 @@ export class InquiriesComponent implements OnInit {
 
   getPendingCaseDetails() {
     this.userAdditionInfoService.getLawyerCases().subscribe((pendingCase: any) => {
-      console.log(pendingCase)
       this.pendingCasesList = pendingCase.data
     })
   }
