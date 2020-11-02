@@ -4,6 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { CaseService } from 'app/services/case.service';
 import { HireLawyerService } from 'app/services/hire-lawyer.service';
 import { ToasterService } from 'app/services/toaster.service';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-view-lawyer',
@@ -19,20 +20,29 @@ export class ViewLawyerComponent implements OnInit {
   isHired: boolean = false;
   logo: any;
   specialtyList: any;
-
+  viewCaseForm: FormGroup;
+  data:any;
   constructor(private hireLawyerService: HireLawyerService, public dialog: MatDialog,
     private caseService: CaseService, private activatedRoute: ActivatedRoute,
-    private toasterService: ToasterService) {
+    private fb: FormBuilder, private toasterService: ToasterService) {
     this.organizationId = this.activatedRoute.snapshot.params.organizationId;
   }
 
   ngOnInit(): void {
+    this.createFormControl();
     this.getAllUsers();
     this.getAllCases();
   }
 
+  createFormControl() {
+    this.viewCaseForm = this.fb.group({
+      notes: ['', [Validators.required]]
+    });
+  }
+
   getAllUsers() {
     this.hireLawyerService.getUsersLawyer(this.organizationId).subscribe((users: any) => {
+      console.log(users)
       let specialty = [];
       specialty.push(users.data.specialty.split(","))
       this.specialtyList = specialty[0]
@@ -50,10 +60,13 @@ export class ViewLawyerComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
     });
   }
-
+  
   onSelectCaseIds(event, caseId) {
+    const data = {
+      "notes": this.viewCaseForm.get('notes').value
+    }
     if (event) {
-      this.selectedCases.push({ caseId });
+      this.selectedCases.push({ caseId },{data});
       this.selectedCases.map((x) => {
         x['lawyerId'] = this.userId
       })

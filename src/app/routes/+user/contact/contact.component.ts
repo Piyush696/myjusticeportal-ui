@@ -30,26 +30,35 @@ export class ContactComponent implements OnInit {
   createFormControl() {
     this.lawyerCaseForm = this.fb.group({
       name: ['', [Validators.required]],
-      caseId: ['', [Validators.required]]
+      lawyerName: ['', [Validators.required]],
+      caseId: ['', [Validators.required]],
+      notes: ['', [Validators.required]]
     });
   }
 
   getOrgUser() {
     this.additionalInfoService.getSingleUsers(this.activatedRoute.snapshot.params['userId']).subscribe((userOrg: any) => {
-      console.log(userOrg)
       this.userOrg = userOrg.data
       this.lawyerCaseForm.get('name').setValue(userOrg.data?.Organization?.name)
+      this.lawyerCaseForm.get('lawyerName').setValue(userOrg.data?.firstName +' '+ userOrg.data?.middleName + ' ' + userOrg.data?.lastName)
       this.lawyerCaseForm.get('name').disable();
+      this.lawyerCaseForm.get('lawyerName').disable();
     })
   }
 
   onContactLawyer() {
     const data = {
       "lawyerId": this.userOrg.userId,
-      "caseId": this.lawyerCaseForm.get('caseId').value
+      "caseId": this.lawyerCaseForm.get('caseId').value,
+      "notes": this.lawyerCaseForm.get('notes').value
     }
     this.additionalInfoService.setCasesLawyer(data).subscribe((data: any) => {
-      console.log(data)
+      if (data.success) {
+        this.toasterService.showSuccessToater('Cases Requested.')
+      }
+      else {
+        this.toasterService.showErrorToater('Cases not Requested.')
+      }
     })
   }
 
