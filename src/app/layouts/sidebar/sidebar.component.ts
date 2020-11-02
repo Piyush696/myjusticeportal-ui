@@ -25,6 +25,7 @@ export const ROUTES: RouteInfo[] = [
     { path: 'lawyer/accepted-cases', title: 'My Cases', icon: 'nc-bank', class: '', roleIds: [3] },
     { path: 'bondsman/accepted-users', title: 'Accepted Users', icon: 'nc-bank', class: '', roleIds: [6] },
     { path: 'lawyer/manage-organization', title: 'Manage Organization', icon: 'nc-bank', class: '', roleIds: [3], isAdmin: true },
+    { path: 'lawyer/manage-profile', title: 'Manage Profile', icon: 'nc-bank', class: '', roleIds: [3], isAdmin: true },
     { path: 'researcher/manage-organization', title: 'Manage Organization', icon: 'nc-bank', class: '', roleIds: [4], isAdmin: true },
     { path: 'public-defender/manage-organization', title: 'Manage Organization', icon: 'nc-bank', class: '', roleIds: [5], isAdmin: true },
     { path: 'bondsman/manage-organization', title: 'Manage Organization', icon: 'nc-bank', class: '', roleIds: [6], isAdmin: true },
