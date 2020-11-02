@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
 import { CaseService } from 'app/services/case.service';
@@ -20,8 +21,8 @@ export class ViewLawyerComponent implements OnInit {
   isHired: boolean = false;
   logo: any;
   specialtyList: any;
-  viewCaseForm: FormGroup;
-  data:any;
+  viewCaseForm:FormGroup;
+
   constructor(private hireLawyerService: HireLawyerService, public dialog: MatDialog,
     private caseService: CaseService, private activatedRoute: ActivatedRoute,
     private fb: FormBuilder, private toasterService: ToasterService) {
@@ -29,7 +30,7 @@ export class ViewLawyerComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.createFormControl();
+    this.createFormControl()
     this.getAllUsers();
     this.getAllCases();
   }
@@ -60,16 +61,13 @@ export class ViewLawyerComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
     });
   }
-  
+
   onSelectCaseIds(event, caseId) {
-    const data = {
-      "notes": this.viewCaseForm.get('notes').value
-    }
     if (event) {
-      this.selectedCases.push({ caseId },{data});
+      this.selectedCases.push({caseId});
       this.selectedCases.map((x) => {
         x['lawyerId'] = this.userId
-      })
+      });
     } else {
       this.selectedCases.forEach((x, i, a) => {
         if (x == caseId) {
