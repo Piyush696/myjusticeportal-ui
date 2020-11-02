@@ -18,6 +18,7 @@ export class LoginComponent implements OnInit {
   loginForm: FormGroup;
   step: number = 1;
   facilityCode: any;
+  spinner:boolean=false;
 
   constructor(private activatedRoute: ActivatedRoute, private fb: FormBuilder,
     private router: Router, private store: Store<any>,
@@ -35,31 +36,37 @@ export class LoginComponent implements OnInit {
   }
 
   onLogin() {
+    this.spinner = true;
     const loginData = {
       "userName": this.loginForm.get('userName').value,
-      "password": this.loginForm.get('password').value
+      "password": this.loginForm.get('password').value,
     }
     this.lawyerService.lawyerLogin(loginData).subscribe((res: any) => {
       if (res.success) {
         this.cacheService.setCache('token', res.token);
         this.checkToken();
+        this.spinner=false;
       }
       else {
         if (res.data === 'Please Enter Your auth code.') {
           this.toasterService.showSuccessToater(res.data);
           this.step = 2;
+          this.spinner=false;
         }
         else if (res.data === 'Please Register your Mobile Number.') {
           this.toasterService.showSuccessToater(res.data);
           this.step = 3;
+          this.spinner=false;
         }
         else if (res.data === 'Please complete your registration.') {
           this.toasterService.showWarningToater(res.data);
+          this.spinner=false;
           // this.step = 4;
         }
         else {
           this.step = 1
           this.toasterService.showWarningToater(res.data);
+          this.spinner=false;
         }
       }
     })
@@ -100,7 +107,7 @@ export class LoginComponent implements OnInit {
           this.router.navigateByUrl('/mjp/facility/facility-dashboard');
         }
         else if (data.user.roles[0].roleId === 3) {
-          this.router.navigateByUrl('/mjp/lawyer/lawyer-dashboard');
+          this.router.navigateByUrl('/mjp/lawyer/lawyer-dashboard');       
         }
         else if (data.user.roles[0].roleId === 4) {
           this.router.navigateByUrl('/mjp/researcher/paralegal-dashboard');
