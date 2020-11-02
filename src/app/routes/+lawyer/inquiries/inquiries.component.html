@@ -1,0 +1,25 @@
+<div class="col-12 pl-0">
+    <mat-card>
+        <h2 class="font-weight-bold m-0">Inquiries</h2>
+        <small>See new inquiries and approve new clients.</small>
+
+        <div>
+            <table style="width:100%">
+                <tr>
+                    <th class="text-center">Name</th>
+                    <th class="text-center">Case Description</th>
+                    <th class="text-center">Sent</th>
+                    <th class="text-center">Status</th>
+                    <th class="text-center">Action</th>
+                </tr>
+                <tr *ngFor="let case of pendingCasesList">
+                    <td>{{case?.inmate?.firstName}} {{case?.inmate?.middleName}} {{case?.inmate?.lastName}}</td>
+                    <td>{{case?.briefDescriptionOfChargeOrLegalMatter}}</td>
+                    <td>{{case?.sentAt | date:'MM/dd/yyyy'}}</td>
+                    <td>{{case?.status}}</td>
+                    <td>None</td>
+                </tr>
+            </table>
+        </div>
+    </mat-card>
+</div>
