@@ -51,7 +51,7 @@ export class OrganisationComponent implements OnInit, OnChanges {
       street2: [''],
       city: ['', [Validators.required, Validators.maxLength(50)]],
       state: ['', [Validators.required, Validators.maxLength(50)]],
-      zip: ['', [Validators.required, Validators.maxLength(20)]],
+      zip: ['', [Validators.required,Validators.minLength(5) ,Validators.maxLength(9)]],
       country: ['United States', [Validators.required, Validators.maxLength(50)]]
     });
   }
