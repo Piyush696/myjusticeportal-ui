@@ -122,11 +122,14 @@
                         <input type="text" matInput [formControl]="addressForm.controls['zip']" required>
                         <mat-error>
                             <div *ngIf="addressForm.controls['zip'].invalid && addressForm.controls['zip'].touched">
-                                <small class="font13">
+                                <small class="font13" *ngIf="addressForm.get('zip').errors?.required">
                                     Zip Code is Required
                                 </small>
+                                <small class="font13" *ngIf="addressForm.get('zip').errors?.minlength">
+                                    Zip Code should be more than 5 chracters
+                                </small>
                                 <small class="font13" *ngIf="addressForm.get('zip').errors?.maxlength">
-                                    Zip Code should be less than 20 chracters
+                                    Zip Code should be less than 9 chracters
                                 </small>
                             </div>
                         </mat-error>
