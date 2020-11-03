@@ -50,4 +50,8 @@ export class UserAdditionInfoService {
     return this.httpClient.get<object>(`${this.apiPath}/userAdditionalInfo/lawyer/Cases`, this.getHeaders());
   }
 
+  updateInmateStatus(updateStatus) {
+    return this.httpClient.post<any>(`${this.apiPath}/userAdditionalInfo/inmateStatus`, updateStatus, this.getHeaders());
+  }
+
 }

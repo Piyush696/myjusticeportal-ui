@@ -13,3 +13,8 @@ th {
 td {
   padding: 10px;
 }
+
+.scroll {
+  height: 300px;
+  overflow-y: scroll;
+}
