@@ -33,6 +33,7 @@ export class ViewLawyerComponent implements OnInit {
 
   getAllUsers() {
     this.hireLawyerService.getUsersLawyer(this.organizationId).subscribe((users: any) => {
+      console.log(users)
       let specialty = [];
       specialty.push(users.data.specialty.split(","))
       this.specialtyList = specialty[0]
@@ -53,10 +54,10 @@ export class ViewLawyerComponent implements OnInit {
 
   onSelectCaseIds(event, caseId) {
     if (event) {
-      this.selectedCases.push({ caseId });
+      this.selectedCases.push({caseId});
       this.selectedCases.map((x) => {
         x['lawyerId'] = this.userId
-      })
+      });
     } else {
       this.selectedCases.forEach((x, i, a) => {
         if (x == caseId) {

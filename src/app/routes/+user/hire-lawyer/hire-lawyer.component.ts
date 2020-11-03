@@ -30,7 +30,9 @@ export class HireLawyerComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
     this.onGetLaywers();
-    this.stateData()
+    this.stateData();
+    this.ngAfterViewInit()
+    
   }
 
   onGetLaywers() {

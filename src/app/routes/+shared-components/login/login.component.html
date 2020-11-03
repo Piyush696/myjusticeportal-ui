@@ -35,7 +35,8 @@
                         LOGIN
                     </button>
                 </div>
-            </mat-card>
+            </mat-card>   
+            <div *ngIf="spinner" class="d-flex justify-content-center align-items-center spinner"><mat-spinner color="primary"></mat-spinner> </div>    
             <mat-card *ngIf="step === 2" class="mat-elevation-z10 p-4">
                 <div>
                     <h3 class="text-center font-weight-bold">Please check your phone</h3>
