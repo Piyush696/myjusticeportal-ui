@@ -18,7 +18,24 @@
                     <td>{{case.firstName}} {{case.middleName}} {{case.lastName}}</td>
                     <td>{{case.sent | date:'MM/dd/yyyy'}}</td>
                     <td>{{case.status}}</td>
-                    <td>None</td>
+                    <td class="d-flex justify-content-center align-items-center">
+                        <div>
+                            <button class="mr-1" color="green" mat-mini-fab title="Approve">
+                                <mat-icon>done</mat-icon>
+                            </button>
+                        </div>
+                        <div>
+                            <button mat-mini-fab color="warn" title="Reject">
+                                <mat-icon>clear</mat-icon>
+                            </button>
+                        </div>
+                        <div>
+                            <button [routerLink]="'user/message-my-lawyer'" mat-mini-fab color="black"
+                                title="More Queries" (click)="onOpenModal(confirmModal,user)">
+                                <mat-icon>chat</mat-icon>
+                            </button>
+                        </div>
+                    </td>
                 </tr>
             </table>
         </div>

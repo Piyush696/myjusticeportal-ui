@@ -45,4 +45,9 @@ export class UserAdditionInfoService {
   setCasesLawyer(selectedCases) {
     return this.httpClient.post<any>(`${this.apiPath}/userAdditionalInfo`, selectedCases, this.getHeaders());
   }
+
+  getLawyerCases() {
+    return this.httpClient.get<object>(`${this.apiPath}/userAdditionalInfo/lawyer/Cases`, this.getHeaders());
+  }
+
 }
