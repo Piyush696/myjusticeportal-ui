@@ -218,8 +218,8 @@
         </div>
     </div>
 
-    <div class="mt-4" *ngFor="let case of requestedCases">
-        <mat-card class="outer-card mat-elevation-z10 mt-3">
+    <div class="mt-4">
+        <mat-card *ngIf="requestedCases?.length!=0" class="outer-card mat-elevation-z10 mt-3">
             <mat-label class="font-weight-bold">
                 Active cases({{requestedCases?.length}}):
             </mat-label>
@@ -227,8 +227,7 @@
                 <span>No data available.</span>
             </mat-card> -->
            <div *ngFor="let case of requestedCases">
-                <mat-card class="d-flex flex-row justify-content-between align-items-center inner-card mt-2"
-                >
+                <mat-card class="d-flex flex-row justify-content-between align-items-center inner-card mt-2">
                     <div class="d-flex flex-column">
                         <span>{{case?.briefDescriptionOfChargeOrLegalMatter}}</span>
                         <span>
