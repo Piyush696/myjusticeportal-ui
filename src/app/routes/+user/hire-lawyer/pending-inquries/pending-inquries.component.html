@@ -4,7 +4,7 @@
         <small>These are lawyer you attempted to contact,View your conversation here and approve new
             lawyers.</small>
 
-        <div>
+        <div class="scroll">
             <table style="width:100%">
                 <tr>
                     <th class="text-center">Law Firm</th>
@@ -14,24 +14,31 @@
                     <th class="text-center">Action</th>
                 </tr>
                 <tr *ngFor="let case of pendingCasesList">
-                    <td>{{case.Organization.name}}</td>
-                    <td>{{case.firstName}} {{case.middleName}} {{case.lastName}}</td>
-                    <td>{{case.sent | date:'MM/dd/yyyy'}}</td>
-                    <td>{{case.status}}</td>
+                    <td>{{case?.Organization?.name}}</td>
+                    <td>{{case?.firstName}} {{case?.middleName}} {{case?.lastName}}</td>
+                    <td>{{case?.sent | date:'MM/dd/yyyy'}}</td>
+                    <td>{{case?.statusDeclared}}</td>
                     <td class="d-flex justify-content-center align-items-center">
                         <div>
-                            <button class="mr-1" color="green" mat-mini-fab title="Approve">
+                            <button
+                                [disabled]="(case.status === 'inmate_rejected' ||  case.status === 'Rejected' ||  case.status === 'Requested')"
+                                class="mr-1" color="green" mat-mini-fab title="Approve"
+                                (click)="onClickStatus('inmate_accepted',case.userId,case.caseId)">
                                 <mat-icon>done</mat-icon>
                             </button>
                         </div>
                         <div>
-                            <button mat-mini-fab color="warn" title="Reject">
+                            <button
+                                [disabled]="(case.status === 'inmate_rejected' || case.status === 'Rejected' ||case.status === 'Requested')"
+                                mat-mini-fab color="warn" title="Reject"
+                                (click)="onClickStatus('inmate_rejected',case.userId,case.caseId)">
                                 <mat-icon>clear</mat-icon>
                             </button>
                         </div>
                         <div>
-                            <button [routerLink]="'user/message-my-lawyer'" mat-mini-fab color="black"
-                                title="More Queries" (click)="onOpenModal(confirmModal,user)">
+                            <button
+                                [disabled]="( case.status === 'inmate_rejected' || case.status === 'inmate_accepted' || case.status === 'Rejected' || case.status === 'Requested' || case.status === 'Approved')"
+                                mat-mini-fab color="black" title="More Queries" (click)="onOpenModal(openModal,user)">
                                 <mat-icon>chat</mat-icon>
                             </button>
                         </div>
@@ -41,3 +48,18 @@
         </div>
     </mat-card>
 </div>
+
+<ng-template #openModal>
+    <div>
+        <h2 class="text-center font-weight-bold">Do You want to Chat more? </h2>
+    </div>
+
+    <div class="d-flex justify-content-between">
+        <button mat-raised-button class="button-purple px-4 py-1" (click)="closeModal()">
+            No
+        </button>
+        <button class="button-purple px-4 py-1" mat-raised-button (click)="saveChanges()">
+            Yes
+        </button>
+    </div>
+</ng-template>
