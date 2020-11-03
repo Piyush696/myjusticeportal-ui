@@ -19,21 +19,36 @@
                     <td>{{case?.status}}</td>
                     <td class="d-flex justify-content-center align-items-center">
                         <div>
-                            <button class="mr-1" color="green" mat-mini-fab title="Approve">
+                            <button class="mr-1" color="green" mat-mini-fab title="Approve"  [disabled]="( case.status === 'Rejected')"
+                            (click)="onStatusUpdate(case?.caseId, status='Approved')">
                                 <mat-icon>done</mat-icon>
                             </button>
                         </div>
                         <div>
-                            <button mat-mini-fab color="warn" title="Reject">
+                            <button mat-mini-fab color="warn" title="Reject" [disabled]="(case.status === 'Rejected')"
+                            (click)="onStatusUpdate(case?.caseId, status='Rejected')">
                                 <mat-icon>clear</mat-icon>
                             </button>
-                        </div>
+                        </div>&nbsp;
                         <div>
-                            <button mat-mini-fab color="black"
+                            <button mat-mini-fab color="black"  [disabled]="(case.status === 'Rejected' )"
                                 title="More Queries" (click)="onOpenModal(confirmModal,user)">
                                 <mat-icon>chat</mat-icon>
                             </button>
                         </div>
+                        <ng-template #confirmModal>
+                            <div>
+                                <h2 class="text-center font-weight-bold">Are You sure you want to enable the chat!</h2>
+                            </div>
+                            <div class="d-flex justify-content-between mt-5"> 
+                                <button class="button-purple px-4 py-1" mat-raised-button (click)="closeModal()">
+                                    No
+                                </button>
+                                <button mat-raised-button class="button-purple px-4 py-1" (click)="onStatusUpdate(case?.caseId, status='chatEnabled'); onChatEnable()">
+                                    Yes
+                                </button>
+                            </div>
+                        </ng-template>
                     </td>
                 </tr>
             </table>
@@ -41,19 +56,3 @@
     </mat-card>
 </div>
 
-
-<ng-template #confirmModal>
-    <div>
-        <h2 class="text-center font-weight-bold">Are You want to chat with Inimate</h2>
-    </div>
-
-    
-    <div class="d-flex justify-content-between mt">
-        <button mat-raised-button class="button-purple px-4 py-1" [routerLink]="'../lawyer-chat'" (click)="closeModal()">
-            Yes
-        </button>
-        <button class="button-purple px-4 py-1" mat-raised-button  (click)="closeModal()">
-            No
-        </button>
-    </div>
-</ng-template>
