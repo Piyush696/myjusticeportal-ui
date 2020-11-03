@@ -1,11 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
 import { CaseService } from 'app/services/case.service';
 import { HireLawyerService } from 'app/services/hire-lawyer.service';
 import { ToasterService } from 'app/services/toaster.service';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-view-lawyer',
@@ -21,24 +19,16 @@ export class ViewLawyerComponent implements OnInit {
   isHired: boolean = false;
   logo: any;
   specialtyList: any;
-  viewCaseForm:FormGroup;
 
   constructor(private hireLawyerService: HireLawyerService, public dialog: MatDialog,
     private caseService: CaseService, private activatedRoute: ActivatedRoute,
-    private fb: FormBuilder, private toasterService: ToasterService) {
+    private toasterService: ToasterService) {
     this.organizationId = this.activatedRoute.snapshot.params.organizationId;
   }
 
   ngOnInit(): void {
-    this.createFormControl()
     this.getAllUsers();
     this.getAllCases();
-  }
-
-  createFormControl() {
-    this.viewCaseForm = this.fb.group({
-      notes: ['', [Validators.required]]
-    });
   }
 
   getAllUsers() {
