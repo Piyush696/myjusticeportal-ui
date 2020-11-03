@@ -41,11 +41,6 @@ export class ManageOrganisationComponent implements OnInit {
   ngOnInit(): void {
     this.createControl()
     this.getOrganisationAddress()
-    console.log(this.organisationForm.value)
-  }
-  ngOnChanges(){
-    console.log(this.getOrganisationAddress())
-    this.getOrganisationAddress()
   }
 
   onUploadLogo() {
@@ -81,7 +76,6 @@ export class ManageOrganisationComponent implements OnInit {
 
   getOrganisationAddress() {
     this.organisationService.getOrganisationAddressDetails().subscribe((orgDetails: any) => {
-      console.log(orgDetails.data)
       this.orgData = orgDetails.data
       this.organisationId = orgDetails.data.Organization.organizationId
       if (orgDetails.success) {

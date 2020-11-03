@@ -22,6 +22,21 @@
         </mat-form-field>
     </div>
 
+    <div class="col-6 pl-0">
+        <mat-form-field appearance="fill" class="w-100 p-0">
+            <mat-label>Lawyer</mat-label>
+            <input type="text" matInput placeholder="Lawyer" [formControl]="lawyerCaseForm.controls['lawyerName']"
+                required>
+            <!-- <mat-error>
+                <div *ngIf="lawyerCaseForm.controls['name'].invalid && lawyerCaseForm.controls['name'].touched">
+                    <small class="font13">
+                        Organization Name is Required
+                    </small>
+                </div>
+            </mat-error> -->
+        </mat-form-field>
+    </div>
+
     <h3 class="font-weight-bold">Select Your Case:</h3>
     <span class="font-italic">By allowing the lawyer to view your case info, they can provide you with a better
         response.</span>
@@ -46,7 +61,7 @@
 
     <div class="col-8 p-0">
         <mat-form-field appearance="fill" class="w-100 p-2">
-            <textarea rows="20" matInput></textarea>
+            <textarea rows="20" matInput [formControl]="lawyerCaseForm.controls['notes']"></textarea>
             <!-- <mat-error>
                         <div *ngIf="caseNoteForm.controls['notes'].invalid && caseNoteForm.controls['notes'].touched">
                             <small class="font13">

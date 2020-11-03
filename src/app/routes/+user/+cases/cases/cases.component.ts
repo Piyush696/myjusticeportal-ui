@@ -28,6 +28,7 @@ export class CasesComponent implements OnInit {
     this.getCases();
     this.getSponsors();
     this.createCaseNotesForm();
+    this.ngAfterViewInit();
   }
 
   ngAfterViewInit(): void {

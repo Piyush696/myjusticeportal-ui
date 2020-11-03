@@ -30,16 +30,19 @@ export class ContactComponent implements OnInit {
   createFormControl() {
     this.lawyerCaseForm = this.fb.group({
       name: ['', [Validators.required]],
-      caseId: ['', [Validators.required]]
+      caseId: ['', [Validators.required]],
+      notes: ['', [Validators.required]],
+      lawyerName: ['', [Validators.required]],
     });
   }
 
   getOrgUser() {
     this.additionalInfoService.getSingleUsers(this.activatedRoute.snapshot.params['userId']).subscribe((userOrg: any) => {
-      console.log(userOrg)
       this.userOrg = userOrg.data
       this.lawyerCaseForm.get('name').setValue(userOrg.data?.Organization?.name)
+      this.lawyerCaseForm.get('lawyerName').setValue(userOrg.data?.firstName +' '+ userOrg.data?.middleName + ' ' + userOrg.data?.lastName)
       this.lawyerCaseForm.get('name').disable();
+      this.lawyerCaseForm.get('lawyerName').disable();
     })
   }
 
@@ -49,7 +52,11 @@ export class ContactComponent implements OnInit {
       "caseId": this.lawyerCaseForm.get('caseId').value
     }
     this.additionalInfoService.setCasesLawyer(data).subscribe((data: any) => {
-      console.log(data)
+      if (data.success) {
+        this.toasterService.showErrorToater('Case Requested.');
+      } else {
+        this.toasterService.showErrorToater('Cases not Requested.');
+      }
     })
   }
 
