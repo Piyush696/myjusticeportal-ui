@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UserAdditionInfoService } from 'app/services/user-addition-info.service';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-inquiries',
@@ -9,7 +10,7 @@ import { UserAdditionInfoService } from 'app/services/user-addition-info.service
 export class InquiriesComponent implements OnInit {
   pendingCasesList: any;
 
-  constructor(private userAdditionInfoService: UserAdditionInfoService) { }
+  constructor(private userAdditionInfoService: UserAdditionInfoService, public dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.getPendingCaseDetails();
@@ -19,5 +20,14 @@ export class InquiriesComponent implements OnInit {
     this.userAdditionInfoService.getLawyerCases().subscribe((pendingCase: any) => {
       this.pendingCasesList = pendingCase.data
     })
+  }
+  onOpenModal(templateRef) {
+    let dialogRef = this.dialog.open(templateRef, {
+      width: '350px',
+      height: '200px'
+    });
+  }
+  closeModal() {
+    this.dialog.closeAll()
   }
 }
