@@ -22,24 +22,23 @@
                         <div>
                             <button
                                 [disabled]="(case.status === 'inmate_rejected' ||  case.status === 'Rejected' ||  case.status === 'Requested')"
-                                class="mr-1" color="green" mat-mini-fab title="Approve"
+                                class="btn btn-sm btn-primary" color="green"
                                 (click)="onClickStatus('inmate_accepted',case.userId,case.caseId)">
-                                <mat-icon>done</mat-icon>
+                                Accept
                             </button>
                         </div>
                         <div>
                             <button
                                 [disabled]="(case.status === 'inmate_rejected' || case.status === 'Rejected' ||case.status === 'Requested')"
-                                mat-mini-fab color="warn" title="Reject"
-                                (click)="onClickStatus('inmate_rejected',case.userId,case.caseId)">
-                                <mat-icon>clear</mat-icon>
+                                class="btn btn-sm btn-warning" color="" (click)="onClickStatus('inmate_rejected',case.userId,case.caseId)">
+                                Reject
                             </button>
                         </div>
                         <div>
                             <button
                                 [disabled]="( case.status === 'inmate_rejected' || case.status === 'inmate_accepted' || case.status === 'Rejected' || case.status === 'Requested' || case.status === 'Approved')"
-                                mat-mini-fab color="black" title="More Queries" (click)="onOpenModal(openModal,user)">
-                                <mat-icon>chat</mat-icon>
+                                class="btn btn-sm btn-dark" (click)="onOpenModal(openModal,user)">
+                                Message
                             </button>
                         </div>
                     </td>

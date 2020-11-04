@@ -43,7 +43,7 @@
     <div class="col-6 pl-0">
         <mat-form-field appearance="fill" class="w-100">
             <mat-label>Cases</mat-label>
-            <mat-select [formControl]="lawyerCaseForm.controls['caseId']">
+            <mat-select [formControl]="lawyerCaseForm.controls['caseId']" required>
                 <mat-option>
                     Select Case
                 </mat-option>
@@ -61,18 +61,18 @@
 
     <div class="col-8 p-0">
         <mat-form-field appearance="fill" class="w-100 p-2">
-            <textarea rows="20" matInput [formControl]="lawyerCaseForm.controls['notes']"></textarea>
-            <!-- <mat-error>
-                        <div *ngIf="caseNoteForm.controls['notes'].invalid && caseNoteForm.controls['notes'].touched">
-                            <small class="font13">
-                                Notes is Required
-                            </small>
-                        </div>
-                    </mat-error> -->
+            <textarea rows="20" matInput [formControl]="lawyerCaseForm.controls['notes']" required></textarea>
+            <mat-error>
+                <div *ngIf="lawyerCaseForm.controls['notes'].invalid && lawyerCaseForm.controls['notes'].touched">
+                    <small class="font13">
+                        Notes is Required
+                    </small>
+                </div>
+            </mat-error>
         </mat-form-field>
     </div>
     <div class="pr-2 pb-2 pt-2 pl-0">
-        <button class="button-purple px-5 py-1 float-right" mat-raised-button (click)="onContactLawyer()">
+        <button class="button-purple px-5 py-1 float-right" [disabled]="!lawyerCaseForm.valid" mat-raised-button (click)="onContactLawyer()">
             Contact lawyer
         </button>
     </div>
