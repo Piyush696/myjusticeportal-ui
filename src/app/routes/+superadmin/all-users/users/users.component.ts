@@ -145,7 +145,6 @@ export class UsersComponent implements OnInit, OnDestroy {
   }
 
   search(searchValue: string) {
-    console.log(searchValue)
     this.dataSource.filter = searchValue.trim().toLowerCase();
   }
 

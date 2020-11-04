@@ -58,9 +58,7 @@ export class ForgetPasswordComponent implements OnInit {
           ', if did not received the email please wait sometime and try again');
       } else { // for user.
         this.securityQuestions = res.data.securityQuestions
-        // this.securityQuestions.push(res.data.securityQuestions[0]);
         this.step = 2;
-        console.log(res.data.securityQuestions)
       }
     })
   }
@@ -71,7 +69,6 @@ export class ForgetPasswordComponent implements OnInit {
       "answer": this.passwordResetForm.get('answer').value,
       "securityQuestionId": this.securityQuestions[this.questionCount].securityQuestionId,
     }
-    console.log(data)
     this.securityService.checkAnswer(data).subscribe((res: any) => {
       if (res.match === true) {
         this.toasterService.showSuccessToater('Security Question and Answer Matched.')

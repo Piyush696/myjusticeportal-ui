@@ -32,7 +32,6 @@ export class PendingInquriesComponent implements OnInit {
 
   getPendingCaseDetails() {
     this.caseService.getPendingCaseInfo().subscribe((pendingCase: any) => {
-      console.log(pendingCase.data)
       this.pendingCasesList = pendingCase.data.map((status) => {
         if (status.status && status.status === 'Rejected') {
           status['statusDeclared'] = 'Lawyer Rejected'
