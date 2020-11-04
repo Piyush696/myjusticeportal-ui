@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CaseService } from 'app/services/case.service';
 import { HireLawyerService } from 'app/services/hire-lawyer.service';
 import { ToasterService } from 'app/services/toaster.service';
@@ -17,7 +17,8 @@ export class ContactComponent implements OnInit {
   userOrg: any;
   lawyerCaseForm: FormGroup;
 
-  constructor(private hireaLawyerService: HireLawyerService, private fb: FormBuilder, private additionalInfoService: UserAdditionInfoService, private activatedRoute: ActivatedRoute, private caseService: CaseService, private toasterService: ToasterService) {
+  constructor(private hireaLawyerService: HireLawyerService, private fb: FormBuilder, private additionalInfoService: UserAdditionInfoService,
+    private router: Router, private activatedRoute: ActivatedRoute, private caseService: CaseService, private toasterService: ToasterService) {
     this.activatedRoute.snapshot.params['userId']
   }
 
@@ -49,13 +50,15 @@ export class ContactComponent implements OnInit {
   onContactLawyer() {
     const data = {
       "lawyerId": this.userOrg.userId,
-      "caseId": this.lawyerCaseForm.get('caseId').value
+      "caseId": this.lawyerCaseForm.get('caseId').value,
+      "notes": this.lawyerCaseForm.get('notes').value
     }
     this.additionalInfoService.setCasesLawyer(data).subscribe((data: any) => {
       if (data.success) {
-        this.toasterService.showErrorToater('Case Requested.');
+        this.toasterService.showSuccessToater('Case Requested.');
+        this.router.navigateByUrl('/mjp/user/case');
       } else {
-        this.toasterService.showErrorToater('Cases not Requested.');
+        this.toasterService.showWarningToater('Cases Already Requested by the Lawyer.');
       }
     })
   }

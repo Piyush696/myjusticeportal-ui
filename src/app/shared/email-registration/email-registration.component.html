@@ -202,7 +202,7 @@
             </div>
             <div class="row">
                 <mat-checkbox class="termCondition-margin ml-2"
-                    [formControl]="registrationForm.controls['termCondition']" (click)="alertModel(myAlert)"
+                    [formControl]="registrationForm.controls['termCondition']" (click)="openModal(mytemplate)"
                     color="primary">
                     <a>
                         <p class="p-0 m-0 line-height">I accept the <span class="font-weight-bold p-0 m-0">Terms and
@@ -227,22 +227,7 @@
         </mat-card>
     </div>
 </div>
-<ng-template #myAlert>
-    <div>
-        <p class="disclaimer-heading text-uppercase text-center">
-            YOU MUST SCROLL
-        </p>
-        <p class="text-justify text-center">
-            Please read the agreement entirely and scroll to the bottom to Accept our terms.
-        </p>
-        <div class="text-center mtop">
-            <button class="px-4 py-1" mat-raised-button color="primary" mat-dialog-close
-                (click)="openModal(mytemplate)">
-                GOT IT
-            </button>
-        </div>
-    </div>
-</ng-template>
+
 <div>
     <ng-template #mytemplate>
         <div class="col-12">
@@ -304,6 +289,7 @@
                     <button mat-dialog-close class="px-4 py-1" mat-button color="primary" (click)="onDeclineTerms()">
                         DECLINE
                     </button>
+                    <span *ngIf="isAcceptDisabled" class="mleft">You must scroll to the bottom to accept.</span>
                     <button class="px-4 py-1" mat-raised-button color="primary" mat-dialog-close
                         [disabled]="isAcceptDisabled" (click)="onAcceptTerms()">
                         ACCEPT
