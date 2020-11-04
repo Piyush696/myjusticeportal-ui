@@ -37,7 +37,7 @@ export class EmailRegistrationComponent implements OnInit, OnChanges {
     this.registrationForm = this.fb.group({
       firstName: ['', [Validators.required, Validators.maxLength(50), Validators.pattern('^[a-zA-Z ]*$')]],
       lastName: ['', [Validators.required, Validators.maxLength(50), Validators.pattern('^[a-zA-Z ]*$')]],
-      middleName: ['', [Validators.required, Validators.maxLength(50), Validators.pattern('^[a-zA-Z ]*$')]],
+      middleName: [''],
       userName: ['', [Validators.required, Validators.maxLength(25), Validators.minLength(8), this.validateEmail.bind(this)], this.validateUserNotTaken.bind(this)],
       password: ['', [Validators.required, Validators.minLength(8), this.validatePassword.bind(this)]],
       confirmPassword: ['', [Validators.required, Validators.minLength(8)]],
