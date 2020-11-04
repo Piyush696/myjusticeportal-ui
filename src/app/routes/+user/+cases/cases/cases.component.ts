@@ -28,7 +28,7 @@ export class CasesComponent implements OnInit {
     this.getCases();
     this.getSponsors();
     this.createCaseNotesForm();
-    this.ngAfterViewInit();
+    this.modalopen.nativeElement.click();
   }
 
   ngAfterViewInit(): void {
@@ -63,7 +63,7 @@ export class CasesComponent implements OnInit {
   openModal(templateRef, value) {
     this.currentCaseId = value.caseId
     let dialogRef = this.dialog.open(templateRef, {
-      width: '836px',
+      width: '55%',
       position: {
         top: '80px',
       }
