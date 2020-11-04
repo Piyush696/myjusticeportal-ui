@@ -37,8 +37,8 @@
                     <mat-form-field appearance="fill" class="w-100">
                         <mat-label>Legal Middle Name</mat-label>
                         <input type="text" matInput placeholder="Legal Middle Name"
-                            [formControl]="registrationForm.controls['middleName']" required>
-                        <mat-error
+                            [formControl]="registrationForm.controls['middleName']">
+                        <!-- <mat-error
                             *ngIf="registrationForm.controls['middleName'].invalid && registrationForm.controls['middleName'].touched">
                             <small class="font13" *ngIf="registrationForm.get('middleName').errors?.required">
                                 Legal Middle Name is Required
@@ -49,7 +49,7 @@
                             <small class="font13" *ngIf="registrationForm.get('middleName').errors?.pattern">
                                 Legal Middle Name should contain only alphabets.
                             </small>
-                        </mat-error>
+                        </mat-error> -->
                     </mat-form-field>
                 </div>
                 <div class="col-4 pl-0 pr-2 mb-1">
@@ -218,7 +218,7 @@
                     Back to Login
                 </button>
                 <button class="button-purple px-4 py-1 float-right" mat-raised-button [disabled]="registrationForm.get('firstName').invalid || registrationForm.get('lastName').invalid 
-                    || registrationForm.get('middleName').invalid || registrationForm.get('userName').invalid 
+                    || registrationForm.get('userName').invalid 
                     || registrationForm.get('password').invalid  || registrationForm.get('confirmPassword').invalid
                      || registrationForm.get('termCondition').invalid || isNextDisabled" (click)="onNextClick()">
                     NEXT
