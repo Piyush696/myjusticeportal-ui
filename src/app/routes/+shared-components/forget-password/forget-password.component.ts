@@ -13,8 +13,10 @@ import { ToasterService } from 'app/services/toaster.service';
 export class ForgetPasswordComponent implements OnInit {
   passwordResetForm: FormGroup;
   step: number = 1;
-  securityQuestions: any;
+  questionCount: number = 0;
+  securityQuestions = [];
   isSentMail: boolean = false;
+  securityQuestionsList: any;
 
   constructor(private fb: FormBuilder, private router: Router,
     private securityService: SecurityService, private toasterService: ToasterService) { }
@@ -26,7 +28,7 @@ export class ForgetPasswordComponent implements OnInit {
   createFormControl() {
     this.passwordResetForm = this.fb.group({
       userName: ['', [Validators.required]],
-      securityQuestionId: ['', [Validators.required]],
+      // securityQuestionId: ['', [Validators.required]],
       answer: ['', [Validators.required]],
       password: ['', [Validators.required, Validators.minLength(6)]],
       confirmPassword: ['', [Validators.required, Validators.minLength(6)]],
@@ -55,8 +57,10 @@ export class ForgetPasswordComponent implements OnInit {
         this.toasterService.showSuccessToater('Your password reset link has been sent to ' + this.passwordResetForm.get('userName').value +
           ', if did not received the email please wait sometime and try again');
       } else { // for user.
-        this.securityQuestions = res.data.securityQuestions;
+        this.securityQuestions = res.data.securityQuestions
+        // this.securityQuestions.push(res.data.securityQuestions[0]);
         this.step = 2;
+        console.log(res.data.securityQuestions)
       }
     })
   }
@@ -65,14 +69,15 @@ export class ForgetPasswordComponent implements OnInit {
     const data = {
       "userName": this.passwordResetForm.get('userName').value,
       "answer": this.passwordResetForm.get('answer').value,
-      "securityQuestionId": this.passwordResetForm.get('securityQuestionId').value,
+      "securityQuestionId": this.securityQuestions[this.questionCount].securityQuestionId,
     }
+    console.log(data)
     this.securityService.checkAnswer(data).subscribe((res: any) => {
       if (res.match === true) {
         this.toasterService.showSuccessToater('Security Question and Answer Matched.')
-        this.securityQuestions = this.securityQuestions.filter(filteredquestion => filteredquestion.securityQuestionId != parseInt(this.passwordResetForm.get('securityQuestionId').value))
+        this.questionCount++
         this.passwordResetForm.get('answer').reset();
-        if (!this.securityQuestions.length) {
+        if (this.questionCount === 3) {
           this.step = 3;
         }
         else {

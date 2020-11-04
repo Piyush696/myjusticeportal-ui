@@ -39,24 +39,24 @@ export class UsersComponent implements OnInit, OnDestroy {
 
 
   onViewRejectedUsers(e) {
-    if(e){
-      this.userService.getUsers().subscribe((res: any) =>{
+    if (e) {
+      this.userService.getUsers().subscribe((res: any) => {
         if (res.data) {
           this.filterStatus = res.data.filter((res) => {
-            if(res.status == false){              
+            if (res.status == false) {
               return res;
-            }  
+            }
           });
         }
         this.dataSource = new MatTableDataSource(this.filterStatus);
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
       })
-    }else{
+    } else {
       this.onGetAllUsers();
     }
   }
- 
+
   createUserControl() {
     this.createUserForm = this.fb.group({
       firstName: ['', [Validators.required, Validators.maxLength(50), Validators.pattern('^[a-zA-Z ]*$')]],
@@ -145,12 +145,13 @@ export class UsersComponent implements OnInit, OnDestroy {
   }
 
   search(searchValue: string) {
+    console.log(searchValue)
     this.dataSource.filter = searchValue.trim().toLowerCase();
   }
 
   // pagination.
   getPageSizeOptions(): number[] {
-    if (this.dataSource.data.length > 500)    
+    if (this.dataSource.data.length > 500)
       return [10, 50, 100, 500, this.dataSource.paginator?.length];
     else if (this.dataSource.data.length > 100) {
       return [10, 50, 100, this.dataSource.paginator?.length];
