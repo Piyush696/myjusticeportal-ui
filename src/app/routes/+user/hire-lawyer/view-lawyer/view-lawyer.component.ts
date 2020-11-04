@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CaseService } from 'app/services/case.service';
 import { HireLawyerService } from 'app/services/hire-lawyer.service';
 import { ToasterService } from 'app/services/toaster.service';
@@ -19,16 +20,24 @@ export class ViewLawyerComponent implements OnInit {
   isHired: boolean = false;
   logo: any;
   specialtyList: any;
+  viewCaseForm: FormGroup;
 
-  constructor(private hireLawyerService: HireLawyerService, public dialog: MatDialog,
+  constructor(private hireLawyerService: HireLawyerService, public dialog: MatDialog,private router: Router,
     private caseService: CaseService, private activatedRoute: ActivatedRoute,
-    private toasterService: ToasterService) {
+    private toasterService: ToasterService, private fb: FormBuilder) {
     this.organizationId = this.activatedRoute.snapshot.params.organizationId;
   }
 
   ngOnInit(): void {
+    this.createFormControl();
     this.getAllUsers();
     this.getAllCases();
+  }
+
+  createFormControl() {
+    this.viewCaseForm = this.fb.group({
+      notes: ['', [Validators.required]]
+    });
   }
 
   getAllUsers() {
@@ -53,11 +62,14 @@ export class ViewLawyerComponent implements OnInit {
   }
 
   onSelectCaseIds(event, caseId) {
+    const data = {
+      "caseId":caseId
+    }
     if (event) {
-      this.selectedCases.push({caseId});
+      this.selectedCases.push(data);
       this.selectedCases.map((x) => {
         x['lawyerId'] = this.userId
-      });
+      })
     } else {
       this.selectedCases.forEach((x, i, a) => {
         if (x == caseId) {
@@ -75,14 +87,19 @@ export class ViewLawyerComponent implements OnInit {
   }
 
   onSubmitCaseIds() {
+    this.selectedCases=this.selectedCases.map((x)=>{
+      x['notes']=this.viewCaseForm.get('notes').value
+      return x;
+    })
     this.hireLawyerService.setCasesLawyer(this.selectedCases).subscribe((cases: any) => {
       if (cases.success) {
         this.dialog.closeAll();
         this.isHired = true;
         this.toasterService.showSuccessToater('Cases Requested.')
+        this.router.navigateByUrl('/mjp/user/case');
       }
       else {
-        this.toasterService.showErrorToater('Cases not Requested.')
+        this.toasterService.showErrorToater('Cases Already Requested by same Lawyer.')
       }
     })
   }

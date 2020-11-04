@@ -12,7 +12,8 @@ export interface RouteInfo {
 
 export const ROUTES: RouteInfo[] = [
     { path: 'user/case', title: 'My Cases', icon: 'nc-bank', class: '', roleIds: [1] },
-    { path: 'user/hire-lawyer', title: 'Hire a lawyer', icon: 'nc-bank', class: '', roleIds: [1] },
+    { path: 'user/message-my-lawyer', title: 'Message My Lawyer', icon: 'nc-bank', class: '', roleIds: [1] },
+    { path: 'user/hire-lawyer', title: 'Find a Lawyer', icon: 'nc-bank', class: '', roleIds: [1] },
     { path: 'user/legal-research', title: 'Legal Research', icon: 'nc-bank', class: '', roleIds: [1] },
     // { path: '/dashboard', title: 'Dashboard', icon: 'nc-bank', class: '', roleIds: [] },
     // { path: ':facilityCode/userdashboard', title: 'Dashboard', icon: 'nc-bank', class: '', roleIds: [1] },
@@ -31,7 +32,6 @@ export const ROUTES: RouteInfo[] = [
     { path: 'public-defender/manage-organization', title: 'Manage Organization', icon: 'nc-bank', class: '', roleIds: [5], isAdmin: true },
     { path: 'bondsman/manage-organization', title: 'Manage Organization', icon: 'nc-bank', class: '', roleIds: [6], isAdmin: true },
     { path: 'user/find-bondsman', title: 'Find Bondsman', icon: 'nc-bank', class: '', roleIds: [1] },
-    { path: 'user/message-my-lawyer', title: 'Message My Lawyer', icon: 'nc-bank', class: '', roleIds: [1] },
     { path: '/legal-research-Assistance', title: 'Legal Research Assistance', icon: 'nc-bank', class: '', roleIds: [4, 6] },
     { path: '/legal-forms', title: 'Legal Forms', icon: 'nc-bank', class: '', roleIds: [2] },
     { path: '/ask-lawyer', title: 'Ask a lawyer', icon: 'nc-bank', class: '', roleIds: [4] },
