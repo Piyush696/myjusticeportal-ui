@@ -92,4 +92,8 @@ export class CasesComponent implements OnInit {
   onContactLawyer(userId) {
     this.router.navigateByUrl('/mjp/user/contact/' + userId)
   }
+
+  onCancelNotesModal() {
+    this.dialog.closeAll();
+  }
 }
