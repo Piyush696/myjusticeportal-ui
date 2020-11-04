@@ -113,7 +113,15 @@ export class UsersComponent implements OnInit, OnDestroy {
 
   onGetAllUsers() {
     this.userService.getUsers().subscribe((res: any) => {
-      this.dataSource = new MatTableDataSource(res.data);
+      let x = res.data.map((element) => {
+        if (element.status == true) {
+          element.status = 'Active'
+        } else {
+          element.status = 'Pending'
+        }
+        return element
+      })
+      this.dataSource = new MatTableDataSource(x);
       this.dataSource.sortingDataAccessor = (item: any, property) => {
         switch (property) {
           case 'name': if (item) return item.firstName + item.middleName + item.lastName;

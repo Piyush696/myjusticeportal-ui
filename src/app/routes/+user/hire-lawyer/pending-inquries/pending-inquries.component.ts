@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { Router } from '@angular/router';
 import { CaseService } from 'app/services/case.service';
 import { ToasterService } from 'app/services/toaster.service';
 import { UserAdditionInfoService } from 'app/services/user-addition-info.service';
@@ -13,7 +14,7 @@ export class PendingInquriesComponent implements OnInit {
   pendingCasesList: any;
 
   constructor(private caseService: CaseService, public dialog: MatDialog,
-    private additionalService: UserAdditionInfoService, private toasterService: ToasterService) { }
+    private additionalService: UserAdditionInfoService, private toasterService: ToasterService, public router: Router) { }
 
   ngOnInit(): void {
     this.getPendingCaseDetails();
@@ -72,4 +73,8 @@ export class PendingInquriesComponent implements OnInit {
     })
   }
 
+  saveChanges() {
+    this.dialog.closeAll();
+    this.router.navigateByUrl('mjp/user/message-my-lawyer')
+  }
 }
