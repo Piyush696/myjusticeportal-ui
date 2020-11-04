@@ -14,7 +14,7 @@ export class InquiriesComponent implements OnInit {
   pendingCasesList: any;
 
   constructor(private userAdditionInfoService: UserAdditionInfoService, public dialog: MatDialog,
-     private toasterService: ToasterService, private router: Router) { }
+    private toasterService: ToasterService, private router: Router) { }
 
   ngOnInit(): void {
     this.getPendingCaseDetails();
@@ -22,7 +22,6 @@ export class InquiriesComponent implements OnInit {
 
   getPendingCaseDetails() {
     this.userAdditionInfoService.getLawyerCases().subscribe((pendingCase: any) => {
-      console.log(pendingCase)
       this.pendingCasesList = pendingCase.data
     })
   }
@@ -35,10 +34,10 @@ export class InquiriesComponent implements OnInit {
   closeModal() {
     this.dialog.closeAll()
   }
-  onStatusUpdate(caseId , status) {
+  onStatusUpdate(caseId, status) {
     const data = {
-      'caseId' : caseId,
-      'status' : status
+      'caseId': caseId,
+      'status': status
     }
     this.userAdditionInfoService.updateLawywrStatus(data).subscribe((res: any) => {
       if (res.success) {
@@ -51,7 +50,7 @@ export class InquiriesComponent implements OnInit {
   }
 
   onChatEnable() {
-        this.dialog.closeAll();
-        this.router.navigateByUrl('/mjp/lawyer/lawyer-chat');
+    this.dialog.closeAll();
+    this.router.navigateByUrl('/mjp/lawyer/lawyer-chat');
   }
 }
