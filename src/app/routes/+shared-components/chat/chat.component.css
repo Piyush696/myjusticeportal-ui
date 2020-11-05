@@ -90,7 +90,7 @@
   justify-content: flex-start;
 }
 
-.chat-scroll{
+.chat-scroll {
   overflow: scroll;
   height: xyz;
 }

@@ -1,7 +1,7 @@
 <div class="d-flex justify-content-between">
     <div>
         <h1 class="font-weight-bold">
-            Case: {{caseDetails?.briefDescriptionOfChargeOrLegalMatter}}
+            Case: {{caseDetails?.legalMatter}}
         </h1>
         <h4 class="line-height">Your case details at-a-glance</h4>
     </div>
@@ -91,6 +91,8 @@
                                         <span class="font-weight-normal">{{assignedLawyer?.Organization?.name}}</span>
                                     </p>
                                 </div>
+                                <button class="btn bg-color px-perc py-1" mat-raised-button
+                                    (click)="removeLawyer(assignedLawyer.userId)">Remove Lawyer</button>
                             </div>
                         </mat-card>
                     </div>

@@ -5,6 +5,8 @@ import { ToasterService } from 'app/services/toaster.service';
 import { Location } from '@angular/common';
 import { MatDialog } from '@angular/material/dialog';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { LawyerService } from 'app/services/lawyer.service';
+
 
 @Component({
   selector: 'app-view-case',
@@ -20,7 +22,7 @@ export class ViewCaseComponent implements OnInit {
 
   constructor(private router: Router, private route: ActivatedRoute, private caseService: CaseService,
     private toasterService: ToasterService, private location: Location,
-    public dialog: MatDialog, private fb: FormBuilder) {
+    public dialog: MatDialog, private fb: FormBuilder, private lawyerService: LawyerService) {
   }
 
   ngOnInit(): void {
@@ -34,6 +36,7 @@ export class ViewCaseComponent implements OnInit {
 
   getAssignedLawyer() {
     this.caseService.getAssignedLawyer(this.route.snapshot.params['caseId']).subscribe((lawyer: any) => {
+      console.log(lawyer)
       if (lawyer.data != 'No lawyer assigned to this case.') {
         this.assignedLawyer = lawyer.data
       } else {
@@ -52,6 +55,18 @@ export class ViewCaseComponent implements OnInit {
       }
     }, (error: any) => {
       this.toasterService.showErrorToater(error.statusText);
+    })
+  }
+
+  removeLawyer(userId) {
+    this.lawyerService.deleteLawyerCase(userId, this.route.snapshot.params['caseId']).subscribe((deletedLawyer: any) => {
+      if (deletedLawyer.data == 1) {
+        this.assignedLawyer = ''
+        this.toasterService.showSuccessToater('Lawyer Removed from case.')
+        this.getAssignedLawyer();
+      } else {
+        this.toasterService.showErrorToater('Something went wrong.')
+      }
     })
   }
 

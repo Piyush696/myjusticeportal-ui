@@ -18,7 +18,7 @@ export class MessagingLawyerComponent implements OnInit {
   userMessageList = [];
   allMessages: any;
   oldUserList = [];
-  headerText = "Lawyers";
+  headerText = "My Connected Lawyers";
 
   constructor(private hireLawyerService: HireLawyerService, private messageService: MessageService) { }
 

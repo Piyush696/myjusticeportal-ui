@@ -10,12 +10,23 @@
   background: white;
 }
 
+.border-card {
+  background: #ededed;
+  border: 1px solid #000;
+}
+
 .unauthorized-text {
   line-height: 26px;
   letter-spacing: 1px;
 }
 
-.circle{
+.card-scroll {
+
+  height: 446px;
+  overflow-y: scroll;
+}
+
+.circle {
   border-color: #FF6700 !important;
   width: 20px;
   height: 20px;
@@ -23,6 +34,7 @@
   position: relative;
   border: 2px;
 }
-.panding-review{
+
+.panding-review {
   color: #FF6700 !important;
 }

@@ -8,86 +8,114 @@
         <div class="d-flex justify-content-center align-items-center;">
             <div class="col-6 pt-2">
                 <mat-card class="mat-elevation-z10">
-                    <h2>Account Status: <span class="panding-review">Panding Review</span></h2>
+                    <h2>Account Status: <span class="panding-review">Pending Review</span></h2>
                 </mat-card>
             </div>
         </div>
-        <div *ngIf="count==1">
-            <div>
-                <div class="d-flex justify-content-center align-items-center;">
-                    <div class="col-6 py-5">
-                        <mat-card class="mat-elevation-z10">
-                            <div class="my-4">
+        <div class="row">
+            <div class="col-6">
+                <div class="row pt-2">
+                    <div class="col-12">
+                        <div class="d-flex justify-content-center align-items-center;">
+                            <mat-card class="mat-elevation-z10 w-100">
                                 <h2 class="text-center">Explore Plans</h2>
-                                <div class="row px-3">
+                                <div class="row">
                                     <div class="col-12 pt-2">
-                                        <mat-card class="mat-elevation-z10">
+                                        <mat-card class="mat-elevation-z10 border-card">
                                             <input class="circle" type="radio" name="package" value="'6month'"
-                                                [formControl]="selectPlanForm.controls['plan']">
-                                            Full Package
-                                        </mat-card>
-                                    </div>
-                                    <div class="col-12 pt-2">
-                                        <mat-card class="mat-elevation-z10">
-                                            <input class="circle" type="radio" name="package" value="'1Year'"
-                                                [formControl]="selectPlanForm.controls['plan']">
-                                            Limited Package
+                                                [formControl]="selectPlanForm.controls['plan']"
+                                                (change)="onSelectPlan($event.checked)">
+                                            Standard Plan($50/mo, $0.10/inmate/mo)
                                         </mat-card>
                                     </div>
                                 </div>
-                                <div class="d-flex justify-content-end mt-2 pr-2 pt-4">
+                                <!-- <div class="d-flex justify-content-end mt-2 pr-2 pt-4">
                                     <button [disabled]="!selectPlanForm.valid" class="button-purple px-4 py-1"
                                         mat-raised-button (click)="yourFacilitys()">
                                         Next
                                     </button>
-                                </div>
-                            </div>
-                        </mat-card>
+                                </div> -->
+                            </mat-card>
+                        </div>
                     </div>
-                </div>
-            </div>
-        </div>
-        <div *ngIf="step==1">
-            <div>
-                <div class="d-flex justify-content-center align-items-center;">
-                    <div class="col-6 py-5">
-                        <mat-card class="mat-elevation-z10">
-                            <h2 class="text-center">Your Facilities</h2>
-                            <div class="col-12 pt-2">
-                                <ul *ngFor="let facility of facilities">
-                                    <div class="row">
-                                        <li>{{facility.facilityName}}</li>
+                    <div class="col-12 pt-2">
+                        <div class="d-flex justify-content-center align-items-center;">
+                            <mat-card class="mat-elevation-z10 w-100 card-scroll">
+                                <h2 class="text-center">Your Facilities</h2>
+                                <h4>Based on the states in which you are admitted to the bar, the following facilities
+                                    are available.
+                                    Please select facility you want.</h4>
+                                <div class="col-12 pt-2">
+                                    <div>
+                                        <li *ngFor="let facility of facilities">
+                                            <mat-checkbox color="primary"
+                                                (change)="onNativeChange($event.checked,facility?.facilityId,facility.userCount)">
+                                                {{facility?.facilityName}} ({{facility.userCount}} inmates)
+                                            </mat-checkbox>
+                                            <div *ngIf="isAddOns && facility?.facilityId == facilityId">
+                                                <mat-card class="border-card">
+                                                    <h4 class="font-weight-bold text-center">Select Add Ons for this
+                                                        facility.
+                                                    </h4>
+                                                    <div>
+                                                        <mat-checkbox color="primary" [checked]="false"
+                                                            [formControl]="addOnsForm.controls['premiumListing']"
+                                                            (change)="onSelectAddOns($event.checked,facility?.facilityId)">
+                                                            <span>Premium listing($10/mo)</span>
+                                                        </mat-checkbox>
+                                                    </div>
+                                                    <div>
+                                                        <mat-checkbox color="primary"
+                                                            [formControl]="addOnsForm.controls['landingPage']"
+                                                            (change)="onSelectAddOns($event.checked,facility?.facilityId)">
+                                                            <span>Landing Page($10/mo)</span>
+                                                        </mat-checkbox>
+                                                    </div>
+                                                    <div>
+                                                        <mat-checkbox color="primary"
+                                                            [formControl]="addOnsForm.controls['sponsors']"
+                                                            (change)="onSelectAddOns($event.checked,facility?.facilityId)">
+                                                            <span>Sponsors Ad Unit Rotation($10/mo)</span>
+                                                        </mat-checkbox>
+                                                    </div>
+                                                </mat-card>
+                                            </div>
+                                        </li>
                                     </div>
-                                </ul>
-                                <div class="d-flex justify-content-between mt-2 pr-2">
-                                    <button class="button-purple px-4 py-1" mat-raised-button (click)="backFacilitys()">
-                                        Back
-                                    </button>
-                                    <button class="button-purple px-4 py-1" mat-raised-button color="primary"
-                                        (click)=" estimatadBill()">
-                                        Next
-                                    </button>
+                                    <!-- <div class="d-flex justify-content-between mt-2 pr-2">
+                                        <button class="button-purple px-4 py-1" mat-raised-button
+                                            (click)="backFacilitys()">
+                                            Back
+                                        </button>
+                                        <button class="button-purple px-4 py-1" mat-raised-button color="primary"
+                                            (click)=" estimatadBill()">
+                                            Next
+                                        </button>
+                                    </div> -->
                                 </div>
-                            </div>
-                        </mat-card>
+                            </mat-card>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-
-        <!-- Estimatad Monthly Bill  -->
-
-        <div *ngIf="step==2">
-            <div>
-                <div class="d-flex justify-content-center align-items-center;">
-                    <div class="col-6 py-5">
-                        <mat-card class="mat-elevation-z10">
-                            <h2>Estimatad Monthly Bill : $100.00</h2>
+            <div class="col-6">
+                <!-- Estimatad Monthly Bill  -->
+                <div class="col-12 pt-2">
+                    <div class="d-flex justify-content-center align-items-center;">
+                        <mat-card class="mat-elevation-z10 w-100">
+                            <h2>Estimatad Monthly Bill : ${{totalCount}}</h2>
                             <div class="col-12 pt-2">
                                 <mat-card class="mat-elevation-z10">
-                                    Game
+                                    <div class="d-flex justify-content-center align-items-center">
+                                        <div>{{addOnsCount/10}} * $10 = {{addOnsCount}}
+                                        </div>
+                                    </div>
+                                    <div class="d-flex justify-content-center align-items-center">
+                                        <div>{{inmatesCount}} inmate * $0.10 = {{facilityCount}}
+                                        </div>
+                                    </div>
                                 </mat-card>
-                                <div class="d-flex justify-content-between mt-2 pr-2">
+                                <!-- <div class="d-flex justify-content-between mt-2 pr-2">
                                     <button class="button-purple px-4 py-1" mat-raised-button
                                         (click)="backEstimatadBill()">
                                         Back
@@ -96,28 +124,25 @@
                                         (click)="cardPayment()">
                                         Payment
                                     </button>
-                                </div>
+                                </div> -->
                             </div>
                         </mat-card>
                     </div>
                 </div>
-            </div>
-        </div>
 
-        <!-- Payment Card  -->
-        <div *ngIf="step==3">
-            <div>
-                <div class="d-flex justify-content-center align-items-center;">
-                    <div class="col-6 pt-2">
-                        <mat-card class="mat-elevation-z10">
-                            <h2>Credit Card Info</h2>
+                <!-- Payment Card  -->
+                <div class="col-12 pt-2">
+                    <div class="d-flex justify-content-center align-items-center;">
+                        <mat-card class="mat-elevation-z10 w-100">
+                            <h2 class="text-center font-weight-bold">Credit Card Info</h2>
                             <div class="row px-3">
                                 <mat-form-field appearance="fill" class="w-100 p-1">
                                     <mat-label>Name on Card</mat-label>
                                     <input matInput [formControl]="cardForm.controls['name']">
                                     <mat-error>
-                                        <div *ngIf="cardForm.controls['name'].invalid && 
-                                                                        cardForm.controls['name'].touched">
+                                        <div
+                                            *ngIf="cardForm.controls['name'].invalid && 
+                                                                                        cardForm.controls['name'].touched">
                                             <small class="font13" *ngIf="cardForm.get('name').errors?.required">
                                                 Name is Required.
                                             </small>
@@ -133,7 +158,7 @@
                                     <mat-error>
                                         <div
                                             *ngIf="cardForm.controls['card'].invalid && cardForm.controls['card'].touched 
-                                               && !cardForm.controls['card'].hasError('invalidCardPattern') && !cardForm.controls['card'].hasError('invalidCard')">
+                                                               && !cardForm.controls['card'].hasError('invalidCardPattern') && !cardForm.controls['card'].hasError('invalidCard')">
                                             <small class="font13">
                                                 Should be 16-digit card number.
                                             </small>
@@ -146,7 +171,7 @@
                                         </div>
                                         <div
                                             *ngIf="cardForm.controls['card'].invalid &&  cardForm.controls['card'].dirty &&
-                                           !cardForm.controls['card'].hasError('invalidCardPattern')&& cardForm.controls['card'].hasError('invalidCard') ">
+                                                           !cardForm.controls['card'].hasError('invalidCardPattern')&& cardForm.controls['card'].hasError('invalidCard') ">
                                             <small class="font13">
                                                 Card number is not Valid.
                                             </small>
@@ -198,7 +223,7 @@
                             <div>
                                 <button [disabled]="!cardForm.valid" class="button-purple px-4 py-1 w-100"
                                     mat-raised-button color="primary" (click)="onPay()">
-                                    Pay $100.00
+                                    Pay ${{totalCount}}
                                 </button>
                             </div>
                         </mat-card>
@@ -226,7 +251,7 @@
             <!-- <mat-card class="inner-card mt-2" *ngIf="!requestedCases?.length">
                 <span>No data available.</span>
             </mat-card> -->
-           <div *ngFor="let case of requestedCases">
+            <div *ngFor="let case of requestedCases">
                 <mat-card class="d-flex flex-row justify-content-between align-items-center inner-card mt-2">
                     <div class="d-flex flex-column">
                         <span>{{case?.briefDescriptionOfChargeOrLegalMatter}}</span>
@@ -260,7 +285,7 @@
                         </button>
                     </div>
                 </mat-card>
-           </div>
+            </div>
         </mat-card>
     </div>
 
