@@ -39,4 +39,9 @@ export class LawyerService {
     return this.httpClient.post<object>(`${this.apiPath}/stripe/validate_card`, data);
   }
 
+
+  deleteLawyerCase(lawyerId, caseId) {
+    return this.httpClient.post<object>(`${this.apiPath}/lawyer/${caseId}`, { lawyerId }, this.getHeaders());
+  }
+
 }
