@@ -63,9 +63,14 @@ export class LawyerRegistrationComponent implements OnInit {
 
   onCreateOrganisation(orgData) {
     if (orgData) {
-      this.step = 4;
       this.registrationData.organization = orgData;
       this.registrationData.organization.address = orgData.address;
+      this.lawyerService.onRegistration(this.registrationData).subscribe((res: any) => {
+        if (res.success) {
+          this.userName = res.data.userName;
+          this.step = 4;
+        }
+      });
     } else {
       this.step = 3;
     }

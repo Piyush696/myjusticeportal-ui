@@ -19,6 +19,7 @@ import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/fo
 export class LawyerdashboardComponent implements OnInit {
   requestedCases: any;
   isAuthorized: boolean;
+  isAddOns: boolean;
   clients: any;
   facilities: any;
   allClients: any;
@@ -30,9 +31,17 @@ export class LawyerdashboardComponent implements OnInit {
   @ViewChild(MatSort, { static: false }) sort: MatSort;
   cardForm: FormGroup;
   selectPlanForm: FormGroup;
+  addOnsForm: FormGroup;
   userData: any;
   public cardMask = [/\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/]
   public cvvMask = [/\d/, /\d/, /\d/]
+  facility = [];
+  addOnsList = [];
+  facilityId: any;
+  totalCount: number = 0
+  facilityCount: number = 0
+  inmatesCount: number = 0
+  addOnsCount: number = 0
 
   constructor(private hireLawyerService: HireLawyerService, private facilityService: FacilityService, public dialog: MatDialog,
     private lawyerService: LawyerService, private toasterService: ToasterService, private store: Store<any>, private fb: FormBuilder,) { }
@@ -52,6 +61,7 @@ export class LawyerdashboardComponent implements OnInit {
     this.getALLFacilities();
     this.createCardControl();
     this.createPlanControl();
+    this.createControl();
   }
 
   createCardControl() {
@@ -115,26 +125,74 @@ export class LawyerdashboardComponent implements OnInit {
     })
   }
 
-  backFacilitys() {
-    this.count = 1;
-    this.step = 0;
+
+  onNativeChange(event, facilityId, inmatesCount) {
+    console.log(inmatesCount)
+    if (event) {
+      this.totalCount = this.totalCount + inmatesCount * 0.10;
+      this.inmatesCount = this.inmatesCount + inmatesCount
+      this.facilityCount = this.facilityCount + inmatesCount * 0.10;
+      this.facility.push(facilityId);
+      this.facilityId = facilityId
+      this.isAddOns = true;
+    } else {
+      this.isAddOns = false;
+      this.facility.forEach((x, i, a) => {
+        if (x == facilityId) {
+          this.facility.splice(i, 1);
+        }
+      })
+    }
+    console.log(this.facility)
   }
-  yourFacilitys() {
-    this.step = 1;
-    this.count = 0;
+
+  onSelectAddOns(event, facilityId) {
+    if (event) {
+      this.totalCount = this.totalCount + 10;
+      this.addOnsCount = this.addOnsCount + 10;
+      this.addOnsList.push(facilityId);
+    } else {
+      this.addOnsList.forEach((x, i, a) => {
+        if (x == facilityId) {
+          this.addOnsList.splice(i, 1);
+        }
+      })
+    }
+    console.log(this.addOnsList)
   }
-  backEstimatadBill() {
-    this.step = 1;
-    this.count = 0;
+
+  createControl() {
+    this.addOnsForm = this.fb.group({
+      premiumListing: ['', [Validators.required]],
+      landingPage: ['', [Validators.required]],
+      sponsors: ['', [Validators.required]]
+    })
   }
-  estimatadBill() {
-    this.step = 2;
-    this.count = 0;
+
+  onSelectPlan() {
+    this.totalCount = this.totalCount + 50
   }
-  cardPayment() {
-    this.step = 3;
-    this.count = 0;
-  }
+
+  // backFacilitys() {
+  //   this.count = 1;
+  //   this.step = 0;
+  // }
+  // yourFacilitys() {
+  //   this.step = 1;
+  //   this.count = 0;
+  // }
+  // backEstimatadBill() {
+  //   this.step = 1;
+  //   this.count = 0;
+  // }
+  // estimatadBill() {
+  //   this.step = 2;
+  //   this.count = 0;
+  // }
+  // cardPayment() {
+  //   this.step = 3;
+  //   this.count = 0;
+  // }
 
   // openestimatadBillModal(templateRef) {
   //   let dialogRef = this.dialog.open(templateRef, {
@@ -188,10 +246,12 @@ export class LawyerdashboardComponent implements OnInit {
 
 
   getALLFacilities() {
-    this.facilityService.getFacilities().subscribe((facilities: any) => {
+    this.facilityService.getFacilitiesUserCount().subscribe((facilities: any) => {
+      console.log(facilities)
       this.facilities = facilities.data;
     })
   }
+
 
   onApproveCase(lawyer_caseId) {
     this.hireLawyerService.approveCase({ lawyer_caseId: lawyer_caseId }).subscribe((res: any) => {
