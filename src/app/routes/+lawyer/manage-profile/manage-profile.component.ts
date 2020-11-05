@@ -68,7 +68,8 @@ export class ManageProfileComponent implements OnInit {
 
   openOrganizationModal(templateRef) {
     let dialogRef = this.dialog.open(templateRef, {
-      width: '750px'
+      width: '60%',
+      height: '80%'
     });
   }
 

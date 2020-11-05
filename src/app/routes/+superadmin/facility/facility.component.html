@@ -117,7 +117,7 @@
                         </mat-error>
                     </mat-form-field>
                 </div>
-                <div class="col-12 mb-1 pr-3">
+                <div class="col-6 mb-1 pr-3">
                     <mat-form-field appearance="fill" class="w-100 pl-2">
                         <mat-label>IP Address</mat-label>
                         <input type="text" matInput placeholder="IP Address"
@@ -133,6 +133,12 @@
                                 </span>
                             </div>
                         </mat-error>
+                    </mat-form-field>
+                </div>
+                <div class="col-6">
+                    <mat-form-field appearance="fill" class="w-100 pl-2">
+                        <mat-label>DIY Law Library Link</mat-label>
+                        <input type="text" matInput [formControl]="facilityForm.controls['libraryLink']">
                     </mat-form-field>
                 </div>
             </div>
@@ -226,26 +232,23 @@
                     </mat-form-field>
                 </div>
             </div>
-            <div class="col-12 p-0">
-                <mat-form-field appearance="fill" class="w-100 px-2">
-                    <mat-label>DIY Law Library Link</mat-label>
-                    <input type="text" matInput [formControl]="facilityForm.controls['libraryLink']">
-                </mat-form-field>
+            <div class="row">
+                <div class="col">
+                    <mat-form-field appearance="fill" class="w-100 pl-2">
+                        <mat-label>Average Daily Population</mat-label>
+                        <input type="number" matInput [formControl]="facilityForm.controls['facilityUserCount']" required>
+                        <mat-error>
+                            <div
+                                *ngIf="facilityForm.controls['facilityUserCount'].invalid && facilityForm.controls['facilityUserCount'].touched">
+                                <small class="font13">
+                                    Average Daily Population is Required
+                                </small>
+                            </div>
+                        </mat-error>
+                    </mat-form-field>
+                </div>
             </div>
-            <div class="col-12 p-0">
-                <mat-form-field appearance="fill" class="w-100 px-2">
-                    <mat-label>Number of Bilable User</mat-label>
-                    <input type="number" matInput [formControl]="facilityForm.controls['facilityUserCount']" required>
-                    <mat-error>
-                        <div
-                            *ngIf="facilityForm.controls['facilityUserCount'].invalid && facilityForm.controls['facilityUserCount'].touched">
-                            <small class="font13">
-                                Bilable user is Required
-                            </small>
-                        </div>
-                    </mat-error>
-                </mat-form-field>
-            </div>
+            <p class="ml-2"><span class="color-star">* </span> Please note this number is calculated on an annual basis and may change from time to time.</p>
         </div>
     </div>
     <div class="d-flex justify-content-end p-0" *ngIf="addHide">

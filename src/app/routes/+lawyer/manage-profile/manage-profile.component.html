@@ -1,7 +1,7 @@
 <div class="col-12 col-sm-12 p-0 d-flex justify-content-between justify-content-sm-between">
     <div>
-        <h1 class="header-title font-weight-bold">Manage Profile.</h1>
-        <label class="header-sub-text">Manage your Profile information.</label>
+        <h1 class="header-title font-weight-bold">Manage Profile</h1>
+        <label class="header-sub-text">Manage the information that is displayed in your profile and visible to potential clients.</label>
     </div>
 
 </div>
@@ -84,7 +84,7 @@
                 <div class="col-12 col-sm-12 d-flex justify-content-end justify-content-sm-end">
                     <div>
                         <button mat-raised-button class="button-purple px-4 py-1 mt-1"
-                            (click)="openOrganizationModal(updateOrganization)">Edit</button>
+                            (click)="openOrganizationModal(updateOrganization)">Update Preview</button>
                     </div>
                 </div>
             </div>
@@ -114,7 +114,7 @@
 
 
     <div class="row px-3">
-        <mat-form-field appearance="fill" class="w-100 p-1">
+        <mat-form-field appearance="fill" class="w-50 p-1">
             <mat-label>Tagline</mat-label>
             <input type="text" matInput [formControl]="additionalInfoForm.controls['tagline']">
             <mat-error>
@@ -126,9 +126,7 @@
                 </div>
             </mat-error>
         </mat-form-field>
-    </div>
-    <div class="row px-3">
-        <mat-form-field appearance="fill" class="w-100 p-1">
+        <mat-form-field appearance="fill" class="w-50 p-1">
             <mat-label>Practice Areas</mat-label>
             <mat-select [formControl]="toppings" multiple [formControl]="additionalInfoForm.controls['practiceAreas']"
                 required>
@@ -150,7 +148,7 @@
     <div class="row px-3">
         <mat-form-field appearance="fill" class="w-100 p-1">
             <mat-label>Description</mat-label>
-            <textarea [formControl]="additionalInfoForm.controls['description']" rows="10" cols="50" matInput
+            <textarea [formControl]="additionalInfoForm.controls['description']" rows="8" cols="50" matInput
                 placeholder="Description..."></textarea>
             <mat-error>
                 <div
@@ -165,7 +163,7 @@
     <div class="row px-3">
         <div class="card-body px-0 pb-4">
             <div class="drag-border p-3">
-                <h4 class="font-weight-bold">Your Logo</h4>
+                <h4 class="font-weight-bold margin-remove">Your Logo</h4>
                 <div ng2FileDrop [ngClass]="{'another-file-over-class': hasAnotherDropZoneOver}"
                     (fileOver)="fileOverAnother($event)" [uploader]="uploader1"
                     class="box-placeholder my-drop-zone font-weight-bold pb-2">

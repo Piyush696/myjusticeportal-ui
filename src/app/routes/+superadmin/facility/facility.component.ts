@@ -121,8 +121,8 @@ export class FacilityComponent implements OnInit {
       this.addressForm.disable();
     }
     let dialogRef = this.dialog.open(templateRef, {
-      width: '120vh',
-      height: '80vh',
+      width: '60%',
+      height: '80%',
     })
     this.addressForm.get('country').setValue('United States')
     this.addressForm.get('country').disable()
