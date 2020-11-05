@@ -108,8 +108,8 @@ export class AdditionalInfoComponent implements OnInit, OnChanges {
         let lawyer = {}
         let splitArray = item.metaValue.split(":")
         lawyer['state'] = splitArray[0],
-          lawyer['bar_info_Exam_Id'] = splitArray[1],
-          lawyer['speciality'] = splitArray[2]
+          lawyer['bar_info_Exam_Id'] = splitArray[1]
+          // lawyer['speciality'] = splitArray[2]
         return lawyer
       })
     }
@@ -133,7 +133,7 @@ export class AdditionalInfoComponent implements OnInit, OnChanges {
     this.additionalInfoLawyer = this.fb.group({
       state: ['', [Validators.required]],
       bar_info_Exam_Id: [''],
-      speciality: ['', [Validators.required]]
+      // speciality: ['']
     })
   }
 
@@ -144,7 +144,8 @@ export class AdditionalInfoComponent implements OnInit, OnChanges {
       let lawyerInfo = this.lawyerInfoArray.map((item) => {
         this.currentState.push(item.state)
         let userMetaInfo = {}
-        let str = item.state + ':' + item.bar_info_Exam_Id + ':' + item.speciality
+        let str = item.state + ':' + item.bar_info_Exam_Id 
+        // + ':' + item.speciality
         userMetaInfo['metaKey'] = 'lawyerInfo'
         userMetaInfo['metaValue'] = str
 
