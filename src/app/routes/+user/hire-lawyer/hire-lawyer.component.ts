@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { CaseService } from 'app/services/case.service';
 import { HireLawyerService } from 'app/services/hire-lawyer.service';
 import { StatesService } from 'app/services/states.service';
+import { UserAdditionInfoService } from 'app/services/user-addition-info.service';
 
 @Component({
   selector: 'app-hire-lawyer',
@@ -19,9 +20,10 @@ export class HireLawyerComponent implements OnInit, AfterViewInit {
   currentLocation: any;
   filteredOrganizationList: any;
   @ViewChild('modalopen') modalopen: ElementRef
+  sponsorUserList: any;
 
-  constructor(private hireLawyerService: HireLawyerService, private caseService: CaseService,
-    private _statesService: StatesService, public dialog: MatDialog) { }
+  constructor(private hireLawyerService: HireLawyerService, private caseService: CaseService, private router: Router,
+    private userAdditionalService: UserAdditionInfoService, private _statesService: StatesService, public dialog: MatDialog) { }
 
   ngAfterViewInit(): void {
     this.modalopen.nativeElement.click();
@@ -29,11 +31,21 @@ export class HireLawyerComponent implements OnInit, AfterViewInit {
 
 
   ngOnInit(): void {
+    this.getSponsors();
     this.onGetLaywers();
     this.stateData();
     this.modalopen.nativeElement.click();
   }
 
+  getSponsors() {
+    this.userAdditionalService.getSponsorUsers().subscribe((sponsorsUser: any) => {
+      console.log(sponsorsUser)
+      this.sponsorUserList = sponsorsUser.data
+    })
+  }
+  onContactLawyer(userId) {
+    this.router.navigateByUrl('/mjp/user/contact/' + userId)
+  }
   onGetLaywers() {
     this.hireLawyerService.getOrganization().subscribe((res: any) => {
       this.organizationList = res.data;

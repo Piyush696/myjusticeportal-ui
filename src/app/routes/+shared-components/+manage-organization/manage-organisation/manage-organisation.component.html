@@ -291,32 +291,34 @@
             </mat-error>
         </mat-form-field>
     </div>
-    <div class="row px-3">
-        <mat-form-field appearance="fill" class="w-100 p-1">
-            <mat-label>Tagline</mat-label>
-            <input type="text" matInput [formControl]="organisationForm.controls['tagline']">
-            <mat-error>
-                <div
-                    *ngIf="organisationForm.controls['tagline'].invalid && organisationForm.controls['tagline'].touched">
-                    <small class="font13">
-                        Tagline is Required
-                    </small>
-                </div>
-            </mat-error>
-        </mat-form-field>
-    </div>
-    <div class="row px-3">
-        <mat-form-field appearance="fill" class="w-100 p-1">
-            <mat-label>Color Picker</mat-label>
-                <input matInput [(colorPicker)]="selectedColor" [value]="selectedColor" [cpCancelButton]="true"
-              [cpHeight]="'310px'" [formControl]="organisationForm.controls['colorPiker']"
-              (colorPickerChange)="buttonColor($event)" />
-        </mat-form-field>
+    <div class="row">
+        <div class=" col-6 pl-3">
+            <mat-form-field appearance="fill" class="w-100 p-1">
+                <mat-label>Tagline</mat-label>
+                <input type="text" matInput [formControl]="organisationForm.controls['tagline']">
+                <mat-error>
+                    <div
+                        *ngIf="organisationForm.controls['tagline'].invalid && organisationForm.controls['tagline'].touched">
+                        <small class="font13">
+                            Tagline is Required
+                        </small>
+                    </div>
+                </mat-error>
+            </mat-form-field>
+        </div>
+        <div class="col-6 pr-3">
+            <mat-form-field appearance="fill" class="w-100 p-1">
+                <mat-label>Color Picker</mat-label>
+                    <input matInput [(colorPicker)]="selectedColor" [value]="selectedColor" [cpCancelButton]="true"
+                  [cpHeight]="'310px'" [formControl]="organisationForm.controls['colorPiker']"
+                  (colorPickerChange)="buttonColor($event)" />
+            </mat-form-field>
+        </div>
     </div>
     <div class="row px-3">
         <mat-form-field appearance="fill" class="w-100 p-1">
             <mat-label>Description</mat-label>
-            <textarea [formControl]="organisationForm.controls['description']" rows="10" cols="50" matInput
+            <textarea [formControl]="organisationForm.controls['description']" rows="8" cols="50" matInput
                 placeholder="Description..."></textarea>
             <mat-error>
                 <div
@@ -331,6 +333,7 @@
     <div class="row px-3">
         <div class="card-body px-0 pt-3 pb-4">
             <div class="drag-border p-3">
+                <h4 class="font-weight-bold margin-remove">Your Logo</h4>
                 <div ng2FileDrop [ngClass]="{'another-file-over-class': hasAnotherDropZoneOver}"
                     (fileOver)="fileOverAnother($event)" [uploader]="uploader1"
                     class="box-placeholder my-drop-zone font-weight-bold pb-2">

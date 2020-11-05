@@ -80,29 +80,47 @@
             </mat-card>
         </div>
     </div>
-    <div class="col-4 mt">
+    <div class="col-sm-4 col-md-4 col-lg-4 col-xl-4 mt-4">
+        <div>
+            <h1 class="line-height font-weight-bold">Sponsors</h1>
+            <h4 class="line-height header-sub-text">Laywers and bondsman ready to help</h4>
+        </div>
         <mat-card class="outer-card">
-            <mat-label class="font-weight-bold">
-                Sponsored:
-            </mat-label>
-            <mat-card class="d-flex flex-column align-items-center inner-card mt-2">
-                <div class="row">
-                    <img src="assets/img/sidebar-logo.png">
-                </div>
-                <div class="row">
-                    <mat-label class="font-weight-bold">
-                        We Specialize in
-                    </mat-label>
-                </div>
-            </mat-card>
-            <mat-card class="d-flex flex-column align-items-center inner-card mt-2">
-                <img src="assets/img/sidebar-logo.png">
-                <div>
-                    <mat-label class="font-weight-bold">
-                        Experienced Criminal
-                    </mat-label>
-                </div>
-            </mat-card>
+            <div class="mt-4" *ngFor="let user of sponsorUserList; ">
+                <mat-card class="sponser-card w-100">
+                    <h3 class="d-flex justify-content-center line-height color font-weight-bold">{{user?.name}}</h3>
+                    <div class="text-center line-height" *ngFor="let pic of user.users">
+                        <div>
+                            <img src="{{pic?.userAdditionalInfo?.profile?.downloadLink}}" width="200" height="60"
+                                alt="logo">
+                        </div>
+                        <div>
+                            <h4 class=" line-height color">{{pic?.firstName}}
+                                {{pic?.middleName}}{{pic?.lastName}}</h4>
+                        </div>
+                    </div>
+                    <div class="d-flex justify-content-center">
+                        <button (click)="onContactLawyer(user.users[0].userId)" class="btn bg-color px-perc py-1"
+                            mat-raised-button>Contact</button>
+                    </div>
+                </mat-card>
+            </div>
+
+            <!-- <div>
+                <mat-card class="sponser-card w-100 mt-4">
+                    <div class="d-flex justify-content-center line-height">
+                        <img src="assets/img/sponsers.PNG" alt="Girl in a jacket" width="200" height="60">
+                    </div>
+                    <h3 class="d-flex justify-content-center line-height color px-5 py-1">
+                        Anytime Bail Bonds
+                    </h3>
+                    <div class="d-flex justify-content-center">
+                        <button [routerLink]="'/mjp/user/contact'" class="white-btn px-perc py-1" mat-raised-button>
+                            Contact
+                        </button>
+                    </div>
+                </mat-card>
+            </div> -->
         </mat-card>
     </div>
 </div>
