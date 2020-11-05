@@ -38,7 +38,7 @@
                                     </td> -->
                                     <td class="btn-group">
                                         <button class="btn-size ml-1 mt-2" mat-mini-fab color="warn"
-                                            title="Delete Specialty" (click)="deleteInfo(info.bar_info_Exam_Id)">
+                                            title="Delete Practice Areas" (click)="deleteInfo(info.bar_info_Exam_Id)">
                                             <mat-icon class="icon-font">delete</mat-icon>
                                         </button>
                                     </td>
@@ -158,14 +158,14 @@
     <div class="col-12">
         <div class="">
             <mat-form-field appearance="fill" class="w-100 p-4">
-                <mat-label>Specialty</mat-label>
+                <mat-label>Practice Areas</mat-label>
                 <input matInput placeholder="specialty" [formControl]="specialtyForm.controls['specialty']"
                     autocapitalize="off" required />
                 <mat-error>
                     <div *ngIf="specialtyForm.controls['specialty'].invalid && 
                                                 specialtyForm.controls['specialty'].touched">
                         <small class="font13" *ngIf="specialtyForm.get('specialty').errors?.required">
-                            specialty is Required.
+                            Practice Areas is Required.
                         </small>
                     </div>
                 </mat-error>
