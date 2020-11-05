@@ -24,6 +24,10 @@
                     <td>{{userDetails?.userAdditionalInfo?.description}}</td>
                 </tr>
                 <tr>
+                    <th>Practice Areas:</th>
+                    <td>{{userDetails?.userAdditionalInfo?.practiceAreas}}</td>
+                </tr>
+                <tr>
                     <th>Profile Picture:</th>
                     <td>
                         <img src="{{userDetails?.userAdditionalInfo?.profile?.downloadLink}}" alt="logo" class="logo"
@@ -125,6 +129,26 @@
     </div>
     <div class="row px-3">
         <mat-form-field appearance="fill" class="w-100 p-1">
+            <mat-label>Practice Areas</mat-label>
+            <mat-select [formControl]="toppings" multiple [formControl]="additionalInfoForm.controls['practiceAreas']"
+                required>
+                <mat-option>Select Practice Areas</mat-option>
+                <mat-option *ngFor="let specialty of specialtyList" value="{{specialty.specialtyType}}">
+                    {{specialty.specialtyType}}
+                </mat-option>
+            </mat-select>
+            <mat-error>
+                <div
+                    *ngIf="additionalInfoForm.controls['practiceAreas'].invalid && additionalInfoForm.controls['practiceAreas'].touched">
+                    <small class="font13">
+                        Practice Areas is Required
+                    </small>
+                </div>
+            </mat-error>
+        </mat-form-field>
+    </div>
+    <div class="row px-3">
+        <mat-form-field appearance="fill" class="w-100 p-1">
             <mat-label>Description</mat-label>
             <textarea [formControl]="additionalInfoForm.controls['description']" rows="10" cols="50" matInput
                 placeholder="Description..."></textarea>
@@ -139,8 +163,9 @@
         </mat-form-field>
     </div>
     <div class="row px-3">
-        <div class="card-body px-0 pt-3 pb-4">
+        <div class="card-body px-0 pb-4">
             <div class="drag-border p-3">
+                <h4 class="font-weight-bold">Your Logo</h4>
                 <div ng2FileDrop [ngClass]="{'another-file-over-class': hasAnotherDropZoneOver}"
                     (fileOver)="fileOverAnother($event)" [uploader]="uploader1"
                     class="box-placeholder my-drop-zone font-weight-bold pb-2">
@@ -165,9 +190,9 @@
             <div *ngIf="uploader1?.queue?.length > 0" class="d-flex align-items-end justify-content-center pr-2">
                 <div class="pr-3">
                     <mat-radio-group color="primary" aria-label="Select an option" [(ngModel)]="fileType">
-                        <mat-radio-button value="private" class="pr-3">
+                        <!-- <mat-radio-button value="private" class="pr-3">
                             Upload as private
-                        </mat-radio-button>
+                        </mat-radio-button> -->
                         <mat-radio-button value="shared" class="pr-3">
                             Upload as shared
                         </mat-radio-button>
