@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { ToasterService } from 'app/services/toaster.service';
 import { UserAdditionInfoService } from 'app/services/user-addition-info.service';
 import { FileUploader } from 'ng2-file-upload';
+import { SpecialtyService } from 'app/services/specialty.service';
 const URL = 'https://evening-anchorage-3159.herokuapp.com/api/';
 
 @Component({
@@ -24,9 +25,13 @@ export class ManageProfileComponent implements OnInit {
   sharedCaseFiles: any;
   privateCaseFiles: any;
   buttonText: string = 'Edit'
-  constructor(private userAdditionalInfo: UserAdditionInfoService, private router: Router, public dialog: MatDialog, private fb: FormBuilder, private toasterService: ToasterService) { }
+  specialtyList: any;
+
+  constructor(private userAdditionalInfo: UserAdditionInfoService, private router: Router, private fb: FormBuilder,
+    private specialtyService: SpecialtyService,public dialog: MatDialog, private toasterService: ToasterService) { }
 
   ngOnInit(): void {
+    this.getAllSpecialty()
     this.getlawyerInfo()
     this.createControl()
   }
@@ -35,8 +40,10 @@ export class ManageProfileComponent implements OnInit {
     this.additionalInfoForm = this.fb.group({
       name: ['', [Validators.required]],
       tagline: ['', [Validators.required]],
-      description: ['', [Validators.required]]
+      description: ['', [Validators.required]],
+      practiceAreas: ['', [Validators.required]]
     });
+    this.getAllSpecialty();
   }
 
   filterCases(data: any) {
@@ -54,14 +61,14 @@ export class ManageProfileComponent implements OnInit {
       this.additionalInfoForm.get('name').setValue(name)
       this.additionalInfoForm.get('tagline').setValue(user?.data?.userAdditionalInfo?.tagline)
       this.additionalInfoForm.get('description').setValue(user?.data?.userAdditionalInfo?.description)
+      this.additionalInfoForm.get('practiceAreas').setValue(user?.data?.userAdditionalInfo?.practiceAreas)
       this.additionalInfoForm.disable()
     })
   }
 
   openOrganizationModal(templateRef) {
     let dialogRef = this.dialog.open(templateRef, {
-      width: '750px',
-      height: '500px'
+      width: '750px'
     });
   }
 
@@ -95,7 +102,8 @@ export class ManageProfileComponent implements OnInit {
       const data = {
         additionalInfo: {
           "tagline": this.additionalInfoForm.get('tagline').value,
-          "description": this.additionalInfoForm.get('description').value
+          "description": this.additionalInfoForm.get('description').value,
+          "practiceAreas": (this.additionalInfoForm.get('practiceAreas').value).toString()
         }
       }
       this.userAdditionalInfo.updateAdditionalInfo(data).subscribe((updatedOrg: any) => {
@@ -117,4 +125,13 @@ export class ManageProfileComponent implements OnInit {
     this.buttonText = 'Save';
   }
 
+  getAllSpecialty() {
+    this.specialtyService.getAllSpecialty().subscribe((res: any) => {
+      console.log(res.data)
+      this.specialtyList = res.data
+    })
+  }
+  closeModal(){
+    this.dialog.closeAll();
+  }
 }
