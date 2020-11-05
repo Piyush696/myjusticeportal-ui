@@ -28,14 +28,14 @@
                         <table class="table">
                             <tbody class="p-1" style="border: none; ">
                                 <tr *ngFor="let info of lawyerInfoArray">
-                                    <td class="p-0 w-25 pl-5 py-1 table-color font-weight-bold">{{info.state}}</td>
-                                    <td class="p-0 w-25 pl-5 py-1 table-color">
+                                    <td class="p-0 w-50 pl-5 py-1 table-color font-weight-bold">{{info.state}}</td>
+                                    <td class="p-0 w-50 pl-5 py-1 table-color">
                                         <span class="font-weight-bold">Bar ID:-
                                         </span>
                                         {{info.bar_info_Exam_Id}}</td>
-                                    <td class="p-0 w-25 pl-5 py-1 table-color">
+                                    <!-- <td class="p-0 w-25 pl-5 py-1 table-color">
                                         <span class="font-weight-bold">Practice Areas:-</span> ({{info.speciality.length}})
-                                    </td>
+                                    </td> -->
                                     <td class="btn-group">
                                         <button class="btn-size ml-1 mt-2" mat-mini-fab color="warn"
                                             title="Delete Specialty" (click)="deleteInfo(info.bar_info_Exam_Id)">
@@ -70,7 +70,7 @@
                     </div>
 
                     <div class="d-flex" *ngIf="roleId == 3">
-                        <div class="col-4 p-0">
+                        <div class="col-6 p-0">
                             <mat-form-field appearance="fill" class="w-100 p-1">
                                 <mat-label>State</mat-label>
                                 <mat-select [formControl]="additionalInfoLawyer.controls['state']" required>
@@ -81,7 +81,7 @@
                                 </mat-select>
                             </mat-form-field>
                         </div>
-                        <div class="col-4 p-0">
+                        <div class="col-6 p-0">
                             <mat-form-field appearance="fill" class="w-100 p-1">
                                 <mat-label>Bar ID (If Applicable)</mat-label>
                                 <input type="text" matInput
@@ -96,9 +96,9 @@
                             </mat-form-field>
                         </div>
 
-                        <div class="col-4 p-0">
+                        <!-- <div class="col-4 p-0">
                             <mat-form-field appearance="fill" class="w-100 p-1">
-                                <!-- <mat-label>Specialty</mat-label> -->
+                                <mat-label>Specialty</mat-label>
                                 <mat-label>Practice Areas</mat-label>
                                 <mat-select [formControl]="toppings" multiple
                                     [formControl]="additionalInfoLawyer.controls['speciality']" required>
@@ -106,13 +106,13 @@
                                     <mat-option *ngFor="let specialty of specialtyList"
                                         value="{{specialty.specialtyType}}">{{specialty.specialtyType}}</mat-option>
                                 </mat-select>
-                                <!-- <mat-select [formControl]="additionalInfoLawyer.controls['speciality']" required>
+                                <mat-select [formControl]="additionalInfoLawyer.controls['speciality']" required>
                                     <mat-option>Select specialty</mat-option>
                                     <mat-option *ngFor="let specialty of specialtyList"
                                         value="{{specialty.specialtyType}}">
                                         {{specialty.specialtyType}}
                                     </mat-option>
-                                </mat-select> -->
+                                </mat-select>
                                 <mat-error
                                     *ngIf="additionalInfoLawyer.controls['speciality'].invalid && additionalInfoLawyer.controls['speciality'].touched">
                                     <small class="font13"
@@ -121,19 +121,19 @@
                                     </small>
                                 </mat-error>
                             </mat-form-field>
-                        </div>
+                        </div> -->
                     </div>
-                    <div class="d-flex justify-content-end">
+                    <!-- <div class="d-flex justify-content-end">
                         <a class="anchor-style" mat-flat-button (click)="openModal(mytemplate)">
                             + Add Practice Areas
                         </a>
-                    </div>
+                    </div> -->
                 </div>
 
                 <div class="row pl-3" *ngIf="roleId == 3">
                     <div class="pl-3">
                         <button class="px-4 py-1"
-                            [disabled]="additionalInfoLawyer.controls['state'].invalid || additionalInfoLawyer.controls['speciality'].invalid"
+                            [disabled]="additionalInfoLawyer.controls['state'].invalid"
                             mat-raised-button color="primary" (click)="addMoreStates()">{{buttonText}}</button>
                     </div>
                 </div>
