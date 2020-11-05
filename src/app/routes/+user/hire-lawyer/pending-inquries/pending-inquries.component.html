@@ -30,14 +30,15 @@
                         <div>
                             <button
                                 [disabled]="(case.status === 'inmate_rejected' || case.status === 'Rejected' ||case.status === 'Requested')"
-                                class="btn btn-sm btn-warning" color="" (click)="onClickStatus('inmate_rejected',case.userId,case.caseId)">
+                                class="btn btn-sm btn-warning" color=""
+                                (click)="onClickStatus('inmate_rejected',case.userId,case.caseId)">
                                 Reject
                             </button>
                         </div>
                         <div>
                             <button
                                 [disabled]="( case.status === 'inmate_rejected' || case.status === 'inmate_accepted' || case.status === 'Rejected' || case.status === 'Requested' || case.status === 'Approved')"
-                                class="btn btn-sm btn-dark" (click)="onOpenModal(openModal,user)">
+                                class="btn btn-sm btn-dark" (click)="onOpenModal(openModal,case)">
                                 Message
                             </button>
                         </div>
