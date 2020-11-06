@@ -79,7 +79,6 @@ hideCaseDetails(caseId) {
 }
 allCase(){
   this.hireLawyerService.getAllCases().subscribe((res) => {
-    console.log(res.data.lawyer)
     this.allCasesData=res.data.lawyer;
     this.dataSource = new MatTableDataSource(res.data.lawyer);
       this.dataSource.paginator = this.paginator;

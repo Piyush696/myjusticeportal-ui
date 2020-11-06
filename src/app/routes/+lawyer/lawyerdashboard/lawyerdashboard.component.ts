@@ -149,7 +149,6 @@ export class LawyerdashboardComponent implements OnInit {
         }
       })
     }
-    console.log(this.facility)
   }
 
   onSelectAddOns(event, facilityId) {
@@ -166,7 +165,6 @@ export class LawyerdashboardComponent implements OnInit {
         }
       })
     }
-    console.log(this.addOnsList)
   }
 
   createControl() {
@@ -256,7 +254,6 @@ export class LawyerdashboardComponent implements OnInit {
 
   getALLFacilities() {
     this.facilityService.getFacilitiesUserCount().subscribe((facilities: any) => {
-      console.log(facilities)
       this.facilities = facilities.data;
     })
   }

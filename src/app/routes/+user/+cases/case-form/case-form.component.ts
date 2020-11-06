@@ -29,7 +29,6 @@ export class CaseFormComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges() {
-    // console.log(this)
     if (this.caseDetails) {
       this.createFormControl();
       this.getUserFromStore();
@@ -78,7 +77,6 @@ export class CaseFormComponent implements OnInit, OnChanges {
   userState() {
     this.caseService.getState().subscribe((state: any) => {
       this.caseForm.get('stateOfArrest').setValue(state.data.facilities[0].Address.state)
-      console.log(state.data.facilities[0].Address.state)
     });
   }
 

@@ -42,7 +42,6 @@ export class ViewLawyerComponent implements OnInit {
 
   getAllUsers() {
     this.hireLawyerService.getUsersLawyer(this.organizationId).subscribe((users: any) => {
-      console.log(users)
       let specialty = [];
       specialty.push(users.data.specialty.split(","))
       this.specialtyList = specialty[0]
