@@ -61,7 +61,6 @@ export class LawyerdashboardComponent implements OnInit {
     this.getAllClients();
     this.getALLFacilities();
     this.createCardControl();
-    this.createPlanControl();
     this.createControl();
   }
 
@@ -75,11 +74,6 @@ export class LawyerdashboardComponent implements OnInit {
     this.cardForm.disable();
   }
 
-  createPlanControl() {
-    this.selectPlanForm = this.fb.group({
-      plan: ['', [Validators.required]],
-    })
-  }
 
   cardPatternValidation(control: AbstractControl) {
     const pattern = /([0-9])$/;
