@@ -20,6 +20,7 @@ export class LawyerdashboardComponent implements OnInit {
   requestedCases: any;
   isAuthorized: boolean;
   isAddOns: boolean;
+  isDisabled: boolean = true;
   clients: any;
   facilities: any;
   allClients: any;
@@ -71,6 +72,7 @@ export class LawyerdashboardComponent implements OnInit {
       valid: ['', [Validators.required]],
       card: ['', [Validators.required, this.cardPatternValidation.bind(this)], this.cardValidation.bind(this)],
     })
+    this.cardForm.disable();
   }
 
   createPlanControl() {
@@ -127,6 +129,7 @@ export class LawyerdashboardComponent implements OnInit {
 
 
   onNativeChange(event, facilityId, inmatesCount) {
+    this.cardForm.enable();
     console.log(inmatesCount)
     if (event) {
       this.totalCount = this.totalCount + inmatesCount * 0.10;
@@ -140,6 +143,9 @@ export class LawyerdashboardComponent implements OnInit {
       this.facility.forEach((x, i, a) => {
         if (x == facilityId) {
           this.facility.splice(i, 1);
+          this.totalCount = this.totalCount - inmatesCount * 0.10;
+          this.inmatesCount = this.inmatesCount - inmatesCount
+          this.facilityCount = this.facilityCount - inmatesCount * 0.10;
         }
       })
     }
@@ -155,6 +161,8 @@ export class LawyerdashboardComponent implements OnInit {
       this.addOnsList.forEach((x, i, a) => {
         if (x == facilityId) {
           this.addOnsList.splice(i, 1);
+          this.totalCount = this.totalCount - 10;
+          this.addOnsCount = this.addOnsCount - 10;
         }
       })
     }
@@ -170,6 +178,7 @@ export class LawyerdashboardComponent implements OnInit {
   }
 
   onSelectPlan() {
+    this.isDisabled = false
     this.totalCount = this.totalCount + 50
   }
 
