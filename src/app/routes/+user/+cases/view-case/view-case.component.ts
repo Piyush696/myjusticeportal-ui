@@ -47,6 +47,7 @@ export class ViewCaseComponent implements OnInit {
 
   getCase() {
     this.caseService.getCase(this.route.snapshot.params['caseId']).subscribe((result: any) => {
+      console.log(result)
       if (result.success) {
         this.caseDetails = result.data;
       }
@@ -62,8 +63,9 @@ export class ViewCaseComponent implements OnInit {
     this.lawyerService.deleteLawyerCase(userId, this.route.snapshot.params['caseId']).subscribe((deletedLawyer: any) => {
       if (deletedLawyer.data == 1) {
         this.assignedLawyer = ''
-        this.toasterService.showSuccessToater('Lawyer Removed from case.')
+        this.toasterService.showSuccessToater('Lawyer Removed from case.')        
         this.getAssignedLawyer();
+        this.dialog.closeAll();
       } else {
         this.toasterService.showErrorToater('Something went wrong.')
       }
@@ -81,6 +83,12 @@ export class ViewCaseComponent implements OnInit {
     this.caseNoteForm.get('notes').setValue(this.caseDetails.notes);
     // this.caseNoteForm.get('notes').disable();
     dialogRef.afterClosed().subscribe(result => {
+    });
+  }
+
+  removeAlert(templateRef) {
+    let dialogRef = this.dialog.open(templateRef, {
+      width: '23%',
     });
   }
 
