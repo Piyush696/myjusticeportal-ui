@@ -54,7 +54,6 @@ export class FacilityComponent implements OnInit {
   stateData() {
     this._statesService.getStates()
       .subscribe((data: any) => {
-        console.log(data)
         this.states = data
       });
   }

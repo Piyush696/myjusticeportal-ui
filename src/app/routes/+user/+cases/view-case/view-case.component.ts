@@ -36,7 +36,6 @@ export class ViewCaseComponent implements OnInit {
 
   getAssignedLawyer() {
     this.caseService.getAssignedLawyer(this.route.snapshot.params['caseId']).subscribe((lawyer: any) => {
-      console.log(lawyer)
       if (lawyer.data != 'No lawyer assigned to this case.') {
         this.assignedLawyer = lawyer.data
       } else {
@@ -47,7 +46,6 @@ export class ViewCaseComponent implements OnInit {
 
   getCase() {
     this.caseService.getCase(this.route.snapshot.params['caseId']).subscribe((result: any) => {
-      console.log(result)
       if (result.success) {
         this.caseDetails = result.data;
       }

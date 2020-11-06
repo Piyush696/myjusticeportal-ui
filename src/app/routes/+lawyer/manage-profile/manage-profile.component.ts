@@ -137,7 +137,6 @@ export class ManageProfileComponent implements OnInit {
 
   getAllSpecialty() {
     this.specialtyService.getAllSpecialty().subscribe((res: any) => {
-      console.log(res.data)
       this.specialtyList = res.data
     })
   }

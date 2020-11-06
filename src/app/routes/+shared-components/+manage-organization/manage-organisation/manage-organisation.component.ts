@@ -97,11 +97,9 @@ export class ManageOrganisationComponent implements OnInit {
         this.addressId = orgDetails.data.Organization.Address.addressId
         this.organisationForm.disable();
       } else {
-        console.log('csdc')
         this.toasterService.showErrorToater(orgDetails.data);
       }
     }, (error: any) => {
-      console.log('csdc')
       this.toasterService.showErrorToater(error.statusText);
     })
   }

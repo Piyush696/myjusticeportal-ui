@@ -18,24 +18,19 @@ export class SelectFacilityComponent implements OnInit {
   constructor(private facilityService: FacilityService) { }
 
   ngOnInit(): void {
-    console.log(this.currentState)
     this.getAllFacility();
   }
 
   getAllFacility() {
-    console.log(this.currentState)
     this.facilityService.getAllFacility().subscribe((facilities: any) => {
-      console.log(facilities)
       if (this.currentState) {
         for (let i = 0; i <= this.currentState.length - 1; i++) {
           for (let j = i; j <= facilities.data.length - 1; j++) {
             if (this.currentState[i] === facilities.data[j].Address.state) {
-              console.log(this.currentState[i] === facilities.data[j].Address.state)
               this.facilityList.push(facilities.data[j])
             }
           }
         }
-        console.log(this.facilityList)
       }
       else {
         this.facilityList = facilities.data
