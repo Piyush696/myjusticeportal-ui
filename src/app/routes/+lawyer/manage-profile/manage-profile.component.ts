@@ -6,6 +6,7 @@ import { ToasterService } from 'app/services/toaster.service';
 import { UserAdditionInfoService } from 'app/services/user-addition-info.service';
 import { FileUploader } from 'ng2-file-upload';
 import { SpecialtyService } from 'app/services/specialty.service';
+import { OrganisationService } from 'app/services/organisation.service';
 const URL = 'https://evening-anchorage-3159.herokuapp.com/api/';
 
 @Component({
@@ -26,14 +27,17 @@ export class ManageProfileComponent implements OnInit {
   privateCaseFiles: any;
   buttonText: string = 'Edit'
   specialtyList: any;
+  orgData: any;
 
   constructor(private userAdditionalInfo: UserAdditionInfoService, private router: Router, private fb: FormBuilder,
-    private specialtyService: SpecialtyService,public dialog: MatDialog, private toasterService: ToasterService) { }
+    private specialtyService: SpecialtyService,public dialog: MatDialog, private toasterService: ToasterService,
+    private organisationService: OrganisationService) { }
 
   ngOnInit(): void {
     this.getAllSpecialty()
     this.getlawyerInfo()
     this.createControl()
+    this.getOrganisationAddress()
   }
 
   createControl() {
@@ -53,9 +57,14 @@ export class ManageProfileComponent implements OnInit {
     }
   }
 
+  getOrganisationAddress() {
+    this.organisationService.getOrganisationAddressDetails().subscribe((orgDetails: any) => {
+      this.orgData = orgDetails.data
+    })
+  }
+
   getlawyerInfo() {
     this.userAdditionalInfo.getUsers().subscribe((user: any) => {
-      console.log(user)
       this.userDetails = user.data
       let name = user?.data?.firstName + user?.data?.middleName + user?.data?.lastName
       this.additionalInfoForm.get('name').setValue(name)

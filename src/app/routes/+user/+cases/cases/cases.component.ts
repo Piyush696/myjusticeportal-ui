@@ -43,6 +43,7 @@ export class CasesComponent implements OnInit {
 
   getSponsors() {
     this.userAdditionalService.getSponsorUsers().subscribe((sponsorsUser: any) => {
+      console.log(sponsorsUser.data)
       this.sponsorUserList = sponsorsUser.data
     })
   }

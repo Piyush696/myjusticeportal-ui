@@ -51,16 +51,6 @@ export class ViewLawyerComponent implements OnInit {
     })
   }
 
-  openModal(templateRef, userId) {
-    this.userId = userId
-    let dialogRef = this.dialog.open(templateRef, {
-      width: '500px'
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-    });
-  }
-
   onSelectCaseIds(event, caseId) {
     const data = {
       "caseId":caseId
@@ -103,9 +93,11 @@ export class ViewLawyerComponent implements OnInit {
       }
     })
   }
-
+  onContactLawyer(userId) {
+    this.router.navigateByUrl('/mjp/user/contact/' + userId)
+  }
   closeModal() {
-    this.dialog.closeAll();
+    this.router.navigateByUrl('mjp/user/hire-lawyer')
   }
 
 }

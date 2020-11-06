@@ -23,7 +23,7 @@
                         </h3>
                     </div>
                     <div>
-                        <button class="white-btn px-5 py-1" mat-raised-button [routerLink]="'edit'">
+                        <button class="white-btn px py-1 mr-2" mat-raised-button [routerLink]="'edit'">
                             Edit Case
                         </button>
                     </div>
@@ -44,6 +44,11 @@
                         <div *ngIf="caseDetails?.countyOfArrest">
                             <p class="text-default">County of Arrest:
                                 <span class="font-weight-normal"> {{caseDetails?.countyOfArrest}}</span>
+                            </p>
+                        </div>
+                        <div *ngIf="caseDetails?.stateOfArrest">
+                            <p class="text-default">State of Arrest:
+                                <span class="font-weight-normal"> {{caseDetails?.stateOfArrest}}</span>
                             </p>
                         </div>
                         <div>
@@ -75,8 +80,9 @@
                     </div>
                     <div class="col-4 d-flex justify-content-center align-items-center">
                         <mat-card>
-                            <div *ngIf="!assignedLawyer" class=" px-4 py-4">
-                                <h4 class="text-center font-weight-bold">None</h4>
+                            <div *ngIf="!assignedLawyer" class=" px-2 py-4">
+                                <h4 class="text-center font-weight-bold">No Connect Lawyer</h4>
+                                <p class="text-justify">Please click Find a Lawyer to search for lawyers.</p>
                             </div>
                             <div *ngIf="assignedLawyer">
                                 <h3 class="text-center font-weight-bold">Lawyer Details:</h3>
@@ -91,8 +97,22 @@
                                         <span class="font-weight-normal">{{assignedLawyer?.Organization?.name}}</span>
                                     </p>
                                 </div>
-                                <button class="btn bg-color px-perc py-1" mat-raised-button
-                                    (click)="removeLawyer(assignedLawyer.userId)">Remove Lawyer</button>
+                                <div class="text-center">
+                                    <button class="btn bg-color px-perc py-1" mat-raised-button
+                                        (click)="removeAlert(lawyerRemoveConforation)">Remove Lawyer
+                                    </button>
+                                    <ng-template #lawyerRemoveConforation>
+                                        <h3 class="text-center">Are you Sure, You want to remove the lawyer</h3>
+                                        <div class="d-flex justify-content-between">
+                                            <button class="btn bg-color px-perc py-1" mat-raised-button
+                                                (click)="onCancelNotesModal()">No
+                                            </button>
+                                            <button class="button-purple px-perc py-1" mat-raised-button
+                                                (click)="removeLawyer(assignedLawyer.userId)">Yes
+                                            </button>
+                                        </div>
+                                    </ng-template>
+                                </div>
                             </div>
                         </mat-card>
                     </div>

@@ -48,7 +48,7 @@
                     Select Case
                 </mat-option>
                 <mat-option *ngFor="let case of caseList" [value]="case.caseId">
-                    {{case?.briefDescriptionOfChargeOrLegalMatter}}
+                    {{case?.legalMatter}}
                 </mat-option>
             </mat-select>
         </mat-form-field>
@@ -65,15 +65,19 @@
             <mat-error>
                 <div *ngIf="lawyerCaseForm.controls['notes'].invalid && lawyerCaseForm.controls['notes'].touched">
                     <small class="font13">
-                        Notes is Required
+                        Request notes is Required
                     </small>
                 </div>
             </mat-error>
         </mat-form-field>
+        <div class="ml-2 pr-2 pb-2 pt-2 pl-0">
+            <button class="button-purple px-5 py-1" [disabled]="!lawyerCaseForm.valid" mat-raised-button (click)="onContactLawyer()">
+                Contact lawyer
+            </button>
+            <button class="ml-4 button-purple px-5 py-1" routerLink="../../case" mat-raised-button>
+                Cancel
+            </button>
+        </div>
     </div>
-    <div class="pr-2 pb-2 pt-2 pl-0">
-        <button class="button-purple px-5 py-1 float-right" [disabled]="!lawyerCaseForm.valid" mat-raised-button (click)="onContactLawyer()">
-            Contact lawyer
-        </button>
-    </div>
+    
 </div>

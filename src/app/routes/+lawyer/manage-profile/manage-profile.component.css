@@ -19,3 +19,13 @@ th {
 .margin-remove{
   margin-top: -30px;
 }
+
+.outer-card {
+  border: 1px solid #333442;
+  color: #333442;
+  background: #e4e4ec;
+}
+
+.bg-color{
+  background-color: #333442;
+}
