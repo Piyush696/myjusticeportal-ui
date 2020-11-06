@@ -22,8 +22,7 @@
                                 <div class="row">
                                     <div class="col-12 pt-2">
                                         <mat-card class="mat-elevation-z10 border-card">
-                                            <input class="circle" type="radio" name="package" value="'6month'"
-                                                [formControl]="selectPlanForm.controls['plan']"
+                                            <input class="circle" type="radio" name="package"
                                                 (change)="onSelectPlan($event.checked)">
                                             Standard Plan($50/mo, $0.10/inmate/mo)
                                         </mat-card>
@@ -48,7 +47,7 @@
                                 <div class="col-12 pt-2">
                                     <div>
                                         <li *ngFor="let facility of facilities">
-                                            <mat-checkbox color="primary"
+                                            <mat-checkbox color="primary" [disabled]="isDisabled"
                                                 (change)="onNativeChange($event.checked,facility?.facilityId,facility.userCount)">
                                                 {{facility?.facilityName}} ({{facility.userCount}} inmates)
                                             </mat-checkbox>
@@ -65,17 +64,17 @@
                                                         </mat-checkbox>
                                                     </div>
                                                     <div>
-                                                        <mat-checkbox color="primary"
+                                                        <!-- <mat-checkbox color="primary"
                                                             [formControl]="addOnsForm.controls['landingPage']"
                                                             (change)="onSelectAddOns($event.checked,facility?.facilityId)">
                                                             <span>Landing Page($10/mo)</span>
-                                                        </mat-checkbox>
+                                                        </mat-checkbox> -->
                                                     </div>
                                                     <div>
                                                         <mat-checkbox color="primary"
                                                             [formControl]="addOnsForm.controls['sponsors']"
                                                             (change)="onSelectAddOns($event.checked,facility?.facilityId)">
-                                                            <span>Sponsors Ad Unit Rotation($10/mo)</span>
+                                                            <span>Sponsors Unit Rotation($10/mo)</span>
                                                         </mat-checkbox>
                                                     </div>
                                                 </mat-card>
@@ -107,11 +106,17 @@
                             <div class="col-12 pt-2">
                                 <mat-card class="mat-elevation-z10">
                                     <div class="d-flex justify-content-center align-items-center">
-                                        <div>{{addOnsCount/10}} * $10 = {{addOnsCount}}
+                                        <div>$10 * {{addOnsCount/10}} addOns = {{addOnsCount}}
                                         </div>
                                     </div>
                                     <div class="d-flex justify-content-center align-items-center">
-                                        <div>{{inmatesCount}} inmate * $0.10 = {{facilityCount}}
+                                        <div>$0.10 * {{inmatesCount}} inmate = {{facilityCount}}
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <div class="d-flex justify-content-center align-items-center">
+                                        <div>
+                                            <span class="font-weight-bold">Total:-</span> ${{totalCount}}
                                         </div>
                                     </div>
                                 </mat-card>
