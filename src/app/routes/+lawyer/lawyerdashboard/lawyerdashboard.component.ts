@@ -127,7 +127,6 @@ export class LawyerdashboardComponent implements OnInit {
 
 
   onNativeChange(event, facilityId, inmatesCount) {
-    console.log(inmatesCount)
     if (event) {
       this.totalCount = this.totalCount + inmatesCount * 0.10;
       this.inmatesCount = this.inmatesCount + inmatesCount
@@ -143,7 +142,6 @@ export class LawyerdashboardComponent implements OnInit {
         }
       })
     }
-    console.log(this.facility)
   }
 
   onSelectAddOns(event, facilityId) {
@@ -158,7 +156,6 @@ export class LawyerdashboardComponent implements OnInit {
         }
       })
     }
-    console.log(this.addOnsList)
   }
 
   createControl() {
@@ -247,7 +244,6 @@ export class LawyerdashboardComponent implements OnInit {
 
   getALLFacilities() {
     this.facilityService.getFacilitiesUserCount().subscribe((facilities: any) => {
-      console.log(facilities)
       this.facilities = facilities.data;
     })
   }

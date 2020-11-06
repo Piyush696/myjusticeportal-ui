@@ -39,7 +39,6 @@ export class HireLawyerComponent implements OnInit, AfterViewInit {
 
   getSponsors() {
     this.userAdditionalService.getSponsorUsers().subscribe((sponsorsUser: any) => {
-      console.log(sponsorsUser)
       this.sponsorUserList = sponsorsUser.data
     })
   }

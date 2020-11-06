@@ -39,7 +39,6 @@ export class ChatComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(): void {
-    console.log(this.allMessages)
   }
 
   getSingleUser() {
@@ -50,8 +49,6 @@ export class ChatComponent implements OnInit, OnChanges {
 
   setupSocketConnection() {
     this.store.select(s => s.incomingMessages).subscribe((x: any) => {
-      console.log(x)
-      // this.allMessages.push(x)
     })
     this.socket = io(SOCKET_ENDPOINT);
     this.socket.on('message-broadcast' + this.userInfo.userId, (data: any) => {
