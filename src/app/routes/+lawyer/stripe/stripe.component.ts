@@ -11,11 +11,13 @@ declare var elements: any;
   styleUrls: ['./stripe.component.css'],
 })
 export class StripeComponent implements OnDestroy, AfterViewInit {
+
   @ViewChild('cardInfo') cardInfo: ElementRef;
   _totalAmount: number;
   card: any;
   cardHandler = this.onChange.bind(this);
   cardError: string;
+   
   constructor(
     private cd: ChangeDetectorRef,
     @Inject(MAT_DIALOG_DATA) private data: any,
@@ -23,6 +25,7 @@ export class StripeComponent implements OnDestroy, AfterViewInit {
   ) {
     this._totalAmount = data['totalAmount'];
   }
+
   ngOnDestroy() {
     if (this.card) {
       // We remove event listener here to keep memory clean
@@ -30,9 +33,11 @@ export class StripeComponent implements OnDestroy, AfterViewInit {
       this.card.destroy();
     }
   }
+
   ngAfterViewInit() {
     this.initiateCardElement();
   }
+
   initiateCardElement() {
     // Giving a base style here, but most of the style is in scss file
     const cardStyle = {

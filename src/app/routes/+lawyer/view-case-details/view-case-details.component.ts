@@ -3,7 +3,10 @@ import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 import { HireLawyerService } from '../../../services/hire-lawyer.service';
 import { ToasterService } from '../../../services/toaster.service';
-
+import { FileUploader } from 'ng2-file-upload';
+import { MatDialog } from '@angular/material/dialog';
+import { CaseService } from 'app/services/case.service';
+const URL = 'https://evening-anchorage-3159.herokuapp.com/api/';
 @Component({
   selector: 'app-view-case-details',
   templateUrl: './view-case-details.component.html',
@@ -13,8 +16,19 @@ import { ToasterService } from '../../../services/toaster.service';
 export class ViewCaseDetailsComponent implements OnInit {
   singleCaseData: any;
 
-  constructor(private hireLawyerService: HireLawyerService, private activatedRoute: ActivatedRoute,
-    private toasterService: ToasterService, private location: Location) { }
+  sharedCaseFiles: any;
+  privateCaseFiles: any;
+  fileId: number;
+  fileType: string = 'private';
+
+  public uploader1: FileUploader = new FileUploader({ url: URL });
+  public hasAnotherDropZoneOver: boolean = false;
+
+  public fileOverAnother(e: any): void {
+    this.hasAnotherDropZoneOver = e;
+  }
+  constructor(private hireLawyerService: HireLawyerService, private activatedRoute: ActivatedRoute,private caseService: CaseService,
+    private toasterService: ToasterService, private location: Location,public dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.onGetCaseData();
@@ -53,4 +67,69 @@ export class ViewCaseDetailsComponent implements OnInit {
       this.toasterService.showErrorToater(error.statusText);
     })
   }
+
+  onUploadCaseFile() {
+    let formData = new FormData();
+    formData.append('caseId', this.activatedRoute.snapshot.params['caseId']);
+    this.uploader1.queue.forEach((file) => {
+      formData.append('file', file._file);
+    })
+    formData.append('type', this.fileType);
+
+    this.caseService.uploadFile(formData).subscribe((res) => {
+      this.fileType = 'private';
+      if (res.success) {
+        this.onGetCaseData();
+        this.uploader1.queue = [];
+        this.toasterService.showSuccessToater('File uploaded successfully.');
+      } else {
+        this.toasterService.showErrorToater(res.data);
+      }
+    }, (error: any) => {
+      this.toasterService.showErrorToater(error.statusText);
+    })
+  }
+
+  onOpenModal(templateRef, fileId) {
+    this.fileId = fileId
+    let dialogRef = this.dialog.open(templateRef, {
+      width: '500px',
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+    });
+  }
+
+  closeModal() {
+    this.dialog.closeAll();
+  }
+
+  onDeleteCaseFile() {
+    this.caseService.deleteFile(this.fileId).subscribe((res: any) => {
+      if (res.success) {
+        this.dialog.closeAll();
+        this.toasterService.showSuccessToater('Case file deleted successfully.');
+        this.onGetCaseData();
+      } else {
+        this.toasterService.showErrorToater(res.data);
+      }
+    }, (error: any) => {
+      this.toasterService.showErrorToater(error.statusText);
+    })
+  }
+
+  // onDownloadCaseFile(fileId) {
+  //   let data: any = {};
+  //   data.caseId = this.activatedRoute.snapshot.params['caseId'];
+  //   data.fileId = fileId;
+  //   this.caseService.getDownloadLink(data).subscribe((res: any) => {
+  //     if (res.success) {
+  //       window.open(res.data, '_self');
+  //     } else {
+  //       this.toasterService.showErrorToater(res.data);
+  //     }
+  //   }, (error: any) => {
+  //     this.toasterService.showErrorToater(error.statusText);
+  //   })
+  // }
 }
