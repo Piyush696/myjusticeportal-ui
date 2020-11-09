@@ -13,6 +13,7 @@ import { ManageProfileComponent } from './manage-profile/manage-profile.componen
 import { FileUploadModule } from 'ng2-file-upload';
 import { ReversePipe } from './accepted-cases/reverse.pipe';
 import { InquiriesComponent } from './inquiries/inquiries.component';
+import { StripeComponent } from './stripe/stripe.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { InquiriesComponent } from './inquiries/inquiries.component';
     ManageProfileComponent,
     ReversePipe,
     InquiriesComponent,
+    StripeComponent,
   ],
   imports: [
     TextMaskModule,

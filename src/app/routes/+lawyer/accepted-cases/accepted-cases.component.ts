@@ -52,6 +52,7 @@ export class AcceptedCasesComponent implements OnInit {
       this.toasterService.showSuccessToater('Showed approved cases only.');
     }
   }
+
  viewhideCaseDetails(check){
     if (!check) {
       this.hide=true;
@@ -66,6 +67,7 @@ export class AcceptedCasesComponent implements OnInit {
       this.toasterService.showSuccessToater('Hide Cases.');
     }
 }
+
 hideCaseDetails(caseId) {
   this.hireLawyerService.hideCase({ caseId: caseId}).subscribe((res: any) => {
     if (res.success) {
