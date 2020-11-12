@@ -42,9 +42,15 @@ export class HireLawyerComponent implements OnInit, AfterViewInit {
       this.sponsorUserList = sponsorsUser.data
     })
   }
+
   onContactLawyer(userId) {
     this.router.navigateByUrl('/mjp/user/contact/' + userId)
   }
+
+  onViewProfile(userId) {
+    this.router.navigateByUrl('/mjp/user/lawyer-profile/'+userId)
+  }
+
   onGetLaywers() {
     this.hireLawyerService.getOrganization().subscribe((res: any) => {
       this.organizationList = res.data;
