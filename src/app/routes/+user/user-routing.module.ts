@@ -17,6 +17,7 @@ import { LegalResearchListComponent } from './legal-research/legal-research-list
 import { LegalResearchFormViewComponent } from './legal-research/legal-research-form-view/legal-research-form-view.component';
 import { EditLegalResearchFormComponent } from './legal-research/edit-legal-research-form/edit-legal-research-form.component';
 import { ContactComponent } from './contact/contact.component';
+import { LawyerProfileComponent } from './hire-lawyer/lawyer-profile/lawyer-profile.component';
 
 const routes: Routes = [
     { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
@@ -32,6 +33,7 @@ const routes: Routes = [
     { path: 'hire-lawyer/:organizationId', component: ViewLawyerComponent },
     { path: 'find-bondsman', component: FindBondsmanComponent },
     { path: 'message-my-lawyer', component: MessagingLawyerComponent },
+    { path: 'lawyer-profile/:userId', component: LawyerProfileComponent },
     { path: 'find-bondsman/:organizationId', component: ViewBondsmanComponent },
     { path: 'legal-form', component: LegalResearchListComponent },
     { path: 'legal-form/create', component: LegalResearchFormComponent },

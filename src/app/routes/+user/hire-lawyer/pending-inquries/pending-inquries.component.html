@@ -14,11 +14,11 @@
                     <th class="text-center">Action</th>
                 </tr>
                 <tr *ngFor="let case of pendingCasesList">
-                    <td>{{case?.Organization?.name}}</td>
-                    <td>{{case?.firstName}} {{case?.middleName}} {{case?.lastName}}</td>
-                    <td>{{case?.sent | date:'MM/dd/yyyy'}}</td>
-                    <td>{{case?.statusDeclared}}</td>
-                    <td class="d-flex justify-content-center align-items-center">
+                    <td class="border">{{case?.Organization?.name}}</td>
+                    <td class="border">{{case?.firstName}} {{case?.middleName}} {{case?.lastName}}</td>
+                    <td class="border">{{case?.sent | date:'MM/dd/yyyy'}}</td>
+                    <td class="border">{{case?.statusDeclared}}</td>
+                    <td class="d-flex justify-content-center align-items-center border">
                         <div>
                             <button
                                 [disabled]="(case.status === 'inmate_rejected' ||  case.status === 'Rejected' ||  case.status === 'Requested')"

@@ -34,6 +34,11 @@ export class ViewLawyerComponent implements OnInit {
     this.getAllCases();
   }
 
+
+  OnViewProfile(userId){
+    this.router.navigateByUrl('/mjp/user/lawyer-profile/'+userId)
+  }
+
   createFormControl() {
     this.viewCaseForm = this.fb.group({
       notes: ['', [Validators.required]]
