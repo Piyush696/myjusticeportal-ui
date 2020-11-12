@@ -77,13 +77,11 @@ export class StripeComponent implements OnDestroy, AfterViewInit {
   async createStripeToken() {
     const { token, error } = await stripe.createToken(this.card);
     if (token) {
-      console.log(token)
       const data = {
         "token":token.id,
         "email":'pp@gmail.com'
       }
       this.lawyerService.postPay(data).subscribe((addCard: any) => {
-        console.log(addCard)
         if(addCard.data){
           const data = {
             "customer": addCard.data.customer,

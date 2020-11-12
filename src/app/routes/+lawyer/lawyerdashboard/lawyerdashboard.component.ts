@@ -123,10 +123,8 @@ export class LawyerdashboardComponent implements OnInit {
   }
 
 
-  onNativeChange(event, facilityId, inmatesCount,index) {
-    console.log(index)
+  onNativeChange(event, facilityId, inmatesCount) {
     this.cardForm.enable();
-    console.log(inmatesCount)
     if (event) {
       this.totalCount = this.totalCount + inmatesCount * 0.10;
       this.inmatesCount = this.inmatesCount + inmatesCount
@@ -166,7 +164,6 @@ export class LawyerdashboardComponent implements OnInit {
         }
         return x
       })
-      console.log(this.facilities)
     } else {
       this.addOnsList.forEach((x, i, a) => {
         if (x == facilityId) {
@@ -186,7 +183,6 @@ export class LawyerdashboardComponent implements OnInit {
   }
 
   onPayEvent(value){
-    console.log(value)
     if(value){
       this.showDashboard = true;
       this.billingBoard = false;
@@ -252,7 +248,6 @@ export class LawyerdashboardComponent implements OnInit {
         };
         return ele
       });
-      console.log(this.facilities)
     })
   }
 
