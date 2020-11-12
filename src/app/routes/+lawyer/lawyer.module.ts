@@ -14,6 +14,7 @@ import { FileUploadModule } from 'ng2-file-upload';
 import { ReversePipe } from './accepted-cases/reverse.pipe';
 import { InquiriesComponent } from './inquiries/inquiries.component';
 import { StripeComponent } from './stripe/stripe.component';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,14 @@ import { StripeComponent } from './stripe/stripe.component';
     FormsModule,
     ReactiveFormsModule,
     FileUploadModule
-  ]
+  ],
+  providers: [{
+    provide: MatDialogRef,
+    useValue: {}
+  }, {
+    provide: MAT_DIALOG_DATA,
+    useValue: {} // Add any data you wish to test if it is passed/used correctly
+  }]
 })
 
 export class LawyerModule { }

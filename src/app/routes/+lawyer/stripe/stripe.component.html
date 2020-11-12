@@ -1,11 +1,12 @@
 <!-- stripe-payment.component.html -->
 <form (ngSubmit)="createStripeToken()" class="checkout">
-    <label for="card-info">Card Info</label>
+    <label for="card-info" class="d-flex justify-content-center align-items-center font-weight-bold">Card Info</label>
     <div id="form-field">
         <div id="card-info" #cardInfo></div>
-        <button id="submit-button" type="submit">
-            Pay ${{_totalAmount}}
-        </button>
+        <div class="d-flex justify-content-center align-items-center">
+            <button mat-raised-button class="button-purple px-4 py-1 mt-3">Pay ${{totalCount}}
+            </button>
+        </div>
         <mat-error id="card-errors" role="alert" *ngIf="cardError">
             <mat-icon style="color: #f44336">cancel</mat-icon>
             &nbsp;{{ cardError }}

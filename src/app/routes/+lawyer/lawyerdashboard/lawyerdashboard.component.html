@@ -1,352 +1,227 @@
 <div class="container" *ngIf="!isAuthorized">
-    <h2 class="font-weight-bold p-3 unauthorized-text">Thank you for registering as an attorney for My Justice Portal.
-        Your registration is being processed. Most registrations
-        are processed withing 24 hours. Once we verify your active Bar membership, your account will be approved and you
-        will
-        receive an email notification to complete the registration process.</h2>
-    <div *ngIf="userData.roles[0].roleId == 3">
-        <div class="d-flex justify-content-center align-items-center;">
-            <div class="col-6 pt-2">
+  <h2 class="font-weight-bold p-3 unauthorized-text">Thank you for registering as an attorney for My Justice Portal.
+    Your registration is being processed. Most registrations
+    are processed withing 24 hours. Once we verify your active Bar membership, your account will be approved and you
+    will
+    receive an email notification to complete the registration process.</h2>
+  <div class="d-flex justify-content-center align-items-center;">
+    <div class="col-6 pt-2">
+      <mat-card class="mat-elevation-z10">
+        <h2>Account Status: <span class="panding-review">Pending Review</span></h2>
+      </mat-card>
+    </div>
+  </div>
+</div>
+
+<div>
+  <div>
+    <h1 class="mb-0">Dashboard</h1>
+    <h4>View and actions for requested cases.</h4>
+  </div>
+</div>
+
+<div *ngIf="billingBoard && isAuthorized">
+  <div class="d-flex justify-content-between">
+  </div>
+  <div *ngIf="userData.roles[0].roleId == 3">
+    <div class="row">
+      <div class="col-6">
+        <div class="row pt-2">
+          <div class="col-12">
+            <div class="d-flex justify-content-center align-items-center;">
+              <mat-card class="mat-elevation-z10 w-100">
+                <h2 class="text-center">Explore Plans</h2>
+                <div class="row">
+                  <div class="col-12 pt-2">
+                    <mat-card class="mat-elevation-z10 border-card">
+                      <input class="circle" type="radio" name="package" (change)="onSelectPlan($event.checked)">
+                      Standard Plan($50/mo, $0.10/inmate/mo)
+                    </mat-card>
+                  </div>
+                </div>
+              </mat-card>
+            </div>
+          </div>
+          <div class="col-12 pt-2">
+            <div class="d-flex justify-content-center align-items-center;">
+              <mat-card class="mat-elevation-z10 w-100 card-scroll">
+                <h2 class="text-center">Your Facilities</h2>
+                <h4>Based on the states in which you are admitted to the bar, the following facilities
+                  are available.
+                  Please select facility you want.</h4>
+                <div class="col-12 pt-2">
+                  <div>
+                    <li *ngFor="let facility of facilities;">
+                      <mat-checkbox color="primary" [disabled]="isDisabled"
+                        (change)="onNativeChange($event.checked,facility?.facilityId,facility.userCount)">
+                        {{facility?.facilityName}} ({{facility.userCount}} inmates)
+                      </mat-checkbox>
+                      <div
+                        *ngIf="facility?.facilityId == facilityId || (facility.addOns.premium || facility.addOns.sponsors)">
+                        <mat-card class="border-card">
+                          <h4 class="font-weight-bold text-center">Select Add Ons for this
+                            facility.
+                          </h4>
+                          <div>
+                            <mat-checkbox color="primary"
+                              [formControl]="addOnsForm.controls['premiumListing']"
+                              (change)="onSelectAddOns($event.checked,facility?.facilityId,'premium')">
+                              <span>Premium listing($10/mo)</span>
+                            </mat-checkbox>
+                          </div>
+                          <div>
+                            <mat-checkbox color="primary" [formControl]="addOnsForm.controls['sponsors']"
+                              (change)="onSelectAddOns($event.checked,facility?.facilityId,'sponsors')">
+                              <span>Sponsors Unit Rotation($10/mo)</span>
+                            </mat-checkbox>
+                          </div>
+                        </mat-card>
+                      </div>
+                    </li>
+                  </div>
+                </div>
+              </mat-card>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-6">
+        <!-- Estimatad Monthly Bill  -->
+        <div class="col-12 pt-2">
+          <div class="d-flex justify-content-center align-items-center;">
+            <mat-card class="mat-elevation-z10 w-100">
+              <h2>Estimatad Monthly Bill : ${{totalCount}}</h2>
+              <div class="col-12 pt-2">
                 <mat-card class="mat-elevation-z10">
-                    <h2>Account Status: <span class="panding-review">Pending Review</span></h2>
-                </mat-card>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-6">
-                <div class="row pt-2">
-                    <div class="col-12">
-                        <div class="d-flex justify-content-center align-items-center;">
-                            <mat-card class="mat-elevation-z10 w-100">
-                                <h2 class="text-center">Explore Plans</h2>
-                                <div class="row">
-                                    <div class="col-12 pt-2">
-                                        <mat-card class="mat-elevation-z10 border-card">
-                                            <input class="circle" type="radio" name="package"
-                                                (change)="onSelectPlan($event.checked)">
-                                            Standard Plan($50/mo, $0.10/inmate/mo)
-                                        </mat-card>
-                                    </div>
-                                </div>
-                                <!-- <div class="d-flex justify-content-end mt-2 pr-2 pt-4">
-                                    <button [disabled]="!selectPlanForm.valid" class="button-purple px-4 py-1"
-                                        mat-raised-button (click)="yourFacilitys()">
-                                        Next
-                                    </button>
-                                </div> -->
-                            </mat-card>
-                        </div>
+                  <div class="d-flex justify-content-center align-items-center">
+                    <div>$10 * {{addOnsCount/10}} addOns = {{addOnsCount}}
                     </div>
-                    <div class="col-12 pt-2">
-                        <div class="d-flex justify-content-center align-items-center;">
-                            <mat-card class="mat-elevation-z10 w-100 card-scroll">
-                                <h2 class="text-center">Your Facilities</h2>
-                                <h4>Based on the states in which you are admitted to the bar, the following facilities
-                                    are available.
-                                    Please select facility you want.</h4>
-                                <div class="col-12 pt-2">
-                                    <div>
-                                        <li *ngFor="let facility of facilities">
-                                            <mat-checkbox color="primary" [disabled]="isDisabled"
-                                                (change)="onNativeChange($event.checked,facility?.facilityId,facility.userCount)">
-                                                {{facility?.facilityName}} ({{facility.userCount}} inmates)
-                                            </mat-checkbox>
-                                            <div *ngIf="isAddOns && facility?.facilityId == facilityId">
-                                                <mat-card class="border-card">
-                                                    <h4 class="font-weight-bold text-center">Select Add Ons for this
-                                                        facility.
-                                                    </h4>
-                                                    <div>
-                                                        <mat-checkbox color="primary" [checked]="false"
-                                                            [formControl]="addOnsForm.controls['premiumListing']"
-                                                            (change)="onSelectAddOns($event.checked,facility?.facilityId)">
-                                                            <span>Premium listing($10/mo)</span>
-                                                        </mat-checkbox>
-                                                    </div>
-                                                    <div>
-                                                        <!-- <mat-checkbox color="primary"
-                                                            [formControl]="addOnsForm.controls['landingPage']"
-                                                            (change)="onSelectAddOns($event.checked,facility?.facilityId)">
-                                                            <span>Landing Page($10/mo)</span>
-                                                        </mat-checkbox> -->
-                                                    </div>
-                                                    <div>
-                                                        <mat-checkbox color="primary"
-                                                            [formControl]="addOnsForm.controls['sponsors']"
-                                                            (change)="onSelectAddOns($event.checked,facility?.facilityId)">
-                                                            <span>Sponsors Unit Rotation($10/mo)</span>
-                                                        </mat-checkbox>
-                                                    </div>
-                                                </mat-card>
-                                            </div>
-                                        </li>
-                                    </div>
-                                    <!-- <div class="d-flex justify-content-between mt-2 pr-2">
-                                        <button class="button-purple px-4 py-1" mat-raised-button
-                                            (click)="backFacilitys()">
-                                            Back
-                                        </button>
-                                        <button class="button-purple px-4 py-1" mat-raised-button color="primary"
-                                            (click)=" estimatadBill()">
-                                            Next
-                                        </button>
-                                    </div> -->
-                                </div>
-                            </mat-card>
-                        </div>
+                  </div>
+                  <div class="d-flex justify-content-center align-items-center">
+                    <div>$0.10 * {{inmatesCount}} inmate = {{facilityCount}}
                     </div>
-                </div>
-            </div>
-            <div class="col-6">
-                <!-- Estimatad Monthly Bill  -->
-                <div class="col-12 pt-2">
-                    <div class="d-flex justify-content-center align-items-center;">
-                        <mat-card class="mat-elevation-z10 w-100">
-                            <h2>Estimatad Monthly Bill : ${{totalCount}}</h2>
-                            <div class="col-12 pt-2">
-                                <mat-card class="mat-elevation-z10">
-                                    <div class="d-flex justify-content-center align-items-center">
-                                        <div>$10 * {{addOnsCount/10}} addOns = {{addOnsCount}}
-                                        </div>
-                                    </div>
-                                    <div class="d-flex justify-content-center align-items-center">
-                                        <div>$0.10 * {{inmatesCount}} inmate = {{facilityCount}}
-                                        </div>
-                                    </div>
-                                    <hr>
-                                    <div class="d-flex justify-content-center align-items-center">
-                                        <div>
-                                            <span class="font-weight-bold">Total:-</span> ${{totalCount}}
-                                        </div>
-                                    </div>
-                                </mat-card>
-                                <!-- <app-stripe></app-stripe> -->
-                                <!-- <div class="d-flex justify-content-between mt-2 pr-2">
-                                    <button class="button-purple px-4 py-1" mat-raised-button
-                                        (click)="backEstimatadBill()">
-                                        Back
-                                    </button>
-                                    <button class="button-purple px-4 py-1" mat-raised-button color="primary"
-                                        (click)="cardPayment()">
-                                        Payment
-                                    </button>
-                                </div> -->o
-                            </div>
-                        </mat-card>
-                    </div>
-                </div>
-
-                <!-- Payment Card  -->
-                <div class="col-12 pt-2">
-                    <div class="d-flex justify-content-center align-items-center;">
-                        <mat-card class="mat-elevation-z10 w-100">
-                            <h2 class="text-center font-weight-bold">Credit Card Info</h2>
-                            <div class="row px-3">
-                                <mat-form-field appearance="fill" class="w-100 p-1">
-                                    <mat-label>Name on Card</mat-label>
-                                    <input matInput [formControl]="cardForm.controls['name']">
-                                    <mat-error>
-                                        <div
-                                            *ngIf="cardForm.controls['name'].invalid && 
-                                                                                        cardForm.controls['name'].touched">
-                                            <small class="font13" *ngIf="cardForm.get('name').errors?.required">
-                                                Name is Required.
-                                            </small>
-                                        </div>
-                                    </mat-error>
-                                </mat-form-field>
-                            </div>
-                            <div class="row px-3">
-                                <mat-form-field appearance="fill" class="w-100 p-1">
-                                    <mat-label>Card Number</mat-label>
-                                    <input matInput [formControl]="cardForm.controls['card']"
-                                        placeholder="1234-5678-9101-1123" [textMask]="{mask: cardMask}" required>
-                                    <mat-error>
-                                        <div
-                                            *ngIf="cardForm.controls['card'].invalid && cardForm.controls['card'].touched 
-                                                               && !cardForm.controls['card'].hasError('invalidCardPattern') && !cardForm.controls['card'].hasError('invalidCard')">
-                                            <small class="font13">
-                                                Should be 16-digit card number.
-                                            </small>
-                                        </div>
-                                        <div
-                                            *ngIf="cardForm.controls['card'].invalid && cardForm.controls['card'].dirty && cardForm.controls['card'].hasError('invalidCardPattern') && !cardForm.controls['card'].hasError('invalidCard')">
-                                            <small class="font13">
-                                                Card number should be in digit .
-                                            </small>
-                                        </div>
-                                        <div
-                                            *ngIf="cardForm.controls['card'].invalid &&  cardForm.controls['card'].dirty &&
-                                                           !cardForm.controls['card'].hasError('invalidCardPattern')&& cardForm.controls['card'].hasError('invalidCard') ">
-                                            <small class="font13">
-                                                Card number is not Valid.
-                                            </small>
-                                        </div>
-                                    </mat-error>
-                                </mat-form-field>
-                            </div>
-                            <div class="row">
-                                <div class="col-6">
-                                    <mat-form-field appearance="fill" class="w-100 pl-2">
-                                        <mat-label>Valid upto</mat-label>
-                                        <input matInput [matDatepicker]="picker1"
-                                            [formControl]="cardForm.controls['valid']" [min]="dateOfArrest">
-                                        <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
-                                        <mat-datepicker #picker1></mat-datepicker>
-                                    </mat-form-field>
-                                </div>
-                                <div class="col-6">
-                                    <mat-form-field appearance="fill" class="w-100 p-1">
-                                        <mat-label>CVV Code</mat-label>
-                                        <input type="text" matInput [formControl]="cardForm.controls['cvv']"
-                                            [textMask]="{mask: cvvMask}">
-                                        <mat-error>
-                                            <div
-                                                *ngIf="cardForm.controls['cvv'].invalid && cardForm.controls['cvv'].touched">
-                                                <small class="font13" *ngIf="cardForm.get('cvv').errors?.required">
-                                                    CVV is Required.
-                                                </small>
-                                            </div>
-                                        </mat-error>
-                                    </mat-form-field>
-                                </div>
-                            </div>
-                            <div class="row ml-2 my-2">
-                                <mat-checkbox class="termCondition-margin ml-2" color="primary">
-                                    <a>
-                                        <p class="p-0 m-0 line-height">I accept the <span
-                                                class="font-weight-bold p-0 m-0">Terms
-                                                and
-                                                Conditions</span>
-                                            of using this website and
-                                        </p>
-                                        <p class="p-0 m-0 line-height">agree to abide by all applicable laws and
-                                            standards.
-                                        </p>
-                                    </a>
-                                </mat-checkbox>
-                            </div>
-                            <div>
-                                <button [disabled]="!cardForm.valid" class="button-purple px-4 py-1 w-100"
-                                    mat-raised-button color="primary" (click)="onPay()">
-                                    Pay ${{totalCount}}
-                                </button>
-                            </div>
-                        </mat-card>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-
-<div *ngIf="isAuthorized">
-    <div class="d-flex justify-content-between">
-        <div>
-            <h1 class="mb-0">Dashboard</h1>
-            <h4>View and actions for requested cases.</h4>
-        </div>
-    </div>
-
-    <div class="mt-4">
-        <mat-card *ngIf="requestedCases?.length!=0" class="outer-card mat-elevation-z10 mt-3">
-            <mat-label class="font-weight-bold">
-                Active cases({{requestedCases?.length}}):
-            </mat-label>
-            <!-- <mat-card class="inner-card mt-2" *ngIf="!requestedCases?.length">
-                <span>No data available.</span>
-            </mat-card> -->
-            <div *ngFor="let case of requestedCases">
-                <mat-card class="d-flex flex-row justify-content-between align-items-center inner-card mt-2">
-                    <div class="d-flex flex-column">
-                        <span>{{case?.briefDescriptionOfChargeOrLegalMatter}}</span>
-                        <span>
-                            Requested By: {{case?.inmate?.firstName}}
-                            <span *ngIf="case?.inmate?.middleName">
-                                &nbsp;{{case?.inmate?.middleName}}
-                            </span>
-                            &nbsp;{{case?.inmate?.lastName}}
-                        </span>
-                        <span>
-                            Status:&nbsp;
-                            <span class="font-weight-bold" [ngClass]="{'text-warning': case?.lawyer_case?.status == 'Requested', 
-                            'text-success': case?.lawyer_case?.status == 'Approved',
-                            'text-danger': case?.lawyer_case?.status == 'Rejected'}">
-                                {{case?.lawyer_case?.status}}
-                            </span>
-                        </span>
-                        <span>
-                            Files attached:{{case?.caseFile?.length}}
-                        </span>
-                    </div>
+                  </div>
+                  <hr>
+                  <div class="d-flex justify-content-center align-items-center">
                     <div>
-                        <button mat-mini-fab color="primary" title="Approve Case"
-                            (click)="onApproveCase(case?.lawyer_case?.lawyer_caseId)">
-                            <mat-icon>done_outline</mat-icon>
-                        </button>
-                        <button class="ml-1" mat-mini-fab color="warn" title="Reject Case"
-                            (click)="onRejectCase(case?.lawyer_case?.lawyer_caseId)">
-                            <mat-icon>clear</mat-icon>
-                        </button>
+                      <span class="font-weight-bold">Total:-</span> ${{totalCount}}
                     </div>
+                  </div>
                 </mat-card>
-            </div>
-        </mat-card>
+              </div>
+            </mat-card>
+          </div>
+        </div>
+        <div class="col-12">
+          <mat-card>
+            <app-stripe [totalCount]="totalCount" (onPayEvent)="onPayEvent($event)"></app-stripe>
+          </mat-card>
+        </div>
+      </div>
     </div>
-
-    <div class="mt-4">
-        <mat-card class="w-100">
-            <div class="d-flex justify-content-between">
-                <div>
-                    <mat-form-field class="w-100">
-                        <mat-label>Search</mat-label>
-                        <input matInput (keyup)="search($event.target.value)">
-                    </mat-form-field>
-                </div>
-                <div>
-                    <mat-form-field appearance="fill">
-                        <mat-label>Facility</mat-label>
-                        <mat-select (selectionChange)="onFacilityFiltered($event)">
-                            <mat-option>
-                                Select facility
-                            </mat-option>
-                            <mat-option *ngFor="let facility of facilities" [value]="facility.facilityId">
-                                {{facility.facilityName}}
-                            </mat-option>
-                        </mat-select>
-                    </mat-form-field>
-                </div>
-            </div>
-            <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8 w-100">
-                <ng-container matColumnDef="name">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header>User</th>
-                    <td mat-cell *matCellDef="let user">
-                        <span>
-                            {{user?.firstName | titlecase}}
-                            <span *ngIf="user?.middleName">
-                                &nbsp;{{user?.middleName | titlecase}}
-                            </span>
-                            &nbsp;{{user?.lastName | titlecase}}
-                        </span>
-                        <span *ngIf="!user?.firstName && !user?.middleName && !user?.lastName">
-                            N/A
-                        </span>
-                    </td>
-                </ng-container>
-
-                <ng-container matColumnDef="facilities">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Facility</th>
-                    <td mat-cell *matCellDef="let user">
-                        <ng-container *ngFor="let facility of user?.facilities;let isLast=last">
-                            <span>{{facility?.facilityName}}{{isLast ? '' : ', '}}</span>
-                        </ng-container>
-                    </td>
-                </ng-container>
-                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-            </table>
-            <mat-paginator [pageSizeOptions]="getPageSizeOptions()" showFirstLastButtons></mat-paginator>
-        </mat-card>
-    </div>
+  </div>
 </div>
+
+  <div *ngIf="showDashboard">
+    <div class="mt-4">
+      <mat-card *ngIf="requestedCases?.length!=0" class="outer-card mat-elevation-z10 mt-3">
+        <mat-label class="font-weight-bold">
+          Active cases({{requestedCases?.length}}):
+        </mat-label>
+  
+        <div *ngFor="let case of requestedCases">
+          <mat-card class="d-flex flex-row justify-content-between align-items-center inner-card mt-2">
+            <div class="d-flex flex-column">
+              <span>{{case?.briefDescriptionOfChargeOrLegalMatter}}</span>
+              <span>
+                Requested By: {{case?.inmate?.firstName}}
+                <span *ngIf="case?.inmate?.middleName">
+                  &nbsp;{{case?.inmate?.middleName}}
+                </span>
+                &nbsp;{{case?.inmate?.lastName}}
+              </span>
+              <span>
+                Status:&nbsp;
+                <span class="font-weight-bold" [ngClass]="{'text-warning': case?.lawyer_case?.status == 'Requested', 
+                              'text-success': case?.lawyer_case?.status == 'Approved',
+                              'text-danger': case?.lawyer_case?.status == 'Rejected'}">
+                  {{case?.lawyer_case?.status}}
+                </span>
+              </span>
+              <span>
+                Files attached:{{case?.caseFile?.length}}
+              </span>
+            </div>
+            <div>
+              <button mat-mini-fab color="primary" title="Approve Case"
+                (click)="onApproveCase(case?.lawyer_case?.lawyer_caseId)">
+                <mat-icon>done_outline</mat-icon>
+              </button>
+              <button class="ml-1" mat-mini-fab color="warn" title="Reject Case"
+                (click)="onRejectCase(case?.lawyer_case?.lawyer_caseId)">
+                <mat-icon>clear</mat-icon>
+              </button>
+            </div>
+          </mat-card>
+        </div>
+      </mat-card>
+    </div>
+    
+  
+    <div class="mt-4">
+      <mat-card class="w-100">
+        <div class="d-flex justify-content-between">
+          <div>
+            <mat-form-field class="w-100">
+              <mat-label>Search</mat-label>
+              <input matInput (keyup)="search($event.target.value)">
+            </mat-form-field>
+          </div>
+          <div>
+            <mat-form-field appearance="fill">
+              <mat-label>Facility</mat-label>
+              <mat-select (selectionChange)="onFacilityFiltered($event)">
+                <mat-option>
+                  Select facility
+                </mat-option>
+                <mat-option *ngFor="let facility of facilities" [value]="facility.facilityId">
+                  {{facility.facilityName}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+        </div>
+        <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8 w-100">
+          <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>User</th>
+            <td mat-cell *matCellDef="let user">
+              <span>
+                {{user?.firstName | titlecase}}
+                <span *ngIf="user?.middleName">
+                  &nbsp;{{user?.middleName | titlecase}}
+                </span>
+                &nbsp;{{user?.lastName | titlecase}}
+              </span>
+              <span *ngIf="!user?.firstName && !user?.middleName && !user?.lastName">
+                N/A
+              </span>
+            </td>
+          </ng-container>
+  
+          <ng-container matColumnDef="facilities">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Facility</th>
+            <td mat-cell *matCellDef="let user">
+              <ng-container *ngFor="let facility of user?.facilities;let isLast=last">
+                <span>{{facility?.facilityName}}{{isLast ? '' : ', '}}</span>
+              </ng-container>
+            </td>
+          </ng-container>
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+        <mat-paginator [pageSizeOptions]="getPageSizeOptions()" showFirstLastButtons></mat-paginator>
+      </mat-card>
+    </div>
+  </div>
+
+  

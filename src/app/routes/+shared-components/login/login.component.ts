@@ -63,6 +63,13 @@ export class LoginComponent implements OnInit {
           this.spinner=false;
           // this.step = 4;
         }
+        else if (res.token) {
+          this.toasterService.showWarningToater('Welcome to My Justice portal.');
+          this.cacheService.setCache('token', res.token);
+          this.checkToken();
+          this.spinner=false;
+          // this.step = 4;
+        }
         else {
           this.step = 1
           this.toasterService.showWarningToater(res.data);
