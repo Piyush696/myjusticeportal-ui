@@ -24,6 +24,7 @@ import { LegalResearchFormViewComponent } from './legal-research/legal-research-
 import { EditLegalResearchFormComponent } from './legal-research/edit-legal-research-form/edit-legal-research-form.component';
 import { ContactComponent } from './contact/contact.component';
 import { PendingInquriesComponent } from './hire-lawyer/pending-inquries/pending-inquries.component';
+import { LawyerProfileComponent } from './hire-lawyer/lawyer-profile/lawyer-profile.component';
 
 @NgModule({
   declarations: [
@@ -46,6 +47,7 @@ import { PendingInquriesComponent } from './hire-lawyer/pending-inquries/pending
     EditLegalResearchFormComponent,
     ContactComponent,
     PendingInquriesComponent,
+    LawyerProfileComponent,
   ],
   imports: [
     CommonModule,
