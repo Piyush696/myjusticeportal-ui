@@ -1,9 +1,8 @@
-import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, Inject, OnDestroy, ViewChild } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, EventEmitter, Inject, Input, OnDestroy, Output, ViewChild } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-
-declare var module: NodeModule;
-declare var stripe: any;
-declare var elements: any;
+import { Store } from '@ngrx/store';
+import { LawyerService } from 'app/services/lawyer.service';
+import { ToasterService } from 'app/services/toaster.service';
 
 @Component({
   selector: 'app-stripe',
@@ -16,12 +15,14 @@ export class StripeComponent implements OnDestroy, AfterViewInit {
   _totalAmount: number;
   card: any;
   cardHandler = this.onChange.bind(this);
+  @Output() onPayEvent = new EventEmitter()
   cardError: string;
-   
+  userData: any;
+   @Input() totalCount:any;
   constructor(
     private cd: ChangeDetectorRef,
     @Inject(MAT_DIALOG_DATA) private data: any,
-    private dialogRef: MatDialogRef<StripeComponent>,
+    private dialogRef: MatDialogRef<StripeComponent>,private lawyerService: LawyerService, private toasterService: ToasterService, private store: Store<any>,
   ) {
     this._totalAmount = data['totalAmount'];
   }
@@ -35,7 +36,10 @@ export class StripeComponent implements OnDestroy, AfterViewInit {
   }
 
   ngAfterViewInit() {
-    this.initiateCardElement();
+    this.store.select(s => s.userInfo).subscribe(x => {
+      this.userData = x
+    });
+      this.initiateCardElement();
   }
 
   initiateCardElement() {
@@ -55,10 +59,12 @@ export class StripeComponent implements OnDestroy, AfterViewInit {
         iconColor: '#fa755a',
       },
     };
-    this.card = elements.create('card', { cardStyle });
+    const elements = stripe.elements();
+    this.card = elements.create('card',{cardStyle});
     this.card.mount(this.cardInfo.nativeElement);
     this.card.addEventListener('change', this.cardHandler);
   }
+
   onChange({ error }) {
     if (error) {
       this.cardError = error.message;
@@ -67,14 +73,39 @@ export class StripeComponent implements OnDestroy, AfterViewInit {
     }
     this.cd.detectChanges();
   }
+  
   async createStripeToken() {
     const { token, error } = await stripe.createToken(this.card);
     if (token) {
-      this.onSuccess(token);
+      const data = {
+        "token":token.id,
+        "email":'pp@gmail.com'
+      }
+      this.lawyerService.postPay(data).subscribe((addCard: any) => {
+        if(addCard.data){
+          const data = {
+            "customer": addCard.data.customer,
+            "userId": this.userData.userId,
+            "amount":  Math.round(this.totalCount),
+            "currency":'usd',
+            "interval":'month'
+          }
+          this.lawyerService.subscribePlan(data).subscribe((subscribePlan: any) => {
+            if (subscribePlan.data) {
+              this.onPayEvent.emit(true)
+              this.toasterService.showSuccessToater('Subscribe Successfully.')
+            } else {
+              this.toasterService.showWarningToater('Something went wrong.')
+            }
+          })
+        }
+        this.onSuccess(token);
+      })
     } else {
       this.onError(error);
     }
   }
+
   onSuccess(token) {
     this.dialogRef.close({ token });
   }

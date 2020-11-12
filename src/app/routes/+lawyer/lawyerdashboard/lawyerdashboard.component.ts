@@ -19,10 +19,11 @@ import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/fo
 export class LawyerdashboardComponent implements OnInit {
   requestedCases: any;
   isAuthorized: boolean;
-  isAddOns: boolean;
+  showDashboard: boolean;
+  billingBoard: boolean = true;
   isDisabled: boolean = true;
   clients: any;
-  facilities: any;
+  facilities= [];
   allClients: any;
   count: number = 1;
   step: number;
@@ -124,16 +125,13 @@ export class LawyerdashboardComponent implements OnInit {
 
   onNativeChange(event, facilityId, inmatesCount) {
     this.cardForm.enable();
-    console.log(inmatesCount)
     if (event) {
       this.totalCount = this.totalCount + inmatesCount * 0.10;
       this.inmatesCount = this.inmatesCount + inmatesCount
       this.facilityCount = this.facilityCount + inmatesCount * 0.10;
       this.facility.push(facilityId);
       this.facilityId = facilityId
-      this.isAddOns = true;
     } else {
-      this.isAddOns = false;
       this.facility.forEach((x, i, a) => {
         if (x == facilityId) {
           this.facility.splice(i, 1);
@@ -143,13 +141,29 @@ export class LawyerdashboardComponent implements OnInit {
         }
       })
     }
+    // if(index >= 1) {
+    //   this.facilityId = null
+    // }
   }
 
-  onSelectAddOns(event, facilityId) {
+  onSelectAddOns(event, facilityId,addOnsType:string) {
     if (event) {
       this.totalCount = this.totalCount + 10;
       this.addOnsCount = this.addOnsCount + 10;
       this.addOnsList.push(facilityId);
+      this.facilities.map((x) => {
+        if(facilityId === x.facilityId){
+          if(addOnsType == 'premium'){
+            x.addOns.premium = true;
+          } else if(addOnsType == 'sponsors') {
+            x.addOns.sponsors = true;
+          }
+        } else {
+          x.addOns.premium = false;
+          x.addOns.sponsors = false;
+        }
+        return x
+      })
     } else {
       this.addOnsList.forEach((x, i, a) => {
         if (x == facilityId) {
@@ -164,42 +178,21 @@ export class LawyerdashboardComponent implements OnInit {
   createControl() {
     this.addOnsForm = this.fb.group({
       premiumListing: ['', [Validators.required]],
-      landingPage: ['', [Validators.required]],
       sponsors: ['', [Validators.required]]
     })
+  }
+
+  onPayEvent(value){
+    if(value){
+      this.showDashboard = true;
+      this.billingBoard = false;
+    }
   }
 
   onSelectPlan() {
     this.isDisabled = false
     this.totalCount = this.totalCount + 50
   }
-
-  // backFacilitys() {
-  //   this.count = 1;
-  //   this.step = 0;
-  // }
-  // yourFacilitys() {
-  //   this.step = 1;
-  //   this.count = 0;
-  // }
-  // backEstimatadBill() {
-  //   this.step = 1;
-  //   this.count = 0;
-  // }
-  // estimatadBill() {
-  //   this.step = 2;
-  //   this.count = 0;
-  // }
-  // cardPayment() {
-  //   this.step = 3;
-  //   this.count = 0;
-  // }
-
-  // openestimatadBillModal(templateRef) {
-  //   let dialogRef = this.dialog.open(templateRef, {
-  //     width: '500px',
-  //   });
-  // }
 
   openPaymentCardModal(templateRef) {
     let dialogRef = this.dialog.open(templateRef, {
@@ -248,7 +241,13 @@ export class LawyerdashboardComponent implements OnInit {
 
   getALLFacilities() {
     this.facilityService.getFacilitiesUserCount().subscribe((facilities: any) => {
-      this.facilities = facilities.data;
+      this.facilities = facilities.data.map((ele)=>{
+        ele['addOns'] = {
+          premium:false,
+          sponsors:false
+        };
+        return ele
+      });
     })
   }
 
