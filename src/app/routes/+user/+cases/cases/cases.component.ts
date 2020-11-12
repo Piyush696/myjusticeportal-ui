@@ -88,8 +88,9 @@ export class CasesComponent implements OnInit {
       this.toasterService.showErrorToater(error.statusText);
     })
   }
-  onContactLawyer(userId) {
-    this.router.navigateByUrl('/mjp/user/contact/' + userId)
+  onViewProfile(userId) {
+    this.router.navigateByUrl('/mjp/user/lawyer-profile/'+userId)
+    // this.router.navigateByUrl('/mjp/user/contact/' + userId)
   }
 
   onCancelNotesModal() {

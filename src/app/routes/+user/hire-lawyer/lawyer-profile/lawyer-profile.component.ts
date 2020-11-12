@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { HireLawyerService } from 'app/services/hire-lawyer.service';
 
 @Component({
@@ -10,7 +10,7 @@ import { HireLawyerService } from 'app/services/hire-lawyer.service';
 export class LawyerProfileComponent implements OnInit {
   userDetails:any
   practiseAreaList = [];
-  constructor(private activatedRoute:ActivatedRoute,private hireLawyerService: HireLawyerService) { 
+  constructor(private activatedRoute:ActivatedRoute,private hireLawyerService: HireLawyerService,private router: Router) { 
   }
 
   ngOnInit(): void {
@@ -24,6 +24,10 @@ export class LawyerProfileComponent implements OnInit {
           this.practiseAreaList.push(user.data.userAdditionalInfo.practiceAreas.split(','))
         }
     })
+  }
+
+  onViewProfile(userId){
+    this.router.navigateByUrl('/mjp/user/contact/' + userId)
   }
 
 }
