@@ -22,7 +22,7 @@ export class LawyerdashboardComponent implements OnInit {
   requestedCases: any;
   isAuthorized: boolean;
   showDashboard: boolean;
-  billingBoard: boolean = true;
+  billingBoard: boolean = false;
   isDisabled: boolean = true;
   clients: any;
   facilities = [];
@@ -209,18 +209,36 @@ export class LawyerdashboardComponent implements OnInit {
 
   getBillingDetails(){
     this.userMetaService.getUserBillingDetails().subscribe((billingsDetails:any)=>{
-      console.log(billingsDetails)
-      if(billingsDetails.data.userMeta){
-        billingsDetails.data.userMeta.forEach((x)=>{
-          if(x.metaKey == "sub_id" || x.metaKey == "cust_id"){
-            console.log('sadas')
-            this.showDashboard = true;
-            this.billingBoard = false;
+      if(billingsDetails.data){
+        billingsDetails.data.forEach((ele)=>{
+          if(ele.userMeta){
+            if(ele.userMeta.length === 1){
+              this.billingBoard = true;
+              this.showDashboard = false;
+            } else {
+              ele.userMeta.forEach((x)=> {
+                if(x.metaKey == "sub_id" || x.metaKey == "cust_id"){
+                  this.showDashboard = true;
+                  this.billingBoard = false;
+                } else if(x.metaKey == "lawyerInfo"){
+                  this.billingBoard = true;
+                  this.showDashboard = false;
+                } 
+                 else {
+                  this.billingBoard = true;
+                  this.showDashboard = false;
+                }
+              })
+            }
+
           } else {
             this.billingBoard = true;
-            this.showDashboard = false;
+            this.showDashboard = false;  
           }
         })
+      } else {
+        this.billingBoard = true;
+        this.showDashboard = false;
       }
     })
   }

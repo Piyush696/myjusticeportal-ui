@@ -14,15 +14,15 @@
 </div>
 
 
-  <div *ngIf="showDashboard || billingBoard">
+  <div *ngIf="showDashboard || billingBoard && isAuthorized">
     <h1 class="mb-0">Dashboard</h1>
     <h4>View and actions for requested cases.</h4>
   </div>
 
-<div *ngIf="billingBoard">
+<div *ngIf="billingBoard && isAuthorized">
   <div class="d-flex justify-content-between">
   </div>
-  <div *ngIf="userData.roles[0].roleId == 3">
+  <div *ngIf="userData?.roles[0]?.roleId == 3">
     <div class="row">
       <div class="col-6">
         <div class="row pt-2">
@@ -110,14 +110,14 @@
           </div>
         </div>
         <div class="col-12 mt-2">
-            <app-stripe [totalCount]="totalPrice" (onPayEvent)="onPayEvent($event)"></app-stripe>
+            <app-stripe [totalCount]="totalPrice" (onPayEvent)="onPayEvent($event)" [facilitiesList] ="facilities"></app-stripe>
         </div>
       </div>
     </div>
   </div>
 </div>
 
-<div *ngIf="showDashboard">
+<div *ngIf="showDashboard && isAuthorized">
   <div class="mt-4">
     <mat-card *ngIf="requestedCases?.length!=0" class="outer-card mat-elevation-z10 mt-3">
       <mat-label class="font-weight-bold">
