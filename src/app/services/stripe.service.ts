@@ -8,7 +8,7 @@ import { CacheService } from './cache.service';
 })
 export class StripeService {
   private apiPath: string;
-  constructor(private httpClient: HttpClient, private cacheService: CacheService) {
+  constructor(private httpClient: HttpClient, private cacheService: CacheService,private stripe:StripeService) {
     const env: any = environment;
     this.apiPath = env.api
   }

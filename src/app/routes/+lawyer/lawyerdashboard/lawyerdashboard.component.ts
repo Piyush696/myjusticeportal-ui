@@ -9,6 +9,8 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
 import { MatDialog } from '@angular/material/dialog';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { StripeService } from 'app/services/stripe.service';
+import { UserMetaService } from 'app/services/user-meta.service';
 
 @Component({
   selector: 'app-lawyerdashboard',
@@ -23,7 +25,7 @@ export class LawyerdashboardComponent implements OnInit {
   billingBoard: boolean = true;
   isDisabled: boolean = true;
   clients: any;
-  facilities= [];
+  facilities = [];
   allClients: any;
   count: number = 1;
   step: number;
@@ -33,20 +35,17 @@ export class LawyerdashboardComponent implements OnInit {
   @ViewChild(MatSort, { static: false }) sort: MatSort;
   cardForm: FormGroup;
   selectPlanForm: FormGroup;
-  addOnsForm: FormGroup;
   userData: any;
   public cardMask = [/\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/]
   public cvvMask = [/\d/, /\d/, /\d/]
-  facility = [];
-  addOnsList = [];
   facilityId: any;
-  totalCount: number = 0
-  facilityCount: number = 0
-  inmatesCount: number = 0
-  addOnsCount: number = 0
+  totalPrice: number = 0
+  averageCount: number = 0;
+  addOnsCount: number = 0;
 
-  constructor(private hireLawyerService: HireLawyerService, private facilityService: FacilityService, public dialog: MatDialog,
-    private lawyerService: LawyerService, private toasterService: ToasterService, private store: Store<any>, private fb: FormBuilder,) { }
+  constructor(private hireLawyerService: HireLawyerService, private userMetaService:UserMetaService,
+     private facilityService: FacilityService, public dialog: MatDialog,
+    private lawyerService: LawyerService, private toasterService: ToasterService, private store: Store<any>, private fb: FormBuilder) { }
 
   ngOnInit(): void {
     this.store.select(s => s.userInfo).subscribe(x => {
@@ -62,8 +61,9 @@ export class LawyerdashboardComponent implements OnInit {
     this.getAllClients();
     this.getALLFacilities();
     this.createCardControl();
-    this.createControl();
+    this.getBillingDetails();
   }
+
 
   createCardControl() {
     this.cardForm = this.fb.group({
@@ -123,75 +123,111 @@ export class LawyerdashboardComponent implements OnInit {
   }
 
 
-  onNativeChange(event, facilityId, inmatesCount) {
+  onFacilitySelect(event, facilityId, averageCount) {
     this.cardForm.enable();
     if (event) {
-      this.totalCount = this.totalCount + inmatesCount * 0.10;
-      this.inmatesCount = this.inmatesCount + inmatesCount
-      this.facilityCount = this.facilityCount + inmatesCount * 0.10;
-      this.facility.push(facilityId);
       this.facilityId = facilityId
-    } else {
-      this.facility.forEach((x, i, a) => {
-        if (x == facilityId) {
-          this.facility.splice(i, 1);
-          this.totalCount = this.totalCount - inmatesCount * 0.10;
-          this.inmatesCount = this.inmatesCount - inmatesCount
-          this.facilityCount = this.facilityCount - inmatesCount * 0.10;
+      this.facilities.map((facility) => {
+        if (facility.facilityId === facilityId) {
+          facility.isSelected = true;
+          this.averageCount = this.averageCount + averageCount
         }
+        return facility
       })
+    } else {
+      this.facilities.map((facility) => {
+        if (facility.facilityId === facilityId) {
+          facility.isSelected = false;
+          this.averageCount = this.averageCount - averageCount
+        }
+        return facility
+      })
+      this.onSelectAddOns(false, facilityId, 'premium')
+      this.onSelectAddOns(false, facilityId, 'sponsors')
     }
-    // if(index >= 1) {
-    //   this.facilityId = null
-    // }
+    this.calculatePrice();
   }
 
-  onSelectAddOns(event, facilityId,addOnsType:string) {
+  onSelectAddOns(event, facilityId, addOnsType: string) {
     if (event) {
-      this.totalCount = this.totalCount + 10;
-      this.addOnsCount = this.addOnsCount + 10;
-      this.addOnsList.push(facilityId);
       this.facilities.map((x) => {
-        if(facilityId === x.facilityId){
-          if(addOnsType == 'premium'){
+        if (facilityId === x.facilityId) {
+          if (addOnsType == 'premium') {
             x.addOns.premium = true;
-          } else if(addOnsType == 'sponsors') {
+
+          } else if (addOnsType == 'sponsors') {
             x.addOns.sponsors = true;
           }
-        } else {
-          x.addOns.premium = false;
-          x.addOns.sponsors = false;
         }
         return x
-      })
+      });
+      if (this.addOnsCount < 0) {
+        this.addOnsCount = 0
+      } else {
+        this.addOnsCount++
+      }
     } else {
-      this.addOnsList.forEach((x, i, a) => {
-        if (x == facilityId) {
-          this.addOnsList.splice(i, 1);
-          this.totalCount = this.totalCount - 10;
-          this.addOnsCount = this.addOnsCount - 10;
+      this.facilities.map((x) => {
+        if (facilityId === x.facilityId) {
+          if (addOnsType == 'premium') {
+            x.addOns.premium = false;
+          } else if (addOnsType == 'sponsors') {
+            x.addOns.sponsors = false;
+          }
         }
-      })
+        return x
+      });
+      if (this.addOnsCount < 0) {
+        this.addOnsCount = 0;
+      } else {
+        this.addOnsCount--;
+      }
     }
+    this.calculatePrice();
   }
 
-  createControl() {
-    this.addOnsForm = this.fb.group({
-      premiumListing: ['', [Validators.required]],
-      sponsors: ['', [Validators.required]]
+  calculatePrice() {
+    this.totalPrice = 50;
+    this.facilities.forEach((ele) => {
+      if (ele.isSelected) {
+        this.totalPrice = this.totalPrice + (ele.facilityUserCount * 0.10)
+        if (ele.addOns.premium) {
+          this.totalPrice = this.totalPrice + 10;
+        }
+        if (ele.addOns.sponsors) {
+          this.totalPrice = this.totalPrice + 10;
+        }
+      }
     })
   }
 
-  onPayEvent(value){
-    if(value){
-      this.showDashboard = true;
-      this.billingBoard = false;
+  onPayEvent(value) {
+    if (value) {
+      this.getBillingDetails();
     }
   }
 
+  getBillingDetails(){
+    this.userMetaService.getUserBillingDetails().subscribe((billingsDetails:any)=>{
+      console.log(billingsDetails)
+      if(billingsDetails.data.userMeta){
+        billingsDetails.data.userMeta.forEach((x)=>{
+          if(x.metaKey == "sub_id" || x.metaKey == "cust_id"){
+            console.log('sadas')
+            this.showDashboard = true;
+            this.billingBoard = false;
+          } else {
+            this.billingBoard = true;
+            this.showDashboard = false;
+          }
+        })
+      }
+    })
+  }
+
   onSelectPlan() {
-    this.isDisabled = false
-    this.totalCount = this.totalCount + 50
+    this.isDisabled = false;
+    this.totalPrice = 50;
   }
 
   openPaymentCardModal(templateRef) {
@@ -241,10 +277,11 @@ export class LawyerdashboardComponent implements OnInit {
 
   getALLFacilities() {
     this.facilityService.getFacilitiesUserCount().subscribe((facilities: any) => {
-      this.facilities = facilities.data.map((ele)=>{
+      this.facilities = facilities.data.map((ele) => {
+        ele['isSelected'] = false;
         ele['addOns'] = {
-          premium:false,
-          sponsors:false
+          premium: false,
+          sponsors: false
         };
         return ele
       });
