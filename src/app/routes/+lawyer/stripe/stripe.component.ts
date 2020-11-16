@@ -85,7 +85,7 @@ export class StripeComponent implements OnDestroy, AfterViewInit,OnChanges {
       let facilityList = [];
       const data = {
         "token":token.id,
-        "email":'pp@gmail.com'
+        "email":this.userData.username
       }
       this.lawyerService.postPay(data).subscribe((addCard: any) => {
         if(addCard.data){
