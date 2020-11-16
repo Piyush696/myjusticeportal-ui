@@ -1,4 +1,4 @@
-import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, EventEmitter, Inject, Input, OnDestroy, Output, ViewChild } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, EventEmitter, Inject, Input, OnChanges, OnDestroy, Output, SimpleChanges, ViewChild } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
 import { LawyerService } from 'app/services/lawyer.service';
@@ -9,7 +9,7 @@ import { ToasterService } from 'app/services/toaster.service';
   templateUrl: './stripe.component.html',
   styleUrls: ['./stripe.component.css'],
 })
-export class StripeComponent implements OnDestroy, AfterViewInit {
+export class StripeComponent implements OnDestroy, AfterViewInit,OnChanges {
 
   @ViewChild('cardInfo') cardInfo: ElementRef;
   _totalAmount: number;
@@ -19,12 +19,17 @@ export class StripeComponent implements OnDestroy, AfterViewInit {
   cardError: string;
   userData: any;
    @Input() totalCount:number;
+   @Input() facilitiesList:any[];
   constructor(
     private cd: ChangeDetectorRef,
     @Inject(MAT_DIALOG_DATA) private data: any,
     private dialogRef: MatDialogRef<StripeComponent>,private lawyerService: LawyerService, private toasterService: ToasterService, private store: Store<any>,
   ) {
     this._totalAmount = data['totalAmount'];
+  }
+
+  ngOnChanges(): void {
+    //console.log(this.facilitiesList)
   }
 
   ngOnDestroy() {
@@ -71,24 +76,37 @@ export class StripeComponent implements OnDestroy, AfterViewInit {
     } else {
       this.cardError = null;
     }
-    this.cd.detectChanges();
+    // this.cd.detectChanges();
   }
   
   async createStripeToken() {
     const { token, error } = await stripe.createToken(this.card);
     if (token) {
+      let facilityList = [];
       const data = {
         "token":token.id,
-        "email":'pp@gmail.com'
+        "email":this.userData.username
       }
       this.lawyerService.postPay(data).subscribe((addCard: any) => {
         if(addCard.data){
+          this.facilitiesList.filter((ele)=>{
+            if(ele.isSelected){
+              const facilityData = {
+                "facilityId":ele.facilityId,
+                "isSponsors":ele.addOns.sponsors,
+                "isPremium":ele.addOns.premium,
+                "lawyerId":this.userData.userId
+              }
+              facilityList.push(facilityData)
+            }
+          })
           const data = {
             "customer": addCard.data.customer,
             "userId": this.userData.userId,
             "amount":  Math.round(this.totalCount) * 100,
             "currency":'usd',
-            "interval":'month'
+            "interval":'month',
+            "facilityList":facilityList
           }
           this.lawyerService.subscribePlan(data).subscribe((subscribePlan: any) => {
             if (subscribePlan.data) {
