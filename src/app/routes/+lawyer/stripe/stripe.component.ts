@@ -18,7 +18,7 @@ export class StripeComponent implements OnDestroy, AfterViewInit {
   @Output() onPayEvent = new EventEmitter()
   cardError: string;
   userData: any;
-   @Input() totalCount:any;
+   @Input() totalCount:number;
   constructor(
     private cd: ChangeDetectorRef,
     @Inject(MAT_DIALOG_DATA) private data: any,
@@ -86,7 +86,7 @@ export class StripeComponent implements OnDestroy, AfterViewInit {
           const data = {
             "customer": addCard.data.customer,
             "userId": this.userData.userId,
-            "amount":  Math.round(this.totalCount),
+            "amount":  Math.round(this.totalCount) * 100,
             "currency":'usd',
             "interval":'month'
           }

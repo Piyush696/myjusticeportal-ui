@@ -142,6 +142,7 @@ export class LawyerRegistrationComponent implements OnInit {
       this.step = 3;
     }
   }
+  
   onBackClick(back) {
     if (back) {
       this.step = 3;

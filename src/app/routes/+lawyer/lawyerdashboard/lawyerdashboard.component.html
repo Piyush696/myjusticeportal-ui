@@ -13,14 +13,13 @@
   </div>
 </div>
 
-<div>
-  <div>
+
+  <div *ngIf="showDashboard || billingBoard">
     <h1 class="mb-0">Dashboard</h1>
     <h4>View and actions for requested cases.</h4>
   </div>
-</div>
 
-<div *ngIf="billingBoard && isAuthorized">
+<div *ngIf="billingBoard">
   <div class="d-flex justify-content-between">
   </div>
   <div *ngIf="userData.roles[0].roleId == 3">
@@ -53,24 +52,22 @@
                   <div>
                     <li *ngFor="let facility of facilities;">
                       <mat-checkbox color="primary" [disabled]="isDisabled"
-                        (change)="onNativeChange($event.checked,facility?.facilityId,facility.userCount)">
-                        {{facility?.facilityName}} ({{facility.userCount}} inmates)
+                        (change)="onFacilitySelect($event.checked,facility?.facilityId,facility.facilityUserCount)">
+                        {{facility?.facilityName}} ({{facility.facilityUserCount}})
                       </mat-checkbox>
-                      <div
-                        *ngIf="facility?.facilityId == facilityId || (facility.addOns.premium || facility.addOns.sponsors)">
-                        <mat-card class="border-card">
-                          <h4 class="font-weight-bold text-center">Select Add Ons for this
+                      <div *ngIf="facility.isSelected">
+                        <mat-card class="border-card mb-2">
+                          <h4 class="font-weight-bold text-center  mb-1 pt-0">Select Add Ons for this
                             facility.
                           </h4>
                           <div>
-                            <mat-checkbox color="primary"
-                              [formControl]="addOnsForm.controls['premiumListing']"
+                            <mat-checkbox color="primary" [(ngModel)]="facility.addOns.premium"
                               (change)="onSelectAddOns($event.checked,facility?.facilityId,'premium')">
                               <span>Premium listing($10/mo)</span>
                             </mat-checkbox>
                           </div>
                           <div>
-                            <mat-checkbox color="primary" [formControl]="addOnsForm.controls['sponsors']"
+                            <mat-checkbox color="primary" [(ngModel)]="facility.addOns.sponsors"
                               (change)="onSelectAddOns($event.checked,facility?.facilityId,'sponsors')">
                               <span>Sponsors Unit Rotation($10/mo)</span>
                             </mat-checkbox>
@@ -94,17 +91,17 @@
               <div class="col-12 pt-2">
                 <mat-card class="mat-elevation-z10">
                   <div class="d-flex justify-content-center align-items-center">
-                    <div>$10 * {{addOnsCount/10}} addOns = {{addOnsCount}}
+                    <div>$10 * {{addOnsCount}} addOns = {{(addOnsCount * 10 ) ? (addOnsCount * 10 ) : 0}}
                     </div>
                   </div>
                   <div class="d-flex justify-content-center align-items-center">
-                    <div>$0.10 * {{inmatesCount}} inmate = {{facilityCount}}
+                    <div>$0.10 * {{averageCount}} inmate = {{averageCount * 0.10 ? averageCount : 0}}
                     </div>
                   </div>
                   <hr>
                   <div class="d-flex justify-content-center align-items-center">
                     <div>
-                      <span class="font-weight-bold">Total:-</span> ${{totalCount}}
+                      <span class="font-weight-bold">Total:-</span> ${{totalPrice}}
                     </div>
                   </div>
                 </mat-card>
@@ -112,116 +109,112 @@
             </mat-card>
           </div>
         </div>
-        <div class="col-12">
-          <mat-card>
-            <app-stripe [totalCount]="totalCount" (onPayEvent)="onPayEvent($event)"></app-stripe>
-          </mat-card>
+        <div class="col-12 mt-2">
+            <app-stripe [totalCount]="totalPrice" (onPayEvent)="onPayEvent($event)"></app-stripe>
         </div>
       </div>
     </div>
   </div>
 </div>
 
-  <div *ngIf="showDashboard">
-    <div class="mt-4">
-      <mat-card *ngIf="requestedCases?.length!=0" class="outer-card mat-elevation-z10 mt-3">
-        <mat-label class="font-weight-bold">
-          Active cases({{requestedCases?.length}}):
-        </mat-label>
-  
-        <div *ngFor="let case of requestedCases">
-          <mat-card class="d-flex flex-row justify-content-between align-items-center inner-card mt-2">
-            <div class="d-flex flex-column">
-              <span>{{case?.briefDescriptionOfChargeOrLegalMatter}}</span>
-              <span>
-                Requested By: {{case?.inmate?.firstName}}
-                <span *ngIf="case?.inmate?.middleName">
-                  &nbsp;{{case?.inmate?.middleName}}
-                </span>
-                &nbsp;{{case?.inmate?.lastName}}
+<div *ngIf="showDashboard">
+  <div class="mt-4">
+    <mat-card *ngIf="requestedCases?.length!=0" class="outer-card mat-elevation-z10 mt-3">
+      <mat-label class="font-weight-bold">
+        Active cases({{requestedCases?.length}}):
+      </mat-label>
+
+      <div *ngFor="let case of requestedCases">
+        <mat-card class="d-flex flex-row justify-content-between align-items-center inner-card mt-2">
+          <div class="d-flex flex-column">
+            <span>{{case?.briefDescriptionOfChargeOrLegalMatter}}</span>
+            <span>
+              Requested By: {{case?.inmate?.firstName}}
+              <span *ngIf="case?.inmate?.middleName">
+                &nbsp;{{case?.inmate?.middleName}}
               </span>
-              <span>
-                Status:&nbsp;
-                <span class="font-weight-bold" [ngClass]="{'text-warning': case?.lawyer_case?.status == 'Requested', 
+              &nbsp;{{case?.inmate?.lastName}}
+            </span>
+            <span>
+              Status:&nbsp;
+              <span class="font-weight-bold" [ngClass]="{'text-warning': case?.lawyer_case?.status == 'Requested', 
                               'text-success': case?.lawyer_case?.status == 'Approved',
                               'text-danger': case?.lawyer_case?.status == 'Rejected'}">
-                  {{case?.lawyer_case?.status}}
-                </span>
+                {{case?.lawyer_case?.status}}
               </span>
-              <span>
-                Files attached:{{case?.caseFile?.length}}
-              </span>
-            </div>
-            <div>
-              <button mat-mini-fab color="primary" title="Approve Case"
-                (click)="onApproveCase(case?.lawyer_case?.lawyer_caseId)">
-                <mat-icon>done_outline</mat-icon>
-              </button>
-              <button class="ml-1" mat-mini-fab color="warn" title="Reject Case"
-                (click)="onRejectCase(case?.lawyer_case?.lawyer_caseId)">
-                <mat-icon>clear</mat-icon>
-              </button>
-            </div>
-          </mat-card>
-        </div>
-      </mat-card>
-    </div>
-    
-  
-    <div class="mt-4">
-      <mat-card class="w-100">
-        <div class="d-flex justify-content-between">
-          <div>
-            <mat-form-field class="w-100">
-              <mat-label>Search</mat-label>
-              <input matInput (keyup)="search($event.target.value)">
-            </mat-form-field>
+            </span>
+            <span>
+              Files attached:{{case?.caseFile?.length}}
+            </span>
           </div>
           <div>
-            <mat-form-field appearance="fill">
-              <mat-label>Facility</mat-label>
-              <mat-select (selectionChange)="onFacilityFiltered($event)">
-                <mat-option>
-                  Select facility
-                </mat-option>
-                <mat-option *ngFor="let facility of facilities" [value]="facility.facilityId">
-                  {{facility.facilityName}}
-                </mat-option>
-              </mat-select>
-            </mat-form-field>
+            <button mat-mini-fab color="primary" title="Approve Case"
+              (click)="onApproveCase(case?.lawyer_case?.lawyer_caseId)">
+              <mat-icon>done_outline</mat-icon>
+            </button>
+            <button class="ml-1" mat-mini-fab color="warn" title="Reject Case"
+              (click)="onRejectCase(case?.lawyer_case?.lawyer_caseId)">
+              <mat-icon>clear</mat-icon>
+            </button>
           </div>
-        </div>
-        <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8 w-100">
-          <ng-container matColumnDef="name">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header>User</th>
-            <td mat-cell *matCellDef="let user">
-              <span>
-                {{user?.firstName | titlecase}}
-                <span *ngIf="user?.middleName">
-                  &nbsp;{{user?.middleName | titlecase}}
-                </span>
-                &nbsp;{{user?.lastName | titlecase}}
-              </span>
-              <span *ngIf="!user?.firstName && !user?.middleName && !user?.lastName">
-                N/A
-              </span>
-            </td>
-          </ng-container>
-  
-          <ng-container matColumnDef="facilities">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header>Facility</th>
-            <td mat-cell *matCellDef="let user">
-              <ng-container *ngFor="let facility of user?.facilities;let isLast=last">
-                <span>{{facility?.facilityName}}{{isLast ? '' : ', '}}</span>
-              </ng-container>
-            </td>
-          </ng-container>
-          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-        </table>
-        <mat-paginator [pageSizeOptions]="getPageSizeOptions()" showFirstLastButtons></mat-paginator>
-      </mat-card>
-    </div>
+        </mat-card>
+      </div>
+    </mat-card>
   </div>
 
-  
+
+  <div class="mt-4">
+    <mat-card class="w-100">
+      <div class="d-flex justify-content-between">
+        <div>
+          <mat-form-field class="w-100">
+            <mat-label>Search</mat-label>
+            <input matInput (keyup)="search($event.target.value)">
+          </mat-form-field>
+        </div>
+        <div>
+          <mat-form-field appearance="fill">
+            <mat-label>Facility</mat-label>
+            <mat-select (selectionChange)="onFacilityFiltered($event)">
+              <mat-option>
+                Select facility
+              </mat-option>
+              <mat-option *ngFor="let facility of facilities" [value]="facility.facilityId">
+                {{facility.facilityName}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div>
+      <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8 w-100">
+        <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>User</th>
+          <td mat-cell *matCellDef="let user">
+            <span>
+              {{user?.firstName | titlecase}}
+              <span *ngIf="user?.middleName">
+                &nbsp;{{user?.middleName | titlecase}}
+              </span>
+              &nbsp;{{user?.lastName | titlecase}}
+            </span>
+            <span *ngIf="!user?.firstName && !user?.middleName && !user?.lastName">
+              N/A
+            </span>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="facilities">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Facility</th>
+          <td mat-cell *matCellDef="let user">
+            <ng-container *ngFor="let facility of user?.facilities;let isLast=last">
+              <span>{{facility?.facilityName}}{{isLast ? '' : ', '}}</span>
+            </ng-container>
+          </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+      <mat-paginator [pageSizeOptions]="getPageSizeOptions()" showFirstLastButtons></mat-paginator>
+    </mat-card>
+  </div>
+</div>
