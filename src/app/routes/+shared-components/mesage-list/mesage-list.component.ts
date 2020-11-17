@@ -11,7 +11,7 @@ export class MesageListComponent implements OnInit, OnChanges {
 
   @Input() userMessageList: any
   @Input() headerText: string;
-  @Input() oldUserList: any
+  @Input() oldUserList: any[]
   @Input() userList: any;
   @Output() messageEvent = new EventEmitter()
   @Output() SubmitEvent = new EventEmitter()
@@ -22,6 +22,11 @@ export class MesageListComponent implements OnInit, OnChanges {
 
   constructor(public dialog: MatDialog, private messageService: MessageService) { }
   ngOnChanges(): void {
+    if(this.userMessageList){
+      this.userMessageList.forEach((x)=>{
+        this.oldUserList.push(x)
+      })
+    }
     if (this.userList) {
       this.oldUserList = this.userList
       this.show = false
