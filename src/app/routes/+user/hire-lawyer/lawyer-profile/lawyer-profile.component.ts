@@ -30,4 +30,8 @@ export class LawyerProfileComponent implements OnInit {
     this.router.navigateByUrl('/mjp/user/contact/' + userId)
   }
 
+  onViewOrg(userId){
+    this.router.navigateByUrl('/mjp/user/hire-lawyer/' + userId)
+  }
+
 }

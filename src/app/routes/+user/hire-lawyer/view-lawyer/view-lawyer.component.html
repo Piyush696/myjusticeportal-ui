@@ -14,7 +14,7 @@
             </div>
             <div class="col-7 d-flex align-items-center">
                 <span class="title-style">
-                    {{orgDetails?.tagline}}
+                    {{orgDetails?.Organization?.tagline}}
                 </span>
             </div>
             <div class="col-1 mt-3">
@@ -29,16 +29,16 @@
             <div class="col-4">
                 <h3 class="font-weight-bold">Organization Information:</h3>
                 <span class="font-weight-bold">Organization:
-                    <span class="font-weight-light text-dark">{{orgDetails?.name}}
-                        {{orgDetails?.orgCode}}</span>
-                    <span class="font-weight-light text-dark"> {{orgDetails?.tagline}}
+                    <span class="font-weight-light text-dark">{{orgDetails?.Organization?.name}}
+                        {{orgDetails?.Organization?.orgCode}}</span>
+                    <span class="font-weight-light text-dark"> {{orgDetails?.Organization?.tagline}}
                     </span>
                 </span><br><br>
                 <span class="font-weight-bold">Primary Address:
-                    <span class="font-weight-light text-dark"> {{orgDetails?.Address?.street1}}
+                    <span class="font-weight-light text-dark"> {{orgDetails?.Organization?.Address?.street1}}
                         {{orgDetails?.Address?.street2}}</span>
-                    <span class="font-weight-light text-dark"> {{orgDetails?.Address?.city}}
-                        {{orgDetails?.Address?.zip}}</span>
+                    <span class="font-weight-light text-dark"> {{orgDetails?.Organization?.Address?.city}}
+                        {{orgDetails?.Organization?.Address?.zip}}</span>
                 </span>
                 <br>
                 <span class="font-weight-bold">Practise Areas: </span>
@@ -54,7 +54,7 @@
             </div>
             <div class="col-8">
                 <h3 class="font-weight-bold">Organization Statement:</h3>
-                <span class="text-dark">{{orgDetails?.description}}</span>
+                <span class="text-dark">{{orgDetails?.Organization.description}}</span>
             </div>
         </div>
     </mat-card>
