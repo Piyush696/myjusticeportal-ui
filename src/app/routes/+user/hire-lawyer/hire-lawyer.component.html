@@ -1,4 +1,8 @@
 <div class="row mb-4">
+    <div class="col-">
+        <h1 class="mb-0 font-weight-bold">Find a Lawyer</h1>
+        <small>Manage inquiries with lawyers and connect to work on Cases.</small>
+    </div>
     <div class="col">
         <button [routerLink]="'../case'" class="white-btn padding-btn float-right py-1" mat-raised-button>
             Back To My Cases
@@ -59,9 +63,10 @@
                     *ngFor="let org of organizationList">
                     <div>
                         <mat-label class="font-weight-bold">
-                            {{org?.name}}
+                            {{org?.firstName}}
+                                {{org?.middleName}}{{org?.lastName}}
                         </mat-label>
-                        <div class="pt-1">
+                        <!-- <div class="pt-1">
                             <span>
                                 {{org?.Address.city}}, {{org?.Address.state}}
                             </span>
@@ -71,9 +76,10 @@
                             <span class="pl-2">
                                 Practice Areas: {{org?.specialty}}
                             </span>
-                        </div>
+                        </div> -->
                     </div>
-                    <button [routerLink]="org.organizationId" class="button-purple" mat-raised-button>
+                    <button  class="button-purple" mat-raised-button
+                    (click)="onViewLawyer(org.userId)">
                         View
                     </button>
                 </mat-card>
@@ -88,19 +94,19 @@
         <mat-card class="outer-card">
             <div class="mt-4" *ngFor="let user of sponsorUserList; ">
                 <mat-card class="sponser-card w-100">
-                    <h3 class="d-flex justify-content-center line-height color font-weight-bold">{{user?.name}}</h3>
-                    <div class="text-center line-height" *ngFor="let pic of user.users">
+                    <!-- <h3 class="d-flex justify-content-center line-height color font-weight-bold">{{user?.name}}</h3> -->
+                    <div class="text-center line-height">
                         <div>
-                            <img src="{{pic?.userAdditionalInfo?.profile?.downloadLink}}" width="200" height="60"
+                            <img src="{{user?.userAdditionalInfo?.profile?.downloadLink}}" width="200" height="60"
                                 alt="logo">
                         </div>
                         <div>
-                            <h4 class=" line-height color">{{pic?.firstName}}
-                                {{pic?.middleName}}{{pic?.lastName}}</h4>
+                            <h4 class=" line-height color">{{user?.firstName}}
+                                {{user?.middleName}}{{user?.lastName}}</h4>
                         </div>
                     </div>
                     <div class="d-flex justify-content-center">
-                        <button (click)="onViewProfile(user.users[0].userId)" class="btn bg-color px-perc py-1"
+                        <button (click)="onViewProfile(user.userId)" class="btn bg-color px-perc py-1"
                             mat-raised-button>View Profile</button>
                     </div>
                 </mat-card>

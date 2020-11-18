@@ -51,8 +51,8 @@ export class HireLawyerService {
     return this.httpClient.get<any>(`${this.apiPath}/hirealawyer/organizations`, this.getHeaders());
   }
 
-  getUsersLawyer(organizationId) {
-    return this.httpClient.get<any>(`${this.apiPath}/hirealawyer/organizations/${organizationId}`, this.getHeaders());
+  getUsersLawyer(userId) {
+    return this.httpClient.get<any>(`${this.apiPath}/hirealawyer/lawyer/organization/${userId}`, this.getHeaders());
   }
 
   setCasesLawyer(selectedCases) {

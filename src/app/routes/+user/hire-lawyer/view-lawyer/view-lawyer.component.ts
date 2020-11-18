@@ -12,11 +12,11 @@ import { ToasterService } from 'app/services/toaster.service';
   styleUrls: ['./view-lawyer.component.css']
 })
 export class ViewLawyerComponent implements OnInit {
-  organizationId: any;
   orgDetails: any;
   selectedCases = [];
   caseList: any;
   userId: any;
+  id:any;
   isHired: boolean = false;
   logo: any;
   specialtyList: any;
@@ -25,12 +25,12 @@ export class ViewLawyerComponent implements OnInit {
   constructor(private hireLawyerService: HireLawyerService, public dialog: MatDialog,private router: Router,
     private caseService: CaseService, private activatedRoute: ActivatedRoute,
     private toasterService: ToasterService, private fb: FormBuilder) {
-    this.organizationId = this.activatedRoute.snapshot.params.organizationId;
+      this.id = this.activatedRoute.snapshot.params.userId
   }
 
   ngOnInit(): void {
     this.createFormControl();
-    this.getAllUsers();
+    this.getOrgDetails();
     this.getAllCases();
   }
 
@@ -45,13 +45,16 @@ export class ViewLawyerComponent implements OnInit {
     });
   }
 
-  getAllUsers() {
-    this.hireLawyerService.getUsersLawyer(this.organizationId).subscribe((users: any) => {
+  getOrgDetails() {
+    this.hireLawyerService.getUsersLawyer(this.id).subscribe((users: any) => {
+      console.log(users)
       let specialty = [];
-      specialty.push(users.data.specialty.split(","))
-      this.specialtyList = specialty[0]
+      if(users.data.Organization.specialty){
+        specialty.push(users.data.Organization.specialty.split(","))
+        this.specialtyList = specialty[0]
+      }
       this.orgDetails = users.data
-      this.logo = this.orgDetails.logo
+      this.logo = this.orgDetails.Organization.logo
     })
   }
 
@@ -97,9 +100,11 @@ export class ViewLawyerComponent implements OnInit {
       }
     })
   }
+
   onContactLawyer(userId) {
     this.router.navigateByUrl('/mjp/user/contact/' + userId)
   }
+
   closeModal() {
     this.router.navigateByUrl('mjp/user/hire-lawyer')
   }
