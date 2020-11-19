@@ -24,7 +24,7 @@ export const AppRoutes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'lawyer/registration', component: LawyerRegistrationComponent },
   { path: 'paralegal/registration', component: ParalegalRegistrationComponent },
-  { path: 'defender/registration', component: PublicDefenderRegistrationComponent },
+  { path: 'publicdefender/registration', component: PublicDefenderRegistrationComponent },
   { path: 'bondsman/registration', component: BondsmanRegistrationComponent },
   { path: 'lawyer/registration/:token', component: InvitedLawyerComponent },
   { path: 'paralegal/registration/:token', component: InvitedParalegalComponent },

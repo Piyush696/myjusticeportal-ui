@@ -9,7 +9,6 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
 import { MatDialog } from '@angular/material/dialog';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { StripeService } from 'app/services/stripe.service';
 import { UserMetaService } from 'app/services/user-meta.service';
 
 @Component({
