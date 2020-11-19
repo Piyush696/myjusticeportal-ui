@@ -17,22 +17,22 @@
                     <td>{{case?.briefDescriptionOfChargeOrLegalMatter}}</td>
                     <td>{{case?.sentAt | date:'MM/dd/yyyy'}}</td>
                     <td>{{case?.status}}</td>
-                    <td class="d-flex justify-content-center align-items-center">
+                    <td class="d-flex justify-content-center align-items-center border-0">
                         <div>
                             <button class="mr-1" color="green" mat-mini-fab title="Approve"
-                                [disabled]="( case.status === 'Rejected')"
+                                [disabled]="( case.status === 'Rejected' || case.status === 'inmate_rejected')"
                                 (click)="onStatusUpdate(case?.caseId, status='Approved')">
                                 <mat-icon>done</mat-icon>
                             </button>
                         </div>
                         <div>
-                            <button mat-mini-fab color="warn" title="Reject" [disabled]="(case.status === 'Rejected')"
+                            <button mat-mini-fab color="warn" title="Reject" [disabled]="(case.status === 'Rejected' || case.status === 'inmate_rejected')"
                                 (click)="onStatusUpdate(case?.caseId, status='Rejected')">
                                 <mat-icon>clear</mat-icon>
                             </button>
                         </div>&nbsp;
                         <div>
-                            <button mat-mini-fab color="black" [disabled]="(case.status === 'Rejected' )"
+                            <button mat-mini-fab color="black" [disabled]="(case.status === 'Rejected' || case.status === inmate_rejected)"
                                 title="More Queries" (click)="onOpenModal(confirmModal,case)">
                                 <mat-icon>chat</mat-icon>
                             </button>

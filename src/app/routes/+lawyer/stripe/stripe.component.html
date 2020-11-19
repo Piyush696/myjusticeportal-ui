@@ -1,9 +1,8 @@
 <!-- stripe-payment.component.html -->
 <form (ngSubmit)="createStripeToken()" class="checkout">
-    <label for="card-info" class="d-flex justify-content-center align-items-center font-weight-bold">Card Info</label>
     <div id="form-field">
         <div id="card-info" #cardInfo></div>
-        <div class="d-flex justify-content-center align-items-center">
+        <div class="d-flex justify-content-center align-items-center pb-3 pt-3">
             <button mat-raised-button class="button-purple px-4 py-1 mt-3">Pay ${{totalCount}}
             </button>
         </div>

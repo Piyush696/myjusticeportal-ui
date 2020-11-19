@@ -112,7 +112,7 @@ export class LawyerdashboardComponent implements OnInit {
         }
         this.lawyerService.subscribePlan(data).subscribe((subscribePlan: any) => {
           if (subscribePlan.data) {
-            this.toasterService.showSuccessToater('Subscribe Successfully.')
+            this.toasterService.showSuccessToater('Your account has been fully activated.')
           } else {
             this.toasterService.showWarningToater('Something went wrong.')
           }
