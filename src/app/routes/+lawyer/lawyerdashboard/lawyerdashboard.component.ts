@@ -38,9 +38,11 @@ export class LawyerdashboardComponent implements OnInit {
   public cardMask = [/\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/]
   public cvvMask = [/\d/, /\d/, /\d/]
   facilityId: any;
-  totalPrice: number = 0
+  totalPrice: number = 50
   averageCount: number = 0;
   addOnsCount: number = 0;
+  state:string;
+  filteredFacilityList = [];
 
   constructor(private hireLawyerService: HireLawyerService, private userMetaService:UserMetaService,
      private facilityService: FacilityService, public dialog: MatDialog,
@@ -56,12 +58,15 @@ export class LawyerdashboardComponent implements OnInit {
         this.isAuthorized = false;
       }
     });
+    this.getUserDetails();
     this.onGetRequestedCases();
     this.getAllClients();
     this.getALLFacilities();
     this.createCardControl();
     this.getBillingDetails();
   }
+
+
 
 
   createCardControl() {
@@ -92,33 +97,6 @@ export class LawyerdashboardComponent implements OnInit {
     } else {
       return null;
     }
-  }
-
-
-  onPay() {
-    let x = new Date(this.cardForm.get('valid').value)
-    const data = {
-      "number": this.cardForm.get('card').value,
-      "exp_month": x.getMonth() + 1,
-      "exp_year": x.getFullYear(),
-      "cvc": this.cardForm.get('cvv').value,
-      "email": this.userData.userName
-    }
-    this.lawyerService.postPay(data).subscribe((addCard: any) => {
-      if (addCard.data) {
-        const data = {
-          "customer": addCard.data.customer,
-          "userId": this.userData.userId
-        }
-        this.lawyerService.subscribePlan(data).subscribe((subscribePlan: any) => {
-          if (subscribePlan.data) {
-            this.toasterService.showSuccessToater('Your account has been fully activated.')
-          } else {
-            this.toasterService.showWarningToater('Something went wrong.')
-          }
-        })
-      }
-    })
   }
 
 
@@ -243,7 +221,6 @@ export class LawyerdashboardComponent implements OnInit {
   }
 
   onSelectPlan() {
-    this.isDisabled = false;
     this.totalPrice = 50;
   }
 
@@ -292,9 +269,29 @@ export class LawyerdashboardComponent implements OnInit {
   }
 
 
+  getUserDetails(){
+    this.userMetaService.getUserAdditionalDetails().subscribe((user:any)=>{
+      user.data.forEach((ele)=>{
+        if(ele.metaKey == "lawyerInfo"){
+          let splitArray = ele.metaValue.split(":")
+          this.state = splitArray[0].toString();
+        }
+      })
+    })
+  }
+  
   getALLFacilities() {
     this.facilityService.getFacilitiesUserCount().subscribe((facilities: any) => {
-      this.facilities = facilities.data.map((ele) => {
+      if(facilities.data){
+         facilities.data.forEach((ele)=>{
+          if(ele.Address){
+            if(ele.Address.state === this.state){
+              this.filteredFacilityList.push(ele)
+            }
+          }
+        })
+      }
+      this.facilities = this.filteredFacilityList.map((ele) => {
         ele['isSelected'] = false;
         ele['addOns'] = {
           premium: false,
