@@ -56,14 +56,14 @@ export class AcceptedCasesComponent implements OnInit {
  viewhideCaseDetails(check){
     if (!check) {
       this.hide=true;
-      let statuses = 'Approved';
-      this.onGetRequestedCases(statuses);
+      let status = 'Approved';
+      this.onGetRequestedCases(status);
       this.toasterService.showSuccessToater('Showed Hide Cases.');
     }
     else{
       this.hide=false;
-      let statuses = ['Approved', 'Rejected'];
-      this.onGetRequestedCases(statuses);
+      let status = ['Approved', 'Rejected'];
+      this.onGetRequestedCases(status);
       this.toasterService.showSuccessToater('Hide Cases.');
     }
 }

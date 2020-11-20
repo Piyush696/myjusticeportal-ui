@@ -15,3 +15,7 @@ td {
   height: 300px;
   overflow-y: scroll;
 }
+
+.tab-color {
+  background-color: #fff;
+}

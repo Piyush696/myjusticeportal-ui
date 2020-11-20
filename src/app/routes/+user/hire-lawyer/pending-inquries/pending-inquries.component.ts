@@ -11,8 +11,9 @@ import { UserAdditionInfoService } from 'app/services/user-addition-info.service
   styleUrls: ['./pending-inquries.component.css']
 })
 export class PendingInquriesComponent implements OnInit {
-  pendingCasesList: any;
-
+  pendingCasesList = [];
+  filteredPendingInquiriesList = [];
+  
   constructor(private caseService: CaseService, public dialog: MatDialog,
     private additionalService: UserAdditionInfoService, private toasterService: ToasterService, public router: Router) { }
 
@@ -25,6 +26,23 @@ export class PendingInquriesComponent implements OnInit {
       width: '550px',
       height: '200px'
     });
+  }
+
+  viewhidePendingInquiries(value){
+   if(value){
+    this.filteredPendingInquiriesList = [];
+     this.pendingCasesList.filter((ele)=>{
+       if(ele.status === 'Rejected'){
+        this.filteredPendingInquiriesList.push(ele)
+       }
+    })
+   } else {
+    this.filteredPendingInquiriesList = this.pendingCasesList.filter((element)=>{
+      if(element.status != 'Rejected'){
+         return element
+      }
+    })
+   }
   }
 
   closeModal() {
@@ -53,6 +71,11 @@ export class PendingInquriesComponent implements OnInit {
           status['statusDeclared'] = 'Inmate chatEnabled'
         }
         return status
+      })
+      this.pendingCasesList.filter((x)=>{
+        if(x.status != 'Rejected'){
+          this.filteredPendingInquiriesList.push(x)
+        }
       })
     })
   }

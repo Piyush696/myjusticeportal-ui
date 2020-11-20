@@ -1,4 +1,10 @@
 <div class="col-12 pl-0">
+    <div class="d-flex justify-content-end pb-3">
+        <mat-checkbox class="mat-card check-style" color="primary" title="View Rejected Cases"
+        (change)="viewhidePendingInquiries($event.checked)">
+        View Rejected Inquiries
+        </mat-checkbox>
+    </div>
     <mat-card>
         <h2 class="font-weight-bold m-0">Pending Inquiries</h2>
         <small>These are lawyer you attempted to contact,View your conversation here and approve new
@@ -13,7 +19,7 @@
                     <th class="text-center">Status</th>
                     <th class="text-center">Action</th>
                 </tr>
-                <tr *ngFor="let case of pendingCasesList">
+                <tr *ngFor="let case of filteredPendingInquiriesList" [ngClass]="{'tab-color': case.status === 'Approved'}">
                     <td class="border">{{case?.Organization?.name}}</td>
                     <td class="border">{{case?.firstName}} {{case?.middleName}} {{case?.lastName}}</td>
                     <td class="border">{{case?.sent | date:'MM/dd/yyyy'}}</td>
