@@ -9,44 +9,46 @@
         </button>
     </div>
 </div>
-<div class="row pt-3">
-    <div>
-        <p>The Demo County Jail contracts with an outside firm to provide legal research assistance to the inmates of
-            this facility. The company has been providing legal research support to inmates since 1995 and currently
-            serves over 150 correctional facilities around the country. As with a traditional law library, this service
-            is for informational purposes only. No legal advice is provided. You can utilize the service to obtain legal
-            information as you require and in support of your constitutional right of access to the courts.​
-            ​</p>
+<mat-card>
+    <div class="row pt-3">
+        <div class="px-3">
+            <p>The Demo County Jail contracts with an outside firm to provide legal research assistance to the inmates of
+                this facility. The company has been providing legal research support to inmates since 1995 and currently
+                serves over 150 correctional facilities around the country. As with a traditional law library, this service
+                is for informational purposes only. No legal advice is provided. You can utilize the service to obtain legal
+                information as you require and in support of your constitutional right of access to the courts.​
+                ​</p>
+        </div>
+        <div class="px-3">
+            <p>The following are tips to assist you in submitting a request form:</p>
+        </div>
+        <div class="">
+            <ul>
+                <li>You may request up to five items per form. If you require more than five items, you will need to submit
+                    an additional form. </li>
+                <li><strong>You may only submit up to three (3) forms per calendar month.</strong></li>
+                <li>Requests must be related to your current charges, an appeal, a civil rights matter, a conditions of
+                    confinement concern, or a family law matter.</li>
+                <li><strong class="text-danger">Inmates found to have abused this program will be subject to
+                        suspension.</strong></li>
+                <li>Not all fields are required, however: the more information you provide, the more likely the information
+                    you receive will be relevant and useful to you. </li>
+                <li>When indicating the information you require, ask for specific cases, citations or code sections whenever
+                    possible. </li>
+                <li>If you're unsure of which case, citation or code to request, you may request general information about
+                    various legal topics. For example: Theft Crimes, Information about Parole Violation, Statute of
+                    Limitations, Divorce, Arraignment Procedures or Habeas Corpus.</li>
+                <li>When requesting a specific case, provide as much information as you can such as case name, citation and
+                    year of decision. For example: People v. Smith, 123 Ga.App. 456, (1997).</li>
+                <li>If you require a specific legal form or sample motion please indicate the court you intend to petition.
+                    For example: "Writ of Habeas Corpus for Georgia state court" or “Sample Motion for Discovery for Federal
+                    Court” </li>
+    
+            </ul>
+        </div>
     </div>
-    <div class="">
-        <p>The following are tips to assist you in submitting a request form:</p>
-    </div>
-    <div class="">
-        <ul>
-            <li>You may request up to five items per form. If you require more than five items, you will need to submit
-                an additional form. </li>
-            <li><strong>You may only submit up to three (3) forms per calendar month.</strong></li>
-            <li>Requests must be related to your current charges, an appeal, a civil rights matter, a conditions of
-                confinement concern, or a family law matter.</li>
-            <li><strong class="text-danger">Inmates found to have abused this program will be subject to
-                    suspension.</strong></li>
-            <li>Not all fields are required, however: the more information you provide, the more likely the information
-                you receive will be relevant and useful to you. </li>
-            <li>When indicating the information you require, ask for specific cases, citations or code sections whenever
-                possible. </li>
-            <li>If you're unsure of which case, citation or code to request, you may request general information about
-                various legal topics. For example: Theft Crimes, Information about Parole Violation, Statute of
-                Limitations, Divorce, Arraignment Procedures or Habeas Corpus.</li>
-            <li>When requesting a specific case, provide as much information as you can such as case name, citation and
-                year of decision. For example: People v. Smith, 123 Ga.App. 456, (1997).</li>
-            <li>If you require a specific legal form or sample motion please indicate the court you intend to petition.
-                For example: "Writ of Habeas Corpus for Georgia state court" or “Sample Motion for Discovery for Federal
-                Court” </li>
-
-        </ul>
-    </div>
-</div>
-<div class="row">
+</mat-card>
+<div class="row pt-2">
     <div class="d-flex pl-4">
         <div class="pr-3">
             <button [routerLink]="'../legal-form'" class="button-purple padding-btn float-right py-1" mat-raised-button>
@@ -54,7 +56,7 @@
             </button>
         </div>
         <div class="">
-            <button [routerLink]="'../case'" class="button-purple padding-btn float-right py-1" mat-raised-button>
+            <button [routerLink]="'../case'" class="btn bg-color px-perc padding-btn float-right py-1" mat-raised-button>
                 Cancel
             </button>
         </div>
