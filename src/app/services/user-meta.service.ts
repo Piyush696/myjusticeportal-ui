@@ -34,4 +34,8 @@ export class UserMetaService {
   getUserBillingDetails() {
     return this.httpClient.get<object>(`${this.apiPath}/userMeta/user/userMeta`, this.getHeaders())
   }
+
+  getUserAdditionalDetails() {
+    return this.httpClient.get<object>(`${this.apiPath}/userMeta`, this.getHeaders())
+  }
 }

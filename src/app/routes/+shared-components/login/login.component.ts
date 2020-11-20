@@ -105,6 +105,7 @@ export class LoginComponent implements OnInit {
 
   checkToken() {
     this.loginService.checkToken().then((data: any) => {
+      console.log(data)
       if (data.success) {
         this.store.dispatch(new AddUserInfo(Object.assign({}, data.user)));
         if (data.user.roles[0].roleId === 1) {
