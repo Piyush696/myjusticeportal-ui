@@ -44,7 +44,7 @@ export class LoginComponent implements OnInit {
     this.lawyerService.lawyerLogin(loginData).subscribe((res: any) => {
       if (res.success) {
         this.cacheService.setCache('token', res.token);
-        this.checkToken();
+        this.checkTokenForUser();
         this.spinner=false;
       }
       else {
@@ -66,7 +66,7 @@ export class LoginComponent implements OnInit {
         else if (res.token) {
           this.toasterService.showWarningToater('Welcome to My Justice portal.');
           this.cacheService.setCache('token', res.token);
-          this.checkToken();
+          this.checkTokenForUser();
           this.spinner=false;
           // this.step = 4;
         }
@@ -95,7 +95,7 @@ export class LoginComponent implements OnInit {
     this.lawyerService.verifylawyerLogin(loginData).subscribe((isVerified: any) => {
       if (isVerified.success) {
         this.cacheService.setCache('token', isVerified.token);
-        this.checkToken();
+         this.checkTokenForUser();
       }
       else {
         this.toasterService.showErrorToater(isVerified.data);
@@ -103,9 +103,8 @@ export class LoginComponent implements OnInit {
     })
   }
 
-  checkToken() {
+  checkTokenForUser() {
     this.loginService.checkToken().then((data: any) => {
-      console.log(data)
       if (data.success) {
         this.store.dispatch(new AddUserInfo(Object.assign({}, data.user)));
         if (data.user.roles[0].roleId === 1) {

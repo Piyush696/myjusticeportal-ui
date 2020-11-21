@@ -91,13 +91,21 @@ export class StripeComponent implements OnDestroy, AfterViewInit,OnChanges {
         if(addCard.data){
           this.facilitiesList.filter((ele)=>{
             if(ele.isSelected){
-              const facilityData = {
-                "facilityId":ele.facilityId,
-                "isSponsors":ele.addOns.sponsors,
-                "isPremium":ele.addOns.premium,
-                "lawyerId":this.userData.userId
+              if(this.userData.roles[0].roleId == 5){
+                const facilityData = {
+                  "facilityId":ele.facilityId,
+                  "lawyerId":this.userData.userId
+                }
+                facilityList.push(facilityData)
+              } else {
+                const facilityData = {
+                  "facilityId":ele.facilityId,
+                  "isSponsors":ele.addOns.sponsors,
+                  "isPremium":ele.addOns.premium,
+                  "lawyerId":this.userData.userId
+                }
+                facilityList.push(facilityData)
               }
-              facilityList.push(facilityData)
             }
           })
           const data = {

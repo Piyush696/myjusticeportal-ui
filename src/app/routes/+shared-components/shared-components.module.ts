@@ -13,6 +13,7 @@ import { ChatComponent } from './chat/chat.component';
 import { FileUploadModule } from 'ng2-file-upload';
 import { MesageListComponent } from './mesage-list/mesage-list.component';
 import { ColorPickerModule } from 'ngx-color-picker';
+import { StripeComponent } from './stripe/stripe.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { ColorPickerModule } from 'ngx-color-picker';
     ViewFacilitiesComponent,
     SecurityQuestionComponent,
     ChatComponent,
-    MesageListComponent
+    MesageListComponent,
+    StripeComponent
   ],
   imports: [
     CommonModule,
@@ -42,7 +44,8 @@ import { ColorPickerModule } from 'ngx-color-picker';
     ViewFacilitiesComponent,
     SecurityQuestionComponent,
     ChatComponent,
-    MesageListComponent
+    MesageListComponent,
+    StripeComponent
   ]
 })
 
