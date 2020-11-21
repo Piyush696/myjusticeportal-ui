@@ -13,7 +13,6 @@ import { ManageProfileComponent } from './manage-profile/manage-profile.componen
 import { FileUploadModule } from 'ng2-file-upload';
 import { ReversePipe } from './accepted-cases/reverse.pipe';
 import { InquiriesComponent } from './inquiries/inquiries.component';
-import { StripeComponent } from './stripe/stripe.component';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 @NgModule({
@@ -24,8 +23,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
     LawyerChatComponent,
     ManageProfileComponent,
     ReversePipe,
-    InquiriesComponent,
-    StripeComponent
+    InquiriesComponent
   ],
   imports: [
     TextMaskModule,
