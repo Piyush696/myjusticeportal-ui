@@ -1,58 +1,74 @@
 <div class="col-12 pl-0">
     <div class="d-flex justify-content-end pb-3">
         <mat-checkbox class="mat-card check-style" color="primary" title="View Rejected Cases"
-        (change)="viewhidePendingInquiries($event.checked)">
-        View Rejected Inquiries
+            (change)="viewhidePendingInquiries($event.checked)">
+            View Rejected Inquiries
         </mat-checkbox>
     </div>
     <mat-card>
-        <h2 class="font-weight-bold m-0">Pending Inquiries</h2>
-        <small>These are lawyer you attempted to contact,View your conversation here and approve new
-            lawyers.</small>
-
-        <div class="scroll">
-            <table style="width:100%">
-                <tr>
-                    <th class="text-center">Law Firm</th>
-                    <th class="text-center">Lawyer</th>
-                    <th class="text-center">Sent</th>
-                    <th class="text-center">Status</th>
-                    <th class="text-center">Action</th>
-                </tr>
-                <tr *ngFor="let case of filteredPendingInquiriesList" [ngClass]="{'tab-color': case.status === 'Approved'}">
-                    <td class="border">{{case?.Organization?.name}}</td>
-                    <td class="border">{{case?.firstName}} {{case?.middleName}} {{case?.lastName}}</td>
-                    <td class="border">{{case?.sent | date:'MM/dd/yyyy'}}</td>
-                    <td class="border">{{case?.statusDeclared}}</td>
-                    <td class="d-flex justify-content-center align-items-center border">
-                        <div>
-                            <button
-                                [disabled]="(case.status === 'inmate_rejected' ||  case.status === 'Rejected' ||  case.status === 'Requested')"
-                                class="btn btn-sm btn-primary" color="green"
-                                (click)="onClickStatus('inmate_accepted',case.userId,case.caseId)">
-                                Accept
-                            </button>
-                        </div>
-                        <div>
-                            <button
-                                [disabled]="(case.status === 'inmate_rejected' || case.status === 'Rejected' ||case.status === 'Requested')"
-                                class="btn btn-sm btn-warning" color=""
-                                (click)="onClickStatus('inmate_rejected',case.userId,case.caseId)">
-                                Reject
-                            </button>
-                        </div>
-                        <div>
-                            <button
-                                [disabled]="( case.status === 'inmate_rejected' || case.status === 'inmate_accepted' || case.status === 'Rejected' || case.status === 'Requested' || case.status === 'Approved')"
-                                class="btn btn-sm btn-dark" (click)="onOpenModal(openModal,case)">
-                                Message
-                            </button>
-                        </div>
-                    </td>
-                </tr>
-            </table>
+        <div>
+            <h2 class="font-weight-bold m-0">Pending Inquiries</h2>
+            <small>These are lawyer you attempted to contact,View your conversation here and approve new
+                lawyers.</small>
         </div>
+        <div class="row">
+            <div class="col-5">
+                <mat-form-field class="w-100">
+                    <mat-label>Search</mat-label>
+                    <input matInput (keyup)="search($event.target.value)">
+                </mat-form-field>
+            </div>
+        </div>
+        <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8 w-100">
+            <ng-container matColumnDef="lawFirm">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Law Firm</th>
+                <td mat-cell *matCellDef="let case">
+                    {{case?.Organization?.name}}
+                </td>
+            </ng-container>
+            <ng-container matColumnDef="lawyer">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Lawyer</th>
+                <td mat-cell *matCellDef="let case">
+                    <span>{{case?.firstName}} {{case?.middleName}} {{case?.lastName}}</span>
+                </td>
+            </ng-container>
+            <ng-container matColumnDef="sent">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Sent</th>
+                <td mat-cell *matCellDef="let case">
+                    {{case?.sent | date:'MM/dd/yyyy'}}</td>
+            </ng-container>
+            <ng-container matColumnDef="status">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Status</th>
+                <td mat-cell *matCellDef="let case">{{case?.statusDeclared}}</td>
+            </ng-container>
+            <ng-container matColumnDef="action">
+                <th mat-header-cell *matHeaderCellDef>Action</th>
+                <td mat-cell *matCellDef="let case">
+                    <button
+                        [disabled]="(case.status === 'inmate_rejected' ||  case.status === 'Rejected' ||  case.status === 'Requested')"
+                        class="btn btn-sm btn-primary" color="green"
+                        (click)="onClickStatus('inmate_accepted',case.userId,case.caseId)">
+                        Accept
+                    </button>
+                    <button
+                        [disabled]="(case.status === 'inmate_rejected' || case.status === 'Rejected' ||case.status === 'Requested')"
+                        class="btn btn-sm btn-warning" color=""
+                        (click)="onClickStatus('inmate_rejected',case.userId,case.caseId)">
+                        Reject
+                    </button>
+                    <button
+                        [disabled]="( case.status === 'inmate_rejected' || case.status === 'inmate_accepted' || case.status === 'Rejected' || case.status === 'Requested' || case.status === 'Approved')"
+                        class="btn btn-sm btn-dark" (click)="onOpenModal(openModal,case)">
+                        Message
+                    </button>
+                </td>
+            </ng-container>
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+        <mat-paginator [pageSizeOptions]="getPageSizeOptions()"></mat-paginator>
     </mat-card>
+
 </div>
 
 <ng-template #openModal>
