@@ -22,7 +22,7 @@ export class FacilityComponent implements OnInit {
   addressForm: FormGroup;
   facilityAddressId: number;
   states = []
-  displayedColumns: string[] = ["facilityCode", "facilityName", "facilityUserCount", "ipAddress", "libraryLink", "action"];
+  displayedColumns: string[] = ["facilityCode", "facilityName","state", "facilityUserCount", "ipAddress", "libraryLink", "action"];
   dataSource = new MatTableDataSource();
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort: MatSort;

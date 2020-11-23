@@ -1,0 +1,16 @@
+.background-color {
+    background-color: #333442;
+  }
+  
+  .white-btn {
+    background: #e4e4ec;
+    color: #333442;
+  }
+  
+  .text-default {
+    font-weight: 800;
+  }
+  
+  .view-card-color {
+    border: 1px solid #333442;
+  }
