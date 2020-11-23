@@ -20,6 +20,7 @@ export class StripeComponent implements OnDestroy, AfterViewInit,OnChanges {
   userData: any;
    @Input() totalCount:number;
    @Input() facilitiesList:any[];
+   
   constructor(
     private cd: ChangeDetectorRef,
     @Inject(MAT_DIALOG_DATA) private data: any,
