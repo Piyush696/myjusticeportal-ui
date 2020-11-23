@@ -1,0 +1,35 @@
+
+<div class="row">
+    <div class="col-8">
+        <div *ngFor="let legalForm of legalFormList; let i= index" class="pr-2 pb-2 pt-2 pl-0">
+            <mat-card class="w-100 card-style">
+                <div class="d-flex justify-content-between">
+                    <div>
+                        <mat-label>
+                            <span class="legalForm-heading color">
+                                legalForm {{i+1}}:&nbsp;
+                                <span *ngIf="legalForm?.researchedMatter.length < 45">
+                                    <span
+                                        class="font-weight-normal">{{legalForm?.researchedMatter}}</span>
+                                </span>
+                                <span *ngIf="legalForm?.researchedMatter.length > 45">
+                                    <span
+                                        class="font-weight-normal">{{legalForm?.researchedMatter | slice:0:45}}...</span>
+                                </span>
+                            </span>
+                        </mat-label>
+                        <br>
+                    </div>
+                    <div class="d-flex">
+                        <div>
+                            <button mat-mini-fab color="primary" title="View Details" [routerLink]="legalForm?.legalResearchId">
+                                <mat-icon>play_arrow</mat-icon>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </mat-card>
+        </div>
+    </div>
+</div>
+
