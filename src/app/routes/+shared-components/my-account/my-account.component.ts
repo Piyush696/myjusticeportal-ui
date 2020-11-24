@@ -160,7 +160,7 @@ export class MyAccountComponent implements OnInit {
     this.profileForm.get('userEmail').enable()
     this.profileForm.get('mobile').enable()
 
-    this.userMetaForm.enable()
+    this.userMetaForm.get('housing_unit').enable()
   }
 
   userMetaUpdate() {
