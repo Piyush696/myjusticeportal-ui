@@ -68,4 +68,9 @@ export class HireLawyerService {
   getLawyerProfileInfo(userId) {
     return this.httpClient.get<any>(`${this.apiPath}/hirealawyer/getLawyerInfo/${userId}`, this.getHeaders());
   }
+
+  getCase(caseId) {
+    return this.httpClient.get<object>(`${this.apiPath}/case/` + caseId, this.getHeaders());
+  }
+
 }
