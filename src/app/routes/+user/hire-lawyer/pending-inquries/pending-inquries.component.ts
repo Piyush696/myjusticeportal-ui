@@ -45,13 +45,11 @@ export class PendingInquriesComponent implements OnInit {
   viewhidePendingInquiries(value) {
     if (value) {
       this.filteredPendingInquiriesList = [];
-      console.log(this.pendingCasesList)
       this.pendingCasesList.filter((ele) => {
         if (ele.status === 'Rejected') {
           this.filteredPendingInquiriesList.push(ele)
         }
       })
-      console.log(this.filteredPendingInquiriesList)
       this.dataSource = new MatTableDataSource(this.filteredPendingInquiriesList);
 
     } else {
@@ -97,7 +95,6 @@ export class PendingInquriesComponent implements OnInit {
           this.filteredPendingInquiriesList.push(x)
         }
       })
-      console.log(this.pendingCasesList)
       this.dataSource = new MatTableDataSource(this.filteredPendingInquiriesList);
 
     })
