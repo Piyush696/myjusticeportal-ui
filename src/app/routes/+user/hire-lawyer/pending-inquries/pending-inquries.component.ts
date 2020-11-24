@@ -45,18 +45,23 @@ export class PendingInquriesComponent implements OnInit {
   viewhidePendingInquiries(value) {
     if (value) {
       this.filteredPendingInquiriesList = [];
+      console.log(this.pendingCasesList)
       this.pendingCasesList.filter((ele) => {
         if (ele.status === 'Rejected') {
           this.filteredPendingInquiriesList.push(ele)
-          // this.dataSource = new MatTableDataSource(this.filteredPendingInquiriesList);
         }
       })
+      console.log(this.filteredPendingInquiriesList)
+      this.dataSource = new MatTableDataSource(this.filteredPendingInquiriesList);
+
     } else {
       this.filteredPendingInquiriesList = this.pendingCasesList.filter((element) => {
         if (element.status != 'Rejected') {
           return element
         }
       })
+      this.dataSource = new MatTableDataSource(this.filteredPendingInquiriesList);
+
     }
   }
 
@@ -90,9 +95,11 @@ export class PendingInquriesComponent implements OnInit {
       this.pendingCasesList.filter((x) => {
         if (x.status != 'Rejected') {
           this.filteredPendingInquiriesList.push(x)
-          this.dataSource = new MatTableDataSource(this.filteredPendingInquiriesList);
         }
       })
+      console.log(this.pendingCasesList)
+      this.dataSource = new MatTableDataSource(this.filteredPendingInquiriesList);
+
     })
   }
 
