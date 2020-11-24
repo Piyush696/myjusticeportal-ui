@@ -21,6 +21,8 @@ export class HireLawyerComponent implements OnInit, AfterViewInit {
   filteredOrganizationList: any;
   @ViewChild('modalopen') modalopen: ElementRef
   sponsorUserList: any;
+  lawyerData: any;
+  path = 'assets/img/75a4c2d1dc2dbce3342109e8270ff4f3.jpg';
 
   constructor(private hireLawyerService: HireLawyerService, private caseService: CaseService, private router: Router,
     private userAdditionalService: UserAdditionInfoService, private _statesService: StatesService, public dialog: MatDialog) { }
@@ -48,11 +50,11 @@ export class HireLawyerComponent implements OnInit, AfterViewInit {
   }
 
   onViewProfile(userId) {
-    this.router.navigateByUrl('/mjp/user/lawyer-profile/'+userId)
+    this.router.navigateByUrl('/mjp/user/lawyer-profile/' + userId)
   }
 
-  onViewLawyer(userId){
-    this.router.navigateByUrl('/mjp/user/lawyer-profile/'+userId)
+  onViewLawyer(userId) {
+    this.router.navigateByUrl('/mjp/user/lawyer-profile/' + userId)
   }
 
   onGetLaywers() {
@@ -61,6 +63,25 @@ export class HireLawyerComponent implements OnInit, AfterViewInit {
       this.filteredOrganizationList = this.organizationList
       this.specialityData = [...new Set(this.filteredOrganizationList.map(item => item.specialty))];
     })
+  }
+
+  openModal(templateRef, lawyerData) {
+    this.lawyerData = lawyerData
+    // this.path = lawyerData?.userAdditionalInfo?.profile?.downloadLink
+    let dialogRef = this.dialog.open(templateRef, {
+      width: '45%',
+      position: {
+        top: '80px',
+      },
+    });
+    setTimeout(() => {
+      var x = document.getElementById('cust-img')
+      x.style.background = 'url(' + this.path + ')'
+    }, 500);
+  }
+
+  onCloseModal() {
+    this.dialog.closeAll();
   }
 
   stateData() {
@@ -134,4 +155,13 @@ export class HireLawyerComponent implements OnInit, AfterViewInit {
     }
   }
 
+  viewContact(userId){
+    this.router.navigateByUrl('mjp/user/contact/'+userId)
+    this.dialog.closeAll();
+  }
+
+  viewOrg(organizationId){
+    this.router.navigateByUrl('mjp/user/hire-lawyer/'+organizationId)
+    this.dialog.closeAll();
+  }
 }

@@ -16,7 +16,7 @@ export class ViewLawyerComponent implements OnInit {
   selectedCases = [];
   caseList: any;
   userId: any;
-  id:any;
+  organizationId:any;
   isHired: boolean = false;
   logo: any;
   specialtyList: any;
@@ -25,7 +25,7 @@ export class ViewLawyerComponent implements OnInit {
   constructor(private hireLawyerService: HireLawyerService, public dialog: MatDialog,private router: Router,
     private caseService: CaseService, private activatedRoute: ActivatedRoute,
     private toasterService: ToasterService, private fb: FormBuilder) {
-      this.id = this.activatedRoute.snapshot.params.userId
+      this.organizationId = this.activatedRoute.snapshot.params.organizationId
   }
 
   ngOnInit(): void {
@@ -46,14 +46,14 @@ export class ViewLawyerComponent implements OnInit {
   }
 
   getOrgDetails() {
-    this.hireLawyerService.getUsersLawyer(this.id).subscribe((users: any) => {
+    this.hireLawyerService.getUsersLawyer(this.organizationId).subscribe((users: any) => {
       let specialty = [];
-      if(users.data.Organization.specialty){
-        specialty.push(users.data.Organization.specialty.split(","))
+      if(users.data.specialty){
+        specialty.push(users.data.specialty.split(","))
         this.specialtyList = specialty[0]
       }
       this.orgDetails = users.data
-      this.logo = this.orgDetails.Organization.logo
+      this.logo = this.orgDetails.logo
     })
   }
 
