@@ -1,0 +1,53 @@
+<div class="d-flex justify-content-between">
+    <div>
+        <h1 class="mb-0">Case Details</h1>
+        <h4>View requested case details.</h4>
+    </div>
+    <div>
+        <button mat-raised-button class="btn-background px-5 py-1" (click)="onGoBack()">
+            Go Back
+        </button>
+    </div>
+</div>
+
+<mat-card class="inner-card mat-elevation-z10 mt-3">
+    <mat-label class="font-weight-bold" *ngIf="!singleCaseData">
+        <span>No data available, invalid url detected.</span>
+    </mat-label>
+    <div class="d-flex flex-column" *ngIf="singleCaseData">
+        <h4>
+            Description: <strong>{{singleCaseData?.briefDescriptionOfChargeOrLegalMatter}}</strong>
+        </h4>
+        <h4>
+            Requested By: <strong>{{singleCaseData?.inmate?.firstName}}</strong>
+            <h4 *ngIf="singleCaseData?.inmate?.middleName">
+                &nbsp;<strong>{{singleCaseData?.inmate?.middleName}}</strong>
+            </h4>
+            &nbsp;<strong>{{singleCaseData?.inmate?.lastName}}</strong>
+        </h4>
+        <h4>
+            Attorney Name: <strong>{{singleCaseData?.attorneyName}}</strong>
+            <h4 *ngIf="!singleCaseData?.attorneyName">N/A</h4>
+        </h4>
+        <h4>
+            County Of Arrest: <strong>{{singleCaseData?.countyOfArrest}}</strong>
+            <h4 *ngIf="!singleCaseData?.countyOfArrest">N/A</h4>
+        </h4>
+        <h4>
+            Other Information: <strong>{{singleCaseData?.otherInformation}}</strong>
+            <h4 *ngIf="!singleCaseData?.otherInformation">N/A</h4>
+        </h4>
+        <h4>
+            Date Of Arrest: <strong>{{singleCaseData?.dateOfArrest | date:'longDate'}}</strong>
+            <h4 *ngIf="!singleCaseData?.dateOfArrest">N/A</h4>
+        </h4>
+        <h4>
+            Next Court Date: <strong>{{singleCaseData?.nextCourtDate | date:'longDate'}}</strong>
+            <h4 *ngIf="!singleCaseData?.nextCourtDate">N/A</h4>
+        </h4>
+        <h4>
+            Note: <strong>{{singleCaseData?.notes}}</strong>
+            <h4 *ngIf="!singleCaseData?.notes">N/A</h4>
+        </h4>
+    </div>
+</mat-card>
