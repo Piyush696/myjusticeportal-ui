@@ -1,59 +1,76 @@
 <div class="col-12 pl-0">
     <mat-card>
-        <h2 class="font-weight-bold m-0">Inquiries</h2>
-        <small>See new inquiries and approve new clients.</small>
-
         <div>
-            <table style="width:100%">
-                <tr>
-                    <th class="text-center">Name</th>
-                    <th class="text-center">Case Description</th>
-                    <th class="text-center">Sent</th>
-                    <th class="text-center">Status</th>
-                    <th class="text-center">Action</th>
-                </tr>
-                <tr *ngFor="let case of pendingCasesList">
-                    <td>{{case?.inmate?.firstName}} {{case?.inmate?.middleName}} {{case?.inmate?.lastName}}</td>
-                    <td>{{case?.briefDescriptionOfChargeOrLegalMatter}}</td>
-                    <td>{{case?.sentAt | date:'MM/dd/yyyy'}}</td>
-                    <td>{{case?.status}}</td>
-                    <td class="d-flex justify-content-center align-items-center border-0">
-                        <div>
-                            <button class="mr-1" color="green" mat-mini-fab title="Approve"
-                                [disabled]="( case.status === 'Rejected' || case.status === 'inmate_rejected')"
-                                (click)="onStatusUpdate(case?.caseId, status='Approved')">
-                                <mat-icon>done</mat-icon>
-                            </button>
-                        </div>
-                        <div>
-                            <button mat-mini-fab color="warn" title="Reject" [disabled]="(case.status === 'Rejected' || case.status === 'inmate_rejected')"
-                                (click)="onStatusUpdate(case?.caseId, status='Rejected')">
-                                <mat-icon>clear</mat-icon>
-                            </button>
-                        </div>&nbsp;
-                        <div>
-                            <button mat-mini-fab color="black" [disabled]="(case.status === 'Rejected' || case.status === inmate_rejected)"
-                                title="More Queries" (click)="onOpenModal(confirmModal,case)">
-                                <mat-icon>chat</mat-icon>
-                            </button>
-                        </div>
-                        <ng-template #confirmModal>
-                            <div>
-                                <h2 class="text-center font-weight-bold">Are You sure you want to enable the chat!</h2>
-                            </div>
-                            <div class="d-flex justify-content-between mt-5">
-                                <button class="button-purple px-4 py-1" mat-raised-button (click)="closeModal()">
-                                    No
-                                </button>
-                                <button mat-raised-button class="button-purple px-4 py-1"
-                                    (click)="onStatusUpdate(case?.caseId, status='chatEnabled'); onChatEnable()">
-                                    Yes
-                                </button>
-                            </div>
-                        </ng-template>
-                    </td>
-                </tr>
-            </table>
+            <h2 class="font-weight-bold m-0">Inquiries</h2>
+            <small>See new inquiries and approve new clients.</small>
         </div>
+        <div class="row">
+            <div class="col-5">
+                <mat-form-field class="w-100">
+                    <mat-label>Search</mat-label>
+                    <input matInput (keyup)="search($event.target.value)">
+                </mat-form-field>
+            </div>
+        </div>
+        <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8 w-100">
+            <ng-container matColumnDef="name">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Name</th>
+                <td mat-cell *matCellDef="let case">
+                    {{case?.inmate?.firstName}} {{case?.inmate?.middleName}} {{case?.inmate?.lastName}}
+                </td>
+            </ng-container>
+            <ng-container matColumnDef="caseDescription">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Case Description</th>
+                <td mat-cell *matCellDef="let case">
+                    <span>{{case?.briefDescriptionOfChargeOrLegalMatter}}</span>
+                </td>
+            </ng-container>
+            <ng-container matColumnDef="sent">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Sent</th>
+                <td mat-cell *matCellDef="let case">
+                    {{case?.sentAt | date:'MM/dd/yyyy'}}</td>
+            </ng-container>
+            <ng-container matColumnDef="status">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Status</th>
+                <td mat-cell *matCellDef="let case">{{case?.status}}</td>
+            </ng-container>
+            <ng-container matColumnDef="action">
+                <th mat-header-cell *matHeaderCellDef>Action</th>
+                <td mat-cell *matCellDef="let case">
+                    <button class="mr-1" class="btn btn-sm btn-primary " color=" green" title="Approve"
+                        [disabled]="( case.status === 'Rejected' || case.status === 'inmate_rejected')"
+                        (click)="onStatusUpdate(case?.caseId, status='Approved')">
+                        ACCEPT
+                    </button>
+                    <button color="warn" title="Reject" class="btn btn-sm btn-warning"
+                        [disabled]="(case.status === 'Rejected' || case.status === 'inmate_rejected')"
+                        (click)="onStatusUpdate(case?.caseId, status='Rejected')">
+                        REJECT
+                    </button>
+                    <button color="black" [disabled]="(case.status === 'Rejected' || case.status === inmate_rejected)"
+                        class="btn btn-sm btn-dark" title="More Queries" (click)="onOpenModal(confirmModal,case)">
+                        MESSAGE
+                    </button>
+                    <ng-template #confirmModal>
+                        <div>
+                            <h2 class="text-center font-weight-bold">Are You sure you want to enable the chat!</h2>
+                        </div>
+                        <div class="d-flex justify-content-between mt-5">
+                            <button class="button-purple px-4 py-1" mat-raised-button (click)="closeModal()">
+                                No
+                            </button>
+                            <button mat-raised-button class="button-purple px-4 py-1"
+                                (click)="onStatusUpdate(case?.caseId, status='chatEnabled'); onChatEnable()">
+                                Yes
+                            </button>
+                        </div>
+                    </ng-template>
+                </td>
+            </ng-container>
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+        <mat-paginator [pageSizeOptions]="getPageSizeOptions()"></mat-paginator>
     </mat-card>
+
 </div>
