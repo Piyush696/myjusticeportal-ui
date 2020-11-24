@@ -10,6 +10,7 @@ import { ViewFacilitiesComponent } from '../+shared-components/+manage-organizat
 import { LawyerChatComponent } from './lawyer-chat/lawyer-chat.component';
 import { ManageProfileComponent } from './manage-profile/manage-profile.component';
 import { InquiriesComponent } from './inquiries/inquiries.component';
+import { InquiriesCaseViewComponent } from './inquiries-case-view/inquiries-case-view.component';
 
 const routes: Routes = [
     { path: '', redirectTo: 'lawyer-dashboard', pathMatch: 'full' },
@@ -22,6 +23,7 @@ const routes: Routes = [
     { path: 'inquiries', component: InquiriesComponent },
     { path: 'manage-organization/users', component: ViewUsersComponent },
     { path: 'lawyer-chat', component: LawyerChatComponent },
+    { path: 'inquiries/:caseId', component: InquiriesCaseViewComponent },
     { path: 'manage-organization/facilities', component: ViewFacilitiesComponent },
     { path: '**', component: LawyerdashboardComponent }
 ];

@@ -51,6 +51,9 @@
                         class="btn btn-sm btn-dark" title="More Queries" (click)="onOpenModal(confirmModal,case)">
                         MESSAGE
                     </button>
+                    <button color="black" [routerLink]="case.caseId" class="btn btn-sm btn-danger" title="View Case">
+                        View
+                    </button>
                     <ng-template #confirmModal>
                         <div>
                             <h2 class="text-center font-weight-bold">Are You sure you want to enable the chat!</h2>
