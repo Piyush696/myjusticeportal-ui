@@ -22,8 +22,8 @@ export class MesageListComponent implements OnInit, OnChanges {
 
   constructor(public dialog: MatDialog, private messageService: MessageService) { }
   ngOnChanges(): void {
-    if(this.userMessageList){
-      this.userMessageList.forEach((x)=>{
+    if (this.userMessageList) {
+      this.userMessageList.forEach((x) => {
         this.oldUserList.push(x)
       })
     }
@@ -38,7 +38,6 @@ export class MesageListComponent implements OnInit, OnChanges {
   ngOnInit(): void {
     if (this.userList || this.userMessageList) {
       this.previouslyTextedUser()
-
     }
   }
 

@@ -7,6 +7,7 @@ import { ToasterService } from 'app/services/toaster.service';
 import { RegistrationService } from 'app/services/registration.service';
 import { UserMetaService } from 'app/services/user-meta.service';
 import { UserService } from 'app/services/user.service';
+import { FacilityService } from 'app/services/registration/facility.service';
 
 @Component({
   selector: 'app-my-account',
@@ -33,11 +34,12 @@ export class MyAccountComponent implements OnInit {
   userMeta: any;
   buttonText: string = 'Edit'
   previousSecurityId: any;
+  facilityList: any;
 
 
   constructor(private registrationService: RegistrationService, public dialog: MatDialog,
     private toasterService: ToasterService, private securityService: SecurityService,
-    private userService: UserService, private store: Store<any>,
+    private userService: UserService, private store: Store<any>, private facilityService: FacilityService,
     private fb: FormBuilder, private userMetaService: UserMetaService) { }
 
   ngOnInit() {
@@ -45,6 +47,8 @@ export class MyAccountComponent implements OnInit {
     this.getLoginDetails();
     this.securityQuestionControl();
     this.getAddUserSecurityQuestion()
+    this.getAllFacilities()
+
   }
 
   createControl() {
@@ -156,7 +160,7 @@ export class MyAccountComponent implements OnInit {
     this.profileForm.get('userEmail').enable()
     this.profileForm.get('mobile').enable()
 
-    this.userMetaForm.enable()
+    this.userMetaForm.get('housing_unit').enable()
   }
 
   userMetaUpdate() {
@@ -275,4 +279,11 @@ export class MyAccountComponent implements OnInit {
       }
     })
   }
+
+  getAllFacilities() {
+    this.facilityService.getAllFacility().subscribe((res: any) => {
+      this.facilityList = res.data
+    })
+  }
+
 }

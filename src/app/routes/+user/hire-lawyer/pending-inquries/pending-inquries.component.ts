@@ -1,24 +1,38 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { CaseService } from 'app/services/case.service';
 import { ToasterService } from 'app/services/toaster.service';
 import { UserAdditionInfoService } from 'app/services/user-addition-info.service';
-
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
 @Component({
   selector: 'app-pending-inquries',
   templateUrl: './pending-inquries.component.html',
   styleUrls: ['./pending-inquries.component.css']
 })
 export class PendingInquriesComponent implements OnInit {
+
+  displayedColumns: string[] = ["lawFirm", "lawyer", "sent", "status", "action"];
+  dataSource = new MatTableDataSource();
+
+  @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
+  @ViewChild(MatSort, { static: true }) sort: MatSort;
+
+
   pendingCasesList = [];
   filteredPendingInquiriesList = [];
-  
+
   constructor(private caseService: CaseService, public dialog: MatDialog,
     private additionalService: UserAdditionInfoService, private toasterService: ToasterService, public router: Router) { }
 
   ngOnInit(): void {
     this.getPendingCaseDetails();
+  }
+
+  search(searchValue: string) {
+    this.dataSource.filter = searchValue.trim().toLowerCase();
   }
 
   onOpenModal(templateRef) {
@@ -28,21 +42,25 @@ export class PendingInquriesComponent implements OnInit {
     });
   }
 
-  viewhidePendingInquiries(value){
-   if(value){
-    this.filteredPendingInquiriesList = [];
-     this.pendingCasesList.filter((ele)=>{
-       if(ele.status === 'Rejected'){
-        this.filteredPendingInquiriesList.push(ele)
-       }
-    })
-   } else {
-    this.filteredPendingInquiriesList = this.pendingCasesList.filter((element)=>{
-      if(element.status != 'Rejected'){
-         return element
-      }
-    })
-   }
+  viewhidePendingInquiries(value) {
+    if (value) {
+      this.filteredPendingInquiriesList = [];
+      this.pendingCasesList.filter((ele) => {
+        if (ele.status === 'Rejected') {
+          this.filteredPendingInquiriesList.push(ele)
+        }
+      })
+      this.dataSource = new MatTableDataSource(this.filteredPendingInquiriesList);
+
+    } else {
+      this.filteredPendingInquiriesList = this.pendingCasesList.filter((element) => {
+        if (element.status != 'Rejected') {
+          return element
+        }
+      })
+      this.dataSource = new MatTableDataSource(this.filteredPendingInquiriesList);
+
+    }
   }
 
   closeModal() {
@@ -72,11 +90,16 @@ export class PendingInquriesComponent implements OnInit {
         }
         return status
       })
-      this.pendingCasesList.filter((x)=>{
-        if(x.status != 'Rejected'){
+      this.pendingCasesList.filter((x) => {
+        if (x.status != 'Rejected') {
           this.filteredPendingInquiriesList.push(x)
         }
       })
+      let emptyDataSource = []
+      this.dataSource = new MatTableDataSource(emptyDataSource);
+
+      this.dataSource = new MatTableDataSource(this.filteredPendingInquiriesList);
+
     })
   }
 
@@ -100,4 +123,22 @@ export class PendingInquriesComponent implements OnInit {
     this.dialog.closeAll();
     this.router.navigateByUrl('mjp/user/message-my-lawyer')
   }
+
+  getPageSizeOptions(): number[] {
+    if (this.dataSource.data.length > 500)
+      return [10, 50, 100, 500, this.dataSource.paginator?.length];
+    else if (this.dataSource.data.length > 100) {
+      return [10, 50, 100, this.dataSource.paginator?.length];
+    }
+    else if (this.dataSource.data.length > 50) {
+      return [10, 50, this.dataSource.paginator?.length];
+    }
+    else if (this.dataSource.data.length > 10) {
+      return [10, this.dataSource.paginator?.length];
+    }
+    else {
+      return [10];
+    }
+  }
+
 }

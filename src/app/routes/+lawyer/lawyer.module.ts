@@ -14,6 +14,7 @@ import { FileUploadModule } from 'ng2-file-upload';
 import { ReversePipe } from './accepted-cases/reverse.pipe';
 import { InquiriesComponent } from './inquiries/inquiries.component';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { InquiriesCaseViewComponent } from './inquiries-case-view/inquiries-case-view.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
     LawyerChatComponent,
     ManageProfileComponent,
     ReversePipe,
-    InquiriesComponent
+    InquiriesComponent,
+    InquiriesCaseViewComponent
   ],
   imports: [
     TextMaskModule,

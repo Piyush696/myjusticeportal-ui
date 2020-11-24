@@ -240,7 +240,8 @@
                 <div class="col">
                     <mat-form-field appearance="fill" class="w-100 pl-2">
                         <mat-label>Average Daily Population</mat-label>
-                        <input type="number" matInput [formControl]="facilityForm.controls['facilityUserCount']" required>
+                        <input type="number" matInput [formControl]="facilityForm.controls['facilityUserCount']"
+                            required>
                         <mat-error>
                             <div
                                 *ngIf="facilityForm.controls['facilityUserCount'].invalid && facilityForm.controls['facilityUserCount'].touched">
@@ -252,7 +253,8 @@
                     </mat-form-field>
                 </div>
             </div>
-            <p class="ml-2"><span class="color-star">* </span> Please note this number is calculated on an annual basis and may change from time to time.</p>
+            <p class="ml-2"><span class="color-star">* </span> Please note this number is calculated on an annual basis
+                and may change from time to time.</p>
         </div>
     </div>
     <div class="d-flex justify-content-end p-0" *ngIf="addHide">
