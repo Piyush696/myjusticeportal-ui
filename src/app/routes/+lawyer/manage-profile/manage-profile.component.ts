@@ -25,7 +25,7 @@ export class ManageProfileComponent implements OnInit {
   fileType: string = 'private';
   sharedCaseFiles: any;
   privateCaseFiles: any;
-  buttonText: string = 'Edit'
+  buttonText: string = 'Save'
   specialtyList: any;
   orgData: any;
 

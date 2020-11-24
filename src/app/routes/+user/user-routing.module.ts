@@ -30,7 +30,7 @@ const routes: Routes = [
     { path: 'case/:caseId', component: ViewCaseComponent },
     { path: 'hire-lawyer', component: HireLawyerComponent },
     { path: 'legal-research', component: LegalResearchComponent },
-    { path: 'hire-lawyer/:userId', component: ViewLawyerComponent },
+    { path: 'hire-lawyer/:organizationId', component: ViewLawyerComponent },
     { path: 'find-bondsman', component: FindBondsmanComponent },
     { path: 'message-my-lawyer', component: MessagingLawyerComponent },
     { path: 'lawyer-profile/:userId', component: LawyerProfileComponent },
