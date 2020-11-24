@@ -62,3 +62,54 @@
   border: none !important;
   outline: none;
 }
+
+.white-btn {
+  background: #e4e4ec;
+  color: #333442;
+}
+
+.padding-btn {
+  padding-left: 10%;
+  padding-right: 10%;
+}
+
+.btn-outline {
+  outline: 4px auto -webkit-focus-ring-color;
+}
+
+.bg-card {
+  background: #ededed;
+}
+
+.name-size {
+  font-size: 18px;
+}
+.card-height {
+  min-height: 180px;
+}
+
+.img-profile {
+  width: 180px;
+  padding: 3%;
+  margin: auto;
+  border: 2px solid #ededed;
+}
+.outer-card {
+  border: 1px solid #333442;
+  color: #333442;
+  background: #e4e4ec;
+}
+
+.inner-card {
+  border: 1px solid #333442;
+  color: #333442;
+  background: white;
+}
+
+.modal-btn {
+  margin-left: 35%;
+}
+
+.bg-color{
+  background-color: #333442;
+}

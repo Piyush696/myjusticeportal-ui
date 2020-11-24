@@ -19,6 +19,8 @@ export class CasesComponent implements OnInit {
   // enableEditBtn: boolean = true;
   currentCaseId: any;
   @ViewChild('modalopen') modalopen: ElementRef
+  lawyerData: any;
+  path = 'assets/img/75a4c2d1dc2dbce3342109e8270ff4f3.jpg';
 
   constructor(private toasterService: ToasterService, public dialog: MatDialog,
     private caseService: CaseService, private fb: FormBuilder, private router: Router, private userAdditionalService: UserAdditionInfoService) {
@@ -73,6 +75,22 @@ export class CasesComponent implements OnInit {
     });
   }
 
+  openLawyerInfo(templateRef, lawyerData) {
+    this.lawyerData = lawyerData
+    // this.path = lawyerData?.userAdditionalInfo?.profile?.downloadLink
+    let dialogRef = this.dialog.open(templateRef, {
+      width: '45%',
+      position: {
+        top: '80px',
+      },
+    });
+    setTimeout(() => {
+      var x = document.getElementById('cust-img')
+      x.style.background = 'url(' + this.path + ')'
+    }, 500);
+  }
+
+
   onSaveChanges() {
     this.caseService.updateCase(this.caseNoteForm.value, this.currentCaseId).subscribe((res: any) => {
       if (res.success) {
@@ -88,12 +106,18 @@ export class CasesComponent implements OnInit {
       this.toasterService.showErrorToater(error.statusText);
     })
   }
-  onViewProfile(userId) {
-    this.router.navigateByUrl('/mjp/user/lawyer-profile/'+userId)
-    // this.router.navigateByUrl('/mjp/user/contact/' + userId)
-  }
 
   onCancelNotesModal() {
+    this.dialog.closeAll();
+  }
+
+  viewContact(userId){
+    this.router.navigateByUrl('mjp/user/contact/'+userId)
+    this.dialog.closeAll();
+  }
+
+  viewOrg(organizationId){
+    this.router.navigateByUrl('mjp/user/hire-lawyer/'+organizationId)
     this.dialog.closeAll();
   }
 }
