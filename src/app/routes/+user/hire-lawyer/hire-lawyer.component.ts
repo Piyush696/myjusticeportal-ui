@@ -22,7 +22,7 @@ export class HireLawyerComponent implements OnInit, AfterViewInit {
   @ViewChild('modalopen') modalopen: ElementRef
   sponsorUserList: any;
   lawyerData: any;
-  path = 'assets/img/75a4c2d1dc2dbce3342109e8270ff4f3.jpg';
+  path = '';
 
   constructor(private hireLawyerService: HireLawyerService, private caseService: CaseService, private router: Router,
     private userAdditionalService: UserAdditionInfoService, private _statesService: StatesService, public dialog: MatDialog) { }
@@ -64,10 +64,12 @@ export class HireLawyerComponent implements OnInit, AfterViewInit {
   openModal(templateRef, lawyerData) {
     this.lawyerData = lawyerData
     // this.path = lawyerData?.userAdditionalInfo?.profile?.downloadLink
+    this.path = lawyerData?.userAdditionalInfo?.header?.downloadLink
     let dialogRef = this.dialog.open(templateRef, {
-      width: '45%',
+      width: '56%',
+      height: '100vh',
       position: {
-        top: '80px',
+        top: '80px'
       },
     });
     setTimeout(() => {
@@ -151,13 +153,13 @@ export class HireLawyerComponent implements OnInit, AfterViewInit {
     }
   }
 
-  viewContact(userId){
-    this.router.navigateByUrl('mjp/user/contact/'+userId)
+  viewContact(userId) {
+    this.router.navigateByUrl('mjp/user/contact/' + userId)
     this.dialog.closeAll();
   }
 
-  viewOrg(organizationId){
-    this.router.navigateByUrl('mjp/user/hire-lawyer/'+organizationId)
+  viewOrg(organizationId) {
+    this.router.navigateByUrl('mjp/user/hire-lawyer/' + organizationId)
     this.dialog.closeAll();
   }
 }
