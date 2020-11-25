@@ -103,41 +103,60 @@
                         </div>
                     </div>
                     <div class="col-4 d-flex justify-content-center align-items-center">
-                        <mat-card>
+                        <mat-card class="border">
                             <div *ngIf="!assignedLawyer" class=" px-2 py-4">
                                 <h4 class="text-center font-weight-bold">No Connect Lawyer</h4>
                                 <p class="text-justify">Please click Find a Lawyer to search for lawyers.</p>
                             </div>
                             <div *ngIf="assignedLawyer">
-                                <h3 class="text-center font-weight-bold">Lawyer Details:</h3>
-                                <div>
-                                    <p class="text-default">Name:
-                                        <span class="font-weight-normal"> {{assignedLawyer?.firstName}}
-                                            {{assignedLawyer?.lastName}}</span>
-                                    </p>
-                                </div>
-                                <div>
-                                    <p class="text-default">Firm Name:
-                                        <span class="font-weight-normal">{{assignedLawyer?.Organization?.name}}</span>
-                                    </p>
-                                </div>
-                                <div class="text-center">
-                                    <button class="btn bg-color px-perc py-1" mat-raised-button
-                                        (click)="removeAlert(lawyerRemoveConforation)">Remove Lawyer
-                                    </button>
-                                    <ng-template #lawyerRemoveConforation>
-                                        <h3 class="text-center">Are you Sure, You want to remove the lawyer</h3>
-                                        <div class="d-flex justify-content-between">
-                                            <button class="btn bg-color px-perc py-1" mat-raised-button
-                                                (click)="onCancelNotesModal()">No
-                                            </button>
-                                            <button class="button-purple px-perc py-1" mat-raised-button
-                                                (click)="removeLawyer(assignedLawyer.userId)">Yes
-                                            </button>
+                                <div class="row">
+                                    <div class="col-4">
+                                        <div>
+                                            <img src="{{assignedLawyer?.userAdditionalInfo?.profile?.downloadLink}}" width="150px" height="150px" alt="logo" class="logo">
                                         </div>
-                                    </ng-template>
+                                    </div>
+                                    <div class="col-8">
+                                        <h3 class="text-center font-weight-bold">Your Connected Lawyer</h3>
+                                        <div>
+                                            <p class="text-default">Name:
+                                                <span class="font-weight-normal"> {{assignedLawyer?.firstName}}
+                                                    {{assignedLawyer?.lastName}}</span>
+                                            </p>
+                                        </div>
+                                        <div>
+                                            <p class="text-default">Organization:
+                                                <span class="font-weight-normal">{{assignedLawyer?.Organization?.name}}</span>
+                                            </p>
+                                        </div>
+                                        <div>
+                                            <p class="text-default">Tagline:
+                                                <span class="font-weight-normal">{{assignedLawyer?.userAdditionalInfo?.tagline}}</span>
+                                            </p>
+                                        </div>
+                                        <div>
+                                            <p class="text-default">Practise Area:
+                                                <span class="font-weight-normal">{{assignedLawyer?.userAdditionalInfo?.practiceAreas}}</span>
+                                            </p>
+                                        </div>
+                                        <div class="text-center">
+                                            <button class="btn bg-color px-perc py-1" mat-raised-button
+                                                (click)="removeAlert(lawyerRemoveConforation)">Disconnect
+                                            </button>
+                                            <ng-template #lawyerRemoveConforation>
+                                                <h3 class="text-center">Are you Sure, You want to remove the lawyer</h3>
+                                                <div class="d-flex justify-content-between">
+                                                    <button class="btn bg-color px-perc py-1" mat-raised-button
+                                                        (click)="onCancelNotesModal()">No
+                                                    </button>
+                                                    <button class="button-purple px-perc py-1" mat-raised-button
+                                                        (click)="removeLawyer(assignedLawyer.userId)">Yes
+                                                    </button>
+                                                </div>
+                                            </ng-template>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
+                                </div>
                         </mat-card>
                     </div>
                 </div>
