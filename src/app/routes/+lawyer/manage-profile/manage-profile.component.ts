@@ -18,6 +18,7 @@ export class ManageProfileComponent implements OnInit {
   userDetails: any;
   additionalInfoForm: FormGroup;
   public uploader1: FileUploader = new FileUploader({ url: URL });
+  public uploader2: FileUploader = new FileUploader({ url: URL });
   public hasAnotherDropZoneOver: boolean = false;
   public fileOverAnother(e: any): void {
     this.hasAnotherDropZoneOver = e;
@@ -30,7 +31,7 @@ export class ManageProfileComponent implements OnInit {
   orgData: any;
 
   constructor(private userAdditionalInfo: UserAdditionInfoService, private router: Router, private fb: FormBuilder,
-    private specialtyService: SpecialtyService,public dialog: MatDialog, private toasterService: ToasterService,
+    private specialtyService: SpecialtyService, public dialog: MatDialog, private toasterService: ToasterService,
     private organisationService: OrganisationService) { }
 
   ngOnInit(): void {
@@ -87,13 +88,17 @@ export class ManageProfileComponent implements OnInit {
       let formData = new FormData();
       // formData.append('this.organisationId', this.organisationId);
       this.uploader1.queue.forEach((file) => {
-        formData.append('file', file._file);
+        formData.append('logo', file._file);
+      })
+      this.uploader2.queue.forEach((file) => {
+        formData.append('header', file._file);
       })
       formData.append('type', this.fileType);
       this.userAdditionalInfo.uploadFile(formData).subscribe((res) => {
         this.fileType = 'private';
         if (res.success) {
           this.uploader1.queue = [];
+          this.uploader2.queue = [];
           this.toasterService.showSuccessToater('File uploaded successfully.');
         } else {
           this.toasterService.showErrorToater(res.data);
@@ -140,7 +145,7 @@ export class ManageProfileComponent implements OnInit {
       this.specialtyList = res.data
     })
   }
-  closeModal(){
+  closeModal() {
     this.dialog.closeAll();
   }
 }

@@ -62,7 +62,7 @@ export class MyAccountComponent implements OnInit {
       mobile: ['']
     })
     this.userMetaForm = this.fb.group({
-      housing_unit: ['', [Validators.required]],
+      housing_unit: [''],
       facility: ['', [Validators.required]]
     })
     this.createPasswordControl();
