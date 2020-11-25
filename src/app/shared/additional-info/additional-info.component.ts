@@ -109,7 +109,7 @@ export class AdditionalInfoComponent implements OnInit, OnChanges {
         let splitArray = item.metaValue.split(":")
         lawyer['state'] = splitArray[0],
           lawyer['bar_info_Exam_Id'] = splitArray[1]
-          // lawyer['speciality'] = splitArray[2]
+        // lawyer['speciality'] = splitArray[2]
         return lawyer
       })
     }
@@ -124,7 +124,7 @@ export class AdditionalInfoComponent implements OnInit, OnChanges {
 
   createFormControl() {
     this.additionalInfo = this.fb.group({
-      housing_unit: ['', [Validators.required]],
+      housing_unit: [''],
       facility: ['', [Validators.required]]
     })
   }
@@ -144,7 +144,7 @@ export class AdditionalInfoComponent implements OnInit, OnChanges {
       let lawyerInfo = this.lawyerInfoArray.map((item) => {
         this.currentState.push(item.state)
         let userMetaInfo = {}
-        let str = item.state + ':' + item.bar_info_Exam_Id 
+        let str = item.state + ':' + item.bar_info_Exam_Id
         // + ':' + item.speciality
         userMetaInfo['metaKey'] = 'lawyerInfo'
         userMetaInfo['metaValue'] = str
