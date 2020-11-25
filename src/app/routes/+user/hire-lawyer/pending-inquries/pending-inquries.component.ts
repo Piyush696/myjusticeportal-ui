@@ -95,10 +95,8 @@ export class PendingInquriesComponent implements OnInit {
           this.filteredPendingInquiriesList.push(x)
         }
       })
-      let emptyDataSource = []
-      this.dataSource = new MatTableDataSource(emptyDataSource);
 
-      this.dataSource = new MatTableDataSource(this.filteredPendingInquiriesList);
+      this.dataSource = new MatTableDataSource(this.pendingCasesList);
 
     })
   }

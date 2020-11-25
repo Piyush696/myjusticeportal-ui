@@ -64,15 +64,14 @@
                     <div>
                         <mat-label class="font-weight-bold">
                             {{org?.firstName}}
-                                {{org?.middleName}}{{org?.lastName}}
+                            {{org?.middleName}}{{org?.lastName}}
                         </mat-label>
                     </div>
                     <!-- <button  class="button-purple" mat-raised-button
                     (click)="onViewLawyer(org.userId)">
                         View
                     </button> -->
-                    <button  class="button-purple" mat-raised-button
-                    (click)="openModal(lawyerView,org)">
+                    <button class="button-purple" mat-raised-button (click)="openModal(lawyerView,org)">
                         View
                     </button>
                 </mat-card>
@@ -98,7 +97,7 @@
                         </div>
                     </div>
                     <div class="d-flex justify-content-center">
-                        <button  (click)="openModal(lawyerView,user)" class="btn bg-color px-perc py-1"
+                        <button (click)="openModal(lawyerView,user)" class="btn bg-color px-perc py-1"
                             mat-raised-button>View Profile</button>
                     </div>
                 </mat-card>
@@ -136,44 +135,45 @@
                 <h2 class="font-weight-bold m-0">To Profile Preview</h2>
                 <small>See below for preview of what users will see when they view your profile</small>
             </div>
-                <div>
-                    <button class="btn bg-color pr-2"
-                    mat-raised-button (click)="onCloseModal()">Close</button>
-                </div>
+            <div>
+                <button class="btn bg-color pr-2" mat-raised-button (click)="onCloseModal()">Close</button>
+            </div>
         </div>
-        <div style="height: 200px;" id="cust-img"> 
+        <div style="height: 200px;" id="cust-img">
         </div>
-        <div  class="row mt-3">
+        <div class="row mt-3">
             <div class="col-4">
                 <div class="img-profile">
-                    <img src="{{lawyerData?.userAdditionalInfo?.profile?.downloadLink}}" width="150px" height="150px" alt="logo" class="logo">
+                    <img src="{{lawyerData?.userAdditionalInfo?.profile?.downloadLink}}" width="150px" height="150px"
+                        alt="logo" class="logo">
                 </div>
                 <div class="pl-5">
-                    <button  class="button-purple" mat-raised-button
-                    (click)="viewContact(lawyerData.userId)">
-                        Contact {{lawyerData?.firstName}} 
+                    <button class="button-purple" mat-raised-button (click)="viewContact(lawyerData.userId)">
+                        Contact {{lawyerData?.firstName}}
                     </button>
                 </div>
             </div>
             <div class="col-8 mt-2 card-height">
-                    <div class="d-flex justify-content-between">
-                        <div class="mt-2">
-                            <h4>
-                                <span  class="font-weight-bold name-size">Name: </span>
-                                <span class="font-weight-bold name-size">{{lawyerData?.firstName}} {{lawyerData?.middleName}} {{lawyerData?.lastName}}</span>
-                            </h4>
-                         
-                        </div>
-                        <div>
-                            <button class="btn bg-color px-perc m-0 mr-1" (click)="viewOrg(lawyerData.Organization.organizationId)">View Organization</button>
-                        </div>
+                <div class="d-flex justify-content-between">
+                    <div class="mt-2">
+                        <h4>
+                            <span class="font-weight-bold name-size">Name: </span>
+                            <span class="font-weight-bold name-size">{{lawyerData?.firstName}}
+                                {{lawyerData?.middleName}} {{lawyerData?.lastName}}</span>
+                        </h4>
+
                     </div>
-                    <div class="row py-2 pl-3">
-                        <div>
-                            <span class="font-weight-bold">Organization: </span>
-                            <span>{{lawyerData?.Organization?.name}}</span>
-                        </div>
+                    <div>
+                        <button class="btn bg-color px-perc m-0 mr-1"
+                            (click)="viewOrg(lawyerData.Organization.organizationId)">View Organization</button>
                     </div>
+                </div>
+                <div class="row py-2 pl-3">
+                    <div>
+                        <span class="font-weight-bold">Organization: </span>
+                        <span>{{lawyerData?.Organization?.name}}</span>
+                    </div>
+                </div>
                 <div class="row py-2 pl-3">
                     <div>
                         <span class="font-weight-bold">Tagline: </span>
@@ -193,6 +193,6 @@
                     </div>
                 </div>
             </div>
-            </div>
+        </div>
     </mat-card>
 </ng-template>
