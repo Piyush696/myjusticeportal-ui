@@ -61,11 +61,16 @@
                 </div>
                 <mat-card class="d-flex justify-content-between align-items-center inner-card mt-2"
                     *ngFor="let org of organizationList">
-                    <div>
-                        <mat-label class="font-weight-bold">
-                            {{org?.firstName}}
-                            {{org?.middleName}}{{org?.lastName}}
-                        </mat-label>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <mat-label class="font-weight-bold">
+                                {{org?.firstName}}
+                                    {{org?.middleName}}{{org?.lastName}}
+                            </mat-label>
+                        </div>
+                        <div>
+                            <span class="ml-3 premium-tag" *ngIf="org?.lawyerFacility[0]?.lawyer_facility?.isPremium">isPremium</span>
+                        </div>
                     </div>
                     <!-- <button  class="button-purple" mat-raised-button
                     (click)="onViewLawyer(org.userId)">

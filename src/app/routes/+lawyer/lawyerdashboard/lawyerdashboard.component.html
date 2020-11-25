@@ -14,12 +14,12 @@
 </div>
 
 
-  <div *ngIf="showDashboard || billingBoard && isAuthorized">
+  <div *ngIf="showDashboard && isAuthorized || billingBoard && isAuthorized">
     <h1 class="mb-0">Dashboard</h1>
     <h4>View and actions for requested cases.</h4>
   </div>
 
-<div *ngIf="billingBoard && isAuthorized">
+<div *ngIf="billingBoard">
   <div class="d-flex justify-content-between">
   </div>
   <div *ngIf="userData?.roles[0]?.roleId == 3">
