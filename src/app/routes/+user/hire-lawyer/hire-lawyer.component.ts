@@ -63,19 +63,19 @@ export class HireLawyerComponent implements OnInit, AfterViewInit {
 
   openModal(templateRef, lawyerData) {
     this.lawyerData = lawyerData
-    // this.path = lawyerData?.userAdditionalInfo?.profile?.downloadLink
+    this.path = lawyerData?.userAdditionalInfo?.profile?.downloadLink
     this.path = lawyerData?.userAdditionalInfo?.header?.downloadLink
     let dialogRef = this.dialog.open(templateRef, {
-      width: '56%',
-      height: '100vh',
-      position: {
-        top: '80px'
-      },
+      width: '800px'
     });
     setTimeout(() => {
       var x = document.getElementById('cust-img')
       x.style.background = 'url(' + this.path + ')'
     }, 500);
+  }
+
+  viewUser(userId){
+    this.router.navigateByUrl('mjp/user/lawyer-profile/'+userId)
   }
 
   onCloseModal() {

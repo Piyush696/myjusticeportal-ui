@@ -1,7 +1,13 @@
 <div class="row mb-4">
     <div class="col-">
-        <h1 class="mb-0 font-weight-bold">Find a Lawyer</h1>
-        <small>Manage inquiries with lawyers and connect to work on Cases.</small>
+        <!-- <h1 class="mb-0 font-weight-bold">Find a Lawyer</h1>
+        <small>Manage inquiries with lawyers and connect to work on Cases.</small> -->
+        <div>
+            <h1 class="line-height font-weight-bold">Find a Lawyer</h1>
+            <h4 class="line-height header-sub-text">
+                Manage inquiries with lawyers and connect to work on Cases.
+            </h4>
+        </div>
     </div>
     <div class="col">
         <button [routerLink]="'../case'" class="white-btn padding-btn float-right py-1" mat-raised-button>
@@ -16,8 +22,12 @@
     </div>
 </div>
 <div class="col pt-5 px-0">
-    <h1 class="mb-0 font-weight-bold">Search All Lawyers</h1>
-    <small>Find lawyers and start working with then directly through My Justice Portal.</small>
+    <div>
+        <h1 class="line-height font-weight-bold">Search All Lawyers</h1>
+        <h4 class="line-height header-sub-text">
+            Find lawyers and start working with then directly through My Justice Portal.
+        </h4>
+    </div>
 </div>
 <div class="row pt-3">
     <div class="col-8">
@@ -69,7 +79,7 @@
                             </mat-label>
                         </div>
                         <div>
-                            <span class="ml-3 premium-tag" *ngIf="org?.lawyerFacility[0]?.lawyer_facility?.isPremium">isPremium</span>
+                            <span class="ml-3 premium-tag" *ngIf="org?.lawyerFacility[0]?.lawyer_facility?.isPremium">Premium</span>
                         </div>
                     </div>
                     <!-- <button  class="button-purple" mat-raised-button
@@ -102,7 +112,7 @@
                         </div>
                     </div>
                     <div class="d-flex justify-content-center">
-                        <button (click)="openModal(lawyerView,user)" class="btn bg-color px-perc py-1"
+                        <button (click)="viewUser(user.userId)" class="btn bg-color px-perc py-1"
                             mat-raised-button>View Profile</button>
                     </div>
                 </mat-card>
@@ -137,26 +147,31 @@
     <mat-card class="border pt-0 bg-card">
         <div class="d-flex justify-content-between align-items-center bg-header">
             <div>
-                <h2 class="font-weight-bold m-0">To Profile Preview</h2>
+                <h2 class="font-weight-bold m-0">Profile Preview</h2>
                 <small>See below for preview of what users will see when they view your profile</small>
             </div>
             <div>
-                <button class="btn bg-color pr-2" mat-raised-button (click)="onCloseModal()">Close</button>
+                <button class="btn bg-color" mat-raised-button (click)="onCloseModal()">Close</button>
             </div>
         </div>
         <div style="height: 200px;" id="cust-img">
         </div>
         <div class="row mt-3">
             <div class="col-4">
-                <div class="img-profile">
-                    <img src="{{lawyerData?.userAdditionalInfo?.profile?.downloadLink}}" width="150px" height="150px"
-                        alt="logo" class="logo">
+                <div class="d-flex">
+                    <div class="img-profile">
+                        <img src="{{lawyerData?.userAdditionalInfo?.profile?.downloadLink}}" width="150px" height="150px"
+                            alt="logo" class="logo">
+                    </div>
                 </div>
-                <div class="pl-5">
-                    <button class="button-purple" mat-raised-button (click)="viewContact(lawyerData.userId)">
-                        Contact {{lawyerData?.firstName}}
-                    </button>
+                <div class="d-flex justify-content-center align-items-center">
+                    <div>
+                        <button class="button-purple" mat-raised-button (click)="viewContact(lawyerData.userId)">
+                            Contact {{lawyerData?.firstName}}
+                        </button>
+                    </div>
                 </div>
+
             </div>
             <div class="col-8 mt-2 card-height">
                 <div class="d-flex justify-content-between">
