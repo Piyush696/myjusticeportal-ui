@@ -16,11 +16,8 @@ export class CasesComponent implements OnInit {
   caseList: any;
   sponsorUserList: any;
   caseNoteForm: FormGroup;
-  // enableEditBtn: boolean = true;
   currentCaseId: any;
-  @ViewChild('modalopen') modalopen: ElementRef
-  lawyerData: any;
-  path = 'assets/img/75a4c2d1dc2dbce3342109e8270ff4f3.jpg';
+  @ViewChild('modalopen') modalopen: ElementRef;
 
   constructor(private toasterService: ToasterService, public dialog: MatDialog,
     private caseService: CaseService, private fb: FormBuilder, private router: Router, private userAdditionalService: UserAdditionInfoService) {
@@ -70,34 +67,20 @@ export class CasesComponent implements OnInit {
       }
     });
     this.caseNoteForm.get('notes').setValue(value.notes);
-    // this.caseNoteForm.get('notes').disable();
     dialogRef.afterClosed().subscribe(result => {
     });
   }
 
-  openLawyerInfo(templateRef, lawyerData) {
-    this.lawyerData = lawyerData
-    // this.path = lawyerData?.userAdditionalInfo?.profile?.downloadLink
-    let dialogRef = this.dialog.open(templateRef, {
-      width: '45%',
-      position: {
-        top: '80px',
-      },
-    });
-    setTimeout(() => {
-      var x = document.getElementById('cust-img')
-      x.style.background = 'url(' + this.path + ')'
-    }, 500);
+  onViewLawyer(userId) {
+    this.router.navigateByUrl('mjp/user/lawyer-profile/'+userId)
   }
 
 
   onSaveChanges() {
     this.caseService.updateCase(this.caseNoteForm.value, this.currentCaseId).subscribe((res: any) => {
       if (res.success) {
-        // this.caseNoteForm.disable();
         this.dialog.closeAll();
         this.getCases();
-        // this.enableEditBtn = true;
         this.toasterService.showSuccessToater('Notes Updated Successfully.');
       } else {
         this.toasterService.showErrorToater(res.data);
