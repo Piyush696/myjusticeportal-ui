@@ -18,12 +18,15 @@ import { LegalResearchFormViewComponent } from './legal-research/legal-research-
 import { EditLegalResearchFormComponent } from './legal-research/edit-legal-research-form/edit-legal-research-form.component';
 import { ContactComponent } from './contact/contact.component';
 import { LawyerProfileComponent } from './hire-lawyer/lawyer-profile/lawyer-profile.component';
+import { PendingInquriesComponent } from './pending-inquries/pending-inquries.component';
+
 
 const routes: Routes = [
     { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
     { path: 'dashboard', component: UserDashboardComponent },
     { path: 'my-account', component: MyAccountComponent },
     { path: 'case', component: CasesComponent },
+    { path: 'inquiries', component: PendingInquriesComponent },
     { path: 'contact/:userId', component: ContactComponent },
     { path: 'case/create', component: CreateCaseComponent },
     { path: 'case/:caseId/edit', component: EditCaseComponent },
