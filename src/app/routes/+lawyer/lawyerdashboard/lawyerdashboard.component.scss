@@ -21,13 +21,12 @@
 }
 
 .card-scroll {
-
   height: 446px;
   overflow-y: scroll;
 }
 
 .circle {
-  border-color: #FF6700 !important;
+  border-color: #ff6700 !important;
   width: 20px;
   height: 20px;
   top: 6px !important;
@@ -36,5 +35,14 @@
 }
 
 .panding-review {
-  color: #FF6700 !important;
+  color: #ff6700 !important;
+}
+
+#circle {
+  width: 50px;
+  height: 50px;
+  -webkit-border-radius: 25px;
+  -moz-border-radius: 25px;
+  border-radius: 25px;
+  background: blue;
 }
