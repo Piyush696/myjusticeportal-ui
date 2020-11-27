@@ -58,4 +58,8 @@ export class UserAdditionInfoService {
     return this.httpClient.post<any>(`${this.apiPath}/userAdditionalInfo/status-update`, caseId, this.getHeaders());
   }
 
+  getDashboardCounts() {
+    return this.httpClient.get<object>(`${this.apiPath}/userAdditionalInfo/dasboard/count`, this.getHeaders());
+  }
+
 }

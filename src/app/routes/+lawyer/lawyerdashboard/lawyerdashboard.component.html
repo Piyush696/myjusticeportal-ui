@@ -150,18 +150,54 @@
   <mat-card class="mat-elevation-z10 border-card">
     <div class="row">
       <div class="col-4">
-        <mat-card>
-          <div id="circle"></div>
+        <mat-card class="dashboard-card">
+          <div class="row d-flex justify-content-center">
+            <p class="pl-1 matheading">Inquiries</p>
+          </div>
+          <div class="row mt-4 mb-4 d-flex justify-content-center">
+            <div id="circle" [ngStyle]="{'background-color': lawyerData?.caseCount > 0  ? '#dc3545b8' : '#edededed'}">
+              <p style="font-size:3em;padding-top: 0.6em;">{{lawyerData?.caseCount}}</p>
+            </div>
+          </div>
+          <div class="row d-flex justify-content-center">
+            <button [routerLink]="'../inquiries'" class="btn bg-color px-perc py-3"
+              [ngStyle]="{'background-color': lawyerData?.caseCount > 0  ? 'orangered'  : ''}">View
+              Inquiries</button>
+          </div>
         </mat-card>
       </div>
       <div class="col-4">
-        <mat-card>
-          <div id="circle"></div>
+        <mat-card class="dashboard-card">
+          <div class="row d-flex justify-content-center">
+            <p class="pl-1 matheading">New Messages</p>
+          </div>
+          <div class="row mt-4 mb-4 d-flex justify-content-center">
+            <div id="circle"
+              [ngStyle]="{'background-color': lawyerData?.messageCount > 0  ? '#dc3545b8' : '#edededed'}">
+              <p style="font-size:3em;padding-top: 0.6em;">{{lawyerData?.messageCount}}</p>
+            </div>
+          </div>
+          <div class="row d-flex justify-content-center">
+            <button [routerLink]="'../lawyer-chat'" class="btn bg-color px-perc py-3"
+              [ngStyle]="{'background-color': lawyerData?.messageCount > 0  ? 'orangered' : ''}">View
+              Messages</button>
+          </div>
         </mat-card>
       </div>
       <div class="col-4">
-        <mat-card>
-          <div id="circle"></div>
+        <mat-card class="dashboard-card">
+          <div class="row d-flex justify-content-center">
+            <p class="pl-1 matheading">Connected Cases</p>
+          </div>
+          <div class="row mt-4 mb-4 d-flex justify-content-center">
+            <div id="circle" [ngStyle]="{'background-color': lawyerData?.myCases > 0  ? '#dc3545b8' : '#edededed'}">
+              <p style="font-size:3em;padding-top: 0.6em;">{{lawyerData?.myCases}}</p>
+            </div>
+          </div>
+          <div class="row d-flex justify-content-center">
+            <button [routerLink]="'../accepted-cases'" class="btn bg-color px-perc py-3"
+              [ngStyle]="{'background-color': lawyerData?.myCases > 0  ? 'orangered' : ''}">View Cases</button>
+          </div>
         </mat-card>
       </div>
     </div>
