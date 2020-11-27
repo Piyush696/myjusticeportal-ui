@@ -16,11 +16,6 @@
     </div>
 </div>
 
-<div class="row">
-    <div class="col-12 p-0">
-        <app-pending-inquries></app-pending-inquries>
-    </div>
-</div>
 <div class="col pt-5 px-0">
     <div>
         <h1 class="line-height font-weight-bold">Search All Lawyers</h1>
@@ -75,11 +70,12 @@
                         <div>
                             <mat-label class="font-weight-bold">
                                 {{org?.firstName}}
-                                    {{org?.middleName}}{{org?.lastName}}
+                                {{org?.middleName}}{{org?.lastName}}
                             </mat-label>
                         </div>
                         <div>
-                            <span class="ml-3 premium-tag" *ngIf="org?.lawyerFacility[0]?.lawyer_facility?.isPremium">Premium</span>
+                            <span class="ml-3 premium-tag"
+                                *ngIf="org?.lawyerFacility[0]?.lawyer_facility?.isPremium">Premium</span>
                         </div>
                     </div>
                     <!-- <button  class="button-purple" mat-raised-button
@@ -112,8 +108,8 @@
                         </div>
                     </div>
                     <div class="d-flex justify-content-center">
-                        <button (click)="viewUser(user.userId)" class="btn bg-color px-perc py-1"
-                            mat-raised-button>View Profile</button>
+                        <button (click)="viewUser(user.userId)" class="btn bg-color px-perc py-1" mat-raised-button>View
+                            Profile</button>
                     </div>
                 </mat-card>
             </div>
@@ -160,8 +156,8 @@
             <div class="col-4">
                 <div class="d-flex">
                     <div class="img-profile">
-                        <img src="{{lawyerData?.userAdditionalInfo?.profile?.downloadLink}}" width="150px" height="150px"
-                            alt="logo" class="logo">
+                        <img src="{{lawyerData?.userAdditionalInfo?.profile?.downloadLink}}" width="150px"
+                            height="150px" alt="logo" class="logo">
                     </div>
                 </div>
                 <div class="d-flex justify-content-center align-items-center">
