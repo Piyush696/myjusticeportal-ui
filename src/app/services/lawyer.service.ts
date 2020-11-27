@@ -44,4 +44,8 @@ export class LawyerService {
     return this.httpClient.post<object>(`${this.apiPath}/lawyer/${caseId}`, { lawyerId }, this.getHeaders());
   }
 
+  getBillingDetails() {
+    return this.httpClient.post<object>(`${this.apiPath}/stripe/subcription_details`, this.getHeaders())
+  }
+
 }

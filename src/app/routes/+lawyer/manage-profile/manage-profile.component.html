@@ -16,7 +16,7 @@
             <table style="width:100%">
                 <tr>
                     <th>Name:</th>
-                    <td>{{userDetails?.firstName}}{{userDetails?.middleName}}{{userDetails?.lastName}}</td>
+                    <td>{{userDetails?.firstName}} {{userDetails?.middleName}} {{userDetails?.lastName}}</td>
                 </tr>
                 <tr>
                     <th>Tagline:</th>
@@ -31,7 +31,7 @@
                     <td>{{userDetails?.userAdditionalInfo?.description}}</td>
                 </tr>
                 <tr>
-                    <th>Profile Header Image:</th>
+                    <th>Profile Image:</th>
                     <td>
                         <img src="{{userDetails?.userAdditionalInfo?.profile?.downloadLink}}" width="150px"
                             height="150px" alt="logo" class="logo"
@@ -285,6 +285,11 @@
                         <h1 class="d-flex justify-content-center line-height color font-weight-bold">
                             {{orgData?.Organization?.name}}
                         </h1>
+                        <div style="height: 200px;"  id="cust-img">
+                            <!-- <img src="{{userDetails?.userAdditionalInfo?.header?.downloadLink}}" width="100%"
+                                height="150px" alt="logo" class="logo"
+                                *ngIf="userDetails?.userAdditionalInfo?.header?.downloadLink"> -->
+                        </div>
                         <div class="text-center line-height">
                             <div>
                                 <img src="{{userDetails?.userAdditionalInfo?.profile?.downloadLink}}" width="150px"
@@ -297,9 +302,9 @@
                                 </h4>
                             </div>
                         </div>
-                        <div class="d-flex justify-content-center">
+                        <!-- <div class="d-flex justify-content-center">
                             <button class="btn bg-color px-perc py-1" mat-raised-button>Contact</button>
-                        </div>
+                        </div> -->
                     </mat-card>
                 </div>
             </mat-card>

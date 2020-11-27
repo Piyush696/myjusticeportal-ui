@@ -1,124 +1,123 @@
 <div class="row mb-4">
-    <div class="col-">
-        <!-- <h1 class="mb-0 font-weight-bold">Find a Lawyer</h1>
+  <div class="col-">
+    <!-- <h1 class="mb-0 font-weight-bold">Find a Lawyer</h1>
         <small>Manage inquiries with lawyers and connect to work on Cases.</small> -->
-        <div>
-            <h1 class="line-height font-weight-bold">Find a Lawyer</h1>
-            <h4 class="line-height header-sub-text">
-                Manage inquiries with lawyers and connect to work on Cases.
-            </h4>
-        </div>
+    <div>
+      <h1 class="line-height font-weight-bold">Find a Lawyer</h1>
+      <h4 class="line-height header-sub-text">
+        Manage inquiries with lawyers and connect to work on Cases.
+      </h4>
     </div>
-    <div class="col">
-        <button [routerLink]="'../case'" class="white-btn padding-btn float-right py-1" mat-raised-button>
-            Back To My Cases
-        </button>
-    </div>
+  </div>
+  <div class="col">
+    <button [routerLink]="'../case'" class="white-btn padding-btn float-right py-1" mat-raised-button>
+      Back To My Cases
+    </button>
+  </div>
 </div>
 
 <div class="row">
-    <div class="col-12 p-0">
-        <app-pending-inquries></app-pending-inquries>
-    </div>
+  <div class="col-12 p-0">
+    <app-pending-inquries></app-pending-inquries>
+  </div>
 </div>
 <div class="col pt-5 px-0">
-    <div>
-        <h1 class="line-height font-weight-bold">Search All Lawyers</h1>
-        <h4 class="line-height header-sub-text">
-            Find lawyers and start working with then directly through My Justice Portal.
-        </h4>
-    </div>
+  <div>
+    <h1 class="line-height font-weight-bold">Search All Lawyers</h1>
+    <h4 class="line-height header-sub-text">
+      Find lawyers and start working with then directly through My Justice Portal.
+    </h4>
+  </div>
 </div>
 <div class="row pt-3">
-    <div class="col-8">
-        <div class="d-flex">
-            <div class="pr-2">
-                <mat-form-field appearance="fill">
-                    <mat-label>Filter: Speciality</mat-label>
-                    <mat-select (selectionChange)="onSpeciality($event)">
-                        <mat-option [value]=" ">
-                            Select speciality
-                        </mat-option>
-                        <mat-option *ngFor="let speciality of specialityData" [value]="speciality">
-                            {{speciality}}
-                        </mat-option>
-                    </mat-select>
-                </mat-form-field>
-            </div>
-            <div class="">
-                <mat-form-field appearance="fill">
-                    <mat-label>Filter: Location</mat-label>
-                    <mat-select (selectionChange)="onLocation($event)">
-                        <mat-option [value]=" ">
-                            Select location
-                        </mat-option>
-                        <mat-option *ngFor="let state of states" [value]="state.name">
-                            {{state.name}}
-                        </mat-option>
-                    </mat-select>
-                </mat-form-field>
-            </div>
+  <div class="col-8">
+    <div class="d-flex">
+      <div class="pr-2">
+        <mat-form-field appearance="fill">
+          <mat-label>Filter: Speciality</mat-label>
+          <mat-select (selectionChange)="onSpeciality($event)">
+            <mat-option [value]=" ">
+              Select speciality
+            </mat-option>
+            <mat-option *ngFor="let speciality of specialityData" [value]="speciality">
+              {{speciality}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="">
+        <mat-form-field appearance="fill">
+          <mat-label>Filter: Location</mat-label>
+          <mat-select (selectionChange)="onLocation($event)">
+            <mat-option [value]=" ">
+              Select location
+            </mat-option>
+            <mat-option *ngFor="let state of states" [value]="state.name">
+              {{state.name}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="pt-3">
+      <mat-card class="outer-card">
+        <mat-label class="font-weight-bold">
+          Filtered Results:
+        </mat-label>
+        <div *ngIf="!organizationList?.length">
+          <mat-label class="font-weight-bold text-danger">
+            No data found.
+          </mat-label>
         </div>
-        <div class="pt-3">
-            <mat-card class="outer-card">
-                <mat-label class="font-weight-bold">
-                    Filtered Results:
-                </mat-label>
-                <div *ngIf="!organizationList?.length">
-                    <mat-label class="font-weight-bold text-danger">
-                        No data found.
-                    </mat-label>
-                </div>
-                <mat-card class="d-flex justify-content-between align-items-center inner-card mt-2"
-                    *ngFor="let org of organizationList">
-                    <div class="d-flex justify-content-between align-items-center">
-                        <div>
-                            <mat-label class="font-weight-bold">
-                                {{org?.firstName}}
-                                    {{org?.middleName}}{{org?.lastName}}
-                            </mat-label>
-                        </div>
-                        <div>
-                            <span class="ml-3 premium-tag" *ngIf="org?.lawyerFacility[0]?.lawyer_facility?.isPremium">Premium</span>
-                        </div>
-                    </div>
-                    <!-- <button  class="button-purple" mat-raised-button
+        <mat-card class="d-flex justify-content-between align-items-center inner-card mt-2"
+          *ngFor="let org of organizationList">
+          <div class="d-flex justify-content-between align-items-center">
+            <div>
+              <mat-label class="font-weight-bold">
+                {{org?.firstName}}
+                {{org?.middleName}}{{org?.lastName}}
+              </mat-label>
+            </div>
+            <div>
+              <span class="ml-3 premium-tag" *ngIf="org?.lawyerFacility[0]?.lawyer_facility?.isPremium">Premium</span>
+            </div>
+          </div>
+          <!-- <button  class="button-purple" mat-raised-button
                     (click)="onViewLawyer(org.userId)">
                         View
                     </button> -->
-                    <button class="button-purple" mat-raised-button (click)="openModal(lawyerView,org)">
-                        View
-                    </button>
-                </mat-card>
-            </mat-card>
-        </div>
-    </div>
-    <div class="col-sm-4 col-md-4 col-lg-4 col-xl-4 mt-4">
-        <div>
-            <h1 class="line-height font-weight-bold">Sponsors</h1>
-            <h4 class="line-height header-sub-text">Laywers and bondsman ready to help</h4>
-        </div>
-        <mat-card class="outer-card">
-            <div class="mt-4" *ngFor="let user of sponsorUserList; ">
-                <mat-card class="sponser-card w-100">
-                    <div class="text-center line-height">
-                        <div>
-                            <img src="{{user?.userAdditionalInfo?.profile?.downloadLink}}" width="200" height="60"
-                                alt="logo">
-                        </div>
-                        <div>
-                            <h4 class=" line-height color">{{user?.firstName}}
-                                {{user?.middleName}}{{user?.lastName}}</h4>
-                        </div>
-                    </div>
-                    <div class="d-flex justify-content-center">
-                        <button (click)="viewUser(user.userId)" class="btn bg-color px-perc py-1"
-                            mat-raised-button>View Profile</button>
-                    </div>
-                </mat-card>
-            </div>
+          <button class="button-purple" mat-raised-button (click)="openModal(lawyerView,org)">
+            View
+          </button>
         </mat-card>
+      </mat-card>
     </div>
+  </div>
+  <div class="col-sm-4 col-md-4 col-lg-4 col-xl-4 mt-4">
+    <div>
+      <h1 class="line-height font-weight-bold">Sponsors</h1>
+      <h4 class="line-height header-sub-text">Laywers and bondsman ready to help</h4>
+    </div>
+    <mat-card class="outer-card">
+      <div class="mt-4" *ngFor="let user of sponsorUserList; ">
+        <mat-card class="sponser-card w-100">
+          <div class="text-center line-height">
+            <div>
+              <img src="{{user?.userAdditionalInfo?.profile?.downloadLink}}" width="200" height="60" alt="logo">
+            </div>
+            <div>
+              <h4 class=" line-height color">{{user?.firstName}}
+                {{user?.middleName}}{{user?.lastName}}</h4>
+            </div>
+          </div>
+          <div class="d-flex justify-content-center">
+            <button (click)="viewUser(user.userId)" class="btn bg-color px-perc py-1" mat-raised-button>View
+              Profile</button>
+          </div>
+        </mat-card>
+      </div>
+    </mat-card>
+  </div>
 </div>
 
 
@@ -128,91 +127,94 @@
 
 <!-- Modal -->
 <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
-    aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered px-4 py-4" role="document">
-        <div class="modal-content px-4 py-4">
-            <h3 class="modal-title text-center font-weight-bold px-4 py-1" id="exampleModalLongTitle">Find a Lawyer</h3>
-            <h4 class="text-center font-weight-bold">Disclaimer here</h4>
-            <div class="d-flex justify-content-center mt-5">
-                <div class="mt-5">
-                    <button type="button" class="btn btn-secondary button-purple px-2" data-dismiss="modal">Accept and
-                        Continue</button>
-                </div>
-            </div>
+  aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered px-4 py-4" role="document">
+    <div class="modal-content px-4 py-4">
+      <h3 class="modal-title text-center font-weight-bold px-4 py-1" id="exampleModalLongTitle">Find a Lawyer</h3>
+      <h4 class="text-center font-weight-bold">Disclaimer here</h4>
+      <div class="d-flex justify-content-center mt-5">
+        <div class="mt-5">
+          <button type="button" class="btn btn-secondary button-purple px-2" data-dismiss="modal">Accept and
+            Continue</button>
         </div>
+      </div>
     </div>
+  </div>
 </div>
 
 <ng-template #lawyerView>
-    <mat-card class="border pt-0 bg-card">
-        <div class="d-flex justify-content-between align-items-center bg-header">
-            <div>
-                <h2 class="font-weight-bold m-0">Profile Preview</h2>
-                <small>See below for preview of what users will see when they view your profile</small>
+  <mat-card class="border bg-card p-2">
+    <div class="d-flex justify-content-between align-items-center bg-header">
+      <div>
+        <h2 class="font-weight-bold m-0">Lawyer Profile</h2>
+      </div>
+      <div>
+        <button class="btn bg-color" mat-raised-button (click)="onCloseModal()">Close</button>
+      </div>
+    </div>
+    <div style="height: 140px;"  class="mt-2" id="cust-img">
+    </div>
+    <div class="p-2 bg-white">
+      <div class="row mt-3">
+        <div class="col-3">
+          <div class="d-flex">
+            <div class="img-profile">
+              <img src="{{lawyerData?.userAdditionalInfo?.profile?.downloadLink}}" width="150px" height="150px"
+                alt="logo" class="logo">
             </div>
-            <div>
-                <button class="btn bg-color" mat-raised-button (click)="onCloseModal()">Close</button>
+          </div>
+          <div class="d-flex justify-content-center align-items-center">
+            <div class="pt-2">
+              <button class="button-purple" mat-raised-button (click)="viewContact(lawyerData.userId)">
+                Contact {{lawyerData?.firstName}}
+              </button>
             </div>
+          </div>
         </div>
-        <div style="height: 200px;" id="cust-img">
-        </div>
-        <div class="row mt-3">
-            <div class="col-4">
-                <div class="d-flex">
-                    <div class="img-profile">
-                        <img src="{{lawyerData?.userAdditionalInfo?.profile?.downloadLink}}" width="150px" height="150px"
-                            alt="logo" class="logo">
-                    </div>
-                </div>
-                <div class="d-flex justify-content-center align-items-center">
-                    <div>
-                        <button class="button-purple" mat-raised-button (click)="viewContact(lawyerData.userId)">
-                            Contact {{lawyerData?.firstName}}
-                        </button>
-                    </div>
-                </div>
+        <div class="col-9 mt-2 card-height">
+          <div>
+            <div class="d-flex justify-content-between">
+              <div class="mt-2">
+                <h4>
+                  <span class="font-weight-bold name-size">Name: </span>
+                  <span class="font-weight-bold name-size">{{lawyerData?.firstName}}
+                    {{lawyerData?.middleName}} {{lawyerData?.lastName}}</span>
+                </h4>
 
+              </div>
+              <div>
+                <button class="btn bg-color px-perc m-0 mr-1"
+                  (click)="viewOrg(lawyerData.Organization.organizationId)">View Organization</button>
+              </div>
             </div>
-            <div class="col-8 mt-2 card-height">
-                <div class="d-flex justify-content-between">
-                    <div class="mt-2">
-                        <h4>
-                            <span class="font-weight-bold name-size">Name: </span>
-                            <span class="font-weight-bold name-size">{{lawyerData?.firstName}}
-                                {{lawyerData?.middleName}} {{lawyerData?.lastName}}</span>
-                        </h4>
-
-                    </div>
-                    <div>
-                        <button class="btn bg-color px-perc m-0 mr-1"
-                            (click)="viewOrg(lawyerData.Organization.organizationId)">View Organization</button>
-                    </div>
-                </div>
-                <div class="row py-2 pl-3">
-                    <div>
-                        <span class="font-weight-bold">Organization: </span>
-                        <span>{{lawyerData?.Organization?.name}}</span>
-                    </div>
-                </div>
-                <div class="row py-2 pl-3">
-                    <div>
-                        <span class="font-weight-bold">Tagline: </span>
-                        <span>{{lawyerData?.userAdditionalInfo?.tagline}}</span>
-                    </div>
-                </div>
-                <div class="row py-2 pl-3">
-                    <div>
-                        <span class="font-weight-bold">PractiseArea: </span>
-                        <span>{{lawyerData?.userAdditionalInfo?.practiceAreas}}</span>
-                    </div>
-                </div>
-                <div class="row py-2 pl-3">
-                    <div>
-                        <span class="font-weight-bold">Description: </span>
-                        <span>{{lawyerData?.userAdditionalInfo?.description}}</span>
-                    </div>
-                </div>
+            <div class="row py-2 pl-3">
+              <div>
+                <span class="font-weight-bold">Organization: </span>
+                <span>{{lawyerData?.Organization?.name}}</span>
+              </div>
             </div>
+            <div class="row py-2 pl-3">
+              <div>
+                <span class="font-weight-bold">Tagline: </span>
+                <span>{{lawyerData?.userAdditionalInfo?.tagline}}</span>
+              </div>
+            </div>
+            <div class="row py-2 pl-3">
+              <div>
+                <span class="font-weight-bold">PractiseArea: </span>
+                <span>{{lawyerData?.userAdditionalInfo?.practiceAreas}}</span>
+              </div>
+            </div>
+            <div class="row py-2 pl-3">
+              <div>
+                <span class="font-weight-bold">Description: </span>
+                <span>{{lawyerData?.userAdditionalInfo?.description}}</span>
+              </div>
+            </div>
+          </div>
         </div>
-    </mat-card>
+      </div>
+    </div>
+
+  </mat-card>
 </ng-template>
