@@ -146,16 +146,15 @@
 
 <div class="col-12 pl-2">
     <div class="row pt-2">
-            <mat-form-field appearance="fill" class="w-100 pl-2">
-                <mat-label>Specify "Other":</mat-label>
-                <input type="email" matInput [formControl]="legalForm.controls['other']" required>
-                <mat-error>
-                    <div
-                        *ngIf="legalForm.controls['other'].invalid && legalForm.controls['other'].touched">
-                        <small class="font13">Other is Required</small>
-                    </div>
-                </mat-error>
-            </mat-form-field>
+        <mat-form-field appearance="fill" class="w-100 pl-2">
+            <mat-label>Specify "Other":</mat-label>
+            <input type="email" matInput [formControl]="legalForm.controls['other']" required>
+            <mat-error>
+                <div *ngIf="legalForm.controls['other'].invalid && legalForm.controls['other'].touched">
+                    <small class="font13">Other is Required</small>
+                </div>
+            </mat-error>
+        </mat-form-field>
     </div>
 </div>
 
@@ -165,7 +164,7 @@
             <mat-radio-group [formControl]="legalForm.controls['convicted']" class="w-100 pl-2"
                 (change)="OnConvictedSelect($event.value)">
                 <mat-label>Have you been convicted?</mat-label>
-                <div class="pl-2">
+                <div class="pl-3">
                     <mat-radio-button class="pr-3" value="true" [checked]="(reSearchDetails?.convicted)==true">
                         Yes</mat-radio-button>
                     <mat-radio-button value="false" [checked]="(reSearchDetails?.convicted)==false">No
@@ -202,7 +201,7 @@
 </div>
 <div class="col-12 pl-2">
     <div class="row pt-2">
-        <div class="col-6 pl-0">
+        <div class="col-6 pl-2">
             <mat-form-field appearance="fill" class="w-100">
                 <mat-label>The matter I’m researching has to do with…</mat-label>
                 <mat-select [formControl]="legalForm.controls['researchedMatter']" required>
@@ -211,11 +210,11 @@
                     </mat-option>
                 </mat-select>
                 <mat-error
-                *ngIf="legalForm.controls['researchedMatter'].invalid && legalForm.controls['researchedMatter'].touched">
-                <div class="font13" *ngIf="legalForm.get('researchedMatter').errors?.required">
-                    The matter I’m researching has to do with
-                    is required. </div>
-            </mat-error>
+                    *ngIf="legalForm.controls['researchedMatter'].invalid && legalForm.controls['researchedMatter'].touched">
+                    <div class="font13" *ngIf="legalForm.get('researchedMatter').errors?.required">
+                        The matter I’m researching has to do with
+                        is required. </div>
+                </mat-error>
             </mat-form-field>
         </div>
         <div class="col-6 pl-2">
@@ -243,18 +242,21 @@
 
 <div class="col-12 pl-2">
     <div class="row">
-        <div class="col-6">
-            <mat-radio-group [formControl]="legalForm.controls['lawyerRepresentingMatter']" class="w-100" (change)="onProSe($event.value)">
+        <div class="col-6 pl-2">
+            <mat-radio-group [formControl]="legalForm.controls['lawyerRepresentingMatter']" class="w-100"
+                (change)="onProSe($event.value)">
                 <mat-label>If not "Pro Se", do you have a lawyer currently representing you in this matter?</mat-label>
                 <div class="pl-2">
-                    <mat-radio-button class="pr-3" [checked]="(reSearchDetails?.lawyerRepresentingMatter) == true " value="true">
+                    <mat-radio-button class="pr-3" [checked]="(reSearchDetails?.lawyerRepresentingMatter) == true "
+                        value="true">
                         Yes</mat-radio-button>
                     <mat-radio-button [checked]="(reSearchDetails?.lawyerRepresentingMatter) == false" value="false">No
                     </mat-radio-button>
                 </div>
             </mat-radio-group>
             <mat-error>
-                <div *ngIf="legalForm.controls['lawyerRepresentingMatter'].invalid && legalForm.controls['lawyerRepresentingMatter'].touched">
+                <div
+                    *ngIf="legalForm.controls['lawyerRepresentingMatter'].invalid && legalForm.controls['lawyerRepresentingMatter'].touched">
                     <small class="font13">
                         If not "Pro Se", do you have a lawyer currently representing you in this matter?) is Required
                     </small>
@@ -265,14 +267,18 @@
             <mat-radio-group [formControl]="legalForm.controls['selectLawyerRepresenting']" class="w-100">
                 <mat-label>The lawyer representing you (if any) is…</mat-label>
                 <div class="pl-2">
-                    <mat-radio-button class="pr-3" [checked]="(reSearchDetails?.selectLawyerRepresenting) == 'A Court Appointed Public Defender'" value=" A Court Appointed Public Defender">
+                    <mat-radio-button class="pr-3"
+                        [checked]="(reSearchDetails?.selectLawyerRepresenting) == 'A Court Appointed Public Defender'"
+                        value=" A Court Appointed Public Defender">
                         A Court Appointed Public Defender</mat-radio-button>
-                    <mat-radio-button [checked]="(reSearchDetails?.selectLawyerRepresenting) == 'A Private Attorney'" value="A Private Attorney"> A Private Attorney
+                    <mat-radio-button [checked]="(reSearchDetails?.selectLawyerRepresenting) == 'A Private Attorney'"
+                        value="A Private Attorney"> A Private Attorney
                     </mat-radio-button>
                 </div>
             </mat-radio-group>
             <mat-error>
-                <div *ngIf="legalForm.controls['selectLawyerRepresenting'].invalid && legalForm.controls['selectLawyerRepresenting'].touched">
+                <div
+                    *ngIf="legalForm.controls['selectLawyerRepresenting'].invalid && legalForm.controls['selectLawyerRepresenting'].touched">
                     <small class="font13">
                         If not "Pro Se", do you have a lawyer currently representing you in this matter?) is Required
                     </small>
@@ -284,21 +290,22 @@
 
 <div class="col-12 pl-2">
     <div class="row">
-        <div class="col-6 pl-0">
+        <div class="col-6 pl-2">
             <mat-form-field appearance="fill" class="w-100">
                 <mat-label>What is the jurisdiction of the legal matter you are researching?
                 </mat-label>
-                <mat-select [formControl]="legalForm.controls['juridictionLegalMatter']" required (selectionChange)="onSelectOther($event)">
+                <mat-select [formControl]="legalForm.controls['juridictionLegalMatter']" required
+                    (selectionChange)="onSelectOther($event)">
                     <mat-option *ngFor="let juridic of juridictionList" [value]="juridic.name">
                         {{juridic?.name}}
                     </mat-option>
                 </mat-select>
                 <mat-error
-                *ngIf="legalForm.controls['juridictionLegalMatter'].invalid && legalForm.controls['juridictionLegalMatter'].touched">
-                <div class="font13" *ngIf="legalForm.get('juridictionLegalMatter').errors?.required">
-                    What is the jurisdiction of the legal matter you are researching?
-                    is required. </div>
-            </mat-error>
+                    *ngIf="legalForm.controls['juridictionLegalMatter'].invalid && legalForm.controls['juridictionLegalMatter'].touched">
+                    <div class="font13" *ngIf="legalForm.get('juridictionLegalMatter').errors?.required">
+                        What is the jurisdiction of the legal matter you are researching?
+                        is required. </div>
+                </mat-error>
             </mat-form-field>
         </div>
         <div class="col-6 pl-0" *ngIf="otherField">
@@ -318,7 +325,7 @@
 </div>
 
 <div class="col-12 pl-2">
-    <div class="row">
+    <div class="row pl-2">
         <mat-label>What information would you like to receive? List up to five (5) items: </mat-label>
     </div>
     <div class="row">
@@ -326,7 +333,8 @@
             <mat-form-field appearance="fill" class="w-100 pl-2">
                 <input type="text" matInput [formControl]="legalForm.controls['information1']" required>
                 <mat-error>
-                    <div *ngIf="legalForm.controls['information1'].invalid && legalForm.controls['information1'].touched">
+                    <div
+                        *ngIf="legalForm.controls['information1'].invalid && legalForm.controls['information1'].touched">
                         <small class="font13">
                             information is Required
                         </small>
@@ -338,7 +346,8 @@
             <mat-form-field appearance="fill" class="w-100 pl-2">
                 <input type="text" matInput [formControl]="legalForm.controls['information2']" required>
                 <mat-error>
-                    <div *ngIf="legalForm.controls['information2'].invalid && legalForm.controls['information2'].touched">
+                    <div
+                        *ngIf="legalForm.controls['information2'].invalid && legalForm.controls['information2'].touched">
                         <small class="font13">
                             information is Required
                         </small>
@@ -347,13 +356,14 @@
             </mat-form-field>
         </div>
     </div>
-    
+
     <div class="row">
         <div class="col-6 pl-0">
             <mat-form-field appearance="fill" class="w-100 pl-2">
                 <input type="text" matInput [formControl]="legalForm.controls['information3']" required>
                 <mat-error>
-                    <div *ngIf="legalForm.controls['information3'].invalid && legalForm.controls['information3'].touched">
+                    <div
+                        *ngIf="legalForm.controls['information3'].invalid && legalForm.controls['information3'].touched">
                         <small class="font13">
                             information is Required
                         </small>
@@ -366,7 +376,8 @@
             <mat-form-field appearance="fill" class="w-100 pl-2">
                 <input type="text" matInput [formControl]="legalForm.controls['information4']" required>
                 <mat-error>
-                    <div *ngIf="legalForm.controls['information4'].invalid && legalForm.controls['information4'].touched">
+                    <div
+                        *ngIf="legalForm.controls['information4'].invalid && legalForm.controls['information4'].touched">
                         <small class="font13">
                             information is Required
                         </small>
@@ -381,13 +392,14 @@
             <mat-form-field appearance="fill" class="w-100 pl-2">
                 <input type="text" matInput [formControl]="legalForm.controls['information5']" required>
                 <mat-error>
-                    <div *ngIf="legalForm.controls['information5'].invalid && legalForm.controls['information5'].touched">
+                    <div
+                        *ngIf="legalForm.controls['information5'].invalid && legalForm.controls['information5'].touched">
                         <small class="font13">
                             information is Required
                         </small>
                     </div>
                 </mat-error>
-            </mat-form-field> 
+            </mat-form-field>
         </div>
     </div>
 </div>
