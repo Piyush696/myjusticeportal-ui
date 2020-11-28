@@ -1,42 +1,79 @@
 <div class="row">
     <div class="col mt-5">    
-        <div class="d-flex justify-content-end">
-            <div class="pr-3">
-                <button class="btn bg-color px-perc py-1"
-                mat-raised-button (click)="onViewOrg(userDetails.Organization.organizationId)">View My Organization</button>
+        <mat-card class="outer-card bg-card">
+            <div class="d-flex justify-content-between">
+                <div>
+                    <h1 class="header-title text-center font-weight-bold m-0">Lawyer Profile</h1>
+                </div>
+                <div class="pl-3">
+                    <button class="btn bg-color px-perc py-1"
+                    mat-raised-button (click)="OnBackCLick()">Back</button>
+                </div>
             </div>
+
             <div>
-                <button class="btn bg-color px-perc py-1"
-                mat-raised-button (click)="onViewProfile(userDetails.userId)">Contact me</button>
-            </div>
-            <div class="pl-3">
-                <button class="btn bg-color px-perc py-1"
-                mat-raised-button (click)="OnBackCLick()">Back</button>
-            </div>
-        </div>
-        <mat-card class="outer-card">
-            <h1 class="header-title text-center font-weight-bold">Lawyer Profile</h1>
-            <div class="mt-4">
                 <div class="sponser-card w-100">
-                    <!-- <h1 class="d-flex justify-content-center line-height color font-weight-bold">
-                        {{orgData?.Organization?.name}}
-                    </h1> -->
-                    <div class="text-center line-height">
-                        <div>
-                            <img src="{{userDetails?.userAdditionalInfo?.profile?.downloadLink}}" width="150px" height="150px" alt="logo" class="logo"
-                            *ngIf="userDetails?.userAdditionalInfo?.profile?.downloadLink">
-                        </div>
-                        <p class="text-center">{{userDetails?.userAdditionalInfo?.tagline}}</p>
-                        <p class="text-center">{{userDetails?.userAdditionalInfo?.description}}</p>
-                        <div>
-                            <h4 class=" line-height color py-2">
-                                Mr/Mrs- {{userDetails?.firstName}} {{userDetails?.middleName}} {{userDetails?.lastName}}
-                            </h4>
-                        </div>
-                        <div> 
-                            <h2>Practise Areas:- 
-                                <span>{{userDetails?.userAdditionalInfo?.practiceAreas}}</span>
-                            </h2>
+                    <div style="height: 140px;"  class="mt-2" id="cust-img">
+                    </div>
+                    <div class="p-2 bg-white">
+                        <div class="row mt-3">
+                            <div class="col-4">
+                                <div class="d-flex">
+                                  <div class="img-profile">
+                                    <img src="{{userDetails?.userAdditionalInfo?.profile?.downloadLink}}" width="150px" height="150px"
+                                      alt="logo" class="logo">
+                                  </div>
+                                </div>
+                                <div class="d-flex justify-content-center align-items-center">
+                                  <div class="pt-2">
+                                    <button class="button-purple" mat-raised-button (click)="onViewProfile(userDetails.userId)">
+                                      Contact {{userDetails?.firstName}}
+                                    </button>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="col-8 mt-2 card-height">
+                                <div>
+                                  <div class="d-flex justify-content-between">
+                                    <div class="mt-2">
+                                      <h4>
+                                        <span class="font-weight-bold name-size">Name: </span>
+                                        <span class="font-weight-bold name-size">{{userDetails?.firstName}}
+                                          {{userDetails?.middleName}} {{userDetails?.lastName}}</span>
+                                      </h4>
+                      
+                                    </div>
+                                    <div>
+                                      <button class="btn bg-color px-perc m-0 mr-1"
+                                      (click)="onViewOrg(userDetails.Organization.organizationId)">View Organization</button>
+                                    </div>
+                                  </div>
+                                  <div class="row py-2 pl-3">
+                                    <div>
+                                      <span class="font-weight-bold">Organization: </span>
+                                      <span>{{userDetails?.Organization?.name}}</span>
+                                    </div>
+                                  </div>
+                                  <div class="row py-2 pl-3">
+                                    <div>
+                                      <span class="font-weight-bold">Tagline: </span>
+                                      <span>{{userDetails?.userAdditionalInfo?.tagline}}</span>
+                                    </div>
+                                  </div>
+                                  <div class="row py-2 pl-3">
+                                    <div>
+                                      <span class="font-weight-bold">PractiseArea: </span>
+                                      <span>{{userDetails?.userAdditionalInfo?.practiceAreas}}</span>
+                                    </div>
+                                  </div>
+                                  <div class="row py-2 pl-3">
+                                    <div>
+                                      <span class="font-weight-bold">Description: </span>
+                                      <span>{{userDetails?.userAdditionalInfo?.description}}</span>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
                         </div>
                     </div>
 

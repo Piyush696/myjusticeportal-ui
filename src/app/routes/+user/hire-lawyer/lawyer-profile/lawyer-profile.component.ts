@@ -11,6 +11,7 @@ import { Location } from '@angular/common';
 export class LawyerProfileComponent implements OnInit {
   userDetails:any
   practiseAreaList = [];
+  path: string;
   constructor(private activatedRoute:ActivatedRoute,private hireLawyerService: HireLawyerService,private router: Router,private location: Location) { 
   }
 
@@ -24,6 +25,11 @@ export class LawyerProfileComponent implements OnInit {
         if(user.data.userAdditionalInfo && user.data.userAdditionalInfo.practiceAreas){
           this.practiseAreaList.push(user.data.userAdditionalInfo.practiceAreas.split(','))
         }
+        this.path = user.data.userAdditionalInfo.header.downloadLink
+        setTimeout(() => {
+          var x = document.getElementById('cust-img')
+          x.style.background = 'url(' + this.path + ')'
+        }, 500);
     })
   }
 
