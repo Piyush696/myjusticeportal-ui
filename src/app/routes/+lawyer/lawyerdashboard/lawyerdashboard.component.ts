@@ -10,6 +10,7 @@ import { MatSort } from '@angular/material/sort';
 import { MatDialog } from '@angular/material/dialog';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UserMetaService } from 'app/services/user-meta.service';
+import { UserAdditionInfoService } from 'app/services/user-addition-info.service';
 
 @Component({
   selector: 'app-lawyerdashboard',
@@ -41,11 +42,12 @@ export class LawyerdashboardComponent implements OnInit {
   totalPrice: number = 50
   averageCount: number = 0;
   addOnsCount: number = 0;
-  state:string;
+  state: string;
   filteredFacilityList = [];
+  lawyerData: any;
 
-  constructor(private hireLawyerService: HireLawyerService, private userMetaService:UserMetaService,
-     private facilityService: FacilityService, public dialog: MatDialog,
+  constructor(private hireLawyerService: HireLawyerService, private userMetaService: UserMetaService,
+    private facilityService: FacilityService, public dialog: MatDialog, private userAdditionInfoService: UserAdditionInfoService,
     private lawyerService: LawyerService, private toasterService: ToasterService, private store: Store<any>, private fb: FormBuilder) { }
 
   ngOnInit(): void {
@@ -64,6 +66,7 @@ export class LawyerdashboardComponent implements OnInit {
     this.getALLFacilities();
     this.createCardControl();
     this.getBillingDetails();
+    this.dashBoardCountData();
   }
 
 
@@ -184,24 +187,24 @@ export class LawyerdashboardComponent implements OnInit {
     }
   }
 
-  getBillingDetails(){
-    this.userMetaService.getUserBillingDetails().subscribe((billingsDetails:any)=>{
-      if(billingsDetails.data){
-        billingsDetails.data.forEach((ele)=>{
-          if(ele.userMeta){
-            if(ele.userMeta.length === 1){
+  getBillingDetails() {
+    this.userMetaService.getUserBillingDetails().subscribe((billingsDetails: any) => {
+      if (billingsDetails.data) {
+        billingsDetails.data.forEach((ele) => {
+          if (ele.userMeta) {
+            if (ele.userMeta.length === 1) {
               this.billingBoard = true;
               this.showDashboard = false;
             } else {
-              ele.userMeta.forEach((x)=> {
-                if(x.metaKey == "sub_id" || x.metaKey == "cust_id"){
+              ele.userMeta.forEach((x) => {
+                if (x.metaKey == "sub_id" || x.metaKey == "cust_id") {
                   this.showDashboard = true;
                   this.billingBoard = false;
-                } else if(x.metaKey == "lawyerInfo"){
+                } else if (x.metaKey == "lawyerInfo") {
                   this.billingBoard = true;
                   this.showDashboard = false;
-                } 
-                 else {
+                }
+                else {
                   this.billingBoard = true;
                   this.showDashboard = false;
                 }
@@ -210,7 +213,7 @@ export class LawyerdashboardComponent implements OnInit {
 
           } else {
             this.billingBoard = true;
-            this.showDashboard = false;  
+            this.showDashboard = false;
           }
         })
       } else {
@@ -269,23 +272,23 @@ export class LawyerdashboardComponent implements OnInit {
   }
 
 
-  getUserDetails(){
-    this.userMetaService.getUserAdditionalDetails().subscribe((user:any)=>{
-      user.data.forEach((ele)=>{
-        if(ele.metaKey == "lawyerInfo"){
+  getUserDetails() {
+    this.userMetaService.getUserAdditionalDetails().subscribe((user: any) => {
+      user.data.forEach((ele) => {
+        if (ele.metaKey == "lawyerInfo") {
           let splitArray = ele.metaValue.split(":")
           this.state = splitArray[0].toString();
         }
       })
     })
   }
-  
+
   getALLFacilities() {
     this.facilityService.getFacilitiesUserCount().subscribe((facilities: any) => {
-      if(facilities.data){
-         facilities.data.forEach((ele)=>{
-          if(ele.Address){
-            if(ele.Address.state === this.state){
+      if (facilities.data) {
+        facilities.data.forEach((ele) => {
+          if (ele.Address) {
+            if (ele.Address.state === this.state) {
               this.filteredFacilityList.push(ele)
             }
           }
@@ -345,5 +348,11 @@ export class LawyerdashboardComponent implements OnInit {
     else {
       return [10];
     }
+  }
+
+  dashBoardCountData() {
+    this.userAdditionInfoService.getDashboardCounts().subscribe((res: any) => {
+      this.lawyerData = res.data
+    })
   }
 }
