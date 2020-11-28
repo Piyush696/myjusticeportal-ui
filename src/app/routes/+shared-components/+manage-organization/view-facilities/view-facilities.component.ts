@@ -51,6 +51,7 @@ export class ViewFacilitiesComponent implements OnInit {
   openModal(templateRef) {
     let dialogRef = this.dialog.open(templateRef, {
       width: '500px',
+      height: '60vh'
     });
 
     dialogRef.afterClosed().subscribe(result => {
