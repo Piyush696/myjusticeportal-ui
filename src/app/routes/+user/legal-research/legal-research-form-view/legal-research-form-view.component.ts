@@ -36,4 +36,19 @@ export class LegalResearchFormViewComponent implements OnInit {
     this.router.navigateByUrl('/mjp/user/legal-form')
   }
 
+  onDownloadCaseFile(fileId) {
+    let data: any = {};
+    data.legalResearchId = this.route.snapshot.params['legalResearchId'];
+    data.fileId = fileId;
+    this.legalResearchService.getDownloadLink(data).subscribe((res: any) => {
+      if (res.success) {
+        window.open(res.data, '_self');
+      } else {
+        this.toasterService.showErrorToater(res.data);
+      }
+    }, (error: any) => {
+      this.toasterService.showErrorToater(error.statusText);
+    })
+  }
+
 }
