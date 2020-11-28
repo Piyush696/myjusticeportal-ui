@@ -67,8 +67,8 @@ export class SidebarComponent implements OnInit {
     ngOnInit() {
         this.store.select(s => s.userInfo).subscribe(x => {
             this.userInfo = x;
-            if (x.facilities[0]) {
-                this.libraryLink = x.facilities[0].libraryLink;
+            if (x.facilities) {
+                this.libraryLink = x.facilities[0]?.libraryLink;
             }
         });
         this.filterMenuByUser();
