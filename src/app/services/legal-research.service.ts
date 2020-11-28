@@ -46,4 +46,8 @@ export class LegalResearchService {
     return this.httpClient.delete<any>(`${this.apiPath}/legalResearch/deleteFile/` + fileId, this.getHeaders());
   }
 
+  getDownloadLink(data) {
+    return this.httpClient.post<any>(`${this.apiPath}/legalResearch/fileDownloadLink`, data, this.getHeaders());
+  }
+
 }
