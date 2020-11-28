@@ -4,9 +4,11 @@
     are processed withing 24 hours. Once we verify your active Bar membership, your account will be approved and you
     will
     receive an email notification to complete the registration process.</h2>
+</div>
+<div *ngIf="!isAuthorized">
   <div class="d-flex justify-content-center align-items-center;">
-    <div class="col-6 pt-2">
-      <mat-card class="mat-elevation-z10">
+    <div class="col-12 pt-2 pl-0">
+      <mat-card class="mat-elevation-z10 d-flex justify-content-center">
         <h2>Account Status: <span class="panding-review">Pending Review</span></h2>
       </mat-card>
     </div>
@@ -14,7 +16,7 @@
 </div>
 
 
-  <div *ngIf="showDashboard && isAuthorized || billingBoard && isAuthorized">
+  <div *ngIf="showDashboard && isAuthorized">
     <h1 class="mb-0">Dashboard</h1>
     <h4>View and actions for requested cases.</h4>
   </div>
@@ -46,7 +48,7 @@
           </div>
           <div class="col-12 pt-2">
             <div class="d-flex justify-content-center align-items-center;">
-              <mat-card class="mat-elevation-z10 w-100 card-scroll">
+              <mat-card class="mat-elevation-z10 w-100">
                 <div>
                   <span class="h5 text-center">Step 2 :</span>&nbsp;
                   <span class="h5 text-center font-weight-bold">Select facilities</span>

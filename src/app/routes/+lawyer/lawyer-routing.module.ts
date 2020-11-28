@@ -11,6 +11,7 @@ import { LawyerChatComponent } from './lawyer-chat/lawyer-chat.component';
 import { ManageProfileComponent } from './manage-profile/manage-profile.component';
 import { InquiriesComponent } from './inquiries/inquiries.component';
 import { InquiriesCaseViewComponent } from './inquiries-case-view/inquiries-case-view.component';
+import { BillingSettingsComponent } from './billing-settings/billing-settings.component';
 
 const routes: Routes = [
     { path: '', redirectTo: 'lawyer-dashboard', pathMatch: 'full' },
@@ -21,6 +22,7 @@ const routes: Routes = [
     { path: 'manage-organization', component: ManageOrganisationComponent },
     { path: 'manage-profile', component: ManageProfileComponent },
     { path: 'inquiries', component: InquiriesComponent },
+    { path: 'billing-setting', component: BillingSettingsComponent },
     { path: 'manage-organization/users', component: ViewUsersComponent },
     { path: 'lawyer-chat', component: LawyerChatComponent },
     { path: 'inquiries/:caseId', component: InquiriesCaseViewComponent },

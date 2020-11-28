@@ -63,7 +63,6 @@ export class HireLawyerComponent implements OnInit, AfterViewInit {
 
   openModal(templateRef, lawyerData) {
     this.lawyerData = lawyerData
-    this.path = lawyerData?.userAdditionalInfo?.profile?.downloadLink
     this.path = lawyerData?.userAdditionalInfo?.header?.downloadLink
     let dialogRef = this.dialog.open(templateRef, {
       width: '800px'
