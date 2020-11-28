@@ -20,6 +20,7 @@ export class ManageProfileComponent implements OnInit {
   public uploader1: FileUploader = new FileUploader({ url: URL });
   public uploader2: FileUploader = new FileUploader({ url: URL });
   public hasAnotherDropZoneOver: boolean = false;
+  path: any;
   public fileOverAnother(e: any): void {
     this.hasAnotherDropZoneOver = e;
   }
@@ -67,6 +68,7 @@ export class ManageProfileComponent implements OnInit {
   getlawyerInfo() {
     this.userAdditionalInfo.getUsers().subscribe((user: any) => {
       this.userDetails = user.data
+      this.path =  this.userDetails?.userAdditionalInfo?.header?.downloadLink
       let name = user?.data?.firstName + user?.data?.middleName + user?.data?.lastName
       this.additionalInfoForm.get('name').setValue(name)
       this.additionalInfoForm.get('tagline').setValue(user?.data?.userAdditionalInfo?.tagline)
@@ -81,6 +83,10 @@ export class ManageProfileComponent implements OnInit {
       width: '60%',
       height: '80%'
     });
+    setTimeout(() => {
+      var x = document.getElementById('cust-img')
+      x.style.background = 'url(' + this.path + ')'
+    }, 500);
   }
 
   onUploadLogo() {

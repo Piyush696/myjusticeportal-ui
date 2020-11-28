@@ -18,7 +18,8 @@ import { LegalResearchFormViewComponent } from './legal-research/legal-research-
 import { EditLegalResearchFormComponent } from './legal-research/edit-legal-research-form/edit-legal-research-form.component';
 import { ContactComponent } from './contact/contact.component';
 import { LawyerProfileComponent } from './hire-lawyer/lawyer-profile/lawyer-profile.component';
-import { PendingInquriesComponent } from './hire-lawyer/pending-inquries/pending-inquries.component';
+import { PendingInquriesComponent } from './pending-inquries/pending-inquries.component';
+
 
 const routes: Routes = [
     { path: '', redirectTo: 'dashboard', pathMatch: 'full' },

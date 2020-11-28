@@ -8,7 +8,6 @@
 }
 
 
-table,
 th,
 td {
   border: 1px solid black;
@@ -27,7 +26,8 @@ td {
 
 .btn-group {
   background: transparent;
-  border: 1px solid #fff;
+  border: 1px solid #afaaaa;
+  border-left: #fff;
 }
 
 .icon-font {

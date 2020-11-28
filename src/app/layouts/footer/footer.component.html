@@ -24,7 +24,7 @@
         <div class="copyright pull-right">
             &copy; {{test | date: 'yyyy'}} My Justice Portal
         </div>
-        <div *ngIf="isButton">
+        <div *ngIf="isButton && this.userInfo.status">
             <div class="d-flex justify-content-end line-height mt-3">
                 <button [routerLink]="buttonLink" class="white-btn py-1 mat-raised-button mat-button-base"
                     (click)="onClickButton()">
