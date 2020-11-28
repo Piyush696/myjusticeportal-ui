@@ -1,0 +1,10 @@
+.img-profile {
+    width: 180px;
+    padding: 3%;
+    margin: auto;
+    border: 2px solid #ededed;
+  }
+
+  .bg-card {
+    background: #ededed;
+  }
