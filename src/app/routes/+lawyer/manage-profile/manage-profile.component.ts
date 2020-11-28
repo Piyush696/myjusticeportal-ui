@@ -27,7 +27,7 @@ export class ManageProfileComponent implements OnInit {
   fileType: string = 'private';
   sharedCaseFiles: any;
   privateCaseFiles: any;
-  buttonText: string = 'Save'
+  buttonText: string = 'Edit'
   specialtyList: any;
   orgData: any;
 
@@ -68,7 +68,7 @@ export class ManageProfileComponent implements OnInit {
   getlawyerInfo() {
     this.userAdditionalInfo.getUsers().subscribe((user: any) => {
       this.userDetails = user.data
-      this.path =  this.userDetails?.userAdditionalInfo?.header?.downloadLink
+      this.path = this.userDetails?.userAdditionalInfo?.header?.downloadLink
       let name = user?.data?.firstName + user?.data?.middleName + user?.data?.lastName
       this.additionalInfoForm.get('name').setValue(name)
       this.additionalInfoForm.get('tagline').setValue(user?.data?.userAdditionalInfo?.tagline)
@@ -79,6 +79,8 @@ export class ManageProfileComponent implements OnInit {
   }
 
   openOrganizationModal(templateRef) {
+    this.buttonText = 'Edit'
+    this.additionalInfoForm.disable()
     let dialogRef = this.dialog.open(templateRef, {
       width: '60%',
       height: '80%'
