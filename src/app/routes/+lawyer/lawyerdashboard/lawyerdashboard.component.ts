@@ -39,9 +39,10 @@ export class LawyerdashboardComponent implements OnInit {
   public cardMask = [/\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/]
   public cvvMask = [/\d/, /\d/, /\d/]
   facilityId: any;
-  totalPrice: number = 50
+  totalPrice: number = 0;
   averageCount: number = 0;
   addOnsCount: number = 0;
+  planPrice: number = 0;
   state = [];
   filteredFacilityList = [];
   lawyerData: any;
@@ -128,6 +129,11 @@ export class LawyerdashboardComponent implements OnInit {
     this.calculatePrice();
   }
 
+  onSelectPlan(price) {
+    this.totalPrice = parseInt(price);
+    this.planPrice = parseInt(price)
+  }
+
   onSelectAddOns(event, facilityId, addOnsType: string) {
     if (event) {
       this.facilities.map((x) => {
@@ -167,9 +173,10 @@ export class LawyerdashboardComponent implements OnInit {
   }
 
   calculatePrice() {
-    this.totalPrice = 50;
+    this.totalPrice =  this.planPrice;
     this.facilities.forEach((ele) => {
       if (ele.isSelected) {
+        console.log('qqq')
         this.totalPrice = this.totalPrice + (ele.facilityUserCount * 0.10)
         if (ele.addOns.premium) {
           this.totalPrice = this.totalPrice + 10;
@@ -177,6 +184,8 @@ export class LawyerdashboardComponent implements OnInit {
         if (ele.addOns.sponsors) {
           this.totalPrice = this.totalPrice + 10;
         }
+      } else {
+        console.log('dew')
       }
     })
   }
@@ -223,9 +232,7 @@ export class LawyerdashboardComponent implements OnInit {
     })
   }
 
-  onSelectPlan() {
-    this.totalPrice = 50;
-  }
+
 
   openPaymentCardModal(templateRef) {
     let dialogRef = this.dialog.open(templateRef, {
