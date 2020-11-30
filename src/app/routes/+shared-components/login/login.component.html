@@ -28,15 +28,18 @@
                 </mat-form-field>
 
                 <div class="d-flex justify-content-between px-3 mt-2">
-                    <a class="create_color" [routerLink]="'/registration'" mat-button>Create an Account</a>
+                    <a class="create_color" [routerLink]="'/registration'" mat-button *ngIf="isFacility">Create an
+                        Account</a>
                     <button
                         [disabled]="this.loginForm.get('userName').invalid || this.loginForm.get('password').invalid"
-                        class="px-4 py-1" mat-raised-button color="primary" (click)="onLogin()">
+                        class="px-4 py-1 float-right" mat-raised-button color="primary" (click)="onLogin()">
                         LOGIN
                     </button>
                 </div>
-            </mat-card>   
-            <div *ngIf="spinner" class="d-flex justify-content-center align-items-center spinner"><mat-spinner color="primary"></mat-spinner> </div>    
+            </mat-card>
+            <div *ngIf="spinner" class="d-flex justify-content-center align-items-center spinner">
+                <mat-spinner color="primary"></mat-spinner>
+            </div>
             <mat-card *ngIf="step === 2" class="mat-elevation-z10 p-4">
                 <div>
                     <h3 class="text-center font-weight-bold">Please check your phone</h3>
