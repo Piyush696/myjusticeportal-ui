@@ -41,8 +41,7 @@ export class PendingInquriesComponent implements OnInit {
     this.userId = userId
     console.log(userId)
     let dialogRef = this.dialog.open(templateRef, {
-      width: '550px',
-      height: '200px'
+      width: '300px'
     });
   }
 
