@@ -1,10 +1,10 @@
 <div class="col-12 col-sm-12 p-0 d-flex justify-content-between justify-content-sm-between">
     <div>
-            <h1 class="font-weight-bold m-0">Manage Profile</h1>
-            <h4 class="line-height header-sub-text">
-                Manage the information that is displayed in your profile and visible to potential
+        <h1 class="font-weight-bold m-0">Manage Profile</h1>
+        <h4 class="line-height header-sub-text">
+            Manage the information that is displayed in your profile and visible to potential
             clients.
-            </h4>
+        </h4>
     </div>
 
 </div>
@@ -33,8 +33,8 @@
                 <tr>
                     <th>Profile Image:</th>
                     <td>
-                        <img src="{{userDetails?.userAdditionalInfo?.profile?.downloadLink}}" width="150px"
-                            height="150px" alt="logo" class="logo"
+                        <img src="{{userDetails?.userAdditionalInfo?.profile?.downloadLink}}" width="300px"
+                            height="200px" alt="logo" class="logo"
                             *ngIf="userDetails?.userAdditionalInfo?.profile?.downloadLink">
                     </td>
                 </tr>
@@ -65,7 +65,9 @@
 
 <ng-template #updateOrganization>
     <div>
-        <h2 class="text-center font-weight-bold">Update Changes.</h2>
+        <h2 class="text-center font-weight-bold">Profile Editor</h2>
+        <h4 class="text-center">Click the Edit button below to make changes, then click Save to confirm your changes."
+        </h4>
     </div>
 
     <div class="col-12 p-0">
@@ -80,6 +82,8 @@
                 </div>
             </mat-error>
         </mat-form-field>
+        <small>To update your name, please visit the My Account section, accessible in the top right Account
+            icon.</small>
     </div>
 
 
@@ -132,7 +136,8 @@
     <div class="row px-3">
         <div class="card-body px-0 pb-4">
             <div class="drag-border p-3">
-                <h4 class="font-weight-bold margin-remove">Your Logo</h4>
+                <h4 class="font-weight-bold margin-remove">Profile Image</h4>
+                <span>Best Size to upload Image is 300*200(width*height)</span>
                 <div ng2FileDrop [ngClass]="{'another-file-over-class': hasAnotherDropZoneOver}"
                     (fileOver)="fileOverAnother($event)" [uploader]="uploader1"
                     class="box-placeholder my-drop-zone font-weight-bold pb-2">
@@ -161,23 +166,6 @@
                     </tbody>
                 </table>
             </div>
-            <!-- <div *ngIf="uploader1?.queue?.length > 0" class="d-flex align-items-end justify-content-center pr-2">
-                <div class="pr-3">
-                    <mat-radio-group color="primary" aria-label="Select an option" [(ngModel)]="fileType">
-                        <mat-radio-button value="private" class="pr-3">
-                            Upload as private
-                        </mat-radio-button>
-                        <mat-radio-button value="shared" class="pr-3">
-                            Upload as shared
-                        </mat-radio-button>
-                    </mat-radio-group>
-                </div>
-                <div>
-                    <button mat-raised-button color="primary" (click)="onUploadLogo()">
-                        <mat-icon>file_upload</mat-icon>Upload
-                    </button>
-                </div>
-            </div> -->
         </div>
     </div>
 
@@ -213,24 +201,6 @@
                     </tbody>
                 </table>
             </div>
-
-            <!-- <div *ngIf="uploader2?.queue?.length > 0" class="d-flex align-items-end justify-content-center pr-2">
-                <div class="pr-3">
-                    <mat-radio-group color="primary" aria-label="Select an option" [(ngModel)]="fileType">
-                        <mat-radio-button value="private" class="pr-3">
-                            Upload as private
-                        </mat-radio-button>
-                        <mat-radio-button value="shared" class="pr-3">
-                            Upload as shared
-                        </mat-radio-button>
-                    </mat-radio-group>
-                </div>
-                <div>
-                    <button mat-raised-button color="primary" (click)="onUploadLogo()">
-                        <mat-icon>file_upload</mat-icon>Upload
-                    </button>
-                </div>
-            </div> -->
         </div>
     </div>
     <div class="d-flex justify-content-between">
@@ -306,31 +276,4 @@
             </div>
         
           </mat-card>
-        <!-- <div class="col mt-5">
-            <mat-card class="outer-card">
-                <h1 class="header-title text-center font-weight-bold">Lawyer Profile</h1>
-                <p class="text-center">Lawyer profile which is visible Inmate page</p>
-                <div class="mt-4">
-                    <mat-card class="sponser-card w-100">
-                        <h1 class="d-flex justify-content-center line-height color font-weight-bold">
-                            {{orgData?.Organization?.name}}
-                        </h1>
-                        <div style="height: 200px;"  id="cust-img">
-                        </div>
-                        <div class="text-center line-height">
-                            <div>
-                                <img src="{{userDetails?.userAdditionalInfo?.profile?.downloadLink}}" width="150px"
-                                    height="150px" alt="logo" class="logo"
-                                    *ngIf="userDetails?.userAdditionalInfo?.profile?.downloadLink">
-                            </div>
-                            <div>
-                                <h4 class=" line-height color py-2">
-                                    {{userDetails?.firstName}} {{userDetails?.middleName}} {{userDetails?.lastName}}
-                                </h4>
-                            </div>
-                        </div>
-                    </mat-card>
-                </div>
-            </mat-card>
-        </div> -->
 </ng-template>

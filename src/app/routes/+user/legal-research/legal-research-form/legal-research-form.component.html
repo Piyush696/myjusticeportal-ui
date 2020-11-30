@@ -311,14 +311,7 @@
         <div class="col-6 pl-0" *ngIf="otherField">
             <mat-form-field appearance="fill" class="w-100 pl-2">
                 <mat-label>Other State</mat-label>
-                <input type="text" matInput [formControl]="legalForm.controls['otherState']" required>
-                <mat-error>
-                    <div *ngIf="legalForm.controls['otherState'].invalid && legalForm.controls['otherState'].touched">
-                        <small class="font13">
-                            Other State is Required
-                        </small>
-                    </div>
-                </mat-error>
+                <input type="text" matInput [formControl]="legalForm.controls['otherState']">
             </mat-form-field>
         </div>
     </div>
