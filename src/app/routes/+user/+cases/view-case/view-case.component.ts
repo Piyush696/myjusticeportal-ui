@@ -61,7 +61,7 @@ export class ViewCaseComponent implements OnInit {
     this.lawyerService.deleteLawyerCase(userId, this.route.snapshot.params['caseId']).subscribe((deletedLawyer: any) => {
       if (deletedLawyer.data == 1) {
         this.assignedLawyer = ''
-        this.toasterService.showSuccessToater('Lawyer Removed from case.')        
+        this.toasterService.showSuccessToater('Lawyer Removed from case.')
         this.getAssignedLawyer();
         this.dialog.closeAll();
       } else {
@@ -76,7 +76,7 @@ export class ViewCaseComponent implements OnInit {
 
   openModal(templateRef) {
     let dialogRef = this.dialog.open(templateRef, {
-      width: '836px',
+      width: '60%'
     });
     this.caseNoteForm.get('notes').setValue(this.caseDetails.notes);
     // this.caseNoteForm.get('notes').disable();

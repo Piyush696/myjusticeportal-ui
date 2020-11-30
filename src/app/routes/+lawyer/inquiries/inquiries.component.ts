@@ -44,8 +44,7 @@ export class InquiriesComponent implements OnInit {
   onOpenModal(templateRef, userId) {
     this.userId = userId
     let dialogRef = this.dialog.open(templateRef, {
-      width: '350px',
-      height: '220px'
+      width: '300px',
     });
   }
   closeModal() {
