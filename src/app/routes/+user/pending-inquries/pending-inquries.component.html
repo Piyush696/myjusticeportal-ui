@@ -49,7 +49,7 @@
                 <th mat-header-cell *matHeaderCellDef>Action</th>
                 <td mat-cell *matCellDef="let case">
                     <button
-                        [disabled]="(case.status === 'inmate_rejected' ||  case.status === 'Rejected' ||  case.status === 'Requested')"
+                        [disabled]="(case.status === 'inmate_rejected'  || case.status === 'inmate_accepted' ||  case.status === 'Rejected' ||  case.status === 'Requested')"
                         class="btn btn-sm btn-primary" color="green"
                         (click)="onClickStatus('inmate_accepted',case.userId,case.caseId)">
                         Accept
@@ -61,7 +61,7 @@
                         Reject
                     </button>
                     <button
-                        [disabled]="( case.status === 'inmate_rejected' || case.status === 'inmate_accepted' || case.status === 'Rejected' || case.status === 'Requested' || case.status === 'Approved')"
+                        [disabled]="( case.status === 'inmate_rejected' || case.status === 'Rejected')"
                         class="btn btn-sm btn-dark" (click)="onOpenModal(openModal,case)">
                         Message
                     </button>

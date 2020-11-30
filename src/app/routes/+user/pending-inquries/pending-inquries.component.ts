@@ -23,6 +23,7 @@ export class PendingInquriesComponent implements OnInit {
 
   pendingCasesList = [];
   filteredPendingInquiriesList = [];
+  filteredRejectedPendingInquiriesList = [];
 
   constructor(private caseService: CaseService, public dialog: MatDialog,
     private additionalService: UserAdditionInfoService, private toasterService: ToasterService, public router: Router) { }
@@ -44,22 +45,27 @@ export class PendingInquriesComponent implements OnInit {
 
   viewhidePendingInquiries(value) {
     if (value) {
-      this.filteredPendingInquiriesList = [];
-      this.pendingCasesList.filter((ele) => {
-        if (ele.status === 'Rejected') {
-          this.filteredPendingInquiriesList.push(ele)
+      this.dataSource = new MatTableDataSource(this.filteredRejectedPendingInquiriesList);
+      this.dataSource.sortingDataAccessor = (item: any, property) => {
+        switch (property) {
+          case 'lawyer': if (item) return item.firstName + item.middleName + item.lastName;
+          case 'lawFirm': if (item) return item.Organization.name;
+          default: return item[property];
         }
-      })
-      this.dataSource = new MatTableDataSource(this.filteredPendingInquiriesList);
-
+      };
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
     } else {
-      this.filteredPendingInquiriesList = this.pendingCasesList.filter((element) => {
-        if (element.status != 'Rejected') {
-          return element
-        }
-      })
       this.dataSource = new MatTableDataSource(this.filteredPendingInquiriesList);
-
+      this.dataSource.sortingDataAccessor = (item: any, property) => {
+        switch (property) {
+          case 'lawyer': if (item) return item.firstName + item.middleName + item.lastName;
+          case 'lawFirm': if (item) return item.Organization.name;
+          default: return item[property];
+        }
+      };
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
     }
   }
 
@@ -68,6 +74,9 @@ export class PendingInquriesComponent implements OnInit {
   }
 
   getPendingCaseDetails() {
+    this.pendingCasesList = []
+    this.filteredPendingInquiriesList = [];
+    this.filteredRejectedPendingInquiriesList = []
     this.caseService.getPendingCaseInfo().subscribe((pendingCase: any) => {
       this.pendingCasesList = pendingCase.data.map((status) => {
         if (status.status && status.status === 'Rejected') {
@@ -91,13 +100,22 @@ export class PendingInquriesComponent implements OnInit {
         return status
       })
       this.pendingCasesList.filter((x) => {
-        if (x.status != 'Rejected') {
+        if (x.status == 'Rejected' || x.status == 'inmate_rejected') {
+          this.filteredRejectedPendingInquiriesList.push(x)
+        } else {
           this.filteredPendingInquiriesList.push(x)
         }
+        this.dataSource = new MatTableDataSource(this.filteredPendingInquiriesList);
+        this.dataSource.sortingDataAccessor = (item: any, property) => {
+          switch (property) {
+            case 'lawyer': if (item) return item.firstName + item.middleName + item.lastName;
+            case 'lawFirm': if (item) return item.Organization.name;
+            default: return item[property];
+          }
+        };
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
       })
-
-      this.dataSource = new MatTableDataSource(this.pendingCasesList);
-
     })
   }
 
