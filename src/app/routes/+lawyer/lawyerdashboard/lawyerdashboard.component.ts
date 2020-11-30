@@ -43,7 +43,7 @@ export class LawyerdashboardComponent implements OnInit {
   averageCount: number = 0;
   addOnsCount: number = 0;
   planPrice: number = 0;
-  state: string;
+  state = [];
   filteredFacilityList = [];
   lawyerData: any;
 
@@ -281,7 +281,7 @@ export class LawyerdashboardComponent implements OnInit {
       user.data.forEach((ele) => {
         if (ele.metaKey == "lawyerInfo") {
           let splitArray = ele.metaValue.split(":")
-          this.state = splitArray[0].toString();
+          this.state.push(splitArray[0].toString());
         }
       })
     })
@@ -292,9 +292,11 @@ export class LawyerdashboardComponent implements OnInit {
       if (facilities.data) {
         facilities.data.forEach((ele) => {
           if (ele.Address) {
-            if (ele.Address.state === this.state) {
-              this.filteredFacilityList.push(ele)
-            }
+            this.state.forEach((item) => {
+              if (ele.Address.state == item) {
+                this.filteredFacilityList.push(ele)
+              }
+            })
           }
         })
       }

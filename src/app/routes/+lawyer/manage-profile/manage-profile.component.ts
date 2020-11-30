@@ -150,7 +150,9 @@ export class ManageProfileComponent implements OnInit {
         this.toasterService.showErrorToater(error.statusText);
       })
     }
-    this.additionalInfoForm.enable();
+    this.additionalInfoForm.get('tagline').enable(),
+      this.additionalInfoForm.get('description').enable(),
+      this.additionalInfoForm.get('practiceAreas').enable()
     this.buttonText = 'Save';
   }
 
