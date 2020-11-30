@@ -1,5 +1,5 @@
-<div class="container" *ngIf="!isAuthorized">
-  <h1 class="font-weight-bold p-3 unauthorized-text">Welcome to My Justice Portal!</h1>
+<div class="container pl-0" *ngIf="!isAuthorized">
+  <h1 class="font-weight-bold unauthorized-text">Welcome to My Justice Portal!</h1>
   <h2 class="unauthorized-text">Your registration is being processed. We must verify your standing in the bar of the state(s) you selected. When your account is approved, you will receive an email notification. Most registrations are processed within 24 hours.<br/><br/>
     Meanwhile, please complete your account information. You will not be charged for anything unless your account is approved.</h2>
 </div>
@@ -29,16 +29,37 @@
           <div class="col-12">
             <div class="d-flex justify-content-center align-items-center;">
               <mat-card class="mat-elevation-z10 w-100">
-                <div class="d-flex justify-content-start">
-                  <h2 class="text-center">Step 1 :</h2>&nbsp;
-                  <h2 class="text-center font-weight-bold">Explore Plans</h2>
+                <div>
+                  <span class="h5 text-center">Step 1 :</span>&nbsp;
+                  <span class="h5 text-center font-weight-bold">Explore Plans</span>
                 </div>
+                <h4>Pay per connection.</h4>
                 <div class="row">
                   <div class="col-12 pt-2">
                     <mat-card class="mat-elevation-z10 border-card">
-                      <input class="circle" [checked]="true" type="radio" name="package"
-                        (change)="onSelectPlan($event.checked)">
-                      Standard Plan($50/mo, $0.10/inmate/mo)
+                      <input class="circle"  type="radio" name="package"
+                        (change)="onSelectPlan('250',$event.checked)">
+                        Up to 5 Connections, $250/mo/lawyer
+                    </mat-card>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-12 pt-2">
+                    <mat-card class="mat-elevation-z10 border-card">
+                      <input class="circle"  type="radio" name="package"
+                        (change)="onSelectPlan('350',$event.checked)">
+                        Up to 25 Connections, $350/mo/lawyer
+                    </mat-card>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-12 pt-2">
+                    <mat-card class="mat-elevation-z10 border-card">
+                      <input class="circle"  type="radio" name="package"
+                        (change)="onSelectPlan('400',$event.checked)">
+                        Unlimited, $400.00/mo/lawyer
                     </mat-card>
                   </div>
                 </div>
@@ -104,23 +125,23 @@
                 <mat-card class="mat-elevation-z10">
                   <div class="d-flex justify-content-between align-items-between">
                     <div>Plan Base Cost:</div>
-                    <div>$50.00</div>
+                    <div>{{planPrice | currency:'USD':'symbol'}}</div>
                   </div>
                   <div class="d-flex justify-content-between align-items-between">
                     <div>Total inmate access Charges:</div>
-                    <div>${{(addOnsCount * 10 ) ? (addOnsCount * 10 ) : 0}}
+                    <div>${{(addOnsCount * 10 ) ? (addOnsCount * 10 )  : 0 }}
                     </div>
                   </div>
                   <div class="d-flex justify-content-between align-items-between">
                     <div>Add On charges:</div>
-                    <div>${{averageCount * 0.10 ? averageCount : 0}}
+                    <div>${{averageCount * 0.10 ? averageCount : 0 }}
                     </div>
                   </div>
                   <hr>
                   <div class="d-flex justify-content-between align-items-between">
                     <div>Total Monthly Charge:</div>
                     <div>
-                      <span class="font-weight-bold">Total:-</span> ${{totalPrice}}
+                      <span class="font-weight-bold">Total:-</span> {{totalPrice | currency:'USD':'symbol'}}
                     </div>
                   </div>
                 </mat-card>
@@ -137,8 +158,8 @@
             <span class="text-center text-black">Please enter your credit card information in the form below.</span>
             <app-stripe class="pt-2" [totalCount]="totalPrice" (onPayEvent)="onPayEvent($event)"
               [facilitiesList]="facilities"></app-stripe>
-            <span class="text-center">Everything look correct? Click pay and Get Started to complete your setup and
-              start using My Justice Portal.</span>
+              <span class="text-center card-footer-style">Everything look correct? Click pay and Get Started to complete your setup and
+                start using My Justice Portal.</span>
           </mat-card>
         </div>
       </div>

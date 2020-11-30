@@ -39,9 +39,10 @@ export class LawyerdashboardComponent implements OnInit {
   public cardMask = [/\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/]
   public cvvMask = [/\d/, /\d/, /\d/]
   facilityId: any;
-  totalPrice: number = 50
+  totalPrice: number = 0;
   averageCount: number = 0;
   addOnsCount: number = 0;
+  planPrice: number = 0;
   state: string;
   filteredFacilityList = [];
   lawyerData: any;
@@ -128,6 +129,11 @@ export class LawyerdashboardComponent implements OnInit {
     this.calculatePrice();
   }
 
+  onSelectPlan(price) {
+    this.totalPrice = parseInt(price);
+    this.planPrice = parseInt(price)
+  }
+
   onSelectAddOns(event, facilityId, addOnsType: string) {
     if (event) {
       this.facilities.map((x) => {
@@ -167,7 +173,7 @@ export class LawyerdashboardComponent implements OnInit {
   }
 
   calculatePrice() {
-    this.totalPrice = 50;
+    this.totalPrice =  this.planPrice;
     this.facilities.forEach((ele) => {
       if (ele.isSelected) {
         this.totalPrice = this.totalPrice + (ele.facilityUserCount * 0.10)
@@ -223,9 +229,7 @@ export class LawyerdashboardComponent implements OnInit {
     })
   }
 
-  onSelectPlan() {
-    this.totalPrice = 50;
-  }
+
 
   openPaymentCardModal(templateRef) {
     let dialogRef = this.dialog.open(templateRef, {
