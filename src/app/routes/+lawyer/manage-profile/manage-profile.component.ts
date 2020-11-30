@@ -65,6 +65,11 @@ export class ManageProfileComponent implements OnInit {
     })
   }
 
+  onCloseModal() {
+    this.dialog.closeAll();
+  }
+
+
   getlawyerInfo() {
     this.userAdditionalInfo.getUsers().subscribe((user: any) => {
       this.userDetails = user.data
@@ -82,7 +87,7 @@ export class ManageProfileComponent implements OnInit {
     this.buttonText = 'Edit'
     this.additionalInfoForm.disable()
     let dialogRef = this.dialog.open(templateRef, {
-      width: '60%',
+      width: '800px',
       height: '80%'
     });
     setTimeout(() => {
@@ -104,6 +109,7 @@ export class ManageProfileComponent implements OnInit {
       formData.append('type', this.fileType);
       this.userAdditionalInfo.uploadFile(formData).subscribe((res) => {
         this.fileType = 'private';
+        this.getlawyerInfo()
         if (res.success) {
           this.uploader1.queue = [];
           this.uploader2.queue = [];

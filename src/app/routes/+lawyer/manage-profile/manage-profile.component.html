@@ -46,51 +46,6 @@
                     </td>
                 </tr>
             </table>
-
-            <!-- <div class="row">
-                <div class="card-body px-0 pt-3 pb-4">
-                    <div class="drag-border p-3">
-                        <div ng2FileDrop [ngClass]="{'another-file-over-class': hasAnotherDropZoneOver}"
-                            (fileOver)="fileOverAnother($event)" [uploader]="uploader1"
-                            class="box-placeholder my-drop-zone font-weight-bold pb-2">
-                            Drag and drop files here (or) Choose below to attach.
-                        </div>
-                        <label for="file1" class="file-upload mb-0">
-                            <input id="file1" type="file" ng2FileSelect [uploader]="uploader1" />
-                        </label>
-                    </div>
-                    <table class="table m-0">
-                        <tbody>
-                            <tr class="pr-0" *ngFor="let item of uploader1?.queue">
-                                <td class="pr-0"><strong>{{item?.file?.name}}</strong></td>
-                                <td nowrap class="pr-0">
-                                    <button mat-raised-button color="warn" (click)="item.remove()">
-                                        <mat-icon>delete</mat-icon>Remove
-                                    </button>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    <div *ngIf="uploader1?.queue?.length > 0"
-                        class="d-flex align-items-end justify-content-center pr-2">
-                        <div class="pr-3">
-                            <mat-radio-group color="primary" aria-label="Select an option" [(ngModel)]="fileType">
-                                <mat-radio-button value="private" class="pr-3">
-                                    Upload as private
-                                </mat-radio-button>
-                                <mat-radio-button value="shared" class="pr-3">
-                                    Upload as shared
-                                </mat-radio-button>
-                            </mat-radio-group>
-                        </div>
-                        <div>
-                            <button mat-raised-button color="primary" (click)="onUploadLogo()">
-                                <mat-icon>file_upload</mat-icon>Upload
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div> -->
             <div class="row">
                 <div class="col-12 col-sm-12 d-flex justify-content-between justify-content-sm-between">
                     <div>
@@ -145,7 +100,6 @@
             <mat-label>Practice Areas</mat-label>
             <mat-select [formControl]="toppings" multiple [formControl]="additionalInfoForm.controls['practiceAreas']"
                 required>
-                <mat-option>Select Practice Areas</mat-option>
                 <mat-option *ngFor="let specialty of specialtyList" value="{{specialty.specialtyType}}">
                     {{specialty.specialtyType}}
                 </mat-option>
@@ -188,24 +142,31 @@
                     <input id="file1" type="file" ng2FileSelect [uploader]="uploader1" />
                 </label>
             </div>
-            <table class="table m-0">
-                <tbody>
-                    <tr class="pr-0" *ngFor="let item of uploader1?.queue">
-                        <td class="pr-0"><strong>{{item?.file?.name}}</strong></td>
-                        <td nowrap class="pr-0">
-                            <button mat-raised-button color="warn" (click)="item.remove()">
-                                <mat-icon>delete</mat-icon>Remove
-                            </button>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-            <div *ngIf="uploader1?.queue?.length > 0" class="d-flex align-items-end justify-content-center pr-2">
+            <div class="px-3">
+                <table class="table m-0">
+                    <tbody>
+                        <tr class="pr-0" *ngFor="let item of uploader1?.queue">
+                            <td class="pr-0"><strong>{{item?.file?.name}}</strong></td>
+                            <td nowrap class="pr-0">
+                                <button mat-raised-button color="warn" (click)="item.remove()">
+                                    <mat-icon>delete</mat-icon>Remove
+                                </button>
+                            </td>
+                            <td>
+                                <button mat-raised-button color="primary" (click)="onUploadLogo()">
+                                    <mat-icon>file_upload</mat-icon>Upload
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <!-- <div *ngIf="uploader1?.queue?.length > 0" class="d-flex align-items-end justify-content-center pr-2">
                 <div class="pr-3">
                     <mat-radio-group color="primary" aria-label="Select an option" [(ngModel)]="fileType">
-                        <!-- <mat-radio-button value="private" class="pr-3">
+                        <mat-radio-button value="private" class="pr-3">
                             Upload as private
-                        </mat-radio-button> -->
+                        </mat-radio-button>
                         <mat-radio-button value="shared" class="pr-3">
                             Upload as shared
                         </mat-radio-button>
@@ -216,7 +177,7 @@
                         <mat-icon>file_upload</mat-icon>Upload
                     </button>
                 </div>
-            </div>
+            </div> -->
         </div>
     </div>
 
@@ -233,24 +194,32 @@
                     <input id="file1" type="file" ng2FileSelect [uploader]="uploader2" />
                 </label>
             </div>
-            <table class="table m-0">
-                <tbody>
-                    <tr class="pr-0" *ngFor="let item of uploader2?.queue">
-                        <td class="pr-0"><strong>{{item?.file?.name}}</strong></td>
-                        <td nowrap class="pr-0">
-                            <button mat-raised-button color="warn" (click)="item.remove()">
-                                <mat-icon>delete</mat-icon>Remove
-                            </button>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-            <div *ngIf="uploader2?.queue?.length > 0" class="d-flex align-items-end justify-content-center pr-2">
+            <div class="px-3">
+                <table class="table m-0">
+                    <tbody>
+                        <tr class="pr-0" *ngFor="let item of uploader2?.queue">
+                            <td class="pr-0"><strong>{{item?.file?.name}}</strong></td>
+                            <td nowrap class="pr-0">
+                                <button mat-raised-button color="warn" (click)="item.remove()">
+                                    <mat-icon>delete</mat-icon>Remove
+                                </button>
+                            </td>
+                            <td>
+                                <button mat-raised-button color="primary" (click)="onUploadLogo()">
+                                    <mat-icon>file_upload</mat-icon>Upload
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- <div *ngIf="uploader2?.queue?.length > 0" class="d-flex align-items-end justify-content-center pr-2">
                 <div class="pr-3">
                     <mat-radio-group color="primary" aria-label="Select an option" [(ngModel)]="fileType">
-                        <!-- <mat-radio-button value="private" class="pr-3">
+                        <mat-radio-button value="private" class="pr-3">
                             Upload as private
-                        </mat-radio-button> -->
+                        </mat-radio-button>
                         <mat-radio-button value="shared" class="pr-3">
                             Upload as shared
                         </mat-radio-button>
@@ -261,7 +230,7 @@
                         <mat-icon>file_upload</mat-icon>Upload
                     </button>
                 </div>
-            </div>
+            </div> -->
         </div>
     </div>
     <div class="d-flex justify-content-between">
@@ -275,8 +244,69 @@
 </ng-template>
 
 <ng-template #previewProfile>
-    <div class="row">
-        <div class="col mt-5">
+        <mat-card class="border bg-card p-2">
+            <div class="d-flex justify-content-between align-items-center bg-header">
+              <div>
+                <h2 class="font-weight-bold m-0">Lawyer Profile</h2>
+              </div>
+              <div>
+                <button class="btn bg-color" mat-raised-button (click)="onCloseModal()">Close</button>
+              </div>
+            </div>
+            <div style="height: 140px;"  class="mt-2" id="cust-img">
+            </div>
+            <div class="p-2 bg-white">
+              <div class="row mt-3">
+                <div class="col-3">
+                  <div class="d-flex">
+                    <div class="img-profile">
+                      <img src="{{userDetails?.userAdditionalInfo?.profile?.downloadLink}}" width="150px" height="150px"
+                        alt="logo" class="logo">
+                    </div>
+                  </div>
+                </div>
+                <div class="col-9 mt-2 card-height">
+                  <div>
+                    <div class="d-flex justify-content-between">
+                      <div class="mt-2">
+                        <h4>
+                          <span class="font-weight-bold name-size">Name: </span>
+                          <span class="font-weight-bold name-size">{{userDetails?.firstName}}
+                            {{userDetails?.middleName}} {{userDetails?.lastName}}</span>
+                        </h4>
+                      </div>
+                    </div>
+                    <div class="row py-2 pl-3">
+                      <div>
+                        <span class="font-weight-bold">Organization: </span>
+                        <span>{{userDetails?.Organization?.name}}</span>
+                      </div>
+                    </div>
+                    <div class="row py-2 pl-3">
+                      <div>
+                        <span class="font-weight-bold">Tagline: </span>
+                        <span>{{userDetails?.userAdditionalInfo?.tagline}}</span>
+                      </div>
+                    </div>
+                    <div class="row py-2 pl-3">
+                      <div>
+                        <span class="font-weight-bold">PractiseArea: </span>
+                        <span>{{userDetails?.userAdditionalInfo?.practiceAreas}}</span>
+                      </div>
+                    </div>
+                    <div class="row py-2 pl-3">
+                      <div>
+                        <span class="font-weight-bold">Description: </span>
+                        <span>{{userDetails?.userAdditionalInfo?.description}}</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+        
+          </mat-card>
+        <!-- <div class="col mt-5">
             <mat-card class="outer-card">
                 <h1 class="header-title text-center font-weight-bold">Lawyer Profile</h1>
                 <p class="text-center">Lawyer profile which is visible Inmate page</p>
@@ -286,9 +316,6 @@
                             {{orgData?.Organization?.name}}
                         </h1>
                         <div style="height: 200px;"  id="cust-img">
-                            <!-- <img src="{{userDetails?.userAdditionalInfo?.header?.downloadLink}}" width="100%"
-                                height="150px" alt="logo" class="logo"
-                                *ngIf="userDetails?.userAdditionalInfo?.header?.downloadLink"> -->
                         </div>
                         <div class="text-center line-height">
                             <div>
@@ -302,12 +329,8 @@
                                 </h4>
                             </div>
                         </div>
-                        <!-- <div class="d-flex justify-content-center">
-                            <button class="btn bg-color px-perc py-1" mat-raised-button>Contact</button>
-                        </div> -->
                     </mat-card>
                 </div>
             </mat-card>
-        </div>
-    </div>
+        </div> -->
 </ng-template>
