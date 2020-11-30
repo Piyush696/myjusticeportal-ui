@@ -159,8 +159,11 @@ export class MyAccountComponent implements OnInit {
     this.profileForm.get('userName').enable()
     this.profileForm.get('userEmail').enable()
     this.profileForm.get('mobile').enable()
-
+    this.profileForm.get('userName').enable()
+    this.profileForm.get('firstName').enable()
+    this.profileForm.get('lastName').enable()
     this.userMetaForm.get('housing_unit').enable()
+    this.profileForm.get('middleName').enable()
   }
 
   userMetaUpdate() {

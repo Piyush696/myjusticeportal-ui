@@ -104,7 +104,7 @@
             <mat-label>Practice Areas</mat-label>
             <mat-select [formControl]="toppings" multiple [formControl]="additionalInfoForm.controls['practiceAreas']"
                 required>
-                <mat-option *ngFor="let specialty of specialtyList" value="{{specialty.specialtyType}}">
+                <mat-option *ngFor="let specialty of specialtyList" value="{{specialty?.specialtyType}}">
                     {{specialty.specialtyType}}
                 </mat-option>
             </mat-select>
@@ -214,66 +214,66 @@
 </ng-template>
 
 <ng-template #previewProfile>
-        <mat-card class="border bg-card p-2">
-            <div class="d-flex justify-content-between align-items-center bg-header">
-              <div>
+    <mat-card class="border bg-card p-2">
+        <div class="d-flex justify-content-between align-items-center bg-header">
+            <div>
                 <h2 class="font-weight-bold m-0">Lawyer Profile</h2>
-              </div>
-              <div>
+            </div>
+            <div>
                 <button class="btn bg-color" mat-raised-button (click)="onCloseModal()">Close</button>
-              </div>
             </div>
-            <div style="height: 140px;"  class="mt-2" id="cust-img">
-            </div>
-            <div class="p-2 bg-white">
-              <div class="row mt-3">
+        </div>
+        <div style="height: 140px;" class="mt-2" id="cust-img">
+        </div>
+        <div class="p-2 bg-white">
+            <div class="row mt-3">
                 <div class="col-3">
-                  <div class="d-flex">
-                    <div class="img-profile">
-                      <img src="{{userDetails?.userAdditionalInfo?.profile?.downloadLink}}" width="150px" height="150px"
-                        alt="logo" class="logo">
+                    <div class="d-flex">
+                        <div class="img-profile">
+                            <img src="{{userDetails?.userAdditionalInfo?.profile?.downloadLink}}" width="150px"
+                                height="150px" alt="logo" class="logo">
+                        </div>
                     </div>
-                  </div>
                 </div>
                 <div class="col-9 mt-2 card-height">
-                  <div>
-                    <div class="d-flex justify-content-between">
-                      <div class="mt-2">
-                        <h4>
-                          <span class="font-weight-bold name-size">Name: </span>
-                          <span class="font-weight-bold name-size">{{userDetails?.firstName}}
-                            {{userDetails?.middleName}} {{userDetails?.lastName}}</span>
-                        </h4>
-                      </div>
+                    <div>
+                        <div class="d-flex justify-content-between">
+                            <div class="mt-2">
+                                <h4>
+                                    <span class="font-weight-bold name-size">Name: </span>
+                                    <span class="font-weight-bold name-size">{{userDetails?.firstName}}
+                                        {{userDetails?.middleName}} {{userDetails?.lastName}}</span>
+                                </h4>
+                            </div>
+                        </div>
+                        <div class="row py-2 pl-3">
+                            <div>
+                                <span class="font-weight-bold">Organization: </span>
+                                <span>{{userDetails?.Organization?.name}}</span>
+                            </div>
+                        </div>
+                        <div class="row py-2 pl-3">
+                            <div>
+                                <span class="font-weight-bold">Tagline: </span>
+                                <span>{{userDetails?.userAdditionalInfo?.tagline}}</span>
+                            </div>
+                        </div>
+                        <div class="row py-2 pl-3">
+                            <div>
+                                <span class="font-weight-bold">PractiseArea: </span>
+                                <span>{{userDetails?.userAdditionalInfo?.practiceAreas}}</span>
+                            </div>
+                        </div>
+                        <div class="row py-2 pl-3">
+                            <div>
+                                <span class="font-weight-bold">Description: </span>
+                                <span>{{userDetails?.userAdditionalInfo?.description}}</span>
+                            </div>
+                        </div>
                     </div>
-                    <div class="row py-2 pl-3">
-                      <div>
-                        <span class="font-weight-bold">Organization: </span>
-                        <span>{{userDetails?.Organization?.name}}</span>
-                      </div>
-                    </div>
-                    <div class="row py-2 pl-3">
-                      <div>
-                        <span class="font-weight-bold">Tagline: </span>
-                        <span>{{userDetails?.userAdditionalInfo?.tagline}}</span>
-                      </div>
-                    </div>
-                    <div class="row py-2 pl-3">
-                      <div>
-                        <span class="font-weight-bold">PractiseArea: </span>
-                        <span>{{userDetails?.userAdditionalInfo?.practiceAreas}}</span>
-                      </div>
-                    </div>
-                    <div class="row py-2 pl-3">
-                      <div>
-                        <span class="font-weight-bold">Description: </span>
-                        <span>{{userDetails?.userAdditionalInfo?.description}}</span>
-                      </div>
-                    </div>
-                  </div>
                 </div>
-              </div>
             </div>
-        
-          </mat-card>
+        </div>
+
+    </mat-card>
 </ng-template>
