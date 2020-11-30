@@ -129,12 +129,12 @@
                   </div>
                   <div class="d-flex justify-content-between align-items-between">
                     <div>Total inmate access Charges:</div>
-                    <div>${{(addOnsCount * 10 ) ? (addOnsCount * 10 )  : 0 }}
+                    <div>{{ (averageCount ? averageCount * 0.10 : 0) | currency:'USD':'symbol'}}
                     </div>
                   </div>
                   <div class="d-flex justify-content-between align-items-between">
                     <div>Add On charges:</div>
-                    <div>${{averageCount * 0.10 ? averageCount : 0 }}
+                    <div>{{(addOnsCount  ? (addOnsCount * 10 )  : 0 ) | currency:'USD':'symbol'}}
                     </div>
                   </div>
                   <hr>
