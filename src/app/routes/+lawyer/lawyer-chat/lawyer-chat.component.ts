@@ -50,4 +50,12 @@ export class LawyerChatComponent implements OnInit {
     this.receiverId = value.receiverId
     this.getMessageHistory(this.receiverId)
   }
+
+  userAdd(user) {
+    let data = this.userList.find(item => item.userId == user.userId)
+    if (data == undefined) {
+      this.userList.push(user)
+    }
+  }
+
 }

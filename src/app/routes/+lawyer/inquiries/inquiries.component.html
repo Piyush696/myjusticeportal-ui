@@ -50,7 +50,8 @@
                         REJECT
                     </button>
                     <button color="black" [disabled]="(case.status === 'Rejected' || case.status === inmate_rejected)"
-                        class="btn btn-sm btn-dark" title="More Queries" (click)="onOpenModal(confirmModal,case)">
+                        class="btn btn-sm btn-dark" title="More Queries"
+                        (click)="onOpenModal(confirmModal,case.inmate.userId)">
                         MESSAGE
                     </button>
                     <button color="black" [routerLink]="case.caseId" class="btn btn-sm btn-danger" title="View Case">

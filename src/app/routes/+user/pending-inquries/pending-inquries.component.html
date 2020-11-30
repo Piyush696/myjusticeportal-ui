@@ -9,9 +9,9 @@
         </div>
         <div>
             <mat-checkbox class="mat-card check-style" color="primary" title="View Rejected Cases"
-            (change)="viewhidePendingInquiries($event.checked)">
-            View Rejected Inquiries
-        </mat-checkbox>
+                (change)="viewhidePendingInquiries($event.checked)">
+                View Rejected Inquiries
+            </mat-checkbox>
         </div>
     </div>
     <mat-card>
@@ -60,9 +60,8 @@
                         (click)="onClickStatus('inmate_rejected',case.userId,case.caseId)">
                         Reject
                     </button>
-                    <button
-                        [disabled]="( case.status === 'inmate_rejected' || case.status === 'Rejected')"
-                        class="btn btn-sm btn-dark" (click)="onOpenModal(openModal,case)">
+                    <button [disabled]="( case.status === 'inmate_rejected' || case.status === 'Rejected')"
+                        class="btn btn-sm btn-dark" (click)="onOpenModal(openModal,case.userId)">
                         Message
                     </button>
                 </td>

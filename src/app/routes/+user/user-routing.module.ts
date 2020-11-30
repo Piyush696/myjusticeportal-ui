@@ -36,6 +36,7 @@ const routes: Routes = [
     { path: 'hire-lawyer/:organizationId', component: ViewLawyerComponent },
     { path: 'find-bondsman', component: FindBondsmanComponent },
     { path: 'message-my-lawyer', component: MessagingLawyerComponent },
+    { path: 'message-my-lawyer/:userId', component: MessagingLawyerComponent },
     { path: 'lawyer-profile/:userId', component: LawyerProfileComponent },
     { path: 'find-bondsman/:organizationId', component: ViewBondsmanComponent },
     { path: 'legal-form', component: LegalResearchListComponent },
