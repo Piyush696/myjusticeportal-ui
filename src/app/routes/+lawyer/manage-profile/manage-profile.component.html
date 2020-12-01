@@ -137,7 +137,7 @@
         <div class="card-body px-0 pb-4">
             <div class="drag-border p-3">
                 <h4 class="font-weight-bold margin-remove">Profile Image</h4>
-                <span>Best Size to upload Image is 300*200(width*height)</span>
+                <span class="text-bold">Best Size to upload Image is 300*200(width*height) and File size is 5 MB</span>
                 <div ng2FileDrop [ngClass]="{'another-file-over-class': hasAnotherDropZoneOver}"
                     (fileOver)="fileOverAnother($event)" [uploader]="uploader1"
                     class="box-placeholder my-drop-zone font-weight-bold pb-2">
@@ -181,6 +181,7 @@
         <div class="card-body px-0 pb-4">
             <div class="drag-border p-3">
                 <h4 class="font-weight-bold margin-remove">Profile Headshot Image</h4>
+                <span class="text-bold">Best Size to upload Image is 500*300(width*height) and File size is 8 MB</span>
                 <div ng2FileDrop [ngClass]="{'another-file-over-class': hasAnotherDropZoneOver}"
                     (fileOver)="fileOverAnother($event)" [uploader]="uploader2"
                     class="box-placeholder my-drop-zone font-weight-bold pb-2">
