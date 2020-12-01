@@ -39,7 +39,6 @@ export class PendingInquriesComponent implements OnInit {
 
   onOpenModal(templateRef, userId) {
     this.userId = userId
-    console.log(userId)
     let dialogRef = this.dialog.open(templateRef, {
       width: '300px'
     });

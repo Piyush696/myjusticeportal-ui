@@ -30,7 +30,6 @@ export class InquiriesCaseViewComponent implements OnInit {
     private location: Location, private toasterService: ToasterService,private caseService: CaseService, public dialog: MatDialog) { }
 
   ngOnInit(): void {
-    console.log(this.activatedRoute.snapshot.params['caseId'])
     this.onGetCaseData();
   }
 
@@ -52,7 +51,6 @@ export class InquiriesCaseViewComponent implements OnInit {
     if (this.activatedRoute.snapshot.params['caseId']) {
       this.hireLawyerService.getCase(this.activatedRoute.snapshot.params['caseId']).subscribe((res: any) => {
         if (res.data) {
-          console.log(res.data)
           this.singleCaseData = res.data;
         } else {
           this.toasterService.showErrorToater('No data found, invalid url detected.');

@@ -87,7 +87,6 @@ export class SearchInmatesComponent implements OnInit {
   
   openModal(templateRef,userId) {
     this.userId = userId
-    console.log(this.userId)
     let dialogRef = this.dialog.open(templateRef, {
       width: '500px'
     });
@@ -113,7 +112,6 @@ export class SearchInmatesComponent implements OnInit {
       "publicdefenderId":this.publicdefenderId
     }
     this.inmatedefenderService.setPublicDefender(data).subscribe((user:any)=>{
-      console.log(user)
       if(user.success){
         this.toasterService.showSuccessToater('Assignee added successfully.')
         this.dialog.closeAll();
@@ -123,7 +121,6 @@ export class SearchInmatesComponent implements OnInit {
 
   getAllDefender(){
     this.inmatedefenderService.getPublicDefenders().subscribe((defenders:any)=>{
-      console.log(defenders)
       this.defenderList = defenders.data.Organization.users
     })
   }
