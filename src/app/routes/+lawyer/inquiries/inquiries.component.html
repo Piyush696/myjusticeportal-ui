@@ -50,7 +50,8 @@
                         REJECT
                     </button>
                     <button color="black" [disabled]="(case.status === 'Rejected' || case.status === inmate_rejected)"
-                        class="btn btn-sm btn-dark" title="More Queries" (click)="onOpenModal(confirmModal,case)">
+                        class="btn btn-sm btn-dark" title="More Queries"
+                        (click)="onOpenModal(confirmModal,case.inmate.userId)">
                         MESSAGE
                     </button>
                     <button color="black" [routerLink]="case.caseId" class="btn btn-sm btn-danger" title="View Case">
@@ -60,7 +61,7 @@
                         <div>
                             <h2 class="text-center font-weight-bold">Are You sure you want to enable the chat!</h2>
                         </div>
-                        <div class="d-flex justify-content-between mt-5">
+                        <div class="d-flex justify-content-between py-2">
                             <button class="button-purple px-4 py-1" mat-raised-button (click)="closeModal()">
                                 No
                             </button>

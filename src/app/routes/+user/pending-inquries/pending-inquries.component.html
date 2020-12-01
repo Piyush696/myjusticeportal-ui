@@ -3,15 +3,14 @@
         <div>
             <h1 class="line-height font-weight-bold">Pending Inquiries</h1>
             <h4 class="line-height header-sub-text">
-                These are lawyer you attempted to contact,View your conversation here and approve new
-                lawyers.
+                View and manage your inquiries to new Lawyers. When both you and the lawyer accept the Connection, your lawyer will be able to chat with you and upload files to your Case.
             </h4>
         </div>
         <div>
             <mat-checkbox class="mat-card check-style" color="primary" title="View Rejected Cases"
-            (change)="viewhidePendingInquiries($event.checked)">
-            View Rejected Inquiries
-        </mat-checkbox>
+                (change)="viewhidePendingInquiries($event.checked)">
+                View Rejected Inquiries
+            </mat-checkbox>
         </div>
     </div>
     <mat-card>
@@ -60,9 +59,8 @@
                         (click)="onClickStatus('inmate_rejected',case.userId,case.caseId)">
                         Reject
                     </button>
-                    <button
-                        [disabled]="( case.status === 'inmate_rejected' || case.status === 'Rejected')"
-                        class="btn btn-sm btn-dark" (click)="onOpenModal(openModal,case)">
+                    <button [disabled]="( case.status === 'inmate_rejected' || case.status === 'Rejected')"
+                        class="btn btn-sm btn-dark" (click)="onOpenModal(openModal,case.userId)">
                         Message
                     </button>
                 </td>
@@ -77,10 +75,9 @@
 
 <ng-template #openModal>
     <div>
-        <h2 class="text-center font-weight-bold">Do You want to Chat more? </h2>
+        <h2 class="text-center font-weight-bold">Do you want to chat more? </h2>
     </div>
-
-    <div class="d-flex justify-content-between">
+    <div class="d-flex justify-content-between py-2">
         <button mat-raised-button class="button-purple px-4 py-1" (click)="closeModal()">
             No
         </button>

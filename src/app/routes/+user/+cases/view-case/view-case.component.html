@@ -3,7 +3,7 @@
         <h1 class="font-weight-bold">
             Case: {{caseDetails?.legalMatter}}
         </h1>
-        <h4 class="line-height">Your case details at-a-glance</h4>
+        <h4 class="line-height">Your case details and tools.</h4>
     </div>
     <div>
         <button class="white-btn py-1 padding-btn" mat-raised-button (click)="backToCases()">
@@ -12,30 +12,30 @@
     </div>
 </div>
 
-    <div class="d-flex justify-content-start py-2">
-        <div>
-            <button class="button-purple  btn-group mt-1 py-1 btn-group" mat-raised-button>
-                Legal Research Assistant
-            </button>
-        </div>
-        <div class="pl-4">
-            <button class="button-purple btn-group mt-1 py-1  btn-group" mat-raised-button (click)="hireLayer()">
-                Find a Lawyer
-            </button>
-        </div>
-        <!-- <div class="d-flex justify-content-end">
+<div class="d-flex justify-content-start py-2">
+    <div>
+        <button class="button-purple  btn-group mt-1 py-1 btn-group" mat-raised-button>
+            Legal Research Assistant
+        </button>
+    </div>
+    <div class="pl-4">
+        <button class="button-purple btn-group mt-1 py-1  btn-group" mat-raised-button (click)="hireLayer()">
+            Find a Lawyer
+        </button>
+    </div>
+    <!-- <div class="d-flex justify-content-end">
             <button (click)="bailbondsNavigate()" class="button-purple btn-group mt-1 py-1 btn-group"
                 mat-raised-button>
                 Find a Bondsman
             </button>
         </div> -->
-        <!-- <div class="d-flex justify-content-end pt-4 pr-4">
+    <!-- <div class="d-flex justify-content-end pt-4 pr-4">
             <button class="white-btn py-1" mat-raised-button>
                 <i class="nc-icon nc-single-02 pr-1"></i>
                 <span>Message My Lawyer</span>
             </button>
         </div> -->
-    </div>
+</div>
 <div class="row">
     <div class="col-12">
         <div class="col-12 p-0">
@@ -105,14 +105,15 @@
                     <div class="col-4 d-flex justify-content-center align-items-center">
                         <mat-card class="border">
                             <div *ngIf="!assignedLawyer" class=" px-2 py-4">
-                                <h4 class="text-center font-weight-bold">No Connect Lawyer</h4>
+                                <h4 class="text-center font-weight-bold">No Connected Lawyer</h4>
                                 <p class="text-justify">Please click Find a Lawyer to search for lawyers.</p>
                             </div>
                             <div *ngIf="assignedLawyer">
                                 <div class="row">
                                     <div class="col-4">
                                         <div>
-                                            <img src="{{assignedLawyer?.userAdditionalInfo?.profile?.downloadLink}}" width="150px" height="150px" alt="logo" class="logo">
+                                            <img src="{{assignedLawyer?.userAdditionalInfo?.profile?.downloadLink}}"
+                                                width="150px" height="150px" alt="logo" class="logo">
                                         </div>
                                     </div>
                                     <div class="col-8">
@@ -125,17 +126,20 @@
                                         </div>
                                         <div>
                                             <p class="text-default">Organization:
-                                                <span class="font-weight-normal">{{assignedLawyer?.Organization?.name}}</span>
+                                                <span
+                                                    class="font-weight-normal">{{assignedLawyer?.Organization?.name}}</span>
                                             </p>
                                         </div>
                                         <div>
                                             <p class="text-default">Tagline:
-                                                <span class="font-weight-normal">{{assignedLawyer?.userAdditionalInfo?.tagline}}</span>
+                                                <span
+                                                    class="font-weight-normal">{{assignedLawyer?.userAdditionalInfo?.tagline}}</span>
                                             </p>
                                         </div>
                                         <div>
                                             <p class="text-default">Practise Area:
-                                                <span class="font-weight-normal">{{assignedLawyer?.userAdditionalInfo?.practiceAreas}}</span>
+                                                <span
+                                                    class="font-weight-normal">{{assignedLawyer?.userAdditionalInfo?.practiceAreas}}</span>
                                             </p>
                                         </div>
                                         <div class="text-center">
@@ -156,7 +160,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                </div>
+                            </div>
                         </mat-card>
                     </div>
                 </div>

@@ -17,7 +17,7 @@
   bottom: 0;
   width: 260px;
   left: 0;
-  z-index: 1030;
+  z-index: 100;
   border-right: 1px solid #ddd;
 
   .sidebar-wrapper {
@@ -72,11 +72,11 @@
     }
 
     li {
-      >a+div .nav li>a {
+      > a + div .nav li > a {
         margin-top: 7px;
       }
 
-      >a {
+      > a {
         margin: 10px 15px 0;
         color: $white-color;
         display: block;
@@ -87,20 +87,20 @@
         font-size: 12px;
         padding: 10px 8px;
         line-height: 30px;
-        opacity: .7;
+        opacity: 0.7;
       }
 
-      .nav>li>a {
+      .nav > li > a {
         padding: 5px 8px;
       }
 
-      &.active>a,
-      &.active>a>i {
+      &.active > a,
+      &.active > a > i {
         opacity: 1;
       }
 
-      &:hover:not(.active)>a,
-      &:focus:not(.active)>a {
+      &:hover:not(.active) > a,
+      &:focus:not(.active) > a {
         opacity: 1;
       }
     }
@@ -146,7 +146,7 @@
       height: 100%;
       content: "";
       display: block;
-      background: #FFFFFF;
+      background: #ffffff;
       opacity: 1;
     }
   }
@@ -176,7 +176,6 @@
       padding: 11px 0 8px;
       @include transform-translate-x(0px);
     }
-
 
     p {
       float: left;
@@ -242,7 +241,6 @@
     @include sidebar-color($dark-color);
   }
 
-
   // Active color changing
 
   &[data-active-color="primary"] {
@@ -276,26 +274,23 @@
 
 .off-canvas-sidebar {
   .nav {
-
-    >li>a,
-    >li>a:hover {
+    > li > a,
+    > li > a:hover {
       color: $white-color;
     }
 
-    >li>a:focus {
+    > li > a:focus {
       background: rgba(200, 200, 200, 0.2);
     }
   }
 }
-
 
 .main-panel {
   position: relative;
   float: right;
   width: $sidebar-width;
 
-
-  @include transition (0.50s, cubic-bezier(0.685, 0.0473, 0.346, 1));
+  @include transition(0.5s, cubic-bezier(0.685, 0.0473, 0.346, 1));
 
   .content {
     padding: 0 30px 30px;
@@ -307,15 +302,12 @@
     margin-bottom: 0;
   }
 
-
   .header {
     margin-bottom: 50px;
   }
 }
 
-
 .perfect-scrollbar-on {
-
   .sidebar,
   .main-panel {
     height: 100%;
@@ -327,7 +319,7 @@
   height: 260px;
   padding-top: 80px;
   padding-bottom: 45px;
-  background: #141E30;
+  background: #141e30;
   /* fallback for old browsers */
   background: -webkit-gradient(linear, left top, right top, from(#0c2646), color-stop(60%, #204065), to(#2a5788));
   background: linear-gradient(to right, #0c2646 0%, #204065 60%, #2a5788 100%);
@@ -357,5 +349,5 @@
 }
 
 .panel-header-lg {
-  height: 380px
+  height: 380px;
 }

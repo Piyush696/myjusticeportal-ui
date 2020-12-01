@@ -19,6 +19,7 @@ export class InquiriesComponent implements OnInit {
 
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort: MatSort;
+  userId: any;
 
   constructor(private userAdditionInfoService: UserAdditionInfoService, public dialog: MatDialog,
     private toasterService: ToasterService, private router: Router) { }
@@ -40,10 +41,10 @@ export class InquiriesComponent implements OnInit {
 
     })
   }
-  onOpenModal(templateRef) {
+  onOpenModal(templateRef, userId) {
+    this.userId = userId
     let dialogRef = this.dialog.open(templateRef, {
-      width: '350px',
-      height: '220px'
+      width: '300px',
     });
   }
   closeModal() {
@@ -66,7 +67,7 @@ export class InquiriesComponent implements OnInit {
 
   onChatEnable() {
     this.dialog.closeAll();
-    this.router.navigateByUrl('/mjp/lawyer/lawyer-chat');
+    this.router.navigateByUrl('/mjp/lawyer/lawyer-chat/' + this.userId);
   }
 
   getPageSizeOptions(): number[] {

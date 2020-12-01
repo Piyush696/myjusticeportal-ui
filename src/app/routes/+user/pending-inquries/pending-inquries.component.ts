@@ -24,6 +24,7 @@ export class PendingInquriesComponent implements OnInit {
   pendingCasesList = [];
   filteredPendingInquiriesList = [];
   filteredRejectedPendingInquiriesList = [];
+  userId: any;
 
   constructor(private caseService: CaseService, public dialog: MatDialog,
     private additionalService: UserAdditionInfoService, private toasterService: ToasterService, public router: Router) { }
@@ -36,10 +37,11 @@ export class PendingInquriesComponent implements OnInit {
     this.dataSource.filter = searchValue.trim().toLowerCase();
   }
 
-  onOpenModal(templateRef) {
+  onOpenModal(templateRef, userId) {
+    this.userId = userId
+    console.log(userId)
     let dialogRef = this.dialog.open(templateRef, {
-      width: '550px',
-      height: '200px'
+      width: '300px'
     });
   }
 
@@ -137,7 +139,7 @@ export class PendingInquriesComponent implements OnInit {
 
   saveChanges() {
     this.dialog.closeAll();
-    this.router.navigateByUrl('mjp/user/message-my-lawyer')
+    this.router.navigateByUrl('mjp/user/message-my-lawyer/' + this.userId)
   }
 
   getPageSizeOptions(): number[] {

@@ -49,6 +49,13 @@ export class MessagingLawyerComponent implements OnInit {
     })
   }
 
+  userAdd(user) {
+    let data = this.oldUserList.find(item => item.userId == user.userId)
+    if (data == undefined) {
+      this.oldUserList.push(user)
+    }
+  }
+
   filterData() {
     this.userMessageList = this.userMessageList.filter(item1 =>
       !this.oldUserList.some(item2 => (item2.userId === item1.userId)))
