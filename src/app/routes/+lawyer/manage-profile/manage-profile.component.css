@@ -33,3 +33,9 @@ th {
 .bg-card {
   background: #ededed;
 }
+
+.name-para {
+  position: relative;
+  bottom: 17px;
+  left: 7px;
+}

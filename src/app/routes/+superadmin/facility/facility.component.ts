@@ -133,6 +133,7 @@ export class FacilityComponent implements OnInit {
     this.facilityForm.get('facilityName').setValue(facility.facilityName);
     this.facilityForm.get('ipAddress').setValue(facility.ipAddress);
     this.facilityForm.get('libraryLink').setValue(facility.libraryLink);
+    this.facilityForm.get('facilityUserCount').setValue(facility.facilityUserCount);
     if (facility.Address) {
       this.facilityAddressId = facility.Address.addressId;
       this.addressForm.get('street1').setValue(facility.Address.street1);
