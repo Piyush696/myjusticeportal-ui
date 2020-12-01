@@ -14,7 +14,7 @@ import { UserAdditionInfoService } from 'app/services/user-addition-info.service
 
 export class CasesComponent implements OnInit {
   caseList: any;
-  sponsorUserList: any;
+  sponsorUserList = [];
   caseNoteForm: FormGroup;
   currentCaseId: any;
   @ViewChild('modalopen') modalopen: ElementRef;

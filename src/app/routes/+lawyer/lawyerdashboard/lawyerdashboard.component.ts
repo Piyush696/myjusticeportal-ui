@@ -176,7 +176,6 @@ export class LawyerdashboardComponent implements OnInit {
     this.totalPrice =  this.planPrice;
     this.facilities.forEach((ele) => {
       if (ele.isSelected) {
-        console.log('qqq')
         this.totalPrice = this.totalPrice + (ele.facilityUserCount * 0.10)
         if (ele.addOns.premium) {
           this.totalPrice = this.totalPrice + 10;
@@ -184,8 +183,6 @@ export class LawyerdashboardComponent implements OnInit {
         if (ele.addOns.sponsors) {
           this.totalPrice = this.totalPrice + 10;
         }
-      } else {
-        console.log('dew')
       }
     })
   }
