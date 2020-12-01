@@ -144,8 +144,15 @@
                     Drag and drop files here (or) Choose below to attach.
                 </div>
                 <label for="file1" class="file-upload mb-0">
-                    <input id="file1" type="file" ng2FileSelect [uploader]="uploader1" />
+                    <input id="file1" type="file" ng2FileSelect [uploader]="uploader1" accept="image/*"
+                        (change)=" onProfile($event.target.files)" />
                 </label>
+                <div>
+                    <small class="text-danger" *ngIf="isFileSizeMax">Image size should be less than 5 MB</small>
+                </div>
+                <div> <small class="text-danger" *ngIf="isDimenssionMax">Image should be 300 * 200 (width * height)
+                    </small>
+                </div>
             </div>
             <div class="px-3">
                 <table class="table m-0">
@@ -158,7 +165,8 @@
                                 </button>
                             </td>
                             <td>
-                                <button mat-raised-button color="primary" (click)="onUploadLogo()">
+                                <button mat-raised-button color="primary" [disabled]="isFileSizeMax || isDimenssionMax"
+                                    (click)="onUploadLogo()">
                                     <mat-icon>file_upload</mat-icon>Upload
                                 </button>
                             </td>
@@ -179,8 +187,15 @@
                     Drag and drop files here (or) Choose below to attach.
                 </div>
                 <label for="file1" class="file-upload mb-0">
-                    <input id="file1" type="file" ng2FileSelect [uploader]="uploader2" />
+                    <input id="file1" type="file" ng2FileSelect [uploader]="uploader2"
+                        (change)="onHeadshot($event.target.files)" />
                 </label>
+                <div>
+                    <small class="text-danger" *ngIf="isHeadshotFileSizeMax">File size should be less than 8 MB</small>
+                </div>
+                <div> <small class="text-danger" *ngIf="isDimenssionMax">Image should be 500 * 300 (width * height)
+                    </small>
+                </div>
             </div>
             <div class="px-3">
                 <table class="table m-0">
@@ -193,7 +208,8 @@
                                 </button>
                             </td>
                             <td>
-                                <button mat-raised-button color="primary" (click)="onUploadLogo()">
+                                <button mat-raised-button color="primary"
+                                    [disabled]="isHeadshotFileSizeMax || isDimenssionMax" (click)="onUploadLogo()">
                                     <mat-icon>file_upload</mat-icon>Upload
                                 </button>
                             </td>
