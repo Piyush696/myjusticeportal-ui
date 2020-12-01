@@ -55,7 +55,12 @@ export class HireLawyerComponent implements OnInit, AfterViewInit {
 
   onGetLaywers() {
     this.hireLawyerService.getOrganization().subscribe((res: any) => {
-      this.organizationList = res.data;
+      this.organizationList = res.data.reduce((acc, element) => {
+        if (!element.lawyerFacility[0].lawyer_facility.isPremium == true) {
+          return [...acc, element];
+        }
+        return [element, ...acc];
+      }, []);
       this.filteredOrganizationList = this.organizationList
       this.specialityData = [...new Set(this.filteredOrganizationList.map(item => item.specialty))];
     })
@@ -73,8 +78,8 @@ export class HireLawyerComponent implements OnInit, AfterViewInit {
     }, 500);
   }
 
-  viewUser(userId){
-    this.router.navigateByUrl('mjp/user/lawyer-profile/'+userId)
+  viewUser(userId) {
+    this.router.navigateByUrl('mjp/user/lawyer-profile/' + userId)
   }
 
   onCloseModal() {

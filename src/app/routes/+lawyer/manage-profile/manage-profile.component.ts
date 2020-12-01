@@ -21,6 +21,10 @@ export class ManageProfileComponent implements OnInit {
   public uploader2: FileUploader = new FileUploader({ url: URL });
   public hasAnotherDropZoneOver: boolean = false;
   path: any;
+  isFileSizeMax: boolean;
+  isHeadshotFileSizeMax: boolean;
+  isDimenssionMax: boolean;
+  isDimenssionMax1: boolean;
   public fileOverAnother(e: any): void {
     this.hasAnotherDropZoneOver = e;
   }
@@ -163,5 +167,51 @@ export class ManageProfileComponent implements OnInit {
   }
   closeModal() {
     this.dialog.closeAll();
+  }
+
+  onProfile(file) {
+    const maxAllowedSize = 5 * 1024 * 1024
+    const height = 200;
+    const width = 100;
+
+    if (file[0].size > maxAllowedSize) {
+      this.isFileSizeMax = true
+    } else {
+      this.isFileSizeMax = false
+    }
+    const Img = new Image();
+    const URL = window.URL || window.webkitURL;
+    const filesToUpload = (file);
+    Img.src = URL.createObjectURL(filesToUpload[0]);
+    Img.onload = (e: any) => {
+      if (e.path[0].height > height && e.path[0].width > width) {
+        this.isDimenssionMax = true
+      } else {
+        this.isDimenssionMax = false
+      }
+    }
+  }
+
+  onHeadshot(file) {
+    const maxAllowedSize = 8 * 1024 * 1024
+    const height = 300;
+    const width = 550;
+
+    if (file[0].size > maxAllowedSize) {
+      this.isHeadshotFileSizeMax = true
+    } else {
+      this.isHeadshotFileSizeMax = false
+    }
+    const Img = new Image();
+    const URL = window.URL || window.webkitURL;
+    const filesToUpload = (file);
+    Img.src = URL.createObjectURL(filesToUpload[0]);
+    Img.onload = (e: any) => {
+      if (e.path[0].height > height && e.path[0].width > width) {
+        this.isDimenssionMax1 = true
+      } else {
+        this.isDimenssionMax1 = false
+      }
+    }
   }
 }
