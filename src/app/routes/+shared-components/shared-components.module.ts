@@ -12,6 +12,8 @@ import { RouterModule } from '@angular/router';
 import { ChatComponent } from './chat/chat.component';
 import { FileUploadModule } from 'ng2-file-upload';
 import { MesageListComponent } from './mesage-list/mesage-list.component';
+import { ColorPickerModule } from 'ngx-color-picker';
+import { StripeComponent } from './stripe/stripe.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +24,8 @@ import { MesageListComponent } from './mesage-list/mesage-list.component';
     ViewFacilitiesComponent,
     SecurityQuestionComponent,
     ChatComponent,
-    MesageListComponent
+    MesageListComponent,
+    StripeComponent
   ],
   imports: [
     CommonModule,
@@ -30,7 +33,8 @@ import { MesageListComponent } from './mesage-list/mesage-list.component';
     ReactiveFormsModule,
     SharedMaterialModule,
     RouterModule,
-    FileUploadModule
+    FileUploadModule,
+    ColorPickerModule
   ],
   exports: [
     LoginComponent,
@@ -40,7 +44,8 @@ import { MesageListComponent } from './mesage-list/mesage-list.component';
     ViewFacilitiesComponent,
     SecurityQuestionComponent,
     ChatComponent,
-    MesageListComponent
+    MesageListComponent,
+    StripeComponent
   ]
 })
 

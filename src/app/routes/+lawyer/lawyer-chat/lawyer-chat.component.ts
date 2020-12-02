@@ -19,7 +19,7 @@ export class LawyerChatComponent implements OnInit {
   isMessage: boolean = false;
   receiverId: any;
   userList = [];
-  headerText = "Users"
+  headerText = "Your Connected Users"
 
 
   constructor(private store: Store<any>, private messageService: MessageService) { }
@@ -50,4 +50,12 @@ export class LawyerChatComponent implements OnInit {
     this.receiverId = value.receiverId
     this.getMessageHistory(this.receiverId)
   }
+
+  userAdd(user) {
+    let data = this.userList.find(item => item.userId == user.userId)
+    if (data == undefined) {
+      this.userList.push(user)
+    }
+  }
+
 }

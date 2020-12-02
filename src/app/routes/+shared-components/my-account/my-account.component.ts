@@ -7,6 +7,7 @@ import { ToasterService } from 'app/services/toaster.service';
 import { RegistrationService } from 'app/services/registration.service';
 import { UserMetaService } from 'app/services/user-meta.service';
 import { UserService } from 'app/services/user.service';
+import { FacilityService } from 'app/services/registration/facility.service';
 
 @Component({
   selector: 'app-my-account',
@@ -33,11 +34,12 @@ export class MyAccountComponent implements OnInit {
   userMeta: any;
   buttonText: string = 'Edit'
   previousSecurityId: any;
+  facilityList: any;
 
 
   constructor(private registrationService: RegistrationService, public dialog: MatDialog,
     private toasterService: ToasterService, private securityService: SecurityService,
-    private userService: UserService, private store: Store<any>,
+    private userService: UserService, private store: Store<any>, private facilityService: FacilityService,
     private fb: FormBuilder, private userMetaService: UserMetaService) { }
 
   ngOnInit() {
@@ -45,6 +47,8 @@ export class MyAccountComponent implements OnInit {
     this.getLoginDetails();
     this.securityQuestionControl();
     this.getAddUserSecurityQuestion()
+    this.getAllFacilities()
+
   }
 
   createControl() {
@@ -58,7 +62,7 @@ export class MyAccountComponent implements OnInit {
       mobile: ['']
     })
     this.userMetaForm = this.fb.group({
-      housing_unit: ['', [Validators.required]],
+      housing_unit: [''],
       facility: ['', [Validators.required]]
     })
     this.createPasswordControl();
@@ -85,7 +89,7 @@ export class MyAccountComponent implements OnInit {
 
   openModal(templateRef) {
     let dialogRef = this.dialog.open(templateRef, {
-      width: '500px',
+      width: '800px',
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -93,10 +97,9 @@ export class MyAccountComponent implements OnInit {
   }
 
   openQuestionModal(templateRef, value) {
-    console.log(value)
     this.previousSecurityId = value.securityQuestionId
     let dialogRef = this.dialog.open(templateRef, {
-      width: '500px',
+      width: '800px',
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -156,8 +159,11 @@ export class MyAccountComponent implements OnInit {
     this.profileForm.get('userName').enable()
     this.profileForm.get('userEmail').enable()
     this.profileForm.get('mobile').enable()
-
-    this.userMetaForm.enable()
+    this.profileForm.get('userName').enable()
+    this.profileForm.get('firstName').enable()
+    this.profileForm.get('lastName').enable()
+    this.userMetaForm.get('housing_unit').enable()
+    this.profileForm.get('middleName').enable()
   }
 
   userMetaUpdate() {
@@ -193,9 +199,7 @@ export class MyAccountComponent implements OnInit {
 
   getAddUserSecurityQuestion() {
     this.securityService.getUpdateUserSecurityQuestion().subscribe((questions: any) => {
-      console.log(questions)
       this.addedSecurityQuestionList = questions.data
-      console.log(this.addedSecurityQuestionList)
     })
   }
 
@@ -278,4 +282,11 @@ export class MyAccountComponent implements OnInit {
       }
     })
   }
+
+  getAllFacilities() {
+    this.facilityService.getAllFacility().subscribe((res: any) => {
+      this.facilityList = res.data
+    })
+  }
+
 }

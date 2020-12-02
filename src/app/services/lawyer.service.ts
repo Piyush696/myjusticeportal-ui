@@ -26,4 +26,26 @@ export class LawyerService {
   getClients() {
     return this.httpClient.get<object>(`${this.apiPath}/lawyer/users`, this.getHeaders());
   }
+
+  postPay(data) {
+    return this.httpClient.post<object>(`${this.apiPath}/stripe`, data);
+  }
+
+  subscribePlan(customer) {
+    return this.httpClient.post<object>(`${this.apiPath}/stripe/subscribe_plan`, customer);
+  }
+
+  validateCard(data) {
+    return this.httpClient.post<object>(`${this.apiPath}/stripe/validate_card`, data);
+  }
+
+
+  deleteLawyerCase(lawyerId, caseId) {
+    return this.httpClient.post<object>(`${this.apiPath}/lawyer/${caseId}`, { lawyerId }, this.getHeaders());
+  }
+
+  getBillingDetails() {
+    return this.httpClient.post<object>(`${this.apiPath}/stripe/subcription_details`, this.getHeaders())
+  }
+
 }

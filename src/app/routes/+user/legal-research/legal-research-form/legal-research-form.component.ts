@@ -11,12 +11,24 @@ import { UserService } from 'app/services/user.service';
   styleUrls: ['./legal-research-form.component.css']
 })
 export class LegalResearchFormComponent implements OnInit, OnChanges {
+
   @Input() reSearchDetails: any
   legalForm: FormGroup;
   userData: any;
   userMeta: any;
   buttonText: string = "Submit Form"
   isSentensed: boolean = true;
+  isProse: boolean = true;
+  otherField: boolean = true;
+
+  arrayList = [{ "name": 'Local Law Enforcement Agency' }, { "name": ' US Marshall' }, { "name": ' US Marshall' }, { "name": ' ICE/INS' },
+  { "name": ' Georgia DOC' }, { "name": 'Federal Bureau of Prisons' }, { "name": 'Other (Complete next field)' }]
+
+  matterArrayList = [{ "name": 'My current charges' }, { "name": ' An Appeal i am pursuing' }, { "name": 'A Habeas corpus action' }, { "name": 'A Civil right issue' },
+  { "name": 'A Condition of Confinement Concern' }, { "name": 'A Civil issue such as child custody' }, { "name": 'Some other legal matter' }]
+
+  juridictionList = [{ "name": 'Georgia (Criminal)' }, { "name": 'Georgia (Civil)' }, { "name": 'Federal (Criminal)' }, { "name": 'Federal (Civil)' },
+  { "name": 'Administrative' }, { "name": 'Immigration(ICE)' }, { "name": 'Other state (Complete next field)' }]
 
   constructor(private toasterService: ToasterService, private router: Router, private fb: FormBuilder,
     private store: Store<any>, private legalResearchService: LegalResearchService, private userService: UserService) { }
@@ -33,9 +45,18 @@ export class LegalResearchFormComponent implements OnInit, OnChanges {
       this.legalForm.get('sentenced').setValue(this.reSearchDetails?.sentenced);
       this.legalForm.get('researchedMatter').setValue(this.reSearchDetails?.researchedMatter);
       this.legalForm.get('areYou_Pro_se').setValue(this.reSearchDetails?.areYou_Pro_se);
+      this.legalForm.get('other').setValue(this.reSearchDetails?.other);
+      this.legalForm.get('lawyerRepresentingMatter').setValue(this.reSearchDetails?.lawyerRepresentingMatter);
+      this.legalForm.get('selectLawyerRepresenting').setValue(this.reSearchDetails?.selectLawyerRepresenting);
+      this.legalForm.get('juridictionLegalMatter').setValue(this.reSearchDetails?.juridictionLegalMatter);
+      this.legalForm.get('otherState').setValue(this.reSearchDetails?.otherState);
+      this.legalForm.get('information1').setValue(this.reSearchDetails?.information1);
+      this.legalForm.get('information2').setValue(this.reSearchDetails?.information2);
+      this.legalForm.get('information3').setValue(this.reSearchDetails?.information3);
+      this.legalForm.get('information4').setValue(this.reSearchDetails?.information4);
+      this.legalForm.get('information5').setValue(this.reSearchDetails?.information5);
       this.buttonText = 'Update Form'
     }
-
   }
 
   ngOnInit(): void {
@@ -58,6 +79,16 @@ export class LegalResearchFormComponent implements OnInit, OnChanges {
       sentenced: ['', [Validators.required]],
       researchedMatter: ['', [Validators.required]],
       areYou_Pro_se: ['', [Validators.required]],
+      other: ['', [Validators.required]],
+      lawyerRepresentingMatter: ['', [Validators.required]],
+      selectLawyerRepresenting: ['', [Validators.required]],
+      juridictionLegalMatter: ['', [Validators.required]],
+      otherState: [''],
+      information1: ['', [Validators.required]],
+      information2: ['', [Validators.required]],
+      information3: ['', [Validators.required]],
+      information4: ['', [Validators.required]],
+      information5: ['', [Validators.required]]
     });
   }
 
@@ -105,13 +136,23 @@ export class LegalResearchFormComponent implements OnInit, OnChanges {
       this.userMeta = result.data.userMeta
       this.legalForm.get('housing_unit').setValue(result.data.userMeta[0]?.metaValue);
       this.legalForm.get('housing_unit').disable();
-
-
     })
   }
 
   OnConvictedSelect(value) {
     this.isSentensed = JSON.parse(value)
+  }
+
+  onProSe(value) {
+    this.isProse = JSON.parse(value)
+  }
+
+  onSelectOther(value) {
+    if (value.value == 'Other state (Complete next field)') {
+      this.otherField = true
+    } else {
+      this.otherField = false
+    }
   }
 
 }

@@ -8,11 +8,18 @@
             <h2 class="text-center">Select facilities:</h2>
             <p class="pl-3">Please choose facilities.</p>
             <ul class="pl-3">
-                <li *ngFor="let facility of facilityList">
-                    <mat-checkbox color="primary" (change)="onNativeChange($event.checked,facility?.facilityId)">
-                        {{facility?.facilityName}}
-                    </mat-checkbox>
-                </li>
+                <div *ngIf="facilityList.length">
+                    <li *ngFor="let facility of facilityList">
+                        <mat-checkbox color="primary" (change)="onNativeChange($event.checked,facility?.facilityId)">
+                            {{facility?.facilityName}}
+                        </mat-checkbox>
+                    </li>
+                </div>
+                <span *ngIf="!facilityList.length">
+                    <span>Unfortunately, we do not currently have any active facilities in your state. Please
+                        contact us and we can prioritizing
+                        access for your state.</span>
+                </span>
             </ul>
             <div class="mx-3 row d-flex justify-content-between mt-2">
                 <button class="button-purple px-4 py-1" mat-raised-button (click)="onPeviousClick()">

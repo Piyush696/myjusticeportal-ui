@@ -1,0 +1,102 @@
+<div>
+  <div>
+    <h1 class="mb-0">Search Inmates</h1>
+    <h4>View all Inmates for Public defender.</h4>
+  </div>
+    <mat-card class="w-100">
+        <div class="d-flex justify-content-between">
+          <div>
+            <mat-form-field class="w-100">
+              <mat-label>Search</mat-label>
+              <input matInput (keyup)="search($event.target.value)">
+            </mat-form-field>
+          </div>
+          <div>
+            <mat-form-field appearance="fill">
+              <mat-label>Facility</mat-label>
+              <mat-select (selectionChange)="onFacilityFiltered($event)">
+                <mat-option>
+                  Select facility
+                </mat-option>
+                <mat-option *ngFor="let facility of facilityList" [value]="facility.facilityId">
+                  {{facility.facilityName}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+        </div>
+        <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8 w-100">
+          <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>User</th>
+            <td mat-cell *matCellDef="let user">
+              <span>
+                {{user?.firstName | titlecase}}
+                <span *ngIf="user?.middleName">
+                  &nbsp;{{user?.middleName | titlecase}}
+                </span>
+                &nbsp;{{user?.lastName | titlecase}}
+              </span>
+              <span *ngIf="!user?.firstName && !user?.middleName && !user?.lastName">
+                N/A
+              </span>
+            </td>
+          </ng-container>
+  
+          <ng-container matColumnDef="facilities">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Facility</th>
+            <td mat-cell *matCellDef="let user">
+              <ng-container *ngFor="let facility of user?.facilities;let isLast=last">
+                <span>{{facility?.facilityName}}{{isLast ? '' : ', '}}</span>
+              </ng-container>
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="assignee">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Assignee</th>
+            <td mat-cell *matCellDef="let user">
+              <span>
+                {{user?.assignee | titlecase}}
+              </span>
+              <span *ngIf="!user?.assignee">
+                N/A
+              </span>
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="action">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Action</th>
+            <td mat-cell *matCellDef="let user">
+                <button  class="button-purple mr-1" mat-mini-fab title="View Details" (click)="openModal(assigneeModal,user.userId)">
+                    <mat-icon>remove_red_eye</mat-icon>
+                </button>
+            </td>
+        </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+        <mat-paginator [pageSizeOptions]="getPageSizeOptions()" showFirstLastButtons></mat-paginator>
+      </mat-card>
+</div>
+
+<ng-template #assigneeModal>
+  <div>
+    <h2>Assignee Defender to User</h2>
+  </div>
+    <mat-form-field appearance="fill" class="w-100 p-1">
+      <mat-select (selectionChange)="onSelectDefender($event)">
+        <mat-option>Select Public Defender</mat-option>
+          <mat-option *ngFor="let user of defenderList" value="{{user.userId}}">
+              {{user.firstName}} {{user.middleName}}  {{user.lastName}} 
+          </mat-option>
+      </mat-select>
+  </mat-form-field>
+  <div class="d-flex justify-content-between p-2">
+    <button mat-raised-button color="primary" class="button-purple px-4 py-1" (click)="onCancel()">
+        Cancel
+    </button>
+    <button class="button-purple px-4 py-1" mat-raised-button color="primary" (click)="saveChanges()">
+        Save
+    </button>
+</div>
+</ng-template>

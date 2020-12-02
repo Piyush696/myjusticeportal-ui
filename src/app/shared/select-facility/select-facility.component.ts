@@ -18,12 +18,10 @@ export class SelectFacilityComponent implements OnInit {
   constructor(private facilityService: FacilityService) { }
 
   ngOnInit(): void {
-    console.log(this.currentState)
     this.getAllFacility();
   }
 
   getAllFacility() {
-    console.log(this.currentState)
     this.facilityService.getAllFacility().subscribe((facilities: any) => {
       if (this.currentState) {
         for (let i = 0; i <= this.currentState.length - 1; i++) {

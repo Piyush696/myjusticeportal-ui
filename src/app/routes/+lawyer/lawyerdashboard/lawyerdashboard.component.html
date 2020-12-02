@@ -1,112 +1,226 @@
-<div *ngIf="!isAuthorized">
-    <h2 class="font-weight-bold p-3 unauthorized-text">Your registration is being processed. We must verify your standing in the bar of the state(s) you selected. When your account is approved, you will receive an email notification. Most registrations are processed within 24 hours.<br/>
-Meanwhile, please complete your account information. You will not be charged for anything unless your account is approved.</h2>
+<div class="container pl-0" *ngIf="!isAuthorized">
+  <h1 class="font-weight-bold unauthorized-text">Welcome to My Justice Portal!</h1>
+  <h2 class="unauthorized-text">Your registration is being processed. We must verify your standing in the bar of the state(s) you selected. When your account is approved, you will receive an email notification. Most registrations are processed within 24 hours.<br/><br/>
+    Meanwhile, please complete your account information. You will not be charged for anything unless your account is approved.</h2>
 </div>
-<div *ngIf="isAuthorized">
-    <div class="d-flex justify-content-between">
-        <div>
-            <h1 class="mb-0">Dashboard</h1>
-            <h4>View and actions for requested cases.</h4>
-        </div>
+<div *ngIf="!isAuthorized">
+  <div class="d-flex justify-content-center align-items-center;">
+    <div class="col-12 pt-2 pl-0">
+      <mat-card class="mat-elevation-z10 d-flex justify-content-center">
+        <h2>Account Status: <span class="panding-review">Pending Review</span></h2>
+      </mat-card>
     </div>
+  </div>
+</div>
 
-    <div class="mt-4">
-        <mat-card class="outer-card mat-elevation-z10 mt-3">
-            <mat-label class="font-weight-bold">
-                Requested cases({{requestedCases?.length}}):
-            </mat-label>
-            <mat-card class="inner-card mt-2" *ngIf="!requestedCases?.length">
-                <span>No data available.</span>
-            </mat-card>
-            <mat-card class="d-flex flex-row justify-content-between align-items-center inner-card mt-2"
-                *ngFor="let case of requestedCases">
-                <div class="d-flex flex-column">
-                    <span>{{case?.briefDescriptionOfChargeOrLegalMatter}}</span>
-                    <span>
-                        Requested By: {{case?.inmate?.firstName}}
-                        <span *ngIf="case?.inmate?.middleName">
-                            &nbsp;{{case?.inmate?.middleName}}
-                        </span>
-                        &nbsp;{{case?.inmate?.lastName}}
-                    </span>
-                    <span>
-                        Status:&nbsp;
-                        <span class="font-weight-bold" [ngClass]="{'text-warning': case?.lawyer_case?.status == 'Requested', 
-                        'text-success': case?.lawyer_case?.status == 'Approved',
-                        'text-danger': case?.lawyer_case?.status == 'Rejected'}">
-                            {{case?.lawyer_case?.status}}
-                        </span>
-                    </span>
-                    <span>
-                        Files attached:{{case?.caseFile?.length}}
-                    </span>
-                </div>
-                <div>
-                    <button mat-mini-fab color="primary" title="Approve Case"
-                        (click)="onApproveCase(case?.lawyer_case?.lawyer_caseId)">
-                        <mat-icon>done_outline</mat-icon>
-                    </button>
-                    <button class="ml-1" mat-mini-fab color="warn" title="Reject Case"
-                        (click)="onRejectCase(case?.lawyer_case?.lawyer_caseId)">
-                        <mat-icon>clear</mat-icon>
-                    </button>
-                </div>
-            </mat-card>
-        </mat-card>
-    </div>
 
-    <div class="mt-4">
-        <mat-card class="w-100">
-            <div class="d-flex justify-content-between">
+<div *ngIf="showDashboard && isAuthorized">
+  <h1 class="mb-0"><b>Dashboard</b></h1>
+  <h4>A summary of recent activity with your Cases and Connections.</h4>
+</div>
+
+<div *ngIf="billingBoard">
+  <div class="d-flex justify-content-between">
+  </div>
+  <div *ngIf="userData?.roles[0]?.roleId == 3">
+    <div class="row">
+      <div class="col-6">
+        <div class="row pt-2">
+          <div class="col-12">
+            <div class="d-flex justify-content-center align-items-center;">
+              <mat-card class="mat-elevation-z10 w-100">
                 <div>
-                    <mat-form-field class="w-100">
-                        <mat-label>Search</mat-label>
-                        <input matInput (keyup)="search($event.target.value)">
-                    </mat-form-field>
+                  <span class="h5 text-center">Step 1 :</span>&nbsp;
+                  <span class="h5 text-center font-weight-bold">Explore Plans</span>
                 </div>
-                <div>
-                    <mat-form-field appearance="fill">
-                        <mat-label>Facility</mat-label>
-                        <mat-select (selectionChange)="onFacilityFiltered($event)">
-                            <mat-option>
-                                Select facility
-                            </mat-option>
-                            <mat-option *ngFor="let facility of facilities" [value]="facility.facilityId">
-                                {{facility.facilityName}}
-                            </mat-option>
-                        </mat-select>
-                    </mat-form-field>
+                <h4>Pay per connection.</h4>
+                <div class="row">
+                  <div class="col-12 pt-2">
+                    <mat-card class="mat-elevation-z10 border-card">
+                      <input class="circle"  type="radio" name="package"
+                        (change)="onSelectPlan('250',$event.checked)">
+                        Up to 5 Connections, $250/mo/lawyer
+                    </mat-card>
+                  </div>
                 </div>
+
+                <div class="row">
+                  <div class="col-12 pt-2">
+                    <mat-card class="mat-elevation-z10 border-card">
+                      <input class="circle"  type="radio" name="package"
+                        (change)="onSelectPlan('350',$event.checked)">
+                        Up to 25 Connections, $350/mo/lawyer
+                    </mat-card>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-12 pt-2">
+                    <mat-card class="mat-elevation-z10 border-card">
+                      <input class="circle"  type="radio" name="package"
+                        (change)="onSelectPlan('400',$event.checked)">
+                        Unlimited, $400.00/mo/lawyer
+                    </mat-card>
+                  </div>
+                </div>
+              </mat-card>
             </div>
-            <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8 w-100">
-                <ng-container matColumnDef="name">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header>User</th>
-                    <td mat-cell *matCellDef="let user">
-                        <span>
-                            {{user?.firstName | titlecase}}
-                            <span *ngIf="user?.middleName">
-                                &nbsp;{{user?.middleName | titlecase}}
-                            </span>
-                            &nbsp;{{user?.lastName | titlecase}}
-                        </span>
-                        <span *ngIf="!user?.firstName && !user?.middleName && !user?.lastName">
-                            N/A
-                        </span>
-                    </td>
-                </ng-container>
-
-                <ng-container matColumnDef="facilities">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Facility</th>
-                    <td mat-cell *matCellDef="let user">
-                        <ng-container *ngFor="let facility of user?.facilities;let isLast=last">
-                            <span>{{facility?.facilityName}}{{isLast ? '' : ', '}}</span>
-                        </ng-container>
-                    </td>
-                </ng-container>
-                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-            </table>
-            <mat-paginator [pageSizeOptions]="getPageSizeOptions()" showFirstLastButtons></mat-paginator>
-        </mat-card>
+          </div>
+          <div class="col-12 pt-2">
+            <div class="d-flex justify-content-center align-items-center;">
+              <mat-card class="mat-elevation-z10 w-100">
+                <div>
+                  <span class="h5 text-center">Step 2 :</span>&nbsp;
+                  <span class="h5 text-center font-weight-bold">Select facilities</span>
+                </div>
+                <h4>Based on the states in which you are admitted to the bar, the following facilities
+                  are available.
+                  Please select facility you want.</h4>
+                <div class="col-12 pt-2">
+                  <div>
+                    <li *ngFor="let facility of facilities;">
+                      <mat-checkbox color="primary"
+                        (change)="onFacilitySelect($event.checked,facility?.facilityId,facility.facilityUserCount)">
+                        {{facility?.facilityName}} ({{facility.facilityUserCount}})
+                      </mat-checkbox>
+                      <div *ngIf="facility.isSelected">
+                        <mat-card class="border-card mb-2">
+                          <h4 class="font-weight-bold text-center  mb-1 pt-0">Select Add Ons for this
+                            facility.
+                          </h4>
+                          <div>
+                            <mat-checkbox color="primary" [(ngModel)]="facility.addOns.premium"
+                              (change)="onSelectAddOns($event.checked,facility?.facilityId,'premium')">
+                              <span>Premium listing ($10/mo)</span>
+                            </mat-checkbox>
+                          </div>
+                          <div>
+                            <mat-checkbox color="primary" [(ngModel)]="facility.addOns.sponsors"
+                              (change)="onSelectAddOns($event.checked,facility?.facilityId,'sponsors')">
+                              <span>Sponsors Unit Rotation ($10/mo)</span>
+                            </mat-checkbox>
+                          </div>
+                        </mat-card>
+                      </div>
+                    </li>
+                  </div>
+                </div>
+              </mat-card>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-6">
+        <!-- Estimatad Monthly Bill  -->
+        <div class="col-12 pt-2">
+          <div class="d-flex justify-content-center align-items-center;">
+            <mat-card>
+              <div class="col-12 pt-2">
+                <div>
+                  <span class="h5 text-center">Step 3 :</span>&nbsp;
+                  <span class="h5 text-center font-weight-bold">Review Plan Details</span>
+                </div>
+                <span class="text-center text-black">Based on the facilities and add ons that you have selected, please
+                  review your monthly bill below.</span>
+                <mat-card class="mat-elevation-z10">
+                  <div class="d-flex justify-content-between align-items-between">
+                    <div>Plan Base Cost:</div>
+                    <div>{{planPrice | currency:'USD':'symbol'}}</div>
+                  </div>
+                  <div class="d-flex justify-content-between align-items-between">
+                    <div>Total inmate access Charges:</div>
+                    <div>{{ (averageCount ? averageCount * 0.10 : 0) | currency:'USD':'symbol'}}
+                    </div>
+                  </div>
+                  <div class="d-flex justify-content-between align-items-between">
+                    <div>Add On charges:</div>
+                    <div>{{(addOnsCount  ? (addOnsCount * 10 )  : 0 ) | currency:'USD':'symbol'}}
+                    </div>
+                  </div>
+                  <hr>
+                  <div class="d-flex justify-content-between align-items-between">
+                    <div>Total Monthly Charge:</div>
+                    <div>
+                      <span class="font-weight-bold">Total: </span> {{totalPrice | currency:'USD':'symbol'}}
+                    </div>
+                  </div>
+                </mat-card>
+              </div>
+            </mat-card>
+          </div>
+        </div>
+        <div class="col-12 mt-2">
+          <mat-card class="p-4">
+            <div>
+              <span class="h5 text-center">Step 4 :</span>&nbsp;
+              <span class="h5 text-center font-weight-bold">Add Credit Card Info</span>
+            </div>
+            <span class="text-center text-black">Please enter your credit card information in the form below.</span>
+            <app-stripe class="pt-2" [totalCount]="totalPrice" (onPayEvent)="onPayEvent($event)"
+              [facilitiesList]="facilities"></app-stripe>
+              <span class="text-center card-footer-style">Everything look correct? Click pay and Get Started to complete your setup and
+                start using My Justice Portal.</span>
+          </mat-card>
+        </div>
+      </div>
     </div>
+  </div>
+</div>
+
+<div *ngIf="showDashboard && isAuthorized">
+  <mat-card class="mat-elevation-z10 border-card">
+    <div class="row">
+      <div class="col-4">
+        <mat-card class="dashboard-card">
+          <div class="row d-flex justify-content-center">
+            <p class="pl-1 matheading">Inquiries</p>
+          </div>
+          <div class="row mt-4 mb-4 d-flex justify-content-center">
+            <div id="circle" [ngStyle]="{'background-color': lawyerData?.caseCount > 0  ? '#dc3545b8' : '#edededed'}">
+              <p style="font-size:3em;padding-top: 0.6em;">{{lawyerData?.caseCount}}</p>
+            </div>
+          </div>
+          <div class="row d-flex justify-content-center">
+            <button [routerLink]="'../inquiries'" class="btn bg-color px-perc py-3"
+              [ngStyle]="{'background-color': lawyerData?.caseCount > 0  ? 'orangered'  : ''}">View
+              Inquiries</button>
+          </div>
+        </mat-card>
+      </div>
+      <div class="col-4">
+        <mat-card class="dashboard-card">
+          <div class="row d-flex justify-content-center">
+            <p class="pl-1 matheading">New Messages</p>
+          </div>
+          <div class="row mt-4 mb-4 d-flex justify-content-center">
+            <div id="circle"
+              [ngStyle]="{'background-color': lawyerData?.messageCount > 0  ? '#dc3545b8' : '#edededed'}">
+              <p style="font-size:3em;padding-top: 0.6em;">{{lawyerData?.messageCount}}</p>
+            </div>
+          </div>
+          <div class="row d-flex justify-content-center">
+            <button [routerLink]="'../lawyer-chat'" class="btn bg-color px-perc py-3"
+              [ngStyle]="{'background-color': lawyerData?.messageCount > 0  ? 'orangered' : ''}">View
+              Messages</button>
+          </div>
+        </mat-card>
+      </div>
+      <div class="col-4">
+        <mat-card class="dashboard-card">
+          <div class="row d-flex justify-content-center">
+            <p class="pl-1 matheading">Connected Cases</p>
+          </div>
+          <div class="row mt-4 mb-4 d-flex justify-content-center">
+            <div id="circle" [ngStyle]="{'background-color': lawyerData?.myCases > 0  ? '#dc3545b8' : '#edededed'}">
+              <p style="font-size:3em;padding-top: 0.6em;">{{lawyerData?.myCases}}</p>
+            </div>
+          </div>
+          <div class="row d-flex justify-content-center">
+            <button [routerLink]="'../accepted-cases'" class="btn bg-color px-perc py-3"
+              [ngStyle]="{'background-color': lawyerData?.myCases > 0  ? 'orangered' : ''}">View Cases</button>
+          </div>
+        </mat-card>
+      </div>
+    </div>
+  </mat-card>
 </div>

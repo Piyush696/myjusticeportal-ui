@@ -81,8 +81,9 @@
                             </mat-error>
                         </mat-form-field>
                     </div>
-
-                    <div class="col-12" *ngIf="!isUser">
+                </div>
+                <div class="row" *ngIf="!isUser">
+                    <div class="col-4 p-0 pl-3">
                         <mat-form-field appearance="fill" class="w-100 p-1">
                             <mat-label>Email</mat-label>
                             <input matInput placeholder="Email" [formControl]="profileForm.controls['userName']"
@@ -90,11 +91,11 @@
                             <mat-error>
                                 <div
                                     *ngIf="profileForm.controls['userName'].invalid &&
-                                                                   profileForm.controls['userName'].touched && profileForm.controls['userName'].hasError('taken')">
+                                                               profileForm.controls['userName'].touched && profileForm.controls['userName'].hasError('taken')">
                                     <small class="font13">Email already taken.</small>
                                 </div>
                                 <div *ngIf="profileForm.controls['userName'].invalid && profileForm.controls['userName'].touched
-                                                     && profileForm.get('userName').errors?.required">
+                                                 && profileForm.get('userName').errors?.required">
                                     <small class="font13">
                                         Email is Required
                                     </small>
@@ -102,55 +103,7 @@
                             </mat-error>
                         </mat-form-field>
                     </div>
-                </div>
-                <div class="row" *ngIf="isUser">
-                    <div class="col-12">
-                        <mat-form-field appearance="fill" class="w-100 p-1">
-                            <mat-label>Housing Unit</mat-label>
-                            <input type="text" matInput placeholder="Legal Last Name"
-                                [formControl]="userMetaForm.controls['housing_unit']" required>
-                            <mat-error>
-                                <div
-                                    *ngIf="userMetaForm.controls['housing_unit'].invalid && userMetaForm.controls['housing_unit'].touched">
-                                    <small class="font13">
-                                        Housing Unit is Required
-                                    </small>
-                                </div>
-                            </mat-error>
-                        </mat-form-field>
-                    </div>
-                    <div class="col-12">
-                        <mat-form-field appearance="fill" class="w-100 p-1">
-                            <mat-label>Facility</mat-label>
-                            <input type="text" matInput [formControl]="userMetaForm.controls['facility']" required>
-                            <mat-error>
-                                <div
-                                    *ngIf="userMetaForm.controls['facility'].invalid && userMetaForm.controls['facility'].touched">
-                                    <small class="font13">
-                                        Facility is Required
-                                    </small>
-                                </div>
-                            </mat-error>
-                        </mat-form-field>
-                    </div>
-                </div>
-                <div class="row" *ngIf="isUser">
-                    <div class="col-6">
-                        <mat-form-field appearance="fill" class="w-100 p-1">
-                            <mat-label>Email</mat-label>
-                            <input type="text" matInput placeholder="Legal Last Name"
-                                [formControl]="profileForm.controls['userEmail']" required>
-                            <mat-error>
-                                <div
-                                    *ngIf="profileForm.controls['userEmail'].invalid && profileForm.controls['userEmail'].touched">
-                                    <small class="font13">
-                                        Email is Required
-                                    </small>
-                                </div>
-                            </mat-error>
-                        </mat-form-field>
-                    </div>
-                    <div class="col-6">
+                    <div class="col-4 p-0">
                         <mat-form-field appearance="fill" class="w-100 p-1">
                             <mat-label>Mobile</mat-label>
                             <input type="text" matInput [formControl]="profileForm.controls['mobile']" required>
@@ -165,7 +118,54 @@
                         </mat-form-field>
                     </div>
                 </div>
-
+                <div class="row" *ngIf="isUser">
+                    <div class="col-12">
+                        <mat-form-field appearance="fill" class="w-100 p-1">
+                            <mat-label>Housing Unit</mat-label>
+                            <input type="text" matInput placeholder="Housing Unit"
+                                [formControl]="userMetaForm.controls['housing_unit']">
+                        </mat-form-field>
+                    </div>
+                    <div class="col-12">
+                        <!-- <mat-form-field appearance="fill" class="w-100 p-1">
+                            <mat-label>Facility</mat-label>
+                            <input type="text" matInput [formControl]="userMetaForm.controls['facility']" required>
+                            <mat-error>
+                                <div
+                                    *ngIf="userMetaForm.controls['facility'].invalid && userMetaForm.controls['facility'].touched">
+                                    <small class="font13">
+                                        Facility is Required
+                                    </small>
+                                </div>
+                            </mat-error>
+                        </mat-form-field> -->
+                        <mat-form-field class="w-100 p-1">
+                            <mat-label>Facility</mat-label>
+                            <input type="text" matInput [formControl]="userMetaForm.controls['facility']"
+                                [matAutocomplete]="auto">
+                            <mat-autocomplete #auto="matAutocomplete">
+                                <mat-option *ngFor="let facility of facilityList" [value]="facility.facilityName">
+                                    {{facility.facilityName}}
+                                </mat-option>
+                            </mat-autocomplete>
+                        </mat-form-field>
+                    </div>
+                </div>
+                <div class="row" *ngIf="isUser">
+                    <div class="col-6">
+                        <mat-form-field appearance="fill" class="w-100 p-1">
+                            <mat-label>Email</mat-label>
+                            <input type="text" matInput placeholder="Legal Last Name"
+                                [formControl]="profileForm.controls['userEmail']">
+                        </mat-form-field>
+                    </div>
+                    <div class="col-6">
+                        <mat-form-field appearance="fill" class="w-100 p-1">
+                            <mat-label>Mobile</mat-label>
+                            <input type="text" matInput [formControl]="profileForm.controls['mobile']">
+                        </mat-form-field>
+                    </div>
+                </div>
                 <div class="row">
                     <div class="col-12">
                         <div class="d-flex align-items-center pb-3" *ngIf="!isUser">

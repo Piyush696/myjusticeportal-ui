@@ -22,6 +22,10 @@ import { LegalResearchFormComponent } from './legal-research/legal-research-form
 import { LegalResearchListComponent } from './legal-research/legal-research-list/legal-research-list.component';
 import { LegalResearchFormViewComponent } from './legal-research/legal-research-form-view/legal-research-form-view.component';
 import { EditLegalResearchFormComponent } from './legal-research/edit-legal-research-form/edit-legal-research-form.component';
+import { ContactComponent } from './contact/contact.component';
+import { LawyerProfileComponent } from './hire-lawyer/lawyer-profile/lawyer-profile.component';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { PendingInquriesComponent } from './pending-inquries/pending-inquries.component';
 
 @NgModule({
   declarations: [
@@ -42,6 +46,9 @@ import { EditLegalResearchFormComponent } from './legal-research/edit-legal-rese
     LegalResearchListComponent,
     LegalResearchFormViewComponent,
     EditLegalResearchFormComponent,
+    ContactComponent,
+    PendingInquriesComponent,
+    LawyerProfileComponent,
   ],
   imports: [
     CommonModule,
@@ -51,7 +58,14 @@ import { EditLegalResearchFormComponent } from './legal-research/edit-legal-rese
     FormsModule,
     ReactiveFormsModule,
     FileUploadModule
-  ]
+  ],
+  providers: [{
+    provide: MatDialogRef,
+    useValue: {}
+  }, {
+    provide: MAT_DIALOG_DATA,
+    useValue: {} // Add any data you wish to test if it is passed/used correctly
+  }]
 })
 
 export class UserModule { }

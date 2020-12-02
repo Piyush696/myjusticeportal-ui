@@ -8,6 +8,14 @@ import { LawyerdashboardComponent } from './lawyerdashboard/lawyerdashboard.comp
 import { ViewCaseDetailsComponent } from './view-case-details/view-case-details.component';
 import { AcceptedCasesComponent } from './accepted-cases/accepted-cases.component';
 import { LawyerChatComponent } from './lawyer-chat/lawyer-chat.component';
+import { TextMaskModule } from 'angular2-text-mask';
+import { ManageProfileComponent } from './manage-profile/manage-profile.component';
+import { FileUploadModule } from 'ng2-file-upload';
+import { ReversePipe } from './accepted-cases/reverse.pipe';
+import { InquiriesComponent } from './inquiries/inquiries.component';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { InquiriesCaseViewComponent } from './inquiries-case-view/inquiries-case-view.component';
+import { BillingSettingsComponent } from './billing-settings/billing-settings.component';
 
 @NgModule({
   declarations: [
@@ -15,15 +23,29 @@ import { LawyerChatComponent } from './lawyer-chat/lawyer-chat.component';
     ViewCaseDetailsComponent,
     AcceptedCasesComponent,
     LawyerChatComponent,
+    ManageProfileComponent,
+    ReversePipe,
+    InquiriesComponent,
+    InquiriesCaseViewComponent,
+    BillingSettingsComponent
   ],
   imports: [
+    TextMaskModule,
     CommonModule,
     LawyerRoutingModule,
     SharedMaterialModule,
     SharedComponentsModule,
     FormsModule,
-    ReactiveFormsModule
-  ]
+    ReactiveFormsModule,
+    FileUploadModule
+  ],
+  providers: [{
+    provide: MatDialogRef,
+    useValue: {}
+  }, {
+    provide: MAT_DIALOG_DATA,
+    useValue: {} // Add any data you wish to test if it is passed/used correctly
+  }]
 })
 
 export class LawyerModule { }

@@ -1,8 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { CaseService } from 'app/services/case.service';
 import { HireLawyerService } from 'app/services/hire-lawyer.service';
 import { StatesService } from 'app/services/states.service';
+import { UserAdditionInfoService } from 'app/services/user-addition-info.service';
 
 @Component({
   selector: 'app-hire-lawyer',
@@ -10,29 +12,80 @@ import { StatesService } from 'app/services/states.service';
   styleUrls: ['./hire-lawyer.component.scss']
 })
 
-export class HireLawyerComponent implements OnInit {
+export class HireLawyerComponent implements OnInit, AfterViewInit {
   organizationList: any;
   states: any[];
   specialityData: any;
   currentSpeciality: any;
   currentLocation: any;
   filteredOrganizationList: any;
+  @ViewChild('modalopen') modalopen: ElementRef
+  sponsorUserList: any;
+  lawyerData: any;
+  path = '';
 
-  constructor(private hireLawyerService: HireLawyerService, private caseService: CaseService,
-    private _statesService: StatesService) { }
+  constructor(private hireLawyerService: HireLawyerService, private caseService: CaseService, private router: Router,
+    private userAdditionalService: UserAdditionInfoService, private _statesService: StatesService, public dialog: MatDialog) { }
+
+  ngAfterViewInit(): void {
+    this.modalopen.nativeElement.click();
+  }
+
 
   ngOnInit(): void {
+    this.getSponsors();
     this.onGetLaywers();
-    this.stateData()
+    this.stateData();
+    this.modalopen.nativeElement.click();
+  }
+
+  getSponsors() {
+    this.userAdditionalService.getSponsorUsers().subscribe((sponsorsUser: any) => {
+      this.sponsorUserList = sponsorsUser.data
+    })
+  }
+
+  onContactLawyer(userId) {
+    this.router.navigateByUrl('/mjp/user/contact/' + userId)
+  }
+
+  onViewLawyer(userId) {
+    this.router.navigateByUrl('/mjp/user/lawyer-profile/' + userId)
   }
 
   onGetLaywers() {
     this.hireLawyerService.getOrganization().subscribe((res: any) => {
-      this.organizationList = res.data;
+      this.organizationList = res.data.reduce((acc, element) => {
+        if (!element.lawyerFacility[0].lawyer_facility.isPremium == true) {
+          return [...acc, element];
+        }
+        return [element, ...acc];
+      }, []);
       this.filteredOrganizationList = this.organizationList
       this.specialityData = [...new Set(this.filteredOrganizationList.map(item => item.specialty))];
     })
   }
+
+  openModal(templateRef, lawyerData) {
+    this.lawyerData = lawyerData
+    this.path = lawyerData?.userAdditionalInfo?.header?.downloadLink
+    let dialogRef = this.dialog.open(templateRef, {
+      width: '800px'
+    });
+    setTimeout(() => {
+      var x = document.getElementById('cust-img')
+      x.style.background = 'url(' + this.path + ')'
+    }, 500);
+  }
+
+  viewUser(userId) {
+    this.router.navigateByUrl('mjp/user/lawyer-profile/' + userId)
+  }
+
+  onCloseModal() {
+    this.dialog.closeAll();
+  }
+
   stateData() {
     this._statesService.getStates()
       .subscribe(data => {
@@ -102,5 +155,15 @@ export class HireLawyerComponent implements OnInit {
     else if (this.currentLocation == undefined) {
       this.organizationList = this.filteredOrganizationList
     }
+  }
+
+  viewContact(userId) {
+    this.router.navigateByUrl('mjp/user/contact/' + userId)
+    this.dialog.closeAll();
+  }
+
+  viewOrg(organizationId) {
+    this.router.navigateByUrl('mjp/user/hire-lawyer/' + organizationId)
+    this.dialog.closeAll();
   }
 }

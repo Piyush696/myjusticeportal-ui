@@ -10,7 +10,55 @@
   background: white;
 }
 
+.border-card {
+  background: #ededed;
+  border: 1px solid #000;
+}
+
 .unauthorized-text {
   line-height: 26px;
   letter-spacing: 1px;
+}
+
+.card-scroll {
+  height: 446px;
+  overflow-y: scroll;
+}
+
+.circle {
+  border-color: #ff6700 !important;
+  width: 20px;
+  height: 20px;
+  top: 6px !important;
+  position: relative;
+  border: 2px;
+}
+
+.panding-review {
+  color: #ff6700 !important;
+}
+
+.card-footer-style {
+  position: relative;
+  top: 8px;
+}
+
+#circle {
+  width: 234px;
+  height: 225px;
+  -webkit-border-radius: 110px;
+  -moz-border-radius: 110px;
+  border-radius: 110px;
+  background: #ededed;
+  text-align: center;
+  font: 32px Arial, sans-serif;
+}
+
+.matheading {
+  font-size: 25px;
+  text-align: center;
+}
+
+.dashboard-card {
+  background-color: gray;
 }

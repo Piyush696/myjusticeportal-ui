@@ -45,7 +45,7 @@
 <div class="pb-3">
     <mat-card class="outer-card">
         <mat-label class="font-weight-bold">
-            Shared Files (with my Lawyers)({{sharedCaseFiles?.length}}):
+            Shared Files (by my Lawyers)({{sharedCaseFiles?.length}}):
         </mat-label>
         <div *ngIf="!sharedCaseFiles?.length">
             <mat-label class="font-weight-bold text-info">
@@ -71,12 +71,12 @@
                     </span>
                 </div>
             </div>
-            <div class="d-flex">
+            <!-- <div class="d-flex">
                 <button class="ml-1" mat-mini-fab color="warn" title="Delete"
                     (click)="onOpenModal(confirmModal,file?.fileId)">
                     <mat-icon>delete</mat-icon>
                 </button>
-            </div>
+            </div> -->
         </mat-card>
     </mat-card>
 </div>

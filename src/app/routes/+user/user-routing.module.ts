@@ -16,12 +16,18 @@ import { LegalResearchFormComponent } from './legal-research/legal-research-form
 import { LegalResearchListComponent } from './legal-research/legal-research-list/legal-research-list.component';
 import { LegalResearchFormViewComponent } from './legal-research/legal-research-form-view/legal-research-form-view.component';
 import { EditLegalResearchFormComponent } from './legal-research/edit-legal-research-form/edit-legal-research-form.component';
+import { ContactComponent } from './contact/contact.component';
+import { LawyerProfileComponent } from './hire-lawyer/lawyer-profile/lawyer-profile.component';
+import { PendingInquriesComponent } from './pending-inquries/pending-inquries.component';
+
 
 const routes: Routes = [
     { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
     { path: 'dashboard', component: UserDashboardComponent },
     { path: 'my-account', component: MyAccountComponent },
     { path: 'case', component: CasesComponent },
+    { path: 'inquiries', component: PendingInquriesComponent },
+    { path: 'contact/:userId', component: ContactComponent },
     { path: 'case/create', component: CreateCaseComponent },
     { path: 'case/:caseId/edit', component: EditCaseComponent },
     { path: 'case/:caseId', component: ViewCaseComponent },
@@ -30,6 +36,8 @@ const routes: Routes = [
     { path: 'hire-lawyer/:organizationId', component: ViewLawyerComponent },
     { path: 'find-bondsman', component: FindBondsmanComponent },
     { path: 'message-my-lawyer', component: MessagingLawyerComponent },
+    { path: 'message-my-lawyer/:userId', component: MessagingLawyerComponent },
+    { path: 'lawyer-profile/:userId', component: LawyerProfileComponent },
     { path: 'find-bondsman/:organizationId', component: ViewBondsmanComponent },
     { path: 'legal-form', component: LegalResearchListComponent },
     { path: 'legal-form/create', component: LegalResearchFormComponent },

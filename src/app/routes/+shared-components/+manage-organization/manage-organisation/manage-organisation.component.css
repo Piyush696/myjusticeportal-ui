@@ -2,3 +2,25 @@
    line-height: 10px !important;
    letter-spacing: 1px !important;
  }
+
+
+ table,
+ th,
+ td {
+   border: 1px solid black;
+   border-collapse: collapse;
+ }
+
+ th,
+ td {
+   padding: 17px 5px 11px 14px;
+   text-align: left;
+ }
+
+ th {
+   width: 40%;
+   background: #f7f4f4;
+ }
+ .margin-remove{
+  margin-top: -30px;
+}

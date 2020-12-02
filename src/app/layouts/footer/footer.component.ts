@@ -44,13 +44,11 @@ export class FooterComponent implements OnInit {
         this.socket = io(SOCKET_ENDPOINT);
         this.socket.on('message-broadcast' + this.userInfo.userId, (data: any) => {
             if (data) {
-                console.log(data)
                 let msg = {
                     data: data
                 }
                 x.push(msg)
                 this.store.dispatch(new AddIncomingMessages(Object.assign({}, data)));
-                // console.log(Object.keys(msg).length + 1);
                 if ((this.userInfo.roles[0].roleId == 3) && (this.userInfo.userId === data.receiverId)) {
                     this.footerText = 'You have' + x.length + 'unreadMessages';
                 }
@@ -62,7 +60,6 @@ export class FooterComponent implements OnInit {
     }
 
     onClickButton() {
-        console.log('dwed', this.userInfo.roles[0].roleId)
         if (this.userInfo.roles[0].roleId == 1) {
             this.footerText = "Message My Lawyer";
         } else {

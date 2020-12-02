@@ -4,6 +4,9 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { FacilityService } from 'app/services/registration/facility.service';
 import { UserService } from 'app/services/registration/user.service';
+import { SpecialtyService } from 'app/services/specialty.service';
+import { MatDialog } from '@angular/material/dialog';
+import { ToasterService } from 'app/services/toaster.service';
 
 @Component({
   selector: 'app-additional-info',
@@ -26,19 +29,22 @@ export class AdditionalInfoComponent implements OnInit, OnChanges {
   facilityList: any;
   lawyerInfoArray: any[] = [];
   additionalInfoLawyer: FormGroup;
+  specialtyForm: FormGroup;
   isDisable: boolean = true
   isFacility: boolean;
   currentState = []
   buttonText: string = "Add State"
-  constructor(private fb: FormBuilder, private activatedRoute: ActivatedRoute, private _statesService: StatesService, private facilityService: FacilityService, private userService: UserService) {
+  specialtyList: any;
+  constructor(private toasterService: ToasterService, public dialog: MatDialog, private specialtyService: SpecialtyService, private fb: FormBuilder, private activatedRoute: ActivatedRoute, private _statesService: StatesService, private facilityService: FacilityService, private userService: UserService) {
     this.facilityCode = this.activatedRoute.snapshot.params.facilityCode;
   }
 
   ngOnInit(): void {
-
+    this.specialtyForm = this.fb.group({
+      specialty: ['', [Validators.required]]
+    })
     if (this.roleId == 1) {
       this.userService.userFacility().subscribe((res: any) => {
-        console.log(res)
         this.isFacility = res.data ? true : false
         if (res.data) {
           this.additionalInfo.get('facility').setValue(res.data)
@@ -55,12 +61,38 @@ export class AdditionalInfoComponent implements OnInit, OnChanges {
       this.createFormControlLawyer()
     }
     this.getAllFacilities()
+    this.getAllSpecialty()
   }
+
+  openModal(templateRef) {
+    let dialogRef = this.dialog.open(templateRef, {
+      width: '500px',
+    });
+  }
+
+  createSpecilaty() {
+    const specialtyType = {
+      "specialtyType": this.specialtyForm.get('specialty').value
+    }
+    this.specialtyService.createSpecialty(specialtyType).subscribe((specialty: any) => {
+      if (specialty) {
+        this.getAllSpecialty();
+        this.toasterService.showSuccessToater('Specialty added.')
+      }
+    })
+  }
+
   stateData() {
     this._statesService.getStates()
       .subscribe(data => {
         this.states = data
       });
+  }
+
+  getAllSpecialty() {
+    this.specialtyService.getAllSpecialty().subscribe((res: any) => {
+      this.specialtyList = res.data
+    })
   }
 
   ngOnChanges(): void {
@@ -76,8 +108,8 @@ export class AdditionalInfoComponent implements OnInit, OnChanges {
         let lawyer = {}
         let splitArray = item.metaValue.split(":")
         lawyer['state'] = splitArray[0],
-          lawyer['bar_info_Exam_Id'] = splitArray[1],
-          lawyer['speciality'] = splitArray[2]
+          lawyer['bar_info_Exam_Id'] = splitArray[1]
+        // lawyer['speciality'] = splitArray[2]
         return lawyer
       })
     }
@@ -92,7 +124,7 @@ export class AdditionalInfoComponent implements OnInit, OnChanges {
 
   createFormControl() {
     this.additionalInfo = this.fb.group({
-      housing_unit: ['', [Validators.required]],
+      housing_unit: [''],
       facility: ['', [Validators.required]]
     })
   }
@@ -101,7 +133,7 @@ export class AdditionalInfoComponent implements OnInit, OnChanges {
     this.additionalInfoLawyer = this.fb.group({
       state: ['', [Validators.required]],
       bar_info_Exam_Id: [''],
-      speciality: ['', [Validators.required]]
+      // speciality: ['']
     })
   }
 
@@ -112,7 +144,8 @@ export class AdditionalInfoComponent implements OnInit, OnChanges {
       let lawyerInfo = this.lawyerInfoArray.map((item) => {
         this.currentState.push(item.state)
         let userMetaInfo = {}
-        let str = item.state + ':' + item.bar_info_Exam_Id + ':' + item.speciality
+        let str = item.state + ':' + item.bar_info_Exam_Id
+        // + ':' + item.speciality
         userMetaInfo['metaKey'] = 'lawyerInfo'
         userMetaInfo['metaValue'] = str
 
@@ -141,7 +174,7 @@ export class AdditionalInfoComponent implements OnInit, OnChanges {
   addMoreStates() {
     // this.currentState.push(this.additionalInfoLawyer.get('state').value)
     this.lawyerInfoArray.push(this.additionalInfoLawyer.value)
-    this.buttonText = "Add more states"
+    this.buttonText = "Add Another State"
     this.isDisable = false
     this.additionalInfoLawyer.reset()
   }

@@ -30,4 +30,12 @@ export class UserMetaService {
   updateUserMeta(userMetaData) {
     return this.httpClient.put<object>(`${this.apiPath}/userMeta/update`, userMetaData, this.getHeaders())
   }
+
+  getUserBillingDetails() {
+    return this.httpClient.get<object>(`${this.apiPath}/userMeta/user/userMeta`, this.getHeaders())
+  }
+
+  getUserAdditionalDetails() {
+    return this.httpClient.get<object>(`${this.apiPath}/userMeta`, this.getHeaders())
+  }
 }

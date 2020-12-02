@@ -18,7 +18,8 @@ export class OrganisationComponent implements OnInit, OnChanges {
   @Output() previousClick = new EventEmitter();
   public states = [];
   currentState: any;
-
+  @Input() roleId;
+  
   constructor(private fb: FormBuilder, private _statesService: StatesService) { }
 
   ngOnInit(): void {
@@ -26,6 +27,10 @@ export class OrganisationComponent implements OnInit, OnChanges {
     if (!this.orgAddress) {
       this.createFormControl();
     }
+    this.countryDisable();
+  }
+  countryDisable(){
+    this.addressForm.get('country').disable()
   }
   stateData() {
     this._statesService.getStates()
@@ -46,13 +51,12 @@ export class OrganisationComponent implements OnInit, OnChanges {
       street2: [''],
       city: ['', [Validators.required, Validators.maxLength(50)]],
       state: ['', [Validators.required, Validators.maxLength(50)]],
-      zip: ['', [Validators.required, Validators.maxLength(20)]],
+      zip: ['', [Validators.required,Validators.minLength(5) ,Validators.maxLength(9)]],
       country: ['United States', [Validators.required, Validators.maxLength(50)]]
     });
   }
 
   ngOnChanges(): void {
-    console.log(this.orgAddress)
     if (this.orgAddress) {
       this.createFormControl();
       this.organisationForm.get('name').setValue(this.orgAddress.name)
@@ -74,9 +78,10 @@ export class OrganisationComponent implements OnInit, OnChanges {
   submit() {
     let data: any = {};
     data.name = this.organisationForm.get('name').value;
-    data.tagline = this.organisationForm.get('tagline').value;
-    data.description = this.organisationForm.get('description').value;
+    // data.tagline = this.organisationForm.get('tagline').value;
+    // data.description = this.organisationForm.get('description').value;
     data.address = this.addressForm.value;
+    data.address['country'] = 'United States';
     this.orgAddressEventEmitter.emit(data);
 
   }

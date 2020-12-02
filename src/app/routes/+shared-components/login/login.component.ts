@@ -7,6 +7,7 @@ import { Store } from '@ngrx/store';
 import { AddUserInfo } from 'app/store/actions/userInfo.actions';
 import { ToasterService } from 'app/services/toaster.service';
 import { LawyerService } from 'app/services/login/lawyer.service';
+import { UserService } from 'app/services/registration/user.service';
 
 @Component({
   selector: 'app-login',
@@ -18,8 +19,10 @@ export class LoginComponent implements OnInit {
   loginForm: FormGroup;
   step: number = 1;
   facilityCode: any;
+  spinner: boolean = false;
+  isFacility: boolean;
 
-  constructor(private activatedRoute: ActivatedRoute, private fb: FormBuilder,
+  constructor(private activatedRoute: ActivatedRoute, private fb: FormBuilder, private userService: UserService,
     private router: Router, private store: Store<any>,
     private lawyerService: LawyerService, private toasterService: ToasterService,
     private cacheService: CacheService, private loginService: LoginService) {
@@ -32,34 +35,50 @@ export class LoginComponent implements OnInit {
       password: ['', [Validators.required]],
       otp: ['', [Validators.required]]
     })
+    this.userService.userFacility().subscribe((res: any) => {
+      this.isFacility = res.data ? true : false
+    })
   }
 
   onLogin() {
+    this.spinner = true;
     const loginData = {
       "userName": this.loginForm.get('userName').value,
-      "password": this.loginForm.get('password').value
+      "password": this.loginForm.get('password').value,
     }
     this.lawyerService.lawyerLogin(loginData).subscribe((res: any) => {
       if (res.success) {
         this.cacheService.setCache('token', res.token);
-        this.checkToken();
+        this.checkTokenForUser();
+        this.spinner = false;
       }
       else {
         if (res.data === 'Please Enter Your auth code.') {
           this.toasterService.showSuccessToater(res.data);
           this.step = 2;
+          this.spinner = false;
         }
         else if (res.data === 'Please Register your Mobile Number.') {
           this.toasterService.showSuccessToater(res.data);
           this.step = 3;
+          this.spinner = false;
         }
         else if (res.data === 'Please complete your registration.') {
           this.toasterService.showWarningToater(res.data);
+          this.spinner = false;
+          // this.step = 4;
+        }
+        else if (res.token) {
+          this.toasterService.showWarningToater('Welcome to My Justice portal.');
+          this.cacheService.setCache('token', res.token);
+          this.checkTokenForUser();
+          this.spinner = false;
           // this.step = 4;
         }
         else {
           this.step = 1
           this.toasterService.showWarningToater(res.data);
+          this.spinner = false;
         }
       }
     })
@@ -81,7 +100,7 @@ export class LoginComponent implements OnInit {
     this.lawyerService.verifylawyerLogin(loginData).subscribe((isVerified: any) => {
       if (isVerified.success) {
         this.cacheService.setCache('token', isVerified.token);
-        this.checkToken();
+        this.checkTokenForUser();
       }
       else {
         this.toasterService.showErrorToater(isVerified.data);
@@ -89,7 +108,7 @@ export class LoginComponent implements OnInit {
     })
   }
 
-  checkToken() {
+  checkTokenForUser() {
     this.loginService.checkToken().then((data: any) => {
       if (data.success) {
         this.store.dispatch(new AddUserInfo(Object.assign({}, data.user)));

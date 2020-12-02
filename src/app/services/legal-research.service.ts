@@ -27,14 +27,27 @@ export class LegalResearchService {
   }
 
   ongetAllLegalForms() {
-    return this.httpClient.get<object>(`${this.apiPath}/legalResearch`, this.getHeaders());
+    return this.httpClient.get<object>(`${this.apiPath}/legalResearch/reseacherList`, this.getHeaders());
   }
+
   ongetSingleLegalForms(legalResearchId) {
     return this.httpClient.get<object>(`${this.apiPath}/legalResearch/` + legalResearchId, this.getHeaders());
   }
 
   updateForm(formData, legalResearchId) {
     return this.httpClient.put<object>(`${this.apiPath}/legalResearch/` + legalResearchId, formData, this.getHeaders());
+  }
+
+  uploadFile(formData) {
+    return this.httpClient.post<any>(`${this.apiPath}/legalResearch/uploadFile`, formData, this.getHeaders());
+  }
+
+  deleteFile(fileId) {
+    return this.httpClient.delete<any>(`${this.apiPath}/legalResearch/deleteFile/` + fileId, this.getHeaders());
+  }
+
+  getDownloadLink(data) {
+    return this.httpClient.post<any>(`${this.apiPath}/legalResearch/fileDownloadLink`, data, this.getHeaders());
   }
 
 }

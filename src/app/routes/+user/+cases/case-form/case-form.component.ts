@@ -21,15 +21,14 @@ export class CaseFormComponent implements OnInit, OnChanges {
   @Input() caseDetails;
   public states = [];
   state: any = [];
-  dateOfArrest=new Date()
-  nextCourtDate=new Date(+new Date() + 24*60*60*1000);
+  dateOfArrest = new Date()
+  nextCourtDate = new Date(+new Date() + 24 * 60 * 60 * 1000);
 
   constructor(private toasterService: ToasterService, private router: Router, private _statesService: StatesService,
     private fb: FormBuilder, private caseService: CaseService, private store: Store<any>) {
   }
 
   ngOnChanges() {
-    // console.log(this)
     if (this.caseDetails) {
       this.createFormControl();
       this.getUserFromStore();
@@ -54,20 +53,6 @@ export class CaseFormComponent implements OnInit, OnChanges {
     this.userState();
   }
 
-  stateData() {
-    this._statesService.getStates()
-      .subscribe(data => {
-        this.states = data
-      });
-  }
-
-  userState() {
-    this.caseService.getState().subscribe((state: any) => {
-      this.caseForm.get('stateOfArrest').setValue(state.data.facilities[0].Address.state)
-      console.log(state.data.facilities[0].Address.state)
-    });
-  }
-
   createFormControl() {
     this.caseForm = this.fb.group({
       firstName: ['', [Validators.required]],
@@ -81,6 +66,21 @@ export class CaseFormComponent implements OnInit, OnChanges {
       // otherInformation: ['']
     });
   }
+
+  stateData() {
+    this._statesService.getStates()
+      .subscribe(data => {
+        this.states = data
+      });
+  }
+
+  userState() {
+    this.caseService.getState().subscribe((state: any) => {
+      this.caseForm.get('stateOfArrest').setValue(state.data.facilities[0].Address.state)
+    });
+  }
+
+
 
   getUserFromStore() {
     this.store.select(s => s.userInfo).subscribe(user => this.userData = user);

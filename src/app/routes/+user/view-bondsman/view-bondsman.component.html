@@ -1,7 +1,7 @@
 <div class="row">
     <div class="col">
-        <h1 class="mb-0">Bondsman Users</h1>
-        <small>All bondsman related to organization.</small>
+        <h1 class="line-height font-weight-bold">Bondsman Users</h1>
+        <h4 class="line-height header-sub-text">All bondsman related to organization.</h4>
     </div>
 </div>
 
@@ -25,10 +25,10 @@
                         </mat-label>
                         <div class="pt-1">
                             <span>
-                                {{org?.Address.city}}, {{org?.Address.state}}
+                                {{user?.Address.city}}, {{user?.Address.state}}
                             </span>
                             <span class="pl-2">
-                                {{org?.orgCode}}
+                                {{user?.orgCode}}
                             </span>
                             <span class="pl-2">
                                 Speciality: Assault
@@ -37,7 +37,7 @@
                     </div>
                     <button class="button-purple" mat-raised-button (click)="onHireBondsman(user?.userId)"
                         [disabled]="isHired">
-                        {{isHired?'Request Pending':'Hire'}}
+                        {{isHired?'Request Pending':'Connect'}}
                     </button>
                 </mat-card>
             </mat-card>

@@ -11,6 +11,7 @@ import { SharedComponentsModule } from '../+shared-components/shared-components.
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PostageAppComponent } from './app-settings/postage-app/postage-app.component';
 import { TwilioCredentialsComponent } from './app-settings/twilio-credentials/twilio-credentials.component';
+import { StripeComponent } from './app-settings/stripe/stripe.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { TwilioCredentialsComponent } from './app-settings/twilio-credentials/tw
     AppSettingsComponent,
     PostageAppComponent,
     TwilioCredentialsComponent,
-    FacilityComponent
+    FacilityComponent,
+    StripeComponent
   ],
   imports: [
     CommonModule,

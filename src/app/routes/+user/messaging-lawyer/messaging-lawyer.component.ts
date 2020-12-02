@@ -18,7 +18,7 @@ export class MessagingLawyerComponent implements OnInit {
   userMessageList = [];
   allMessages: any;
   oldUserList = [];
-  headerText = "Lawyers";
+  headerText = "My Connected Lawyers";
 
   constructor(private hireLawyerService: HireLawyerService, private messageService: MessageService) { }
 
@@ -30,6 +30,7 @@ export class MessagingLawyerComponent implements OnInit {
     this.messageService.getMessageUsers().subscribe((res: any) => {
       this.userMessageList = res.data
       this.getOldUserList()
+
     })
   }
 
@@ -46,6 +47,13 @@ export class MessagingLawyerComponent implements OnInit {
       this.oldUserList = res.data
       this.filterData()
     })
+  }
+
+  userAdd(user) {
+    let data = this.oldUserList.find(item => item.userId == user.userId)
+    if (data == undefined) {
+      this.oldUserList.push(user)
+    }
   }
 
   filterData() {

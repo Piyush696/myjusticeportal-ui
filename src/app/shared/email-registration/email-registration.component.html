@@ -37,8 +37,8 @@
                     <mat-form-field appearance="fill" class="w-100">
                         <mat-label>Legal Middle Name</mat-label>
                         <input type="text" matInput placeholder="Legal Middle Name"
-                            [formControl]="registrationForm.controls['middleName']" required>
-                        <mat-error
+                            [formControl]="registrationForm.controls['middleName']">
+                        <!-- <mat-error
                             *ngIf="registrationForm.controls['middleName'].invalid && registrationForm.controls['middleName'].touched">
                             <small class="font13" *ngIf="registrationForm.get('middleName').errors?.required">
                                 Legal Middle Name is Required
@@ -49,7 +49,7 @@
                             <small class="font13" *ngIf="registrationForm.get('middleName').errors?.pattern">
                                 Legal Middle Name should contain only alphabets.
                             </small>
-                        </mat-error>
+                        </mat-error> -->
                     </mat-form-field>
                 </div>
                 <div class="col-4 pl-0 pr-2 mb-1">
@@ -121,43 +121,22 @@
                     </mat-form-field>
                 </div>
             </div>
-            <h5 *ngIf="roleId === 1" class="text-center">Please give us your email and/or phone number as you can
-                connect to us when you
-                are no longer
-                incarcerated.
+            <h5 *ngIf="roleId === 1" class="text-center">Please give us your email and phone so that you can access the
+                portal anytime.
             </h5>
             <div class="row">
                 <div *ngIf="roleId === 1" class="col-6 pr-2">
                     <mat-form-field appearance="fill" class="w-100">
                         <mat-label>Email</mat-label>
                         <input matInput placeholder="abc@xyz.com" [formControl]="registrationForm.controls['userEmail']"
-                            autocomplete="new-Email" autocapitalize="off" required/>
-                            <mat-error>
-                                <div *ngIf="registrationForm.controls['userEmail'].invalid && 
-                                    registrationForm.controls['userEmail'].touched">
-                                    <small class="font13" *ngIf="registrationForm.get('userEmail').errors?.required">
-                                        Email is Required.
-                                    </small>
-                                    <small class="font13" *ngIf="registrationForm.get('userEmail').errors?.email">
-                                        Invalid Email.
-                                    </small>
-                                </div>
-                            </mat-error>
+                            autocomplete="new-Email" autocapitalize="off" />
                     </mat-form-field>
                 </div>
                 <div *ngIf="roleId === 1" class="col-6 pl-2">
                     <mat-form-field appearance="fill" class="w-100">
                         <mat-label>Mobile</mat-label>
                         <input type="text" matInput placeholder="(123) 456-7890" [textMask]="{mask: mobileMask}"
-                            [formControl]="registrationForm.controls['mobile']" required/>
-                            <mat-error>
-                                <div *ngIf="registrationForm.controls['mobile'].invalid && 
-                                    registrationForm.controls['mobile'].touched">
-                                    <small class="font13" *ngIf="registrationForm.get('mobile').errors?.required">
-                                        Mobile number is Required.
-                                    </small>
-                                </div>
-                            </mat-error>
+                            [formControl]="registrationForm.controls['mobile']" />
                     </mat-form-field>
                 </div>
             </div>
@@ -205,7 +184,7 @@
             </div>
             <div class="row">
                 <mat-checkbox class="termCondition-margin ml-2"
-                    [formControl]="registrationForm.controls['termCondition']" (click)="alertModel(myAlert)"
+                    [formControl]="registrationForm.controls['termCondition']" (click)="openModal(mytemplate)"
                     color="primary">
                     <a>
                         <p class="p-0 m-0 line-height">I accept the <span class="font-weight-bold p-0 m-0">Terms and
@@ -221,7 +200,7 @@
                     Back to Login
                 </button>
                 <button class="button-purple px-4 py-1 float-right" mat-raised-button [disabled]="registrationForm.get('firstName').invalid || registrationForm.get('lastName').invalid 
-                    || registrationForm.get('middleName').invalid || registrationForm.get('userName').invalid 
+                    || registrationForm.get('userName').invalid 
                     || registrationForm.get('password').invalid  || registrationForm.get('confirmPassword').invalid
                      || registrationForm.get('termCondition').invalid || isNextDisabled" (click)="onNextClick()">
                     NEXT
@@ -230,22 +209,7 @@
         </mat-card>
     </div>
 </div>
-<ng-template #myAlert>
-    <div>
-        <p class="disclaimer-heading text-uppercase">
-            YOU MUST SCROLL
-        </p>
-        <p class="text-justify">
-            Please read the agreement entirely and scroll to the bottom to Accept our terms.
-        </p>
-        <div class="text-center">
-            <button class="px-4 py-1" mat-raised-button color="primary" mat-dialog-close
-                (click)="openModal(mytemplate)">
-                GOT IT
-            </button>
-        </div>
-    </div>
-</ng-template>
+
 <div>
     <ng-template #mytemplate>
         <div class="col-12">
@@ -307,6 +271,7 @@
                     <button mat-dialog-close class="px-4 py-1" mat-button color="primary" (click)="onDeclineTerms()">
                         DECLINE
                     </button>
+                    <span *ngIf="isAcceptDisabled" class="mleft">You must scroll to the bottom to accept.</span>
                     <button class="px-4 py-1" mat-raised-button color="primary" mat-dialog-close
                         [disabled]="isAcceptDisabled" (click)="onAcceptTerms()">
                         ACCEPT

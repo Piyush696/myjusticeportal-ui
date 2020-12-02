@@ -39,24 +39,24 @@ export class UsersComponent implements OnInit, OnDestroy {
 
 
   onViewRejectedUsers(e) {
-    if(e){
-      this.userService.getUsers().subscribe((res: any) =>{
+    if (e) {
+      this.userService.getUsers().subscribe((res: any) => {
         if (res.data) {
           this.filterStatus = res.data.filter((res) => {
-            if(res.status == false){              
+            if (res.status == false) {
               return res;
-            }  
+            }
           });
         }
         this.dataSource = new MatTableDataSource(this.filterStatus);
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
       })
-    }else{
+    } else {
       this.onGetAllUsers();
     }
   }
- 
+
   createUserControl() {
     this.createUserForm = this.fb.group({
       firstName: ['', [Validators.required, Validators.maxLength(50), Validators.pattern('^[a-zA-Z ]*$')]],
@@ -113,7 +113,15 @@ export class UsersComponent implements OnInit, OnDestroy {
 
   onGetAllUsers() {
     this.userService.getUsers().subscribe((res: any) => {
-      this.dataSource = new MatTableDataSource(res.data);
+      let x = res.data.map((element) => {
+        if (element.status == true) {
+          element.status = 'Active'
+        } else {
+          element.status = 'Pending'
+        }
+        return element
+      })
+      this.dataSource = new MatTableDataSource(x);
       this.dataSource.sortingDataAccessor = (item: any, property) => {
         switch (property) {
           case 'name': if (item) return item.firstName + item.middleName + item.lastName;
@@ -150,7 +158,7 @@ export class UsersComponent implements OnInit, OnDestroy {
 
   // pagination.
   getPageSizeOptions(): number[] {
-    if (this.dataSource.data.length > 500)    
+    if (this.dataSource.data.length > 500)
       return [10, 50, 100, 500, this.dataSource.paginator?.length];
     else if (this.dataSource.data.length > 100) {
       return [10, 50, 100, this.dataSource.paginator?.length];

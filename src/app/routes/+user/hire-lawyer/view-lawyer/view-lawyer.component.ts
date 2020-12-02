@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CaseService } from 'app/services/case.service';
 import { HireLawyerService } from 'app/services/hire-lawyer.service';
 import { ToasterService } from 'app/services/toaster.service';
@@ -11,45 +12,57 @@ import { ToasterService } from 'app/services/toaster.service';
   styleUrls: ['./view-lawyer.component.css']
 })
 export class ViewLawyerComponent implements OnInit {
-  organizationId: any;
   orgDetails: any;
   selectedCases = [];
   caseList: any;
   userId: any;
+  organizationId:any;
   isHired: boolean = false;
   logo: any;
+  specialtyList: any;
+  viewCaseForm: FormGroup;
 
-  constructor(private hireLawyerService: HireLawyerService, public dialog: MatDialog,
+  constructor(private hireLawyerService: HireLawyerService, public dialog: MatDialog,private router: Router,
     private caseService: CaseService, private activatedRoute: ActivatedRoute,
-    private toasterService: ToasterService) {
-    this.organizationId = this.activatedRoute.snapshot.params.organizationId;
+    private toasterService: ToasterService, private fb: FormBuilder) {
+      this.organizationId = this.activatedRoute.snapshot.params.organizationId
   }
 
   ngOnInit(): void {
-    this.getAllUsers();
+    this.createFormControl();
+    this.getOrgDetails();
     this.getAllCases();
   }
 
-  getAllUsers() {
+
+  OnViewProfile(userId){
+    this.router.navigateByUrl('/mjp/user/lawyer-profile/'+userId)
+  }
+
+  createFormControl() {
+    this.viewCaseForm = this.fb.group({
+      notes: ['', [Validators.required]]
+    });
+  }
+
+  getOrgDetails() {
     this.hireLawyerService.getUsersLawyer(this.organizationId).subscribe((users: any) => {
+      let specialty = [];
+      if(users.data.specialty){
+        specialty.push(users.data.specialty.split(","))
+        this.specialtyList = specialty[0]
+      }
       this.orgDetails = users.data
       this.logo = this.orgDetails.logo
     })
   }
 
-  openModal(templateRef, userId) {
-    this.userId = userId
-    let dialogRef = this.dialog.open(templateRef, {
-      width: '500px'
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-    });
-  }
-
   onSelectCaseIds(event, caseId) {
+    const data = {
+      "caseId":caseId
+    }
     if (event) {
-      this.selectedCases.push({ caseId });
+      this.selectedCases.push(data);
       this.selectedCases.map((x) => {
         x['lawyerId'] = this.userId
       })
@@ -70,20 +83,29 @@ export class ViewLawyerComponent implements OnInit {
   }
 
   onSubmitCaseIds() {
+    this.selectedCases=this.selectedCases.map((x)=>{
+      x['notes']=this.viewCaseForm.get('notes').value
+      return x;
+    })
     this.hireLawyerService.setCasesLawyer(this.selectedCases).subscribe((cases: any) => {
       if (cases.success) {
         this.dialog.closeAll();
         this.isHired = true;
         this.toasterService.showSuccessToater('Cases Requested.')
+        this.router.navigateByUrl('/mjp/user/case');
       }
       else {
-        this.toasterService.showErrorToater('Cases not Requested.')
+        this.toasterService.showErrorToater('Cases Already Requested by same Lawyer.')
       }
     })
   }
 
+  onContactLawyer(userId) {
+    this.router.navigateByUrl('/mjp/user/contact/' + userId)
+  }
+
   closeModal() {
-    this.dialog.closeAll();
+    this.router.navigateByUrl('mjp/user/hire-lawyer')
   }
 
 }

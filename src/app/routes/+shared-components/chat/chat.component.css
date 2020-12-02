@@ -19,7 +19,7 @@
 
 .chat-messages-create-container {
   background: #616161;
-  height: 100px;
+  height: 103px;
   display: flex;
   justify-content: center;
 }
@@ -90,7 +90,7 @@
   justify-content: flex-start;
 }
 
-.chat-scroll{
+.chat-scroll {
   overflow: scroll;
   height: xyz;
 }

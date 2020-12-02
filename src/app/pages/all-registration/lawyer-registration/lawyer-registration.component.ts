@@ -53,6 +53,7 @@ export class LawyerRegistrationComponent implements OnInit {
   }
 
   onUserPageClick(user) {
+    this.user = this.registrationData.user;
     if (user) {
       this.step = 1
     } else {
@@ -62,16 +63,20 @@ export class LawyerRegistrationComponent implements OnInit {
 
   onCreateOrganisation(orgData) {
     if (orgData) {
-      this.step = 4;
       this.registrationData.organization = orgData;
       this.registrationData.organization.address = orgData.address;
+      this.lawyerService.onRegistration(this.registrationData).subscribe((res: any) => {
+        if (res.success) {
+          this.userName = res.data.userName;
+          this.step = 4;
+        }
+      });
     } else {
       this.step = 3;
     }
   }
 
   stateEvent(state) {
-    console.log(state)
     this.currentState = [...state]
   }
 
@@ -137,6 +142,7 @@ export class LawyerRegistrationComponent implements OnInit {
       this.step = 3;
     }
   }
+  
   onBackClick(back) {
     if (back) {
       this.step = 3;

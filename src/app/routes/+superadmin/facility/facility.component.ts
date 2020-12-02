@@ -22,7 +22,7 @@ export class FacilityComponent implements OnInit {
   addressForm: FormGroup;
   facilityAddressId: number;
   states = []
-  displayedColumns: string[] = ["facilityCode", "facilityName", "ipAddress", "libraryLink", "action"];
+  displayedColumns: string[] = ["facilityCode", "facilityName","state", "facilityUserCount", "ipAddress", "libraryLink", "action"];
   dataSource = new MatTableDataSource();
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort: MatSort;
@@ -35,7 +35,8 @@ export class FacilityComponent implements OnInit {
       facilityCode: ['', [Validators.required], [this.validateUserNotTaken.bind(this)]],
       facilityName: ['', [Validators.required, Validators.minLength(1), Validators.maxLength(50)]],
       ipAddress: ['', [Validators.required, Validators.pattern('(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)')]],
-      libraryLink: ['']
+      libraryLink: [''],
+      facilityUserCount: ['', [Validators.required]],
     })
 
     this.addressForm = this.fb.group({
@@ -53,7 +54,6 @@ export class FacilityComponent implements OnInit {
   stateData() {
     this._statesService.getStates()
       .subscribe((data: any) => {
-        console.log(data)
         this.states = data
       });
   }
@@ -120,8 +120,8 @@ export class FacilityComponent implements OnInit {
       this.addressForm.disable();
     }
     let dialogRef = this.dialog.open(templateRef, {
-      width: '80vh',
-      height: '75vh'
+      width: '60%',
+      height: '80%',
     })
     this.addressForm.get('country').setValue('United States')
     this.addressForm.get('country').disable()
@@ -133,6 +133,7 @@ export class FacilityComponent implements OnInit {
     this.facilityForm.get('facilityName').setValue(facility.facilityName);
     this.facilityForm.get('ipAddress').setValue(facility.ipAddress);
     this.facilityForm.get('libraryLink').setValue(facility.libraryLink);
+    this.facilityForm.get('facilityUserCount').setValue(facility.facilityUserCount);
     if (facility.Address) {
       this.facilityAddressId = facility.Address.addressId;
       this.addressForm.get('street1').setValue(facility.Address.street1);

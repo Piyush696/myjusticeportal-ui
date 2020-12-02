@@ -1,10 +1,17 @@
-<div class="row">
-    <div class="col-4 p-0">
-        <app-mesage-list [userMessageList]="userMessageList" [oldUserList]="oldUserList"
-            (messageEvent)="messageEvent($event)" [headerText]="headerText"></app-mesage-list>
+<div>
+    <div>
+        <h1 class="line-height font-weight-bold">Message My Lawyers</h1>
+        <h4 class="line-height header-sub-text">Have real time chats with your connected lawyers.</h4>
     </div>
-    <div class="col-8 p-0">
-        <app-chat *ngIf="isMessage" [receiverId]="receiverId" [allMessages]="allMessages">
-        </app-chat>
+    <div class="row">
+        <div class="col-4 p-0">
+            <app-mesage-list [userMessageList]="userMessageList" [oldUserList]="oldUserList"
+                (messageEvent)="messageEvent($event)" (userEvent)="userAdd($event)" [headerText]="headerText">
+            </app-mesage-list>
+        </div>
+        <div class="col-8 p-0">
+            <app-chat *ngIf="isMessage" [receiverId]="receiverId" [allMessages]="allMessages">
+            </app-chat>
+        </div>
     </div>
 </div>
