@@ -5,17 +5,25 @@
             Manage your Organization information.
         </h4>
     </div>
-    <div>
-        <button mat-raised-button class="button-purple px-4 py-1" (click)="openModal(inviteEmail)">
-            Invite New User
-        </button> &nbsp;
-        <button [routerLink]="'users'" class="button-purple px-4 py-1" mat-raised-button>
-            View All Users
-        </button> &nbsp;
-        <button [routerLink]="'facilities'" class="button-purple px-4 py-1" mat-raised-button>
-            Manage Facilities
-        </button>
-    </div>
+
+        <div>
+            <button mat-raised-button class="button-purple px-4 py-1" (click)="openModal(inviteEmail)">
+                Invite New User
+            </button> &nbsp;
+        </div>
+
+        <div>
+            <button [routerLink]="'users'" class="button-purple px-4 py-1" mat-raised-button>
+                View All Users
+            </button> &nbsp;
+        </div>
+
+        <div>
+            <button [routerLink]="'facilities'" class="button-purple px-4 py-1" mat-raised-button>
+                Manage Facilities
+            </button>
+        </div>
+
 </div>
 
 <div class="row">
