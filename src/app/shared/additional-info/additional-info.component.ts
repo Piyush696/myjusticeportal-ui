@@ -174,7 +174,7 @@ export class AdditionalInfoComponent implements OnInit, OnChanges {
   addMoreStates() {
     // this.currentState.push(this.additionalInfoLawyer.get('state').value)
     this.lawyerInfoArray.push(this.additionalInfoLawyer.value)
-    this.buttonText = "Add Another State"
+    this.buttonText = "Add State"
     this.isDisable = false
     this.additionalInfoLawyer.reset()
   }
