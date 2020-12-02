@@ -89,7 +89,7 @@ export class MyAccountComponent implements OnInit {
 
   openModal(templateRef) {
     let dialogRef = this.dialog.open(templateRef, {
-      width: '500px',
+      width: '800px',
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -99,7 +99,7 @@ export class MyAccountComponent implements OnInit {
   openQuestionModal(templateRef, value) {
     this.previousSecurityId = value.securityQuestionId
     let dialogRef = this.dialog.open(templateRef, {
-      width: '500px',
+      width: '800px',
     });
 
     dialogRef.afterClosed().subscribe(result => {

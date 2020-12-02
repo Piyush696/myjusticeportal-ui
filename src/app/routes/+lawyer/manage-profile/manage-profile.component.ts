@@ -92,7 +92,7 @@ export class ManageProfileComponent implements OnInit {
     this.additionalInfoForm.disable()
     let dialogRef = this.dialog.open(templateRef, {
       width: '800px',
-      height: '80%'
+      height: '500px'
     });
     setTimeout(() => {
       var x = document.getElementById('cust-img')
@@ -103,7 +103,6 @@ export class ManageProfileComponent implements OnInit {
   onUploadLogo() {
     if (this.uploader1.queue.length <= 1) {
       let formData = new FormData();
-      // formData.append('this.organisationId', this.organisationId);
       this.uploader1.queue.forEach((file) => {
         formData.append('logo', file._file);
       })

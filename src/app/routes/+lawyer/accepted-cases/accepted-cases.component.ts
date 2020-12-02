@@ -31,6 +31,7 @@ export class AcceptedCasesComponent implements OnInit {
   onGetRequestedCases(status) {
     this.hireLawyerService.getRequestedCases({ status: status }).subscribe((res: any) => {
       if (res.data) {
+        console.log(res.data)
         this.requestedCases = res.data.lawyer;
       } else {
         this.requestedCases = [];
@@ -53,6 +54,7 @@ export class AcceptedCasesComponent implements OnInit {
     }
   }
 
+
  viewhideCaseDetails(check){
     if (!check) {
       this.hide=true;
@@ -69,16 +71,37 @@ export class AcceptedCasesComponent implements OnInit {
 }
 
 hideCaseDetails(caseId) {
-  this.hireLawyerService.hideCase({ caseId: caseId}).subscribe((res: any) => {
+  const data = {
+    "caseId" : caseId,
+    "isHide" : true
+  }
+  this.hireLawyerService.hideCase(data).subscribe((res: any) => {
     if (res.success) {
-      let statuses = 'Approved';      
-      this.onGetRequestedCases(statuses);
+      let status = 'Approved';      
+      this.onGetRequestedCases(status);
       this.toasterService.showSuccessToater('Hide case successfully.');
     } else {
       this.toasterService.showErrorToater('Something went wrong, please try again.');
     }
   });
 }
+
+unHideCaseDetails(caseId){
+  const data = {
+    "caseId" : caseId,
+    "isHide" : false
+  }
+  this.hireLawyerService.hideCase(data).subscribe((res: any) => {
+    if (res.success) {
+      let status = 'Approved';      
+      this.onGetRequestedCases(status);
+      this.toasterService.showSuccessToater('Unhide case successfully.');
+    } else {
+      this.toasterService.showErrorToater('Something went wrong, please try again.');
+    }
+  });
+}
+
 allCase(){
   this.hireLawyerService.getAllCases().subscribe((res) => {
     this.allCasesData=res.data.lawyer;

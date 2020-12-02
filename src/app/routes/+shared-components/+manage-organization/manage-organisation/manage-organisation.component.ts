@@ -155,8 +155,8 @@ export class ManageOrganisationComponent implements OnInit {
   openOrganizationModal(templateRef) {
     this.inviteMailForm.reset();
     let dialogRef = this.dialog.open(templateRef, {
-      width: '60%',
-      height: '80%'
+      width: '800px',
+      height: '500px'
     });
   }
 

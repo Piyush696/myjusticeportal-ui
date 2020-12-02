@@ -58,9 +58,11 @@ export class HireLawyerService {
   setCasesLawyer(selectedCases) {
     return this.httpClient.post<any>(`${this.apiPath}/hirealawyer`, { selectedCases }, this.getHeaders());
   }
-  hideCase(caseId) {
-    return this.httpClient.post<any>(`${this.apiPath}/hirealawyer/hide/hide-case`, caseId, this.getHeaders());
+
+  hideCase(caseData) {
+    return this.httpClient.post<any>(`${this.apiPath}/hirealawyer/hide/hide-case`, caseData, this.getHeaders());
   }
+
   getAllCases() {
     return this.httpClient.get<any>(`${this.apiPath}/case/lawyer/allCases`, this.getHeaders());
   }

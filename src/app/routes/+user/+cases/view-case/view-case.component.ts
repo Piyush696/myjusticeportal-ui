@@ -76,7 +76,7 @@ export class ViewCaseComponent implements OnInit {
 
   openModal(templateRef) {
     let dialogRef = this.dialog.open(templateRef, {
-      width: '60%'
+      width: '800px'
     });
     this.caseNoteForm.get('notes').setValue(this.caseDetails.notes);
     // this.caseNoteForm.get('notes').disable();
