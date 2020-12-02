@@ -42,7 +42,7 @@ export class MobileRegistrationComponent implements OnInit, OnChanges {
   onGetOtp() {
     const data = {
       "mobile": this.mobileRegistrationForm.get('mobile').value,
-      "countryCode": this.mobileRegistrationForm.get('countryCode').value,
+      "countryCode": 1,
     }
     this.isMobileEvent.emit(data);
   }

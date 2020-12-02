@@ -8,3 +8,9 @@
   .bg-card {
     background: #ededed;
   }
+  
+.background-profile-headshot{
+  background-size: cover;
+    background-repeat: no-repeat;
+    height: 140px;
+}
