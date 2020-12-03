@@ -126,10 +126,10 @@
                                     Zip Code is Required
                                 </small>
                                 <small class="font13" *ngIf="addressForm.get('zip').errors?.minlength">
-                                    Zip Code should be less than 5 chracters
+                                    Zip Code should not be less than 5 characters
                                 </small>
                                 <small class="font13" *ngIf="addressForm.get('zip').errors?.maxlength">
-                                    Zip Code should be more than 5 chracters
+                                    Zip Code should not be more than 5 characters
                                 </small>
                             </div>
                         </mat-error>
