@@ -28,7 +28,7 @@
                                 Legal First Name should be less than 50 chracters
                             </small>
                             <small class="font13" *ngIf="registrationForm.get('firstName').errors?.pattern">
-                                Legal First Name should contain only alphabets.
+                                Legal First Name should contain only letters.
                             </small>
                         </mat-error>
                     </mat-form-field>
@@ -66,7 +66,7 @@
                                 Legal Last Name should be less than 50 chracters
                             </small>
                             <small class="font13" *ngIf="registrationForm.get('lastName').errors?.pattern">
-                                Legal Last Name should contain only alphabets.
+                                Legal Last Name should contain only letters.
                             </small>
                         </mat-error>
                     </mat-form-field>

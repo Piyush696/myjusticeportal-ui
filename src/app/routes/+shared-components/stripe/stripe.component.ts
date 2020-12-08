@@ -1,4 +1,5 @@
-import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, EventEmitter, Inject, Input, OnChanges, OnDestroy, Output, SimpleChanges, ViewChild } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, EventEmitter, Inject, Input, OnChanges, OnDestroy, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
+import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
 import { LawyerService } from 'app/services/lawyer.service';
@@ -9,8 +10,8 @@ import { ToasterService } from 'app/services/toaster.service';
   templateUrl: './stripe.component.html',
   styleUrls: ['./stripe.component.css'],
 })
-export class StripeComponent implements OnDestroy, AfterViewInit,OnChanges {
-
+export class StripeComponent implements OnDestroy, AfterViewInit,OnChanges ,OnInit{
+  cardForm: FormGroup;
   @ViewChild('cardInfo') cardInfo: ElementRef;
   _totalAmount: number;
   card: any;
@@ -22,15 +23,37 @@ export class StripeComponent implements OnDestroy, AfterViewInit,OnChanges {
    @Input() facilitiesList:any[];
    
   constructor(
-    private cd: ChangeDetectorRef,
+    private cd: ChangeDetectorRef,private fb: FormBuilder,
     @Inject(MAT_DIALOG_DATA) private data: any,
     private dialogRef: MatDialogRef<StripeComponent>,private lawyerService: LawyerService, private toasterService: ToasterService, private store: Store<any>,
   ) {
     this._totalAmount = data['totalAmount'];
   }
 
+
+  ngOnInit(): void {
+    this.createCardControl();
+  }
+
   ngOnChanges(): void {
     //console.log(this.facilitiesList)
+  }
+
+  createCardControl() {
+    this.cardForm = this.fb.group({
+      coupon: ['', Validators.required, this.validateCoupon.bind(this)]
+    })
+  }
+
+  async validateCoupon(control: AbstractControl) {
+    const result: any = await this.lawyerService.validate_coupan({
+      coupon: control.value,
+    }).toPromise();
+    if (!result.success) {
+      return { invalidCoupon: true };
+    } else {
+      return null;
+    }
   }
 
   ngOnDestroy() {

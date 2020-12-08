@@ -33,7 +33,7 @@ export class AdditionalInfoComponent implements OnInit, OnChanges {
   isDisable: boolean = true
   isFacility: boolean;
   currentState = []
-  buttonText: string = "Add State"
+  buttonText: string = "Save"
   specialtyList: any;
   constructor(private toasterService: ToasterService, public dialog: MatDialog, private specialtyService: SpecialtyService, private fb: FormBuilder, private activatedRoute: ActivatedRoute, private _statesService: StatesService, private facilityService: FacilityService, private userService: UserService) {
     this.facilityCode = this.activatedRoute.snapshot.params.facilityCode;
@@ -174,7 +174,7 @@ export class AdditionalInfoComponent implements OnInit, OnChanges {
   addMoreStates() {
     // this.currentState.push(this.additionalInfoLawyer.get('state').value)
     this.lawyerInfoArray.push(this.additionalInfoLawyer.value)
-    this.buttonText = "Add State"
+    this.buttonText = "Save"
     this.isDisable = false
     this.additionalInfoLawyer.reset()
   }
