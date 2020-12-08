@@ -28,4 +28,5 @@ export class StripeService {
   updateStripeCredentials(updateStripeCredencialData) {
     return this.httpClient.post<object>(`${this.apiPath}/stripeConnection`, updateStripeCredencialData, this.getHeaders())
   }
+
 }

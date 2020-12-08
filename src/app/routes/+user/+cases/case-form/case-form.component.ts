@@ -21,7 +21,7 @@ export class CaseFormComponent implements OnInit, OnChanges {
   @Input() caseDetails;
   public states = [];
   state: any = [];
-  dateOfArrest = new Date()
+  dateOfArrest = Date()
   nextCourtDate = new Date(+new Date() + 24 * 60 * 60 * 1000);
 
   constructor(private toasterService: ToasterService, private router: Router, private _statesService: StatesService,

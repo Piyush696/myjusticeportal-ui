@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
@@ -12,11 +12,12 @@ import { UserAdditionInfoService } from 'app/services/user-addition-info.service
   styleUrls: ['./cases.component.scss']
 })
 
-export class CasesComponent implements OnInit {
-  caseList: any;
+export class CasesComponent implements OnInit,AfterViewInit {
+  caseList = [];
   sponsorUserList = [];
   caseNoteForm: FormGroup;
   currentCaseId: any;
+  count:number = 0;
   @ViewChild('modalopen') modalopen: ElementRef;
 
   constructor(private toasterService: ToasterService, public dialog: MatDialog,
@@ -24,14 +25,14 @@ export class CasesComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    //this.modalopen.nativeElement.click();
     this.getCases();
     this.getSponsors();
     this.createCaseNotesForm();
-    this.modalopen.nativeElement.click();
   }
 
   ngAfterViewInit(): void {
-    this.modalopen.nativeElement.click();
+       this.modalopen.nativeElement.click();
   }
 
   createCaseNotesForm() {
