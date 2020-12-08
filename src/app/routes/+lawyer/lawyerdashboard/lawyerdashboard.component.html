@@ -27,19 +27,19 @@
       <div class="col-6">
         <div class="row pt-2">
           <div class="col-12">
-            <div class="d-flex justify-content-center align-items-center;">
+            <div class="d-flex justify-content-center align-items-center mt-10;">
               <mat-card>
                 <div>
                   <span class="h5 text-center font-weight-bold">Step 1:</span>&nbsp;
-                  <span class="h5 text-center font-weight-bold">Explore Plans</span>
+                  <span class="h5 text-center font-weight-bold">Select Subscription Level</span>
                 </div>
-                <h4>Pay per Connection to Defendants. Not sure what this means? <a href='https://google.com' target="_blank">Learn More about Connections.</a></h4>
+                <h4>How many inmate connections do you need? <a href='https://google.com' target="_blank">Learn More about Connections.</a></h4>
                 <div class="row">
                   <div class="col-12 pt-2">
                     <mat-card class="mat-elevation-z10 border-card">
                       <input class="circle"  type="radio" name="package"
                         (change)="onSelectPlan('250',$event.checked)">
-                        Up to 5 Connections, $250/mo/lawyer<br/>
+                        Up to 5 Connections, $250/mo<br/>
                     </mat-card>
                   </div>
                 </div>
@@ -49,7 +49,7 @@
                     <mat-card class="mat-elevation-z10 border-card">
                       <input class="circle"  type="radio" name="package"
                         (change)="onSelectPlan('350',$event.checked)">
-                        Up to 25 Connections, $350/mo/lawyer
+                        Up to 25 Connections, $350/mo
                     </mat-card>
                   </div>
                 </div>
@@ -59,7 +59,7 @@
                     <mat-card class="mat-elevation-z10 border-card">
                       <input class="circle"  type="radio" name="package"
                         (change)="onSelectPlan('400',$event.checked)">
-                        Unlimited, $400.00/mo/lawyer
+                        Unlimited Connections, $400/mo
                     </mat-card>
                   </div>
                 </div>
@@ -67,15 +67,13 @@
             </div>
           </div>
           <div class="col-12 pt-2">
-            <div class="d-flex justify-content-center align-items-center;">
+            <div class="d-flex justify-content-center align-items-center mt-10;">
               <mat-card>
                 <div>
                   <span class="h5 text-center font-weight-bold">Step 2:</span>&nbsp;
                   <span class="h5 text-center font-weight-bold">Select Facilities</span>
                 </div>
-                <h4>Based on the states in which you are admitted to the bar, the following facilities
-                  are available.
-                  Please select the facilities you want access to, and elect AddOns.</h4>
+                <h4>Which facilities would you like to have access? <a href='https://google.com' target="_blank">Learn more about Premium Listings and Sponsorships.</a></h4>
                 <div class="col-12 pt-2">
                   <div>
                     <li *ngFor="let facility of facilities;">
@@ -85,19 +83,18 @@
                       </mat-checkbox>
                       <div *ngIf="facility.isSelected">
                         <mat-card class="border-card mb-2">
-                          <h4 class="font-weight-bold text-center  mb-1 pt-0">Select Add Ons for this
-                            facility.
+                          <h4 class="font-weight-bold text-center  mb-1 pt-0">Select Sponsorship Options for this Facility
                           </h4>
                           <div>
                             <mat-checkbox color="primary" [(ngModel)]="facility.addOns.premium"
                               (change)="onSelectAddOns($event.checked,facility?.facilityId,'premium')">
-                              <span>Premium listing ($10/mo)</span>
+                              <span>Premium Listing: $0.25/mo./Average Daily Population</span>
                             </mat-checkbox>
                           </div>
                           <div>
                             <mat-checkbox color="primary" [(ngModel)]="facility.addOns.sponsors"
                               (change)="onSelectAddOns($event.checked,facility?.facilityId,'sponsors')">
-                              <span>Sponsors Unit Rotation ($10/mo)</span>
+                              <span>Sponsorship: $1.00/mo./Average Daily Population</span>
                             </mat-checkbox>
                           </div>
                         </mat-card>
@@ -113,7 +110,7 @@
       <div class="col-6">
         <!-- Estimated Monthly Bill  -->
         <div class="col-12 pt-2">
-          <div class="d-flex justify-content-center align-items-center;">
+          <div class="d-flex justify-content-center align-items-center mt-10;">
             <mat-card>
               <div class="col-12 pt-2">
                 <div>
@@ -150,16 +147,16 @@
           </div>
         </div>
         <div class="col-12 mt-2">
-          <mat-card class="p-4">
+          <mat-card class="p-4 mt-10">
             <div>
-              <span class="h5 text-center">Step 4 :</span>&nbsp;
+              <span class="h5 text-center font-weight-bold">Step 4:</span>&nbsp;
               <span class="h5 text-center font-weight-bold">Add Credit Card Info</span>
             </div>
-            <span class="text-center text-black">Please enter your credit card information in the form below.</span>
+            <span class="text-center text-black">Please enter your credit card information in the form below. Once everything looks correct, click Pay to complete your setup and
+                start using My Justice Portal!</span>
             <app-stripe class="pt-2" [totalCount]="totalPrice" (onPayEvent)="onPayEvent($event)"
               [facilitiesList]="facilities"></app-stripe>
-              <span class="text-center card-footer-style">Everything look correct? Click pay and Get Started to complete your setup and
-                start using My Justice Portal.</span>
+              
           </mat-card>
         </div>
       </div>
