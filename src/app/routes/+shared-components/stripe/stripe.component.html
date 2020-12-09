@@ -3,6 +3,16 @@
     <form class="mt-2" (ngSubmit)="createStripeToken()" class="checkout">
         <div id="form-field">
             <div class="card-section" id="card-info" #cardInfo></div>
+            
+            <div class="px-5">
+                <h5 class="text-center m-0">Coupon Code</h5>
+                <p class="m-0 text-center">If you have a coupon code, enter it below.</p>
+                <input class="w-100" matInput placeholder="Enter valid coupon code" [formControl]="cardForm.controls['coupon']">   
+            </div>
+                <mat-error *ngIf="cardForm.controls['coupon'].hasError('invalidCoupon')">
+                    <i>Invalid coupon. </i>
+                </mat-error>
+
             <div class="d-flex justify-content-center align-items-center">
                 <button mat-raised-button class="button-purple px-4 py-1 mt-3">Pay {{totalCount | currency:'USD':'symbol'}}
                 </button>

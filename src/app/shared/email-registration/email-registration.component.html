@@ -3,11 +3,24 @@
         <div class="d-flex justify-content-center">
             <img src="assets/img/logo.png" alt="logo" class="logo">
         </div>
+        <div *ngIf="roleId == 1">
+            <h1 class="text-center">Inmate Registration</h1>
+        </div>
         <div *ngIf="roleId == 3">
             <h1 class="text-center">Lawyer Registration</h1>
         </div>
+        <div *ngIf="roleId == 6">
+            <h1 class="text-center">Bondsman Registration</h1>
+        </div>
+        <div *ngIf="roleId == 4">
+            <h1 class="text-center">Researcher Registration</h1>
+        </div>
+        <div *ngIf="roleId == 5">
+            <h1 class="text-center">Public Defender Registration</h1>
+        </div>
         <h3 class="text-center font-weight-bold">Step 1/{{totalSteps}}</h3>
-        <mat-card class="mat-elevation-z10 p-5">
+        <mat-card class="mat-elevation-z10 px-5">
+            <h3 class="text-center m-0 pb-3">Personal Information</h3>
             <p class="font-weight-bold text-center pb-2" *ngIf="message">
                 <span [ngClass]="{'text-danger' : email == 'EXPIRED_TOKEN'}">
                     {{message}}
@@ -28,7 +41,7 @@
                                 Legal First Name should be less than 50 chracters
                             </small>
                             <small class="font13" *ngIf="registrationForm.get('firstName').errors?.pattern">
-                                Legal First Name should contain only alphabets.
+                                Legal First Name should contain only letters.
                             </small>
                         </mat-error>
                     </mat-form-field>
@@ -66,7 +79,7 @@
                                 Legal Last Name should be less than 50 chracters
                             </small>
                             <small class="font13" *ngIf="registrationForm.get('lastName').errors?.pattern">
-                                Legal Last Name should contain only alphabets.
+                                Legal Last Name should contain only letters.
                             </small>
                         </mat-error>
                     </mat-form-field>

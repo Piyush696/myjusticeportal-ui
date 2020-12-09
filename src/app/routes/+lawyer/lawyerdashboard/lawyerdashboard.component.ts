@@ -12,6 +12,7 @@ import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/fo
 import { UserMetaService } from 'app/services/user-meta.service';
 import { UserAdditionInfoService } from 'app/services/user-addition-info.service';
 
+
 @Component({
   selector: 'app-lawyerdashboard',
   templateUrl: './lawyerdashboard.component.html',
@@ -47,7 +48,7 @@ export class LawyerdashboardComponent implements OnInit {
   filteredFacilityList = [];
   lawyerData: any;
 
-  constructor(private hireLawyerService: HireLawyerService, private userMetaService: UserMetaService,
+  constructor(private hireLawyerService: HireLawyerService, private userMetaService: UserMetaService, 
     private facilityService: FacilityService, public dialog: MatDialog, private userAdditionInfoService: UserAdditionInfoService,
     private lawyerService: LawyerService, private toasterService: ToasterService, private store: Store<any>, private fb: FormBuilder) { }
 
@@ -65,23 +66,10 @@ export class LawyerdashboardComponent implements OnInit {
     this.onGetRequestedCases();
     this.getAllClients();
     this.getALLFacilities();
-    this.createCardControl();
     this.getBillingDetails();
     this.dashBoardCountData();
   }
 
-
-
-
-  createCardControl() {
-    this.cardForm = this.fb.group({
-      name: ['', [Validators.required]],
-      cvv: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(3)]],
-      valid: ['', [Validators.required]],
-      card: ['', [Validators.required, this.cardPatternValidation.bind(this)], this.cardValidation.bind(this)],
-    })
-    this.cardForm.disable();
-  }
 
 
   cardPatternValidation(control: AbstractControl) {
@@ -105,7 +93,6 @@ export class LawyerdashboardComponent implements OnInit {
 
 
   onFacilitySelect(event, facilityId, averageCount) {
-    this.cardForm.enable();
     if (event) {
       this.facilityId = facilityId
       this.facilities.map((facility) => {

@@ -4,19 +4,26 @@
             <div class="d-flex justify-content-center">
                 <img src="assets/img/logo.png" alt="logo" class="logo">
             </div>
-            <h3 class="text-center font-weight-bold">Step 2/4</h3>
+            <div *ngIf="roleId == 3">
+                <h2 class="text-center">Lawyer Registration</h2>
+            </div>
+            <div *ngIf="roleId == 1">
+                <h2 class="text-center">Inmate Registration</h2>
+            </div>
+            <h3 *ngIf="roleId == 1" class="text-center font-weight-bold">Step 2/3</h3>
+            <h3 *ngIf="roleId == 3 || roleId == 4 || roleId == 5" class="text-center font-weight-bold">Step 2/4</h3>
             <mat-card class="p-4">
                 <div>
                     <div>
-                        <h2 class=" text-center font-weight-bold" *ngIf="roleId != 3">Additional Information</h2>
+                        <h3 class=" text-center font-weight-bold" *ngIf="roleId != 3">Housing Information</h3>
                     </div>
                     <div>
-                        <h2 class=" text-center font-weight-bold" *ngIf="roleId == 3">Please Add Your Bar Information
+                        <h2 class=" text-center font-weight-bold" *ngIf="roleId == 3">Bar Information
                         </h2>
                     </div>
                     <p class="text-center" *ngIf="roleId == 3">Please add the states in which you are admitted to the
                         bar.<br>If possible, include your Bar ID in that state.</p>
-                    <p class="text-center" *ngIf="isFacility">Please enter the housing unit, if you remember it.</p>
+                    <!-- <p class="text-center" *ngIf="isFacility">Housing Unit (If Known.)</p> -->
                     <p class="text-center" *ngIf="(roleId == 1 && !isFacility)">It looks like you aren't currently in a
                         facility. Please
                         select the last facility you were in, or select which is
@@ -54,7 +61,7 @@
                             </mat-autocomplete>
                         </mat-form-field>
                         <mat-form-field appearance="fill" class="w-100 p-3">
-                            <mat-label>Housing unit</mat-label> <input type="text" matInput placeholder="Housing Unit"
+                            <mat-label>Housing unit</mat-label> <input type="text" matInput placeholder="Housing Unit (If Known.)"
                                 [formControl]="additionalInfo.controls['housing_unit']">
                         </mat-form-field>
                     </div>

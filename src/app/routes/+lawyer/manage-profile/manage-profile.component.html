@@ -31,7 +31,7 @@
                     <td>{{userDetails?.userAdditionalInfo?.description}}</td>
                 </tr>
                 <tr>
-                    <th>Profile Image:</th>
+                    <th>Profile Headshot:</th>
                     <td>
                         <img src="{{userDetails?.userAdditionalInfo?.profile?.downloadLink}}" width="300px"
                             height="200px" alt="logo" class="logo"
@@ -39,7 +39,7 @@
                     </td>
                 </tr>
                 <tr>
-                    <th>Profile Headshot:</th>
+                    <th>Profile Header Background Image:</th>
                     <td>
                         <img src="{{userDetails?.userAdditionalInfo?.header?.downloadLink}}" alt="logo" class="logo"
                             *ngIf="userDetails?.userAdditionalInfo?.header?.downloadLink">
@@ -136,12 +136,12 @@
     <div class="row px-3">
         <div class="card-body px-0 pb-4">
             <div class="drag-border p-3">
-                <h4 class="font-weight-bold margin-remove">Profile Image</h4>
-                <span class="text-bold">Best Size to upload Image is 5 MB and 300*200(width*height).</span>
+                <h4 class="font-weight-bold margin-remove">Profile Headshot</h4>
+                <span class="text-bold">Best image size is up to 5MB and 300*200(width*height).</span>
                 <div ng2FileDrop [ngClass]="{'another-file-over-class': hasAnotherDropZoneOver}"
                     (fileOver)="fileOverAnother($event)" [uploader]="uploader1"
                     class="box-placeholder my-drop-zone font-weight-bold pb-2">
-                    Drag and drop files here (or) Choose below to attach.
+                    Drag and drop files here (or) choose below to attach.
                 </div>
                 <label for="file1" class="file-upload mb-0">
                     <input id="file1" type="file" ng2FileSelect [uploader]="uploader1" accept="image/*"
@@ -180,12 +180,12 @@
     <div class="row px-3">
         <div class="card-body px-0 pb-4">
             <div class="drag-border p-3">
-                <h4 class="font-weight-bold margin-remove">Profile Headshot Image</h4>
-                <span class="text-bold">Best Size to upload Image is 8 MB and 500*300 (width*height)</span>
+                <h4 class="font-weight-bold margin-remove">Profile Header Background Image</h4>
+                <span class="text-bold">Best image size is 8 MB and 500*300 (width*height)</span>
                 <div ng2FileDrop [ngClass]="{'another-file-over-class': hasAnotherDropZoneOver}"
                     (fileOver)="fileOverAnother($event)" [uploader]="uploader2"
                     class="box-placeholder my-drop-zone font-weight-bold pb-2">
-                    Drag and drop files here (or) Choose below to attach.
+                    Drag and drop files here (or) choose below to attach.
                 </div>
                 <label for="file1" class="file-upload mb-0">
                     <input id="file1" type="file" ng2FileSelect [uploader]="uploader2"
@@ -277,7 +277,7 @@
                         </div>
                         <div class="row py-2 pl-3">
                             <div>
-                                <span class="font-weight-bold">PractiseArea: </span>
+                                <span class="font-weight-bold">Practice Area: </span>
                                 <span>{{userDetails?.userAdditionalInfo?.practiceAreas}}</span>
                             </div>
                         </div>
