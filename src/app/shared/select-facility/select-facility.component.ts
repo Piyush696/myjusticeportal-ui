@@ -14,7 +14,8 @@ export class SelectFacilityComponent implements OnInit {
   @Input() totalSteps: any;
   @Output() selectedFacilityEventEmitter = new EventEmitter();
   @Output() perviousClick = new EventEmitter();
-
+  @Input() roleId;
+  
   constructor(private facilityService: FacilityService) { }
 
   ngOnInit(): void {
