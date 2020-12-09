@@ -2,13 +2,13 @@
     <app-email-registration *ngIf="step == 1" [totalSteps]="totalSteps" [message]="message"
         (isNextEvent)="onNextClick($event)" [roleId]="roleId" [user]="user">
     </app-email-registration>
-    <app-organisation *ngIf="step == 2" [totalSteps]="totalSteps" [orgAddress]="orgAddress"
+    <app-organisation *ngIf="step == 2" [roleId]="roleId" [totalSteps]="totalSteps" [orgAddress]="orgAddress"
         (orgAddressEventEmitter)="onCreateOrganisation($event)" (previousClick)="onPreviousClick($event)">
     </app-organisation>
-    <app-select-facility *ngIf="step == 3" [totalSteps]="totalSteps"
+    <app-select-facility *ngIf="step == 3" [roleId]="roleId" [totalSteps]="totalSteps"
         (selectedFacilityEventEmitter)="onSelectedfacility($event)" (perviousClick)="onBackClick($event)">
     </app-select-facility>
-    <app-mobile-registration *ngIf="step == 4" [authCodeField]="authCodeField" [totalSteps]="totalSteps"
+    <app-mobile-registration *ngIf="step == 4" [roleId]="roleId" [authCodeField]="authCodeField" [totalSteps]="totalSteps"
         (isMobileEvent)="mobileDetails($event)" (isOtpEvent)="onAuthCodeValidate($event)">
     </app-mobile-registration>
 </div>

@@ -6,13 +6,13 @@
         (stateEvent)="stateEvent($event)" (isPreviousClick)="onUserPageClick($event)" [roleId]="roleId"
         [userMeta]="registrationData.userMeta">
     </app-additional-info>
-    <app-organisation *ngIf="step == 3" [totalSteps]="totalSteps" [orgAddress]="orgAddress"
+    <app-organisation *ngIf="step == 3" [roleId]="roleId" [totalSteps]="totalSteps" [orgAddress]="orgAddress"
         (orgAddressEventEmitter)="onCreateOrganisation($event)" (previousClick)="onPreviousClick($event)">
     </app-organisation>
     <!-- <app-select-facility *ngIf="step == 4" [totalSteps]="totalSteps" [currentState]="currentState"
         (selectedFacilityEventEmitter)="onSelectedfacility($event)" (perviousClick)="onBackClick($event)">
     </app-select-facility> -->
-    <app-mobile-registration *ngIf="step == 4" [authCodeField]="authCodeField" [totalSteps]="totalSteps"
+    <app-mobile-registration *ngIf="step == 4" [roleId]="roleId" [authCodeField]="authCodeField" [totalSteps]="totalSteps"
         (isMobileEvent)="mobileDetails($event)" (isOtpEvent)="onAuthCodeValidate($event)">
     </app-mobile-registration>
 </div>

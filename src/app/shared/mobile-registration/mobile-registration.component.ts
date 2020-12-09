@@ -15,7 +15,8 @@ export class MobileRegistrationComponent implements OnInit, OnChanges {
   @Input() totalSteps: any;
   @Output() isMobileEvent = new EventEmitter();
   @Output() isOtpEvent = new EventEmitter();
-
+  @Input() roleId;
+  
   constructor(private fb: FormBuilder) { }
 
   ngOnChanges() {
