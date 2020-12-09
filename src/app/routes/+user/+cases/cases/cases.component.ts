@@ -25,7 +25,7 @@ export class CasesComponent implements OnInit,AfterViewInit {
   }
 
   ngOnInit(): void {
-    //this.modalopen.nativeElement.click();
+    this.modalopen.nativeElement.click();
     this.getCases();
     this.getSponsors();
     this.createCaseNotesForm();
