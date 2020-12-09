@@ -3,8 +3,20 @@
         <div class="d-flex justify-content-center">
             <img src="assets/img/logo.png" alt="logo" class="logo">
         </div>
+        <div *ngIf="roleId == 1">
+            <h1 class="text-center">Inmate Registration</h1>
+        </div>
         <div *ngIf="roleId == 3">
             <h1 class="text-center">Lawyer Registration</h1>
+        </div>
+        <div *ngIf="roleId == 6">
+            <h1 class="text-center">Bondsman Registration</h1>
+        </div>
+        <div *ngIf="roleId == 4">
+            <h1 class="text-center">Researcher Registration</h1>
+        </div>
+        <div *ngIf="roleId == 5">
+            <h1 class="text-center">Public Defender Registration</h1>
         </div>
         <h3 class="text-center font-weight-bold">Step 1/{{totalSteps}}</h3>
         <mat-card class="mat-elevation-z10 p-5">
