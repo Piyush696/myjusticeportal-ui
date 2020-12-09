@@ -31,7 +31,7 @@
                     <td>{{userDetails?.userAdditionalInfo?.description}}</td>
                 </tr>
                 <tr>
-                    <th>Profile Image:</th>
+                    <th>Profile Headshot:</th>
                     <td>
                         <img src="{{userDetails?.userAdditionalInfo?.profile?.downloadLink}}" width="300px"
                             height="200px" alt="logo" class="logo"
@@ -39,7 +39,7 @@
                     </td>
                 </tr>
                 <tr>
-                    <th>Profile Headshot:</th>
+                    <th>Profile Header Background Image:</th>
                     <td>
                         <img src="{{userDetails?.userAdditionalInfo?.header?.downloadLink}}" alt="logo" class="logo"
                             *ngIf="userDetails?.userAdditionalInfo?.header?.downloadLink">
@@ -277,7 +277,7 @@
                         </div>
                         <div class="row py-2 pl-3">
                             <div>
-                                <span class="font-weight-bold">PractiseArea: </span>
+                                <span class="font-weight-bold">Practice Area: </span>
                                 <span>{{userDetails?.userAdditionalInfo?.practiceAreas}}</span>
                             </div>
                         </div>
