@@ -44,6 +44,7 @@ export class LawyerdashboardComponent implements OnInit {
   averageCount: number = 0;
   addOnsCount: number = 0;
   planPrice: number = 0;
+  addOnsPrice:number = 0;
   state = [];
   filteredFacilityList = [];
   lawyerData: any;
@@ -127,34 +128,41 @@ export class LawyerdashboardComponent implements OnInit {
         if (facilityId === x.facilityId) {
           if (addOnsType == 'premium') {
             x.addOns.premium = true;
-
+            this.addOnsPrice =  this.addOnsPrice + x.facilityUserCount * 0.25
+             this.totalPrice =   this.totalPrice  + this.addOnsPrice
           } else if (addOnsType == 'sponsors') {
+            this.addOnsPrice =  this.addOnsPrice + x.facilityUserCount * 1.00
+             this.totalPrice =   this.totalPrice  + this.addOnsPrice
             x.addOns.sponsors = true;
           }
         }
         return x
       });
-      if (this.addOnsCount < 0) {
-        this.addOnsCount = 0
-      } else {
-        this.addOnsCount++
-      }
+      // if (this.addOnsCount < 0) {
+      //   this.addOnsCount = 0
+      // } else {
+      //   this.addOnsCount++
+      // }
     } else {
       this.facilities.map((x) => {
         if (facilityId === x.facilityId) {
           if (addOnsType == 'premium') {
+            this.addOnsPrice =  this.addOnsPrice - x.facilityUserCount * 0.25
+              this.totalPrice =   this.totalPrice  - this.addOnsPrice 
             x.addOns.premium = false;
           } else if (addOnsType == 'sponsors') {
+           this.addOnsPrice =  this.addOnsPrice - x.facilityUserCount * 1.00
+             this.totalPrice =   this.totalPrice  - this.addOnsPrice
             x.addOns.sponsors = false;
           }
         }
         return x
       });
-      if (this.addOnsCount < 0) {
-        this.addOnsCount = 0;
-      } else {
-        this.addOnsCount--;
-      }
+      // if (this.addOnsCount < 0) {
+      //   this.addOnsCount = 0;
+      // } else {
+      //   this.addOnsCount--;
+      // }
     }
     this.calculatePrice();
   }
@@ -165,10 +173,12 @@ export class LawyerdashboardComponent implements OnInit {
       if (ele.isSelected) {
         this.totalPrice = this.totalPrice + (ele.facilityUserCount * 0.10)
         if (ele.addOns.premium) {
-          this.totalPrice = this.totalPrice + 10;
+          // this.addOnsPrice =  this.addOnsPrice + ele.facilityUserCount * 0.25
+          this.totalPrice  =   this.totalPrice  + this.addOnsPrice
         }
         if (ele.addOns.sponsors) {
-          this.totalPrice = this.totalPrice + 10;
+          // this.addOnsPrice =  this.addOnsPrice + ele.facilityUserCount * 1.00
+          // this.totalPrice =   this.totalPrice  + this.addOnsPrice
         }
       }
     })
