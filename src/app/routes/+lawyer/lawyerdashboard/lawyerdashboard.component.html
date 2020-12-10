@@ -27,7 +27,6 @@
       <div class="col-6">
         <div class="row pt-2">
           <div class="col-12">
-            <div class="d-flex justify-content-center align-items-center mt-10;">
               <mat-card>
                 <div>
                   <span class="h5 text-center font-weight-bold">Step 1:</span>&nbsp;
@@ -64,7 +63,6 @@
                   </div>
                 </div>
               </mat-card>
-            </div>
           </div>
           <div class="col-12 pt-2">
             <div class="d-flex justify-content-center align-items-center mt-10;">
@@ -74,8 +72,12 @@
                   <span class="h5 text-center font-weight-bold">Select Facilities</span>
                 </div>
                 <h4>Which facilities would you like to have access? <a href='https://google.com' target="_blank">Learn more about Premium Listings and Sponsorships.</a></h4>
+                
                 <div class="col-12 pt-2">
-                  <div>
+                  <div *ngIf="facilities.length < 0">
+                    <span>We currently do not have any facilities in your state. Please contact support for more information.</span>
+                  </div>
+                  <div  *ngIf="facilities.length > 0">
                     <li *ngFor="let facility of facilities;">
                       <mat-checkbox color="primary"
                         (change)="onFacilitySelect($event.checked,facility?.facilityId,facility.facilityUserCount)">
@@ -124,14 +126,14 @@
                     <div>Plan Base Cost:</div>
                     <div>{{planPrice | currency:'USD':'symbol'}}</div>
                   </div>
-                  <div class="d-flex justify-content-between align-items-between">
+                  <!-- <div class="d-flex justify-content-between align-items-between">
                     <div>Total inmate access Charges:</div>
                     <div>{{ (averageCount ? averageCount * 0.10 : 0) | currency:'USD':'symbol'}}
                     </div>
-                  </div>
+                  </div> -->
                   <div class="d-flex justify-content-between align-items-between">
                     <div>Add On charges:</div>
-                    <div>{{(addOnsCount  ? (addOnsCount * 10 )  : 0 ) | currency:'USD':'symbol'}}
+                    <div>{{(addOnsPrice  ? addOnsPrice   : 0 ) | currency:'USD':'symbol'}}
                     </div>
                   </div>
                   <hr>
