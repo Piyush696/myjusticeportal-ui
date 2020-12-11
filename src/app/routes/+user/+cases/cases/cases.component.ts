@@ -25,10 +25,14 @@ export class CasesComponent implements OnInit,AfterViewInit {
   }
 
   ngOnInit(): void {
-    this.modalopen.nativeElement.click();
+   // this.modalopen.nativeElement.click();
     this.getCases();
     this.getSponsors();
     this.createCaseNotesForm();
+  }
+
+  onAcceptClick(){
+    
   }
 
   ngAfterViewInit(): void {
@@ -50,6 +54,7 @@ export class CasesComponent implements OnInit,AfterViewInit {
   getCases() {
     this.caseService.getCases().subscribe((cases: any) => {
       if (cases.success) {
+        console.log(cases)
         this.caseList = cases.data;
       } else {
         this.toasterService.showErrorToater(cases.data);
