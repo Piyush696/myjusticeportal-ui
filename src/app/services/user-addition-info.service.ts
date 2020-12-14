@@ -62,4 +62,12 @@ export class UserAdditionInfoService {
     return this.httpClient.get<object>(`${this.apiPath}/userAdditionalInfo/dasboard/count`, this.getHeaders());
   }
 
+  caseCreateModal(metaValue){
+    return this.httpClient.post<object>(`${this.apiPath}/userMeta/modal/caseCreate`, {metaValue}, this.getHeaders())
+  }
+
+  caseModalDetails(){
+    return this.httpClient.get<object>(`${this.apiPath}/userMeta/getCaseModalValue`, this.getHeaders())
+  }
+
 }
