@@ -45,7 +45,6 @@ export class CasesComponent implements OnInit,AfterViewInit {
   onAcceptClick(){
     let metaValue = 'clicked'
     this.userAdditionalService.caseCreateModal(metaValue).subscribe((res:any) => {
-     console.log(res)
      this.modalAcceptDetails();
    })
   }
@@ -69,7 +68,6 @@ export class CasesComponent implements OnInit,AfterViewInit {
   getCases() {
     this.caseService.getCases().subscribe((cases: any) => {
       if (cases.success) {
-        console.log(cases)
         this.caseList = cases.data;
       } else {
         this.toasterService.showErrorToater(cases.data);
