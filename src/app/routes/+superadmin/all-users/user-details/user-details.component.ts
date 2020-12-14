@@ -7,6 +7,7 @@ import { Subscription } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { ToasterService } from 'app/services/toaster.service';
+import { FacilityService } from 'app/services/facility.service';
 
 @Component({
     selector: 'app-user-details',
@@ -18,14 +19,16 @@ export class UserDetailsComponent implements OnInit, OnDestroy {
     selectedUserId: number;
     selectedUserData: any;
     selectedRoleId: number;
+    selectedFacilityId:number;
     userDetailsForm: FormGroup;
+    facilityList: [];
 
     roleStoreSub: Subscription;
     roleList: any;
 
     constructor(private fb: FormBuilder, private activatedRoute: ActivatedRoute,
         private store: Store<any>, private userService: UserService, public dialog: MatDialog,
-        private toasterService: ToasterService) {
+        private toasterService: ToasterService, private facilityService:FacilityService) {
         this.selectedUserId = this.activatedRoute.snapshot.params['userId'];
     }
 
@@ -33,6 +36,7 @@ export class UserDetailsComponent implements OnInit, OnDestroy {
         this.store.dispatch(new LoadRole());
         this.createControl();
         this.onGetUserDetails();
+        this.onGetFacilityList();
     }
 
     createControl() {
@@ -45,8 +49,28 @@ export class UserDetailsComponent implements OnInit, OnDestroy {
     onGetUserDetails() {
         this.userService.getSingleUserById(+this.selectedUserId).subscribe((res: any) => {
             this.selectedUserData = res.data;
+            console.log(this.selectedUserData)
         });
         this.onGetRoleList();
+    }
+
+    openChangefacilityModal(modalName){
+        const dialogRef = this.dialog.open(modalName, {
+            // width: '500px',
+        });
+
+        dialogRef.afterClosed().subscribe(result => {
+            if (result) {
+                this.onChangeFacility(result);
+            }
+        });
+    }
+
+    onGetFacilityList() {
+        this.facilityService.getAllFacility().subscribe((facilityList:any)=>{
+            console.log(facilityList)
+            this.facilityList = facilityList.data
+        })
     }
 
     onGetRoleList() {
@@ -78,6 +102,20 @@ export class UserDetailsComponent implements OnInit, OnDestroy {
                 this.toasterService.showSuccessToater('Role changed successfully.');
             } else {
                 this.toasterService.showErrorToater('Role change unsuccessful.');
+            }
+            this.onGetUserDetails();
+        });
+    }
+
+    onChangeFacility(facilityId){
+        let data: any = {};
+        data.userId = this.selectedUserId;
+        data.facilityId = facilityId;
+        this.userService.changeFacility(data).subscribe((res: any) => {
+            if (res.success) {
+                this.toasterService.showSuccessToater('Facility changed successfully.');
+            } else {
+                this.toasterService.showErrorToater('Facility change unsuccessful.');
             }
             this.onGetUserDetails();
         });

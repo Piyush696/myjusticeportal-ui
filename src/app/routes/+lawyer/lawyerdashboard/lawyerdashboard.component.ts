@@ -213,7 +213,6 @@ export class LawyerdashboardComponent implements OnInit {
                 }
               })
             }
-
           } else {
             this.billingBoard = true;
             this.showDashboard = false;
