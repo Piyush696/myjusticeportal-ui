@@ -214,6 +214,7 @@ export class MyAccountComponent implements OnInit {
       result.data.roles.forEach(element => {
         this.getAllSecurityQuestion(element.roleId)
       });
+      console.log(result.data)
       this.user = result.data;
       this.userMeta = result.data.userMeta
       this.profileForm.get('firstName').setValue(result.data.firstName)
@@ -223,9 +224,12 @@ export class MyAccountComponent implements OnInit {
       this.profileForm.get('mobile').setValue(result.data.mobile)
       this.profileForm.get('userEmail').setValue(result.data.email)
       this.profileForm.get('isMFA').setValue(result.data.isMFA)
+      if(result.data.facilities.length > 0){
+        this.userMetaForm.get('facility').setValue(result.data.facilities[0]?.facilityName);
+        this.userMetaForm.disable()
+      }
       if (result.data.userMeta.length) {
         this.userMetaForm.get('housing_unit').setValue(result.data.userMeta[0]?.metaValue);
-        this.userMetaForm.get('facility').setValue(result.data.userMeta[1]?.metaValue);
         this.userMetaForm.disable()
       }
       this.profileForm.get('userName').disable()

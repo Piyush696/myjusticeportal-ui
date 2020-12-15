@@ -24,3 +24,9 @@
  .margin-remove{
   margin-top: -30px;
 }
+
+.background-org-logo{
+  background-size: cover!important;
+    background-repeat: no-repeat!important;
+    height: 140px;
+}

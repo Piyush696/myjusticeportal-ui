@@ -90,9 +90,8 @@ export class SidebarComponent implements OnInit,AfterViewInit {
         this.userMetaService.getUserBillingDetails().subscribe((billingsDetails: any) => {
             console.log(billingsDetails)
           if (billingsDetails.data) {
-            billingsDetails.data.forEach((ele) => {
-              if (ele.userMeta) {
-                if (ele.userMeta.length === 3) {
+              if (billingsDetails.data.userMeta) {
+                if (billingsDetails.data.userMeta.length === 3) {
                     console.log('dwe')
                     this.setupDashboard = true;
                 } else {
@@ -100,7 +99,6 @@ export class SidebarComponent implements OnInit,AfterViewInit {
                     this.setupDashboard = false;
                 }
               }
-            })
           }
         })
       }
