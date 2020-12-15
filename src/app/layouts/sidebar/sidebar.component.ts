@@ -88,19 +88,14 @@ export class SidebarComponent implements OnInit,AfterViewInit {
 
     getBillingDetails() {
         this.userMetaService.getUserBillingDetails().subscribe((billingsDetails: any) => {
-            console.log(billingsDetails)
           if (billingsDetails.data) {
-            billingsDetails.data.forEach((ele) => {
-              if (ele.userMeta) {
-                if (ele.userMeta.length === 3) {
-                    console.log('dwe')
+              if (billingsDetails.data.userMeta) {
+                if (billingsDetails.data.userMeta.length === 3) {
                     this.setupDashboard = true;
                 } else {
-                    console.log('ddd')
                     this.setupDashboard = false;
                 }
               }
-            })
           }
         })
       }

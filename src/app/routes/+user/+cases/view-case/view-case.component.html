@@ -166,25 +166,32 @@
                 </div>
             </mat-card>
         </div>
-        <div class="col-12 p-0 mt-3">
+        <div  class="col-12 p-0 mt-3">
             <mat-card class="d-flex justify-content-between mat-elevation-z10 view-card-color">
-                <div>
-                    <h3 class="font-weight-bold mb-2">My Private Case Notes:</h3>
-                    <div class="notes">
-                        <span>{{caseDetails?.notes}}</span>
-                        <span *ngIf="!caseDetails?.notes" class="text-danger">
-                            No Notes have been added. Click the edit button to add a note.
-                        </span>
+                <div *ngIf="isFacility">
+                    <div>
+                        <h3 class="font-weight-bold mb-2">My Private Case Notes:</h3>
+                        <div class="notes">
+                            <span>{{caseDetails?.notes}}</span>
+                            <span *ngIf="!caseDetails?.notes" class="text-danger">
+                                No Notes have been added. Click the edit button to add a note.
+                            </span>
+                        </div>
+                    </div>
+                    <div class="pl-2">
+                        <button class="button-purple" mat-mini-fab title="Add/Edit Note"
+                            (click)="openModal(managenotesModel)">
+                            <mat-icon>edit</mat-icon>
+                        </button>
                     </div>
                 </div>
-                <div class="pl-2">
-                    <button class="button-purple" mat-mini-fab title="Add/Edit Note"
-                        (click)="openModal(managenotesModel)">
-                        <mat-icon>edit</mat-icon>
-                    </button>
+                <div  *ngIf="!isFacility">
+                    <h3 class="font-weight-bold mb-2">My Private Case Notes:</h3>
+                    <span>Private notes are only available when you are within a Facility.</span>
                 </div>
             </mat-card>
         </div>
+
         <div class="col-12 p-0 mt-3">
             <mat-card class="mat-elevation-z10 view-card-color px-2">
                 <app-view-case-files></app-view-case-files>

@@ -20,7 +20,12 @@
 </div>
 
 <div *ngIf="billingBoard">
-  <div class="d-flex justify-content-between">
+  <div *ngIf="billingBoard && isAuthorized" class="d-flex justify-content-center align-items-center;">
+    <div class="col-12 pt-2 pl-0">
+      <mat-card class="mat-elevation-z10 d-flex justify-content-center">
+        <h2>Account Status: <span class="panding-review approved-card">Approved</span></h2>
+      </mat-card>
+    </div>
   </div>
   <div *ngIf="userData?.roles[0]?.roleId == 3">
     <div class="row">

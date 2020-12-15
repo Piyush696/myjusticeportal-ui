@@ -6,6 +6,7 @@ import { Location } from '@angular/common';
 import { MatDialog } from '@angular/material/dialog';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { LawyerService } from 'app/services/lawyer.service';
+import { UserService } from 'app/services/registration/user.service';
 
 
 @Component({
@@ -18,11 +19,12 @@ export class ViewCaseComponent implements OnInit {
   caseDetails: any;
   caseNoteForm: FormGroup;
   assignedLawyer: any;
+  isFacility: boolean;
   // enableEditBtn: boolean = true;
 
   constructor(private router: Router, private route: ActivatedRoute, private caseService: CaseService,
     private toasterService: ToasterService, private location: Location,
-    public dialog: MatDialog, private fb: FormBuilder, private lawyerService: LawyerService) {
+    public dialog: MatDialog, private fb: FormBuilder, private lawyerService: LawyerService, private userService: UserService) {
   }
 
   ngOnInit(): void {
@@ -32,6 +34,10 @@ export class ViewCaseComponent implements OnInit {
     })
     this.getCase();
     this.getAssignedLawyer();
+
+    this.userService.userFacility().subscribe((res: any) => {
+      this.isFacility = res.data ? true : false
+    })
   }
 
   getAssignedLawyer() {
