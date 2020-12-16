@@ -7,8 +7,10 @@ import { CacheService } from './cache.service';
   providedIn: 'root'
 })
 export class StripeService {
+
   private apiPath: string;
-  constructor(private httpClient: HttpClient, private cacheService: CacheService,private stripe:StripeService) {
+  
+  constructor(private httpClient: HttpClient, private cacheService: CacheService) {
     const env: any = environment;
     this.apiPath = env.api
   }

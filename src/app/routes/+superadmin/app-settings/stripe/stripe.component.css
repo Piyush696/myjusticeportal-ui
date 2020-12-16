@@ -1,7 +1,0 @@
-.wpx-300 {
-  width: 300px !important;
-}
-
-button[disabled] {
-  cursor: not-allowed;
-}
