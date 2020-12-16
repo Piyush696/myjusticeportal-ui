@@ -66,6 +66,10 @@ export class UserService {
     return this.httpClient.put<Object>(`${this.apiPath}/user/changeRole`, roleId, this.getHeaders());
   }
 
+  changeFacility(FacilityId) {
+    return this.httpClient.put<Object>(`${this.apiPath}/user/changeFacility`, FacilityId, this.getHeaders());
+  }
+
   addUser(userData) {
     return this.httpClient.post<Object>(`${this.apiPath}/user/createUser`, userData, this.getHeaders());
   }

@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
+import { UserMetaService } from 'app/services/user-meta.service';
 
 export interface RouteInfo {
     path: string;
@@ -58,12 +59,19 @@ export const ROUTES: RouteInfo[] = [
     templateUrl: 'sidebar.component.html'
 })
 
-export class SidebarComponent implements OnInit {
+export class SidebarComponent implements OnInit,AfterViewInit {
     public filteredMenuItems: any[];
     userInfo: any;
     libraryLink: any;
+    setupDashboard:boolean = false;
 
-    constructor(private store: Store<any>) { }
+    constructor(private store: Store<any>,private userMetaService: UserMetaService) { }
+
+
+    ngAfterViewInit(): void {
+        this.filterMenuByUser();
+        this.getBillingDetails();
+    }
 
     ngOnInit() {
         this.store.select(s => s.userInfo).subscribe(x => {
@@ -73,9 +81,44 @@ export class SidebarComponent implements OnInit {
             }
         });
         this.filterMenuByUser();
+        this.getBillingDetails();
     }
 
+
+
+    getBillingDetails() {
+        this.userMetaService.getUserBillingDetails().subscribe((billingsDetails: any) => {
+          if (billingsDetails.data) {
+              if (billingsDetails.data.userMeta) {
+                if (billingsDetails.data.userMeta.length === 3) {
+                    this.setupDashboard = true;
+                } else {
+                    this.setupDashboard = false;
+                }
+              }
+          }
+        })
+      }
+
     filterMenuByUser() {
+        if(this.userInfo.roles[0].roleId === 3){
+            if (this.userInfo.status && !this.setupDashboard) {
+                this.filteredMenuItems = ROUTES.filter(menu => {
+                    let isExist = menu.roleIds.find(roleId => roleId == this.userInfo.roles[0].roleId);
+                    if (isExist) {
+                        if (!menu.isAdmin) {
+                            return menu;
+                        }
+                        else if (menu.isAdmin && this.userInfo.isAdmin) {
+                            return menu;
+                        }
+                    }
+                });
+            }
+            else {
+                this.filteredMenuItems = null;
+            }
+        } else {
         if (this.userInfo.status) {
             this.filteredMenuItems = ROUTES.filter(menu => {
                 let isExist = menu.roleIds.find(roleId => roleId == this.userInfo.roles[0].roleId);
@@ -93,4 +136,5 @@ export class SidebarComponent implements OnInit {
             this.filteredMenuItems = null;
         }
     }
+}
 }

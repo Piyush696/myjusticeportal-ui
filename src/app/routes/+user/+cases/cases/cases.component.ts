@@ -5,6 +5,8 @@ import { Router } from '@angular/router';
 import { CaseService } from 'app/services/case.service';
 import { ToasterService } from 'app/services/toaster.service';
 import { UserAdditionInfoService } from 'app/services/user-addition-info.service';
+import { UserMetaService } from 'app/services/user-meta.service';
+
 
 @Component({
   selector: 'app-cases',
@@ -21,22 +23,34 @@ export class CasesComponent implements OnInit,AfterViewInit {
   @ViewChild('modalopen') modalopen: ElementRef;
 
   constructor(private toasterService: ToasterService, public dialog: MatDialog,
-    private caseService: CaseService, private fb: FormBuilder, private router: Router, private userAdditionalService: UserAdditionInfoService) {
+    private caseService: CaseService, private fb: FormBuilder, private router: Router, 
+    private userAdditionalService: UserAdditionInfoService) {
   }
 
   ngOnInit(): void {
-   // this.modalopen.nativeElement.click();
     this.getCases();
     this.getSponsors();
     this.createCaseNotesForm();
+    this.modalAcceptDetails();
+  }
+
+  modalAcceptDetails(){
+    this.userAdditionalService.caseModalDetails().subscribe((res:any) => {
+      if(!res.data){
+        this.modalopen.nativeElement.click();
+      }
+    })
   }
 
   onAcceptClick(){
-    
+    let metaValue = 'clicked'
+    this.userAdditionalService.caseCreateModal(metaValue).subscribe((res:any) => {
+     this.modalAcceptDetails();
+   })
   }
 
   ngAfterViewInit(): void {
-       this.modalopen.nativeElement.click();
+       //this.modalopen.nativeElement.click();
   }
 
   createCaseNotesForm() {
@@ -54,7 +68,6 @@ export class CasesComponent implements OnInit,AfterViewInit {
   getCases() {
     this.caseService.getCases().subscribe((cases: any) => {
       if (cases.success) {
-        console.log(cases)
         this.caseList = cases.data;
       } else {
         this.toasterService.showErrorToater(cases.data);

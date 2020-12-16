@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { StripeComponent } from './stripe.component';
+import { StripeConnectionComponent } from './stripe-connection.component';
 
-describe('StripeComponent', () => {
-  let component: StripeComponent;
-  let fixture: ComponentFixture<StripeComponent>;
+describe('StripeConnectionComponent', () => {
+  let component: StripeConnectionComponent;
+  let fixture: ComponentFixture<StripeConnectionComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ StripeComponent ]
+      declarations: [ StripeConnectionComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(StripeComponent);
+    fixture = TestBed.createComponent(StripeConnectionComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

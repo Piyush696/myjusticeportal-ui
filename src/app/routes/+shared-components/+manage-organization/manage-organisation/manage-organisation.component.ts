@@ -34,7 +34,7 @@ export class ManageOrganisationComponent implements OnInit {
   public fileOverAnother(e: any): void {
     this.hasAnotherDropZoneOver = e;
   }
-
+  path: any;
   constructor(private fb: FormBuilder, private toasterService: ToasterService,
     public dialog: MatDialog, private organisationService: OrganisationService, private specialtyService: SpecialtyService) { }
 
@@ -42,6 +42,7 @@ export class ManageOrganisationComponent implements OnInit {
     this.createControl()
     this.getOrganisationAddress()
   }
+  
 
   onUploadLogo() {
     if (this.uploader1.queue.length <= 1) {
@@ -74,9 +75,27 @@ export class ManageOrganisationComponent implements OnInit {
     }
   }
 
+  onCloseModal(){
+    this.dialog.closeAll();
+  }
+
+  openOrgPreviewModal(templateRef){
+    this.buttonText = 'Edit'
+    let dialogRef = this.dialog.open(templateRef, {
+      width: '800px',
+      height: '500px'
+    });
+    setTimeout(() => {
+      var x = document.getElementById('cust-img')
+      x.style.background = 'url(' + this.path + ')'
+    }, 500);
+  }
+
   getOrganisationAddress() {
     this.organisationService.getOrganisationAddressDetails().subscribe((orgDetails: any) => {
+      console.log(orgDetails.data)
       this.orgData = orgDetails.data
+      this.path =  orgDetails.data?.Organization?.logo?.downloadLink
       this.organisationId = orgDetails.data.Organization.organizationId
       if (orgDetails.success) {
         let specialty = [];
