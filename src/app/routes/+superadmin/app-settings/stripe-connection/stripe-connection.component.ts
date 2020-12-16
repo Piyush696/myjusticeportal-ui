@@ -4,16 +4,17 @@ import { StripeService } from 'app/services/stripe.service';
 import { ToasterService } from 'app/services/toaster.service';
 
 @Component({
-  selector: 'app-stripe',
-  templateUrl: './stripe.component.html',
-  styleUrls: ['./stripe.component.css']
+  selector: 'app-stripe-connection',
+  templateUrl: './stripe-connection.component.html',
+  styleUrls: ['./stripe-connection.component.css']
 })
-export class StripeComponent implements OnInit {
+
+export class StripeConnectionComponent implements OnInit {
+
   stripeCredentialForm: FormGroup;
   isDisabled: boolean = true;
 
-  constructor(private fb: FormBuilder, private stripeService: StripeService,
-    private toasterService: ToasterService) { }
+  constructor(private fb: FormBuilder,private toasterService: ToasterService, private stripeService: StripeService) { }
 
   ngOnInit(): void {
     this.stripeCredentialForm = this.fb.group({
@@ -53,5 +54,4 @@ export class StripeComponent implements OnInit {
   enableSave() {
     this.isDisabled = false;
   }
-
 }
