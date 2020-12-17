@@ -63,10 +63,10 @@ export class LawyerdashboardComponent implements OnInit {
         this.isAuthorized = false;
       }
     });
+    this.getALLFacilities();
     this.getUserDetails();
     this.onGetRequestedCases();
     this.getAllClients();
-    this.getALLFacilities();
     this.getBillingDetails();
     this.dashBoardCountData();
   }
