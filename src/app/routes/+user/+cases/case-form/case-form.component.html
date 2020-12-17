@@ -49,16 +49,6 @@
                 <mat-label>County of Arrest (If Applicable)</mat-label>
                 <input type="text" matInput placeholder="County of Arrest (If Applicable)"
                     [formControl]="caseForm.controls['countyOfArrest']">
-                <!-- <input type="text" matInput placeholder="County Of Arrest"
-                    [formControl]="caseForm.controls['countyOfArrest']"> -->
-                <!-- <mat-error>
-                    <div
-                        *ngIf="caseForm.controls['countyOfArrest'].invalid && caseForm.controls['countyOfArrest'].touched">
-                        <small class="font13">
-                            County of Arrest is Required
-                        </small>
-                    </div>
-                </mat-error> -->
             </mat-form-field>
         </div>
         <div class="col-6 pl-0">
@@ -68,16 +58,6 @@
                     <mat-option>Select state</mat-option>
                     <mat-option *ngFor="let state of states" value="{{state.name}}">{{state.name}}</mat-option>
                 </mat-select>
-                <!-- <input type="text" matInput placeholder="County Of Arrest"
-                    [formControl]="caseForm.controls['countyOfArrest']"> -->
-                <!-- <mat-error>
-                    <div
-                        *ngIf="caseForm.controls['countyOfArrest'].invalid && caseForm.controls['countyOfArrest'].touched">
-                        <small class="font13">
-                            County of Arrest is Required
-                        </small>
-                    </div>
-                </mat-error> -->
             </mat-form-field>
         </div>
     </div>
@@ -92,13 +72,6 @@
                     [min]="dateOfArrest">
                 <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
                 <mat-datepicker #picker1></mat-datepicker>
-                <!-- <mat-error>
-                    <div *ngIf="caseForm.controls['dateOfArrest'].invalid && caseForm.controls['dateOfArrest'].touched">
-                        <small class="font13">
-                            Date of Arrest is Required
-                        </small>
-                    </div>
-                </mat-error> -->
             </mat-form-field>
         </div>
         <div class="col-6 pl-0">
@@ -110,19 +83,6 @@
                 <mat-datepicker #picker></mat-datepicker>
             </mat-form-field>
         </div>
-        <!-- <div class="col-6 pl-0">
-            <mat-form-field appearance="fill" class="w-100 pl-2">
-                <mat-label>Other Case Details</mat-label>
-                <input type="email" matInput placeholder="Other Case Details"
-                    [formControl]="caseForm.controls['otherInformation']">
-                <mat-error>
-                    <div
-                        *ngIf="caseForm.controls['otherInformation'].invalid && caseForm.controls['otherInformation'].touched">
-                        <small class="font13">Other Case Details is Required</small>
-                    </div>
-                </mat-error>
-            </mat-form-field>
-        </div> -->
     </div>
 </div>
 
@@ -156,14 +116,6 @@
                 <mat-label>Attorney Name (If Applicable)</mat-label>
                 <input type="text" matInput placeholder="Attorney Name"
                     [formControl]="caseForm.controls['attorneyName']">
-                <!-- <mat-error>
-                    <div
-                        *ngIf="caseForm.controls['caseJurisdiction'].invalid && caseForm.controls['caseJurisdiction'].touched">
-                        <small class="font13">
-                            Case Jurisdiction is Required
-                        </small>
-                    </div>
-                </mat-error> -->
             </mat-form-field>
         </div>
     </div>
