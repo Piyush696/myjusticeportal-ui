@@ -1,12 +1,12 @@
 //Install express server
 const express = require('express');
 const path = require('path');
-const sslRedirect = require('heroku-ssl-redirect');
+// const sslRedirect = require('heroku-ssl-redirect');
 
 
 const app = express();
 
-app.use(sslRedirect(['development', 'staging', 'production']));
+// app.use(sslRedirect(['development', 'staging', 'production']));
 
 
 // Serve only the static files form the dist directory

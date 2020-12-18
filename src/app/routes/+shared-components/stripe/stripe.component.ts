@@ -33,6 +33,7 @@ export class StripeComponent implements OnDestroy, AfterViewInit,OnChanges ,OnIn
 
   ngOnInit(): void {
     this.createCardControl();
+    this.getUserDetailsFromStore();
   }
 
   ngOnChanges(): void {
@@ -65,10 +66,15 @@ export class StripeComponent implements OnDestroy, AfterViewInit,OnChanges ,OnIn
   }
 
   ngAfterViewInit() {
+    this.getUserDetailsFromStore();
+      this.initiateCardElement();
+  }
+
+  getUserDetailsFromStore(){
     this.store.select(s => s.userInfo).subscribe(x => {
+      console.log(x)
       this.userData = x
     });
-      this.initiateCardElement();
   }
 
   initiateCardElement() {
@@ -109,7 +115,7 @@ export class StripeComponent implements OnDestroy, AfterViewInit,OnChanges ,OnIn
       let facilityList = [];
       const data = {
         "token":token.id,
-        "email":this.userData.username
+        "email":'sahyxyf@gmail.com'
       }
       this.lawyerService.postPay(data).subscribe((addCard: any) => {
         if(addCard.data){
