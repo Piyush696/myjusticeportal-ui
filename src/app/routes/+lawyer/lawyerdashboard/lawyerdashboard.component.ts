@@ -138,11 +138,6 @@ export class LawyerdashboardComponent implements OnInit {
         }
         return x
       });
-      // if (this.addOnsCount < 0) {
-      //   this.addOnsCount = 0
-      // } else {
-      //   this.addOnsCount++
-      // }
     } else {
       this.facilities.map((x) => {
         if (facilityId === x.facilityId) {
@@ -158,11 +153,6 @@ export class LawyerdashboardComponent implements OnInit {
         }
         return x
       });
-      // if (this.addOnsCount < 0) {
-      //   this.addOnsCount = 0;
-      // } else {
-      //   this.addOnsCount--;
-      // }
     }
     this.calculatePrice();
   }
@@ -173,12 +163,9 @@ export class LawyerdashboardComponent implements OnInit {
       if (ele.isSelected) {
         this.totalPrice = this.totalPrice + (ele.facilityUserCount * 0.10)
         if (ele.addOns.premium) {
-          // this.addOnsPrice =  this.addOnsPrice + ele.facilityUserCount * 0.25
           this.totalPrice  =   this.totalPrice  + this.addOnsPrice
         }
         if (ele.addOns.sponsors) {
-          // this.addOnsPrice =  this.addOnsPrice + ele.facilityUserCount * 1.00
-          // this.totalPrice =   this.totalPrice  + this.addOnsPrice
         }
       }
     })
