@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { FacilityService } from 'app/services/facility.service';
 import { LawyerFacilityService } from '../../../services/lawyer-facility.service';
 @Component({
@@ -10,13 +11,20 @@ export class BillingSettingsComponent implements OnInit {
   billingFacilities = [];
   facilities = [];
   planPrice:number = 0;
-  totalPrice:number = 0;
+  currentPlanPrice:number = 0;
+  totalBillingPrice:number = 0;
+  addOnsBillingPrice:number = 0;
   addOnsPrice:number = 0;
+  totalPrice:number = 0;
+  facilityList = [];
+  facilityId: any;
+  averageCount: number = 0;
 
-  constructor(private lawyerFacilityService:LawyerFacilityService, private facilityService: FacilityService) { }
+  constructor(private lawyerFacilityService:LawyerFacilityService, private facilityService: FacilityService,public dialog: MatDialog) { }
 
   ngOnInit(): void {
    this.getBillableFacility();
+   this.getALLFacilities();
   }
 
   getBillableFacility(){
@@ -24,31 +32,149 @@ export class BillingSettingsComponent implements OnInit {
       this.facilities = data.facilities
       data.facilities.forEach(element => {
         if(element.planSelected === 'Up to 5 Connections'){
-          this.planPrice =  250
+          this.currentPlanPrice =  250
         } else if(element.planSelected === 'Up to 25 Connections'){
-          this.planPrice = 350
+          this.currentPlanPrice = 350
         } else {
-          this.planPrice = 400
+          this.currentPlanPrice = 400
         }
 
         if(element.isSelected === true) {
-          this.totalPrice = this.totalPrice + (element.facilityUserCount * 0.10)
+          this.totalBillingPrice = this.totalBillingPrice + (element.facilityUserCount * 0.10)
         } else if(element.isPremium === true) {
-          this.totalPrice = this.totalPrice + (element.facilityUserCount * 0.10)
+          this.totalBillingPrice = this.totalBillingPrice + (element.facilityUserCount * 0.10)
         }
 
         if(element.isPremium === true && element.isSponsors === true){
-          this.addOnsPrice =  this.addOnsPrice + element.facilityUserCount * 0.25
-          this.addOnsPrice =  this.addOnsPrice + element.facilityUserCount * 1.00
-          this.totalPrice = this.totalPrice + this.addOnsPrice
+          this.addOnsBillingPrice =  this.addOnsBillingPrice + element.facilityUserCount * 0.25
+          this.addOnsBillingPrice =  this.addOnsBillingPrice + element.facilityUserCount * 1.00
+          this.totalBillingPrice = this.totalBillingPrice + this.addOnsBillingPrice
         } else if(element.isSponsors === true) {
-          this.addOnsPrice =  this.addOnsPrice + element.facilityUserCount * 1.00
-          this.totalPrice = this.totalPrice + this.addOnsPrice
+          this.addOnsBillingPrice =  this.addOnsBillingPrice + element.facilityUserCount * 1.00
+          this.totalBillingPrice = this.totalBillingPrice + this.addOnsBillingPrice
         }  else if(element.isPremium === true) {
-          this.addOnsPrice =  this.addOnsPrice + element.facilityUserCount * 0.25
-          this.totalPrice = this.totalPrice + this.addOnsPrice
+          this.addOnsBillingPrice =  this.addOnsBillingPrice + element.facilityUserCount * 0.25
+          this.totalBillingPrice = this.totalBillingPrice + this.addOnsBillingPrice
         }
       });
+    })
+  }
+
+  openModal(templateRef) {
+    let dialogRef = this.dialog.open(templateRef, {
+      width: '800px',
+      height:'450px'
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+    });
+  }
+
+  onCloseModal(){
+    this.dialog.closeAll();
+  }
+
+  onSelectPlan(price) {
+    this.totalPrice = parseInt(price);
+    this.planPrice = parseInt(price)
+  }
+
+  getALLFacilities() {
+    this.facilityService.getFacilitiesUserCount().subscribe((facilities: any) => {
+      // this.facilityList = facilities.data
+      // if (facilities.data) {
+      //   facilities.data.forEach((ele) => {
+      //     if (ele.Address) {
+      //       this.state.forEach((item) => {
+      //         if (ele.Address.state == item) {
+      //           this.filteredFacilityList.push(ele)
+      //         }
+      //       })
+      //     }
+      //   })
+      // }
+      this.facilityList = facilities.data.map((ele) => {
+        ele['isSelected'] = false;
+        ele['addOns'] = {
+          premium: false,
+          sponsors: false
+        };
+        return ele
+      });
+    })
+  }
+
+  onFacilitySelect(event, facilityId, averageCount) {
+    if (event) {
+      this.facilityId = facilityId
+      this.facilityList.map((facility) => {
+        if (facility.facilityId === facilityId) {
+          facility.isSelected = true;
+          this.averageCount = this.averageCount + averageCount
+        }
+        return facility
+      })
+    } else {
+      this.facilities.map((facility) => {
+        if (facility.facilityId === facilityId) {
+          facility.isSelected = false;
+          this.averageCount = this.averageCount - averageCount
+        }
+        return facility
+      })
+      this.onSelectAddOns(false, facilityId, 'premium')
+      this.onSelectAddOns(false, facilityId, 'sponsors')
+    }
+    this.calculatePrice();
+  }
+
+  
+  onSelectAddOns(event, facilityId, addOnsType: string) {
+    if (event) {
+      this.facilities.map((x) => {
+        if (facilityId === x.facilityId) {
+          if (addOnsType == 'premium') {
+            x.addOns.premium = true;
+            this.addOnsPrice =  this.addOnsPrice + x.facilityUserCount * 0.25
+             this.totalPrice =   this.totalPrice  + this.addOnsPrice
+          } else if (addOnsType == 'sponsors') {
+            this.addOnsPrice =  this.addOnsPrice + x.facilityUserCount * 1.00
+             this.totalPrice =   this.totalPrice  + this.addOnsPrice
+            x.addOns.sponsors = true;
+          }
+        }
+        return x
+      });
+    } else {
+      this.facilities.map((x) => {
+        if (facilityId === x.facilityId) {
+          if (addOnsType == 'premium') {
+            this.addOnsPrice =  this.addOnsPrice - x.facilityUserCount * 0.25
+              this.totalPrice =   this.totalPrice  - this.addOnsPrice 
+            x.addOns.premium = false;
+          } else if (addOnsType == 'sponsors') {
+           this.addOnsPrice =  this.addOnsPrice - x.facilityUserCount * 1.00
+             this.totalPrice =   this.totalPrice  - this.addOnsPrice
+            x.addOns.sponsors = false;
+          }
+        }
+        return x
+      });
+    }
+    this.calculatePrice();
+  }
+
+  calculatePrice() {
+    this.totalPrice =  this.planPrice;
+    this.facilities.forEach((ele) => {
+      if (ele.isSelected) {
+        this.totalPrice = this.totalPrice + (ele.facilityUserCount * 0.10)
+        if (ele.addOns.premium) {
+          this.totalPrice  =   this.totalPrice  + this.addOnsPrice
+        }
+        if (ele.addOns.sponsors) {
+        }
+      }
     })
   }
 

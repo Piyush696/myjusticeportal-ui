@@ -56,7 +56,7 @@ export class HireLawyerComponent implements OnInit, AfterViewInit {
   onGetLaywers() {
     this.hireLawyerService.getOrganization().subscribe((res: any) => {
       this.organizationList = res.data.reduce((acc, element) => {
-        if (!element.lawyerFacility[0].lawyer_facility.isPremium == true) {
+        if (!element.lawyerFacility[0].lawyer_facility.isSponsors == true) {
           return [...acc, element];
         }
         return [element, ...acc];
