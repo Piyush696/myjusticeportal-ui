@@ -54,7 +54,7 @@
 
     <div class="col-8 p-0">
         <mat-form-field appearance="fill" class="w-100 p-2">
-            <textarea rows="20" matInput [formControl]="lawyerCaseForm.controls['notes']" required></textarea>
+            <textarea rows="10" matInput [formControl]="lawyerCaseForm.controls['notes']" required></textarea>
             <mat-error>
                 <div *ngIf="lawyerCaseForm.controls['notes'].invalid && lawyerCaseForm.controls['notes'].touched">
                     <small class="font13">
@@ -65,7 +65,7 @@
         </mat-form-field>
         <div class="ml-2 pr-2 pb-2 pt-2 pl-0">
             <button class="button-purple px-5 py-1" [disabled]="!lawyerCaseForm.valid" mat-raised-button (click)="onContactLawyer()">
-                Contact lawyer
+                Send
             </button>
             <button class="ml-4 button-purple px-5 py-1" routerLink="../../case" mat-raised-button>
                 Cancel
