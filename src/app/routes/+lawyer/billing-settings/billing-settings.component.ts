@@ -79,6 +79,30 @@ export class BillingSettingsComponent implements OnInit {
     this.planPrice = parseInt(price)
   }
 
+  onFacilitySelect(event, facilityId, averageCount) {
+    if (event) {
+      this.facilityId = facilityId
+      this.facilityList.map((facility) => {
+        if (facility.facilityId === facilityId) {
+          facility.isSelected = true;
+          this.averageCount = this.averageCount + averageCount
+        }
+        return facility
+      })
+    } else {
+      this.facilities.map((facility) => {
+        if (facility.facilityId === facilityId) {
+          facility.isSelected = false;
+          this.averageCount = this.averageCount - averageCount
+        }
+        return facility
+      })
+      this.onSelectAddOns(false, facilityId, 'premium')
+      this.onSelectAddOns(false, facilityId, 'sponsors')
+    }
+    this.calculatePrice();
+  }
+
   getALLFacilities() {
     this.facilityService.getFacilitiesUserCount().subscribe((facilities: any) => {
       // this.facilityList = facilities.data
@@ -104,34 +128,9 @@ export class BillingSettingsComponent implements OnInit {
     })
   }
 
-  onFacilitySelect(event, facilityId, averageCount) {
-    if (event) {
-      this.facilityId = facilityId
-      this.facilityList.map((facility) => {
-        if (facility.facilityId === facilityId) {
-          facility.isSelected = true;
-          this.averageCount = this.averageCount + averageCount
-        }
-        return facility
-      })
-    } else {
-      this.facilities.map((facility) => {
-        if (facility.facilityId === facilityId) {
-          facility.isSelected = false;
-          this.averageCount = this.averageCount - averageCount
-        }
-        return facility
-      })
-      this.onSelectAddOns(false, facilityId, 'premium')
-      this.onSelectAddOns(false, facilityId, 'sponsors')
-    }
-    this.calculatePrice();
-  }
-
-  
   onSelectAddOns(event, facilityId, addOnsType: string) {
     if (event) {
-      this.facilities.map((x) => {
+      this.facilityList.map((x) => {
         if (facilityId === x.facilityId) {
           if (addOnsType == 'premium') {
             x.addOns.premium = true;
@@ -146,7 +145,7 @@ export class BillingSettingsComponent implements OnInit {
         return x
       });
     } else {
-      this.facilities.map((x) => {
+      this.facilityList.map((x) => {
         if (facilityId === x.facilityId) {
           if (addOnsType == 'premium') {
             this.addOnsPrice =  this.addOnsPrice - x.facilityUserCount * 0.25
@@ -166,7 +165,7 @@ export class BillingSettingsComponent implements OnInit {
 
   calculatePrice() {
     this.totalPrice =  this.planPrice;
-    this.facilities.forEach((ele) => {
+    this.facilityList.forEach((ele) => {
       if (ele.isSelected) {
         this.totalPrice = this.totalPrice + (ele.facilityUserCount * 0.10)
         if (ele.addOns.premium) {

@@ -21,6 +21,7 @@ export class NavbarComponent implements OnInit {
 
   public isCollapsed = true;
   @ViewChild("navbar-cmp", { static: false }) button;
+  userInfo: any;
 
   constructor(location: Location, private cacheService: CacheService,
     private element: ElementRef, private router: Router, private store: Store<any>) {
@@ -41,6 +42,7 @@ export class NavbarComponent implements OnInit {
 
   setMyAccountLink() {
     this.store.select(s => s.userInfo).subscribe(x => {
+      this.userInfo = x
       if (x.roles[0].roleId == 1) {
         this.myAccountLink = 'user/my-account';
       }
