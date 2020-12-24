@@ -18,7 +18,7 @@
     <div class="d-flex">
       <div class="pr-2">
         <mat-form-field appearance="fill">
-          <mat-label>Filter: Speciality</mat-label>
+          <mat-label>Filter: Practise Area</mat-label>
           <mat-select (selectionChange)="onSpeciality($event)">
             <mat-option [value]=" ">
               Select speciality
@@ -58,8 +58,7 @@
           <div class="d-flex justify-content-between align-items-center">
             <div>
               <mat-label class="font-weight-bold">
-                {{org?.firstName}}
-                {{org?.middleName}}{{org?.lastName}}
+                {{org?.firstName}} {{org?.middleName}} {{org?.lastName}}
               </mat-label>
             </div>
             <div>

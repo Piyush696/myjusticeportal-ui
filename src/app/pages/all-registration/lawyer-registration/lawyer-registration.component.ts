@@ -134,6 +134,13 @@ export class LawyerRegistrationComponent implements OnInit {
     })
   }
 
+  onBackClickFromMobile(event){
+    if(event){
+      this.step = 3;
+      this.orgAddress = this.registrationData.organization
+    }
+  }
+
   onPreviousClick(back) {
     if (back) {
       this.step = 2;

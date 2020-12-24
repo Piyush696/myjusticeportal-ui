@@ -9,6 +9,7 @@ import { Subscription } from 'rxjs';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { RegistrationService } from 'app/services/registration.service';
 import { MatDialog } from '@angular/material/dialog';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-users',
@@ -28,8 +29,10 @@ export class UsersComponent implements OnInit, OnDestroy {
   user: any;
   filterStatus: any;
 
+
   constructor(private userService: UserService, private store: Store<any>,
-    private toasterService: ToasterService, private registrationService: RegistrationService, private fb: FormBuilder, public dialog: MatDialog) { }
+    private toasterService: ToasterService, private registrationService: RegistrationService, private fb: FormBuilder, public dialog: MatDialog) {
+  }
 
   ngOnInit(): void {
     this.onGetAllUsers();
@@ -134,6 +137,8 @@ export class UsersComponent implements OnInit, OnDestroy {
     })
   }
 
+
+
   onDeleteUser() {
     if (this.user.userId != this.userInfo.userId) {
       this.userService.deleteUser(this.user.userId).subscribe((res: any) => {
@@ -154,6 +159,10 @@ export class UsersComponent implements OnInit, OnDestroy {
 
   search(searchValue: string) {
     this.dataSource.filter = searchValue.trim().toLowerCase();
+    // this.dataSource.filterPredicate = (searchValue: any, filter) => {
+    //   const dataStr =JSON.stringify(searchValue).toLowerCase();
+    //   return dataStr.indexOf(filter) != -1; 
+    // }
   }
 
   // pagination.

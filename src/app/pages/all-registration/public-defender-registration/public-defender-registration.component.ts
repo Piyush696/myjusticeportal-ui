@@ -109,6 +109,13 @@ export class PublicDefenderRegistrationComponent implements OnInit {
     })
   }
 
+  onBackClickFromMobile(event){
+    if(event){
+      this.step = 3;
+    }
+  }
+
+
   onPreviousClick(back) {
     if (back) {
       this.step = 1;
