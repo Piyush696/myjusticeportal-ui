@@ -22,6 +22,7 @@ export class FacilityComponent implements OnInit {
   addressForm: FormGroup;
   facilityAddressId: number;
   states = []
+  facility;
   displayedColumns: string[] = ["facilityCode", "facilityName","state", "facilityUserCount", "ipAddress", "libraryLink", "action"];
   dataSource = new MatTableDataSource();
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
@@ -72,14 +73,31 @@ export class FacilityComponent implements OnInit {
     this.addressForm.get('country').setValue('United States')
     this.facilityService.getAllFacility().subscribe((res: any) => {
       this.dataSource = new MatTableDataSource(res.data);
+      this.dataSource.sortingDataAccessor = (item: any, property) => {
+        switch (property) {
+          case 'state': if (item) return item.Address.state;
+          default: return item[property];
+        }
+      };
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
     })
   }
 
-  onDeletefacility(facility) {
-    this.facilityService.deleteFacility(facility.facilityId).subscribe((res: any) => {
+  deleteFacilityModal(templateRef, facility) {
+    this.facility = facility
+    let dialogRef = this.dialog.open(templateRef, {
+      width: '500px',
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+    });
+  }
+
+  onDeletefacility() {
+    this.facilityService.deleteFacility(this.facility.facilityId).subscribe((res: any) => {
       if (res.success) {
+        this.dialog.closeAll();
         this.toasterService.showSuccessToater('Facility successfully deleted.');
         this.getAllFacilities();
       } else {
@@ -165,7 +183,15 @@ export class FacilityComponent implements OnInit {
   }
 
   search(searchValue: string) {
-    this.dataSource.filter = searchValue.trim().toLowerCase();
+     this.dataSource.filter = searchValue.trim().toLowerCase();
+    this.dataSource.filterPredicate = (searchValue: any, filter) => {
+      const dataStr =JSON.stringify(searchValue).toLowerCase();
+      return dataStr.indexOf(filter) != -1; 
+    }
+  }
+
+  closeModal(){
+    this.dialog.closeAll();
   }
 
   // pagination.

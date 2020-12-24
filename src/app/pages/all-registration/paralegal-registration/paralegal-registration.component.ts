@@ -69,6 +69,12 @@ export class ParalegalRegistrationComponent implements OnInit {
     }
   }
 
+  onBackClickFromMobile(event){
+    if(event){
+      this.step = 3;
+    }
+  }
+
   mobileDetails(mobileDetails) {
     const mobileData = {
       "mobile": mobileDetails.mobile,

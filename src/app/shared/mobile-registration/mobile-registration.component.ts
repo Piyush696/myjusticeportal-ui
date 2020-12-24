@@ -10,7 +10,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 export class MobileRegistrationComponent implements OnInit, OnChanges {
   mobileRegistrationForm: FormGroup;
   OtpField: boolean;
-
+  public mobileMask = ['(', /[1-9]/, /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/]
+  @Output() isPreviousClick = new EventEmitter();
   @Input() authCodeField: boolean;
   @Input() totalSteps: any;
   @Output() isMobileEvent = new EventEmitter();
@@ -43,12 +44,16 @@ export class MobileRegistrationComponent implements OnInit, OnChanges {
   onGetOtp() {
     const data = {
       "mobile": this.mobileRegistrationForm.get('mobile').value,
-      "countryCode": 1,
+      "countryCode": 91,
     }
     this.isMobileEvent.emit(data);
   }
 
   onVerifySms() {
     this.isOtpEvent.emit(this.mobileRegistrationForm.get('otp').value);
+  }
+
+  onPreviousClick() {
+    this.isPreviousClick.emit(true)
   }
 }
