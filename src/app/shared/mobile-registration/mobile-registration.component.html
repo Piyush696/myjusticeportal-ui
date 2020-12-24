@@ -33,7 +33,8 @@
                     <div class="col-8 pb-4">
                         <mat-form-field appearance="fill" class="w-100 hpx px-0">
                             <mat-label>Mobile</mat-label>
-                            <input type="number" matInput placeholder="Mobile Number"
+                            <input type="text" matInput placeholder="Mobile Number" placeholder="(123) 456-7890"
+                               [textMask]="{mask: mobileMask}"
                                 [formControl]="mobileRegistrationForm.controls['mobile']" required>
                             <mat-error>
                                 <div
@@ -73,7 +74,10 @@
                     <span>Didn't get your code? or Expired? <p (click)="onGetOtp()" style="color: blue;cursor: pointer">
                             Resend Code</p></span>
                 </div>
-                <div class="d-flex justify-content-center">
+                <div class="d-flex justify-content-between px-3 mt-2">
+                    <button mat-button color="primary" (click)="onPreviousClick()">
+                        BACK
+                    </button>
                     <button *ngIf="!OtpField"
                         [disabled]="mobileRegistrationForm.get('countryCode').invalid || mobileRegistrationForm.get('mobile').invalid"
                         mat-raised-button color="primary" class="mt-2 px-4 py-2" (click)="onGetOtp()">
