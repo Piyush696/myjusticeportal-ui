@@ -93,7 +93,6 @@ export class ManageOrganisationComponent implements OnInit {
 
   getOrganisationAddress() {
     this.organisationService.getOrganisationAddressDetails().subscribe((orgDetails: any) => {
-      console.log(orgDetails.data)
       this.orgData = orgDetails.data
       this.path =  orgDetails.data?.Organization?.logo?.downloadLink
       this.organisationId = orgDetails.data.Organization.organizationId
@@ -102,6 +101,7 @@ export class ManageOrganisationComponent implements OnInit {
         if (orgDetails.data.Organization.specialty) {
           specialty.push(orgDetails.data.Organization.specialty.split(","))
         }
+        console.log(orgDetails.data.Organization)
         this.organisationForm.get('name').setValue(orgDetails.data.Organization.name)
         this.organisationForm.get('street1').setValue(orgDetails.data.Organization.Address.street1)
         this.organisationForm.get('street2').setValue(orgDetails.data.Organization.Address.street2)

@@ -72,7 +72,6 @@ export class StripeComponent implements OnDestroy, AfterViewInit,OnChanges ,OnIn
 
   getUserDetailsFromStore(){
     this.store.select(s => s.userInfo).subscribe(x => {
-      console.log(x)
       this.userData = x
     });
   }

@@ -18,13 +18,13 @@
     <div class="d-flex">
       <div class="pr-2">
         <mat-form-field appearance="fill">
-          <mat-label>Filter: Practise Area</mat-label>
+          <mat-label>Filter: Practice area</mat-label>
           <mat-select (selectionChange)="onSpeciality($event)">
             <mat-option [value]=" ">
-              Select speciality
+              Select Practice area
             </mat-option>
-            <mat-option *ngFor="let speciality of specialityData" [value]="speciality">
-              {{speciality}}
+            <mat-option *ngFor="let speciality of specialtyList"  value="{{speciality?.specialtyType}}">
+              {{speciality.specialtyType}}
             </mat-option>
           </mat-select>
         </mat-form-field>
@@ -65,6 +65,9 @@
               <span class="ml-3 premium-tag"
                 *ngIf="org?.lawyerFacility[0]?.lawyer_facility?.isSponsors">Sponsored</span>
             </div>
+          </div>
+          <div>
+            <span> {{org?.userAdditionalInfo?.practiceAreas}}</span>
           </div>
           <button class="button-purple" mat-raised-button (click)="openModal(lawyerView,org)">
             View

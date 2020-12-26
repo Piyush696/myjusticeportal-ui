@@ -295,7 +295,7 @@
             <mat-label>Practice Areas</mat-label>
             <mat-select [formControl]="toppings" multiple [formControl]="organisationForm.controls['specialty']"
                 required>
-                <mat-option>Select Practice Areas</mat-option>
+                <span class="pl-3">Select Practice Areas</span>
                 <mat-option *ngFor="let specialty of specialtyList" value="{{specialty.specialtyType}}">
                     {{specialty.specialtyType}}&nbsp;
                 </mat-option>

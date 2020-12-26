@@ -77,12 +77,19 @@ export class ManageProfileComponent implements OnInit {
   getlawyerInfo() {
     this.userAdditionalInfo.getUsers().subscribe((user: any) => {
       this.userDetails = user.data
+      console.log(this.userDetails.userAdditionalInfo.practiceAreas)
+      console.log(this.userDetails.userAdditionalInfo.practiceAreas.split(","))
+      let specialty = [];
+      if (user.data.userAdditionalInfo.practiceAreas) {
+        specialty.push(this.userDetails.userAdditionalInfo.practiceAreas.split(","))
+      }
+      console.log(specialty)
       this.path = this.userDetails?.userAdditionalInfo?.header?.downloadLink
       let name = user?.data?.firstName + user?.data?.middleName + user?.data?.lastName
       this.additionalInfoForm.get('name').setValue(name)
       this.additionalInfoForm.get('tagline').setValue(user?.data?.userAdditionalInfo?.tagline)
       this.additionalInfoForm.get('description').setValue(user?.data?.userAdditionalInfo?.description)
-      this.additionalInfoForm.get('practiceAreas').setValue(user?.data?.userAdditionalInfo?.practiceAreas)
+      this.additionalInfoForm.get('practiceAreas').setValue(specialty[0])
       this.additionalInfoForm.disable()
     })
   }

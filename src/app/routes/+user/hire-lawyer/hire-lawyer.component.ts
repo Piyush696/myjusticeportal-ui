@@ -3,6 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { CaseService } from 'app/services/case.service';
 import { HireLawyerService } from 'app/services/hire-lawyer.service';
+import { SpecialtyService } from 'app/services/specialty.service';
 import { StatesService } from 'app/services/states.service';
 import { UserAdditionInfoService } from 'app/services/user-addition-info.service';
 
@@ -23,8 +24,9 @@ export class HireLawyerComponent implements OnInit, AfterViewInit {
   sponsorUserList: any;
   lawyerData: any;
   path = '';
+  specialtyList: any;
 
-  constructor(private hireLawyerService: HireLawyerService, private caseService: CaseService, private router: Router,
+  constructor(private hireLawyerService: HireLawyerService, private caseService: CaseService, private router: Router, private specialtyService: SpecialtyService, 
     private userAdditionalService: UserAdditionInfoService, private _statesService: StatesService, public dialog: MatDialog) { }
 
   ngAfterViewInit(): void {
@@ -36,12 +38,19 @@ export class HireLawyerComponent implements OnInit, AfterViewInit {
     this.getSponsors();
     this.onGetLaywers();
     this.stateData();
+    this.getAllSpecialty();
     this.modalopen.nativeElement.click();
   }
 
   getSponsors() {
     this.userAdditionalService.getSponsorUsers().subscribe((sponsorsUser: any) => {
       this.sponsorUserList = sponsorsUser.data
+    })
+  }
+
+  getAllSpecialty() {
+    this.specialtyService.getAllSpecialty().subscribe((res: any) => {
+      this.specialtyList = res.data
     })
   }
 

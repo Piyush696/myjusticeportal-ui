@@ -291,6 +291,8 @@ export class LawyerdashboardComponent implements OnInit {
         };
         return ele
       });
+      console.log(this.facilities)
+      console.log(this.filteredFacilityList)
     })
   }
 
