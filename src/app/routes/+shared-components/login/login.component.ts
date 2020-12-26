@@ -69,7 +69,7 @@ export class LoginComponent implements OnInit {
           // this.step = 4;
         }
         else if (res.token) {
-          this.toasterService.showWarningToater('Welcome to My Justice portal.');
+          this.toasterService.showSuccessToater('Welcome to My Justice portal.');
           this.cacheService.setCache('token', res.token);
           this.checkTokenForUser();
           this.spinner = false;
@@ -133,7 +133,6 @@ export class LoginComponent implements OnInit {
         else if (data.user.roles[0].roleId === 7) {
           this.router.navigateByUrl('/mjp/superadmin/superadmin-dashboard');
         }
-        this.toasterService.showSuccessToater('Welcome to My Justice Portal.');
       }
       else {
         this.toasterService.showErrorToater(data.error.name);
