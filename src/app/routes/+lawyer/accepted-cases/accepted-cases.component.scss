@@ -14,3 +14,8 @@
     font-size: 15px;
     font-weight: 500;
 }
+::ng-deep .mat-sort-header-container {
+    display:flex;
+    justify-content:center;
+  }
+

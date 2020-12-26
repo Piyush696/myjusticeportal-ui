@@ -40,6 +40,10 @@ export class AcceptedCasesComponent implements OnInit {
 
   search(searchValue: string) {
     this.dataSource.filter = searchValue.trim().toLowerCase();
+    this.dataSource.filterPredicate = (searchValue: any, filter) => {
+      const dataStr =JSON.stringify(searchValue).toLowerCase();
+      return dataStr.indexOf(filter) != -1; 
+    }
   }
 
   onViewRejectedCases(e) {
@@ -103,10 +107,17 @@ unHideCaseDetails(caseId){
 
 allCase(){
   this.hireLawyerService.getAllCases().subscribe((res) => {
-    this.allCasesData=res.data.lawyer;
+    this.allCasesData=res.data.lawyer
     this.dataSource = new MatTableDataSource(res.data.lawyer);
-      this.dataSource.paginator = this.paginator;
-      this.dataSource.sort = this.sort;
+    this.dataSource.sortingDataAccessor = (item: any, property) => {
+      switch (property) {
+        case 'name': if (item) return item.inmate.firstName + item.inmate.middleName +  item.inmate.lastName;
+        case 'status': if (item) return item.lawyer_case.status;
+        default: return item[property];
+      }
+    };
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
   }) 
 }
 

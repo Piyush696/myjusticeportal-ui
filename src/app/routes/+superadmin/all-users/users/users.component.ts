@@ -47,6 +47,7 @@ export class UsersComponent implements OnInit, OnDestroy {
         if (res.data) {
           this.filterStatus = res.data.filter((res) => {
             if (res.status == false) {
+              res.status = 'Pending'
               return res;
             }
           });
@@ -159,10 +160,6 @@ export class UsersComponent implements OnInit, OnDestroy {
 
   search(searchValue: string) {
     this.dataSource.filter = searchValue.trim().toLowerCase();
-    // this.dataSource.filterPredicate = (searchValue: any, filter) => {
-    //   const dataStr =JSON.stringify(searchValue).toLowerCase();
-    //   return dataStr.indexOf(filter) != -1; 
-    // }
   }
 
   // pagination.
