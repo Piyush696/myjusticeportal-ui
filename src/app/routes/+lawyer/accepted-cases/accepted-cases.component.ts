@@ -31,7 +31,6 @@ export class AcceptedCasesComponent implements OnInit {
   onGetRequestedCases(status) {
     this.hireLawyerService.getRequestedCases({ status: status }).subscribe((res: any) => {
       if (res.data) {
-        console.log(res.data)
         this.requestedCases = res.data.lawyer;
       } else {
         this.requestedCases = [];
