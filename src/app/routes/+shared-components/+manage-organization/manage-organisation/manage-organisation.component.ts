@@ -93,7 +93,6 @@ export class ManageOrganisationComponent implements OnInit {
 
   getOrganisationAddress() {
     this.organisationService.getOrganisationAddressDetails().subscribe((orgDetails: any) => {
-      console.log(orgDetails.data)
       this.orgData = orgDetails.data
       this.path =  orgDetails.data?.Organization?.logo?.downloadLink
       this.organisationId = orgDetails.data.Organization.organizationId

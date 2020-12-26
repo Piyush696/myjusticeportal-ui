@@ -175,15 +175,6 @@
                                 {{user?.isMFA ? 'Enabled' : 'Disabled'}}
                             </mat-slide-toggle>
                         </div>
-                        <!-- <div class="row px-1">
-                            <div class="col-12">
-                                <div class="form-control d-flex justify-content-center">
-                                    <a class="anchor-style" mat-flat-button (click)="openModal(passwordModal)">
-                                        Click here to reset your password
-                                    </a>
-                                </div>
-                            </div>
-                        </div> -->
                         <div class="row pr-1">
                             <div class="col-6 d-flex justify-content-between justify-content-sm-between">
                                 <div class="pr-4" *ngIf="isUser">
@@ -200,8 +191,14 @@
                                 </div>
                             </div>
                             <div class="col-6 d-flex justify-content-end justify-content-sm-end">
-                                <div>
+                                <div *ngIf="isUser">
                                     <button class="button-purple px-sm-4 px-md-4 px-lg-4 px-xl-4 py-1" mat-raised-button
+                                        (click)="editChanges()" [ngClass]="{'button-green': buttonText == 'Save'}">
+                                        {{buttonText}}
+                                    </button>
+                                </div>
+                                <div *ngIf="!isUser">
+                                    <button [disabled]="profileForm.controls['userName'].invalid &&  profileForm.controls['userName'].touched && profileForm.controls['userName'].hasError('taken')" class="button-purple px-sm-4 px-md-4 px-lg-4 px-xl-4 py-1" mat-raised-button
                                         (click)="editChanges()" [ngClass]="{'button-green': buttonText == 'Save'}">
                                         {{buttonText}}
                                     </button>
