@@ -118,7 +118,6 @@ allCase(){
       item['newUpdatedAt']=monthDay+","+year;
       return item;
     })
-    console.log(this.allCasesData)
     this.dataSource = new MatTableDataSource(this.allCasesData);
     this.dataSource.sortingDataAccessor = (item: any, property) => {
       switch (property) {
