@@ -108,7 +108,43 @@ unHideCaseDetails(caseId){
 allCase(){
   this.hireLawyerService.getAllCases().subscribe((res) => {
     this.allCasesData=res.data.lawyer
-    this.dataSource = new MatTableDataSource(res.data.lawyer);
+    this.allCasesData = this.allCasesData.map((item)=>{
+      item['name'] = item.inmate.firstName+' '+item.inmate.middleName+' '+item.inmate.lastName;
+      item['name1'] = item.inmate.firstName+item.inmate.middleName+item.inmate.lastName;
+        var year=item.lawyer_case.updatedAt.substring(0, 4);
+        var month=item.lawyer_case.updatedAt.substring(5, 7);
+        var day=item.lawyer_case.updatedAt.substring(8, 10);
+        if(month == "01"){
+          var newMonth="January"
+        }else if(month == "02" ){
+          var newMonth="february"
+        }else if(month == "03" ){
+          var newMonth="March"
+        }else if(month == "04" ){
+          var newMonth="April"
+        }else if(month == "05" ){
+          var newMonth="May"
+        }else if(month == "06" ){
+          var newMonth="Jun"
+        }else if(month == "07" ){
+          var newMonth="July"
+        }else if(month == "08" ){
+          var newMonth="August"
+        }else if(month == "09" ){
+          var newMonth="September"
+        }else if(month == "10" ){
+          var newMonth="October"
+        }else if(month == "11" ){
+          var newMonth="November"
+        }else if(month == "12" ){
+          var newMonth="December"
+        }
+        var date=newMonth+" "+day+", "+year;
+        item['sent']=date;
+      return item;
+    })
+    console.log(this.allCasesData)
+    this.dataSource = new MatTableDataSource(this.allCasesData);
     this.dataSource.sortingDataAccessor = (item: any, property) => {
       switch (property) {
         case 'name': if (item) return item.inmate.firstName + item.inmate.middleName +  item.inmate.lastName;

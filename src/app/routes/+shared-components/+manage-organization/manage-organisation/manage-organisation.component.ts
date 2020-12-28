@@ -218,7 +218,17 @@ export class ManageOrganisationComponent implements OnInit {
         this.toasterService.showErrorToater(error.statusText);
       })
     }
-    this.organisationForm.enable();
+    this.organisationForm.get('name').enable();
+    this.organisationForm.get('street1').enable();
+    this.organisationForm.get('street2').enable();
+    this.organisationForm.get('city').enable();
+    this.organisationForm.get('state').enable();
+    this.organisationForm.get('zip').enable();
+    this.organisationForm.get('tagline').enable();
+    this.organisationForm.get('colorPiker').enable();
+    this.organisationForm.get('specialty').enable();
+    this.organisationForm.get('description').enable();
+    this.organisationForm.get('country').disable();
     this.buttonText = 'Save';
   }
 

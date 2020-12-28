@@ -39,7 +39,42 @@ export class InquiriesComponent implements OnInit {
   getPendingCaseDetails() {
     this.userAdditionInfoService.getLawyerCases().subscribe((pendingCase: any) => {
       this.pendingCasesList = pendingCase.data
-      this.dataSource = new MatTableDataSource(pendingCase.data);
+      this.pendingCasesList = this.pendingCasesList.map((item)=>{
+        item['name']=item.inmate.firstName+" "+item.inmate.lastName;
+        item['name1']=item.inmate.firstName+item.inmate.lastName;
+        var year=item.sentAt.substring(0, 4);
+        var month=item.sentAt.substring(5, 7);
+        var day=item.sentAt.substring(8, 10);
+        if(month == "01"){
+          var newMonth="January"
+        }else if(month == "02" ){
+          var newMonth="february"
+        }else if(month == "03" ){
+          var newMonth="March"
+        }else if(month == "04" ){
+          var newMonth="April"
+        }else if(month == "05" ){
+          var newMonth="May"
+        }else if(month == "06" ){
+          var newMonth="Jun"
+        }else if(month == "07" ){
+          var newMonth="July"
+        }else if(month == "08" ){
+          var newMonth="August"
+        }else if(month == "09" ){
+          var newMonth="September"
+        }else if(month == "10" ){
+          var newMonth="October"
+        }else if(month == "11" ){
+          var newMonth="November"
+        }else if(month == "12" ){
+          var newMonth="December"
+        }
+        var date=newMonth+" "+day+", "+year;
+        item['sent']=date;
+        return item;
+      })
+      this.dataSource = new MatTableDataSource(this.pendingCasesList);
       this.dataSource.sortingDataAccessor = (item: any, property) => {
         switch (property) {
           case 'name': if (item) return item.inmate.firstName + item.inmate.lastName;
