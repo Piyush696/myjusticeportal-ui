@@ -219,6 +219,7 @@ export class ManageOrganisationComponent implements OnInit {
       })
     }
     this.organisationForm.enable();
+    this.organisationForm.get('country').disable();
     this.buttonText = 'Save';
   }
 
