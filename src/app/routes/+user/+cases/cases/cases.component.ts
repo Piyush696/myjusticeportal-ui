@@ -35,7 +35,8 @@ export class CasesComponent implements OnInit,AfterViewInit {
   }
 
   modalAcceptDetails(){
-    this.userAdditionalService.caseModalDetails().subscribe((res:any) => {
+    let metaKey = 'case_model'
+    this.userAdditionalService.modalDetails(metaKey).subscribe((res:any) => {
       if(!res.data){
         this.modalopen.nativeElement.click();
       }

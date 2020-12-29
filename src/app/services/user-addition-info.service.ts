@@ -66,12 +66,8 @@ export class UserAdditionInfoService {
     return this.httpClient.post<object>(`${this.apiPath}/userMeta/modal/caseCreate`, {userMeta}, this.getHeaders())
   }
 
-  caseModalDetails(){
-    return this.httpClient.get<object>(`${this.apiPath}/userMeta/getCaseModalValue`, this.getHeaders())
-  }
-
-  findLawyerModalDetails(){
-    return this.httpClient.get<object>(`${this.apiPath}/userMeta/getFindLawyerModal`, this.getHeaders())
+  modalDetails(metaKey){
+    return this.httpClient.post<object>(`${this.apiPath}/userMeta/getModalValue`,{metaKey}, this.getHeaders())
   }
 
 }
