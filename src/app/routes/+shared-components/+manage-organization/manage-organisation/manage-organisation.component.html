@@ -1,8 +1,8 @@
 <div class="col-12 col-sm-12 p-0 d-flex justify-content-between justify-content-sm-between">
     <div>
-        <h1 class="font-weight-bold m-0">Manage Organization.</h1>
+        <h1 class="font-weight-bold m-0">Manage Organization</h1>
         <h4 class="line-height header-sub-text">
-            Manage your Organization information.
+            Manage your Organization information
         </h4>
     </div>
 
@@ -32,33 +32,33 @@
             <h1 class="font-weight-bold">Profile Information</h1>
             <table style="width:100%">
                 <tr>
-                    <th>Organization Name:</th>
+                    <th>Organization Name</th>
                     <td>{{orgData?.Organization?.name}}</td>
                 </tr>
                 <tr>
-                    <th>Primary Address:</th>
+                    <th>Primary Address</th>
                     <td>{{orgData?.Organization?.Address?.street1}} {{orgData?.Organization?.Address?.street2}} ,
                         {{orgData?.Organization?.Address?.city}}, {{orgData?.Organization?.Address?.state}}
                         ,{{orgData?.Organization?.Address?.zip}}</td>
                 </tr>
                 <tr>
-                    <th>Practice Areas:</th>
+                    <th>Practice Areas</th>
                     <td>{{orgData?.Organization?.specialty}}</td>
                 </tr>
                 <tr>
-                    <th>Tagline:</th>
+                    <th>Tagline</th>
                     <td>{{orgData?.Organization?.tagline}}</td>
                 </tr>
                 <tr>
-                    <th>Organization Statement:</th>
+                    <th>Organization Statement</th>
                     <td>{{orgData?.Organization?.description}}</td>
                 </tr>
                 <tr>
-                    <th>Logo Upload:</th>
+                    <th>Logo Upload</th>
                    <img src="{{orgData?.Organization?.logo?.downloadLink}}" width="250px" height="150px" alt="logo"> 
                 </tr>
                 <tr>
-                    <th>Header Color:</th>
+                    <th>Header Color</th>
                     <td>{{orgData?.Organization?.colorPiker}}</td>
                 </tr>
             </table>
@@ -113,7 +113,7 @@
                             {{orgData?.Organization?.Address?.zip}}</span>
                     </span>
                     <br>
-                    <span class="font-weight-bold">Practise Areas: </span>
+                    <span class="font-weight-bold">Practice areas: </span>
                     <br>
                     <ul class="m-0">
                         <li class="text-dark">{{orgData?.Organization?.specialty}}</li>
