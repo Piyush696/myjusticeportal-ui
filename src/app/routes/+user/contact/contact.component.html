@@ -7,27 +7,29 @@
 </div>
 <div>
     <h3 class="font-weight-bold">You are contacting:</h3>
-    <div class="col-6 pl-0">
-        <mat-form-field appearance="fill" class="w-100 p-0">
-            <mat-label>Organization Name</mat-label>
-            <input type="text" matInput placeholder="Organization Name" [formControl]="lawyerCaseForm.controls['name']"
-                required>
-            <mat-error>
-                <div *ngIf="lawyerCaseForm.controls['name'].invalid && lawyerCaseForm.controls['name'].touched">
-                    <small class="font13">
-                        Organization Name is Required
-                    </small>
-                </div>
-            </mat-error>
-        </mat-form-field>
-    </div>
-
-    <div class="col-6 pl-0">
-        <mat-form-field appearance="fill" class="w-100 p-0">
-            <mat-label>Lawyer</mat-label>
-            <input type="text" matInput placeholder="Lawyer" [formControl]="lawyerCaseForm.controls['lawyerName']"
-                required>
-        </mat-form-field>
+    <div class="row">
+        <div class="col-6 pl-0">
+            <mat-form-field appearance="fill" class="w-100 p-0">
+                <mat-label>Organization Name</mat-label>
+                <input type="text" matInput placeholder="Organization Name" [formControl]="lawyerCaseForm.controls['name']"
+                    required>
+                <mat-error>
+                    <div *ngIf="lawyerCaseForm.controls['name'].invalid && lawyerCaseForm.controls['name'].touched">
+                        <small class="font13">
+                            Organization Name is Required
+                        </small>
+                    </div>
+                </mat-error>
+            </mat-form-field>
+        </div>
+    
+        <div class="col-6 pl-0">
+            <mat-form-field appearance="fill" class="w-100 p-0">
+                <mat-label>Lawyer</mat-label>
+                <input type="text" matInput placeholder="Lawyer" [formControl]="lawyerCaseForm.controls['lawyerName']"
+                    required>
+            </mat-form-field>
+        </div>
     </div>
 
     <h3 class="font-weight-bold">Select Your Case:</h3>
@@ -54,7 +56,7 @@
 
     <div class="col-8 p-0">
         <mat-form-field appearance="fill" class="w-100 p-2">
-            <textarea rows="10" matInput [formControl]="lawyerCaseForm.controls['notes']" required></textarea>
+            <textarea rows="2" matInput [formControl]="lawyerCaseForm.controls['notes']" required></textarea>
             <mat-error>
                 <div *ngIf="lawyerCaseForm.controls['notes'].invalid && lawyerCaseForm.controls['notes'].touched">
                     <small class="font13">

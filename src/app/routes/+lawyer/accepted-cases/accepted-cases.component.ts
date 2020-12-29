@@ -31,7 +31,6 @@ export class AcceptedCasesComponent implements OnInit {
   onGetRequestedCases(status) {
     this.hireLawyerService.getRequestedCases({ status: status }).subscribe((res: any) => {
       if (res.data) {
-        console.log(res.data)
         this.requestedCases = res.data.lawyer;
       } else {
         this.requestedCases = [];
@@ -41,6 +40,10 @@ export class AcceptedCasesComponent implements OnInit {
 
   search(searchValue: string) {
     this.dataSource.filter = searchValue.trim().toLowerCase();
+    this.dataSource.filterPredicate = (searchValue: any, filter) => {
+      const dataStr =JSON.stringify(searchValue).toLowerCase();
+      return dataStr.indexOf(filter) != -1; 
+    }
   }
 
   onViewRejectedCases(e) {
@@ -104,10 +107,27 @@ unHideCaseDetails(caseId){
 
 allCase(){
   this.hireLawyerService.getAllCases().subscribe((res) => {
-    this.allCasesData=res.data.lawyer;
-    this.dataSource = new MatTableDataSource(res.data.lawyer);
-      this.dataSource.paginator = this.paginator;
-      this.dataSource.sort = this.sort;
+    this.allCasesData=res.data.lawyer
+    this.allCasesData = this.allCasesData.map((item)=>{
+      item['name'] = item.inmate.firstName+' '+item.inmate.middleName+' '+item.inmate.lastName;
+      item['name1'] = item.inmate.firstName+item.inmate.middleName+item.inmate.lastName;
+      var date=item.lawyer_case.updatedAt;
+      date = new Date(date).toDateString();
+      var monthDay=date.substring(4, 10);
+      var year=date.substring(10, 15);
+      item['newUpdatedAt']=monthDay+","+year;
+      return item;
+    })
+    this.dataSource = new MatTableDataSource(this.allCasesData);
+    this.dataSource.sortingDataAccessor = (item: any, property) => {
+      switch (property) {
+        case 'name': if (item) return item.inmate.firstName + item.inmate.middleName +  item.inmate.lastName;
+        case 'status': if (item) return item.lawyer_case.status;
+        default: return item[property];
+      }
+    };
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
   }) 
 }
 

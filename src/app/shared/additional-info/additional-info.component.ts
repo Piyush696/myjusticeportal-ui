@@ -26,6 +26,7 @@ export class AdditionalInfoComponent implements OnInit, OnChanges {
   fieldName: string = 'Housing Unit';
   fieldOption: string = 'Bar info - Exam Id';
   public states = [];
+  filteredStateArray = []
   facilityList: any;
   lawyerInfoArray: any[] = [];
   additionalInfoLawyer: FormGroup;
@@ -36,7 +37,7 @@ export class AdditionalInfoComponent implements OnInit, OnChanges {
   buttonText: string = "Save"
   specialtyList: any;
   constructor(private toasterService: ToasterService, public dialog: MatDialog, private specialtyService: SpecialtyService, private fb: FormBuilder, private activatedRoute: ActivatedRoute,
-     private _statesService: StatesService, private facilityService: FacilityService, private userService: UserService) {
+    private _statesService: StatesService, private facilityService: FacilityService, private userService: UserService) {
     this.facilityCode = this.activatedRoute.snapshot.params.facilityCode;
   }
 
@@ -87,6 +88,7 @@ export class AdditionalInfoComponent implements OnInit, OnChanges {
     this._statesService.getStates()
       .subscribe(data => {
         this.states = data
+        this.filteredStateArray = data
       });
   }
 
@@ -110,7 +112,6 @@ export class AdditionalInfoComponent implements OnInit, OnChanges {
         let splitArray = item.metaValue.split(":")
         lawyer['state'] = splitArray[0],
           lawyer['bar_info_Exam_Id'] = splitArray[1]
-        // lawyer['speciality'] = splitArray[2]
         return lawyer
       })
     }
@@ -119,8 +120,23 @@ export class AdditionalInfoComponent implements OnInit, OnChanges {
   deleteInfo(value) {
     var index = this.lawyerInfoArray.map(function (element) {
       return element.bar_info_Exam_Id;
-    }).indexOf(value)
+    }).indexOf(value.bar_info_Exam_Id)
     let info = this.lawyerInfoArray.splice(index, 1)
+     this.states.forEach((currentState) => {
+      if(currentState.name == value.state){
+        this.filteredStateArray.unshift(currentState) 
+      }
+    })
+  }
+  
+  addMoreStates() {
+    this.lawyerInfoArray.push(this.additionalInfoLawyer.value)
+    this.filteredStateArray = this.states.filter((currentState) => {
+      return currentState.name != this.additionalInfoLawyer.get('state').value
+    })
+    this.buttonText = "Save"
+    this.isDisable = false
+    this.additionalInfoLawyer.reset()
   }
 
   createFormControl() {
@@ -146,7 +162,6 @@ export class AdditionalInfoComponent implements OnInit, OnChanges {
         this.currentState.push(item.state)
         let userMetaInfo = {}
         let str = item.state + ':' + item.bar_info_Exam_Id
-        // + ':' + item.speciality
         userMetaInfo['metaKey'] = 'lawyerInfo'
         userMetaInfo['metaValue'] = str
 
@@ -170,14 +185,6 @@ export class AdditionalInfoComponent implements OnInit, OnChanges {
     this.facilityService.getAllFacility().subscribe((res: any) => {
       this.facilityList = res.data
     })
-  }
-
-  addMoreStates() {
-    // this.currentState.push(this.additionalInfoLawyer.get('state').value)
-    this.lawyerInfoArray.push(this.additionalInfoLawyer.value)
-    this.buttonText = "Save"
-    this.isDisable = false
-    this.additionalInfoLawyer.reset()
   }
 
 }

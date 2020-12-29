@@ -93,14 +93,13 @@ export class ManageOrganisationComponent implements OnInit {
 
   getOrganisationAddress() {
     this.organisationService.getOrganisationAddressDetails().subscribe((orgDetails: any) => {
-      console.log(orgDetails.data)
       this.orgData = orgDetails.data
       this.path =  orgDetails.data?.Organization?.logo?.downloadLink
       this.organisationId = orgDetails.data.Organization.organizationId
       if (orgDetails.success) {
         let specialty = [];
         if (orgDetails.data.Organization.specialty) {
-          specialty.push(orgDetails.data.Organization.specialty.split(","))
+          specialty.push(orgDetails.data.Organization.specialty.split(", "))
         }
         this.organisationForm.get('name').setValue(orgDetails.data.Organization.name)
         this.organisationForm.get('street1').setValue(orgDetails.data.Organization.Address.street1)
@@ -193,7 +192,7 @@ export class ManageOrganisationComponent implements OnInit {
           "tagline": this.organisationForm.get('tagline').value,
           "colorPiker": this.organisationForm.get('colorPiker').value,
           "description": this.organisationForm.get('description').value,
-          "specialty": (this.organisationForm.get('specialty').value).toString()
+          "specialty": (this.organisationForm.get('specialty').value).toString().split(',').join(', ')
         },
         address: {
           "street1": this.organisationForm.get('street1').value,
@@ -220,6 +219,7 @@ export class ManageOrganisationComponent implements OnInit {
       })
     }
     this.organisationForm.enable();
+    this.organisationForm.get('country').disable();
     this.buttonText = 'Save';
   }
 

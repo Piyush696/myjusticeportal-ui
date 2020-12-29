@@ -3,6 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { CaseService } from 'app/services/case.service';
 import { HireLawyerService } from 'app/services/hire-lawyer.service';
+import { SpecialtyService } from 'app/services/specialty.service';
 import { StatesService } from 'app/services/states.service';
 import { UserAdditionInfoService } from 'app/services/user-addition-info.service';
 
@@ -19,29 +20,53 @@ export class HireLawyerComponent implements OnInit, AfterViewInit {
   currentSpeciality: any;
   currentLocation: any;
   filteredOrganizationList: any;
-  @ViewChild('modalopen') modalopen: ElementRef
   sponsorUserList: any;
   lawyerData: any;
   path = '';
+  specialtyList: any;
+  @ViewChild('modalopen') modalopen: ElementRef;
 
-  constructor(private hireLawyerService: HireLawyerService, private caseService: CaseService, private router: Router,
+  constructor(private hireLawyerService: HireLawyerService, private caseService: CaseService, private router: Router, private specialtyService: SpecialtyService, 
     private userAdditionalService: UserAdditionInfoService, private _statesService: StatesService, public dialog: MatDialog) { }
 
-  ngAfterViewInit(): void {
-    this.modalopen.nativeElement.click();
-  }
-
-
   ngOnInit(): void {
+    this.modalAcceptDetails();
     this.getSponsors();
     this.onGetLaywers();
     this.stateData();
-    this.modalopen.nativeElement.click();
+    this.getAllSpecialty();
+  }
+
+  
+  ngAfterViewInit(): void {
+    //  this.modalopen.nativeElement.click();
+    }
+  
+  modalAcceptDetails(){
+   let metaKey = 'findlawyer_model'
+    this.userAdditionalService.modalDetails(metaKey).subscribe((res:any) => {
+      if(!res.data){
+        this.modalopen.nativeElement.click();
+      }
+    })
+  }
+
+  acceptDisclaimer(){
+    let userMeta = { metaKey: 'findlawyer_model', metaValue: 'clicked'}
+    this.userAdditionalService.caseCreateModal(userMeta).subscribe((res:any) => {
+      this.modalAcceptDetails();
+   })
   }
 
   getSponsors() {
     this.userAdditionalService.getSponsorUsers().subscribe((sponsorsUser: any) => {
       this.sponsorUserList = sponsorsUser.data
+    })
+  }
+
+  getAllSpecialty() {
+    this.specialtyService.getAllSpecialty().subscribe((res: any) => {
+      this.specialtyList = res.data
     })
   }
 

@@ -18,13 +18,13 @@
     <div class="d-flex">
       <div class="pr-2">
         <mat-form-field appearance="fill">
-          <mat-label>Filter: Practise Area</mat-label>
+          <mat-label>Filter: Practice area</mat-label>
           <mat-select (selectionChange)="onSpeciality($event)">
             <mat-option [value]=" ">
-              Select speciality
+              Select Practice area
             </mat-option>
-            <mat-option *ngFor="let speciality of specialityData" [value]="speciality">
-              {{speciality}}
+            <mat-option *ngFor="let speciality of specialtyList"  value="{{speciality?.specialtyType}}">
+              {{speciality.specialtyType}}
             </mat-option>
           </mat-select>
         </mat-form-field>
@@ -65,6 +65,9 @@
               <span class="ml-3 premium-tag"
                 *ngIf="org?.lawyerFacility[0]?.lawyer_facility?.isSponsors">Sponsored</span>
             </div>
+          </div>
+          <div>
+            <span> {{org?.userAdditionalInfo?.practiceAreas}}</span>
           </div>
           <button class="button-purple" mat-raised-button (click)="openModal(lawyerView,org)">
             View
@@ -114,7 +117,7 @@
       <h4 class="text-center font-weight-bold">Disclaimer here</h4>
       <div class="d-flex justify-content-center mt-1">
         <div class="mt-1">
-          <button type="button" class="btn btn-secondary button-purple px-2" data-dismiss="modal">Accept and
+          <button type="button" class="btn btn-secondary button-purple px-2" data-dismiss="modal" (click)="acceptDisclaimer()">Accept and
             Continue</button>
         </div>
       </div>
@@ -167,25 +170,25 @@
                   (click)="viewOrg(lawyerData.Organization.organizationId)">View Organization</button>
               </div>
             </div>
-            <div class="row py-2 pl-3">
+            <div class="row py-2 px-3">
               <div>
                 <span class="font-weight-bold">Organization: </span>
                 <span>{{lawyerData?.Organization?.name}}</span>
               </div>
             </div>
-            <div class="row py-2 pl-3">
+            <div class="row py-2 px-3">
               <div>
                 <span class="font-weight-bold">Tagline: </span>
                 <span>{{lawyerData?.userAdditionalInfo?.tagline}}</span>
               </div>
             </div>
-            <div class="row py-2 pl-3">
+            <div class="row py-2 px-3">
               <div>
-                <span class="font-weight-bold">PractiseArea: </span>
+                <span class="font-weight-bold">Practise area: </span>
                 <span>{{lawyerData?.userAdditionalInfo?.practiceAreas}}</span>
               </div>
             </div>
-            <div class="row py-2 pl-3">
+            <div class="row py-2 px-3">
               <div>
                 <span class="font-weight-bold">Description: </span>
                 <span>{{lawyerData?.userAdditionalInfo?.description}}</span>

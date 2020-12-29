@@ -28,12 +28,16 @@
         <div class="row p-4">
             <div class="col-4">
                 <h3 class="font-weight-bold">Organization Information:</h3>
-                <span class="font-weight-bold">Organization:
+                <span class="font-weight-bold">Organization Name:
                     <span class="font-weight-light text-dark">{{orgDetails?.name}}
-                        {{orgDetails?.orgCode}}</span>
+                        <!-- {{orgDetails?.orgCode}} -->
+                    </span>                    
+                </span><br>
+                <span class="font-weight-bold">Tagline:
                     <span class="font-weight-light text-dark"> {{orgDetails?.tagline}}
                     </span>
-                </span><br><br>
+                </span>
+                <br>
                 <span class="font-weight-bold">Primary Address:
                     <span class="font-weight-light text-dark"> {{orgDetails?.Address?.street1}}
                         {{orgDetails?.Address?.street2}}</span>
@@ -41,7 +45,7 @@
                         {{orgDetails?.Address?.zip}}</span>
                 </span>
                 <br>
-                <span class="font-weight-bold">Practise Areas: </span>
+                <span class="font-weight-bold">Practice areas: </span>
                 <br>
                 <ul class="m-0" [hidden]="specialtyList?.length < 0 " *ngFor="let spec of specialtyList">
                     <li class="text-dark">{{spec}}</li>

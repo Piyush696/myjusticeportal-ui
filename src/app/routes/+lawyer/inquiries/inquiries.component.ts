@@ -14,7 +14,7 @@ import { MatTableDataSource } from '@angular/material/table';
 })
 export class InquiriesComponent implements OnInit {
   pendingCasesList: any;
-  displayedColumns: string[] = ["name", "caseDescription", "sent", "status", "action"];
+  displayedColumns: string[] = ["name", "briefDescriptionOfChargeOrLegalMatter", "sentAt", "status", "action"];
   dataSource = new MatTableDataSource();
 
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
@@ -30,26 +30,48 @@ export class InquiriesComponent implements OnInit {
 
   search(searchValue: string) {
     this.dataSource.filter = searchValue.trim().toLowerCase();
+        this.dataSource.filterPredicate = (searchValue: any, filter) => {
+      const dataStr =JSON.stringify(searchValue).toLowerCase();
+      return dataStr.indexOf(filter) != -1; 
+    }
   }
 
   getPendingCaseDetails() {
     this.userAdditionInfoService.getLawyerCases().subscribe((pendingCase: any) => {
       this.pendingCasesList = pendingCase.data
-      let emptyDataSource = []
-      this.dataSource = new MatTableDataSource(emptyDataSource);
+      this.pendingCasesList = this.pendingCasesList.map((item)=>{
+        item['name']=item.inmate.firstName+" "+item.inmate.lastName;
+        item['name1']=item.inmate.firstName+item.inmate.lastName;
+        var date=item.sentAt;
+        date = new Date(date).toDateString();
+        var monthDay=date.substring(4, 10);
+        var year=date.substring(10, 15);
+        item['sent']=monthDay+","+year;
+        return item;
+      })
       this.dataSource = new MatTableDataSource(this.pendingCasesList);
-
+      this.dataSource.sortingDataAccessor = (item: any, property) => {
+        switch (property) {
+          case 'name': if (item) return item.inmate.firstName + item.inmate.lastName;
+          default: return item[property];
+        }
+      };
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
     })
   }
+
   onOpenModal(templateRef, userId) {
     this.userId = userId
     let dialogRef = this.dialog.open(templateRef, {
       width: '300px',
     });
   }
+  
   closeModal() {
     this.dialog.closeAll()
   }
+
   onStatusUpdate(caseId, status) {
     const data = {
       'caseId': caseId,

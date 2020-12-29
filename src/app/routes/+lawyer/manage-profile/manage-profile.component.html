@@ -3,7 +3,7 @@
         <h1 class="font-weight-bold m-0">Manage Profile</h1>
         <h4 class="line-height header-sub-text">
             Manage the information that is displayed in your profile and visible to potential
-            clients.
+            clients
         </h4>
     </div>
 
@@ -15,23 +15,23 @@
             <h1 class="font-weight-bold">Profile Information</h1>
             <table style="width:100%">
                 <tr>
-                    <th>Name:</th>
+                    <th>Name</th>
                     <td>{{userDetails?.firstName}} {{userDetails?.middleName}} {{userDetails?.lastName}}</td>
                 </tr>
                 <tr>
-                    <th>Tagline:</th>
+                    <th>Tagline</th>
                     <td>{{userDetails?.userAdditionalInfo?.tagline}}</td>
                 </tr>
                 <tr>
-                    <th>Practice Areas:</th>
+                    <th>Practice Areas</th>
                     <td>{{userDetails?.userAdditionalInfo?.practiceAreas}}</td>
                 </tr>
                 <tr>
-                    <th>Description:</th>
+                    <th>Description</th>
                     <td>{{userDetails?.userAdditionalInfo?.description}}</td>
                 </tr>
                 <tr>
-                    <th>Profile Headshot:</th>
+                    <th>Profile Headshot</th>
                     <td>
                         <img src="{{userDetails?.userAdditionalInfo?.profile?.downloadLink}}" width="300px"
                             height="200px" alt="logo" class="logo"
@@ -39,7 +39,7 @@
                     </td>
                 </tr>
                 <tr>
-                    <th>Profile Header Background Image:</th>
+                    <th>Profile Header Background Image</th>
                     <td>
                         <img src="{{userDetails?.userAdditionalInfo?.header?.downloadLink}}" alt="logo" class="logo"
                             *ngIf="userDetails?.userAdditionalInfo?.header?.downloadLink">
@@ -66,7 +66,7 @@
 <ng-template #updateOrganization>
     <div>
         <h2 class="text-center font-weight-bold">Profile Editor</h2>
-        <h4 class="text-center">Click the Edit button below to make changes, then click Save to confirm your changes."
+        <h4 class="text-center">Click the Edit button below to make changes, then click Save to confirm your changes.
         </h4>
     </div>
 
@@ -104,6 +104,7 @@
             <mat-label>Practice Areas</mat-label>
             <mat-select [formControl]="toppings" multiple [formControl]="additionalInfoForm.controls['practiceAreas']"
                 required>
+                <span class="pl-3">Select Practice Areas</span>
                 <mat-option *ngFor="let specialty of specialtyList" value="{{specialty?.specialtyType}}">
                     {{specialty.specialtyType}}
                 </mat-option>

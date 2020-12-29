@@ -35,7 +35,8 @@ export class CasesComponent implements OnInit,AfterViewInit {
   }
 
   modalAcceptDetails(){
-    this.userAdditionalService.caseModalDetails().subscribe((res:any) => {
+    let metaKey = 'case_model'
+    this.userAdditionalService.modalDetails(metaKey).subscribe((res:any) => {
       if(!res.data){
         this.modalopen.nativeElement.click();
       }
@@ -43,8 +44,8 @@ export class CasesComponent implements OnInit,AfterViewInit {
   }
 
   onAcceptClick(){
-    let metaValue = 'clicked'
-    this.userAdditionalService.caseCreateModal(metaValue).subscribe((res:any) => {
+    let userMeta = { metaKey: 'case_model', metaValue: 'clicked'}
+    this.userAdditionalService.caseCreateModal(userMeta).subscribe((res:any) => {
      this.modalAcceptDetails();
    })
   }

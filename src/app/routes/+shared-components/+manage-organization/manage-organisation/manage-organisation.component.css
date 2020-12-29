@@ -30,3 +30,10 @@
     background-repeat: no-repeat!important;
     height: 140px;
 }
+
+.option{
+  display: none;
+}
+ul {
+  padding-inline-start: 0px !important;
+}
