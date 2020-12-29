@@ -11,7 +11,7 @@
                         required>
                     <mat-error *ngIf="loginForm.controls['userName'].invalid && loginForm.controls['userName'].touched">
                         <div class="font13" *ngIf="loginForm.get('userName').errors?.required">
-                            User is required
+                            Username is required
                         </div>
                     </mat-error>
                 </mat-form-field>
@@ -22,7 +22,7 @@
                         [formControl]="loginForm.controls['password']" required (keydown.enter)="onLogin()">
                     <mat-error *ngIf="loginForm.controls['password'].invalid && loginForm.controls['password'].touched">
                         <small class="font13" *ngIf="loginForm.get('password').errors?.required">
-                            Password is Required
+                            Password is required
                         </small>
                     </mat-error>
                 </mat-form-field>
@@ -76,7 +76,7 @@
             </app-mobile-registration>
             <div class="d-flex justify-content-center p-3">
                 <a [routerLink]="'/forget-password'" class="p-3 text-dark">
-                    Forgot Password? Click here to reset
+                    Forgot password? Click here to reset
                 </a>
             </div>
         </div>

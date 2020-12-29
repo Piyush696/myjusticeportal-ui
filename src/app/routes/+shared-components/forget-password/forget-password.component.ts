@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { SecurityService } from 'app/services/security.service';
 import { ToasterService } from 'app/services/toaster.service';
@@ -30,9 +30,19 @@ export class ForgetPasswordComponent implements OnInit {
       userName: ['', [Validators.required]],
       // securityQuestionId: ['', [Validators.required]],
       answer: ['', [Validators.required]],
-      password: ['', [Validators.required, Validators.minLength(6)]],
-      confirmPassword: ['', [Validators.required, Validators.minLength(6)]],
+      password: ['',[Validators.required, Validators.minLength(8), this.validatePassword.bind(this)]],
+      confirmPassword: ['', [Validators.required, Validators.minLength(8)]],
     }, { validator: this.checkIfMatchingPasswords('password', 'confirmPassword') });
+  }
+
+  validatePassword(control: AbstractControl) {
+    if (control.value) {
+      const pattern = /(?=.*[A-Z])(?=.*[a-z])(?=.*\W).{8,18}$/;
+      if (!control.value.match(pattern) && control.value !== '') {
+        return { invalidPassword: true };
+      }
+      return null;
+    }
   }
 
   checkIfMatchingPasswords(passwordKey: string, passwordConfirmationKey: string) {
