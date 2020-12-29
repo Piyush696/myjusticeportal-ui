@@ -62,12 +62,16 @@ export class UserAdditionInfoService {
     return this.httpClient.get<object>(`${this.apiPath}/userAdditionalInfo/dasboard/count`, this.getHeaders());
   }
 
-  caseCreateModal(metaValue){
-    return this.httpClient.post<object>(`${this.apiPath}/userMeta/modal/caseCreate`, {metaValue}, this.getHeaders())
+  caseCreateModal(userMeta){
+    return this.httpClient.post<object>(`${this.apiPath}/userMeta/modal/caseCreate`, {userMeta}, this.getHeaders())
   }
 
   caseModalDetails(){
     return this.httpClient.get<object>(`${this.apiPath}/userMeta/getCaseModalValue`, this.getHeaders())
+  }
+
+  findLawyerModalDetails(){
+    return this.httpClient.get<object>(`${this.apiPath}/userMeta/getFindLawyerModal`, this.getHeaders())
   }
 
 }

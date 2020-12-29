@@ -15,7 +15,7 @@ import { FacilityService } from 'app/services/facility.service';
 })
 
 export class ViewFacilitiesComponent implements OnInit {
-  facilityList: any[];
+  facilityList = [];
   facilityIds = [];
   originalData: any[];
 

@@ -2,7 +2,7 @@
     <div class="col">
         <h1 class="font-weight-bold m-0">Manage Users</h1>
         <h4 class="line-height header-sub-text">
-            View and manage all your organization users.
+            View and manage all your organization users
         </h4>
     </div>
     <div class="col- pr-4">
@@ -51,7 +51,7 @@
             </ng-container>
             <ng-container matColumnDef="createdAt">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header>Date Created</th>
-                <td mat-cell *matCellDef="let user">{{user?.createdAt | date:'longDate'}}</td>
+                <td mat-cell *matCellDef="let user">{{user?.sent}}</td>
             </ng-container>
             <!-- <ng-container matColumnDef="action">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header>Action</th>

@@ -43,8 +43,8 @@ export class CasesComponent implements OnInit,AfterViewInit {
   }
 
   onAcceptClick(){
-    let metaValue = 'clicked'
-    this.userAdditionalService.caseCreateModal(metaValue).subscribe((res:any) => {
+    let userMeta = { metaKey: 'case_model', metaValue: 'clicked'}
+    this.userAdditionalService.caseCreateModal(userMeta).subscribe((res:any) => {
      this.modalAcceptDetails();
    })
   }

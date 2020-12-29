@@ -27,6 +27,16 @@ export class ViewUsersComponent implements OnInit {
   getAllUsers() {
     this.organisationService.getOrganisationUsers().subscribe((users: any) => {
       if (users.success) {
+        users.data.users.map((item) => {
+          item['name'] = item.firstName + " " + item.middleName +  " " +  item.lastName;
+          item['name1'] = item.firstName + item.middleName + item.lastName;
+          var date = item.createdAt;
+          date = new Date(date).toDateString();
+          var monthDay = date.substring(4, 10);
+          var year = date.substring(10, 15);
+          item['sent'] = monthDay + "," + year;
+          return item;
+        })
         this.dataSource = new MatTableDataSource(users.data.users);
         this.dataSource.sortingDataAccessor = (item: any, property) => {
           switch (property) {

@@ -20,26 +20,41 @@ export class HireLawyerComponent implements OnInit, AfterViewInit {
   currentSpeciality: any;
   currentLocation: any;
   filteredOrganizationList: any;
-  @ViewChild('modalopen') modalopen: ElementRef
   sponsorUserList: any;
   lawyerData: any;
   path = '';
   specialtyList: any;
+  @ViewChild('modalopen') modalopen: ElementRef;
 
   constructor(private hireLawyerService: HireLawyerService, private caseService: CaseService, private router: Router, private specialtyService: SpecialtyService, 
     private userAdditionalService: UserAdditionInfoService, private _statesService: StatesService, public dialog: MatDialog) { }
 
-  ngAfterViewInit(): void {
-    this.modalopen.nativeElement.click();
-  }
-
-
   ngOnInit(): void {
+    this.modalAcceptDetails();
     this.getSponsors();
     this.onGetLaywers();
     this.stateData();
     this.getAllSpecialty();
-    this.modalopen.nativeElement.click();
+  }
+
+  
+  ngAfterViewInit(): void {
+    //  this.modalopen.nativeElement.click();
+    }
+  
+  modalAcceptDetails(){
+    this.userAdditionalService.findLawyerModalDetails().subscribe((res:any) => {
+      if(!res.data){
+        this.modalopen.nativeElement.click();
+      }
+    })
+  }
+
+  acceptDisclaimer(){
+    let userMeta = { metaKey: 'findlawyer_model', metaValue: 'clicked'}
+    this.userAdditionalService.caseCreateModal(userMeta).subscribe((res:any) => {
+      this.modalAcceptDetails();
+   })
   }
 
   getSponsors() {
