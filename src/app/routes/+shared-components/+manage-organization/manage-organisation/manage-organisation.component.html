@@ -86,7 +86,7 @@
             <div class="d-flex justify-content-between align-items-between">
                 <div>
                     <span class="title-style">
-                        {{orgData?.Organization?.tagline}}
+                        <!-- {{orgData?.Organization?.tagline}} -->
                     </span>
                 </div>
                 <div>
@@ -100,12 +100,16 @@
             <div class="row p-4">
                 <div class="col-4">
                     <h3 class="font-weight-bold">Organization Information:</h3>
-                    <span class="font-weight-bold">Organization:
+                    <span class="font-weight-bold">Organization Name:
                         <span class="font-weight-light text-dark">{{orgData?.Organization?.name}}
-                            {{orgData?.orgCode}}</span>
+                            <!-- {{orgData?.orgCode}} -->
+                        </span>
+                    </span><br>
+                    <span class="font-weight-bold">Tagline:
                         <span class="font-weight-light text-dark"> {{orgData?.Organization?.tagline}}
                         </span>
-                    </span><br><br>
+                    </span>
+                    <br>
                     <span class="font-weight-bold">Primary Address:
                         <span class="font-weight-light text-dark"> {{orgData?.Organization?.Address?.street1}}
                             {{orgData?.Organization?.Address?.street2}}</span>

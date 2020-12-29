@@ -79,7 +79,7 @@ export class ManageProfileComponent implements OnInit {
       this.userDetails = user.data
       let specialty = [];
       if (user.data.userAdditionalInfo.practiceAreas) {
-        specialty.push(this.userDetails.userAdditionalInfo.practiceAreas.split(","))
+        specialty.push(this.userDetails.userAdditionalInfo.practiceAreas.split(", "))
       }
       this.path = this.userDetails?.userAdditionalInfo?.header?.downloadLink
       let name = user?.data?.firstName + ' ' + user?.data?.middleName + ' ' + user?.data?.lastName
@@ -139,7 +139,7 @@ export class ManageProfileComponent implements OnInit {
         additionalInfo: {
           "tagline": this.additionalInfoForm.get('tagline').value,
           "description": this.additionalInfoForm.get('description').value,
-          "practiceAreas": (this.additionalInfoForm.get('practiceAreas').value).toString()
+          "practiceAreas": (this.additionalInfoForm.get('practiceAreas').value).toString().split(',').join(', ')
         }
       }
       this.userAdditionalInfo.updateAdditionalInfo(data).subscribe((updatedOrg: any) => {
