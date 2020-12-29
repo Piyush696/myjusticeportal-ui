@@ -86,7 +86,7 @@ export class ManageProfileComponent implements OnInit {
       this.additionalInfoForm.get('name').setValue(name)
       this.additionalInfoForm.get('tagline').setValue(user?.data?.userAdditionalInfo?.tagline)
       this.additionalInfoForm.get('description').setValue(user?.data?.userAdditionalInfo?.description)
-      this.additionalInfoForm.get('practiceAreas').setValue(specialty[0])
+      this.additionalInfoForm.get('practiceAreas').setValue(specialty[0].split(', ').join(','))
       this.additionalInfoForm.disable()
     })
   }
@@ -139,7 +139,7 @@ export class ManageProfileComponent implements OnInit {
         additionalInfo: {
           "tagline": this.additionalInfoForm.get('tagline').value,
           "description": this.additionalInfoForm.get('description').value,
-          "practiceAreas": (this.additionalInfoForm.get('practiceAreas').value).toString()
+          "practiceAreas": (this.additionalInfoForm.get('practiceAreas').value).toString().split(',').join(', ')
         }
       }
       this.userAdditionalInfo.updateAdditionalInfo(data).subscribe((updatedOrg: any) => {
