@@ -39,7 +39,17 @@ export class InquiriesComponent implements OnInit {
   getPendingCaseDetails() {
     this.userAdditionInfoService.getLawyerCases().subscribe((pendingCase: any) => {
       this.pendingCasesList = pendingCase.data
-      this.dataSource = new MatTableDataSource(pendingCase.data);
+      this.pendingCasesList = this.pendingCasesList.map((item)=>{
+        item['name']=item.inmate.firstName+" "+item.inmate.lastName;
+        item['name1']=item.inmate.firstName+item.inmate.lastName;
+        var date=item.sentAt;
+        date = new Date(date).toDateString();
+        var monthDay=date.substring(4, 10);
+        var year=date.substring(10, 15);
+        item['sent']=monthDay+","+year;
+        return item;
+      })
+      this.dataSource = new MatTableDataSource(this.pendingCasesList);
       this.dataSource.sortingDataAccessor = (item: any, property) => {
         switch (property) {
           case 'name': if (item) return item.inmate.firstName + item.inmate.lastName;
