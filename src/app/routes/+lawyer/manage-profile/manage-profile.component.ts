@@ -82,7 +82,7 @@ export class ManageProfileComponent implements OnInit {
         specialty.push(this.userDetails.userAdditionalInfo.practiceAreas.split(", "))
       }
       this.path = this.userDetails?.userAdditionalInfo?.header?.downloadLink
-      let name = user?.data?.firstName + user?.data?.middleName + user?.data?.lastName
+      let name = user?.data?.firstName + ' ' + user?.data?.middleName + ' ' + user?.data?.lastName
       this.additionalInfoForm.get('name').setValue(name)
       this.additionalInfoForm.get('tagline').setValue(user?.data?.userAdditionalInfo?.tagline)
       this.additionalInfoForm.get('description').setValue(user?.data?.userAdditionalInfo?.description)

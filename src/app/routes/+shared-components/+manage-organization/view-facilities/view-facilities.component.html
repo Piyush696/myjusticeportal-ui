@@ -4,7 +4,7 @@
         <h4 class="line-height header-sub-text">
             Manage which facilities your organization has access to. Your billing will be prorated and modified based
             on your
-            choices here.
+            choices here
         </h4>
     </div>
 </div>
@@ -18,7 +18,7 @@
                 </mat-form-field>
             </div>
             <div class="pr-2">
-                <button mat-raised-button class="button-purple px-4 py-1" (click)="openModal(addFacility)">
+                <button [disabled]="facilityList.length < 1" mat-raised-button class="button-purple px-4 py-1" (click)="openModal(addFacility)">
                     Add Facility
                 </button>
             </div>
@@ -33,7 +33,7 @@
                 <td mat-cell *matCellDef="let facility">{{facility?.facilityName}}</td>
             </ng-container>
             <ng-container matColumnDef="action">
-                <th mat-header-cell *matHeaderCellDef>Action</th>
+                <th mat-header-cell *matHeaderCellDef class="text-center">Action</th>
                 <td mat-cell *matCellDef="let facility">
                     <button mat-mini-fab color="warn" title="Delete Facilities"
                         (click)="onDeleteFacility(facility.facilityId)">
