@@ -180,11 +180,12 @@ export class LawyerdashboardComponent implements OnInit {
   getBillingDetails() {
     this.userMetaService.getUserBillingDetails().subscribe((billingsDetails: any) => {
       if (billingsDetails.data) {
-        // billingsDetails.data.forEach((ele) => {
           if (billingsDetails.data.userMeta) {
             if (billingsDetails.data.userMeta.length === 1) {
               this.billingBoard = true;
               this.showDashboard = false;
+            } else if(billingsDetails.data.userMeta.length === 0){
+              this.showDashboard = true;
             } else {
               billingsDetails.data.userMeta.forEach((x) => {
                 if (x.metaKey == "sub_id" || x.metaKey == "cust_id") {
@@ -204,7 +205,6 @@ export class LawyerdashboardComponent implements OnInit {
             this.billingBoard = true;
             this.showDashboard = false;
           }
-        // })
       } else {
         this.billingBoard = true;
         this.showDashboard = false;

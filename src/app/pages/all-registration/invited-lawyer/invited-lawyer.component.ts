@@ -4,6 +4,8 @@ import { LoginService } from 'app/services/login.service';
 import { LawyerService } from 'app/services/registration/lawyer.service';
 import { ToasterService } from 'app/services/toaster.service';
 import { CacheService } from 'app/services/cache.service';
+import { AddUserInfo } from 'app/store/actions/userInfo.actions';
+import { Store } from '@ngrx/store';
 
 @Component({
   selector: 'app-invited-lawyer',
@@ -21,7 +23,7 @@ export class InvitedLawyerComponent implements OnInit {
 
   constructor(private activatedRoute: ActivatedRoute, private loginService: LoginService,
     private lawyerService: LawyerService, private toasterService: ToasterService,
-    private router: Router, private cacheService: CacheService) {
+    private router: Router, private cacheService: CacheService,private store: Store<any>) {
     this.onGetEmailFromToken(this.activatedRoute.snapshot.params.token);
   }
 
@@ -82,13 +84,9 @@ export class InvitedLawyerComponent implements OnInit {
         this.cacheService.setCache('token', verified.token);
         this.loginService.checkToken().then((data: any) => {
           if (data.success) {
-            if (data.user.status) {
-              this.router.navigateByUrl('/mjp/lawyer/lawyer-dashboard');
-            }
-            else {
-              this.toasterService.showWarningToater("Account under review.");
-              this.router.navigateByUrl('/account-review');
-            }
+            this.store.dispatch(new AddUserInfo(Object.assign({}, data.user)));
+            this.router.navigateByUrl('/mjp/lawyer/lawyer-dashboard');
+            this.toasterService.showWarningToater("Account under review.")
           }
           else {
             this.toasterService.showWarningToater('Something went wrong.');

@@ -63,19 +63,19 @@
                 <div class="row">
                     <div class="col-12" *ngIf="isUser">
                         <mat-form-field appearance="fill" class="w-100 p-1">
-                            <mat-label>User Name</mat-label>
+                            <mat-label>username</mat-label>
                             <input matInput placeholder="User Name" [formControl]="profileForm.controls['userName']"
                                 required>
                             <mat-error>
                                 <div
                                     *ngIf="profileForm.controls['userName'].invalid &&
                                                                    profileForm.controls['userName'].touched && profileForm.controls['userName'].hasError('taken')">
-                                    <small class="font13">User Name already taken.</small>
+                                    <small class="font13">Username is taken.</small>
                                 </div>
                                 <div *ngIf="profileForm.controls['userName'].invalid && profileForm.controls['userName'].touched
                                                      && profileForm.get('userName').errors?.required">
                                     <small class="font13">
-                                        User Name is Required
+                                        Username is required
                                     </small>
                                 </div>
                             </mat-error>
@@ -162,7 +162,7 @@
                     <div class="col-6">
                         <mat-form-field appearance="fill" class="w-100 p-1">
                             <mat-label>Mobile</mat-label>
-                            <input type="text" matInput [formControl]="profileForm.controls['mobile']">
+                            <input type="number" matInput [formControl]="profileForm.controls['mobile']">
                         </mat-form-field>
                     </div>
                 </div>
@@ -170,7 +170,7 @@
                     <div class="col-12">
                         <div class="d-flex align-items-center pb-3" *ngIf="!isUser">
                             MFA
-                            <mat-slide-toggle class="pl-2" color="warn" [checked]="user?.isMFA" (change)="onMfaSelect()"
+                            <mat-slide-toggle [disabled]="isDisabled" class="pl-2" color="warn" [checked]="user?.isMFA" (change)="onMfaSelect()"
                                 [formControl]="profileForm.controls['isMFA']">
                                 {{user?.isMFA ? 'Enabled' : 'Disabled'}}
                             </mat-slide-toggle>
@@ -192,7 +192,7 @@
                             </div>
                             <div class="col-6 d-flex justify-content-end justify-content-sm-end">
                                 <div *ngIf="isUser">
-                                    <button class="button-purple px-sm-4 px-md-4 px-lg-4 px-xl-4 py-1" mat-raised-button
+                                    <button [disabled]="profileForm.controls['userName'].invalid &&  profileForm.controls['userName'].touched && profileForm.controls['userName'].hasError('taken')" class="button-purple px-sm-4 px-md-4 px-lg-4 px-xl-4 py-1" mat-raised-button
                                         (click)="editChanges()" [ngClass]="{'button-green': buttonText == 'Save'}">
                                         {{buttonText}}
                                     </button>
@@ -282,7 +282,7 @@
     <div class="d-flex justify-content-between modal-footer">
         <button type="button" class="button-purple px-4 py-1" mat-raised-button color="primary" type="button"
             (click)="closeModal()">Close</button>
-        <button type="button" class="button-purple px-4 py-1" [disabled]="passwordForm.invalid"
+        <button  type="button" class="button-purple px-4 py-1" [disabled]="passwordForm.invalid"
             (click)="passwordChange()" mat-raised-button color="primary">Save</button>
     </div>
 </ng-template>
