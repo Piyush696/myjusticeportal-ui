@@ -43,7 +43,8 @@ export class HireLawyerComponent implements OnInit, AfterViewInit {
     }
   
   modalAcceptDetails(){
-    this.userAdditionalService.findLawyerModalDetails().subscribe((res:any) => {
+   let metaKey = 'findlawyer_model'
+    this.userAdditionalService.modalDetails(metaKey).subscribe((res:any) => {
       if(!res.data){
         this.modalopen.nativeElement.click();
       }
