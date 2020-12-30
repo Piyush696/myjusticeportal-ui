@@ -184,9 +184,9 @@
                 </mat-form-field>
             </div>
             <div class="row">
-                <mat-checkbox class="termCondition-margin ml-2"
-                    [formControl]="registrationForm.controls['termCondition']" (click)="openModal(mytemplate)"
-                    color="primary">
+                <mat-checkbox class="mat-focus-indicator termCondition-margin ml-2"
+                    [formControl]="registrationForm.controls['termCondition']" 
+                    (change)="openModal(mytemplate)" color="primary">
                     <a>
                         <p class="p-0 m-0 line-height">I accept the <span class="font-weight-bold p-0 m-0">Terms and
                                 Conditions</span>
