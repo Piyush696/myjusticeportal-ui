@@ -4,6 +4,7 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { HireLawyerService } from 'app/services/hire-lawyer.service';
 import { ToasterService } from 'app/services/toaster.service';
+import { count } from 'rxjs/operators';
 
 @Component({
   selector: 'app-accepted-cases',
@@ -18,9 +19,9 @@ export class AcceptedCasesComponent implements OnInit {
   @ViewChild(MatSort, { static: true }) sort: MatSort;
   filterStatus: any;
   requestedCases: any;
-  hideCases:any;
   hide:boolean=true;
   allCasesData:any;
+  hideCount:number=0;
 
   constructor(private hireLawyerService: HireLawyerService, private toasterService: ToasterService) { }
   ngOnInit(): void {
@@ -48,12 +49,12 @@ export class AcceptedCasesComponent implements OnInit {
 
   onViewRejectedCases(e) {
     if (e) {
-      let statuses = ['Approved', 'Rejected'];
+      let statuses = ['Rejected'];
       this.onGetRequestedCases(statuses);
-      this.toasterService.showSuccessToater('Showed approved, rejected cases.');
+      this.toasterService.showSuccessToater('Showing rejected cases.');
     } else {
       this.onGetRequestedCases('Approved');
-      this.toasterService.showSuccessToater('Showed approved cases only.');
+      this.toasterService.showSuccessToater('Showed approved cases.');
     }
   }
 
@@ -63,17 +64,18 @@ export class AcceptedCasesComponent implements OnInit {
       this.hide=true;
       let status = 'Approved';
       this.onGetRequestedCases(status);
-      this.toasterService.showSuccessToater('Showed Hide Cases.');
+      this.toasterService.showSuccessToater('Showed approved cases.');
     }
     else{
       this.hide=false;
       let status = ['Approved', 'Rejected'];
       this.onGetRequestedCases(status);
-      this.toasterService.showSuccessToater('Hide Cases.');
+      this.toasterService.showSuccessToater('Showing Hide cases.');
     }
 }
 
 hideCaseDetails(caseId) {
+  this.hideCount=this.hideCount-1;
   const data = {
     "caseId" : caseId,
     "isHide" : true
@@ -90,13 +92,14 @@ hideCaseDetails(caseId) {
 }
 
 unHideCaseDetails(caseId){
+  this.hideCount=this.hideCount+1;
   const data = {
     "caseId" : caseId,
     "isHide" : false
   }
   this.hireLawyerService.hideCase(data).subscribe((res: any) => {
     if (res.success) {
-      let status = 'Approved';      
+      let status = ['Approved', 'Rejected'];      
       this.onGetRequestedCases(status);
       this.toasterService.showSuccessToater('Unhide case successfully.');
     } else {
