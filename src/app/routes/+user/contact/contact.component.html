@@ -7,7 +7,7 @@
 </div>
 <div>
     <h3 class="font-weight-bold">You are contacting:</h3>
-    <div class="row">
+    <div class="row px-3">
         <div class="col-6 pl-0">
             <mat-form-field appearance="fill" class="w-100 p-0">
                 <mat-label>Organization Name</mat-label>
@@ -55,7 +55,7 @@
         complete response and hopefully, allow you to hire them.</span>
 
     <div class="col-8 p-0">
-        <mat-form-field appearance="fill" class="w-100 p-2">
+        <mat-form-field appearance="fill" class="w-100 py-2">
             <textarea rows="2" matInput [formControl]="lawyerCaseForm.controls['notes']" required></textarea>
             <mat-error>
                 <div *ngIf="lawyerCaseForm.controls['notes'].invalid && lawyerCaseForm.controls['notes'].touched">
@@ -65,7 +65,7 @@
                 </div>
             </mat-error>
         </mat-form-field>
-        <div class="ml-2 pr-2 pb-2 pt-2 pl-0">
+        <div class="pr-2 pb-2 pt-2 pl-0">
             <button class="button-purple px-5 py-1" [disabled]="!lawyerCaseForm.valid" mat-raised-button (click)="onContactLawyer()">
                 Send
             </button>

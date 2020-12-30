@@ -28,7 +28,7 @@
                     and complete the rest of the form with your information.</p>
             </div>
             <div *ngIf="roleId == 3">
-                <h2 class="text-center">Enter your Organization details:</h2>
+                <h2 class="text-center org-heading">Enter your Organization details:</h2>
                 <p class="text-center">Add information about organization and it's address</p>
             </div>
             <div class="row">
@@ -39,7 +39,7 @@
                         <mat-error>
                             <div
                                 *ngIf="organisationForm.controls['name'].invalid && organisationForm.controls['name'].touched">
-                                <small class="font13">
+                                <small class="font13" *ngIf="organisationForm.get('name').errors?.required">
                                     Organization Name is Required
                                 </small>
                                 <small class="font13" *ngIf="organisationForm.get('name').errors?.maxlength">
@@ -58,7 +58,7 @@
                         <mat-error>
                             <div
                                 *ngIf="addressForm.controls['street1'].invalid && addressForm.controls['street1'].touched">
-                                <small class="font13">
+                                <small class="font13" *ngIf="addressForm.get('street1').errors?.required">
                                     Street 1 address is Required
                                 </small>
                                 <small class="font13" *ngIf="addressForm.get('street1').errors?.maxlength">

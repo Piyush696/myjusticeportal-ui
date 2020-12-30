@@ -66,7 +66,7 @@
                 *ngIf="org?.lawyerFacility[0]?.lawyer_facility?.isSponsors">Sponsored</span>
             </div>
           </div>
-          <div>
+          <div class="px-3">
             <span> {{org?.userAdditionalInfo?.practiceAreas}}</span>
           </div>
           <button class="button-purple" mat-raised-button (click)="openModal(lawyerView,org)">
@@ -184,7 +184,7 @@
             </div>
             <div class="row py-2 px-3">
               <div>
-                <span class="font-weight-bold">Practise area: </span>
+                <span class="font-weight-bold">Practice area: </span>
                 <span>{{lawyerData?.userAdditionalInfo?.practiceAreas}}</span>
               </div>
             </div>
