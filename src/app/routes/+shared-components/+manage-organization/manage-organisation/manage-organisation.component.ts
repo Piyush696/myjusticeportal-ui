@@ -42,8 +42,8 @@ export class ManageOrganisationComponent implements OnInit {
     this.createControl()
     this.getOrganisationAddress()
   }
-  
 
+  
   onUploadLogo() {
     if (this.uploader1.queue.length <= 1) {
       let formData = new FormData();
