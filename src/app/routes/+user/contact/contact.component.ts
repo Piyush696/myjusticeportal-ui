@@ -55,7 +55,7 @@ export class ContactComponent implements OnInit {
     }
     this.additionalInfoService.setCasesLawyer(data).subscribe((data: any) => {
       if (data.success) {
-        this.toasterService.showSuccessToater('Case Requested.');
+        this.toasterService.showSuccessToater('Inquiry Sent.');
         this.router.navigateByUrl('/mjp/user/case');
       } else {
         this.toasterService.showWarningToater('Cases Already Requested by the Lawyer.');

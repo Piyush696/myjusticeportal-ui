@@ -35,6 +35,7 @@ export class MyAccountComponent implements OnInit {
   buttonText: string = 'Edit'
   previousSecurityId: any;
   facilityList: any;
+  isDisabled:boolean = true;
 
 
   constructor(private registrationService: RegistrationService, public dialog: MatDialog,
@@ -79,11 +80,13 @@ export class MyAccountComponent implements OnInit {
   }
 
   async validateUserNotTaken(control: AbstractControl) {
-    const result: any = await this.registrationService.checkUser({ userName: control.value }).toPromise();
-    if (result.taken) {
-      return { taken: true };
-    } else {
-      return null;
+    if(this.profileForm.get('userName').value != this.user.userName){
+      const result: any = await this.registrationService.checkUser({ userName: control.value }).toPromise();
+      if (result.taken) {
+        return { taken: true };
+      } else {
+        return null;
+      }
     }
   }
 
@@ -152,6 +155,7 @@ export class MyAccountComponent implements OnInit {
       this.userService.updateUserInfo(this.profileForm.value).subscribe((result: any) => {
         // this.toasterService.showSuccessToater('User Updated Successfully.')
         this.buttonText = 'Edit';
+        this.isDisabled = true; 
         this.getSingleUser();
       })
     }
@@ -164,6 +168,7 @@ export class MyAccountComponent implements OnInit {
     this.profileForm.get('lastName').enable()
     this.userMetaForm.get('housing_unit').enable()
     this.profileForm.get('middleName').enable()
+    this.isDisabled = false;
   }
 
   userMetaUpdate() {
@@ -214,6 +219,7 @@ export class MyAccountComponent implements OnInit {
       result.data.roles.forEach(element => {
         this.getAllSecurityQuestion(element.roleId)
       });
+      console.log(result.data)
       this.user = result.data;
       this.userMeta = result.data.userMeta
       this.profileForm.get('firstName').setValue(result.data.firstName)
