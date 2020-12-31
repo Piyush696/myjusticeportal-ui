@@ -64,8 +64,7 @@ export class ForgetPasswordComponent implements OnInit {
         this.toasterService.showErrorToater("We don't recognize your entry. Please try again.");
       }
       else if (res.data == 'Mail sent' || res.data == 'Mail not sent') { // for other.
-        this.toasterService.showSuccessToater('Your password reset link has been sent to ' + this.passwordResetForm.get('userName').value +
-          ', if did not received the email please wait sometime and try again');
+        this.toasterService.showSuccessToater('An email with the password reset link has been sent to your email address. It may take up to a few minutes before you see it in your inbox. If you would like to send the email again please click Resend');
       } else { // for user.
         this.securityQuestions = res.data.securityQuestions
         this.step = 2;
