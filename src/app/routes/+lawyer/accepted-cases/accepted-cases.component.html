@@ -19,8 +19,15 @@
 
 <div class="pb-4">
     <mat-card class="outer-card mat-elevation-z10 mt-3">
-        <mat-label class="font-weight-bold">
-            Active Cases({{requestedCases?.length}}):
+        <mat-label *ngIf="activeCase==0" class="font-weight-bold">
+            Active Cases:
+            <!-- ({{requestedCases?.length}}) -->
+        </mat-label>
+        <mat-label *ngIf="activeCase==1" class="font-weight-bold">
+            Hidden Cases:
+        </mat-label>
+        <mat-label *ngIf="activeCase==2" class="font-weight-bold">
+            Rejected Cases:
         </mat-label>
         <mat-card class="inner-card mt-2" *ngIf="!requestedCases?.length">
             <span>No data available.</span>
@@ -45,11 +52,25 @@
                         </span>
                     </span>
                     <span>
-                        Files attached:{{case?.caseFile?.length}}
+                        Files attached: {{case?.caseFile?.length}}
                     </span>
                 </div>
-                <div>
+                <div *ngIf="hide">
                     <button *ngIf="case?.lawyer_case?.isHide" (click)="unHideCaseDetails(case?.caseId)" class="button-purple mr-1" mat-mini-fab
+                    title="Unhide Case Details">
+                    <mat-icon>visibility_off</mat-icon>
+                </button>
+                    <button *ngIf="!case?.lawyer_case?.isHide" (click)="hideCaseDetails(case?.caseId)" class="bg-warning text-light mr-1" mat-mini-fab
+                        title="Hide Case Details">
+                        <mat-icon>visibility_off</mat-icon>
+                    </button>
+                    <button *ngIf="case?.lawyer_case?.status == 'Approved'" [routerLink]="case?.caseId"
+                        class="button-purple mr-1" mat-mini-fab title="View Case Details">
+                        <mat-icon>remove_red_eye</mat-icon>
+                    </button>
+                </div>
+                <div *ngIf="!hide">
+                    <button *ngIf="case?.lawyer_case?.isHide" (click)="unHideCaseDetails(case?.caseId)" class="bg-dark text-light mr-1" mat-mini-fab
                     title="Unhide Case Details">
                     <mat-icon>visibility_off</mat-icon>
                 </button>

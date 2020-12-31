@@ -4,6 +4,7 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { HireLawyerService } from 'app/services/hire-lawyer.service';
 import { ToasterService } from 'app/services/toaster.service';
+import { count } from 'rxjs/operators';
 
 @Component({
   selector: 'app-accepted-cases',
@@ -18,9 +19,9 @@ export class AcceptedCasesComponent implements OnInit {
   @ViewChild(MatSort, { static: true }) sort: MatSort;
   filterStatus: any;
   requestedCases: any;
-  hideCases:any;
   hide:boolean=true;
   allCasesData:any;
+  activeCase:number=0;
 
   constructor(private hireLawyerService: HireLawyerService, private toasterService: ToasterService) { }
   ngOnInit(): void {
@@ -48,28 +49,32 @@ export class AcceptedCasesComponent implements OnInit {
 
   onViewRejectedCases(e) {
     if (e) {
-      let statuses = ['Approved', 'Rejected'];
+      this.activeCase=2;
+      let statuses = ['Rejected'];
       this.onGetRequestedCases(statuses);
-      this.toasterService.showSuccessToater('Showed approved, rejected cases.');
+      this.toasterService.showSuccessToater('Showing rejected cases.');
     } else {
+      this.activeCase=0;
       this.onGetRequestedCases('Approved');
-      this.toasterService.showSuccessToater('Showed approved cases only.');
+      this.toasterService.showSuccessToater('Showed approved cases.');
     }
   }
 
 
  viewhideCaseDetails(check){
     if (!check) {
+      this.activeCase=0;
       this.hide=true;
       let status = 'Approved';
       this.onGetRequestedCases(status);
-      this.toasterService.showSuccessToater('Showed Hide Cases.');
+      this.toasterService.showSuccessToater('Showed approved cases.');
     }
     else{
+      this.activeCase=1;
       this.hide=false;
       let status = ['Approved', 'Rejected'];
       this.onGetRequestedCases(status);
-      this.toasterService.showSuccessToater('Hide Cases.');
+      this.toasterService.showSuccessToater('Showing Hidden cases.');
     }
 }
 
@@ -96,7 +101,7 @@ unHideCaseDetails(caseId){
   }
   this.hireLawyerService.hideCase(data).subscribe((res: any) => {
     if (res.success) {
-      let status = 'Approved';      
+      let status = ['Approved', 'Rejected'];      
       this.onGetRequestedCases(status);
       this.toasterService.showSuccessToater('Unhide case successfully.');
     } else {
@@ -116,6 +121,12 @@ allCase(){
       var monthDay=date.substring(4, 10);
       var year=date.substring(10, 15);
       item['newUpdatedAt']=monthDay+","+year;
+      var month=date.substring(4, 7);
+      var day=date.substring(8, 10);
+      var year=date.substring(11, 15);
+      item['newUpdatedAt1']=month+day+year;
+      item['newUpdatedAt2']=month+" "+day+" "+year;
+      item['newUpdatedAt3']=month+"/"+day+"/"+year;
       return item;
     })
     this.dataSource = new MatTableDataSource(this.allCasesData);
