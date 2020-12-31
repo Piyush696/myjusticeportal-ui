@@ -98,8 +98,24 @@ export class PendingInquriesComponent implements OnInit {
         else if (status.status && status.status === 'chatEnabled') {
           status['statusDeclared'] = 'Inmate chatEnabled'
         }
+        status['name0']= status.Organization.name;
+        status['name1']= status.Organization.name.split(" ").join("");
+        status['name2']=status.firstName+" "+status.lastName;
+        status['name3']=status.firstName+status.lastName;
+        var date=status.sent;
+        date = new Date(date).toDateString();
+        var monthDay=date.substring(4, 10);
+        var year=date.substring(10, 15);
+        status['sent']=monthDay+","+year;
+        var month=date.substring(4, 7);
+        var day=date.substring(8, 10);
+        var year=date.substring(11, 15);
+        status['newUpdatedAt1']=month+day+year;
+        status['newUpdatedAt2']=month+" "+day+" "+year;
+        status['newUpdatedAt3']=month+"/"+day+"/"+year;
         return status
       })
+      console.log(this.pendingCasesList)
       this.pendingCasesList.filter((x) => {
         if (x.status == 'Rejected' || x.status == 'inmate_rejected') {
           this.filteredRejectedPendingInquiriesList.push(x)
