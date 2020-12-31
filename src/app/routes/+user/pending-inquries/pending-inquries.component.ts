@@ -115,7 +115,6 @@ export class PendingInquriesComponent implements OnInit {
         status['newUpdatedAt3']=month+"/"+day+"/"+year;
         return status
       })
-      console.log(this.pendingCasesList)
       this.pendingCasesList.filter((x) => {
         if (x.status == 'Rejected' || x.status == 'inmate_rejected') {
           this.filteredRejectedPendingInquiriesList.push(x)
