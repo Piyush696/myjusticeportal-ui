@@ -48,6 +48,7 @@ export class UserDetailsComponent implements OnInit, OnDestroy {
 
     onGetUserDetails() {
         this.userService.getSingleUserById(+this.selectedUserId).subscribe((res: any) => {
+            console.log(res)
             this.selectedUserData = res.data;
         });
         this.onGetRoleList();

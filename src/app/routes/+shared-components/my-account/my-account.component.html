@@ -64,7 +64,7 @@
                     <div class="col-12" *ngIf="isUser">
                         <mat-form-field appearance="fill" class="w-100 p-1">
                             <mat-label>username</mat-label>
-                            <input matInput placeholder="User Name" [formControl]="profileForm.controls['userName']"
+                            <input matInput placeholder="username" [formControl]="profileForm.controls['userName']"
                                 required>
                             <mat-error>
                                 <div
@@ -106,7 +106,7 @@
                     <div class="col-4 p-0">
                         <mat-form-field appearance="fill" class="w-100 p-1">
                             <mat-label>Mobile</mat-label>
-                            <input type="text" matInput [formControl]="profileForm.controls['mobile']" required>
+                            <input type="number" onkeydown="return event.keyCode !== 69" matInput [formControl]="profileForm.controls['mobile']" required>
                             <mat-error>
                                 <div
                                     *ngIf="profileForm.controls['mobile'].invalid && profileForm.controls['mobile'].touched">
@@ -162,7 +162,7 @@
                     <div class="col-6">
                         <mat-form-field appearance="fill" class="w-100 p-1">
                             <mat-label>Mobile</mat-label>
-                            <input type="number" matInput [formControl]="profileForm.controls['mobile']">
+                            <input type="number" onkeydown="return event.keyCode !== 69" matInput [formControl]="profileForm.controls['mobile']">
                         </mat-form-field>
                     </div>
                 </div>
