@@ -21,7 +21,7 @@ export class AcceptedCasesComponent implements OnInit {
   requestedCases: any;
   hide:boolean=true;
   allCasesData:any;
-  hideCount:number=0;
+  activeCase:number=0;
 
   constructor(private hireLawyerService: HireLawyerService, private toasterService: ToasterService) { }
   ngOnInit(): void {
@@ -49,10 +49,12 @@ export class AcceptedCasesComponent implements OnInit {
 
   onViewRejectedCases(e) {
     if (e) {
+      this.activeCase=2;
       let statuses = ['Rejected'];
       this.onGetRequestedCases(statuses);
       this.toasterService.showSuccessToater('Showing rejected cases.');
     } else {
+      this.activeCase=0;
       this.onGetRequestedCases('Approved');
       this.toasterService.showSuccessToater('Showed approved cases.');
     }
@@ -61,21 +63,22 @@ export class AcceptedCasesComponent implements OnInit {
 
  viewhideCaseDetails(check){
     if (!check) {
+      this.activeCase=0;
       this.hide=true;
       let status = 'Approved';
       this.onGetRequestedCases(status);
       this.toasterService.showSuccessToater('Showed approved cases.');
     }
     else{
+      this.activeCase=1;
       this.hide=false;
       let status = ['Approved', 'Rejected'];
       this.onGetRequestedCases(status);
-      this.toasterService.showSuccessToater('Showing Hide cases.');
+      this.toasterService.showSuccessToater('Showing Hidden cases.');
     }
 }
 
 hideCaseDetails(caseId) {
-  this.hideCount=this.hideCount-1;
   const data = {
     "caseId" : caseId,
     "isHide" : true
@@ -92,7 +95,6 @@ hideCaseDetails(caseId) {
 }
 
 unHideCaseDetails(caseId){
-  this.hideCount=this.hideCount+1;
   const data = {
     "caseId" : caseId,
     "isHide" : false
@@ -119,6 +121,12 @@ allCase(){
       var monthDay=date.substring(4, 10);
       var year=date.substring(10, 15);
       item['newUpdatedAt']=monthDay+","+year;
+      var month=date.substring(4, 7);
+      var day=date.substring(8, 10);
+      var year=date.substring(11, 15);
+      item['newUpdatedAt1']=month+day+year;
+      item['newUpdatedAt2']=month+" "+day+" "+year;
+      item['newUpdatedAt3']=month+"/"+day+"/"+year;
       return item;
     })
     this.dataSource = new MatTableDataSource(this.allCasesData);

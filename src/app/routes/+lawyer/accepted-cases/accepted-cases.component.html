@@ -19,11 +19,15 @@
 
 <div class="pb-4">
     <mat-card class="outer-card mat-elevation-z10 mt-3">
-        <mat-label *ngIf="hide" class="font-weight-bold">
-            Active Cases({{requestedCases?.length}}):
+        <mat-label *ngIf="activeCase==0" class="font-weight-bold">
+            Active Cases:
+            <!-- ({{requestedCases?.length}}) -->
         </mat-label>
-        <mat-label *ngIf="!hide" class="font-weight-bold">
-            Hide Cases:
+        <mat-label *ngIf="activeCase==1" class="font-weight-bold">
+            Hidden Cases:
+        </mat-label>
+        <mat-label *ngIf="activeCase==2" class="font-weight-bold">
+            Rejected Cases:
         </mat-label>
         <mat-card class="inner-card mt-2" *ngIf="!requestedCases?.length">
             <span>No data available.</span>
