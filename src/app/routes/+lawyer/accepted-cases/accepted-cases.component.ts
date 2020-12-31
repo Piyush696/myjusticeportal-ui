@@ -119,6 +119,12 @@ allCase(){
       var monthDay=date.substring(4, 10);
       var year=date.substring(10, 15);
       item['newUpdatedAt']=monthDay+","+year;
+      var month=date.substring(4, 7);
+      var day=date.substring(8, 10);
+      var year=date.substring(11, 15);
+      item['newUpdatedAt1']=month+day+year;
+      item['newUpdatedAt2']=month+" "+day+" "+year;
+      item['newUpdatedAt3']=month+"/"+day+"/"+year;
       return item;
     })
     this.dataSource = new MatTableDataSource(this.allCasesData);
