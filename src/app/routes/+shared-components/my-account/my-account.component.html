@@ -299,7 +299,7 @@
                 <div class="form-group">
                     <li class="d-flex justify-content-between"
                         *ngFor="let securityQuestion of addedSecurityQuestionList; let i= index"
-                        [value]="securityQuestion.addedSecurityQuestionList">
+                        [value]="securityQuestion.question">
                         <span class="pt-3">{{i+1}}. {{securityQuestion.question}}</span>
                         <button class="btn btn-bg-color float-right"
                             (click)="openQuestionModal(manageSecurityQuestionModal,securityQuestion)">Change</button>
