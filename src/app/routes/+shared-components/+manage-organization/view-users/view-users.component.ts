@@ -13,7 +13,7 @@ import { Location } from '@angular/common';
 
 export class ViewUsersComponent implements OnInit {
 
-  displayedColumns: string[] = ["name", "userName", "roles", "createdAt"];
+  displayedColumns: string[] = ["name", "userName", "roles", "createdAt","action"];
   dataSource = new MatTableDataSource();
   @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: false }) sort: MatSort;
