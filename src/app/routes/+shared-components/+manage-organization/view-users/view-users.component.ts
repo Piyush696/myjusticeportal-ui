@@ -1,27 +1,57 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { OrganisationService } from 'app/services/organisation.service';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
 import { ToasterService } from 'app/services/toaster.service';
 import { Location } from '@angular/common';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 @Component({
   selector: 'app-view-users',
   templateUrl: './view-users.component.html',
   styleUrls: ['./view-users.component.css']
 })
 
-export class ViewUsersComponent implements OnInit {
+export class ViewUsersComponent implements OnInit, AfterViewInit {
 
-  displayedColumns: string[] = ["name", "userName", "roles", "createdAt","action"];
+  displayedColumns: string[] = ["name", "userName", "roles",'mobile', "createdAt","action"];
   dataSource = new MatTableDataSource();
   @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: false }) sort: MatSort;
-
-  constructor(private location: Location, private organisationService: OrganisationService, private toasterService: ToasterService,) { }
+  editUserForm: FormGroup;
+  userId: any;
+  
+  constructor(private location: Location, public dialog: MatDialog, private fb: FormBuilder,
+     private organisationService: OrganisationService, private toasterService: ToasterService,) { }
 
   ngOnInit(): void {
+    this.createControl();
     this.getAllUsers();
+  }
+
+  onDeleteInvitedUser(){
+    this.organisationService.deleteInvitedUser(this.userId).subscribe((res:any)=>{
+      if(res.success){
+        this.toasterService.showSuccessToater('User deleted')
+        this.getAllUsers();
+        this.dialog.closeAll();
+      }
+    })
+  }  
+
+  createControl() {
+    this.editUserForm = this.fb.group({
+      email: ['', [Validators.required]],
+      firstName: ['', [Validators.required]],
+      lastName: ['', [Validators.required]],
+      middleName: ['', [Validators.required]],
+      mobile: ['']
+    })
+  }
+
+  ngAfterViewInit() {
+    this.dataSource.sort = this.sort;
   }
 
   getAllUsers() {
@@ -54,6 +84,35 @@ export class ViewUsersComponent implements OnInit {
     }, (error: any) => {
       this.toasterService.showErrorToater(error.statusText);
     })
+  }
+
+  openModal(templateRef,user) {
+    this.editUserForm.get('firstName').setValue(user.firstName)
+    this.editUserForm.get('middleName').setValue(user.middleName)
+    this.editUserForm.get('lastName').setValue(user.lastName)
+    this.editUserForm.get('mobile').setValue(user.mobile)
+    this.editUserForm.get('email').setValue(user.userName)
+    this.editUserForm.disable();
+    let dialogRef = this.dialog.open(templateRef, {
+      width: '800px',
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+    });
+  }
+
+  deleteUserModal(templateRef,userId){
+    this.userId = userId
+    let dialogRef = this.dialog.open(templateRef, {
+      width: '500px',
+    }); 
+
+    dialogRef.afterClosed().subscribe(result => {
+    });
+  }
+
+  closeModal(){
+    this.dialog.closeAll();
   }
 
   search(searchValue: string) {

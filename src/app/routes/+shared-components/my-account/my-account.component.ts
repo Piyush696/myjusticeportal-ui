@@ -49,7 +49,6 @@ export class MyAccountComponent implements OnInit {
     this.securityQuestionControl();
     this.getAddUserSecurityQuestion()
     this.getAllFacilities()
-
   }
 
   createControl() {
@@ -219,7 +218,6 @@ export class MyAccountComponent implements OnInit {
       result.data.roles.forEach(element => {
         this.getAllSecurityQuestion(element.roleId)
       });
-      console.log(result.data)
       this.user = result.data;
       this.userMeta = result.data.userMeta
       this.profileForm.get('firstName').setValue(result.data.firstName)
