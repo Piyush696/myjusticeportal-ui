@@ -69,7 +69,6 @@ export class ViewUsersComponent implements OnInit, AfterViewInit {
         })
         this.dataSource = new MatTableDataSource(users.data.users);
         this.dataSource.sortingDataAccessor = (item: any, property) => {
-          console.log(item, property)
           switch (property) {
             case 'name': if (item) return item.firstName + item.middleName + item.lastName;
             case 'roles': if (item) return item.roles[0].name;
