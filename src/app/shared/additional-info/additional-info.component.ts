@@ -131,7 +131,7 @@ export class AdditionalInfoComponent implements OnInit, OnChanges {
   
   addMoreStates() {
     this.lawyerInfoArray.push(this.additionalInfoLawyer.value)
-    this.filteredStateArray = this.states.filter((currentState) => {
+    this.filteredStateArray = this.filteredStateArray.filter((currentState) => {
       return currentState.name != this.additionalInfoLawyer.get('state').value
     })
     this.buttonText = "Save"

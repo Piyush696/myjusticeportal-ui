@@ -91,7 +91,9 @@ export class ManageProfileComponent implements OnInit {
     })
   }
 
-  openOrganizationModal(templateRef) {
+  openOrganizationModal(templateRef, userDetails) {
+    let name = userDetails.firstName + ' ' + userDetails.middleName + ' ' + userDetails.lastName
+    this.additionalInfoForm.get('name').setValue(name)
     this.buttonText = 'Edit'
     this.additionalInfoForm.disable()
     let dialogRef = this.dialog.open(templateRef, {
