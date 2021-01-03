@@ -49,7 +49,6 @@ export class MyAccountComponent implements OnInit {
     this.securityQuestionControl();
     this.getAddUserSecurityQuestion()
     this.getAllFacilities()
-
   }
 
   createControl() {
