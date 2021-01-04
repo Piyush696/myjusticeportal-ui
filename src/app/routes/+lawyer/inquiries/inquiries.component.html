@@ -29,7 +29,7 @@
             </ng-container>
             <ng-container matColumnDef="briefDescriptionOfChargeOrLegalMatter">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header>Case Description</th>
-                <td mat-cell *matCellDef="let user" class="table-action-style">
+                <td mat-cell *matCellDef="let user" class="table-action-style" id="textalign">
                     <span>{{user?.briefDescriptionOfChargeOrLegalMatter}}</span>
                 </td>
             </ng-container>
