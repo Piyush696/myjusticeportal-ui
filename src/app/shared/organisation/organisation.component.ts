@@ -1,6 +1,6 @@
 import { StatesService } from './../../services/states.service';
 import { Component, EventEmitter, OnInit, Output, Input, OnChanges } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-organisation',
@@ -48,12 +48,20 @@ export class OrganisationComponent implements OnInit, OnChanges {
 
     this.addressForm = this.fb.group({
       street1: ['', [Validators.required, Validators.maxLength(100)]],
-      street2: [''],
+      street2: ['',[Validators.maxLength(100)]],
       city: ['', [Validators.required, Validators.maxLength(50)]],
       state: ['', [Validators.required, Validators.maxLength(50)]],
       zip: ['', [Validators.required,Validators.minLength(5) ,Validators.maxLength(5)]],
       country: ['United States', [Validators.required, Validators.maxLength(50)]]
     });
+  }
+
+  numberOnly(event): boolean {
+    const charCode = (event.which) ? event.which : event.keyCode;
+    if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+      return false;
+    }
+    return true;
   }
 
   ngOnChanges(): void {
