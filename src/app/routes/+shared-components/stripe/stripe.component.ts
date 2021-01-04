@@ -148,9 +148,9 @@ export class StripeComponent implements OnDestroy, AfterViewInit,OnChanges ,OnIn
           this.lawyerService.subscribePlan(data).subscribe((subscribePlan: any) => {
             if (subscribePlan.data) {
               this.onPayEvent.emit(true)
-              this.toasterService.showSuccessToater('You have subscribed successfully!.')
+              this.toasterService.showSuccessToater('You have subscribed successfully!')
             } else {
-              this.toasterService.showWarningToater('Something went wrong. Please try again.')
+              this.toasterService.showWarningToater('Something went wrong. Please try again')
             }
           })
         }

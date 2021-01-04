@@ -53,4 +53,8 @@ export class OrganisationService {
   uploadFile(formData) {
     return this.httpClient.post<any>(`${this.apiPath}/organization/uploadLogo`, formData, this.getHeaders());
   }
+
+  deleteInvitedUser(userId){
+    return this.httpClient.delete<any>(`${this.apiPath}/organization/deletedInvitedUser/${userId}`, this.getHeaders());
+  }
 }

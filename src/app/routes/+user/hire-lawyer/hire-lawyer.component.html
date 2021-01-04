@@ -85,9 +85,13 @@
       <div class="mt-4" *ngFor="let user of sponsorUserList; ">
         <mat-card class="sponser-card w-100">
           <div class="text-center line-height">
-            <div>
+            <div *ngIf="user?.userAdditionalInfo?.profile?.downloadLink">
               <img src="{{user?.userAdditionalInfo?.profile?.downloadLink}}" width="200" height="60" alt="logo">
             </div>
+            <div *ngIf="!user?.userAdditionalInfo?.profile?.downloadLink">
+              <img src="assets/img/lawyer.jpg" width="200" height="60"
+                  alt="logo">
+          </div>
             <div>
               <h4 class=" line-height color">{{user?.firstName}}
                 {{user?.middleName}}{{user?.lastName}}</h4>

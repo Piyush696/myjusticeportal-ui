@@ -26,7 +26,7 @@
                     {{message}}
                 </span>
             </p>
-            <div class="row mb-1">
+            <div class="row mb-2">
                 <div class="col-4 pl-2 mb-1">
                     <mat-form-field appearance="fill" class="w-100">
                         <mat-label>Legal First Name</mat-label>
@@ -75,7 +75,7 @@
             </div>
 
             <div class="row">
-                <div *ngIf="roleId == 1" class="col px-2">
+                <div *ngIf="roleId == 1" class="col px-2 py-1">
                     <mat-form-field appearance="fill" class="w-100">
                         <mat-label>User Name</mat-label>
                         <input type="text" matInput [formControl]="registrationForm.controls['userName']"
@@ -102,7 +102,7 @@
                     </mat-form-field>
                 </div>
 
-                <div *ngIf="roleId != 1" class="col px-2">
+                <div *ngIf="roleId != 1" class="col px-2 py-1">
                     <mat-form-field appearance="fill" class="w-100">
                         <mat-label>Email</mat-label>
                         <input matInput placeholder="abc@xyz.com" [formControl]="registrationForm.controls['userName']"

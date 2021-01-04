@@ -34,7 +34,7 @@
                 </span>
               </td>
             </tr>
-            <tr *ngIf="selectedUserData.roles[0].roleId === 1">
+            <tr *ngIf="selectedUserData?.roles[0]?.roleId === 1">
               <th>Facility(s):&nbsp;</th>
               <td class="d-flex align-items-center justify-content-between py-1">
                 <span *ngFor="let facility of selectedUserData?.facilities;let isLast=last">
