@@ -43,7 +43,7 @@ export class ManageOrganisationComponent implements OnInit {
     this.getOrganisationAddress()
   }
 
-  
+
   onUploadLogo() {
     if (this.uploader1.queue.length <= 1) {
       let formData = new FormData();
@@ -75,11 +75,11 @@ export class ManageOrganisationComponent implements OnInit {
     }
   }
 
-  onCloseModal(){
+  onCloseModal() {
     this.dialog.closeAll();
   }
 
-  openOrgPreviewModal(templateRef){
+  openOrgPreviewModal(templateRef) {
     this.buttonText = 'Edit'
     let dialogRef = this.dialog.open(templateRef, {
       width: '800px',
@@ -94,7 +94,7 @@ export class ManageOrganisationComponent implements OnInit {
   getOrganisationAddress() {
     this.organisationService.getOrganisationAddressDetails().subscribe((orgDetails: any) => {
       this.orgData = orgDetails.data
-      this.path =  orgDetails.data?.Organization?.logo?.downloadLink
+      this.path = orgDetails.data?.Organization?.logo?.downloadLink
       this.organisationId = orgDetails.data.Organization.organizationId
       if (orgDetails.success) {
         let specialty = [];
@@ -114,7 +114,8 @@ export class ManageOrganisationComponent implements OnInit {
         this.organisationForm.get('country').setValue(orgDetails.data.Organization.Address.country)
         this.addressId = orgDetails.data.Organization.Address.addressId
         this.organisationForm.disable();
-      } else {
+      }
+      else {
         this.toasterService.showErrorToater(orgDetails.data);
       }
     }, (error: any) => {
@@ -212,7 +213,7 @@ export class ManageOrganisationComponent implements OnInit {
           this.buttonText = 'Edit';
         }
         else {
-          this.toasterService.showErrorToater(updatedOrg.data);
+          this.toasterService.showErrorToater(updatedOrg.data.errors[0].message);
         }
       }, (error: any) => {
         this.toasterService.showErrorToater(error.statusText);

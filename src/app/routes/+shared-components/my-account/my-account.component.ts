@@ -35,7 +35,7 @@ export class MyAccountComponent implements OnInit {
   buttonText: string = 'Edit'
   previousSecurityId: any;
   facilityList: any;
-  isDisabled:boolean = true;
+  isDisabled: boolean = true;
 
 
   constructor(private registrationService: RegistrationService, public dialog: MatDialog,
@@ -79,7 +79,7 @@ export class MyAccountComponent implements OnInit {
   }
 
   async validateUserNotTaken(control: AbstractControl) {
-    if(this.profileForm.get('userName').value != this.user.userName){
+    if (this.profileForm.get('userName').value != this.user.userName) {
       const result: any = await this.registrationService.checkUser({ userName: control.value }).toPromise();
       if (result.taken) {
         return { taken: true };
@@ -154,7 +154,7 @@ export class MyAccountComponent implements OnInit {
       this.userService.updateUserInfo(this.profileForm.value).subscribe((result: any) => {
         // this.toasterService.showSuccessToater('User Updated Successfully.')
         this.buttonText = 'Edit';
-        this.isDisabled = true; 
+        this.isDisabled = true;
         this.getSingleUser();
       })
     }
@@ -227,7 +227,7 @@ export class MyAccountComponent implements OnInit {
       this.profileForm.get('mobile').setValue(result.data.mobile)
       this.profileForm.get('userEmail').setValue(result.data.email)
       this.profileForm.get('isMFA').setValue(result.data.isMFA)
-      if(result.data.facilities.length > 0){
+      if (result.data.facilities.length > 0) {
         this.userMetaForm.get('facility').setValue(result.data.facilities[0]?.facilityName);
         this.userMetaForm.disable()
       }
