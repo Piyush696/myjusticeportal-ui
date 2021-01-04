@@ -15,30 +15,30 @@ import { MatDialog } from '@angular/material/dialog';
 
 export class ViewUsersComponent implements OnInit, AfterViewInit {
 
-  displayedColumns: string[] = ["name", "userName", "roles",'mobile', "createdAt","action"];
+  displayedColumns: string[] = ["name", "userName", "roles", 'mobile', "createdAt", "action"];
   dataSource = new MatTableDataSource();
   @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: false }) sort: MatSort;
   editUserForm: FormGroup;
   userId: any;
-  
+
   constructor(private location: Location, public dialog: MatDialog, private fb: FormBuilder,
-     private organisationService: OrganisationService, private toasterService: ToasterService,) { }
+    private organisationService: OrganisationService, private toasterService: ToasterService,) { }
 
   ngOnInit(): void {
     this.createControl();
     this.getAllUsers();
   }
 
-  onDeleteInvitedUser(){
-    this.organisationService.deleteInvitedUser(this.userId).subscribe((res:any)=>{
-      if(res.success){
+  onDeleteInvitedUser() {
+    this.organisationService.deleteInvitedUser(this.userId).subscribe((res: any) => {
+      if (res.success) {
         this.toasterService.showSuccessToater('User deleted')
         this.getAllUsers();
         this.dialog.closeAll();
       }
     })
-  }  
+  }
 
   createControl() {
     this.editUserForm = this.fb.group({
@@ -58,7 +58,7 @@ export class ViewUsersComponent implements OnInit, AfterViewInit {
     this.organisationService.getOrganisationUsers().subscribe((users: any) => {
       if (users.success) {
         users.data.users.map((item) => {
-          item['name'] = item.firstName + " " + item.middleName +  " " +  item.lastName;
+          item['name'] = item.firstName + " " + item.middleName + " " + item.lastName;
           item['name1'] = item.firstName + item.middleName + item.lastName;
           var date = item.createdAt;
           date = new Date(date).toDateString();
@@ -86,7 +86,7 @@ export class ViewUsersComponent implements OnInit, AfterViewInit {
     })
   }
 
-  openModal(templateRef,user) {
+  openModal(templateRef, user) {
     this.editUserForm.get('firstName').setValue(user.firstName)
     this.editUserForm.get('middleName').setValue(user.middleName)
     this.editUserForm.get('lastName').setValue(user.lastName)
@@ -101,17 +101,17 @@ export class ViewUsersComponent implements OnInit, AfterViewInit {
     });
   }
 
-  deleteUserModal(templateRef,userId){
+  deleteUserModal(templateRef, userId) {
     this.userId = userId
     let dialogRef = this.dialog.open(templateRef, {
       width: '500px',
-    }); 
+    });
 
     dialogRef.afterClosed().subscribe(result => {
     });
   }
 
-  closeModal(){
+  closeModal() {
     this.dialog.closeAll();
   }
 

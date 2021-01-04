@@ -35,15 +35,15 @@
                 <div class="col-12">
                     <mat-form-field appearance="fill" class="w-100 px-2 mb-1">
                         <mat-label>Organization Name</mat-label>
-                        <input type="text" matInput [formControl]="organisationForm.controls['name']" required>
+                        <input type="text" (keydown.space)="$event.preventDefault();" matInput [formControl]="organisationForm.controls['name']" required>
                         <mat-error>
                             <div
                                 *ngIf="organisationForm.controls['name'].invalid && organisationForm.controls['name'].touched">
                                 <small class="font13" *ngIf="organisationForm.get('name').errors?.required">
-                                    Organization Name is Required
+                                    Organization name is required
                                 </small>
                                 <small class="font13" *ngIf="organisationForm.get('name').errors?.maxlength">
-                                    Organization Name should be less than 100 chracters
+                                    Organization name should be less than 100 chracters
                                 </small>
                             </div>
                         </mat-error>
@@ -54,15 +54,15 @@
                 <div class="col-6">
                     <mat-form-field appearance="fill" class="w-100 pl-2 mb-1">
                         <mat-label>Street 1</mat-label>
-                        <input type="text" matInput [formControl]="addressForm.controls['street1']" required>
+                        <input type="text" (keydown.space)="$event.preventDefault();" matInput [formControl]="addressForm.controls['street1']" required>
                         <mat-error>
                             <div
                                 *ngIf="addressForm.controls['street1'].invalid && addressForm.controls['street1'].touched">
                                 <small class="font13" *ngIf="addressForm.get('street1').errors?.required">
-                                    Street 1 address is Required
+                                    Street 1 address is required
                                 </small>
                                 <small class="font13" *ngIf="addressForm.get('street1').errors?.maxlength">
-                                    Street 1 address should be less than 100 chracters
+                                    Street 1 address should not be more than 100 chracters
                                 </small>
                             </div>
                         </mat-error>
@@ -71,7 +71,14 @@
                 <div class="col-6 pl-0">
                     <mat-form-field appearance="fill" class="w-100 pr-2 mb-1">
                         <mat-label>Street 2</mat-label>
-                        <input type="text" matInput [formControl]="addressForm.controls['street2']">
+                        <input type="text" (keydown.space)="$event.preventDefault();" matInput [formControl]="addressForm.controls['street2']">
+                        <mat-error>
+                            <div>
+                                <small class="font13" *ngIf="addressForm.get('street2').errors?.maxlength">
+                                    Street 2 address should not be more than 100 characters
+                                </small>
+                            </div>
+                        </mat-error>
                     </mat-form-field>
                 </div>
             </div>
@@ -80,11 +87,11 @@
                 <div class="col-6">
                     <mat-form-field appearance="fill" class="w-100 pl-2 mb-1">
                         <mat-label>City</mat-label>
-                        <input type="text" matInput [formControl]="addressForm.controls['city']" required>
+                        <input type="text" (keydown.space)="$event.preventDefault();" matInput [formControl]="addressForm.controls['city']" required>
                         <mat-error>
                             <div *ngIf="addressForm.controls['city'].invalid && addressForm.controls['city'].touched">
-                                <small class="font13">
-                                    City is Required
+                                <small class="font13" *ngIf="addressForm.get('city').errors?.required">
+                                    City is required
                                 </small>
                                 <small class="font13" *ngIf="addressForm.get('city').errors?.maxlength">
                                     City should be less than 50 chracters
@@ -103,10 +110,10 @@
                         <mat-error>
                             <div *ngIf="addressForm.controls['state'].invalid && addressForm.controls['state'].touched">
                                 <small class="font13">
-                                    State is Required
+                                    State is required
                                 </small>
                                 <small class="font13" *ngIf="addressForm.get('state').errors?.maxlength">
-                                    State should be less than 50 chracters
+                                    State should be less than 100 chracters
                                 </small>
                             </div>
                         </mat-error>
@@ -117,15 +124,15 @@
                 <div class="col-6">
                     <mat-form-field appearance="fill" class="w-100 pl-2">
                         <mat-label>Country</mat-label>
-                        <input type="text" matInput [formControl]="addressForm.controls['country']" required>
+                        <input type="text" (keydown.space)="$event.preventDefault();" matInput [formControl]="addressForm.controls['country']" required>
                         <mat-error>
                             <div
                                 *ngIf="addressForm.controls['country'].invalid && addressForm.controls['country'].touched">
                                 <small class="font13">
-                                    Country name is Required
+                                    Country name is required
                                 </small>
                                 <small class="font13" *ngIf="addressForm.get('country').errors?.maxlength">
-                                    Country Name should be less than 50 chracters
+                                    Country name should be less than 50 chracters
                                 </small>
                             </div>
                         </mat-error>
@@ -134,11 +141,11 @@
                 <div class="col-6 pl-0">
                     <mat-form-field appearance="fill" class="w-100 pr-2">
                         <mat-label>Zip Code</mat-label>
-                        <input type="text" matInput [formControl]="addressForm.controls['zip']" required>
+                        <input type="text" (keydown.space)="$event.preventDefault();" (keypress)="numberOnly($event)" matInput [formControl]="addressForm.controls['zip']" required>
                         <mat-error>
                             <div *ngIf="addressForm.controls['zip'].invalid && addressForm.controls['zip'].touched">
                                 <small class="font13" *ngIf="addressForm.get('zip').errors?.required">
-                                    Zip Code is Required
+                                    Zip Code is required
                                 </small>
                                 <small class="font13" *ngIf="addressForm.get('zip').errors?.minlength">
                                     Zip Code should not be less than 5 characters
@@ -155,28 +162,6 @@
             <div>
 
             </div>
-            <!-- <div class="row p-1">
-                <mat-form-field appearance="fill" class="w-100 px-3 mb-1">
-                    <mat-label>Tagline</mat-label>
-                    <input type="text" matInput [formControl]="organisationForm.controls['tagline']">
-                    <mat-error>
-                        <small class="font13" *ngIf="organisationForm.get('tagline').errors?.maxlength">
-                            Tagline should be less than 1000 chracters
-                        </small>
-                    </mat-error>
-                </mat-form-field>
-            </div>
-            <div class="row p-1">
-                <mat-form-field appearance="fill" class="w-100 px-3 mb-1">
-                    <mat-label>Description</mat-label>
-                    <textarea rows="10" matInput [formControl]="organisationForm.controls['description']"></textarea>
-                    <mat-error>
-                        <small class="font13" *ngIf="organisationForm.get('description').errors?.maxlength">
-                            Description should be less than 5000 chracters
-                        </small>
-                    </mat-error>
-                </mat-form-field>
-            </div> -->
             <div class="d-flex justify-content-between mt-2 pr-2">
                 <button class="button-purple px-4 py-1" mat-raised-button (click)="onPreviousClick()">
                     Back
