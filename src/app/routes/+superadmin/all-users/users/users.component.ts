@@ -138,7 +138,6 @@ export class UsersComponent implements OnInit, OnDestroy {
         element['newCreatedAt3']=month+"/"+day+"/"+year;
         return element
       })
-      console.log(x)
       this.dataSource = new MatTableDataSource(x);
       this.dataSource.sortingDataAccessor = (item: any, property) => {
         switch (property) {
