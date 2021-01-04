@@ -26,7 +26,7 @@ export class HireLawyerComponent implements OnInit, AfterViewInit {
   specialtyList: any;
   @ViewChild('modalopen') modalopen: ElementRef;
 
-  constructor(private hireLawyerService: HireLawyerService, private caseService: CaseService, private router: Router, private specialtyService: SpecialtyService, 
+  constructor(private hireLawyerService: HireLawyerService, private caseService: CaseService, private router: Router, private specialtyService: SpecialtyService,
     private userAdditionalService: UserAdditionInfoService, private _statesService: StatesService, public dialog: MatDialog) { }
 
   ngOnInit(): void {
@@ -37,25 +37,25 @@ export class HireLawyerComponent implements OnInit, AfterViewInit {
     this.getAllSpecialty();
   }
 
-  
+
   ngAfterViewInit(): void {
     //  this.modalopen.nativeElement.click();
-    }
-  
-  modalAcceptDetails(){
-   let metaKey = 'findlawyer_model'
-    this.userAdditionalService.modalDetails(metaKey).subscribe((res:any) => {
-      if(!res.data){
+  }
+
+  modalAcceptDetails() {
+    let metaKey = 'findlawyer_model'
+    this.userAdditionalService.modalDetails(metaKey).subscribe((res: any) => {
+      if (!res.data) {
         this.modalopen.nativeElement.click();
       }
     })
   }
 
-  acceptDisclaimer(){
-    let userMeta = { metaKey: 'findlawyer_model', metaValue: 'clicked'}
-    this.userAdditionalService.caseCreateModal(userMeta).subscribe((res:any) => {
+  acceptDisclaimer() {
+    let userMeta = { metaKey: 'findlawyer_model', metaValue: 'clicked' }
+    this.userAdditionalService.caseCreateModal(userMeta).subscribe((res: any) => {
       this.modalAcceptDetails();
-   })
+    })
   }
 
   getSponsors() {
@@ -66,7 +66,7 @@ export class HireLawyerComponent implements OnInit, AfterViewInit {
 
   getAllSpecialty() {
     this.specialtyService.getAllSpecialty().subscribe((res: any) => {
-      this.specialtyList = res.data
+      this.specialtyList = res.data;
     })
   }
 
@@ -119,67 +119,33 @@ export class HireLawyerComponent implements OnInit, AfterViewInit {
   }
 
   onSpeciality(value) {
-    this.currentSpeciality = value.value
-    if (this.currentSpeciality && this.currentLocation) {
-      this.organizationList = this.filteredOrganizationList.filter((org) => {
-        return org.Address.state == this.currentLocation && org.specialty == this.currentSpeciality
-      })
-    }
-
-    else if (value.value !== undefined) {
-      this.organizationList = this.filteredOrganizationList.filter((org) => {
-        return org.specialty == this.currentSpeciality
-      })
-    }
-
-    else if ((this.currentSpeciality == undefined) && this.currentLocation) {
-      this.organizationList = this.filteredOrganizationList.filter((org) => {
-        return org.Address.state == this.currentLocation
-      })
-    }
-
-    else if ((this.currentLocation == undefined) && this.currentSpeciality) {
-      this.organizationList = this.filteredOrganizationList.filter((org) => {
-        return org.specialty == this.currentSpeciality
-      })
-    }
-
-    else if (this.currentSpeciality == undefined) {
-      return this.organizationList = this.filteredOrganizationList
-    }
-
+    this.currentSpeciality = value.value;
+    this.organizationList = this.filteredOrganizationList.filter(org => {
+      if (this.currentSpeciality && this.currentLocation) {
+        return org?.userAdditionalInfo?.practiceAreas.includes(this.currentSpeciality) && (org?.Organization?.Address?.state == this.currentLocation)
+      } else if (!this.currentSpeciality && !this.currentLocation) {
+        return true;
+      } else if (this.currentSpeciality && !this.currentLocation) {
+        return org?.userAdditionalInfo?.practiceAreas.includes(this.currentSpeciality)
+      } else if (!this.currentSpeciality && this.currentLocation) {
+        return org?.Organization?.Address?.state == this.currentLocation;
+      }
+    })
   }
 
   onLocation(value) {
     this.currentLocation = value.value
-
-    if (this.currentLocation && this.currentSpeciality) {
-      this.organizationList = this.filteredOrganizationList.filter((org) => {
-        return org.Address.state == this.currentLocation && org.specialty == this.currentSpeciality
-      })
-    }
-
-    else if (value.value !== undefined) {
-      this.organizationList = this.filteredOrganizationList.filter((org) => {
-        return org.Address.state === this.currentLocation
-      })
-    }
-
-    else if ((this.currentLocation == undefined) && this.currentSpeciality) {
-      this.organizationList = this.filteredOrganizationList.filter((org) => {
-        return org.specialty == this.currentSpeciality
-      })
-    }
-
-    else if (this.currentLocation && (this.currentSpeciality == undefined)) {
-      this.organizationList = this.filteredOrganizationList.filter((org) => {
-        return org.Address.state === this.currentLocation
-      })
-    }
-
-    else if (this.currentLocation == undefined) {
-      this.organizationList = this.filteredOrganizationList
-    }
+    this.organizationList = this.filteredOrganizationList.filter(org => {
+      if (this.currentSpeciality && this.currentLocation) {
+        return org?.userAdditionalInfo?.practiceAreas.includes(this.currentSpeciality) && (org?.Organization?.Address?.state == this.currentLocation)
+      } else if (!this.currentSpeciality && !this.currentLocation) {
+        return true;
+      } else if (this.currentSpeciality && !this.currentLocation) {
+        return org?.userAdditionalInfo?.practiceAreas.includes(this.currentSpeciality)
+      } else if (!this.currentSpeciality && this.currentLocation) {
+        return org?.Organization?.Address?.state == this.currentLocation;
+      }
+    })
   }
 
   viewContact(userId) {
