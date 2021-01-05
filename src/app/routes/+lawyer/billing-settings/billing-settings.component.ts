@@ -105,7 +105,7 @@ export class BillingSettingsComponent implements OnInit {
 
   getALLFacilities() {
     this.facilityService.getFacilitiesUserCount().subscribe((facilities: any) => {
-      // this.facilityList = facilities.data
+      // this.facilityList = facilities.data;
       // if (facilities.data) {
       //   facilities.data.forEach((ele) => {
       //     if (ele.Address) {
