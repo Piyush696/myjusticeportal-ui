@@ -61,7 +61,7 @@
             </ng-container>
             <ng-container matColumnDef="createdAt">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header>Date Created</th>
-                <td mat-cell *matCellDef="let user">{{user?.newCreatedAt}}</td>
+                <td mat-cell *matCellDef="let user">{{user?.createdAt  | date : 'mediumDate'}}</td>
             </ng-container>
             <ng-container matColumnDef="action">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header>Action</th>
