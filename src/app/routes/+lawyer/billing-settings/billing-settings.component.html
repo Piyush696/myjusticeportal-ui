@@ -36,7 +36,7 @@
                           </mat-card>
                         </div>
                       </div>
-                  </mat-card>
+         </mat-card>
     </div>
 </div>
 <div class="d-flex">
@@ -58,7 +58,7 @@
                       </mat-checkbox>
                       <div *ngIf="facility.isPremium || facility.isSponsors">
                         <mat-card class="border-card mb-2">
-                          <h4 class="font-weight-bold text-center  mb-1 pt-0">Selected Sponsorship Options for this Facility
+                          <h4 class="font-weight-bold text-center  mb-1 pt-0">Selected sponsorship options for this facility
                           </h4>
                           <div>
                             <mat-checkbox color="primary" [checked]="facility.isPremium">
@@ -255,8 +255,8 @@
                 </div>
                 <span class="text-center text-black">Please enter your credit card information in the form below. Once everything looks correct, click Pay to complete your setup and
                     start using My Justice Portal!</span>
-                <app-stripe class="pt-2" [totalCount]="totalPrice" (onPayEvent)="onPayEvent($event)"
-                  [facilitiesList]="facilities"></app-stripe>
+                <app-stripe class="pt-2" [totalCount]="totalPrice" [update]="update" (onPayEvent)="onPayEvent($event)"
+                  [facilitiesList]="facilityList"></app-stripe>
                   
               </mat-card>
             </div>

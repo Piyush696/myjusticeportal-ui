@@ -19,13 +19,15 @@ export class StripeComponent implements OnDestroy, AfterViewInit,OnChanges ,OnIn
   @Output() onPayEvent = new EventEmitter()
   cardError: string;
   userData: any;
+  @Input() plan:string;
    @Input() totalCount:number;
    @Input() facilitiesList:any[];
-   
+   @Input() update;
   constructor(
     private cd: ChangeDetectorRef,private fb: FormBuilder,
     @Inject(MAT_DIALOG_DATA) private data: any,
-    private dialogRef: MatDialogRef<StripeComponent>,private lawyerService: LawyerService, private toasterService: ToasterService, private store: Store<any>,
+    private dialogRef: MatDialogRef<StripeComponent>,private lawyerService: LawyerService, 
+    private toasterService: ToasterService, private store: Store<any>,
   ) {
     this._totalAmount = data['totalAmount'];
   }
@@ -110,54 +112,95 @@ export class StripeComponent implements OnDestroy, AfterViewInit,OnChanges ,OnIn
   
   async createStripeToken() {
     const { token, error } = await stripe.createToken(this.card);
-    if (token) {
+    if(this.update){
       let facilityList = [];
-      const data = {
-        "token":token.id,
-        "email":this.userData.userName
-      }
-      this.lawyerService.postPay(data).subscribe((addCard: any) => {
-        if(addCard.data){
-          this.facilitiesList.filter((ele)=>{
-            if(ele.isSelected) {
-              if(this.userData.roles[0].roleId == 5){
-                const facilityData = {
-                  "facilityId":ele.facilityId,
-                  "lawyerId":this.userData.userId
-                }
-                facilityList.push(facilityData)
-              } else {
-                const facilityData = {
-                  "facilityId":ele.facilityId,
-                  "isSponsors":ele.addOns.sponsors,
-                  "isPremium":ele.addOns.premium,
-                  "lawyerId":this.userData.userId
-                }
-                facilityList.push(facilityData)
-              }
+      this.facilitiesList.filter((ele) => {
+        if(ele.isSelected) {
+          if(this.userData.roles[0].roleId == 5){
+            const facilityData = {
+              "facilityId":ele.facilityId,
+              "lawyerId":this.userData.userId
             }
-          })
-          const data = {
-            "customer": addCard.data.customer,
-            "userId": this.userData.userId,
-            "amount":  Math.round(this.totalCount) * 100,
-            "currency":'usd',
-            "interval":'month',
-            "facilityList":facilityList
+            facilityList.push(facilityData)
+          } else {
+            const facilityData = {
+              "facilityId":ele.facilityId,
+              "isSponsors":ele.addOns.sponsors,
+              "isPremium":ele.addOns.premium,
+              "lawyerId":this.userData.userId,
+              "isSelected":true,
+              "planSelected":this.plan
+            }
+            facilityList.push(facilityData)
           }
-          this.lawyerService.subscribePlan(data).subscribe((subscribePlan: any) => {
-            if (subscribePlan.data) {
-              this.onPayEvent.emit(true)
-              this.toasterService.showSuccessToater('You have subscribed successfully!')
-            } else {
-              this.toasterService.showWarningToater('Something went wrong. Please try again')
-            }
-          })
         }
-        this.onSuccess(token);
+      })
+      const data = {
+        "userId": this.userData.userId,
+        "amount":  Math.round(this.totalCount) * 100,
+        "currency":'usd',
+        "interval":'month',
+        "facilityList":facilityList
+      }
+      this.lawyerService.updatePlan(data).subscribe((res:any)=>{
+        if(res.success){
+          this.toasterService.showSuccessToater('Plan updated')
+          this.onPayEvent.emit(true)
+        }
       })
     } else {
-      this.onError(error);
+      const { token, error } = await stripe.createToken(this.card);
+      if (token) {
+        let facilityList = [];
+        const data = {
+          "token":token.id,
+          "email":this.userData.userName
+        }
+        this.lawyerService.postPay(data).subscribe((addCard: any) => {
+          if(addCard.data){
+            this.facilitiesList.filter((ele)=>{
+              if(ele.isSelected) {
+                if(this.userData.roles[0].roleId == 5){
+                  const facilityData = {
+                    "facilityId":ele.facilityId,
+                    "lawyerId":this.userData.userId
+                  }
+                  facilityList.push(facilityData)
+                } else {
+                  const facilityData = {
+                    "facilityId":ele.facilityId,
+                    "isSponsors":ele.addOns.sponsors,
+                    "isPremium":ele.addOns.premium,
+                    "lawyerId":this.userData.userId,
+                    "isSelected":true,
+                    "planSelected":this.plan
+                  }
+                  facilityList.push(facilityData)
+                }
+              }
+            })
+            const data = {
+              "customer": addCard.data.customer,
+              "userId": this.userData.userId,
+              "amount":  Math.round(this.totalCount) * 100,
+              "currency":'usd',
+              "interval":'month',
+              "facilityList":facilityList
+            }
+            this.lawyerService.subscribePlan(data).subscribe((subscribePlan: any) => {
+              if (subscribePlan.data) {
+                this.onPayEvent.emit(true)
+                this.toasterService.showSuccessToater('You have subscribed successfully!')
+              } else {
+                this.toasterService.showWarningToater('Something went wrong. Please try again')
+              }
+            })
+          }
+          this.onSuccess(token);
+        })
+      } else {
+        this.onError(error);
+      }
     }
   }
 
