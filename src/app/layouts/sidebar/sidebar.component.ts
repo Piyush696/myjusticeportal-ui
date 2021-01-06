@@ -35,6 +35,7 @@ export const ROUTES: RouteInfo[] = [
     // { path: 'lawyer/lawyer-chat', title: 'Messaging', icon: 'nc-bank', class: '', roleIds: [3] },
 
     { path: 'public-defender/search-inquiries', title: 'Search Inmates', icon: 'nc-bank', class: '', roleIds: [5] },
+    { path: 'public-defender/inmates-cases', title: 'Inmates Cases', icon: 'nc-bank', class: '', roleIds: [5] },
 
     { path: 'bondsman/accepted-users', title: 'Accepted Users', icon: 'nc-bank', class: '', roleIds: [6] },
     { path: 'public-defender/manage-organization', title: 'Manage Organization', icon: 'nc-bank', class: '', roleIds: [5], isAdmin: true },

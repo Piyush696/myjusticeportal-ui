@@ -1,3 +1,4 @@
+import { InmatesCasesComponent } from './inmates-cases/inmates-cases/inmates-cases.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { DefenderDashboardComponent } from './defender-dashboard/defender-dashboard.component';
@@ -13,6 +14,7 @@ const routes: Routes = [
     { path: 'my-account', component: MyAccountComponent },
     { path: 'manage-organization', component: ManageOrganisationComponent },
     { path: 'search-inquiries', component: SearchInmatesComponent },
+    { path: 'inmates-cases', component: InmatesCasesComponent },
     { path: 'manage-organization/users', component: ViewUsersComponent },
     { path: 'manage-organization/facilities', component: ViewFacilitiesComponent },
     { path: '**', component: DefenderDashboardComponent }
