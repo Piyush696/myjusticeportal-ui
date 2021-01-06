@@ -30,4 +30,8 @@ export class InmateDefenderService {
   setPublicDefender(data) {
     return this.httpClient.post<object>(`${this.apiPath}/inmatdefender`,data, this.getHeaders());
   }
+
+  getInmateCases() {
+    return this.httpClient.get<object>(`${this.apiPath}/inmatdefender/allInmateAssignedCases`, this.getHeaders());
+  }
 }

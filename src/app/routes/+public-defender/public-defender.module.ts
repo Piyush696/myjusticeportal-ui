@@ -7,12 +7,14 @@ import { SharedComponentsModule } from '../+shared-components/shared-components.
 import { DefenderDashboardComponent } from './defender-dashboard/defender-dashboard.component';
 import { PublicDefenderRoutingModule } from './public-defender-routing.module';
 import { SearchInmatesComponent } from './search-inmates/search-inmates.component';
+import { InmatesCasesComponent } from './inmates-cases/inmates-cases/inmates-cases.component';
 
 
 @NgModule({
   declarations: [
     DefenderDashboardComponent,
-    SearchInmatesComponent
+    SearchInmatesComponent,
+    InmatesCasesComponent
   ],
   imports: [
     CommonModule,
