@@ -52,7 +52,31 @@ export class UsersComponent implements OnInit, OnDestroy {
             }
           });
         }
-        this.dataSource = new MatTableDataSource(this.filterStatus);
+        let x = res.data.map((element) => {
+          if (element.status == true) {
+            element.status = 'Active'
+          } else {
+            element.status = 'Pending'
+          }
+          element["name1"] = element.firstName + element.middleName + element.lastName;
+          element["name2"] = element.firstName + " " + element.middleName + " " + element.lastName;
+          var date = element.createdAt;
+          date = new Date(date).toDateString();
+          var month = date.substring(4, 7);
+          var day = date.substring(8, 10);
+          var year = date.substring(11, 15);
+          if(day<10){
+            var day1 = day.substring(1, 2);
+          }
+          else{
+            var day1 = day.substring(0, 2);
+          }
+          element['newCreatedAt1'] = month +' '+ day1 +','+' '+ year;
+          element['newCreatedAt2'] = month +' '+ day +','+' '+ year;
+          return element
+        })
+        console.log(x)
+        this.dataSource = new MatTableDataSource(x);
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
       })
@@ -127,17 +151,20 @@ export class UsersComponent implements OnInit, OnDestroy {
         element["name2"] = element.firstName + " " + element.middleName + " " + element.lastName;
         var date = element.createdAt;
         date = new Date(date).toDateString();
-        var monthDay = date.substring(4, 10);
-        var year = date.substring(10, 15);
-        element['newCreatedAt'] = monthDay + "," + year;
         var month = date.substring(4, 7);
         var day = date.substring(8, 10);
         var year = date.substring(11, 15);
-        element['newCreatedAt1'] = month + day + year;
-        element['newCreatedAt2'] = month + " " + day + " " + year;
-        element['newCreatedAt3'] = month + "/" + day + "/" + year;
+        if(day<10){
+          var day1 = day.substring(1, 2);
+        }
+        else{
+          var day1 = day.substring(0, 2);
+        }
+        element['newCreatedAt1'] = month +' '+ day1 +','+' '+ year;
+        element['newCreatedAt2'] = month +' '+ day +','+' '+ year;
         return element
       })
+      console.log(x)
       this.dataSource = new MatTableDataSource(x);
       this.dataSource.sortingDataAccessor = (item: any, property) => {
         switch (property) {
