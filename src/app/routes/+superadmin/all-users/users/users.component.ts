@@ -75,8 +75,7 @@ export class UsersComponent implements OnInit, OnDestroy {
           element['newCreatedAt2'] = month +' '+ day +','+' '+ year;
           return element
         })
-        console.log(x)
-        this.dataSource = new MatTableDataSource(x);
+        this.dataSource = new MatTableDataSource(this.filterStatus);
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
       })
@@ -164,7 +163,6 @@ export class UsersComponent implements OnInit, OnDestroy {
         element['newCreatedAt2'] = month +' '+ day +','+' '+ year;
         return element
       })
-      console.log(x)
       this.dataSource = new MatTableDataSource(x);
       this.dataSource.sortingDataAccessor = (item: any, property) => {
         switch (property) {
