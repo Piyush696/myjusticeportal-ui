@@ -13,9 +13,6 @@
                     <input matInput (keyup)="search($event.target.value)">
                 </mat-form-field>
             </div>
-            <div>
-                <span *ngFor="let plan of plans">{{plan?.planSelected}}</span>
-            </div>
         </div>
         <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8 w-100">
             <ng-container matColumnDef="name">
