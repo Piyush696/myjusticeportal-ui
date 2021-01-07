@@ -54,7 +54,7 @@ export class LawyerdashboardComponent implements OnInit,AfterViewInit {
   constructor(private hireLawyerService: HireLawyerService, private userMetaService: UserMetaService,
     private facilityService: FacilityService, public dialog: MatDialog, private userAdditionInfoService: UserAdditionInfoService,
     private lawyerService: LawyerService, private toasterService: ToasterService, private store: Store<any>, private fb: FormBuilder) { }
-    
+
   ngAfterViewInit(): void {
     this.modalopen.nativeElement.click();
   }
