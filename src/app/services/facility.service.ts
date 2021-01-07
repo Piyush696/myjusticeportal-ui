@@ -49,5 +49,8 @@ export class FacilityService {
     return this.httpClient.get<Object>(`${this.apiPath}/facility/facility/userCount`, this.getHeaders());
   }
 
+  getSelectedPlanFaciltiy() {
+    return this.httpClient.get<object>(`${this.apiPath}/facility/planSelectedFaciltiy`, this.getHeaders());
+  }
 
 }
