@@ -64,7 +64,6 @@ export class LawyerdashboardComponent implements OnInit {
         this.isAuthorized = false;
       }
     });
-    this.getALLFacilities();
     this.getUserDetails();
     this.onGetRequestedCases();
     this.getAllClients();
@@ -115,7 +114,7 @@ export class LawyerdashboardComponent implements OnInit {
       this.onSelectAddOns(false, facilityId, 'premium')
       this.onSelectAddOns(false, facilityId, 'sponsors')
     }
-    this.calculatePrice();
+    //this.calculatePrice();
   }
 
   onSelectPlan(price, value) {
@@ -162,22 +161,21 @@ export class LawyerdashboardComponent implements OnInit {
         return x
       });
     }
-    this.calculatePrice();
+    // this.calculatePrice();
   }
 
-  calculatePrice() {
-    this.totalPrice = this.planPrice;
-    this.facilities.forEach((ele) => {
-      if (ele.isSelected) {
-        this.totalPrice = this.totalPrice + (ele.facilityUserCount * 0.10)
-        if (ele.addOns.premium) {
-          this.totalPrice = this.totalPrice + this.addOnsPrice
-        }
-        if (ele.addOns.sponsors) {
-        }
-      }
-    })
-  }
+  // calculatePrice() {
+  //   this.facilities.forEach((ele) => {
+  //     if (ele.isSelected) {
+  //       this.totalPrice = this.totalPrice + (ele.facilityUserCount * 0.10)
+  //       if (ele.addOns.premium) {
+  //         this.totalPrice = this.totalPrice + this.addOnsPrice
+  //       }
+  //       if (ele.addOns.sponsors) {
+  //       }
+  //     }
+  //   })
+  // }
 
   onPayEvent(value) {
     if (value) {
@@ -275,30 +273,40 @@ export class LawyerdashboardComponent implements OnInit {
           this.state.push(splitArray[0].toString());
         }
       })
+      this.getALLFacilities();
     })
   }
 
   getALLFacilities() {
     this.facilityService.getFacilitiesUserCount().subscribe((facilities: any) => {
       if (facilities.data) {
-        facilities.data.forEach((ele) => {
-          if (ele.Address) {
-            this.state.forEach((item) => {
-              if (ele.Address.state == item) {
-                this.filteredFacilityList.push(ele)
-              }
-            })
-          }
+        this.facilities = facilities.data.map((ele) => {         
+          if (this.state.includes(ele.Address.state)) {
+            ele['isSelected'] = false;
+            ele['addOns'] = {
+              premium: false,
+              sponsors: false
+            };
+            return ele;
+          }else{
+            return null;
+          }         
         })
+        console.log(this.facilities)
+        this.facilities = this.facilities.filter(x => x)
+        // facilities.data.forEach((ele) => {
+        //   if (ele.Address) {
+        //     // this.state.forEach((item) => {
+        //     if (this.state.includes(ele.Address.state)) {
+        //       this.filteredFacilityList.push(ele)
+        //     }
+        //     // })
+        //   }
+        // })
+        // this.facilities = this.filteredFacilityList.map((ele) => {
+
+        // });
       }
-      this.facilities = this.filteredFacilityList.map((ele) => {
-        ele['isSelected'] = false;
-        ele['addOns'] = {
-          premium: false,
-          sponsors: false
-        };
-        return ele
-      });
     })
   }
 

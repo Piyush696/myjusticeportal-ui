@@ -5,7 +5,7 @@
             <div class="card-section" id="card-info" #cardInfo></div>
             <div class="px-5 pt-2">
                 <!-- <h5 class="text-center m-0">Coupon Code</h5> -->
-                <p class="m-0 text-center">If you have a coupon code, enter it below.</p>
+                <p class="m-0 text-center mb-1">If you have a coupon code, enter it below.</p>
                 <input class="w-100 coupon-field" matInput placeholder="Enter valid coupon code" [formControl]="cardForm.controls['coupon']">  
                 <mat-error *ngIf="cardForm.controls['coupon'].hasError('invalidCoupon')">
                     <i>Invalid coupon. </i>
