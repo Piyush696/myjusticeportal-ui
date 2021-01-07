@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { LawyerService } from 'app/services/lawyer.service';
 import { FacilityService } from 'app/services/facility.service';
@@ -19,7 +19,7 @@ import { UserAdditionInfoService } from 'app/services/user-addition-info.service
   styleUrls: ['./lawyerdashboard.component.scss']
 })
 
-export class LawyerdashboardComponent implements OnInit {
+export class LawyerdashboardComponent implements OnInit,AfterViewInit {
   requestedCases: any;
   isAuthorized: boolean;
   showDashboard: boolean;
@@ -49,10 +49,15 @@ export class LawyerdashboardComponent implements OnInit {
   filteredFacilityList = [];
   lawyerData: any;
   plan: string;
-
+  @ViewChild('modalopen') modalopen: ElementRef;
+  
   constructor(private hireLawyerService: HireLawyerService, private userMetaService: UserMetaService,
     private facilityService: FacilityService, public dialog: MatDialog, private userAdditionInfoService: UserAdditionInfoService,
     private lawyerService: LawyerService, private toasterService: ToasterService, private store: Store<any>, private fb: FormBuilder) { }
+    
+  ngAfterViewInit(): void {
+    this.modalopen.nativeElement.click();
+  }
 
   ngOnInit(): void {
     this.store.select(s => s.userInfo).subscribe(x => {
