@@ -194,6 +194,7 @@ export class StripeComponent implements OnDestroy, AfterViewInit,OnChanges ,OnIn
               } else {
                 this.toasterService.showWarningToater('Something went wrong. Please try again')
               }
+              window.location.reload();
             })
           }
           this.onSuccess(token);

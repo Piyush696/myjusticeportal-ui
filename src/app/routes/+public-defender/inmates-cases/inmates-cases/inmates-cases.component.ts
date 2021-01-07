@@ -28,7 +28,6 @@ export class InmatesCasesComponent implements OnInit {
   getInmatesCases(){
     this.inmatedefenderService.getInmateCases().subscribe((users:any)=>{
       this.casesList = users.data;
-      console.log(users.data)
       this.casesList = this.casesList.map((item)=>{
         item['name']=item.inmate.firstName+" "+item.inmate.lastName;
         var date=item.updatedAt;

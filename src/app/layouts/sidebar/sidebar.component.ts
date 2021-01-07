@@ -23,7 +23,7 @@ export const ROUTES: RouteInfo[] = [
     //{ path: '/my-dockets', title: 'My Dockets', icon: 'nc-bank', class: '', roleIds: [2, 5] },
     { path: '', title: 'Law Library', icon: 'nc-bank', class: '', roleIds: [1] },
     { path: 'lawyer/lawyer-dashboard', title: 'Dashboard', icon: 'nc-bank', class: '', roleIds: [3] },
-    { path: 'lawyer/inquiries', title: 'Inquiries', icon: 'nc-bank', class: '', roleIds: [3]},
+    { path: 'lawyer/inquiries', title: 'Inquiries', icon: 'nc-bank', class: '', roleIds: [3] },
     { path: 'lawyer/lawyer-chat', title: 'Messaging', icon: 'nc-bank', class: '', roleIds: [3] },
     { path: 'lawyer/accepted-cases', title: 'My Cases', icon: 'nc-bank', class: '', roleIds: [3] },
     { path: 'lawyer/billing-setting', title: 'Billing Settings', icon: 'nc-bank', class: '', roleIds: [3], isAdmin: true },
@@ -60,18 +60,17 @@ export const ROUTES: RouteInfo[] = [
     templateUrl: 'sidebar.component.html'
 })
 
-export class SidebarComponent implements OnInit,AfterViewInit {
+export class SidebarComponent implements OnInit, AfterViewInit {
     public filteredMenuItems: any[];
     userInfo: any;
     libraryLink: any;
-    setupDashboard:boolean = false;
-
-    constructor(private store: Store<any>,private userMetaService: UserMetaService) { }
+    setupDashboard: boolean = false;
+    billingsDetails: any;
+    constructor(private store: Store<any>, private userMetaService: UserMetaService) { }
 
 
     ngAfterViewInit(): void {
-        this.filterMenuByUser();
-        this.getBillingDetails();
+      //  this.filterMenuByUser();
     }
 
     ngOnInit() {
@@ -81,29 +80,24 @@ export class SidebarComponent implements OnInit,AfterViewInit {
                 this.libraryLink = x.facilities[0]?.libraryLink;
             }
         });
-        this.filterMenuByUser();
         this.getBillingDetails();
     }
 
-
-
     getBillingDetails() {
-        this.userMetaService.getUserBillingDetails().subscribe((billingsDetails: any) => {
-          if (billingsDetails.data) {
-              if (billingsDetails.data.userMeta) {
-                if (billingsDetails.data.userMeta.length === 3) {
-                    this.setupDashboard = true;
-                } else {
-                    this.setupDashboard = false;
-                }
-              }
-          }
-        })
-      }
+        if (this.userInfo.roles[0].roleId === 3) {
+            this.userMetaService.getUserBillingDetails().subscribe((billingsDetails: any) => {
+                this.billingsDetails = billingsDetails
+                this.filterMenuByUser();
+            })
+        }else{
+            this.filterMenuByUser();   
+        }
+    }
+
 
     filterMenuByUser() {
-        if(this.userInfo.roles[0].roleId === 3){
-            if (this.userInfo.status && !this.setupDashboard) {
+        if (this.userInfo.roles[0].roleId === 3) {
+            if (this.userInfo.status && this.billingsDetails?.data?.userMeta.find(element => element.metaKey === 'sub_id')) {
                 this.filteredMenuItems = ROUTES.filter(menu => {
                     let isExist = menu.roleIds.find(roleId => roleId == this.userInfo.roles[0].roleId);
                     if (isExist) {
@@ -120,22 +114,22 @@ export class SidebarComponent implements OnInit,AfterViewInit {
                 this.filteredMenuItems = null;
             }
         } else {
-        if (this.userInfo.status) {
-            this.filteredMenuItems = ROUTES.filter(menu => {
-                let isExist = menu.roleIds.find(roleId => roleId == this.userInfo.roles[0].roleId);
-                if (isExist) {
-                    if (!menu.isAdmin) {
-                        return menu;
+            if (this.userInfo.status) {
+                this.filteredMenuItems = ROUTES.filter(menu => {
+                    let isExist = menu.roleIds.find(roleId => roleId == this.userInfo.roles[0].roleId);
+                    if (isExist) {
+                        if (!menu.isAdmin) {
+                            return menu;
+                        }
+                        else if (menu.isAdmin && this.userInfo.isAdmin) {
+                            return menu;
+                        }
                     }
-                    else if (menu.isAdmin && this.userInfo.isAdmin) {
-                        return menu;
-                    }
-                }
-            });
-        }
-        else {
-            this.filteredMenuItems = null;
+                });
+            }
+            else {
+                this.filteredMenuItems = null;
+            }
         }
     }
-}
 }
