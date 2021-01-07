@@ -95,7 +95,7 @@
                       </mat-checkbox>
                       <div *ngIf="facility.isSelected">
                         <mat-card class="border-card mb-2">
-                          <h4 class="font-weight-bold text-center  mb-1 pt-0">Select Sponsorship Options for this Facility
+                          <h4 class="font-weight-bold text-center  mb-1 pt-0">Select sponsorship options for this facility
                           </h4>
                           <div>
                             <mat-checkbox color="primary" [(ngModel)]="facility.addOns.premium"
@@ -136,11 +136,11 @@
                     <div>Plan Base Cost:</div>
                     <div>{{planPrice | currency:'USD':'symbol'}}</div>
                   </div>
-                  <!-- <div class="d-flex justify-content-between align-items-between">
+                  <div class="d-flex justify-content-between align-items-between">
                     <div>Total inmate access Charges:</div>
                     <div>{{ (averageCount ? averageCount * 0.10 : 0) | currency:'USD':'symbol'}}
                     </div>
-                  </div> -->
+                  </div>
                   <div class="d-flex justify-content-between align-items-between">
                     <div>Add On charges:</div>
                     <div>{{(addOnsPrice  ? addOnsPrice   : 0 ) | currency:'USD':'symbol'}}
@@ -166,7 +166,7 @@
             </div>
             <span class="text-center text-black">Please enter your credit card information in the form below. Once everything looks correct, click Pay to complete your setup and
                 start using My Justice Portal!</span>
-            <app-stripe class="pt-2" [totalCount]="totalPrice" (onPayEvent)="onPayEvent($event)"
+            <app-stripe class="pt-2" [totalCount]="totalPrice"  [plan]="plan" (onPayEvent)="onPayEvent($event)"
               [facilitiesList]="facilities"></app-stripe>
               
           </mat-card>

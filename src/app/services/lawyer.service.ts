@@ -31,6 +31,10 @@ export class LawyerService {
     return this.httpClient.post<object>(`${this.apiPath}/stripe`, data);
   }
 
+  updatePlan(data) {
+    return this.httpClient.post<object>(`${this.apiPath}/stripe/update_plan`, data,this.getHeaders());
+  }
+
   subscribePlan(customer) {
     return this.httpClient.post<object>(`${this.apiPath}/stripe/subscribe_plan`, customer);
   }

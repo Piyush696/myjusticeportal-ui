@@ -10,73 +10,91 @@ import { LawyerFacilityService } from '../../../services/lawyer-facility.service
 export class BillingSettingsComponent implements OnInit {
   billingFacilities = [];
   facilities = [];
-  planPrice:number = 0;
-  currentPlanPrice:number = 0;
-  totalBillingPrice:number = 0;
-  addOnsBillingPrice:number = 0;
-  addOnsPrice:number = 0;
-  totalPrice:number = 0;
+  planPrice: number = 0;
+  currentPlanPrice: number = 0;
+  totalBillingPrice: number = 0;
+  addOnsBillingPrice: number = 0;
+  addOnsPrice: number = 0;
+  totalPrice: number = 0;
   facilityList = [];
   facilityId: any;
   averageCount: number = 0;
-
-  constructor(private lawyerFacilityService:LawyerFacilityService, private facilityService: FacilityService,public dialog: MatDialog) { }
+  update: boolean;
+  plan: string;
+  
+  constructor(private lawyerFacilityService: LawyerFacilityService, private facilityService: FacilityService, public dialog: MatDialog) { }
 
   ngOnInit(): void {
-   this.getBillableFacility();
-   this.getALLFacilities();
+    this.getBillableFacility();
+    this.getALLFacilities();
   }
 
-  getBillableFacility(){
-    this.lawyerFacilityService.getBilliableFacilityDetails().subscribe((data:any)=>{
+  getBillableFacility() {
+    this.lawyerFacilityService.getBilliableFacilityDetails().subscribe((data: any) => {
       this.facilities = data.facilities
+      let facilityCount: number = 0;
+      let addOnsCount: number = 0
       data.facilities.forEach(element => {
-        if(element.planSelected === 'Up to 5 Connections'){
-          this.currentPlanPrice =  250
-        } else if(element.planSelected === 'Up to 25 Connections'){
+        if (element.planSelected === 'Up to 5 Connections') {
+          this.currentPlanPrice = 250
+        } else if (element.planSelected === 'Up to 25 Connections') {
           this.currentPlanPrice = 350
-        } else {
+        } else if(element.planSelected ==='Unlimited Connections') {
           this.currentPlanPrice = 400
         }
 
-        if(element.isSelected === true) {
-          this.totalBillingPrice = this.totalBillingPrice + (element.facilityUserCount * 0.10)
-        } else if(element.isPremium === true) {
-          this.totalBillingPrice = this.totalBillingPrice + (element.facilityUserCount * 0.10)
-        }
-
-        if(element.isPremium === true && element.isSponsors === true){
-          this.addOnsBillingPrice =  this.addOnsBillingPrice + element.facilityUserCount * 0.25
-          this.addOnsBillingPrice =  this.addOnsBillingPrice + element.facilityUserCount * 1.00
-          this.totalBillingPrice = this.totalBillingPrice + this.addOnsBillingPrice
-        } else if(element.isSponsors === true) {
-          this.addOnsBillingPrice =  this.addOnsBillingPrice + element.facilityUserCount * 1.00
-          this.totalBillingPrice = this.totalBillingPrice + this.addOnsBillingPrice
-        }  else if(element.isPremium === true) {
-          this.addOnsBillingPrice =  this.addOnsBillingPrice + element.facilityUserCount * 0.25
-          this.totalBillingPrice = this.totalBillingPrice + this.addOnsBillingPrice
+        if (element.isSelected) {
+          if (element.isSponsors && element.isPremium) {
+            facilityCount = (element.facilityUserCount * 0.10)
+            addOnsCount = ((element.facilityUserCount * 0.25) + (element.facilityUserCount * 1.00))
+          } else if (!element.isSponsors && !element.isPremium) {
+            facilityCount = (element.facilityUserCount * 0.10)
+          }
+          else if (!element.isSponsors && element.isPremium) {
+            facilityCount = (element.facilityUserCount * 0.10)
+            addOnsCount = element.facilityUserCount * 0.25
+          }
+          else if (element.isSponsors && !element.isPremium) {
+            facilityCount = element.facilityUserCount * 0.10
+            addOnsCount = element.facilityUserCount * 1.00
+          }
         }
       });
+      this.addOnsBillingPrice = addOnsCount
+      this.totalBillingPrice = facilityCount + addOnsCount + this.currentPlanPrice
     })
   }
 
   openModal(templateRef) {
     let dialogRef = this.dialog.open(templateRef, {
-      width: '800px',
-      height:'450px'
+      width: '850px',
+      height: '450px'
     });
 
     dialogRef.afterClosed().subscribe(result => {
     });
   }
 
-  onCloseModal(){
+  onCloseModal() {
     this.dialog.closeAll();
   }
 
   onSelectPlan(price) {
+    this.update = true;
     this.totalPrice = parseInt(price);
     this.planPrice = parseInt(price)
+    if (this.planPrice == 250) {
+      this.plan = 'Up to 5 Connections'
+    } else if (this.planPrice == 350) {
+      this.plan = 'Up to 25 Connections'
+    } else {
+      this.plan = 'Unlimited Connections'
+    }
+  }
+
+  onPayEvent(event) {
+    this.dialog.closeAll();
+    this.getBillableFacility();
   }
 
   onFacilitySelect(event, facilityId, averageCount) {
@@ -105,18 +123,6 @@ export class BillingSettingsComponent implements OnInit {
 
   getALLFacilities() {
     this.facilityService.getFacilitiesUserCount().subscribe((facilities: any) => {
-      // this.facilityList = facilities.data;
-      // if (facilities.data) {
-      //   facilities.data.forEach((ele) => {
-      //     if (ele.Address) {
-      //       this.state.forEach((item) => {
-      //         if (ele.Address.state == item) {
-      //           this.filteredFacilityList.push(ele)
-      //         }
-      //       })
-      //     }
-      //   })
-      // }
       this.facilityList = facilities.data.map((ele) => {
         ele['isSelected'] = false;
         ele['addOns'] = {
@@ -129,17 +135,16 @@ export class BillingSettingsComponent implements OnInit {
   }
 
   onSelectAddOns(event, facilityId, addOnsType: string) {
+
     if (event) {
       this.facilityList.map((x) => {
         if (facilityId === x.facilityId) {
           if (addOnsType == 'premium') {
             x.addOns.premium = true;
-            this.addOnsPrice =  this.addOnsPrice + x.facilityUserCount * 0.25
-             this.totalPrice =   this.totalPrice  + this.addOnsPrice
+            this.addOnsPrice = this.addOnsPrice + x.facilityUserCount * 0.25
           } else if (addOnsType == 'sponsors') {
-            this.addOnsPrice =  this.addOnsPrice + x.facilityUserCount * 1.00
-             this.totalPrice =   this.totalPrice  + this.addOnsPrice
             x.addOns.sponsors = true;
+            this.addOnsPrice = this.addOnsPrice + x.facilityUserCount * 1.00
           }
         }
         return x
@@ -148,13 +153,13 @@ export class BillingSettingsComponent implements OnInit {
       this.facilityList.map((x) => {
         if (facilityId === x.facilityId) {
           if (addOnsType == 'premium') {
-            this.addOnsPrice =  this.addOnsPrice - x.facilityUserCount * 0.25
-              this.totalPrice =   this.totalPrice  - this.addOnsPrice 
             x.addOns.premium = false;
+            this.addOnsPrice = this.addOnsPrice - x.facilityUserCount * 0.25
+            this.totalPrice = this.totalPrice -  x.facilityUserCount * 0.25
           } else if (addOnsType == 'sponsors') {
-           this.addOnsPrice =  this.addOnsPrice - x.facilityUserCount * 1.00
-             this.totalPrice =   this.totalPrice  - this.addOnsPrice
             x.addOns.sponsors = false;
+            this.addOnsPrice = this.addOnsPrice - x.facilityUserCount * 1.00
+            this.totalPrice = this.totalPrice -  x.facilityUserCount * 1.00
           }
         }
         return x
@@ -164,14 +169,14 @@ export class BillingSettingsComponent implements OnInit {
   }
 
   calculatePrice() {
-    this.totalPrice =  this.planPrice;
     this.facilityList.forEach((ele) => {
       if (ele.isSelected) {
         this.totalPrice = this.totalPrice + (ele.facilityUserCount * 0.10)
         if (ele.addOns.premium) {
-          this.totalPrice  =   this.totalPrice  + this.addOnsPrice
+          this.totalPrice = this.totalPrice + this.addOnsPrice
         }
         if (ele.addOns.sponsors) {
+          this.totalPrice = this.totalPrice + this.addOnsPrice
         }
       }
     })

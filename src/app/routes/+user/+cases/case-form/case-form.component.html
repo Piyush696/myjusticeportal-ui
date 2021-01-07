@@ -28,7 +28,7 @@
         <div class="col-6 pl-2">
             <mat-form-field appearance="fill" class="w-100 p-0">
                 <mat-label>Charges or Legal Matter</mat-label>
-                <input type="text" (keydown.space)="$event.preventDefault();" matInput placeholder="Charges or Legal Matter"
+                <input type="text"  matInput placeholder="Charges or Legal Matter"
                     [formControl]="caseForm.controls['legalMatter']" required>
                 <mat-error>
                     <div *ngIf="caseForm.controls['legalMatter'].invalid && caseForm.controls['legalMatter'].touched">
@@ -91,7 +91,7 @@
         <div class="col-6 pl-0">
             <mat-form-field appearance="fill" class="w-100 pl-2">
                 <mat-label>Brief Description</mat-label>
-                <input type="text" (keydown.space)="$event.preventDefault();" matInput placeholder="Brief Description"
+                <input type="text"  matInput placeholder="Brief Description"
                     [formControl]="caseForm.controls['briefDescriptionOfChargeOrLegalMatter']" minlength="3"
                     maxlength="500" required />
                 <mat-error>
