@@ -1,5 +1,9 @@
+<div *ngIf="isAuthorized && !showDashboard">
+  <h1 class="font-weight-bold m-0">Setup Your Account</h1>
+</div>
+
 <div class="container pl-0" *ngIf="!isAuthorized">
-  <h1 class="font-weight-bold unauthorized-text text-center">Welcome to My Justice Portal!</h1>
+  <h1 class="font-weight-bold unauthorized-text text-center" *ngIf="!isAuthorized && !showDashboard">Welcome to My Justice Portal!</h1>
   <h2 class="unauthorized-text text-center">Your registration is being processed. We must verify your standing in the bar of the state(s) you selected. When your account is approved, you will receive an email notification. Most registrations are processed within 24 hours.<br/><br/>
     Meanwhile, please complete your account information. You will not be charged for anything unless your account is approved.</h2>
 </div>
@@ -84,7 +88,7 @@
                 <h4>Which facilities would you like to have access? <a href='https://google.com' target="_blank">Learn more about Premium Listings and Sponsorships.</a></h4>
                 
                 <div class="col-12 pt-2">
-                  <div *ngIf="facilities.length < 1">
+                  <div *ngIf="facilities.length == 0">
                     <span>We currently do not have any facilities in your state. Please contact support for more information.</span>
                   </div>
                   <div  *ngIf="facilities.length > 0">
@@ -133,13 +137,8 @@
                   review your monthly bill below.</span>
                 <mat-card class="mat-elevation-z10">
                   <div class="d-flex justify-content-between align-items-between">
-                    <div>Plan Base Cost:</div>
+                    <div>BASE COST:</div>
                     <div>{{planPrice | currency:'USD':'symbol'}}</div>
-                  </div>
-                  <div class="d-flex justify-content-between align-items-between">
-                    <div>Total inmate access Charges:</div>
-                    <div>{{ (averageCount ? averageCount * 0.10 : 0) | currency:'USD':'symbol'}}
-                    </div>
                   </div>
                   <div class="d-flex justify-content-between align-items-between">
                     <div>Add On charges:</div>
@@ -148,9 +147,9 @@
                   </div>
                   <hr>
                   <div class="d-flex justify-content-between align-items-between">
-                    <div>Total Monthly Charge:</div>
+                    <div>TOTAL MONTHLY CHARGE:</div>
                     <div>
-                      <span class="font-weight-bold">Total: </span> {{totalPrice | currency:'USD':'symbol'}}
+                      <span class="font-weight-bold">{{totalPrice | currency:'USD':'symbol'}}</span>
                     </div>
                   </div>
                 </mat-card>
