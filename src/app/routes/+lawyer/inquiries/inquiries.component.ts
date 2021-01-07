@@ -38,7 +38,6 @@ export class InquiriesComponent implements OnInit {
   getSelectedPlan() {
     this.facilityService.getSelectedPlanFaciltiy().subscribe((selectedPlan: any) => {
       this.plans = selectedPlan.data;
-      console.log(this.plans[0].planSelected)
       if(this.plans[0].planSelected == "Up to 5 Connections"){
         this.approvedStatus = 4;
       }else if(this.plans[0].planSelected == "Up to 25 Connections"){
