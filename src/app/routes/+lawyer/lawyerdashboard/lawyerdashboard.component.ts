@@ -11,6 +11,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UserMetaService } from 'app/services/user-meta.service';
 import { UserAdditionInfoService } from 'app/services/user-addition-info.service';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -19,7 +20,7 @@ import { UserAdditionInfoService } from 'app/services/user-addition-info.service
   styleUrls: ['./lawyerdashboard.component.scss']
 })
 
-export class LawyerdashboardComponent implements OnInit,AfterViewInit {
+export class LawyerdashboardComponent implements OnInit, AfterViewInit {
   requestedCases: any;
   isAuthorized: boolean;
   showDashboard: boolean;
@@ -41,7 +42,7 @@ export class LawyerdashboardComponent implements OnInit,AfterViewInit {
   public cvvMask = [/\d/, /\d/, /\d/]
   facilityId: any;
   totalPrice: number = 0;
-  averageCount: number = 0;
+
   addOnsCount: number = 0;
   planPrice: number = 0;
   addOnsPrice: number = 0;
@@ -50,13 +51,15 @@ export class LawyerdashboardComponent implements OnInit,AfterViewInit {
   lawyerData: any;
   plan: string;
   @ViewChild('modalopen') modalopen: ElementRef;
-  
-  constructor(private hireLawyerService: HireLawyerService, private userMetaService: UserMetaService,
+
+  constructor(private hireLawyerService: HireLawyerService, private userMetaService: UserMetaService, private router: Router,
     private facilityService: FacilityService, public dialog: MatDialog, private userAdditionInfoService: UserAdditionInfoService,
     private lawyerService: LawyerService, private toasterService: ToasterService, private store: Store<any>, private fb: FormBuilder) { }
 
   ngAfterViewInit(): void {
-    this.modalopen.nativeElement.click();
+    if (!this.modalopen) {
+      this.modalopen.nativeElement.click();
+    }
   }
 
   ngOnInit(): void {
@@ -69,6 +72,7 @@ export class LawyerdashboardComponent implements OnInit,AfterViewInit {
         this.isAuthorized = false;
       }
     });
+    this.getModal();
     this.getUserDetails();
     this.onGetRequestedCases();
     this.getAllClients();
@@ -76,6 +80,12 @@ export class LawyerdashboardComponent implements OnInit,AfterViewInit {
     this.dashBoardCountData();
   }
 
+
+  getModal() {
+    this.userMetaService.getmodalData({ metaKey: 'choosePlanModal' }).subscribe((res: any) => {
+      this.modalopen = res.data.metaValue
+    })
+  }
 
 
   cardPatternValidation(control: AbstractControl) {
@@ -98,13 +108,12 @@ export class LawyerdashboardComponent implements OnInit,AfterViewInit {
   }
 
 
-  onFacilitySelect(event, facilityId, averageCount) {
+  onFacilitySelect(event, facilityId) {
     if (event) {
       this.facilityId = facilityId
       this.facilities.map((facility) => {
         if (facility.facilityId === facilityId) {
           facility.isSelected = true;
-          this.averageCount = this.averageCount + averageCount
         }
         return facility
       })
@@ -112,18 +121,17 @@ export class LawyerdashboardComponent implements OnInit,AfterViewInit {
       this.facilities.map((facility) => {
         if (facility.facilityId === facilityId) {
           facility.isSelected = false;
-          this.averageCount = this.averageCount - averageCount
         }
         return facility
       })
-      this.onSelectAddOns(false, facilityId, 'premium')
-      this.onSelectAddOns(false, facilityId, 'sponsors')
+      // this.onSelectAddOns(false, facilityId, 'premium')
+      // this.onSelectAddOns(false, facilityId, 'sponsors')
     }
-    //this.calculatePrice();
   }
 
-  onSelectPlan(price, value) {
-    this.totalPrice = parseInt(price);
+  onSelectPlan(price) {
+    this.totalPrice = this.totalPrice + parseInt(price) - this.planPrice;
+
     this.planPrice = parseInt(price)
     if (this.planPrice == 250) {
       this.plan = 'Up to 5 Connections'
@@ -132,6 +140,7 @@ export class LawyerdashboardComponent implements OnInit,AfterViewInit {
     } else {
       this.plan = 'Unlimited Connections'
     }
+
   }
 
   onSelectAddOns(event, facilityId, addOnsType: string) {
@@ -140,11 +149,11 @@ export class LawyerdashboardComponent implements OnInit,AfterViewInit {
         if (facilityId === x.facilityId) {
           if (addOnsType == 'premium') {
             x.addOns.premium = true;
-            this.addOnsPrice = this.addOnsPrice + x.facilityUserCount * 0.25
-            this.totalPrice = this.totalPrice + this.addOnsPrice
+            this.addOnsPrice = this.addOnsPrice + (x.facilityUserCount * 0.25)
+            this.totalPrice = this.totalPrice + (x.facilityUserCount * 0.25)
           } else if (addOnsType == 'sponsors') {
-            this.addOnsPrice = this.addOnsPrice + x.facilityUserCount * 1.00
-            this.totalPrice = this.totalPrice + this.addOnsPrice
+            this.addOnsPrice = this.addOnsPrice + (x.facilityUserCount * 1.00)
+            this.totalPrice = this.totalPrice + (x.facilityUserCount * 1.00)
             x.addOns.sponsors = true;
           }
         }
@@ -154,33 +163,22 @@ export class LawyerdashboardComponent implements OnInit,AfterViewInit {
       this.facilities.map((x) => {
         if (facilityId === x.facilityId) {
           if (addOnsType == 'premium') {
-            this.addOnsPrice = this.addOnsPrice - x.facilityUserCount * 0.25
-            this.totalPrice = this.totalPrice - this.addOnsPrice
+            this.addOnsPrice = this.addOnsPrice - (x.facilityUserCount * 0.25)
+            this.totalPrice = this.totalPrice - (x.facilityUserCount * 0.25)
             x.addOns.premium = false;
           } else if (addOnsType == 'sponsors') {
-            this.addOnsPrice = this.addOnsPrice - x.facilityUserCount * 1.00
-            this.totalPrice = this.totalPrice - this.addOnsPrice
+            this.addOnsPrice = this.addOnsPrice - (x.facilityUserCount * 1.00)
+            this.totalPrice = this.totalPrice - (x.facilityUserCount * 1.00)
             x.addOns.sponsors = false;
           }
         }
         return x
       });
     }
-    // this.calculatePrice();
+
   }
 
-  // calculatePrice() {
-  //   this.facilities.forEach((ele) => {
-  //     if (ele.isSelected) {
-  //       this.totalPrice = this.totalPrice + (ele.facilityUserCount * 0.10)
-  //       if (ele.addOns.premium) {
-  //         this.totalPrice = this.totalPrice + this.addOnsPrice
-  //       }
-  //       if (ele.addOns.sponsors) {
-  //       }
-  //     }
-  //   })
-  // }
+
 
   onPayEvent(value) {
     if (value) {
@@ -285,7 +283,7 @@ export class LawyerdashboardComponent implements OnInit,AfterViewInit {
   getALLFacilities() {
     this.facilityService.getFacilitiesUserCount().subscribe((facilities: any) => {
       if (facilities.data) {
-        this.facilities = facilities.data.map((ele) => {         
+        this.facilities = facilities.data.map((ele) => {
           if (this.state.includes(ele.Address.state)) {
             ele['isSelected'] = false;
             ele['addOns'] = {
@@ -293,11 +291,10 @@ export class LawyerdashboardComponent implements OnInit,AfterViewInit {
               sponsors: false
             };
             return ele;
-          }else{
+          } else {
             return null;
-          }         
+          }
         })
-        console.log(this.facilities)
         this.facilities = this.facilities.filter(x => x)
         // facilities.data.forEach((ele) => {
         //   if (ele.Address) {
@@ -364,5 +361,12 @@ export class LawyerdashboardComponent implements OnInit,AfterViewInit {
     this.userAdditionInfoService.getDashboardCounts().subscribe((res: any) => {
       this.lawyerData = res.data
     })
+  }
+
+  onchoosePlan() {
+    this.userMetaService.modalDataEvent({ metaKey: 'choosePlanModal', metaValue: true }).subscribe()
+  }
+  redirect() {
+    this.router.navigateByUrl('mjp/lawyer/manage-profile')
   }
 }

@@ -27,6 +27,10 @@ export class UserMetaService {
     return this.httpClient.post<object>(`${this.apiPath}/userMeta/createUserMetaList`, userMetaData)
   }
 
+  modalDataEvent(userMetaData) {
+    return this.httpClient.post<object>(`${this.apiPath}/userMeta/createUserMeta`, userMetaData, this.getHeaders())
+  }
+
   updateUserMeta(userMetaData) {
     return this.httpClient.put<object>(`${this.apiPath}/userMeta/update`, userMetaData, this.getHeaders())
   }
@@ -37,5 +41,10 @@ export class UserMetaService {
 
   getUserAdditionalDetails() {
     return this.httpClient.get<object>(`${this.apiPath}/userMeta`, this.getHeaders())
+  }
+
+  getmodalData(userMetaData) {
+    return this.httpClient.post<object>(`${this.apiPath}/userMeta/getModalValue`, userMetaData, this.getHeaders())
+
   }
 }
