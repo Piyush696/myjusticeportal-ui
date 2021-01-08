@@ -7,6 +7,8 @@ import { UserAdditionInfoService } from 'app/services/user-addition-info.service
 import { FileUploader } from 'ng2-file-upload';
 import { SpecialtyService } from 'app/services/specialty.service';
 import { OrganisationService } from 'app/services/organisation.service';
+import { Location } from '@angular/common';
+
 const URL = 'https://evening-anchorage-3159.herokuapp.com/api/';
 
 @Component({
@@ -36,7 +38,7 @@ export class ManageProfileComponent implements OnInit {
   orgData: any;
 
   constructor(private userAdditionalInfo: UserAdditionInfoService, private router: Router, private fb: FormBuilder,
-    private specialtyService: SpecialtyService, public dialog: MatDialog, private toasterService: ToasterService,
+    private specialtyService: SpecialtyService, public dialog: MatDialog, private toasterService: ToasterService, private location: Location,
     private organisationService: OrganisationService) { }
 
   ngOnInit(): void {
@@ -219,4 +221,10 @@ export class ManageProfileComponent implements OnInit {
       }
     }
   }
+
+  onClickGoBack() {
+    this.location.back();
+  }
+
+
 }
