@@ -51,15 +51,16 @@ export class LawyerdashboardComponent implements OnInit, AfterViewInit {
   lawyerData: any;
   plan: string;
   @ViewChild('modalopen') modalopen: ElementRef;
+  modalopens: any;
 
   constructor(private hireLawyerService: HireLawyerService, private userMetaService: UserMetaService, private router: Router,
     private facilityService: FacilityService, public dialog: MatDialog, private userAdditionInfoService: UserAdditionInfoService,
     private lawyerService: LawyerService, private toasterService: ToasterService, private store: Store<any>, private fb: FormBuilder) { }
 
   ngAfterViewInit(): void {
-    if (!this.modalopen) {
-      this.modalopen.nativeElement.click();
-    }
+
+    this.getModal();
+
   }
 
   ngOnInit(): void {
@@ -72,7 +73,7 @@ export class LawyerdashboardComponent implements OnInit, AfterViewInit {
         this.isAuthorized = false;
       }
     });
-    this.getModal();
+
     this.getUserDetails();
     this.onGetRequestedCases();
     this.getAllClients();
@@ -83,7 +84,9 @@ export class LawyerdashboardComponent implements OnInit, AfterViewInit {
 
   getModal() {
     this.userMetaService.getmodalData({ metaKey: 'choosePlanModal' }).subscribe((res: any) => {
-      this.modalopen = res.data.metaValue
+      if (!res.data) {
+        this.modalopen.nativeElement.click();
+      }
     })
   }
 
