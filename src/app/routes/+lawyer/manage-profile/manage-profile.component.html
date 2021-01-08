@@ -253,9 +253,13 @@
             <div class="row mt-3">
                 <div class="col-3">
                     <div class="d-flex">
-                        <div class="img-profile">
-                            <img src="{{userDetails?.userAdditionalInfo?.profile?.downloadLink}}" width="150px"
-                                height="150px" alt="logo" class="logo">
+                        <div class="img-profile" *ngIf="userDetails?.userAdditionalInfo?.profile?.downloadLink">
+                            <img src="{{userDetails?.userAdditionalInfo?.profile?.downloadLink}}" width="250px"
+                                height="185px" alt="logo" class="logo">
+                        </div>
+                        <div class="img-profile" *ngIf="!userDetails?.userAdditionalInfo?.profile?.downloadLink">
+                            <img src="../../../../assets/img/placeholder.jpg" width="250px" height="185px" alt="logo"
+                                class="logo">
                         </div>
                     </div>
                 </div>
