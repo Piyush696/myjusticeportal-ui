@@ -75,11 +75,7 @@ export class UsersComponent implements OnInit, OnDestroy {
           element['newCreatedAt2'] = month +' '+ day +','+' '+ year;
           return element
         })
-<<<<<<< HEAD
         this.dataSource = new MatTableDataSource(this.filterStatus);
-=======
-        this.dataSource = new MatTableDataSource(x);
->>>>>>> develop
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
       })
