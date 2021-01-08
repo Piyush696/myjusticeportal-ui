@@ -119,7 +119,9 @@ export class AdditionalInfoComponent implements OnInit, OnChanges {
 
   deleteInfo(value) {
     var index = this.lawyerInfoArray.map(function (element) {
-      return element.bar_info_Exam_Id;
+      if(element.bar_info_Exam_Id){
+        return element.bar_info_Exam_Id;
+      }
     }).indexOf(value.bar_info_Exam_Id)
     let info = this.lawyerInfoArray.splice(index, 1)
      this.states.forEach((currentState) => {

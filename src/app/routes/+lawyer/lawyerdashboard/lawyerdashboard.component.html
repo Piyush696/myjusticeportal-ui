@@ -1,18 +1,18 @@
-<div class="container pl-0" *ngIf="!isAuthorized">
-  <h1 class="font-weight-bold unauthorized-text text-center">Welcome to My Justice Portal!</h1>
-  <h2 class="unauthorized-text text-center">Your registration is being processed. We must verify your standing in the bar of the state(s) you selected. When your account is approved, you will receive an email notification. Most registrations are processed within 24 hours.<br/><br/>
-    Meanwhile, please complete your account information. You will not be charged for anything unless your account is approved.</h2>
+<div *ngIf="billingBoard">
+  <h1 class="font-weight-bold m-0">Setup Your Account</h1>
 </div>
+
 <div *ngIf="!isAuthorized">
   <div class="d-flex justify-content-center align-items-center;">
     <div class="col-12 pt-2 pl-0">
       <mat-card class="mat-elevation-z10 d-flex justify-content-center">
-        <h2>Account Status: <span class="panding-review">Pending Review</span></h2>
+        <h2>
+          Account Status: <span class="panding-review">Pending Review</span>
+        </h2>
       </mat-card>
     </div>
   </div>
 </div>
-
 
 <div *ngIf="showDashboard && isAuthorized">
   <h1 class="mb-0"><b>Dashboard</b></h1>
@@ -20,10 +20,7 @@
 </div>
 
 <div *ngIf="billingBoard">
-  <div *ngIf="billingBoard && isAuthorized">  
-    <div>
-      <h2 class="mb-0"><b>Welcome to My Justice Portal</b></h2>
-    </div>  
+  <div *ngIf="billingBoard && isAuthorized">
     <div class="d-flex justify-content-center align-items-center;">
       <div class="col-12 pt-2 px-0">
         <mat-card class="mat-elevation-z10 d-flex justify-content-center">
@@ -37,76 +34,144 @@
       <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
         <div class="row pt-2">
           <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-              <mat-card>
-                <div>
-                  <span class="h5 text-center font-weight-bold">Step 1:</span>&nbsp;
-                  <span class="h5 text-center font-weight-bold">Select Subscription Level</span>
+            <mat-card>
+              <div>
+                <span class="h5 text-center font-weight-bold">Step 1:</span
+                >&nbsp;
+                <span class="h5 text-center font-weight-bold"
+                  >Select Subscription Level</span
+                >
+              </div>
+              <h4>
+                How many inmate connections do you need?
+                <a href="https://google.com" target="_blank"
+                  >Learn More about Connections.</a
+                >
+              </h4>
+              <div class="row">
+                <div class="col-12 pt-2">
+                  <mat-card class="mat-elevation-z10 border-card">
+                    <input
+                      class="circle"
+                      type="radio"
+                      name="package"
+                      (change)="onSelectPlan('250', $event.checked)"
+                    />
+                    Up to 5 Connections, $250/mo<br />
+                  </mat-card>
                 </div>
-                <h4>How many inmate connections do you need? <a href='https://google.com' target="_blank">Learn More about Connections.</a></h4>
-                <div class="row">
-                  <div class="col-12 pt-2">
-                    <mat-card class="mat-elevation-z10 border-card">
-                      <input class="circle"  type="radio" name="package"
-                        (change)="onSelectPlan('250',$event.checked)">
-                        Up to 5 Connections, $250/mo<br/>
-                    </mat-card>
-                  </div>
-                </div>
+              </div>
 
-                <div class="row">
-                  <div class="col-12 pt-2">
-                    <mat-card class="mat-elevation-z10 border-card">
-                      <input class="circle"  type="radio" name="package"
-                        (change)="onSelectPlan('350',$event.checked)">
-                        Up to 25 Connections, $350/mo
-                    </mat-card>
-                  </div>
+              <div class="row">
+                <div class="col-12 pt-2">
+                  <mat-card class="mat-elevation-z10 border-card">
+                    <input
+                      class="circle"
+                      type="radio"
+                      name="package"
+                      (change)="onSelectPlan('350', $event.checked)"
+                    />
+                    Up to 25 Connections, $350/mo
+                  </mat-card>
                 </div>
+              </div>
 
-                <div class="row">
-                  <div class="col-12 pt-2">
-                    <mat-card class="mat-elevation-z10 border-card">
-                      <input class="circle"  type="radio" name="package"
-                        (change)="onSelectPlan('400',$event.checked)">
-                        Unlimited Connections, $400/mo
-                    </mat-card>
-                  </div>
+              <div class="row">
+                <div class="col-12 pt-2">
+                  <mat-card class="mat-elevation-z10 border-card">
+                    <input
+                      class="circle"
+                      type="radio"
+                      name="package"
+                      (change)="onSelectPlan('400', $event.checked)"
+                    />
+                    Unlimited Connections, $400/mo
+                  </mat-card>
                 </div>
-              </mat-card>
+              </div>
+            </mat-card>
           </div>
           <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 pt-2">
-            <div class="d-flex justify-content-center align-items-center mt-10;">
+            <div
+              class="d-flex justify-content-center align-items-center mt-10;"
+            >
               <mat-card>
                 <div>
-                  <span class="h5 text-center font-weight-bold">Step 2:</span>&nbsp;
-                  <span class="h5 text-center font-weight-bold">Select Facilities</span>
+                  <span class="h5 text-center font-weight-bold">Step 2:</span
+                  >&nbsp;
+                  <span class="h5 text-center font-weight-bold"
+                    >Select Facilities</span
+                  >
                 </div>
-                <h4>Which facilities would you like to have access? <a href='https://google.com' target="_blank">Learn more about Premium Listings and Sponsorships.</a></h4>
-                
+                <h4>
+                  Which facilities would you like to have access?
+                  <a href="https://google.com" target="_blank"
+                    >Learn more about Premium Listings and Sponsorships.</a
+                  >
+                </h4>
+
                 <div class="col-12 pt-2">
-                  <div *ngIf="facilities.length < 1">
-                    <span>We currently do not have any facilities in your state. Please contact support for more information.</span>
+                  <div *ngIf="facilities.length == 0">
+                    <span
+                      >We currently do not have any facilities in your state.
+                      Please contact support for more information.</span
+                    >
                   </div>
-                  <div  *ngIf="facilities.length > 0">
-                    <li *ngFor="let facility of facilities;">
-                      <mat-checkbox color="primary"
-                        (change)="onFacilitySelect($event.checked,facility?.facilityId,facility.facilityUserCount)">
-                        {{facility?.facilityName}} ({{facility.facilityUserCount}})
+                  <div *ngIf="facilities.length > 0">
+                    <li *ngFor="let facility of facilities">
+                      <mat-checkbox
+                        color="primary"
+                        (change)="
+                          onFacilitySelect(
+                            $event.checked,
+                            facility?.facilityId,
+                            facility.facilityUserCount
+                          )
+                        "
+                      >
+                        {{ facility?.facilityName }} ({{
+                          facility.facilityUserCount
+                        }})
                       </mat-checkbox>
                       <div *ngIf="facility.isSelected">
                         <mat-card class="border-card mb-2">
-                          <h4 class="font-weight-bold text-center  mb-1 pt-0">Select Sponsorship Options for this Facility
+                          <h4 class="font-weight-bold text-center mb-1 pt-0">
+                            Select sponsorship options for this facility
                           </h4>
                           <div>
-                            <mat-checkbox color="primary" [(ngModel)]="facility.addOns.premium"
-                              (change)="onSelectAddOns($event.checked,facility?.facilityId,'premium')">
-                              <span>Premium Listing: $0.25/mo./Average Daily Population</span>
+                            <mat-checkbox
+                              color="primary"
+                              [(ngModel)]="facility.addOns.premium"
+                              (change)="
+                                onSelectAddOns(
+                                  $event.checked,
+                                  facility?.facilityId,
+                                  'premium'
+                                )
+                              "
+                            >
+                              <span
+                                >Premium Listing: $0.25/mo./Average Daily
+                                Population</span
+                              >
                             </mat-checkbox>
                           </div>
                           <div>
-                            <mat-checkbox color="primary" [(ngModel)]="facility.addOns.sponsors"
-                              (change)="onSelectAddOns($event.checked,facility?.facilityId,'sponsors')">
-                              <span>Sponsorship: $1.00/mo./Average Daily Population</span>
+                            <mat-checkbox
+                              color="primary"
+                              [(ngModel)]="facility.addOns.sponsors"
+                              (change)="
+                                onSelectAddOns(
+                                  $event.checked,
+                                  facility?.facilityId,
+                                  'sponsors'
+                                )
+                              "
+                            >
+                              <span
+                                >Sponsorship: $1.00/mo./Average Daily
+                                Population</span
+                              >
                             </mat-checkbox>
                           </div>
                         </mat-card>
@@ -126,31 +191,43 @@
             <mat-card>
               <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 pt-2">
                 <div>
-                  <span class="h5 text-center font-weight-bold">Step 3:</span>&nbsp;
-                  <span class="h5 text-center font-weight-bold">Review Plan Details</span>
+                  <span class="h5 text-center font-weight-bold">Step 3:</span
+                  >&nbsp;
+                  <span class="h5 text-center font-weight-bold"
+                    >Review Plan Details</span
+                  >
                 </div>
-                <span class="text-center text-black">Based on the facilities and add ons that you have selected, please
-                  review your monthly bill below.</span>
+                <span class="text-center text-black"
+                  >Based on the facilities and add ons that you have selected,
+                  please review your monthly bill below.</span
+                >
                 <mat-card class="mat-elevation-z10">
-                  <div class="d-flex justify-content-between align-items-between">
-                    <div>Plan Base Cost:</div>
-                    <div>{{planPrice | currency:'USD':'symbol'}}</div>
+                  <div
+                    class="d-flex justify-content-between align-items-between"
+                  >
+                    <div>BASE COST:</div>
+                    <div>{{ planPrice | currency: "USD":"symbol" }}</div>
                   </div>
-                  <!-- <div class="d-flex justify-content-between align-items-between">
-                    <div>Total inmate access Charges:</div>
-                    <div>{{ (averageCount ? averageCount * 0.10 : 0) | currency:'USD':'symbol'}}
-                    </div>
-                  </div> -->
-                  <div class="d-flex justify-content-between align-items-between">
-                    <div>Add On charges:</div>
-                    <div>{{(addOnsPrice  ? addOnsPrice   : 0 ) | currency:'USD':'symbol'}}
-                    </div>
-                  </div>
-                  <hr>
-                  <div class="d-flex justify-content-between align-items-between">
-                    <div>Total Monthly Charge:</div>
+                  <div
+                    class="d-flex justify-content-between align-items-between"
+                  >
+                    <div>PREMIUM:</div>
                     <div>
-                      <span class="font-weight-bold">Total: </span> {{totalPrice | currency:'USD':'symbol'}}
+                      {{
+                        (addOnsPrice ? addOnsPrice : 0)
+                          | currency: "USD":"symbol"
+                      }}
+                    </div>
+                  </div>
+                  <hr />
+                  <div
+                    class="d-flex justify-content-between align-items-between"
+                  >
+                    <div>TOTAL MONTHLY CHARGE:</div>
+                    <div>
+                      <span class="font-weight-bold">{{
+                        totalPrice | currency: "USD":"symbol"
+                      }}</span>
                     </div>
                   </div>
                 </mat-card>
@@ -162,13 +239,22 @@
           <mat-card class="p-4 mt-10">
             <div>
               <span class="h5 text-center font-weight-bold">Step 4:</span>&nbsp;
-              <span class="h5 text-center font-weight-bold">Add Credit Card Info</span>
+              <span class="h5 text-center font-weight-bold"
+                >Add Credit Card Info</span
+              >
             </div>
-            <span class="text-center text-black">Please enter your credit card information in the form below. Once everything looks correct, click Pay to complete your setup and
-                start using My Justice Portal!</span>
-            <app-stripe class="pt-2" [totalCount]="totalPrice" (onPayEvent)="onPayEvent($event)"
-              [facilitiesList]="facilities"></app-stripe>
-              
+            <span class="text-center text-black"
+              >Please enter your credit card information in the form below. Once
+              everything looks correct, click Pay to complete your setup and
+              start using My Justice Portal!</span
+            >
+            <app-stripe
+              class="pt-2"
+              [totalCount]="totalPrice"
+              [plan]="plan"
+              (onPayEvent)="onPayEvent($event)"
+              [facilitiesList]="facilities"
+            ></app-stripe>
           </mat-card>
         </div>
       </div>
@@ -185,14 +271,28 @@
             <p class="pl-1 matheading">Inquiries</p>
           </div>
           <div class="row mt-4 mb-4 d-flex justify-content-center">
-            <div id="circle" [ngStyle]="{'background-color': lawyerData?.caseCount > 0  ? '#dc3545b8' : '#edededed'}">
-              <p style="font-size:3em;padding-top: 0.6em;">{{lawyerData?.caseCount}}</p>
+            <div
+              id="circle"
+              [ngStyle]="{
+                'background-color':
+                  lawyerData?.caseCount > 0 ? '#dc3545b8' : '#edededed'
+              }"
+            >
+              <p style="font-size: 3em; padding-top: 0.6em">
+                {{ lawyerData?.caseCount }}
+              </p>
             </div>
           </div>
           <div class="row d-flex justify-content-center">
-            <button [routerLink]="'../inquiries'" class="btn bg-color px-perc py-3"
-              [ngStyle]="{'background-color': lawyerData?.caseCount > 0  ? 'orangered'  : ''}">View
-              Inquiries</button>
+            <button
+              [routerLink]="'../inquiries'"
+              class="btn bg-color px-perc py-3"
+              [ngStyle]="{
+                'background-color': lawyerData?.caseCount > 0 ? 'orangered' : ''
+              }"
+            >
+              View Inquiries
+            </button>
           </div>
         </mat-card>
       </div>
@@ -202,15 +302,29 @@
             <p class="pl-1 matheading">New Messages</p>
           </div>
           <div class="row mt-4 mb-4 d-flex justify-content-center">
-            <div id="circle"
-              [ngStyle]="{'background-color': lawyerData?.messageCount > 0  ? '#dc3545b8' : '#edededed'}">
-              <p style="font-size:3em;padding-top: 0.6em;">{{lawyerData?.messageCount}}</p>
+            <div
+              id="circle"
+              [ngStyle]="{
+                'background-color':
+                  lawyerData?.messageCount > 0 ? '#dc3545b8' : '#edededed'
+              }"
+            >
+              <p style="font-size: 3em; padding-top: 0.6em">
+                {{ lawyerData?.messageCount }}
+              </p>
             </div>
           </div>
           <div class="row d-flex justify-content-center">
-            <button [routerLink]="'../lawyer-chat'" class="btn bg-color px-perc py-3"
-              [ngStyle]="{'background-color': lawyerData?.messageCount > 0  ? 'orangered' : ''}">View
-              Messages</button>
+            <button
+              [routerLink]="'../lawyer-chat'"
+              class="btn bg-color px-perc py-3"
+              [ngStyle]="{
+                'background-color':
+                  lawyerData?.messageCount > 0 ? 'orangered' : ''
+              }"
+            >
+              View Messages
+            </button>
           </div>
         </mat-card>
       </div>
@@ -220,16 +334,92 @@
             <p class="pl-1 matheading">Connected Cases</p>
           </div>
           <div class="row mt-4 mb-4 d-flex justify-content-center">
-            <div id="circle" [ngStyle]="{'background-color': lawyerData?.myCases > 0  ? '#dc3545b8' : '#edededed'}">
-              <p style="font-size:3em;padding-top: 0.6em;">{{lawyerData?.myCases}}</p>
+            <div
+              id="circle"
+              [ngStyle]="{
+                'background-color':
+                  lawyerData?.myCases > 0 ? '#dc3545b8' : '#edededed'
+              }"
+            >
+              <p style="font-size: 3em; padding-top: 0.6em">
+                {{ lawyerData?.myCases }}
+              </p>
             </div>
           </div>
           <div class="row d-flex justify-content-center">
-            <button [routerLink]="'../accepted-cases'" class="btn bg-color px-perc py-3"
-              [ngStyle]="{'background-color': lawyerData?.myCases > 0  ? 'orangered' : ''}">View Cases</button>
+            <button
+              [routerLink]="'../accepted-cases'"
+              class="btn bg-color px-perc py-3"
+              [ngStyle]="{
+                'background-color': lawyerData?.myCases > 0 ? 'orangered' : ''
+              }"
+            >
+              View Cases
+            </button>
           </div>
         </mat-card>
       </div>
     </div>
   </mat-card>
 </div>
+
+<!-- Button trigger modal -->
+<button
+  id="modalopen"
+  #modalopen
+  [hidden]="true"
+  data-toggle="modal"
+  data-target="#exampleModalCenter"
+></button>
+
+<!-- Modal -->
+  <div
+    class="modal fade"
+    id="exampleModalCenter"
+    tabindex="-1"
+    role="dialog"
+    aria-labelledby="exampleModalCenterTitle"
+    aria-hidden="true"
+  >
+    <div
+      class="modal-dialog modal-lg modal-dialog-centered px-4 py-4"
+      role="document"
+    >
+      <div class="modal-content px-4 py-4">
+        <div class="d-flex justify-content-end">
+          <button type="button" class="bg-button" data-dismiss="modal">
+            X
+          </button>
+        </div>
+        <div class="mb-1">
+          <h2 class="text-center"><b>Welcome to My Justice Portal</b></h2>
+          <i class="mt-2 mb-2"
+            >The secure, all-in-one portal designed to help support meaningful
+            representation and access to the courts.</i
+          >
+          <p class="text-center mb-0 pt-4">
+            Your registration status is
+            <span class="text-warning">Pending</span> while we verify your
+            information. When your account is
+            <span class="text-success">Approved</span> you'll receive an email
+            information.<br /><br />
+          </p>
+          <p class="text-center">
+            In the meantime, let select your access plan and configure your
+            account preferences so you'll be ready to go! <br /><br />
+          </p>
+        </div>
+        <div class="d-flex justify-content-center">
+          <div class="modal-btn">
+            <button
+              type="button"
+              class="btn btn-secondary button-purple px-3 py-2"
+              data-dismiss="modal"
+            >
+              Choose Your Plan
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

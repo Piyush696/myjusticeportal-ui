@@ -1,6 +1,6 @@
 import { StatesService } from './../../../../services/states.service';
 import { Component, Input, OnChanges, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, ValidatorFn, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { CaseService } from 'app/services/case.service';
 import { ToasterService } from 'app/services/toaster.service';
@@ -56,16 +56,30 @@ export class CaseFormComponent implements OnInit, OnChanges {
   createFormControl() {
     this.caseForm = this.fb.group({
       firstName: ['', [Validators.required]],
-      legalMatter: ['', [Validators.required]],
+      legalMatter: ['', [Validators.required,this.trimValidator]],
       countyOfArrest: [''],
       stateOfArrest: [''],
       dateOfArrest: [''],
-      briefDescriptionOfChargeOrLegalMatter: ['', [Validators.required]],
+      briefDescriptionOfChargeOrLegalMatter: ['', [Validators.required,this.trimValidator]],
       attorneyName: [''],
       nextCourtDate: [''],
-      // otherInformation: ['']
     });
   }
+  
+   trimValidator: ValidatorFn = (control: FormControl) => {
+    if (control.value.startsWith(' ')) {
+      return {
+        'trimError': { value: 'control has leading whitespace' }
+      };
+    }
+    if (control.value.endsWith(' ')) {
+      return {
+        'trimError': { value: 'control has trailing whitespace' }
+      };
+    }
+  
+    return null;
+  };
 
   stateData() {
     this._statesService.getStates()
