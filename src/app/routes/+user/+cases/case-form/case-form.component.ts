@@ -84,7 +84,7 @@ export class CaseFormComponent implements OnInit, OnChanges {
 
   getUserFromStore() {
     this.store.select(s => s.userInfo).subscribe(user => this.userData = user);
-    this.fullName = `${this.userData.firstName} ${this.userData.middleName} ${this.userData.lastName}`;
+    this.fullName = `${this.userData.firstName} ${this.userData.middleName ? this.userData.middleName : ''} ${this.userData.lastName}`;
     this.caseForm.get('firstName').setValue(this.fullName);
     this.caseForm.get('firstName').disable();
   }
