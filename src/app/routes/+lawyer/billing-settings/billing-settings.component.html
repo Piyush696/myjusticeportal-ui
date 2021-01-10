@@ -10,8 +10,8 @@
     <mat-card class="card-color">
       <div class="dflex pb-2">
         <div class="col-12">
-                        <div class="text-center">
-                            <span class="h5 text-center font-weight-bold">Plan Selected</span>
+                        <div>
+                            <span class="h5 font-weight-bold">Plan Selected</span>
                           </div>
                           <div *ngIf="facilities[0]?.planSelected == 'Up to 5 Connections'" class="row">
                             <div class="col-12 pt-2">
@@ -150,23 +150,24 @@
                 <div  *ngIf="facilityList.length > 0">
                   <li *ngFor="let facility of facilityList;">
                     <mat-checkbox color="primary"
-                      (change)="onFacilitySelect($event.checked,facility?.facilityId,facility.facilityUserCount)">
-                      {{facility?.facilityName}} ({{facility.facilityUserCount}})
+                      (change)="onFacilitySelect($event.checked,facility?.facilityId)">
+                      {{facility?.facilityName}} ({{facility?.facilityUserCount}})
                     </mat-checkbox>
                     <div *ngIf="facility.isSelected">
                       <mat-card class="border-card mb-2">
-                        <h4 class="font-weight-bold text-center  mb-1 pt-0">Select Sponsorship Options for this Facility
+                        <h4 class="font-weight-bold text-center mb-1 pt-0">
+                          Select sponsorship options for this facility
                         </h4>
                         <div>
-                          <mat-checkbox color="primary" [(ngModel)]="facility.addOns.premium"
-                            (change)="onSelectAddOns($event.checked,facility?.facilityId,'premium')">
-                            <span>Premium Listing: $0.25/mo./Average Daily Population</span>
+                          <mat-checkbox color="primary" [(ngModel)]="facility.addOns.premium" (change)="onSelectAddOns($event.checked, facility?.facilityId, 'premium' ) ">
+                            <span>Premium Listing: $0.25/mo./Average Daily
+                              Population</span>
                           </mat-checkbox>
                         </div>
                         <div>
-                          <mat-checkbox color="primary" [(ngModel)]="facility.addOns.sponsors"
-                            (change)="onSelectAddOns($event.checked,facility?.facilityId,'sponsors')">
-                            <span>Sponsorship: $1.00/mo./Average Daily Population</span>
+                          <mat-checkbox color="primary" [(ngModel)]="facility.addOns.sponsors" (change)="onSelectAddOns($event.checked, facility?.facilityId,'sponsors')">
+                            <span>Sponsorship: $1.00/mo./Average Daily
+                              Population</span>
                           </mat-checkbox>
                         </div>
                       </mat-card>

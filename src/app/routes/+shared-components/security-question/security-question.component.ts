@@ -17,6 +17,7 @@ export class SecurityQuestionComponent implements OnInit {
   originalSecurityQuestions: any;
   questionId: any;
   securityQuestionAnswered = [];
+  spinner: boolean = false;
 
   @Output() isRegisterEvent = new EventEmitter();
   @Output() isPreviousClick = new EventEmitter();
@@ -74,6 +75,7 @@ export class SecurityQuestionComponent implements OnInit {
   }
 
   onClickRegister() {
+    this.spinner = true;
     this.onClickNext()
     if(this.count < 3){
       this.setAnswers();

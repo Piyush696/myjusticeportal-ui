@@ -27,7 +27,8 @@ export class HireLawyerComponent implements OnInit, AfterViewInit {
   @ViewChild('modalopen') modalopen: ElementRef;
 
   constructor(private hireLawyerService: HireLawyerService, private caseService: CaseService, private router: Router, private specialtyService: SpecialtyService,
-    private userAdditionalService: UserAdditionInfoService, private _statesService: StatesService, public dialog: MatDialog) { }
+    private userAdditionalService: UserAdditionInfoService, private _statesService: StatesService, public dialog: MatDialog) { 
+    }
 
   ngOnInit(): void {
     this.modalAcceptDetails();
@@ -93,13 +94,23 @@ export class HireLawyerComponent implements OnInit, AfterViewInit {
 
   openModal(templateRef, lawyerData) {
     this.lawyerData = lawyerData
-    this.path = lawyerData?.userAdditionalInfo?.header?.downloadLink
+    if(lawyerData?.userAdditionalInfo?.header?.downloadLink){
+      this.path = lawyerData?.userAdditionalInfo?.header?.downloadLink
+    } else {
+      this.path = 'assets/img/LOGO 4.jpg'
+    }
+
     let dialogRef = this.dialog.open(templateRef, {
       width: '800px'
     });
     setTimeout(() => {
       var x = document.getElementById('cust-img')
-      x.style.background = 'url(' + this.path + ')'
+      if(lawyerData?.userAdditionalInfo?.header?.downloadLink){
+        x.style.background = 'url(' + this.path + ')'
+      } else {
+        x.style.background = 'url(' + this.path + ')'
+        x.style.backgroundColor = '#333442'
+      }
     }, 500);
   }
 
