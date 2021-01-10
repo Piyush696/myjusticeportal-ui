@@ -36,6 +36,7 @@ export class ManageProfileComponent implements OnInit {
   buttonText: string = 'Edit'
   specialtyList: any;
   orgData: any;
+  currentView: number = 1;
 
   constructor(private userAdditionalInfo: UserAdditionInfoService, private router: Router, private fb: FormBuilder,
     private specialtyService: SpecialtyService, public dialog: MatDialog, private toasterService: ToasterService, private location: Location,
@@ -72,6 +73,7 @@ export class ManageProfileComponent implements OnInit {
   }
 
   onCloseModal() {
+    this.currentView = 1
     this.dialog.closeAll();
   }
 
@@ -94,13 +96,14 @@ export class ManageProfileComponent implements OnInit {
   }
 
   openOrganizationModal(templateRef, userDetails) {
+    this.currentView = 1
     let name = userDetails.firstName + ' ' + userDetails.middleName + ' ' + userDetails.lastName
     this.additionalInfoForm.get('name').setValue(name)
     this.buttonText = 'Edit'
     this.additionalInfoForm.disable()
     let dialogRef = this.dialog.open(templateRef, {
+
       width: '800px',
-      height: '500px'
     });
     setTimeout(() => {
       var x = document.getElementById('cust-img')
@@ -173,6 +176,7 @@ export class ManageProfileComponent implements OnInit {
     })
   }
   closeModal() {
+    this.currentView = 1
     this.dialog.closeAll();
   }
 
@@ -224,6 +228,10 @@ export class ManageProfileComponent implements OnInit {
 
   onClickGoBack() {
     this.location.back();
+  }
+
+  OnNextView(val) {
+    this.currentView = val
   }
 
 
