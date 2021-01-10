@@ -8,20 +8,20 @@
                 message you and upload files related to your case.
             </h4>
         </div>
-        <div>
-            <mat-checkbox class="mat-card check-style" color="primary" title="View Rejected Cases"
-                (change)="viewhidePendingInquiries($event.checked)">
-                View Rejected Inquiries
-            </mat-checkbox>
-        </div>
     </div>
     <mat-card>
-        <div class="row">
-            <div class="col-5">
+        <div class="d-flex justify-content-between">
+            <div>
                 <mat-form-field class="w-100">
                     <mat-label>Search</mat-label>
                     <input matInput (keyup)="search($event.target.value)">
                 </mat-form-field>
+            </div>
+            <div>
+                <mat-checkbox class="mat-card check-style" color="primary" title="View Rejected Cases"
+                    (change)="viewhidePendingInquiries($event.checked)">
+                    View Rejected Inquiries
+                </mat-checkbox>
             </div>
         </div>
         <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8 w-100">

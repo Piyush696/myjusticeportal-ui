@@ -99,9 +99,13 @@
                             <div *ngIf="assignedLawyer">
                                 <div class="row">
                                     <div class="col-4">
-                                        <div>
+                                        <div *ngIf="assignedLawyer?.userAdditionalInfo?.profile?.downloadLink">
                                             <img src="{{assignedLawyer?.userAdditionalInfo?.profile?.downloadLink}}"
                                                 width="150px" height="150px" alt="logo" class="logo">
+                                        </div>
+                                        <div *ngIf="!assignedLawyer?.userAdditionalInfo?.profile?.downloadLink">
+                                            <img src="assets/img/placeholder.jpg"  width="230px" height="100px"
+                                            alt="logo">
                                         </div>
                                     </div>
                                     <div class="col-8">

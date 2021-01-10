@@ -89,12 +89,12 @@
               <img src="{{user?.userAdditionalInfo?.profile?.downloadLink}}" width="200" height="60" alt="logo">
             </div>
             <div *ngIf="!user?.userAdditionalInfo?.profile?.downloadLink">
-              <img src="assets/img/lawyer.jpg" width="200" height="60"
+              <img src="assets/img/placeholder.jpg" width="150" height="100"
                   alt="logo">
           </div>
             <div>
-              <h4 class=" line-height color">{{user?.firstName}}
-                {{user?.middleName}}{{user?.lastName}}</h4>
+              <h4 class=" line-height color pt-2"><b>{{user?.firstName}}
+                {{user?.middleName}} {{user?.lastName}}</b></h4>
             </div>
           </div>
           <div class="d-flex justify-content-center">

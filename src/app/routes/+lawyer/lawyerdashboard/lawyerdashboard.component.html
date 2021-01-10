@@ -2,6 +2,10 @@
   <h1 class="font-weight-bold m-0">Setup Your Account</h1>
 </div>
 
+<div *ngIf="spinner" class="d-flex justify-content-center align-items-center spinner">
+  <mat-spinner color="primary"></mat-spinner>
+</div>
+
 <div *ngIf="!isAuthorized">
   <div class="d-flex justify-content-center align-items-center;">
     <div class="col-12 pt-2 pl-0">
@@ -169,7 +173,7 @@
             <span class="text-center text-black">Please enter your credit card information in the form below. Once
               everything looks correct, click Pay to complete your setup and
               start using My Justice Portal!</span>
-            <app-stripe class="pt-2 mt-2" [totalCount]="totalPrice" [plan]="plan" (onPayEvent)="onPayEvent($event)"
+            <app-stripe class="pt-2 mt-2" [totalCount]="totalPrice" [plan]="plan" (isloading)="startLoader($event)" (onPayEvent)="onPayEvent($event)"
               [facilitiesList]="facilities"></app-stripe>
           </mat-card>
         </div>
