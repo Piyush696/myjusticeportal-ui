@@ -203,7 +203,7 @@ export class LawyerdashboardComponent implements OnInit, AfterViewInit {
               if (x.metaKey == "sub_id" || x.metaKey == "cust_id") {
                 this.showDashboard = true;
                 this.billingBoard = false;
-              } else if (x.metaKey == "lawyerInfo") {
+              } else if (x.metaKey == "State:Bar") {
                 this.billingBoard = true;
                 this.showDashboard = false;
               }
@@ -274,7 +274,7 @@ export class LawyerdashboardComponent implements OnInit, AfterViewInit {
   getUserDetails() {
     this.userMetaService.getUserAdditionalDetails().subscribe((user: any) => {
       user.data.forEach((ele) => {
-        if (ele.metaKey == "lawyerInfo") {
+        if (ele.metaKey == "State:Bar") {
           let splitArray = ele.metaValue.split(":")
           this.state.push(splitArray[0].toString());
         }

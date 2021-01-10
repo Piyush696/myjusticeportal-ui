@@ -56,17 +56,17 @@ export class CaseFormComponent implements OnInit, OnChanges {
   createFormControl() {
     this.caseForm = this.fb.group({
       firstName: ['', [Validators.required]],
-      legalMatter: ['', [Validators.required,this.trimValidator]],
+      legalMatter: ['', [Validators.required, this.trimValidator]],
       countyOfArrest: [''],
       stateOfArrest: [''],
       dateOfArrest: [''],
-      briefDescriptionOfChargeOrLegalMatter: ['', [Validators.required,this.trimValidator]],
+      briefDescriptionOfChargeOrLegalMatter: ['', [Validators.required, this.trimValidator]],
       attorneyName: [''],
       nextCourtDate: [''],
     });
   }
-  
-   trimValidator: ValidatorFn = (control: FormControl) => {
+
+  trimValidator: ValidatorFn = (control: FormControl) => {
     if (control.value.startsWith(' ')) {
       return {
         'trimError': { value: 'control has leading whitespace' }
@@ -77,7 +77,7 @@ export class CaseFormComponent implements OnInit, OnChanges {
         'trimError': { value: 'control has trailing whitespace' }
       };
     }
-  
+
     return null;
   };
 
@@ -98,7 +98,7 @@ export class CaseFormComponent implements OnInit, OnChanges {
 
   getUserFromStore() {
     this.store.select(s => s.userInfo).subscribe(user => this.userData = user);
-    this.fullName = `${this.userData.firstName} ${this.userData.middleName} ${this.userData.lastName}`;
+    this.fullName = `${this.userData.firstName} ${this.userData.middleName ? this.userData.middleName : ''} ${this.userData.lastName}`;
     this.caseForm.get('firstName').setValue(this.fullName);
     this.caseForm.get('firstName').disable();
   }

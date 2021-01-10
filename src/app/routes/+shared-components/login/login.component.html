@@ -7,7 +7,7 @@
             <mat-card class="mat-elevation-z10 p-4" *ngIf="step === 1">
                 <mat-form-field appearance="fill" class="w-100 p-3">
                     <mat-label>Enter your email or username</mat-label>
-                    <input matInput placeholder="userName@example.com" [formControl]="loginForm.controls['userName']"
+                    <input matInput placeholder="username@example.com" [formControl]="loginForm.controls['userName']"
                         required>
                     <mat-error *ngIf="loginForm.controls['userName'].invalid && loginForm.controls['userName'].touched">
                         <div class="font13" *ngIf="loginForm.get('userName').errors?.required">
