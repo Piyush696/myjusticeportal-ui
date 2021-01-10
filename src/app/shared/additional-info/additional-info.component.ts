@@ -119,18 +119,18 @@ export class AdditionalInfoComponent implements OnInit, OnChanges {
 
   deleteInfo(value) {
     var index = this.lawyerInfoArray.map(function (element) {
-      if(element.bar_info_Exam_Id){
+      if (element.bar_info_Exam_Id) {
         return element.bar_info_Exam_Id;
       }
     }).indexOf(value.bar_info_Exam_Id)
     let info = this.lawyerInfoArray.splice(index, 1)
-     this.states.forEach((currentState) => {
-      if(currentState.name == value.state){
-        this.filteredStateArray.unshift(currentState) 
+    this.states.forEach((currentState) => {
+      if (currentState.name == value.state) {
+        this.filteredStateArray.unshift(currentState)
       }
     })
   }
-  
+
   addMoreStates() {
     this.lawyerInfoArray.push(this.additionalInfoLawyer.value)
     this.filteredStateArray = this.filteredStateArray.filter((currentState) => {
@@ -164,7 +164,7 @@ export class AdditionalInfoComponent implements OnInit, OnChanges {
         this.currentState.push(item.state)
         let userMetaInfo = {}
         let str = item.state + ':' + item.bar_info_Exam_Id
-        userMetaInfo['metaKey'] = 'lawyerInfo'
+        userMetaInfo['metaKey'] = 'State:Bar'
         userMetaInfo['metaValue'] = str
 
         return userMetaInfo

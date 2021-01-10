@@ -185,8 +185,8 @@
             </div>
             <div class="row">
                 <mat-checkbox class="mat-focus-indicator termCondition-margin ml-2"
-                    [formControl]="registrationForm.controls['termCondition']" 
-                    (change)="openModal(mytemplate)" color="primary">
+                    [formControl]="registrationForm.controls['termCondition']" (change)="openModal(mytemplate)"
+                    color="primary">
                     <a>
                         <p class="p-0 m-0 line-height">I accept the <span class="font-weight-bold p-0 m-0">Terms and
                                 Conditions</span>
@@ -272,7 +272,7 @@
                     <button mat-dialog-close class="px-4 py-1" mat-button color="primary" (click)="onDeclineTerms()">
                         DECLINE
                     </button>
-                    <span *ngIf="isAcceptDisabled" class="mleft">You must scroll to the bottom to accept.</span>
+                    <span class="mleft">You must scroll to the bottom to accept.</span>
                     <button class="px-4 py-1" mat-raised-button color="primary" mat-dialog-close
                         [disabled]="isAcceptDisabled" (click)="onAcceptTerms()">
                         ACCEPT

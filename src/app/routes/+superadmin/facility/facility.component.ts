@@ -23,10 +23,11 @@ export class FacilityComponent implements OnInit {
   facilityAddressId: number;
   states = []
   facility;
-  displayedColumns: string[] = ["facilityCode", "facilityName","state", "facilityUserCount", "ipAddress", "libraryLink", "action"];
+  displayedColumns: string[] = ["facilityCode", "facilityName", "state", "facilityUserCount", "ipAddress", "libraryLink", "action"];
   dataSource = new MatTableDataSource();
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort: MatSort;
+  currentView: number = 1;
 
   constructor(private toasterService: ToasterService, private facilityService: FacilityService,
     public dialog: MatDialog, private fb: FormBuilder, private _statesService: StatesService,) { }
@@ -87,7 +88,8 @@ export class FacilityComponent implements OnInit {
   deleteFacilityModal(templateRef, facility) {
     this.facility = facility
     let dialogRef = this.dialog.open(templateRef, {
-      width: '500px',
+      // width: '500px',
+      height: '79%'
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -117,8 +119,12 @@ export class FacilityComponent implements OnInit {
       if (res.success) {
         this.toasterService.showSuccessToater('Facility successfully Added.');
         this.getAllFacilities();
+        this.currentView = 1;
+
       } else {
         this.toasterService.showErrorToater('Facility is not Added.');
+        this.currentView = 1;
+
       }
       this.facilityForm.reset();
       this.addressForm.reset();
@@ -126,6 +132,7 @@ export class FacilityComponent implements OnInit {
   }
 
   openModal(templateRef, value) {
+    this.currentView = 1;
     this.addHide = value;
     this.buttonText = 'Edit';
     if (value) {
@@ -172,6 +179,7 @@ export class FacilityComponent implements OnInit {
 
     this.buttonText = 'Edit';
     this.facilityService.updateFacility(facilityDetails, this.facilityId,).subscribe((res: any) => {
+      this.currentView = 1;
       this.dialog.closeAll();
       if (res.success) {
         this.toasterService.showSuccessToater('Facility successfully updated.');
@@ -183,14 +191,14 @@ export class FacilityComponent implements OnInit {
   }
 
   search(searchValue: string) {
-     this.dataSource.filter = searchValue.trim().toLowerCase();
+    this.dataSource.filter = searchValue.trim().toLowerCase();
     this.dataSource.filterPredicate = (searchValue: any, filter) => {
-      const dataStr =JSON.stringify(searchValue).toLowerCase();
-      return dataStr.indexOf(filter) != -1; 
+      const dataStr = JSON.stringify(searchValue).toLowerCase();
+      return dataStr.indexOf(filter) != -1;
     }
   }
 
-  closeModal(){
+  closeModal() {
     this.dialog.closeAll();
   }
 
@@ -210,5 +218,9 @@ export class FacilityComponent implements OnInit {
     else {
       return [10];
     }
+  }
+
+  OnNextView(val) {
+    this.currentView = val
   }
 }
