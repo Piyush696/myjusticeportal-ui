@@ -23,7 +23,7 @@ export class StripeComponent implements OnDestroy, AfterViewInit,OnChanges ,OnIn
    @Input() totalCount:number;
    @Input() facilitiesList:any[];
    @Input() update;
-   spinner: boolean = false;
+   @Output() isloading = new EventEmitter()
 
   constructor(
     private cd: ChangeDetectorRef,private fb: FormBuilder,
@@ -113,7 +113,7 @@ export class StripeComponent implements OnDestroy, AfterViewInit,OnChanges ,OnIn
   }
   
   async createStripeToken() {
-    this.spinner = true;
+    this.isloading.emit(true)
     const { token, error } = await stripe.createToken(this.card);
     if(this.update){
       let facilityList = [];
@@ -149,6 +149,7 @@ export class StripeComponent implements OnDestroy, AfterViewInit,OnChanges ,OnIn
         if(res.success){
           this.toasterService.showSuccessToater('Plan updated')
           this.onPayEvent.emit(true)
+          this.isloading.emit(false)
         }
       })
     } else {
@@ -193,7 +194,6 @@ export class StripeComponent implements OnDestroy, AfterViewInit,OnChanges ,OnIn
             this.lawyerService.subscribePlan(data).subscribe((subscribePlan: any) => {
               if (subscribePlan.data) {
                 this.onPayEvent.emit(true)
-                this.spinner = false;
                 this.toasterService.showSuccessToater('You have subscribed successfully!')
               } else {
                 this.toasterService.showWarningToater('Something went wrong. Please try again')

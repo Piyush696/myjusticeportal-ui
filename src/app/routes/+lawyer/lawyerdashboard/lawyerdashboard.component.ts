@@ -52,7 +52,7 @@ export class LawyerdashboardComponent implements OnInit, AfterViewInit {
   plan: string;
   @ViewChild('modalopen') modalopen: ElementRef;
   modalopens: any;
-
+  spinner:boolean = false;
   constructor(private hireLawyerService: HireLawyerService, private userMetaService: UserMetaService, private router: Router,
     private facilityService: FacilityService, public dialog: MatDialog, private userAdditionInfoService: UserAdditionInfoService,
     private lawyerService: LawyerService, private toasterService: ToasterService, private store: Store<any>, private fb: FormBuilder) { }
@@ -327,6 +327,10 @@ export class LawyerdashboardComponent implements OnInit, AfterViewInit {
 
   search(searchValue: string) {
     this.dataSource.filter = searchValue.trim().toLowerCase();
+  }
+
+  startLoader(value){
+    this.spinner = value
   }
 
   // pagination.
