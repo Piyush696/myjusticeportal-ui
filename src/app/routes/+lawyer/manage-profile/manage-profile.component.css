@@ -45,3 +45,9 @@ th {
     background-repeat: no-repeat;
     height: 140px;
 }
+
+::ng-deep .mat-dialog-container {
+  overflow: hidden !important;
+  height: 80% !important;
+
+}

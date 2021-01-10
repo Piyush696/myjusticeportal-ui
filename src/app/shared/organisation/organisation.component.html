@@ -45,6 +45,10 @@
                                 <small class="font13" *ngIf="organisationForm.get('name').errors?.maxlength">
                                     Organization name should be less than 100 chracters
                                 </small>
+                                <small class="font13"
+                                    *ngIf="organisationForm.controls['name'].hasError('invalidString')">
+                                    Organization Name should not contain spaces.
+                                </small>
                             </div>
                         </mat-error>
                     </mat-form-field>
