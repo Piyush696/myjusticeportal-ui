@@ -85,10 +85,10 @@ export class ManageProfileComponent implements OnInit {
       if (user.data.userAdditionalInfo.practiceAreas) {
         specialty.push(this.userDetails.userAdditionalInfo.practiceAreas.split(", "))
       }
-      if(this.userDetails?.userAdditionalInfo?.header?.downloadLink){
+      if (this.userDetails?.userAdditionalInfo?.header?.downloadLink) {
         this.path = this.userDetails?.userAdditionalInfo?.header?.downloadLink
-      }else{
-        this.path =  this.path = 'assets/img/LOGO 4.jpg'
+      } else {
+        this.path = this.path = 'assets/img/LOGO 4.jpg'
       }
       let name = user?.data?.firstName + ' ' + user?.data?.middleName + ' ' + user?.data?.lastName
       this.additionalInfoForm.get('name').setValue(name)
@@ -111,9 +111,9 @@ export class ManageProfileComponent implements OnInit {
     });
     setTimeout(() => {
       var x = document.getElementById('cust-img')
-      if(this.userDetails?.userAdditionalInfo?.header?.downloadLink){
+      if (this.userDetails?.userAdditionalInfo?.header?.downloadLink) {
         x.style.background = 'url(' + this.path + ')'
-      }else{
+      } else {
         x.style.background = 'url(' + this.path + ')'
         x.style.backgroundColor = '#333442'
       }
@@ -191,8 +191,8 @@ export class ManageProfileComponent implements OnInit {
 
   onProfile(file) {
     const maxAllowedSize = 5 * 1024 * 1024
-    const height = 300;
-    const width = 300;
+    const height = 261;
+    const width = 500;
 
     if (file[0].size > maxAllowedSize) {
       this.isFileSizeMax = true
@@ -214,8 +214,8 @@ export class ManageProfileComponent implements OnInit {
 
   onHeadshot(file) {
     const maxAllowedSize = 8 * 1024 * 1024
-    const height = 300;
-    const width = 550;
+    const height = 360;
+    const width = 640;
 
     if (file[0].size > maxAllowedSize) {
       this.isHeadshotFileSizeMax = true

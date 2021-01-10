@@ -150,7 +150,7 @@
             <div class="card-body px-0 pb-4">
                 <div class="drag-border p-3">
                     <h4 class="font-weight-bold margin-remove">Profile Headshot</h4>
-                    <span class="text-bold">Best image size is up to 5MB and 300px × 200px (width × height).</span>
+                    <span class="text-bold">Best image size is up to 5MB and 500px × 261px (width × height).</span>
                     <div ng2FileDrop [ngClass]="{'another-file-over-class': hasAnotherDropZoneOver}"
                         (fileOver)="fileOverAnother($event)" [uploader]="uploader1"
                         class="box-placeholder my-drop-zone font-weight-bold pb-2">
@@ -163,7 +163,7 @@
                     <div>
                         <small class="text-danger" *ngIf="isFileSizeMax">Image size should be less than 5 MB</small>
                     </div>
-                    <div> <small class="text-danger" *ngIf="isDimenssionMax">Image should be 300px × 200px (width ×
+                    <div> <small class="text-danger" *ngIf="isDimenssionMax">Image should be 500px × 261px (width ×
                             height)
                         </small>
                     </div>
@@ -195,7 +195,7 @@
             <div class="card-body px-0 pb-4">
                 <div class="drag-border p-3">
                     <h4 class="font-weight-bold margin-remove">Profile Header Background Image</h4>
-                    <span class="text-bold">Best image size is 8 MB and 500px × 300px (width × height)</span>
+                    <span class="text-bold">Best image size is 8 MB and 640px × 360px (width × height)</span>
                     <div ng2FileDrop [ngClass]="{'another-file-over-class': hasAnotherDropZoneOver}"
                         (fileOver)="fileOverAnother($event)" [uploader]="uploader2"
                         class="box-placeholder my-drop-zone font-weight-bold pb-2">
@@ -209,7 +209,7 @@
                         <small class="text-danger" *ngIf="isHeadshotFileSizeMax">File size should be less than 8
                             MB</small>
                     </div>
-                    <div> <small class="text-danger" *ngIf="isDimenssionMax1">Image should be 500px × 300px (width ×
+                    <div> <small class="text-danger" *ngIf="isDimenssionMax1">Image should be 640px × 360px (width ×
                             height)
                         </small>
                     </div>
