@@ -11,8 +11,8 @@
         <div class="col-6 pl-0">
             <mat-form-field appearance="fill" class="w-100 p-0">
                 <mat-label>Organization Name</mat-label>
-                <input type="text" matInput placeholder="Organization Name" [formControl]="lawyerCaseForm.controls['name']"
-                    required>
+                <input type="text" matInput placeholder="Organization Name"
+                    [formControl]="lawyerCaseForm.controls['name']" required>
                 <mat-error>
                     <div *ngIf="lawyerCaseForm.controls['name'].invalid && lawyerCaseForm.controls['name'].touched">
                         <small class="font13">
@@ -22,7 +22,7 @@
                 </mat-error>
             </mat-form-field>
         </div>
-    
+
         <div class="col-6 pl-0">
             <mat-form-field appearance="fill" class="w-100 p-0">
                 <mat-label>Lawyer</mat-label>
@@ -56,7 +56,8 @@
 
     <div class="col-8 p-0">
         <mat-form-field appearance="fill" class="w-100 py-2">
-            <textarea rows="2" matInput [formControl]="lawyerCaseForm.controls['notes']" required></textarea>
+            <textarea rows="2" matInput [formControl]="lawyerCaseForm.controls['notes']"
+                placeholder="Please describe about your case" required></textarea>
             <mat-error>
                 <div *ngIf="lawyerCaseForm.controls['notes'].invalid && lawyerCaseForm.controls['notes'].touched">
                     <small class="font13">
@@ -66,7 +67,8 @@
             </mat-error>
         </mat-form-field>
         <div class="pr-2 pb-2 pt-2 pl-0">
-            <button class="button-purple px-5 py-1" [disabled]="!lawyerCaseForm.valid" mat-raised-button (click)="onContactLawyer()">
+            <button class="button-purple px-5 py-1" [disabled]="!lawyerCaseForm.valid" mat-raised-button
+                (click)="onContactLawyer()">
                 Send
             </button>
             <button class="ml-4 button-purple px-5 py-1" routerLink="../../case" mat-raised-button>

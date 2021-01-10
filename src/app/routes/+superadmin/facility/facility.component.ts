@@ -223,4 +223,5 @@ export class FacilityComponent implements OnInit {
   OnNextView(val) {
     this.currentView = val
   }
+
 }

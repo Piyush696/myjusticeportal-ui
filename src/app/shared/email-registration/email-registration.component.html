@@ -43,6 +43,10 @@
                             <small class="font13" *ngIf="registrationForm.get('firstName').errors?.pattern">
                                 Legal First Name should contain only letters.
                             </small>
+                            <small class="font13"
+                                *ngIf="registrationForm.controls['firstName'].hasError('invalidString')">
+                                Legal First Name should not contain spaces.
+                            </small>
                         </mat-error>
                     </mat-form-field>
                 </div>
@@ -68,6 +72,10 @@
                             </small>
                             <small class="font13" *ngIf="registrationForm.get('lastName').errors?.pattern">
                                 Legal Last Name should contain only letters.
+                            </small>
+                            <small class="font13"
+                                *ngIf="registrationForm.controls['lastName'].hasError('invalidString')">
+                                Legal Last Name should not contain spaces.
                             </small>
                         </mat-error>
                     </mat-form-field>
