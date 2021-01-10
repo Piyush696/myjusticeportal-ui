@@ -90,15 +90,8 @@
                   </div>
                   <div *ngIf="facilities.length > 0">
                     <li *ngFor="let facility of facilities">
-                      <mat-checkbox color="primary" (change)="
-                          onFacilitySelect(
-                            $event.checked,
-                            facility?.facilityId
-                          )
-                        ">
-                        {{ facility?.facilityName }} ({{
-                        facility.facilityUserCount
-                        }})
+                      <mat-checkbox color="primary" (change)="onFacilitySelect($event.checked,facility?.facilityId) ">
+                        {{ facility?.facilityName }} ({{facility.facilityUserCount }})
                       </mat-checkbox>
                       <div *ngIf="facility.isSelected">
                         <mat-card class="border-card mb-2">
@@ -106,25 +99,13 @@
                             Select sponsorship options for this facility
                           </h4>
                           <div>
-                            <mat-checkbox color="primary" [(ngModel)]="facility.addOns.premium" (change)="
-                                onSelectAddOns(
-                                  $event.checked,
-                                  facility?.facilityId,
-                                  'premium'
-                                )
-                              ">
+                            <mat-checkbox color="primary" [(ngModel)]="facility.addOns.premium" (change)="onSelectAddOns($event.checked,facility?.facilityId,'premium' )">
                               <span>Premium Listing: $0.25/mo./Average Daily
                                 Population</span>
                             </mat-checkbox>
                           </div>
                           <div>
-                            <mat-checkbox color="primary" [(ngModel)]="facility.addOns.sponsors" (change)="
-                                onSelectAddOns(
-                                  $event.checked,
-                                  facility?.facilityId,
-                                  'sponsors'
-                                )
-                              ">
+                            <mat-checkbox color="primary" [(ngModel)]="facility.addOns.sponsors" (change)="onSelectAddOns($event.checked,facility?.facilityId,'sponsors' )">
                               <span>Sponsorship: $1.00/mo./Average Daily
                                 Population</span>
                             </mat-checkbox>

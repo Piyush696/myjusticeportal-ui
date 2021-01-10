@@ -87,14 +87,24 @@ export class ManageOrganisationComponent implements OnInit {
     });
     setTimeout(() => {
       var x = document.getElementById('cust-img')
-      x.style.background = 'url(' + this.path + ')'
+      if(this.orgData.Organization?.logo?.downloadLink){
+        x.style.background = 'url(' + this.path + ')'
+      }else{
+        x.style.background = 'url(' + this.path + ')'
+        x.style.backgroundColor = '#333442'
+      }
     }, 500);
   }
 
   getOrganisationAddress() {
     this.organisationService.getOrganisationAddressDetails().subscribe((orgDetails: any) => {
       this.orgData = orgDetails.data
-      this.path = orgDetails.data?.Organization?.logo?.downloadLink
+      if(orgDetails.data?.Organization?.logo?.downloadLink){
+        this.path = orgDetails.data?.Organization?.logo?.downloadLink
+      }else{
+        this.path = 'assets/img/LOGO 4.jpg'
+      }
+
       this.organisationId = orgDetails.data.Organization.organizationId
       if (orgDetails.success) {
         let specialty = [];

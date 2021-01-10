@@ -56,30 +56,16 @@ export class CaseFormComponent implements OnInit, OnChanges {
   createFormControl() {
     this.caseForm = this.fb.group({
       firstName: ['', [Validators.required]],
-      legalMatter: ['', [Validators.required, this.trimValidator]],
+      legalMatter: ['', [Validators.required,Validators.pattern(".*\\S.*[a-zA-z0-9 ]")]],
       countyOfArrest: [''],
       stateOfArrest: [''],
       dateOfArrest: [''],
-      briefDescriptionOfChargeOrLegalMatter: ['', [Validators.required, this.trimValidator]],
+      briefDescriptionOfChargeOrLegalMatter: ['', [Validators.required,Validators.pattern(".*\\S.*[a-zA-z0-9 ]")]],
       attorneyName: [''],
       nextCourtDate: [''],
     });
   }
 
-  trimValidator: ValidatorFn = (control: FormControl) => {
-    if (control.value.startsWith(' ')) {
-      return {
-        'trimError': { value: 'control has leading whitespace' }
-      };
-    }
-    if (control.value.endsWith(' ')) {
-      return {
-        'trimError': { value: 'control has trailing whitespace' }
-      };
-    }
-
-    return null;
-  };
 
   stateData() {
     this._statesService.getStates()

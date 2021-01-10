@@ -25,10 +25,18 @@ export class LawyerProfileComponent implements OnInit {
         if(user.data.userAdditionalInfo && user.data.userAdditionalInfo.practiceAreas){
           this.practiseAreaList.push(user.data.userAdditionalInfo.practiceAreas.split(','))
         }
-        this.path = user.data.userAdditionalInfo.header.downloadLink
+        if(user.data?.userAdditionalInfo?.header?.downloadLink){
+          this.path = user.data.userAdditionalInfo.header.downloadLink
+        } else {
+          this.path = 'assets/img/LOGO 4.jpg'
+        }
         setTimeout(() => {
           var x = document.getElementById('cust-img')
-          x.style.background = 'url(' + this.path + ')'
+          if(user.data?.userAdditionalInfo?.header?.downloadLink){
+            x.style.background = 'url(' + this.path + ')'
+          } else{
+            x.style.backgroundColor = '#333442'
+          }
         }, 500);
     })
   }

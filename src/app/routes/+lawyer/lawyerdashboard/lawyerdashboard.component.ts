@@ -178,7 +178,6 @@ export class LawyerdashboardComponent implements OnInit, AfterViewInit {
         return x
       });
     }
-
   }
 
 
@@ -299,18 +298,6 @@ export class LawyerdashboardComponent implements OnInit, AfterViewInit {
           }
         })
         this.facilities = this.facilities.filter(x => x)
-        // facilities.data.forEach((ele) => {
-        //   if (ele.Address) {
-        //     // this.state.forEach((item) => {
-        //     if (this.state.includes(ele.Address.state)) {
-        //       this.filteredFacilityList.push(ele)
-        //     }
-        //     // })
-        //   }
-        // })
-        // this.facilities = this.filteredFacilityList.map((ele) => {
-
-        // });
       }
     })
   }
