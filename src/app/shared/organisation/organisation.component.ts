@@ -58,11 +58,6 @@ export class OrganisationComponent implements OnInit, OnChanges {
 
   validateString(control: AbstractControl) {
     if (control.value) {
-      // const pattern = /^\S*$/;
-      // if (!control.value.match(pattern) && control.value !== '') {
-      //   return { invalidString: true };
-      // }
-      // return null;
       if (control.value.startsWith(' ')) {
         return { invalidString: true };;
       }
