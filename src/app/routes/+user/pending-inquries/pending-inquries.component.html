@@ -3,9 +3,7 @@
         <div>
             <h1 class="line-height font-weight-bold">Pending Inquiries</h1>
             <h4 class="line-height header-sub-text">
-                View and manage your prospective lawyer inquiries. When both you and a lawyer accept the 
-                connection, your lawyer will be able to 
-                message you and upload files related to your case.
+                View and manage your prospective lawyer inquiries. When both you and a lawyer accept the connection, your lawyer will be able to message you and upload files related to your case.
             </h4>
         </div>
     </div>
@@ -18,8 +16,7 @@
                 </mat-form-field>
             </div>
             <div>
-                <mat-checkbox class="mat-card check-style" color="primary" title="View Rejected Cases"
-                    (change)="viewhidePendingInquiries($event.checked)">
+                <mat-checkbox class="mat-card check-style" color="primary" title="View Rejected Cases" (change)="viewhidePendingInquiries($event.checked)">
                     View Rejected Inquiries
                 </mat-checkbox>
             </div>
@@ -44,25 +41,34 @@
             </ng-container>
             <ng-container matColumnDef="status">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header>Status</th>
-                <td mat-cell *matCellDef="let case">{{case?.statusDeclared}}</td>
+                <td mat-cell *matCellDef="let case">{{case?.status}}</td>
             </ng-container>
             <ng-container matColumnDef="action">
                 <th mat-header-cell *matHeaderCellDef>Action</th>
                 <td mat-cell *matCellDef="let case">
-                    <button
-                        [disabled]="(case.status === 'inmate_rejected'  || case.status === 'inmate_accepted' ||  case.status === 'Rejected' ||  case.status === 'Requested')"
-                        class="btn btn-sm btn-primary" color="green"
-                        (click)="onClickStatus('inmate_accepted',case.userId,case.caseId)">
+                    <button *ngIf="(!case.status === 'Lawyer Requested' ||  case.status === 'Lawyer Rejected')" [disabled]="(case.status === 'Lawyer Rejected')" class="btn btn-sm btn-primary" color="green" (click)="onClickStatus('inmate_accepted',case.userId,case.caseId)">
                         Accept
                     </button>
-                    <button
-                        [disabled]="(case.status === 'inmate_rejected' || case.status === 'Rejected' ||case.status === 'Requested')"
-                        class="btn btn-sm btn-warning" color=""
-                        (click)="onClickStatus('inmate_rejected',case.userId,case.caseId)">
+                    <button *ngIf="(case.status === 'Inmate Rejected' || case.status === 'Disconnected')" [disabled]="(case.status === 'Lawyer Rejected')" class="btn btn-sm btn-primary" color="green" (click)="onClickStatus('Lawyer Requested',case.userId,case.caseId)">
+                        Request Again
+                    </button>
+                    <button *ngIf="case.status === 'Lawyer Requested' ||  case.status === 'Lawyer Requested'" [disabled]="(case.status === 'inmate_rejected'  || case.status === 'inmate_accepted' 
+                    ||  case.status === 'Rejected' ||  case.status === 'Requested')" class="btn btn-sm btn-primary" color="green" (click)="onClickStatus('Inmate Rejected',case.userId,case.caseId)">
+                        Cancel
+                    </button>
+                    <button *ngIf="case.status === 'Lawyer Approved'" [disabled]="(case.status === 'inmate_rejected'  || case.status === 'inmate_accepted' ||  
+                    case.status === 'Rejected' ||  case.status === 'Requested')" class="btn btn-sm btn-primary" color="green" (click)="onClickStatus('Connected',case.userId,case.caseId)">
+                        Connect
+                   </button>
+                    <button *ngIf="case.status === 'Connected'" class="btn btn-sm btn-danger" (click)="onClickStatus('Disconnected',case.userId,case.caseId)">
+                       Disconnect
+                  </button>
+                    <button *ngIf="(case.status === 'Lawyer Requested' || case.status === 'Lawyer Approved' 
+                    || case.status === 'Inmate Rejected' || case.status === 'Lawyer Rejected')" [disabled]="(!case.status === 'Lawyer Requested' 
+                    || case.status === 'Inmate Rejected' || case.status === 'Lawyer Rejected')" class="btn btn-sm btn-warning" (click)="onClickStatus('Inmate Rejected',case.userId,case.caseId)">
                         Reject
                     </button>
-                    <button [disabled]="( case.status === 'inmate_rejected' || case.status === 'Rejected')"
-                        class="btn btn-sm btn-dark" (click)="onOpenModal(openModal,case.userId)">
+                    <button [disabled]="(case.status === 'Rejected' || case.status === 'Lawyer Rejected')" class="btn btn-sm btn-dark" (click)="onOpenModal(openModal,case.userId)">
                         Message
                     </button>
                 </td>

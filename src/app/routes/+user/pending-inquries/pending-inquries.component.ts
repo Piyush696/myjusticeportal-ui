@@ -80,24 +80,6 @@ export class PendingInquriesComponent implements OnInit {
     this.filteredRejectedPendingInquiriesList = []
     this.caseService.getPendingCaseInfo().subscribe((pendingCase: any) => {
       this.pendingCasesList = pendingCase.data.map((status) => {
-        if (status.status && status.status === 'Rejected') {
-          status['statusDeclared'] = 'Lawyer Rejected'
-        }
-        else if (status.status && status.status === 'Requested') {
-          status['statusDeclared'] = 'Lawyer Requested'
-        }
-        else if (status.status && status.status === 'Approved') {
-          status['statusDeclared'] = 'Lawyer Approved'
-        }
-        else if (status.status && status.status === 'inmate_accepted') {
-          status['statusDeclared'] = 'Inmate Approved'
-        }
-        else if (status.status && status.status === 'inmate_rejected') {
-          status['statusDeclared'] = 'Inmate Rejected'
-        }
-        else if (status.status && status.status === 'chatEnabled') {
-          status['statusDeclared'] = 'Inmate chatEnabled'
-        }
         status['name0']= status.Organization.name;
         status['name1']= status.Organization.name.split(" ").join("");
         status['name2']=status.firstName+" "+status.lastName;
