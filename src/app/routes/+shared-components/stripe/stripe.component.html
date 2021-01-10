@@ -13,8 +13,7 @@
                 </mat-error>
             </div>
             <div class="d-flex justify-content-center align-items-center">
-                <button [disabled]="!totalCount && facilitiesList.length == 0" mat-raised-button
-                    class="button-purple px-4 py-1 mt-3">Pay
+                <button [disabled]="!totalCount" mat-raised-button class="button-purple px-4 py-1 mt-3">Pay
                     {{totalCount | currency:'USD':'symbol'}}
                 </button>
             </div>
