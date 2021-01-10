@@ -85,7 +85,11 @@ export class ManageProfileComponent implements OnInit {
       if (user.data.userAdditionalInfo.practiceAreas) {
         specialty.push(this.userDetails.userAdditionalInfo.practiceAreas.split(", "))
       }
-      this.path = this.userDetails?.userAdditionalInfo?.header?.downloadLink
+      if(this.userDetails?.userAdditionalInfo?.header?.downloadLink){
+        this.path = this.userDetails?.userAdditionalInfo?.header?.downloadLink
+      }else{
+        this.path =  this.path = 'assets/img/LOGO 4.jpg'
+      }
       let name = user?.data?.firstName + ' ' + user?.data?.middleName + ' ' + user?.data?.lastName
       this.additionalInfoForm.get('name').setValue(name)
       this.additionalInfoForm.get('tagline').setValue(user?.data?.userAdditionalInfo?.tagline)
@@ -107,7 +111,12 @@ export class ManageProfileComponent implements OnInit {
     });
     setTimeout(() => {
       var x = document.getElementById('cust-img')
-      x.style.background = 'url(' + this.path + ')'
+      if(this.userDetails?.userAdditionalInfo?.header?.downloadLink){
+        x.style.background = 'url(' + this.path + ')'
+      }else{
+        x.style.background = 'url(' + this.path + ')'
+        x.style.backgroundColor = '#333442'
+      }
     }, 500);
   }
 

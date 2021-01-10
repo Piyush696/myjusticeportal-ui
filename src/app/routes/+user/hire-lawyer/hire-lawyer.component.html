@@ -89,12 +89,12 @@
               <img src="{{user?.userAdditionalInfo?.profile?.downloadLink}}" width="200" height="60" alt="logo">
             </div>
             <div *ngIf="!user?.userAdditionalInfo?.profile?.downloadLink">
-              <img src="assets/img/lawyer.jpg" width="200" height="60"
+              <img src="assets/img/placeholder.jpg" width="150" height="100"
                   alt="logo">
           </div>
             <div>
-              <h4 class=" line-height color">{{user?.firstName}}
-                {{user?.middleName}}{{user?.lastName}}</h4>
+              <h4 class=" line-height color pt-2"><b>{{user?.firstName}}
+                {{user?.middleName}} {{user?.lastName}}</b></h4>
             </div>
           </div>
           <div class="d-flex justify-content-center">
@@ -145,10 +145,14 @@
       <div class="row mt-3">
         <div class="col-3">
           <div class="d-flex">
-            <div class="img-profile">
+            <div *ngIf="lawyerData?.userAdditionalInfo?.profile?.downloadLink" class="img-profile">
               <img src="{{lawyerData?.userAdditionalInfo?.profile?.downloadLink}}" width="150px" height="150px"
                 alt="logo" class="logo">
             </div>
+            <div *ngIf="!lawyerData?.userAdditionalInfo?.profile?.downloadLink">
+              <img src="assets/img/placeholder.jpg"  width="150px" height="130px"
+                  alt="logo">
+          </div>
           </div>
           <div class="d-flex justify-content-center align-items-center">
             <div class="pt-2">

@@ -3,9 +3,13 @@
         <div class="d-flex justify-content-center">
             <img src="assets/img/logo.png" alt="logo" class="logo">
         </div>
-        <h3 class="text-center font-weight-bold">Step 3/3</h3>
+        <h3 *ngIf="!spinner" class="text-center font-weight-bold">Step 3/3</h3>
 
-        <mat-card class="p-5">
+        <div *ngIf="spinner" class="d-flex justify-content-center align-items-center spinner">
+            <mat-spinner color="primary"></mat-spinner>
+        </div>
+
+        <mat-card *ngIf="!spinner" class="p-5">
             <h2 class="font-weight-bold mb-1 text-center">
                 Security Questions
             </h2>
@@ -53,7 +57,7 @@
                 </button>
             </div>
         </mat-card>
-        <div class="row d-flex justify-content-center pt-2">
+        <div *ngIf="!spinner" class="row d-flex justify-content-center pt-2">
             <a [routerLink]="'/login'" mat-button>Back to Login</a>
         </div>
     </div>

@@ -23,6 +23,8 @@ export class StripeComponent implements OnDestroy, AfterViewInit,OnChanges ,OnIn
    @Input() totalCount:number;
    @Input() facilitiesList:any[];
    @Input() update;
+   @Output() isloading = new EventEmitter()
+
   constructor(
     private cd: ChangeDetectorRef,private fb: FormBuilder,
     @Inject(MAT_DIALOG_DATA) private data: any,
@@ -111,6 +113,7 @@ export class StripeComponent implements OnDestroy, AfterViewInit,OnChanges ,OnIn
   }
   
   async createStripeToken() {
+    this.isloading.emit(true)
     const { token, error } = await stripe.createToken(this.card);
     if(this.update){
       let facilityList = [];
@@ -146,6 +149,7 @@ export class StripeComponent implements OnDestroy, AfterViewInit,OnChanges ,OnIn
         if(res.success){
           this.toasterService.showSuccessToater('Plan updated')
           this.onPayEvent.emit(true)
+          this.isloading.emit(false)
         }
       })
     } else {

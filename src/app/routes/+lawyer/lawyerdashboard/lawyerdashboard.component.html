@@ -2,6 +2,10 @@
   <h1 class="font-weight-bold m-0">Setup Your Account</h1>
 </div>
 
+<div *ngIf="spinner" class="d-flex justify-content-center align-items-center spinner">
+  <mat-spinner color="primary"></mat-spinner>
+</div>
+
 <div *ngIf="!isAuthorized">
   <div class="d-flex justify-content-center align-items-center;">
     <div class="col-12 pt-2 pl-0">
@@ -90,15 +94,8 @@
                   </div>
                   <div *ngIf="facilities.length > 0">
                     <li *ngFor="let facility of facilities">
-                      <mat-checkbox color="primary" (change)="
-                          onFacilitySelect(
-                            $event.checked,
-                            facility?.facilityId
-                          )
-                        ">
-                        {{ facility?.facilityName }} ({{
-                        facility.facilityUserCount
-                        }})
+                      <mat-checkbox color="primary" (change)="onFacilitySelect($event.checked,facility?.facilityId) ">
+                        {{ facility?.facilityName }} ({{facility.facilityUserCount }})
                       </mat-checkbox>
                       <div *ngIf="facility.isSelected">
                         <mat-card class="border-card mb-2">
@@ -106,25 +103,13 @@
                             Select sponsorship options for this facility
                           </h4>
                           <div>
-                            <mat-checkbox color="primary" [(ngModel)]="facility.addOns.premium" (change)="
-                                onSelectAddOns(
-                                  $event.checked,
-                                  facility?.facilityId,
-                                  'premium'
-                                )
-                              ">
+                            <mat-checkbox color="primary" [(ngModel)]="facility.addOns.premium" (change)="onSelectAddOns($event.checked,facility?.facilityId,'premium' )">
                               <span>Premium Listing: $0.25/mo./Average Daily
                                 Population</span>
                             </mat-checkbox>
                           </div>
                           <div>
-                            <mat-checkbox color="primary" [(ngModel)]="facility.addOns.sponsors" (change)="
-                                onSelectAddOns(
-                                  $event.checked,
-                                  facility?.facilityId,
-                                  'sponsors'
-                                )
-                              ">
+                            <mat-checkbox color="primary" [(ngModel)]="facility.addOns.sponsors" (change)="onSelectAddOns($event.checked,facility?.facilityId,'sponsors' )">
                               <span>Sponsorship: $1.00/mo./Average Daily
                                 Population</span>
                             </mat-checkbox>
@@ -188,7 +173,7 @@
             <span class="text-center text-black">Please enter your credit card information in the form below. Once
               everything looks correct, click Pay to complete your setup and
               start using My Justice Portal!</span>
-            <app-stripe class="pt-2 mt-2" [totalCount]="totalPrice" [plan]="plan" (onPayEvent)="onPayEvent($event)"
+            <app-stripe class="pt-2 mt-2" [totalCount]="totalPrice" [plan]="plan" (isloading)="startLoader($event)" (onPayEvent)="onPayEvent($event)"
               [facilitiesList]="facilities"></app-stripe>
           </mat-card>
         </div>

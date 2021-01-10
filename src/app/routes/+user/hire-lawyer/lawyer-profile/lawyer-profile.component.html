@@ -19,10 +19,14 @@
                         <div class="row mt-3">
                             <div class="col-4">
                                 <div class="d-flex">
-                                  <div class="img-profile">
+                                  <div *ngIf="userDetails?.userAdditionalInfo?.profile?.downloadLink" class="img-profile">
                                     <img src="{{userDetails?.userAdditionalInfo?.profile?.downloadLink}}" width="150px" height="150px"
                                       alt="logo" class="logo">
                                   </div>
+                                  <div *ngIf="!userDetails?.userAdditionalInfo?.profile?.downloadLink" class="img-profile">
+                                    <img src="assets/img/placeholder.jpg"  width="150px" height="130px"
+                                        alt="logo">
+                                </div>
                                 </div>
                                 <div class="d-flex justify-content-center align-items-center">
                                   <div class="pt-2">

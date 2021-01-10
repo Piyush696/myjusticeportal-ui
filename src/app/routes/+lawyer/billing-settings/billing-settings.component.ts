@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { FacilityService } from 'app/services/facility.service';
+import { UserAdditionInfoService } from 'app/services/user-addition-info.service';
+import { UserMetaService } from 'app/services/user-meta.service';
 import { LawyerFacilityService } from '../../../services/lawyer-facility.service';
 @Component({
   selector: 'app-billing-settings',
@@ -21,12 +23,13 @@ export class BillingSettingsComponent implements OnInit {
   averageCount: number = 0;
   update: boolean;
   plan: string;
-  
-  constructor(private lawyerFacilityService: LawyerFacilityService, private facilityService: FacilityService, public dialog: MatDialog) { }
+  state = [];
+
+  constructor(private lawyerFacilityService: LawyerFacilityService,private userMetaService: UserMetaService, private facilityService: FacilityService, public dialog: MatDialog) { }
 
   ngOnInit(): void {
+    this.getUserDetails();
     this.getBillableFacility();
-    this.getALLFacilities();
   }
 
   getBillableFacility() {
@@ -97,13 +100,13 @@ export class BillingSettingsComponent implements OnInit {
     this.getBillableFacility();
   }
 
-  onFacilitySelect(event, facilityId, averageCount) {
+
+  onFacilitySelect(event, facilityId) {
     if (event) {
       this.facilityId = facilityId
-      this.facilityList.map((facility) => {
+      this.facilities.map((facility) => {
         if (facility.facilityId === facilityId) {
           facility.isSelected = true;
-          this.averageCount = this.averageCount + averageCount
         }
         return facility
       })
@@ -111,75 +114,90 @@ export class BillingSettingsComponent implements OnInit {
       this.facilities.map((facility) => {
         if (facility.facilityId === facilityId) {
           facility.isSelected = false;
-          this.averageCount = this.averageCount - averageCount
         }
         return facility
       })
-      this.onSelectAddOns(false, facilityId, 'premium')
-      this.onSelectAddOns(false, facilityId, 'sponsors')
     }
-    this.calculatePrice();
   }
 
-  getALLFacilities() {
+  // getALLFacilities() {
+  //   this.facilityService.getFacilitiesUserCount().subscribe((facilities: any) => {
+  //     this.facilityList = facilities.data.map((ele) => {
+  //       ele['isSelected'] = false;
+  //       ele['addOns'] = {
+  //         premium: false,
+  //         sponsors: false
+  //       };
+  //       return ele
+  //     });
+  //   })
+  // }
+
+  getUserDetails() {
+    this.userMetaService.getUserAdditionalDetails().subscribe((user: any) => {
+      user.data.forEach((ele) => {
+        if (ele.metaKey == "lawyerInfo") {
+          let splitArray = ele.metaValue.split(":")
+          this.state.push(splitArray[0].toString());
+        }
+      })
+      this.getAllFacilities();
+    })
+  }
+
+
+  getAllFacilities() {
     this.facilityService.getFacilitiesUserCount().subscribe((facilities: any) => {
-      this.facilityList = facilities.data.map((ele) => {
-        ele['isSelected'] = false;
-        ele['addOns'] = {
-          premium: false,
-          sponsors: false
-        };
-        return ele
-      });
+      if (facilities.data) {
+        this.facilityList = facilities.data.map((ele) => {
+          if (this.state.includes(ele.Address.state)) {
+            ele['isSelected'] = false;
+            ele['addOns'] = {
+              premium: false,
+              sponsors: false
+            };
+            return ele;
+          } else {
+            return null;
+          }
+        })
+        this.facilityList = this.facilities.filter(x => x)
+      }
     })
   }
 
   onSelectAddOns(event, facilityId, addOnsType: string) {
-
     if (event) {
-      this.facilityList.map((x) => {
+      this.facilities.map((x) => {
         if (facilityId === x.facilityId) {
           if (addOnsType == 'premium') {
             x.addOns.premium = true;
-            this.addOnsPrice = this.addOnsPrice + x.facilityUserCount * 0.25
+            this.addOnsPrice = this.addOnsPrice + (x.facilityUserCount * 0.25)
+            this.totalPrice = this.totalPrice + (x.facilityUserCount * 0.25)
           } else if (addOnsType == 'sponsors') {
+            this.addOnsPrice = this.addOnsPrice + (x.facilityUserCount * 1.00)
+            this.totalPrice = this.totalPrice + (x.facilityUserCount * 1.00)
             x.addOns.sponsors = true;
-            this.addOnsPrice = this.addOnsPrice + x.facilityUserCount * 1.00
           }
         }
         return x
       });
     } else {
-      this.facilityList.map((x) => {
+      this.facilities.map((x) => {
         if (facilityId === x.facilityId) {
           if (addOnsType == 'premium') {
+            this.addOnsPrice = this.addOnsPrice - (x.facilityUserCount * 0.25)
+            this.totalPrice = this.totalPrice - (x.facilityUserCount * 0.25)
             x.addOns.premium = false;
-            this.addOnsPrice = this.addOnsPrice - x.facilityUserCount * 0.25
-            this.totalPrice = this.totalPrice -  x.facilityUserCount * 0.25
           } else if (addOnsType == 'sponsors') {
+            this.addOnsPrice = this.addOnsPrice - (x.facilityUserCount * 1.00)
+            this.totalPrice = this.totalPrice - (x.facilityUserCount * 1.00)
             x.addOns.sponsors = false;
-            this.addOnsPrice = this.addOnsPrice - x.facilityUserCount * 1.00
-            this.totalPrice = this.totalPrice -  x.facilityUserCount * 1.00
           }
         }
         return x
       });
     }
-    this.calculatePrice();
-  }
-
-  calculatePrice() {
-    this.facilityList.forEach((ele) => {
-      if (ele.isSelected) {
-        this.totalPrice = this.totalPrice + (ele.facilityUserCount * 0.10)
-        if (ele.addOns.premium) {
-          this.totalPrice = this.totalPrice + this.addOnsPrice
-        }
-        if (ele.addOns.sponsors) {
-          this.totalPrice = this.totalPrice + this.addOnsPrice
-        }
-      }
-    })
   }
 
 }

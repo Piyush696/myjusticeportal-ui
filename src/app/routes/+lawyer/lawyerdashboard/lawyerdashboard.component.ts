@@ -52,7 +52,7 @@ export class LawyerdashboardComponent implements OnInit, AfterViewInit {
   plan: string;
   @ViewChild('modalopen') modalopen: ElementRef;
   modalopens: any;
-
+  spinner:boolean = false;
   constructor(private hireLawyerService: HireLawyerService, private userMetaService: UserMetaService, private router: Router,
     private facilityService: FacilityService, public dialog: MatDialog, private userAdditionInfoService: UserAdditionInfoService,
     private lawyerService: LawyerService, private toasterService: ToasterService, private store: Store<any>, private fb: FormBuilder) { }
@@ -178,7 +178,6 @@ export class LawyerdashboardComponent implements OnInit, AfterViewInit {
         return x
       });
     }
-
   }
 
 
@@ -299,18 +298,6 @@ export class LawyerdashboardComponent implements OnInit, AfterViewInit {
           }
         })
         this.facilities = this.facilities.filter(x => x)
-        // facilities.data.forEach((ele) => {
-        //   if (ele.Address) {
-        //     // this.state.forEach((item) => {
-        //     if (this.state.includes(ele.Address.state)) {
-        //       this.filteredFacilityList.push(ele)
-        //     }
-        //     // })
-        //   }
-        // })
-        // this.facilities = this.filteredFacilityList.map((ele) => {
-
-        // });
       }
     })
   }
@@ -340,6 +327,10 @@ export class LawyerdashboardComponent implements OnInit, AfterViewInit {
 
   search(searchValue: string) {
     this.dataSource.filter = searchValue.trim().toLowerCase();
+  }
+
+  startLoader(value){
+    this.spinner = value
   }
 
   // pagination.
