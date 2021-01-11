@@ -192,7 +192,7 @@ export class ManageProfileComponent implements OnInit {
   onProfile(file) {
     const maxAllowedSize = 5 * 1024 * 1024
     const height = 185;
-    const width = 200;
+    const width = 157;
 
     if (file[0].size > maxAllowedSize) {
       this.isFileSizeMax = true

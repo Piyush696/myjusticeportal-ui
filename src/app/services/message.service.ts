@@ -45,4 +45,5 @@ export class MessageService {
   saveMessage(message) {
     return this.httpClient.post<object>(`${this.apiPath}​​​​​​​​/message/createMessage`, message, this.getHeaders());
   }
+
 }

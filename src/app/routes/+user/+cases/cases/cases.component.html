@@ -1,5 +1,5 @@
 <div class="row">
-    <div class="col-7">
+    <div class="col-8">
         <div>
             <h1 class="line-height font-weight-bold">My Cases</h1>
             <h4 class="line-height header-sub-text">
@@ -45,12 +45,12 @@
             </button>
         </div>
     </div>
-    <div class="col-sm-5 col-md-5 col-lg-5 col-xl-5">
+    <div class="col-sm-4 col-md-4 col-lg-4 col-xl-4">
         <div>
             <h1 class="line-height font-weight-bold">Sponsored Lawyers</h1>
             <h4 class="line-height header-sub-text">Sponsored lawyers are ready to connect.</h4>
         </div>
-        <mat-card>
+        <mat-card class="outer-card">
             <div class="mt-4" *ngFor="let user of sponsorUserList; ">
                 <mat-card *ngIf="sponsorUserList?.length < 0" class="sponser-card w-100">
                     <p>Currently your facility does not have any sponsors lawyer</p>
@@ -59,11 +59,11 @@
                     <div class="text-center line-height">
 
                         <div *ngIf="user?.userAdditionalInfo?.profile?.downloadLink">
-                            <img src="{{user?.userAdditionalInfo?.profile?.downloadLink}}" width="200px" height="185px"
+                            <img src="{{user?.userAdditionalInfo?.profile?.downloadLink}}" width="157px" height="185px"
                                 alt="logo">
                         </div>
                         <div *ngIf="!user?.userAdditionalInfo?.profile?.downloadLink">
-                            <img src="assets/img/placeholder.jpg" width="200px" height="185px" alt="logo">
+                            <img src="assets/img/placeholder.jpg" width="157px" height="185px" alt="logo">
                         </div>
                         <div>
                             <h4 class=" line-height color pt-2"><b>{{user?.firstName}}

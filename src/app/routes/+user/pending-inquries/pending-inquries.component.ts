@@ -25,6 +25,7 @@ export class PendingInquriesComponent implements OnInit {
   filteredPendingInquiriesList = [];
   filteredRejectedPendingInquiriesList = [];
   userId: any;
+  userName: any;
 
   constructor(private caseService: CaseService, public dialog: MatDialog,
     private additionalService: UserAdditionInfoService, private toasterService: ToasterService, public router: Router) { }
@@ -37,10 +38,12 @@ export class PendingInquriesComponent implements OnInit {
     this.dataSource.filter = searchValue.trim().toLowerCase();
   }
 
-  onOpenModal(templateRef, userId) {
+  onOpenModal(templateRef, userId, user) {
     this.userId = userId
+    user.middleName = user.middleName ? user.middleName : ' '
+    this.userName = user.firstName + ' ' + user.middleName + ' ' + user.lastName
     let dialogRef = this.dialog.open(templateRef, {
-      width: '300px'
+      width: '800px'
     });
   }
 
@@ -80,21 +83,21 @@ export class PendingInquriesComponent implements OnInit {
     this.filteredRejectedPendingInquiriesList = []
     this.caseService.getPendingCaseInfo().subscribe((pendingCase: any) => {
       this.pendingCasesList = pendingCase.data.map((status) => {
-        status['name0']= status.Organization.name;
-        status['name1']= status.Organization.name.split(" ").join("");
-        status['name2']=status.firstName+" "+status.lastName;
-        status['name3']=status.firstName+status.lastName;
-        var date=status.sent;
+        status['name0'] = status.Organization.name;
+        status['name1'] = status.Organization.name.split(" ").join("");
+        status['name2'] = status.firstName + " " + status.lastName;
+        status['name3'] = status.firstName + status.lastName;
+        var date = status.sent;
         date = new Date(date).toDateString();
-        var monthDay=date.substring(4, 10);
-        var year=date.substring(10, 15);
-        status['sent']=monthDay+","+year;
-        var month=date.substring(4, 7);
-        var day=date.substring(8, 10);
-        var year=date.substring(11, 15);
-        status['newUpdatedAt1']=month+day+year;
-        status['newUpdatedAt2']=month+" "+day+" "+year;
-        status['newUpdatedAt3']=month+"/"+day+"/"+year;
+        var monthDay = date.substring(4, 10);
+        var year = date.substring(10, 15);
+        status['sent'] = monthDay + "," + year;
+        var month = date.substring(4, 7);
+        var day = date.substring(8, 10);
+        var year = date.substring(11, 15);
+        status['newUpdatedAt1'] = month + day + year;
+        status['newUpdatedAt2'] = month + " " + day + " " + year;
+        status['newUpdatedAt3'] = month + "/" + day + "/" + year;
         return status
       })
       this.pendingCasesList.filter((x) => {
