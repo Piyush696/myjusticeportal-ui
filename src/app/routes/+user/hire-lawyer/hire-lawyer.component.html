@@ -23,7 +23,7 @@
             <mat-option [value]=" ">
               Select Practice area
             </mat-option>
-            <mat-option *ngFor="let speciality of specialtyList"  value="{{speciality?.specialtyType}}">
+            <mat-option *ngFor="let speciality of specialtyList" value="{{speciality?.specialtyType}}">
               {{speciality.specialtyType}}
             </mat-option>
           </mat-select>
@@ -86,15 +86,14 @@
         <mat-card class="sponser-card w-100">
           <div class="text-center line-height">
             <div *ngIf="user?.userAdditionalInfo?.profile?.downloadLink">
-              <img src="{{user?.userAdditionalInfo?.profile?.downloadLink}}" width="200" height="60" alt="logo">
+              <img src="{{user?.userAdditionalInfo?.profile?.downloadLink}}" width="200px" height="185px" alt="logo">
             </div>
             <div *ngIf="!user?.userAdditionalInfo?.profile?.downloadLink">
-              <img src="assets/img/placeholder.jpg" width="150" height="100"
-                  alt="logo">
-          </div>
+              <img src="assets/img/placeholder.jpg" width="200px" height="185px" alt="logo">
+            </div>
             <div>
               <h4 class=" line-height color pt-2"><b>{{user?.firstName}}
-                {{user?.middleName}} {{user?.lastName}}</b></h4>
+                  {{user?.middleName}} {{user?.lastName}}</b></h4>
             </div>
           </div>
           <div class="d-flex justify-content-center">
@@ -121,7 +120,8 @@
       <h4 class="text-center font-weight-bold">Disclaimer here</h4>
       <div class="d-flex justify-content-center mt-1">
         <div class="mt-1">
-          <button type="button" class="btn btn-secondary button-purple px-2" data-dismiss="modal" (click)="acceptDisclaimer()">Accept and
+          <button type="button" class="btn btn-secondary button-purple px-2" data-dismiss="modal"
+            (click)="acceptDisclaimer()">Accept and
             Continue</button>
         </div>
       </div>
@@ -139,20 +139,19 @@
         <button class="btn bg-color" mat-raised-button (click)="onCloseModal()">Close</button>
       </div>
     </div>
-    <div  class="mt-2 background-profile-headshot" id="cust-img">
+    <div class="mt-2 background-profile-headshot" id="cust-img">
     </div>
     <div class="p-2 bg-white">
       <div class="row mt-3">
         <div class="col-3">
           <div class="d-flex">
             <div *ngIf="lawyerData?.userAdditionalInfo?.profile?.downloadLink" class="img-profile">
-              <img src="{{lawyerData?.userAdditionalInfo?.profile?.downloadLink}}" width="150px" height="150px"
+              <img src="{{lawyerData?.userAdditionalInfo?.profile?.downloadLink}}" width="200px" height="185px"
                 alt="logo" class="logo">
             </div>
             <div *ngIf="!lawyerData?.userAdditionalInfo?.profile?.downloadLink">
-              <img src="assets/img/placeholder.jpg"  width="150px" height="130px"
-                  alt="logo">
-          </div>
+              <img src="assets/img/placeholder.jpg" width="200px" height="185px" alt="logo">
+            </div>
           </div>
           <div class="d-flex justify-content-center align-items-center">
             <div class="pt-2">

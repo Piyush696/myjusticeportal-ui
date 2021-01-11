@@ -12,5 +12,7 @@
 .background-profile-headshot{
   background-size: cover;
     background-repeat: no-repeat;
-    height: 140px;
+    height: 170px;
+    width: 998px;
+    background-position: center !important;
 }
