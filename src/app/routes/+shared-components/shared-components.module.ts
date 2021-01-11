@@ -14,6 +14,7 @@ import { FileUploadModule } from 'ng2-file-upload';
 import { MesageListComponent } from './mesage-list/mesage-list.component';
 import { ColorPickerModule } from 'ngx-color-picker';
 import { StripeComponent } from './stripe/stripe.component';
+import { BillingServicesComponent } from './billing-services/billing-services.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { StripeComponent } from './stripe/stripe.component';
     SecurityQuestionComponent,
     ChatComponent,
     MesageListComponent,
-    StripeComponent
+    StripeComponent,
+    BillingServicesComponent
   ],
   imports: [
     CommonModule,
@@ -45,7 +47,8 @@ import { StripeComponent } from './stripe/stripe.component';
     SecurityQuestionComponent,
     ChatComponent,
     MesageListComponent,
-    StripeComponent
+    StripeComponent,
+    BillingServicesComponent
   ]
 })
 

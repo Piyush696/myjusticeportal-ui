@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { Router } from '@angular/router';
 import { FacilityService } from 'app/services/facility.service';
 import { UserAdditionInfoService } from 'app/services/user-addition-info.service';
 import { UserMetaService } from 'app/services/user-meta.service';
@@ -25,7 +26,7 @@ export class BillingSettingsComponent implements OnInit {
   plan: string;
   state = [];
 
-  constructor(private lawyerFacilityService: LawyerFacilityService,private userMetaService: UserMetaService, private facilityService: FacilityService, public dialog: MatDialog) { }
+  constructor(private lawyerFacilityService: LawyerFacilityService, private router:Router, private userMetaService: UserMetaService, private facilityService: FacilityService, public dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.getUserDetails();
@@ -35,7 +36,6 @@ export class BillingSettingsComponent implements OnInit {
   getBillableFacility() {
     this.lawyerFacilityService.getBilliableFacilityDetails().subscribe((data: any) => {
       this.facilities = data.facilities
-      let facilityCount: number = 0;
       let addOnsCount: number = 0
       data.facilities.forEach(element => {
         if (element.planSelected === 'Up to 5 Connections') {
@@ -48,23 +48,19 @@ export class BillingSettingsComponent implements OnInit {
 
         if (element.isSelected) {
           if (element.isSponsors && element.isPremium) {
-            facilityCount = (element.facilityUserCount * 0.10)
-            addOnsCount = ((element.facilityUserCount * 0.25) + (element.facilityUserCount * 1.00))
+            addOnsCount = addOnsCount + ((element.facilityUserCount * 0.25) + (element.facilityUserCount * 1.00))
           } else if (!element.isSponsors && !element.isPremium) {
-            facilityCount = (element.facilityUserCount * 0.10)
           }
           else if (!element.isSponsors && element.isPremium) {
-            facilityCount = (element.facilityUserCount * 0.10)
-            addOnsCount = element.facilityUserCount * 0.25
+            addOnsCount = addOnsCount + element.facilityUserCount * 0.25
           }
           else if (element.isSponsors && !element.isPremium) {
-            facilityCount = element.facilityUserCount * 0.10
-            addOnsCount = element.facilityUserCount * 1.00
+            addOnsCount = addOnsCount + element.facilityUserCount * 1.00
           }
         }
       });
       this.addOnsBillingPrice = addOnsCount
-      this.totalBillingPrice = facilityCount + addOnsCount + this.currentPlanPrice
+      this.totalBillingPrice =  addOnsCount + this.currentPlanPrice
     })
   }
 
@@ -100,6 +96,10 @@ export class BillingSettingsComponent implements OnInit {
     this.getBillableFacility();
   }
 
+  onChangePlan(){
+    this.router.navigateByUrl('/mjp/lawyer/billing-setting/update')
+  }
+
 
   onFacilitySelect(event, facilityId) {
     if (event) {
@@ -119,19 +119,6 @@ export class BillingSettingsComponent implements OnInit {
       })
     }
   }
-
-  // getALLFacilities() {
-  //   this.facilityService.getFacilitiesUserCount().subscribe((facilities: any) => {
-  //     this.facilityList = facilities.data.map((ele) => {
-  //       ele['isSelected'] = false;
-  //       ele['addOns'] = {
-  //         premium: false,
-  //         sponsors: false
-  //       };
-  //       return ele
-  //     });
-  //   })
-  // }
 
   getUserDetails() {
     this.userMetaService.getUserAdditionalDetails().subscribe((user: any) => {
