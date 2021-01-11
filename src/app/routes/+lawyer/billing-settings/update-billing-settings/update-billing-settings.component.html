@@ -1,0 +1,10 @@
+<div class="pl-3">
+    <h1 class="font-weight-bold m-0">Update Billing</h1>
+    <h4 class="line-height header-sub-text">
+        If you wish to change your plan & services.
+    </h4>
+</div>
+
+<div>
+    <app-billing-services (paymentConfirm)="onPayEvent($event)" [update]="update"></app-billing-services>
+</div>

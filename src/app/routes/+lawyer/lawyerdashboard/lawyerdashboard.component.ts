@@ -1,14 +1,13 @@
 import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { LawyerService } from 'app/services/lawyer.service';
-import { FacilityService } from 'app/services/facility.service';
 import { HireLawyerService } from '../../../services/hire-lawyer.service';
 import { ToasterService } from 'app/services/toaster.service';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
 import { MatDialog } from '@angular/material/dialog';
-import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormGroup } from '@angular/forms';
 import { UserMetaService } from 'app/services/user-meta.service';
 import { UserAdditionInfoService } from 'app/services/user-addition-info.service';
 import { Router } from '@angular/router';
@@ -27,7 +26,7 @@ export class LawyerdashboardComponent implements OnInit, AfterViewInit {
   billingBoard: boolean = false;
   isDisabled: boolean = true;
   clients: any;
-  facilities = [];
+
   allClients: any;
   count: number = 1;
   step: number;
@@ -40,27 +39,16 @@ export class LawyerdashboardComponent implements OnInit, AfterViewInit {
   userData: any;
   public cardMask = [/\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/]
   public cvvMask = [/\d/, /\d/, /\d/]
-  facilityId: any;
-  totalPrice: number = 0;
 
-  addOnsCount: number = 0;
-  planPrice: number = 0;
-  addOnsPrice: number = 0;
-  state = [];
-  filteredFacilityList = [];
   lawyerData: any;
-  plan: string;
   @ViewChild('modalopen') modalopen: ElementRef;
   modalopens: any;
-  spinner:boolean = false;
-  constructor(private hireLawyerService: HireLawyerService, private userMetaService: UserMetaService, private router: Router,
-    private facilityService: FacilityService, public dialog: MatDialog, private userAdditionInfoService: UserAdditionInfoService,
-    private lawyerService: LawyerService, private toasterService: ToasterService, private store: Store<any>, private fb: FormBuilder) { }
+
+  constructor(private hireLawyerService: HireLawyerService, private userMetaService: UserMetaService, private router: Router, public dialog: MatDialog, private userAdditionInfoService: UserAdditionInfoService,
+    private lawyerService: LawyerService, private toasterService: ToasterService, private store: Store<any>) { }
 
   ngAfterViewInit(): void {
-
     this.getModal();
-
   }
 
   ngOnInit(): void {
@@ -74,7 +62,7 @@ export class LawyerdashboardComponent implements OnInit, AfterViewInit {
       }
     });
 
-    this.getUserDetails();
+    // this.getUserDetails();
     this.onGetRequestedCases();
     this.getAllClients();
     this.getBillingDetails();
@@ -89,97 +77,6 @@ export class LawyerdashboardComponent implements OnInit, AfterViewInit {
       }
     })
   }
-
-
-  cardPatternValidation(control: AbstractControl) {
-    const pattern = /([0-9])$/;
-    if (control.value) {
-      if (!control.value.match(pattern)) {
-        return { invalidCardPattern: true };
-      }
-      return null;
-    }
-  }
-
-  async cardValidation(control: AbstractControl) {
-    const result: any = await this.lawyerService.validateCard({ number: control.value }).toPromise();
-    if (!result.success) {
-      return { invalidCard: true };
-    } else {
-      return null;
-    }
-  }
-
-
-  onFacilitySelect(event, facilityId) {
-    if (event) {
-      this.facilityId = facilityId
-      this.facilities.map((facility) => {
-        if (facility.facilityId === facilityId) {
-          facility.isSelected = true;
-        }
-        return facility
-      })
-    } else {
-      this.facilities.map((facility) => {
-        if (facility.facilityId === facilityId) {
-          facility.isSelected = false;
-        }
-        return facility
-      })
-      // this.onSelectAddOns(false, facilityId, 'premium')
-      // this.onSelectAddOns(false, facilityId, 'sponsors')
-    }
-  }
-
-  onSelectPlan(price) {
-    this.totalPrice = this.totalPrice + parseInt(price) - this.planPrice;
-
-    this.planPrice = parseInt(price)
-    if (this.planPrice == 250) {
-      this.plan = 'Up to 5 Connections'
-    } else if (this.planPrice == 350) {
-      this.plan = 'Up to 25 Connections'
-    } else {
-      this.plan = 'Unlimited Connections'
-    }
-
-  }
-
-  onSelectAddOns(event, facilityId, addOnsType: string) {
-    if (event) {
-      this.facilities.map((x) => {
-        if (facilityId === x.facilityId) {
-          if (addOnsType == 'premium') {
-            x.addOns.premium = true;
-            this.addOnsPrice = this.addOnsPrice + (x.facilityUserCount * 0.25)
-            this.totalPrice = this.totalPrice + (x.facilityUserCount * 0.25)
-          } else if (addOnsType == 'sponsors') {
-            this.addOnsPrice = this.addOnsPrice + (x.facilityUserCount * 1.00)
-            this.totalPrice = this.totalPrice + (x.facilityUserCount * 1.00)
-            x.addOns.sponsors = true;
-          }
-        }
-        return x
-      });
-    } else {
-      this.facilities.map((x) => {
-        if (facilityId === x.facilityId) {
-          if (addOnsType == 'premium') {
-            this.addOnsPrice = this.addOnsPrice - (x.facilityUserCount * 0.25)
-            this.totalPrice = this.totalPrice - (x.facilityUserCount * 0.25)
-            x.addOns.premium = false;
-          } else if (addOnsType == 'sponsors') {
-            this.addOnsPrice = this.addOnsPrice - (x.facilityUserCount * 1.00)
-            this.totalPrice = this.totalPrice - (x.facilityUserCount * 1.00)
-            x.addOns.sponsors = false;
-          }
-        }
-        return x
-      });
-    }
-  }
-
 
 
   onPayEvent(value) {
@@ -270,39 +167,6 @@ export class LawyerdashboardComponent implements OnInit, AfterViewInit {
   }
 
 
-  getUserDetails() {
-    this.userMetaService.getUserAdditionalDetails().subscribe((user: any) => {
-      user.data.forEach((ele) => {
-        if (ele.metaKey == "State:Bar") {
-          let splitArray = ele.metaValue.split(":")
-          this.state.push(splitArray[0].toString());
-        }
-      })
-      this.getALLFacilities();
-    })
-  }
-
-  getALLFacilities() {
-    this.facilityService.getFacilitiesUserCount().subscribe((facilities: any) => {
-      if (facilities.data) {
-        this.facilities = facilities.data.map((ele) => {
-          if (this.state.includes(ele.Address.state)) {
-            ele['isSelected'] = false;
-            ele['addOns'] = {
-              premium: false,
-              sponsors: false
-            };
-            return ele;
-          } else {
-            return null;
-          }
-        })
-        this.facilities = this.facilities.filter(x => x)
-      }
-    })
-  }
-
-
   onApproveCase(lawyer_caseId) {
     this.hireLawyerService.approveCase({ lawyer_caseId: lawyer_caseId }).subscribe((res: any) => {
       if (res.success) {
@@ -327,10 +191,6 @@ export class LawyerdashboardComponent implements OnInit, AfterViewInit {
 
   search(searchValue: string) {
     this.dataSource.filter = searchValue.trim().toLowerCase();
-  }
-
-  startLoader(value){
-    this.spinner = value
   }
 
   // pagination.
@@ -360,6 +220,7 @@ export class LawyerdashboardComponent implements OnInit, AfterViewInit {
   onchoosePlan() {
     this.userMetaService.modalDataEvent({ metaKey: 'choosePlanModal', metaValue: true }).subscribe()
   }
+
   redirect() {
     this.router.navigateByUrl('mjp/lawyer/manage-profile')
   }

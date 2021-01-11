@@ -6,14 +6,13 @@
             <div class="px-5 pt-2">
                 <!-- <h5 class="text-center m-0">Coupon Code</h5> -->
                 <p class="m-0 text-center mb-1">If you have a coupon code, enter it below.</p>
-                <input class="w-100 coupon-field border-0" matInput placeholder="Enter valid coupon code"
-                    [formControl]="cardForm.controls['coupon']">
+                <input class="w-100 coupon-field border-0" matInput placeholder="Enter valid coupon code" [formControl]="cardForm.controls['coupon']">
                 <mat-error *ngIf="cardForm.controls['coupon'].hasError('invalidCoupon')">
                     <i>Invalid coupon. </i>
                 </mat-error>
             </div>
             <div class="d-flex justify-content-center align-items-center">
-                <button [disabled]="!totalCount" mat-raised-button class="button-purple px-4 py-1 mt-3">Pay
+                <button mat-raised-button class="button-purple px-4 py-1 mt-3">Pay
                     {{totalCount | currency:'USD':'symbol'}}
                 </button>
             </div>

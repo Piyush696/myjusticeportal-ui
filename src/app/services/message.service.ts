@@ -40,6 +40,9 @@ export class MessageService {
 
   getLastTextedUser() {
     return this.httpClient.get<object>(`${this.apiPath}/message/allMessages`, this.getHeaders());
+  }
 
+  saveMessage(message) {
+    return this.httpClient.post<object>(`${this.apiPath}​​​​​​​​/message/createMessage`, message, this.getHeaders());
   }
 }
