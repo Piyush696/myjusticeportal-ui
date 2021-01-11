@@ -48,7 +48,7 @@ th {
     background-position: center !important;
 }
 
-::ng-deep .mat-dialog-container {
+::ng-deep .mat-dialog-container .manage-profile {
   overflow: hidden !important;
   height: 80% !important;
 
