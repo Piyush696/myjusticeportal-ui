@@ -16,6 +16,7 @@ import { InquiriesComponent } from './inquiries/inquiries.component';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { InquiriesCaseViewComponent } from './inquiries-case-view/inquiries-case-view.component';
 import { BillingSettingsComponent } from './billing-settings/billing-settings.component';
+import { UpdateBillingSettingsComponent } from './billing-settings/update-billing-settings/update-billing-settings.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { BillingSettingsComponent } from './billing-settings/billing-settings.co
     ReversePipe,
     InquiriesComponent,
     InquiriesCaseViewComponent,
-    BillingSettingsComponent
+    BillingSettingsComponent,
+    UpdateBillingSettingsComponent
   ],
   imports: [
     TextMaskModule,

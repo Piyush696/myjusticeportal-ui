@@ -15,6 +15,7 @@ import { MesageListComponent } from './mesage-list/mesage-list.component';
 import { ColorPickerModule } from 'ngx-color-picker';
 import { StripeComponent } from './stripe/stripe.component';
 import { ChatModalComponent } from './chat-modal/chat-modal.component';
+import { BillingServicesComponent } from './billing-services/billing-services.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { ChatModalComponent } from './chat-modal/chat-modal.component';
     ChatComponent,
     MesageListComponent,
     StripeComponent,
+    BillingServicesComponent,
     ChatModalComponent
   ],
   imports: [
@@ -48,6 +50,7 @@ import { ChatModalComponent } from './chat-modal/chat-modal.component';
     ChatComponent,
     MesageListComponent,
     StripeComponent,
+    BillingServicesComponent,
     ChatModalComponent
   ]
 })

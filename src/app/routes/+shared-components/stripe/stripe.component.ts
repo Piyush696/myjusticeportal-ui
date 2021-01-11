@@ -16,13 +16,13 @@ export class StripeComponent implements OnDestroy, AfterViewInit,OnChanges ,OnIn
   _totalAmount: number;
   card: any;
   cardHandler = this.onChange.bind(this);
-  @Output() onPayEvent = new EventEmitter()
-  cardError: string;
-  userData: any;
+   @Output() onPayEvent = new EventEmitter()
+   cardError: string;
+   userData: any;
   @Input() plan:string;
    @Input() totalCount:number;
    @Input() facilitiesList:any[];
-   @Input() update;
+   @Input() update:boolean;
    @Output() isloading = new EventEmitter()
 
   constructor(
@@ -97,6 +97,7 @@ export class StripeComponent implements OnDestroy, AfterViewInit,OnChanges ,OnIn
         iconColor: '#fa755a',
       },
     };
+    
     const elements = stripe.elements();
     this.card = elements.create('card',{cardStyle});
     this.card.mount(this.cardInfo.nativeElement);
@@ -194,11 +195,11 @@ export class StripeComponent implements OnDestroy, AfterViewInit,OnChanges ,OnIn
             this.lawyerService.subscribePlan(data).subscribe((subscribePlan: any) => {
               if (subscribePlan.data) {
                 this.onPayEvent.emit(true)
+                window.location.reload();
                 this.toasterService.showSuccessToater('You have subscribed successfully!')
               } else {
                 this.toasterService.showWarningToater('Something went wrong. Please try again')
               }
-              window.location.reload();
             })
           }
           this.onSuccess(token);
@@ -212,6 +213,7 @@ export class StripeComponent implements OnDestroy, AfterViewInit,OnChanges ,OnIn
   onSuccess(token) {
     this.dialogRef.close({ token });
   }
+
   onError(error) {
     if (error.message) {
       this.cardError = error.message;
