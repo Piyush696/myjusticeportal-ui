@@ -42,8 +42,8 @@ export class MessageService {
     return this.httpClient.get<object>(`${this.apiPath}/message/allMessages`, this.getHeaders());
   }
 
-  saveMessage(message) {
-    return this.httpClient.post<object>(`${this.apiPath}​​​​​​​​/message/createMessage`, message, this.getHeaders());
+  saveMessage(data) {
+    return this.httpClient.post<object>(`${this.apiPath}/message/createMessage`, data, this.getHeaders());
   }
 
 }

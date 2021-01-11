@@ -104,8 +104,8 @@
                                                 width="150px" height="150px" alt="logo" class="logo">
                                         </div>
                                         <div *ngIf="!assignedLawyer?.userAdditionalInfo?.profile?.downloadLink">
-                                            <img src="assets/img/placeholder.jpg"  width="230px" height="100px"
-                                            alt="logo">
+                                            <img src="assets/img/placeholder.jpg" width="230px" height="100px"
+                                                alt="logo">
                                         </div>
                                     </div>
                                     <div class="col-8">
@@ -158,7 +158,7 @@
                 </div>
             </mat-card>
         </div>
-        <div  class="col-12 p-0 mt-3">
+        <div class="col-12 p-0 mt-3">
             <mat-card class="d-flex justify-content-between mat-elevation-z10 view-card-color">
                 <div *ngIf="isFacility">
                     <div>
@@ -170,14 +170,14 @@
                             </span>
                         </div>
                     </div>
-                    <div class="pl-2">
-                        <button class="button-purple" mat-mini-fab title="Add/Edit Note"
-                            (click)="openModal(managenotesModel)">
-                            <mat-icon>edit</mat-icon>
-                        </button>
-                    </div>
                 </div>
-                <div  *ngIf="!isFacility">
+                <div class="pl-2" *ngIf="isFacility">
+                    <button class="button-purple" mat-mini-fab title="Add/Edit Note"
+                        (click)="openModal(managenotesModel)">
+                        <mat-icon>edit</mat-icon>
+                    </button>
+                </div>
+                <div *ngIf="!isFacility">
                     <h3 class="font-weight-bold mb-2">My Private Case Notes:</h3>
                     <span>Private notes are only available when you are within a Facility.</span>
                 </div>
