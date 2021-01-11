@@ -47,30 +47,43 @@
                 <th mat-header-cell *matHeaderCellDef class="table-action-style">Action</th>
                 <td mat-cell *matCellDef="let user">
                     <div class="d-flex justify-content-center">
-                        <button *ngIf="!user.status === 'Lawyer Approved' || user.status === 'Inmate Rejected' || user.status === 'Lawyer Requested'" class="mr-1" class="btn btn-sm btn-primary " color=" green" title="Approve" [disabled]="( user.status === 'Inmate Rejected' || allApprovedData.length > approvedStatus)"
+                        <button
+                            *ngIf="!user.status === 'Lawyer Approved' || user.status === 'Inmate Rejected' || user.status === 'Lawyer Requested'"
+                            class="mr-1" class="btn btn-sm btn-primary " color=" green" title="Approve"
+                            [disabled]="( user.status === 'Inmate Rejected' || allApprovedData.length > approvedStatus)"
                             (click)="onStatusUpdate(user?.caseId, status='Lawyer Approved')">
                             ACCEPT
                         </button>
-                        <button *ngIf="user.status === 'Lawyer Rejected'" class="mr-1" class="btn btn-sm btn-primary " color=" green" title="Approve" [disabled]="( user.status === 'Rejected' || user.status === 'inmate_rejected' 
-                        || allApprovedData.length > approvedStatus)" (click)="onStatusUpdate(user?.caseId, status='Lawyer Approved')">
+                        <button *ngIf="user.status === 'Lawyer Rejected'" class="mr-1" class="btn btn-sm btn-primary "
+                            color=" green" title="Approve" [disabled]="( user.status === 'Rejected' || user.status === 'inmate_rejected' 
+                        || allApprovedData.length > approvedStatus)"
+                            (click)="onStatusUpdate(user?.caseId, status='Lawyer Approved')">
                             ACCEPT AGAIN
                         </button>
-                        <button *ngIf="(!user.status === 'Lawyer Rejected'  || user.status === 'Lawyer Approved' || user.status === 'Inmate Rejected'|| user.status === 'Lawyer Requested')" color="warn" title="Reject" class="btn btn-sm btn-warning" [disabled]="(user.status === 'Rejected' || user.status === 'inmate_rejected' || user.status === 'Inmate Rejected')"
+                        <button
+                            *ngIf="(!user.status === 'Lawyer Rejected'  || user.status === 'Lawyer Approved' || user.status === 'Inmate Rejected'|| user.status === 'Lawyer Requested')"
+                            color="warn" title="Reject" class="btn btn-sm btn-warning"
+                            [disabled]="(user.status === 'Rejected' || user.status === 'inmate_rejected' || user.status === 'Inmate Rejected')"
                             (click)="onStatusUpdate(user?.caseId, status='Lawyer Rejected')">
                             REJECT
                         </button>
-                        <button *ngIf="(user.status === 'Connected')" color="black" class="btn btn-sm btn-danger" title="More Queries" (click)="onStatusUpdate(user?.caseId, status='Disconnected')">
-                        Disconnect
-                       </button>
-                        <button *ngIf="(!user.status === 'Lawyer Rejected' || user.status === 'Connected' || user.status === 'Lawyer Approved'|| user.status === 'Lawyer Requested')" color="black" [disabled]="(user.status === 'Rejected' || user.status === inmate_rejected)" class="btn btn-sm btn-dark"
-                            title="More Queries" (click)="onOpenModal(confirmModal,user.inmate.userId)">
+                        <button *ngIf="(user.status === 'Connected')" color="black" class="btn btn-sm btn-danger"
+                            title="More Queries" (click)="onStatusUpdate(user?.caseId, status='Disconnected')">
+                            Disconnect
+                        </button>
+                        <button
+                            *ngIf="(!user.status === 'Lawyer Rejected' || user.status === 'Connected' || user.status === 'Lawyer Approved'|| user.status === 'Lawyer Requested')"
+                            color="black" [disabled]="(user.status === 'Rejected' || user.status === inmate_rejected)"
+                            class="btn btn-sm btn-dark" title="More Queries"
+                            (click)="onOpenModal(openModal,user.inmate.userId,user?.inmate)">
                             MESSAGE
                         </button>
-                        <button [disabled]="user.status === 'Inmate Rejected'" color="black" [routerLink]="user.caseId" class="btn btn-sm btn-danger" title="View Case">
+                        <button [disabled]="user.status === 'Inmate Rejected'" color="black" [routerLink]="user.caseId"
+                            class="btn btn-sm btn-danger" title="View Case">
                             View
                         </button>
                     </div>
-                    <ng-template #confirmModal>
+                    <!-- <ng-template #confirmModal>
                         <div>
                             <h2 class="text-center font-weight-bold">Are You sure you want to enable the chat!</h2>
                         </div>
@@ -82,7 +95,7 @@
                                 Yes
                             </button>
                         </div>
-                    </ng-template>
+                    </ng-template> -->
                 </td>
             </ng-container>
             <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
@@ -92,3 +105,7 @@
     </mat-card>
 
 </div>
+
+<ng-template #openModal>
+    <app-chat-modal [userId]="userId" [userName]="userName"></app-chat-modal>
+</ng-template>

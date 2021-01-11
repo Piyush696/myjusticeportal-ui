@@ -26,6 +26,7 @@ export class InquiriesComponent implements OnInit {
   plans: any;
   allApprovedData = [];
   approvedStatus: any;
+  userName: string;
 
 
   constructor(private userAdditionInfoService: UserAdditionInfoService, public dialog: MatDialog,
@@ -38,11 +39,11 @@ export class InquiriesComponent implements OnInit {
   getSelectedPlan() {
     this.facilityService.getSelectedPlanFaciltiy().subscribe((selectedPlan: any) => {
       this.plans = selectedPlan.data;
-      if(this.plans[0].planSelected == "Up to 5 Connections"){
+      if (this.plans[0].planSelected == "Up to 5 Connections") {
         this.approvedStatus = 4;
-      }else if(this.plans[0].planSelected == "Up to 25 Connections"){
+      } else if (this.plans[0].planSelected == "Up to 25 Connections") {
         this.approvedStatus = 24;
-      }else if(this.plans[0].planSelected == "Unlimited Connections"){
+      } else if (this.plans[0].planSelected == "Unlimited Connections") {
         this.approvedStatus = this.approvedStatus;
       }
     });
@@ -87,10 +88,12 @@ export class InquiriesComponent implements OnInit {
     })
   }
 
-  onOpenModal(templateRef, userId) {
+  onOpenModal(templateRef, userId, user) {
     this.userId = userId
+    user.middleName = user.middleName ? user.middleName : ' '
+    this.userName = user.firstName + ' ' + user.middleName + ' ' + user.lastName
     let dialogRef = this.dialog.open(templateRef, {
-      width: '300px',
+      width: '800px',
     });
   }
 

@@ -38,7 +38,7 @@
                 <tr>
                     <th>Profile Headshot</th>
                     <td>
-                        <img src="{{userDetails?.userAdditionalInfo?.profile?.downloadLink}}" width="200px"
+                        <img src="{{userDetails?.userAdditionalInfo?.profile?.downloadLink}}" width="157px"
                             height="185px" alt="logo" class="logo"
                             *ngIf="userDetails?.userAdditionalInfo?.profile?.downloadLink">
                     </td>
@@ -150,7 +150,7 @@
             <div class="card-body px-0 pb-4">
                 <div class="drag-border p-3">
                     <h4 class="font-weight-bold margin-remove">Profile Headshot</h4>
-                    <span class="text-bold">Best image size is up to 5MB and 200px × 185px (width × height).</span>
+                    <span class="text-bold">Best image size is up to 5MB and 157px × 185px (width × height).</span>
                     <div ng2FileDrop [ngClass]="{'another-file-over-class': hasAnotherDropZoneOver}"
                         (fileOver)="fileOverAnother($event)" [uploader]="uploader1"
                         class="box-placeholder my-drop-zone font-weight-bold pb-2">
@@ -163,7 +163,7 @@
                     <div>
                         <small class="text-danger" *ngIf="isFileSizeMax">Image size should be less than 5 MB</small>
                     </div>
-                    <div> <small class="text-danger" *ngIf="isDimenssionMax">Image should be 200px × 185px (width ×
+                    <div> <small class="text-danger" *ngIf="isDimenssionMax">Image should be 157px × 185px (width ×
                             height)
                         </small>
                     </div>
@@ -274,11 +274,11 @@
                 <div class="col-3">
                     <div class="d-flex">
                         <div class="img-profile" *ngIf="userDetails?.userAdditionalInfo?.profile?.downloadLink">
-                            <img src="{{userDetails?.userAdditionalInfo?.profile?.downloadLink}}" width="200px"
+                            <img src="{{userDetails?.userAdditionalInfo?.profile?.downloadLink}}" width="157px"
                                 height="185px" alt="logo" class="logo">
                         </div>
                         <div class="img-profile" *ngIf="!userDetails?.userAdditionalInfo?.profile?.downloadLink">
-                            <img src="../../../../assets/img/placeholder.jpg" width="200px" height="185px" alt="logo"
+                            <img src="../../../../assets/img/placeholder.jpg" width="157px" height="185px" alt="logo"
                                 class="logo">
                         </div>
                     </div>
