@@ -47,27 +47,32 @@ export class PublicDefenderRegistrationComponent implements OnInit {
 
   onCreateOrganisation(orgData) {
     if (orgData) {
-      this.step = 3;
       this.registrationData.organization = orgData;
       this.registrationData.organization.address = orgData.address;
+      this.defenderService.onRegistration(this.registrationData).subscribe((res: any) => {
+        if (res.success) {
+          this.userName = res.data.userName;
+          this.step = 3;
+        }
+      });
     } else {
       this.step = 2;
     }
   }
 
-  onSelectedfacility(selectedfacility) {
-    if (selectedfacility) {
-      this.registrationData.facilityIds = selectedfacility;
-      this.defenderService.onRegistration(this.registrationData).subscribe((res: any) => {
-        if (res.success) {
-          this.userName = res.data.userName;
-          this.step = 4;
-        }
-      });
-    } else {
-      this.step = 3;
-    }
-  }
+  // onSelectedfacility(selectedfacility) {
+  //   if (selectedfacility) {
+  //     this.registrationData.facilityIds = selectedfacility;
+  //     this.defenderService.onRegistration(this.registrationData).subscribe((res: any) => {
+  //       if (res.success) {
+  //         this.userName = res.data.userName;
+  //         this.step = 4;
+  //       }
+  //     });
+  //   } else {
+  //     this.step = 3;
+  //   }
+  // }
 
   mobileDetails(mobileDetails) {
     const mobileData = {
