@@ -8,6 +8,11 @@
       Back To My Cases
     </button>
     </div>
+    <div *ngIf="!isUser">
+        <button class="button-purple px-5 py-1" mat-raised-button (click)="onClick()">
+      Back 
+    </button>
+    </div>
 </div>
 
 <div class="row pl-2">
