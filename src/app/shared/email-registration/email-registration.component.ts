@@ -22,7 +22,7 @@ export class EmailRegistrationComponent implements OnInit, OnChanges {
   @Input() email: string;
   @Input() user;
   @Output() isNextEvent = new EventEmitter();
-
+  
   constructor(public securityService: SecurityService, public dialog: MatDialog,
     private fb: FormBuilder, private registrationService: RegistrationService) {
   }

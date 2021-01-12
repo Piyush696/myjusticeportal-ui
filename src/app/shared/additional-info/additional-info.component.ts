@@ -85,11 +85,10 @@ export class AdditionalInfoComponent implements OnInit, OnChanges {
   }
 
   stateData() {
-    this._statesService.getStates()
-      .subscribe(data => {
-        this.states = data
-        this.filteredStateArray = data
-      });
+    this._statesService.getStates().subscribe(data => {
+      this.states = data
+      this.filteredStateArray = data
+    });
   }
 
   getAllSpecialty() {
@@ -118,12 +117,7 @@ export class AdditionalInfoComponent implements OnInit, OnChanges {
   }
 
   deleteInfo(value) {
-    var index = this.lawyerInfoArray.map(function (element) {
-      if (element.bar_info_Exam_Id) {
-        return element.bar_info_Exam_Id;
-      }
-    }).indexOf(value.bar_info_Exam_Id)
-    let info = this.lawyerInfoArray.splice(index, 1)
+    this.lawyerInfoArray = this.lawyerInfoArray.filter(x => x.state !== value.state)
     this.states.forEach((currentState) => {
       if (currentState.name == value.state) {
         this.filteredStateArray.unshift(currentState)

@@ -8,6 +8,7 @@ import { RegistrationService } from 'app/services/registration.service';
 import { UserMetaService } from 'app/services/user-meta.service';
 import { UserService } from 'app/services/user.service';
 import { FacilityService } from 'app/services/registration/facility.service';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-my-account',
@@ -41,14 +42,19 @@ export class MyAccountComponent implements OnInit {
   constructor(private registrationService: RegistrationService, public dialog: MatDialog,
     private toasterService: ToasterService, private securityService: SecurityService,
     private userService: UserService, private store: Store<any>, private facilityService: FacilityService,
-    private fb: FormBuilder, private userMetaService: UserMetaService) { }
+    private fb: FormBuilder, private userMetaService: UserMetaService,  private location: Location) { }
 
   ngOnInit() {
     this.createControl();
     this.getLoginDetails();
     this.securityQuestionControl();
-    this.getAddUserSecurityQuestion()
-    this.getAllFacilities()
+    this.getAddUserSecurityQuestion();
+    this.getAllFacilities();
+    this.getSingleUser();
+  }
+
+  onClick(){
+    this.location.back();
   }
 
   createControl() {
