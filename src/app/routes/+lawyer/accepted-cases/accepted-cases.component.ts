@@ -26,7 +26,7 @@ export class AcceptedCasesComponent implements OnInit {
 
   constructor(private hireLawyerService: HireLawyerService, private toasterService: ToasterService) { }
   ngOnInit(): void {
-    this.onGetRequestedCases('Approved');
+    this.onGetRequestedCases('Lawyer Requested');
     this.allCase()
   }
 

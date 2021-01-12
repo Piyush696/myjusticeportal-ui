@@ -56,7 +56,7 @@ export class MyAccountComponent implements OnInit {
       userName: ['', [Validators.required, this.validateEmail.bind(this)], this.validateUserNotTaken.bind(this)],
       firstName: ['', [Validators.required]],
       lastName: ['', [Validators.required]],
-      middleName: ['', [Validators.required]],
+      middleName: [''],
       isMFA: [''],
       userEmail: [''],
       mobile: ['']
