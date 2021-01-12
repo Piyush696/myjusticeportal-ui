@@ -85,7 +85,7 @@ export class AcceptedCasesComponent implements OnInit {
       if (res.success) {
         let status = 'Approved';
         this.onGetRequestedCases(status);
-        this.toasterService.showSuccessToater('Hide case successfully.');
+        // this.toasterService.showSuccessToater('Hide case successfully.');
       } else {
         this.toasterService.showErrorToater('Something went wrong, please try again.');
       }
@@ -101,7 +101,7 @@ export class AcceptedCasesComponent implements OnInit {
       if (res.success) {
         let status = ['Approved', 'Rejected'];
         this.onGetRequestedCases(status);
-        this.toasterService.showSuccessToater('Unhide case successfully.');
+        // this.toasterService.showSuccessToater('Unhide case successfully.');
       } else {
         this.toasterService.showErrorToater('Something went wrong, please try again.');
       }

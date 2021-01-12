@@ -286,7 +286,7 @@
 }
 
 .main-panel {
-  position: relative;
+  position: relative !important;
   float: right;
   width: $sidebar-width;
 
