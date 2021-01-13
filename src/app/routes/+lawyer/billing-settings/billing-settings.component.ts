@@ -78,18 +78,18 @@ export class BillingSettingsComponent implements OnInit {
     this.dialog.closeAll();
   }
 
-  onSelectPlan(price) {
-    this.update = true;
-    this.totalPrice = parseInt(price);
-    this.planPrice = parseInt(price)
-    if (this.planPrice == 250) {
-      this.plan = 'Up to 5 Connections'
-    } else if (this.planPrice == 350) {
-      this.plan = 'Up to 25 Connections'
-    } else {
-      this.plan = 'Unlimited Connections'
-    }
-  }
+  // onSelectPlan(price) {
+  //   this.update = true;
+  //   this.totalPrice = parseInt(price);
+  //   this.planPrice = parseInt(price)
+  //   if (this.planPrice == 250) {
+  //     this.plan = 'Up to 5 Connections'
+  //   } else if (this.planPrice == 350) {
+  //     this.plan = 'Up to 25 Connections'
+  //   } else {
+  //     this.plan = 'Unlimited Connections'
+  //   }
+  // }
 
   onPayEvent(event) {
     this.dialog.closeAll();
@@ -101,24 +101,24 @@ export class BillingSettingsComponent implements OnInit {
   }
 
 
-  onFacilitySelect(event, facilityId) {
-    if (event) {
-      this.facilityId = facilityId
-      this.facilities.map((facility) => {
-        if (facility.facilityId === facilityId) {
-          facility.isSelected = true;
-        }
-        return facility
-      })
-    } else {
-      this.facilities.map((facility) => {
-        if (facility.facilityId === facilityId) {
-          facility.isSelected = false;
-        }
-        return facility
-      })
-    }
-  }
+  // onFacilitySelect(event, facilityId) {
+  //   if (event) {
+  //     this.facilityId = facilityId
+  //     this.facilities.map((facility) => {
+  //       if (facility.facilityId === facilityId) {
+  //         facility.isSelected = true;
+  //       }
+  //       return facility
+  //     })
+  //   } else {
+  //     this.facilities.map((facility) => {
+  //       if (facility.facilityId === facilityId) {
+  //         facility.isSelected = false;
+  //       }
+  //       return facility
+  //     })
+  //   }
+  // }
 
   getUserDetails() {
     this.userMetaService.getUserAdditionalDetails().subscribe((user: any) => {
@@ -153,38 +153,38 @@ export class BillingSettingsComponent implements OnInit {
     })
   }
 
-  onSelectAddOns(event, facilityId, addOnsType: string) {
-    if (event) {
-      this.facilities.map((x) => {
-        if (facilityId === x.facilityId) {
-          if (addOnsType == 'premium') {
-            x.addOns.premium = true;
-            this.addOnsPrice = this.addOnsPrice + (x.facilityUserCount * 0.25)
-            this.totalPrice = this.totalPrice + (x.facilityUserCount * 0.25)
-          } else if (addOnsType == 'sponsors') {
-            this.addOnsPrice = this.addOnsPrice + (x.facilityUserCount * 1.00)
-            this.totalPrice = this.totalPrice + (x.facilityUserCount * 1.00)
-            x.addOns.sponsors = true;
-          }
-        }
-        return x
-      });
-    } else {
-      this.facilities.map((x) => {
-        if (facilityId === x.facilityId) {
-          if (addOnsType == 'premium') {
-            this.addOnsPrice = this.addOnsPrice - (x.facilityUserCount * 0.25)
-            this.totalPrice = this.totalPrice - (x.facilityUserCount * 0.25)
-            x.addOns.premium = false;
-          } else if (addOnsType == 'sponsors') {
-            this.addOnsPrice = this.addOnsPrice - (x.facilityUserCount * 1.00)
-            this.totalPrice = this.totalPrice - (x.facilityUserCount * 1.00)
-            x.addOns.sponsors = false;
-          }
-        }
-        return x
-      });
-    }
-  }
+  // onSelectAddOns(event, facilityId, addOnsType: string) {
+  //   if (event) {
+  //     this.facilities.map((x) => {
+  //       if (facilityId === x.facilityId) {
+  //         if (addOnsType == 'premium') {
+  //           x.addOns.premium = true;
+  //           this.addOnsPrice = this.addOnsPrice + (x.facilityUserCount * 0.25)
+  //           this.totalPrice = this.totalPrice + (x.facilityUserCount * 0.25)
+  //         } else if (addOnsType == 'sponsors') {
+  //           this.addOnsPrice = this.addOnsPrice + (x.facilityUserCount * 1.00)
+  //           this.totalPrice = this.totalPrice + (x.facilityUserCount * 1.00)
+  //           x.addOns.sponsors = true;
+  //         }
+  //       }
+  //       return x
+  //     });
+  //   } else {
+  //     this.facilities.map((x) => {
+  //       if (facilityId === x.facilityId) {
+  //         if (addOnsType == 'premium') {
+  //           this.addOnsPrice = this.addOnsPrice - (x.facilityUserCount * 0.25)
+  //           this.totalPrice = this.totalPrice - (x.facilityUserCount * 0.25)
+  //           x.addOns.premium = false;
+  //         } else if (addOnsType == 'sponsors') {
+  //           this.addOnsPrice = this.addOnsPrice - (x.facilityUserCount * 1.00)
+  //           this.totalPrice = this.totalPrice - (x.facilityUserCount * 1.00)
+  //           x.addOns.sponsors = false;
+  //         }
+  //       }
+  //       return x
+  //     });
+  //   }
+  // }
 
 }
