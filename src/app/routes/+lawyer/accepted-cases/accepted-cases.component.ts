@@ -22,9 +22,10 @@ export class AcceptedCasesComponent implements OnInit {
   allRequestedCases: any;
   isHidden: boolean;
   allCasesData: any;
-  currentCases: any = ['Approved'];
+  currentCases: any = ['Lawyer Approved'];
 
   constructor(private hireLawyerService: HireLawyerService, private toasterService: ToasterService) { }
+  
   ngOnInit(): void {
     this.onGetRequestedCases('Lawyer Requested');
     this.allCase()

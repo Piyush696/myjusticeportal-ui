@@ -8,6 +8,7 @@ import { Router } from '@angular/router';
 })
 export class UpdateBillingSettingsComponent implements OnInit {
   update:boolean = true;
+  selectedFacilityList = [];
   constructor(private router:Router) { }
 
   ngOnInit(): void {

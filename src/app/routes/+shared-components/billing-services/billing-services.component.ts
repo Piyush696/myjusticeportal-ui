@@ -1,5 +1,6 @@
 import { AfterViewInit, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FacilityService } from 'app/services/facility.service';
+import { LawyerFacilityService } from 'app/services/lawyer-facility.service';
 import { UserMetaService } from 'app/services/user-meta.service';
 
 @Component({
@@ -7,28 +8,38 @@ import { UserMetaService } from 'app/services/user-meta.service';
   templateUrl: './billing-services.component.html',
   styleUrls: ['./billing-services.component.css']
 })
-export class BillingServicesComponent implements OnInit,AfterViewInit {
+export class BillingServicesComponent implements OnInit, AfterViewInit {
   addOnsCount: number = 0;
   planPrice: number = 0;
   addOnsPrice: number = 0;
   facilityId: any;
   totalPrice: number = 0;
-  @Input() update:boolean;
-  spinner:boolean = false;
+  @Input() update: boolean;
+  spinner: boolean = false;
   facilities = [];
   state = [];
   filteredFacilityList = [];
   plan: string;
   @Output() paymentConfirm = new EventEmitter()
-  
-  constructor(private facilityService: FacilityService,private userMetaService: UserMetaService) { }
+  selectedFacilities = [];
+
+  constructor(private facilityService: FacilityService, private userMetaService: UserMetaService,private lawyerFacilityService: LawyerFacilityService) { }
 
   ngAfterViewInit(): void {
-    // console.log(this.update)
+    if(this.update){
+      this.getBillableFacility();
+    }
   }
 
+
   ngOnInit(): void {
-  this.getUserDetails();
+    this.getUserDetails();
+  }
+
+  getBillableFacility() {
+    this.lawyerFacilityService.getBilliableFacilityDetails().subscribe((data: any) => {
+      this.selectedFacilities = data.facilities
+    })
   }
 
   getUserDetails() {
@@ -43,7 +54,7 @@ export class BillingServicesComponent implements OnInit,AfterViewInit {
     })
   }
 
-    onPayEvent(value) {
+  onPayEvent(value) {
     if (value) {
       this.paymentConfirm.emit(true)
     }
@@ -136,7 +147,7 @@ export class BillingServicesComponent implements OnInit,AfterViewInit {
     })
   }
 
-  startLoader(value){
+  startLoader(value) {
     this.spinner = value
   }
 
