@@ -42,6 +42,7 @@ export class AdditionalInfoComponent implements OnInit, OnChanges {
   }
 
   ngOnInit(): void {
+    console.log(this.roleId)
     this.specialtyForm = this.fb.group({
       specialty: ['', [Validators.required]]
     })
@@ -98,12 +99,12 @@ export class AdditionalInfoComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(): void {
-    if (this.userMeta && this.roleId !== 3) {
+    if (this.userMeta && this.roleId !== 3 && this.roleId !== 5) {
       this.createFormControl();
       this.additionalInfo.get('housing_unit').setValue(this.userMeta[0].metaValue)
       this.additionalInfo.get('facility').setValue(this.userMeta[1].metaValue)
     }
-    if (this.userMeta && this.roleId == 3) {
+    if ((this.userMeta && this.roleId == 3) || (this.userMeta && this.roleId == 5)) {
       this.isDisable = false
       this.createFormControlLawyer()
       this.lawyerInfoArray = this.userMeta.map((item) => {
@@ -153,7 +154,7 @@ export class AdditionalInfoComponent implements OnInit, OnChanges {
 
   submit() {
     var userMetaList: any
-    if (this.roleId == 3) {
+    if (this.roleId == 3 || this.roleId == 5) {
       let lawyerInfo = this.lawyerInfoArray.map((item) => {
         this.currentState.push(item.state)
         let userMetaInfo = {}

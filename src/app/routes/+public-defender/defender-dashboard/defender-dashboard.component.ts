@@ -20,7 +20,7 @@ export class DefenderDashboardComponent implements OnInit {
   averageCount: number = 0;
   facilityId: any;
 
-  constructor(private store: Store<any>,private userMetaService:UserMetaService, private facilityService: FacilityService) { }
+  constructor(private store: Store<any>, private userMetaService: UserMetaService, private facilityService: FacilityService) { }
 
   ngOnInit(): void {
     this.store.select(s => s.userInfo).subscribe(x => {
@@ -36,43 +36,46 @@ export class DefenderDashboardComponent implements OnInit {
     this.getALLFacilities();
   }
 
-  getBillingDetails(){
-    this.userMetaService.getUserBillingDetails().subscribe((billingsDetails:any)=>{
-      if(billingsDetails.data){
-        billingsDetails.data.forEach((ele)=>{
-          if(ele.userMeta.length > 1){
-            if(ele.userMeta.length === 1){
-              this.billingBoard = true;
-              this.showDashboard = false;
-            } else {
-              ele.userMeta.forEach((x)=> {
-                if(x.metaKey == "sub_id" || x.metaKey == "cust_id"){
-                  this.showDashboard = true;
-                  this.billingBoard = false;
-                }
-                 else {
-                  this.billingBoard = true;
-                  this.showDashboard = false;
-                }
-              })
-            }
-          } else {
+  onPayEvent(value) {
+    if (value) {
+      this.getBillingDetails();
+    }
+  }
+
+  getBillingDetails() {
+    this.userMetaService.getUserBillingDetails().subscribe((billingsDetails: any) => {
+      console.log(billingsDetails)
+      if (billingsDetails.data) {
+        if (billingsDetails.data.userMeta) {
+          if (billingsDetails.data.userMeta.length === 1) {
             this.billingBoard = true;
-            this.showDashboard = false;  
+            this.showDashboard = false;
+          } else if (billingsDetails.data.userMeta.length === 0) {
+            this.showDashboard = true;
+          } else {
+            billingsDetails.data.userMeta.forEach((x) => {
+              if (x.metaKey == "sub_id" || x.metaKey == "cust_id") {
+                this.showDashboard = true;
+                this.billingBoard = false;
+              } else if (x.metaKey == "State:Bar") {
+                this.billingBoard = true;
+                this.showDashboard = false;
+              }
+              else {
+                this.billingBoard = true;
+                this.showDashboard = false;
+              }
+            })
           }
-        })
+        } else {
+          this.billingBoard = true;
+          this.showDashboard = false;
+        }
       } else {
         this.billingBoard = true;
         this.showDashboard = false;
       }
     })
-  }
-
-  
-  onPayEvent(value) {
-    if (value) {
-      this.getBillingDetails();
-    }
   }
 
   getALLFacilities() {

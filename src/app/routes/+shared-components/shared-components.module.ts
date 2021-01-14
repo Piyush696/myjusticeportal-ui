@@ -16,6 +16,7 @@ import { ColorPickerModule } from 'ngx-color-picker';
 import { StripeComponent } from './stripe/stripe.component';
 import { ChatModalComponent } from './chat-modal/chat-modal.component';
 import { BillingServicesComponent } from './billing-services/billing-services.component';
+import { PublicDefenderBillingComponent } from './public-defender-billing/public-defender-billing.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { BillingServicesComponent } from './billing-services/billing-services.co
     MesageListComponent,
     StripeComponent,
     BillingServicesComponent,
-    ChatModalComponent
+    ChatModalComponent,
+    PublicDefenderBillingComponent
   ],
   imports: [
     CommonModule,
@@ -51,7 +53,8 @@ import { BillingServicesComponent } from './billing-services/billing-services.co
     MesageListComponent,
     StripeComponent,
     BillingServicesComponent,
-    ChatModalComponent
+    ChatModalComponent,
+    PublicDefenderBillingComponent
   ]
 })
 

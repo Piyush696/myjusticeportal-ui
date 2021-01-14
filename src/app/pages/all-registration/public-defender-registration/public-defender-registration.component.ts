@@ -28,12 +28,22 @@ export class PublicDefenderRegistrationComponent implements OnInit {
   }
   user: any;
   orgAddress: {};
+  currentState = [];
 
   constructor(private defenderService: PublicDefenderService, private cacheService: CacheService,
     private toaterService: ToasterService, private toasterService: ToasterService,
     private router: Router, private loginService: LoginService, private store: Store<any>) { }
 
   ngOnInit(): void {
+  }
+
+  onUserPageClick(user) {
+    if (user) {
+      this.step = 1
+      this.user = this.registrationData.user;
+    } else {
+      this.step = 2;
+    }
   }
 
   onNextClick(userData) {
@@ -49,14 +59,15 @@ export class PublicDefenderRegistrationComponent implements OnInit {
     if (orgData) {
       this.registrationData.organization = orgData;
       this.registrationData.organization.address = orgData.address;
+      console.log(this.registrationData)
       this.defenderService.onRegistration(this.registrationData).subscribe((res: any) => {
         if (res.success) {
           this.userName = res.data.userName;
-          this.step = 3;
+          this.step = 4;
         }
       });
     } else {
-      this.step = 2;
+      this.step = 3;
     }
   }
 
@@ -86,6 +97,15 @@ export class PublicDefenderRegistrationComponent implements OnInit {
         this.toaterService.showSuccessToater("Your code has been sent, please check your mobile device.")
       }
     })
+  }
+
+  userMetaData(userMetaData) {
+    this.step = 3;
+    this.registrationData['userMeta'] = userMetaData;
+  }
+
+  stateEvent(state) {
+    this.currentState = [...state]
   }
 
   onAuthCodeValidate(authcode) {
@@ -123,10 +143,9 @@ export class PublicDefenderRegistrationComponent implements OnInit {
 
   onPreviousClick(back) {
     if (back) {
-      this.step = 1;
-      this.user = this.registrationData.user
-    } else {
       this.step = 2;
+    } else {
+      this.step = 3;
     }
   }
   onBackClick(back) {

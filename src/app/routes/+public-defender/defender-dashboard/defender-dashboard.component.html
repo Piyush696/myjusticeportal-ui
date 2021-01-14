@@ -1,110 +1,35 @@
-<div *ngIf="!isAuthorized">
-    <h2 class="font-weight-bold p-3 unauthorized-text">Thank you for registering as an attorney for My Justice Portal.
-        Your registration is being processed. Most registrations
-        are processed withing 24 hours. Once we verify your active Bar membership, your account will be approved and you
-        will
-        receive an email notification to complete the registration process.</h2>
+<div *ngIf="!isAuthorized || billingBoard">
+    <h1 class="font-weight-bold m-0">Setup Your Account</h1>
 </div>
-<div *ngIf="showDashboard && isAuthorized || billingBoard && isAuthorized">
-    <h1 class="mb-0">Dashboard</h1>
-    <h4>View and actions for requested cases.</h4>
-  </div>
- <div *ngIf="billingBoard">
-        <div class="row">
-          <div class="col-6">
-            <div class="row pt-2">
-              <div class="col-12">
-                <div class="d-flex justify-content-center align-items-center;">
-                  <mat-card class="mat-elevation-z10 w-100">
-                    <div class="d-flex justify-content-start">
-                      <h2 class="text-center">Step 1 :</h2>&nbsp;
-                      <h2 class="text-center font-weight-bold">Explore Plans</h2>
-                    </div>
-                    <div class="row">
-                      <div class="col-12 pt-2">
-                        <mat-card class="mat-elevation-z10 border-card">
-                          <input class="circle" [checked]="true" type="radio" name="package" (change)="onSelectPlan($event.checked)">
-                          Standard Plan($40/mo, $0.10/inmate/mo)
-                        </mat-card>
-                      </div>
-                    </div>
-                  </mat-card>
-                </div>
-              </div>
-              <div class="col-12 pt-2">
-                <div class="d-flex justify-content-center align-items-center;">
-                  <mat-card class="mat-elevation-z10 w-100 card-scroll">
-                    <div>
-                      <span class="h5 text-center">Step 2 :</span>&nbsp;
-                      <span class="h5 text-center font-weight-bold">Select facilities</span>
-                    </div>
-                    <h4>Based on the states in which you are admitted to the bar, the following facilities
-                      are available.
-                      Please select facility you want.</h4>
-                    <div class="col-12 pt-2">
-                      <div>
-                        <li *ngFor="let facility of facilities;">
-                          <mat-checkbox color="primary" 
-                            (change)="onFacilitySelect($event.checked,facility?.facilityId,facility.facilityUserCount)">
-                            {{facility?.facilityName}} ({{facility.facilityUserCount}})
-                          </mat-checkbox>
-                        </li>
-                      </div>
-                    </div>
-                  </mat-card>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-6">
-            <!-- Estimatad Monthly Bill  -->
-            <div class="col-12 pt-2">
-              <div class="d-flex justify-content-center align-items-center;">
-                <mat-card>
-                  <div class="col-12 pt-2">
-                    <div>
-                      <span class="h5 text-center">Step 3 :</span>&nbsp;
-                      <span class="h5 text-center font-weight-bold">Review Plan Details</span>
-                    </div>
-                       <span class="text-center text-black">Based on the facilities and add ons that you have selected, please review your monthly bill below.</span>
-                    <mat-card class="mat-elevation-z10">
-                      <div class="d-flex justify-content-between align-items-between">
-                        <div>Plan Base Cost:</div>
-                        <div>$50.00</div>
-                      </div>
-                      <div class="d-flex justify-content-between align-items-between">
-                        <div>Total inmate access Charges:</div>
-                        <div>${{(addOnsCount * 10 ) ? (addOnsCount * 10 ) : 0}}
-                        </div>
-                      </div>
-                      <!-- <div class="d-flex justify-content-between align-items-between">
-                        <div>Add On charges:</div>
-                        <div>${{averageCount * 0.10 ? averageCount : 0}}
-                        </div>
-                      </div> -->
-                      <hr>
-                      <div class="d-flex justify-content-between align-items-between">
-                        <div>Total Monthly Charge:</div>
-                        <div>
-                          <span class="font-weight-bold">Total:-</span> ${{totalPrice}}
-                        </div>
-                      </div>
-                    </mat-card>
-                  </div>
-                </mat-card>
-              </div>
-            </div>
-            <div class="col-12 mt-2">
-              <mat-card class="p-4">
-                <div>
-                  <span class="h5 text-center">Step 4 :</span>&nbsp;
-                  <span class="h5 text-center font-weight-bold">Add Credit Card Info</span>
-                </div>
-                   <span class="text-center text-black">Please enter your credit card information in the form below.</span>
-                <app-stripe class="pt-2" [totalCount]="totalPrice" (onPayEvent)="onPayEvent($event)" [facilitiesList] ="facilities"></app-stripe>
-                <span class="text-center">Everything look correct? Click pay and Get Started to complete your setup and start using My Justice Portal.</span>
-              </mat-card>
-            </div>
-          </div>
+
+<div *ngIf="!isAuthorized">
+    <div class="d-flex justify-content-center align-items-center;">
+        <div class="col-12 pt-2 pl-0">
+            <mat-card class="mat-elevation-z10 d-flex justify-content-center">
+                <h2>
+                    Account Status: <span class="panding-review">Pending Review</span>
+                </h2>
+            </mat-card>
         </div>
+    </div>
+</div>
+
+<div *ngIf="showDashboard && isAuthorized">
+    <h1 class="mb-0"><b>Dashboard</b></h1>
+    <h4>A summary of recent activity with your Cases and Connections.</h4>
+</div>
+
+<div *ngIf="billingBoard">
+    <div *ngIf="billingBoard && isAuthorized">
+        <div class="d-flex justify-content-center align-items-center;">
+            <div class="col-12 pt-2 px-0">
+                <mat-card class="mat-elevation-z10 d-flex justify-content-center">
+                    <h2>Account Status: <span class="approved-card">Approved</span></h2>
+                </mat-card>
+            </div>
+        </div>
+    </div>
+    <div *ngIf="userData?.roles[0]?.roleId == 5">
+        <app-public-defender-billing (paymentConfirm)="onPayEvent($event)"></app-public-defender-billing>
+    </div>
 </div>

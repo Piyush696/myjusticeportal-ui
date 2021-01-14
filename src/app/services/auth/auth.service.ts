@@ -33,7 +33,7 @@ export class AuthLoadService {
             resolve(true);
           },
             (err) => {
-              this.cacheService.removeCache('user');
+              this.cacheService.removeCache('token');
               resolve(true);
             })
       })

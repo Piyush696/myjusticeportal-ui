@@ -7,6 +7,9 @@
             <div *ngIf="roleId == 3">
                 <h2 class="text-center">Lawyer Registration</h2>
             </div>
+            <div *ngIf="roleId == 5">
+                <h2 class="text-center">Public Defender Registration</h2>
+            </div>
             <div *ngIf="roleId == 1">
                 <h2 class="text-center">Inmate Registration</h2>
             </div>
@@ -15,18 +18,15 @@
             <mat-card class="p-4">
                 <div>
                     <div>
-                        <h3 class=" text-center font-weight-bold" *ngIf="roleId != 3">Housing Information</h3>
+                        <h3 class=" text-center font-weight-bold" *ngIf="roleId != 3 && roleId != 5">Housing Information</h3>
                     </div>
                     <div>
-                        <h2 class=" text-center font-weight-bold" *ngIf="roleId == 3">Bar Information
+                        <h2 class=" text-center font-weight-bold" *ngIf="roleId == 3 || roleId == 5">Bar Information
                         </h2>
                     </div>
-                    <p class="text-center" *ngIf="roleId == 3">Please add the states in which you are admitted to the
-                        bar.<br>If possible, include your Bar ID in that state.</p>
-                    <p class="text-center" *ngIf="(roleId == 1 && !isFacility)">It looks like you aren't currently in a
-                        facility. Please
-                        select the last facility you were in, or select which is
-                        closest to you.</p>
+                    <p class="text-center" *ngIf="roleId == 3 || roleId == 5">Please add the states in which you are admitted to the bar.
+                        <br>If possible, include your Bar ID in that state.</p>
+                    <p class="text-center" *ngIf="(roleId == 1 && !isFacility)">It looks like you aren't currently in a facility. Please select the last facility you were in, or select which is closest to you.</p>
                 </div>
                 <div class="">
                     <div class="px-2">
@@ -36,11 +36,10 @@
                                     <td class="p-0 w-50 pl-5 py-1 table-color font-weight-bold">{{info.state}}</td>
                                     <td class="p-0 w-50 pl-5 py-1 table-color">
                                         <span class="font-weight-bold">Bar ID:
-                                        </span>
-                                        {{info.bar_info_Exam_Id}}</td>
+                                        </span> {{info.bar_info_Exam_Id}}
+                                    </td>
                                     <td class="btn-group">
-                                        <button class="btn-size" mat-mini-fab color="warn"
-                                            title="Delete Practice Areas" (click)="deleteInfo(info)">
+                                        <button class="btn-size" mat-mini-fab color="warn" title="Delete Practice Areas" (click)="deleteInfo(info)">
                                             <mat-icon class="icon-font">delete</mat-icon>
                                         </button>
                                     </td>
@@ -48,11 +47,10 @@
                             </tbody>
                         </table>
                     </div>
-                    <div *ngIf="roleId != 3">
+                    <div *ngIf="roleId != 3 && roleId != 5">
                         <mat-form-field class="w-100 p-3">
                             <mat-label>Facility</mat-label>
-                            <input type="text" matInput [formControl]="additionalInfo.controls['facility']"
-                                [matAutocomplete]="auto">
+                            <input type="text" matInput [formControl]="additionalInfo.controls['facility']" [matAutocomplete]="auto">
                             <mat-autocomplete #auto="matAutocomplete">
                                 <mat-option *ngFor="let facility of facilityList" [value]="facility.facilityName">
                                     {{facility.facilityName}}
@@ -60,12 +58,11 @@
                             </mat-autocomplete>
                         </mat-form-field>
                         <mat-form-field appearance="fill" class="w-100 p-3">
-                            <mat-label>Housing unit</mat-label> <input type="text" matInput placeholder="Housing Unit (If Known.)"
-                                [formControl]="additionalInfo.controls['housing_unit']">
+                            <mat-label>Housing unit</mat-label> <input type="text" matInput placeholder="Housing Unit (If Known.)" [formControl]="additionalInfo.controls['housing_unit']">
                         </mat-form-field>
                     </div>
 
-                    <div class="d-flex" *ngIf="roleId == 3">
+                    <div class="d-flex" *ngIf="roleId == 3 || roleId == 5">
                         <div class="col-6 p-0">
                             <mat-form-field appearance="fill" class="w-100 p-1">
                                 <mat-label>State</mat-label>
@@ -80,12 +77,9 @@
                         <div class="col-6 p-0">
                             <mat-form-field appearance="fill" class="w-100 p-1">
                                 <mat-label>Bar ID (If Applicable)</mat-label>
-                                <input type="text" matInput
-                                    [formControl]="additionalInfoLawyer.controls['bar_info_Exam_Id']">
-                                <mat-error
-                                    *ngIf="additionalInfoLawyer.controls['bar_info_Exam_Id'].invalid && additionalInfoLawyer.controls['bar_info_Exam_Id'].touched">
-                                    <small class="font13"
-                                        *ngIf="additionalInfoLawyer.get('bar_info_Exam_Id').errors?.required">
+                                <input type="text" matInput [formControl]="additionalInfoLawyer.controls['bar_info_Exam_Id']">
+                                <mat-error *ngIf="additionalInfoLawyer.controls['bar_info_Exam_Id'].invalid && additionalInfoLawyer.controls['bar_info_Exam_Id'].touched">
+                                    <small class="font13" *ngIf="additionalInfoLawyer.get('bar_info_Exam_Id').errors?.required">
                                         Bar ID is required.
                                     </small>
                                 </mat-error>
@@ -94,10 +88,9 @@
                     </div>
                 </div>
 
-                <div class="row pl-3" *ngIf="roleId == 3">
+                <div class="row pl-3" *ngIf="roleId == 3 || roleId == 5">
                     <div class="pl-3">
-                        <button class="px-4 py-1" [disabled]="additionalInfoLawyer.controls['state'].invalid"
-                            mat-raised-button color="primary" (click)="addMoreStates()">{{buttonText}}</button>
+                        <button class="px-4 py-1" [disabled]="additionalInfoLawyer.controls['state'].invalid" mat-raised-button color="primary" (click)="addMoreStates()">{{buttonText}}</button>
                     </div>
                 </div>
                 <hr class="footer-line">
@@ -105,12 +98,8 @@
                     <button mat-button color="primary" (click)="onPreviousClick()">
                         BACK
                     </button>
-                    <button *ngIf="roleId != 3"
-                        [disabled]="additionalInfo.controls['housing_unit'].invalid || additionalInfo.controls['facility'].invalid"
-                        class="px-4 py-1" mat-raised-button color="primary" (click)="submit()">Next</button>
-
-                    <button *ngIf="roleId == 3" [disabled]="isDisable" class="px-4 py-1" mat-raised-button
-                        color="primary" (click)="submit()">Next</button>
+                    <button *ngIf="roleId != 3 && roleId != 5" [disabled]="additionalInfo.controls['housing_unit'].invalid || additionalInfo.controls['facility'].invalid" class="px-4 py-1" mat-raised-button color="primary" (click)="submit()">Next</button>
+                    <button *ngIf="roleId == 3 || roleId == 5" [disabled]="isDisable" class="px-4 py-1" mat-raised-button color="primary" (click)="submit()">Next</button>
                 </div>
             </mat-card>
         </div>
@@ -122,8 +111,7 @@
         <div class="">
             <mat-form-field appearance="fill" class="w-100 p-4">
                 <mat-label>Practice Areas</mat-label>
-                <input matInput placeholder="specialty" [formControl]="specialtyForm.controls['specialty']"
-                    autocapitalize="off" required />
+                <input matInput placeholder="specialty" [formControl]="specialtyForm.controls['specialty']" autocapitalize="off" required />
                 <mat-error>
                     <div *ngIf="specialtyForm.controls['specialty'].invalid && 
                                                 specialtyForm.controls['specialty'].touched">
@@ -140,8 +128,7 @@
                 <button mat-dialog-close class="px-4 py-1" mat-button color="primary">
                     Cancel
                 </button>
-                <button class="px-4 py-1" mat-raised-button color="primary" mat-dialog-close
-                    (click)="createSpecilaty()">
+                <button class="px-4 py-1" mat-raised-button color="primary" mat-dialog-close (click)="createSpecilaty()">
                     Save
                 </button>
             </div>
