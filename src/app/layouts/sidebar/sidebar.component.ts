@@ -66,6 +66,7 @@ export class SidebarComponent implements OnInit, AfterViewInit {
     libraryLink: any;
     setupDashboard: boolean = false;
     billingsDetails: any;
+
     constructor(private store: Store<any>, private userMetaService: UserMetaService) { }
 
 
@@ -84,7 +85,7 @@ export class SidebarComponent implements OnInit, AfterViewInit {
     }
 
     getBillingDetails() {
-        if (this.userInfo.roles[0].roleId === 3) {
+        if (this.userInfo.roles[0].roleId === 3 || this.userInfo.roles[0].roleId === 5) {
             this.userMetaService.getUserBillingDetails().subscribe((billingsDetails: any) => {
                 this.billingsDetails = billingsDetails
                 this.filterMenuByUser();
@@ -96,7 +97,7 @@ export class SidebarComponent implements OnInit, AfterViewInit {
 
 
     filterMenuByUser() {
-        if (this.userInfo.roles[0].roleId === 3) {
+        if (this.userInfo.roles[0].roleId === 3 || this.userInfo.roles[0].roleId === 5) {
             if (this.userInfo.status && this.billingsDetails?.data?.userMeta.find(element => element.metaKey === 'sub_id')) {
                 this.filteredMenuItems = ROUTES.filter(menu => {
                     let isExist = menu.roleIds.find(roleId => roleId == this.userInfo.roles[0].roleId);

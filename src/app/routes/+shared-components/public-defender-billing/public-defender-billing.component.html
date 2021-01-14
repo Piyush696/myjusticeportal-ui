@@ -1,0 +1,102 @@
+<div class="row">
+    <div *ngIf="spinner" class="d-flex justify-content-center align-items-center spinner">
+        <mat-spinner color="primary"></mat-spinner>
+    </div>
+    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+        <div class="row pt-2">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <mat-card class="mt-2">
+                    <div>
+                        <span class="h5 text-center font-weight-bold">Step 1:</span>&nbsp;
+                        <span class="h5 text-center font-weight-bold">Select Subscription Level</span>
+                    </div>
+                    <h4>
+                        How many inmate connections do you need?
+                        <a href="https://google.com" target="_blank">Learn More about Connections.</a>
+                    </h4>
+                    <div class="row">
+                        <div class="col-12 pt-2">
+                            <mat-card class="mat-elevation-z10 border-card">
+                                <input class="circle" type="radio" [checked]="true" name="package" (change)="onSelectPlan('40')" />Unlimited Connections, $40/mo<br />
+                            </mat-card>
+                        </div>
+                    </div>
+                </mat-card>
+            </div>
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 pt-2">
+                <mat-card>
+                    <div>
+                        <span class="h5 text-center font-weight-bold">Step 2:</span>&nbsp;
+                        <span class="h5 text-center font-weight-bold">Select Facilities</span>
+                    </div>
+                    <h4>
+                        Which facilities would you like to have access?
+                        <a href="https://google.com" target="_blank">Learn more about Premium Listings and Sponsorships.</a>
+                    </h4>
+
+                    <div class="col-12 pt-2">
+                        <div *ngIf="facilities.length == 0">
+                            <span>We currently do not have any facilities in your state.
+                                      Please contact support for more information.</span>
+                        </div>
+                        <div *ngIf="facilities.length > 0">
+                            <li *ngFor="let facility of facilities">
+                                <mat-checkbox color="primary" (change)="onFacilitySelect($event.checked,facility?.facilityId) ">
+                                    {{ facility?.facilityName }} ({{facility.facilityUserCount }})
+                                </mat-checkbox>
+                            </li>
+                        </div>
+                    </div>
+                </mat-card>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+        <!-- Estimated Monthly Bill  -->
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 pt-2 px-0">
+            <mat-card class="mt-2">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 pt-2">
+                    <div>
+                        <span class="h5 text-center font-weight-bold">Step 3:</span>&nbsp;
+                        <span class="h5 text-center font-weight-bold">Review Plan Details</span>
+                    </div>
+                    <span class="text-center text-black">Based on the facilities that you have selected,
+                            please review your monthly bill below.</span>
+                    <mat-card class="mat-elevation-z10">
+                        <div class="d-flex justify-content-between align-items-between">
+                            <div>BASE COST:</div>
+                            <div>{{ planPrice | currency: "USD":"symbol" }}</div>
+                        </div>
+                        <div class="d-flex justify-content-between align-items-between">
+                            <div>PREMIUM:</div>
+                            <div>
+                                {{ (addOnsPrice ? addOnsPrice : 0) | currency: "USD":"symbol" }}
+                            </div>
+                        </div>
+                        <hr />
+                        <div class="d-flex justify-content-between align-items-between">
+                            <div>TOTAL MONTHLY CHARGE:</div>
+                            <div>
+                                <span class="font-weight-bold">{{
+                      totalPrice | currency: "USD":"symbol"
+                      }}</span>
+                            </div>
+                        </div>
+                    </mat-card>
+                </div>
+            </mat-card>
+        </div>
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mt-2 px-0">
+            <mat-card class="p-4 mt-10">
+                <div>
+                    <span class="h5 text-center font-weight-bold">Step 4:</span>&nbsp;
+                    <span class="h5 text-center font-weight-bold">Add Credit Card Info</span>
+                </div>
+                <span class="text-center text-black">Please enter your credit card information in the form below. Once
+            everything looks correct, click Pay to complete your setup and
+            start using My Justice Portal!</span>
+                <app-stripe class="pt-2 mt-2" [totalCount]="totalPrice" [plan]="plan" (isloading)="startLoader($event)" (onPayEvent)="onPayEvent($event)" [facilitiesList]="facilities"></app-stripe>
+            </mat-card>
+        </div>
+    </div>
+</div>
