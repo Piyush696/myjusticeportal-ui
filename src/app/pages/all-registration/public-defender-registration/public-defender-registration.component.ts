@@ -23,8 +23,7 @@ export class PublicDefenderRegistrationComponent implements OnInit {
     'user': {},
     'organization': {
       'address': {}
-    },
-    'facilityIds': []
+    }
   }
   user: any;
   orgAddress: {};
@@ -71,19 +70,6 @@ export class PublicDefenderRegistrationComponent implements OnInit {
     }
   }
 
-  // onSelectedfacility(selectedfacility) {
-  //   if (selectedfacility) {
-  //     this.registrationData.facilityIds = selectedfacility;
-  //     this.defenderService.onRegistration(this.registrationData).subscribe((res: any) => {
-  //       if (res.success) {
-  //         this.userName = res.data.userName;
-  //         this.step = 4;
-  //       }
-  //     });
-  //   } else {
-  //     this.step = 3;
-  //   }
-  // }
 
   mobileDetails(mobileDetails) {
     const mobileData = {

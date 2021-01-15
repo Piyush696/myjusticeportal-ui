@@ -7,14 +7,18 @@ import { ManageOrganisationComponent } from '../+shared-components/+manage-organ
 import { ViewFacilitiesComponent } from '../+shared-components/+manage-organization/view-facilities/view-facilities.component';
 import { ViewUsersComponent } from '../+shared-components/+manage-organization/view-users/view-users.component';
 import { SearchInmatesComponent } from './search-inmates/search-inmates.component';
+import { ManageProfileComponent } from '../+shared-components/manage-profile/manage-profile.component';
+import { ManageBillingSettingsComponent } from '../+shared-components/manage-billing-settings/manage-billing-settings.component';
 
 const routes: Routes = [
     { path: '', redirectTo: 'defender-dashboard', pathMatch: 'full' },
     { path: 'defender-dashboard', component: DefenderDashboardComponent },
     { path: 'my-account', component: MyAccountComponent },
+    { path: 'manage-profile', component: ManageProfileComponent },
     { path: 'manage-organization', component: ManageOrganisationComponent },
     { path: 'search-inquiries', component: SearchInmatesComponent },
     { path: 'inmates-cases', component: InmatesCasesComponent },
+    { path: 'billing-setting', component: ManageBillingSettingsComponent },
     { path: 'manage-organization/users', component: ViewUsersComponent },
     { path: 'manage-organization/facilities', component: ViewFacilitiesComponent },
     { path: '**', component: DefenderDashboardComponent }

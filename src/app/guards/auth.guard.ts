@@ -21,12 +21,12 @@ export class AuthGuard implements CanActivate {
         this.store.dispatch(new AddUserInfo(Object.assign({}, data.user)));
         return true;
       } else {
-        this.cacheService.removeCache('user');
+        this.cacheService.removeCache('token');
         this.router.navigateByUrl('/login');
         return false;
       }
     }).catch((x) => {
-      this.cacheService.removeCache('user');
+      this.cacheService.removeCache('token');
       this.router.navigateByUrl('/login');
       return false;
     })

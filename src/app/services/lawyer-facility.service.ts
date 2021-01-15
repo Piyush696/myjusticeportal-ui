@@ -22,7 +22,6 @@ export class LawyerFacilityService {
     };
   }
 
-
   getBilliableFacilityDetails() {
     return this.httpClient.get<object>(`${this.apiPath}/lawyerFacility`, this.getHeaders());
   }

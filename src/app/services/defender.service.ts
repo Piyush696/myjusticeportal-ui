@@ -29,4 +29,8 @@ export class DefenderService {
     return this.httpClient.get<object>(`${this.apiPath}/defender`, this.getHeaders());
   }
 
+  getBilliableFacilityDetails() {
+    return this.httpClient.get<object>(`${this.apiPath}/defender/defender-facility`, this.getHeaders());
+  }
+
 }

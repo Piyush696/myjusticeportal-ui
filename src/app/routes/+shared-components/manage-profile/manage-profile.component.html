@@ -1,0 +1,327 @@
+<div class="col-12 col-sm-12 p-0 d-flex justify-content-between justify-content-sm-between">
+    <div>
+        <h1 class="font-weight-bold m-0">Manage Profile</h1>
+        <h4 class="line-height header-sub-text">
+            Manage the information that is displayed in your profile and visible to potential
+            clients
+        </h4>
+    </div>
+    <div class="">
+        <a (click)="onClickGoBack()" type="button" class="btn btn-labeled float-right ml-3">
+            Back
+        </a>
+    </div>
+
+</div>
+
+<div class="row">
+    <div class="col-12 pt-2">
+        <mat-card class="mat-elevation-z10">
+            <h1 class="font-weight-bold">Profile Information</h1>
+            <table style="width:100%">
+                <tr>
+                    <th>Name</th>
+                    <td>{{userDetails?.firstName}} {{userDetails?.middleName}} {{userDetails?.lastName}}</td>
+                </tr>
+                <tr>
+                    <th>Tagline</th>
+                    <td>{{userDetails?.userAdditionalInfo?.tagline}}</td>
+                </tr>
+                <tr>
+                    <th>Practice Areas</th>
+                    <td>{{userDetails?.userAdditionalInfo?.practiceAreas}}</td>
+                </tr>
+                <tr>
+                    <th>Description</th>
+                    <td>{{userDetails?.userAdditionalInfo?.description}}</td>
+                </tr>
+                <tr>
+                    <th>Profile Headshot</th>
+                    <td>
+                        <img src="{{userDetails?.userAdditionalInfo?.profile?.downloadLink}}" width="157px"
+                            height="185px" alt="logo" class="logo"
+                            *ngIf="userDetails?.userAdditionalInfo?.profile?.downloadLink">
+                    </td>
+                </tr>
+                <tr>
+                    <th>Profile Header Background Image</th>
+                    <td>
+                        <img src="{{userDetails?.userAdditionalInfo?.header?.downloadLink}}" alt="logo" class="logo"
+                            *ngIf="userDetails?.userAdditionalInfo?.header?.downloadLink">
+                    </td>
+                </tr>
+            </table>
+            <div class="row">
+                <div class="col-12 col-sm-12 d-flex justify-content-between justify-content-sm-between">
+                    <div>
+                        <button mat-raised-button class="button-purple px-4 py-1 mt-1"
+                            (click)="openOrganizationModal(previewProfile,userDetails)">Preview</button>
+                    </div>
+                    <div>
+                        <button mat-raised-button class="button-purple px-4 py-1 mt-1"
+                            (click)="openOrganizationModal(updateOrganization,userDetails)">Make Changes</button>
+                    </div>
+                </div>
+            </div>
+        </mat-card>
+    </div>
+</div>
+
+
+<ng-template #updateOrganization class="manage-profile">
+    <div>
+        <h2 class="text-center font-weight-bold">Profile Editor</h2>
+        <h4 class="text-center">Click the Edit button below to make changes, then click Save to confirm your changes.
+        </h4>
+    </div>
+
+    <div class="" *ngIf="currentView == 1">
+        <div class="col-12 p-0">
+            <mat-form-field appearance="fill" class="w-100 p-1">
+                <mat-label> Name</mat-label>
+                <input type="text" matInput placeholder="Name" [formControl]="additionalInfoForm.controls['name']"
+                    required>
+                <mat-error>
+                    <div
+                        *ngIf="additionalInfoForm.controls['name'].invalid && additionalInfoForm.controls['name'].touched">
+                        <small class="font13">
+                            Name is Required
+                        </small>
+                    </div>
+                </mat-error>
+            </mat-form-field>
+            <small class="name-para">To update your name, please visit the My Account section, accessible in the top
+                right
+                Account
+                icon.</small>
+        </div>
+
+
+        <div class="row px-3">
+            <mat-form-field appearance="fill" class="w-50 p-1">
+                <mat-label>Tagline</mat-label>
+                <input type="text" matInput [formControl]="additionalInfoForm.controls['tagline']">
+                <mat-error>
+                    <div
+                        *ngIf="additionalInfoForm.controls['tagline'].invalid && additionalInfoForm.controls['tagline'].touched">
+                        <small class="font13">
+                            Tagline is Required
+                        </small>
+                    </div>
+                </mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="fill" class="w-50 p-1">
+                <mat-label>Practice Areas</mat-label>
+                <mat-select [formControl]="toppings" multiple
+                    [formControl]="additionalInfoForm.controls['practiceAreas']" required>
+                    <span class="pl-3">Select Practice Areas</span>
+                    <mat-option *ngFor="let specialty of specialtyList" value="{{specialty?.specialtyType}}">
+                        {{specialty.specialtyType}}
+                    </mat-option>
+                </mat-select>
+                <mat-error>
+                    <div
+                        *ngIf="additionalInfoForm.controls['practiceAreas'].invalid && additionalInfoForm.controls['practiceAreas'].touched">
+                        <small class="font13">
+                            Practice Areas is Required
+                        </small>
+                    </div>
+                </mat-error>
+            </mat-form-field>
+        </div>
+        <div class="row px-3">
+            <mat-form-field appearance="fill" class="w-100 p-1">
+                <mat-label>Description</mat-label>
+                <textarea [formControl]="additionalInfoForm.controls['description']" rows="8" cols="50" matInput
+                    placeholder="Description..."></textarea>
+                <mat-error>
+                    <div
+                        *ngIf="additionalInfoForm.controls['description'].invalid && additionalInfoForm.controls['description'].touched">
+                        <small class="font13">
+                            Description Required
+                        </small>
+                    </div>
+                </mat-error>
+            </mat-form-field>
+        </div>
+    </div>
+    <div class="" *ngIf="currentView == 2">
+        <div class="row px-3">
+            <div class="card-body px-0 pb-4">
+                <div class="drag-border p-3">
+                    <h4 class="font-weight-bold margin-remove">Profile Headshot</h4>
+                    <span class="text-bold">Best image size is up to 5MB and 157px × 185px (width × height).</span>
+                    <div ng2FileDrop [ngClass]="{'another-file-over-class': hasAnotherDropZoneOver}"
+                        (fileOver)="fileOverAnother($event)" [uploader]="uploader1"
+                        class="box-placeholder my-drop-zone font-weight-bold pb-2">
+                        Drag and drop files here (or) choose below to attach.
+                    </div>
+                    <label for="file1" class="file-upload mb-0">
+                        <input id="file1" type="file" ng2FileSelect [uploader]="uploader1" accept="image/*"
+                            (change)=" onProfile($event.target.files)" />
+                    </label>
+                    <div>
+                        <small class="text-danger" *ngIf="isFileSizeMax">Image size should be less than 5 MB</small>
+                    </div>
+                    <div> <small class="text-danger" *ngIf="isDimenssionMax">Image should be 157px × 185px (width ×
+                            height)
+                        </small>
+                    </div>
+                </div>
+                <div class="px-3">
+                    <table class="table m-0">
+                        <tbody>
+                            <tr class="pr-0" *ngFor="let item of uploader1?.queue">
+                                <td class="pr-0"><strong>{{item?.file?.name}}</strong></td>
+                                <td nowrap class="pr-0">
+                                    <button mat-raised-button color="warn" (click)="item.remove()">
+                                        <mat-icon>delete</mat-icon>Remove
+                                    </button>
+                                </td>
+                                <td>
+                                    <button mat-raised-button color="primary"
+                                        [disabled]="isFileSizeMax || isDimenssionMax" (click)="onUploadLogo()">
+                                        <mat-icon>file_upload</mat-icon>Upload
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="row px-3">
+            <div class="card-body px-0 pb-4">
+                <div class="drag-border p-3">
+                    <h4 class="font-weight-bold margin-remove">Profile Header Background Image</h4>
+                    <span class="text-bold">Best image size is 8 MB and 730px × 170px (width × height)</span>
+                    <div ng2FileDrop [ngClass]="{'another-file-over-class': hasAnotherDropZoneOver}"
+                        (fileOver)="fileOverAnother($event)" [uploader]="uploader2"
+                        class="box-placeholder my-drop-zone font-weight-bold pb-2">
+                        Drag and drop files here (or) choose below to attach.
+                    </div>
+                    <label for="file1" class="file-upload mb-0">
+                        <input id="file1" type="file" ng2FileSelect [uploader]="uploader2"
+                            (change)="onHeadshot($event.target.files)" />
+                    </label>
+                    <div>
+                        <small class="text-danger" *ngIf="isHeadshotFileSizeMax">File size should be less than 8
+                            MB</small>
+                    </div>
+                    <div> <small class="text-danger" *ngIf="isDimenssionMax1">Image should be 730px × 170px (width ×
+                            height)
+                        </small>
+                    </div>
+                </div>
+                <div class="px-3">
+                    <table class="table m-0">
+                        <tbody>
+                            <tr class="pr-0" *ngFor="let item of uploader2?.queue">
+                                <td class="pr-0"><strong>{{item?.file?.name}}</strong></td>
+                                <td nowrap class="pr-0">
+                                    <button mat-raised-button color="warn" (click)="item.remove()">
+                                        <mat-icon>delete</mat-icon>Remove
+                                    </button>
+                                </td>
+                                <td>
+                                    <button mat-raised-button color="primary"
+                                        [disabled]="isHeadshotFileSizeMax || isDimenssionMax1" (click)="onUploadLogo()">
+                                        <mat-icon>file_upload</mat-icon>Upload
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="d-flex justify-content-between">
+        <button mat-raised-button class="btn bg-color px-perc py-1" (click)="closeModal()">
+            Close
+        </button>
+        <div class="">
+            <button mat-raised-button class="btn bg-color px-perc py-1 mr-2" *ngIf="currentView == 2"
+                (click)="OnNextView(1)">
+                Back
+            </button>
+            <button mat-raised-button class="btn bg-color px-perc py-1 mr-2" [disabled]="additionalInfoForm.invalid"
+                *ngIf="currentView == 1" (click)="OnNextView(2)">
+                Next
+            </button>
+            <button class="button-purple px-4 py-1" mat-raised-button (click)="saveChanges()">
+                {{buttonText}}
+            </button>
+        </div>
+    </div>
+</ng-template>
+
+<ng-template #previewProfile>
+    <mat-card class="border bg-card p-2">
+        <div class="d-flex justify-content-between align-items-center bg-header">
+            <div>
+                <h2 class="font-weight-bold m-0">Lawyer Profile</h2>
+            </div>
+            <div>
+                <button class="btn bg-color" mat-raised-button (click)="onCloseModal()">Close</button>
+            </div>
+        </div>
+        <div class="mt-2 background-profile-headshot" id="cust-img">
+        </div>
+        <div class="p-2 bg-white">
+            <div class="row mt-3">
+                <div class="col-3">
+                    <div class="d-flex">
+                        <div class="img-profile" *ngIf="userDetails?.userAdditionalInfo?.profile?.downloadLink">
+                            <img src="{{userDetails?.userAdditionalInfo?.profile?.downloadLink}}" width="157px"
+                                height="185px" alt="logo" class="logo">
+                        </div>
+                        <div class="img-profile" *ngIf="!userDetails?.userAdditionalInfo?.profile?.downloadLink">
+                            <img src="../../../../assets/img/placeholder.jpg" width="157px" height="185px" alt="logo"
+                                class="logo">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-9 mt-2 card-height">
+                    <div>
+                        <div class="d-flex justify-content-between">
+                            <div class="mt-2">
+                                <h4>
+                                    <span class="font-weight-bold name-size">Name: </span>
+                                    <span class="font-weight-bold name-size">{{userDetails?.firstName}}
+                                        {{userDetails?.middleName}} {{userDetails?.lastName}}</span>
+                                </h4>
+                            </div>
+                        </div>
+                        <div class="row py-2 pl-3">
+                            <div>
+                                <span class="font-weight-bold">Organization: </span>
+                                <span>{{userDetails?.Organization?.name}}</span>
+                            </div>
+                        </div>
+                        <div class="row py-2 pl-3">
+                            <div>
+                                <span class="font-weight-bold">Tagline: </span>
+                                <span>{{userDetails?.userAdditionalInfo?.tagline}}</span>
+                            </div>
+                        </div>
+                        <div class="row py-2 pl-3">
+                            <div>
+                                <span class="font-weight-bold">Practice Area: </span>
+                                <span>{{userDetails?.userAdditionalInfo?.practiceAreas}}</span>
+                            </div>
+                        </div>
+                        <div class="row py-2 pl-3">
+                            <div>
+                                <span class="font-weight-bold">Description: </span>
+                                <span>{{userDetails?.userAdditionalInfo?.description}}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </mat-card>
+</ng-template>

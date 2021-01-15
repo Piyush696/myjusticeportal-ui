@@ -17,6 +17,8 @@ import { StripeComponent } from './stripe/stripe.component';
 import { ChatModalComponent } from './chat-modal/chat-modal.component';
 import { BillingServicesComponent } from './billing-services/billing-services.component';
 import { PublicDefenderBillingComponent } from './public-defender-billing/public-defender-billing.component';
+import { ManageProfileComponent } from './manage-profile/manage-profile.component';
+import { ManageBillingSettingsComponent } from './manage-billing-settings/manage-billing-settings.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +33,9 @@ import { PublicDefenderBillingComponent } from './public-defender-billing/public
     StripeComponent,
     BillingServicesComponent,
     ChatModalComponent,
-    PublicDefenderBillingComponent
+    PublicDefenderBillingComponent,
+    ManageProfileComponent,
+    ManageBillingSettingsComponent
   ],
   imports: [
     CommonModule,
@@ -54,7 +58,9 @@ import { PublicDefenderBillingComponent } from './public-defender-billing/public
     StripeComponent,
     BillingServicesComponent,
     ChatModalComponent,
-    PublicDefenderBillingComponent
+    PublicDefenderBillingComponent,
+    ManageProfileComponent,
+    ManageBillingSettingsComponent
   ]
 })
 

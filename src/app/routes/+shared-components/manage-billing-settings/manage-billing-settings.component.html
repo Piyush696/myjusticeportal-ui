@@ -1,0 +1,63 @@
+<div class="pl-3">
+    <h1 class="font-weight-bold m-0">Manage Billing Settings</h1>
+    <h4 class="line-height header-sub-text">
+        If you need any help, please contact Support.
+    </h4>
+</div>
+
+<div class="d-flex">
+    <div class="col-8">
+        <mat-card class="card-color">
+            <div class="dflex pb-2">
+                <div class="col-12">
+                    <div>
+                        <span class="h5 font-weight-bold">Plan Selected</span>
+                    </div>
+                    <div class="row">
+                        <div class="col-12 pt-2">
+                            <mat-card class="mat-elevation-z10 border-card">
+                                Unlimited Connections, $40/mo<br/>
+                            </mat-card>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="d-flex justify-content-center align-items-center;">
+                <div class="col-6">
+                    <div>
+                        <span class="h5 text-center font-weight-bold">Facilities you have selected</span>
+                    </div>
+                    <div *ngIf="facilities.length > 0" class="pt-2">
+                        <li *ngFor="let facility of facilities;">
+                            <span class="font-weight-bold">{{facility?.facilityName}}</span>
+                        </li>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div>
+                        <span class="h5 text-center font-weight-bold">Your plan details</span>
+                    </div>
+                    <span class="text-center text-black">Based on the facilities and add ons that you have selected your monthly bill below.</span>
+                    <mat-card class="mat-elevation-z10">
+                        <div class="d-flex justify-content-between align-items-between">
+                            <div>Plan Base Cost:</div>
+                            <div>{{currentPlanPrice | currency:'USD':'symbol'}}</div>
+                        </div>
+                        <hr>
+                        <div class="d-flex justify-content-between align-items-between">
+                            <div>Total Monthly Charge:</div>
+                            <div>
+                                <span class="font-weight-bold">Total: </span> {{totalBillingPrice | currency:'USD':'symbol'}}
+                            </div>
+                        </div>
+                    </mat-card>
+                    <!-- <div class="d-flex justify-content-end align-items-end  pt-2">
+                        <div>
+                            <button mat-raised-button class="button-purple px-4 py-1 mt-1" (click)="onChangePlan()">Change Plan</button>
+                        </div>
+                    </div> -->
+                </div>
+            </div>
+        </mat-card>
+    </div>
+</div>
