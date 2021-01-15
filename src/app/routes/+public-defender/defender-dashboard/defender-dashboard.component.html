@@ -14,6 +14,14 @@
     </div>
 </div>
 
+<div class="pt-3 pr-3" *ngIf="!billingBoard && !isAuthorized">
+    <mat-card class="mat-elevation-z10">
+        <p class="h5 text-center"> Your account is under review meanwhile please setup your profile.
+            <button class=" btn-link" (click)="redirect()">Click here</button>
+        </p>
+    </mat-card>
+</div>
+
 <div *ngIf="showDashboard && isAuthorized">
     <h1 class="mb-0"><b>Dashboard</b></h1>
     <h4>A summary of recent activity with your Cases and Connections.</h4>
@@ -29,6 +37,7 @@
             </div>
         </div>
     </div>
+
     <div *ngIf="userData?.roles[0]?.roleId == 5">
         <app-public-defender-billing (paymentConfirm)="onPayEvent($event)"></app-public-defender-billing>
     </div>

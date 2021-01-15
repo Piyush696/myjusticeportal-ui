@@ -12,7 +12,7 @@ import { InmateDefenderService } from 'app/services/inmate-defender.service';
 })
 export class InmatesCasesComponent implements OnInit {
 
-  displayedColumns: string[] = ['updatedAt', 'name', 'legalMatter', "briefDescriptionOfChargeOrLegalMatter", "otherInformation"];
+  displayedColumns: string[] = ['updatedAt', 'name', 'legalMatter', "briefDescriptionOfChargeOrLegalMatter", "otherInformation","action"];
   dataSource = new MatTableDataSource();
   @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: false }) sort: MatSort;

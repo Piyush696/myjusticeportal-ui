@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { FacilityService } from 'app/services/facility.service';
 import { UserMetaService } from 'app/services/user-meta.service';
@@ -20,7 +21,7 @@ export class DefenderDashboardComponent implements OnInit {
   averageCount: number = 0;
   facilityId: any;
 
-  constructor(private store: Store<any>, private userMetaService: UserMetaService, private facilityService: FacilityService) { }
+  constructor(private store: Store<any>,private router: Router, private userMetaService: UserMetaService, private facilityService: FacilityService) { }
 
   ngOnInit(): void {
     this.store.select(s => s.userInfo).subscribe(x => {
@@ -118,5 +119,8 @@ export class DefenderDashboardComponent implements OnInit {
     })
   }
 
+  redirect() {
+    this.router.navigateByUrl('mjp/public-defender/manage-profile')
+  }
 
 }

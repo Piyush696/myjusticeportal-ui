@@ -1,66 +1,74 @@
 <div>
     <div>
-      <h1 class="mb-0">Inmates Cases</h1>
-      <h4>View all Inmates Cases for Public defender.</h4>
+        <h1 class="mb-0">Inmates Cases</h1>
+        <h4>View all Inmates Cases for Public defender.</h4>
     </div>
     <mat-card class="w-100">
         <div>
             <mat-form-field>
-              <mat-label>Search</mat-label>
-              <input matInput (keyup)="search($event.target.value)">
+                <mat-label>Search</mat-label>
+                <input matInput (keyup)="search($event.target.value)">
             </mat-form-field>
-          </div>
-          
-          <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8 w-100">
+        </div>
+
+        <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8 w-100">
             <ng-container matColumnDef="updatedAt">
-              <th mat-header-cell *matHeaderCellDef mat-sort-header>Date</th>
-              <td mat-cell *matCellDef="let user">
-                <span>{{user.newUpdatedAt}}</span>
-              </td>
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Date</th>
+                <td mat-cell *matCellDef="let user">
+                    <span>{{user.newUpdatedAt}}</span>
+                </td>
             </ng-container>
 
             <ng-container matColumnDef="name">
-              <th mat-header-cell *matHeaderCellDef mat-sort-header>User</th>
-              <td mat-cell *matCellDef="let user">
-                  <span>
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>User</th>
+                <td mat-cell *matCellDef="let user">
+                    <span>
                       {{user?.inmate?.firstName | titlecase}}
                       &nbsp;{{user?.inmate?.lastName | titlecase}}
                   </span>
-                  <span *ngIf="!user?.inmate?.firstName  && !user?.inmate.lastName">
+                    <span *ngIf="!user?.inmate?.firstName  && !user?.inmate.lastName">
                       N/A
                   </span>
-              </td>
-          </ng-container>
+                </td>
+            </ng-container>
 
             <ng-container matColumnDef="legalMatter">
-              <th mat-header-cell *matHeaderCellDef mat-sort-header>Legal Matter</th>
-              <td mat-cell *matCellDef="let user">
-                <span *ngIf="user?.legalMatter!=''">{{user?.legalMatter}}</span>
-                <span *ngIf="user?.legalMatter==''">N/A</span>
-              </td>
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Legal Matter</th>
+                <td mat-cell *matCellDef="let user">
+                    <span *ngIf="user?.legalMatter!=''">{{user?.legalMatter}}</span>
+                    <span *ngIf="user?.legalMatter==''">N/A</span>
+                </td>
             </ng-container>
 
-             <ng-container matColumnDef="briefDescriptionOfChargeOrLegalMatter">
-              <th mat-header-cell *matHeaderCellDef mat-sort-header>Description</th>
-              <td mat-cell *matCellDef="let user">
-                <span *ngIf="user?.briefDescriptionOfChargeOrLegalMatter!=''">{{user?.briefDescriptionOfChargeOrLegalMatter}}</span>
-                <span *ngIf="user?.briefDescriptionOfChargeOrLegalMatter==''">N/A</span>
-              </td>
+            <ng-container matColumnDef="briefDescriptionOfChargeOrLegalMatter">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Description</th>
+                <td mat-cell *matCellDef="let user">
+                    <span *ngIf="user?.briefDescriptionOfChargeOrLegalMatter!=''">{{user?.briefDescriptionOfChargeOrLegalMatter}}</span>
+                    <span *ngIf="user?.briefDescriptionOfChargeOrLegalMatter==''">N/A</span>
+                </td>
             </ng-container>
 
-           <ng-container matColumnDef="otherInformation">
-              <th mat-header-cell *matHeaderCellDef mat-sort-header>Other Information</th>
-              <td mat-cell *matCellDef="let user">
-                  <span *ngIf="user?.otherInformation!=''">{{user?.otherInformation}}</span>
-                  <span *ngIf="user?.otherInformation==''">N/A</span>
-              </td>
+            <ng-container matColumnDef="otherInformation">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Other Information</th>
+                <td mat-cell *matCellDef="let user">
+                    <span *ngIf="user?.otherInformation!=''">{{user?.otherInformation}}</span>
+                    <span *ngIf="user?.otherInformation==''">N/A</span>
+                </td>
             </ng-container>
-  
-  
+            <ng-container matColumnDef="action">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Action</th>
+                <td mat-cell *matCellDef="let user">
+                    <button color="black" class="btn btn-sm btn-success" title="View Case">
+                  View
+              </button>
+                </td>
+            </ng-container>
+
+
             <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
             <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-          </table>
-          <mat-paginator [pageSizeOptions]="getPageSizeOptions()" showFirstLastButtons></mat-paginator>
-        </mat-card>
-            
+        </table>
+        <mat-paginator [pageSizeOptions]="getPageSizeOptions()" showFirstLastButtons></mat-paginator>
+    </mat-card>
+
 </div>
