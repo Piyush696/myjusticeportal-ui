@@ -9,6 +9,7 @@ import { PublicDefenderRoutingModule } from './public-defender-routing.module';
 import { SearchInmatesComponent } from './search-inmates/search-inmates.component';
 import { InmatesCasesComponent } from './inmates-cases/inmates-cases/inmates-cases.component';
 import { InmateCaseViewComponent } from './inmate-case-view/inmate-case-view.component';
+import { FileUploadModule } from 'ng2-file-upload';
 
 
 @NgModule({
@@ -22,6 +23,7 @@ import { InmateCaseViewComponent } from './inmate-case-view/inmate-case-view.com
     CommonModule,
     ReactiveFormsModule,
     FormsModule,
+    FileUploadModule,
     PublicDefenderRoutingModule,
     SharedMaterialModule,
     SharedComponentsModule
