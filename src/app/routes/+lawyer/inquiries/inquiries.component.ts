@@ -36,6 +36,7 @@ export class InquiriesComponent implements OnInit {
     this.getPendingCaseDetails();
     this.getSelectedPlan();
   }
+  
   getSelectedPlan() {
     this.facilityService.getSelectedPlanFaciltiy().subscribe((selectedPlan: any) => {
       this.plans = selectedPlan.data;

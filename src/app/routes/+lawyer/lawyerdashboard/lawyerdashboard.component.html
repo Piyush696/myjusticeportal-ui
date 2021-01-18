@@ -36,9 +36,8 @@
 
 <div class="pt-3 pr-3" *ngIf="!billingBoard && !isAuthorized">
     <mat-card class="mat-elevation-z10">
-        <p class="h5 text-center"> Your account is under review meanwhile please setup your profile.
-            <button class=" btn-link" (click)="redirect()">Click here</button>
-        </p>
+        <h2 class="text-center"> Your account is under review meanwhile <button class=" btn-link px-0" (click)="redirect()">please setup your profile.</button>
+        </h2>
     </mat-card>
 </div>
 

@@ -8,13 +8,15 @@ import { DefenderDashboardComponent } from './defender-dashboard/defender-dashbo
 import { PublicDefenderRoutingModule } from './public-defender-routing.module';
 import { SearchInmatesComponent } from './search-inmates/search-inmates.component';
 import { InmatesCasesComponent } from './inmates-cases/inmates-cases/inmates-cases.component';
+import { InmateCaseViewComponent } from './inmate-case-view/inmate-case-view.component';
 
 
 @NgModule({
   declarations: [
     DefenderDashboardComponent,
     SearchInmatesComponent,
-    InmatesCasesComponent
+    InmatesCasesComponent,
+    InmateCaseViewComponent
   ],
   imports: [
     CommonModule,
