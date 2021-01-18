@@ -87,9 +87,9 @@ export class ManageOrganisationComponent implements OnInit {
     });
     setTimeout(() => {
       var x = document.getElementById('cust-img')
-      if(this.orgData.Organization?.logo?.downloadLink){
+      if (this.orgData.Organization?.logo?.downloadLink) {
         x.style.background = 'url(' + this.path + ')'
-      }else{
+      } else {
         x.style.background = 'url(' + this.path + ')'
         x.style.backgroundColor = '#333442'
       }
@@ -99,9 +99,9 @@ export class ManageOrganisationComponent implements OnInit {
   getOrganisationAddress() {
     this.organisationService.getOrganisationAddressDetails().subscribe((orgDetails: any) => {
       this.orgData = orgDetails.data
-      if(orgDetails.data?.Organization?.logo?.downloadLink){
+      if (orgDetails.data?.Organization?.logo?.downloadLink) {
         this.path = orgDetails.data?.Organization?.logo?.downloadLink
-      }else{
+      } else {
         this.path = 'assets/img/LOGO 4.jpg'
       }
 
@@ -182,6 +182,7 @@ export class ManageOrganisationComponent implements OnInit {
   }
 
   openOrganizationModal(templateRef) {
+    this.buttonText = 'Edit'
     this.inviteMailForm.reset();
     let dialogRef = this.dialog.open(templateRef, {
       width: '800px',
@@ -190,6 +191,7 @@ export class ManageOrganisationComponent implements OnInit {
   }
 
   closeModal() {
+    this.buttonText = 'Edit'
     this.dialog.closeAll();
   }
 
