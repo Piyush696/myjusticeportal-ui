@@ -69,10 +69,10 @@
 
 
 <ng-template #updateOrganization class="manage-profile">
-    <div>
-        <h2 class="text-center font-weight-bold">Profile Editor</h2>
-        <h4 class="text-center">Click the Edit button below to make changes, then click Save to confirm your changes.
-        </h4>
+    <div class="pl-1">
+        <h2 class="mb-0 font-weight-bold">Profile Editor</h2>
+        <span class="">Click the Edit button below to make changes, then click Save to confirm your changes.
+        </span>
     </div>
 
     <div class="" *ngIf="currentView == 1">
@@ -193,7 +193,7 @@
 
         <div class="row px-3">
             <div class="card-body px-0 pb-4">
-                <div class="drag-border p-3">
+                <div class="drag-border p-3 mb-3">
                     <h4 class="font-weight-bold margin-remove">Profile Header Background Image</h4>
                     <span class="text-bold">Best image size is 8 MB and 730px × 170px (width × height)</span>
                     <div ng2FileDrop [ngClass]="{'another-file-over-class': hasAnotherDropZoneOver}"
@@ -239,12 +239,12 @@
     </div>
     <div class="d-flex justify-content-between">
         <button mat-raised-button class="btn bg-color-grey px-perc py-1" (click)="closeModal()">
-            Cancel
+            Close
         </button>
-        <div class="">
+        <div>
             <button mat-raised-button class="btn bg-color px-perc py-1 mr-2" *ngIf="currentView == 2"
                 (click)="OnNextView(1)">
-                Edit Details
+                Back : Edit Details
             </button>
             <button mat-raised-button class="btn bg-color px-perc py-1 mr-2" [disabled]="additionalInfoForm.invalid"
                 *ngIf="currentView == 1" (click)="OnNextView(2)">
