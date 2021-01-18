@@ -33,7 +33,7 @@ export const ROUTES: RouteInfo[] = [
     { path: 'bondsman/bondsman-dashboard', title: 'Dashboard', icon: 'nc-bank', class: '', roleIds: [6] },
 
     { path: 'public-defender/defender-dashboard', title: 'Dashboard', icon: 'nc-bank', class: '', roleIds: [5] },
-    { path: 'public-defender/search-inquiries', title: 'Search Inmates', icon: 'nc-bank', class: '', roleIds: [5] },
+    { path: 'public-defender/search-inmates', title: 'Search Inmates', icon: 'nc-bank', class: '', roleIds: [5] },
     { path: 'public-defender/inmates-cases', title: 'Inmates Cases', icon: 'nc-bank', class: '', roleIds: [5] },
     { path: 'public-defender/billing-setting', title: 'Billing Settings', icon: 'nc-bank', class: '', roleIds: [5], isAdmin: true },
     { path: 'public-defender/manage-profile', title: 'Manage Profile', icon: 'nc-bank', class: '', roleIds: [5] },
