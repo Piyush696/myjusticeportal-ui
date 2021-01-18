@@ -27,6 +27,14 @@ export class InmateDefenderService {
     return this.httpClient.get<object>(`${this.apiPath}/inmatdefender`, this.getHeaders());
   }
 
+  getCaseInmates(userId) {
+    return this.httpClient.get<object>(`${this.apiPath}/inmatdefender/allCases/${userId}`, this.getHeaders());
+  }
+
+  getRegisteredFacilities() {
+    return this.httpClient.get<object>(`${this.apiPath}/inmatdefender/allDefenderFacility`, this.getHeaders());
+  }
+
   setPublicDefender(data) {
     return this.httpClient.post<object>(`${this.apiPath}/inmatdefender`,data, this.getHeaders());
   }

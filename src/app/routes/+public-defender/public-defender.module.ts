@@ -10,6 +10,7 @@ import { SearchInmatesComponent } from './search-inmates/search-inmates.componen
 import { InmatesCasesComponent } from './inmates-cases/inmates-cases/inmates-cases.component';
 import { InmateCaseViewComponent } from './inmate-case-view/inmate-case-view.component';
 import { FileUploadModule } from 'ng2-file-upload';
+import { ViewCasesComponent } from './search-inmates/view-cases/view-cases.component';
 
 
 @NgModule({
@@ -17,7 +18,8 @@ import { FileUploadModule } from 'ng2-file-upload';
     DefenderDashboardComponent,
     SearchInmatesComponent,
     InmatesCasesComponent,
-    InmateCaseViewComponent
+    InmateCaseViewComponent,
+    ViewCasesComponent
   ],
   imports: [
     CommonModule,

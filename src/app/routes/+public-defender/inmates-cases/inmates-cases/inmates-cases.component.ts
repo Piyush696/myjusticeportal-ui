@@ -12,7 +12,7 @@ import { InmateDefenderService } from 'app/services/inmate-defender.service';
 })
 export class InmatesCasesComponent implements OnInit {
 
-  displayedColumns: string[] = ['updatedAt', 'name', 'legalMatter', "briefDescriptionOfChargeOrLegalMatter", "otherInformation","action"];
+  displayedColumns: string[] = ['updatedAt', 'legalMatter', "briefDescriptionOfChargeOrLegalMatter", "otherInformation","action"];
   dataSource = new MatTableDataSource();
   @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: false }) sort: MatSort;
@@ -29,7 +29,6 @@ export class InmatesCasesComponent implements OnInit {
     this.inmatedefenderService.getInmateCases().subscribe((users:any)=>{
       this.casesList = users.data;
       this.casesList = this.casesList.map((item)=>{
-        item['name']=item.inmate.firstName+" "+item.inmate.lastName;
         var date=item.updatedAt;
         date = new Date(date).toDateString();
         var monthDay=date.substring(4, 10);

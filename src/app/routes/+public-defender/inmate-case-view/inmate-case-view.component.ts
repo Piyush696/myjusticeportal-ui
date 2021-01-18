@@ -61,21 +61,7 @@ export class InmateCaseViewComponent implements OnInit {
       this.toasterService.showErrorToater('No data found, invalid url detected.');
     }
   }
-
-  onDeleteCaseFile() {
-    this.caseService.deleteFile(this.fileId).subscribe((res: any) => {
-      if (res.success) {
-        this.dialog.closeAll();
-        this.toasterService.showSuccessToater('Case file deleted successfully.');
-        this.onGetCaseData();
-      } else {
-        this.toasterService.showErrorToater(res.data);
-      }
-    }, (error: any) => {
-      this.toasterService.showErrorToater(error.statusText);
-    })
-  }
-
+  
   onGoBack() {
     this.location.back();
   }

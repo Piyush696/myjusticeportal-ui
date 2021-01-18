@@ -45,7 +45,6 @@ export class DefenderDashboardComponent implements OnInit {
 
   getBillingDetails() {
     this.userMetaService.getUserBillingDetails().subscribe((billingsDetails: any) => {
-      console.log(billingsDetails)
       if (billingsDetails.data) {
         if (billingsDetails.data.userMeta) {
           if (billingsDetails.data.userMeta.length === 1) {

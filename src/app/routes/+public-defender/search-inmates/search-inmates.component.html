@@ -50,20 +50,11 @@
                 </td>
             </ng-container>
 
-            <ng-container matColumnDef="status">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header>Status</th>
-                <td mat-cell *matCellDef="let user">
-                    <span>
-                {{user?.assigned === true ? 'Assigned' : 'Unassigned'}}
-              </span>
-                </td>
-            </ng-container>
-
             <ng-container matColumnDef="action">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header>Action</th>
                 <td mat-cell *matCellDef="let user" class="text-center">
-                    <button [disabled]="user?.assigned" color="black" class="btn btn-sm btn-primary" title="Assign" (click)="openModal(assigneeModal,user.userId)">
-                        Assign
+                    <button [routerLink]="user.userId" color="black" class="btn btn-sm btn-primary" title="View Cases">
+                        View Cases
                 </button>
                 </td>
             </ng-container>
@@ -74,25 +65,3 @@
         <mat-paginator [pageSizeOptions]="getPageSizeOptions()" showFirstLastButtons></mat-paginator>
     </mat-card>
 </div>
-
-<ng-template #assigneeModal>
-    <div>
-        <h2>Assigne Defender to User</h2>
-    </div>
-    <mat-form-field appearance="fill" class="w-100 p-1">
-        <mat-select (selectionChange)="onSelectDefender($event)">
-            <mat-option>Select Public Defender</mat-option>
-            <mat-option *ngFor="let user of defenderList" value="{{user.userId}}">
-                {{user.firstName}} {{user.middleName}} {{user.lastName}}
-            </mat-option>
-        </mat-select>
-    </mat-form-field>
-    <div class="d-flex justify-content-between p-2">
-        <button mat-raised-button color="primary" class="button-purple px-4 py-1" (click)="onCancel()">
-        Cancel
-    </button>
-        <button class="button-purple px-4 py-1" mat-raised-button color="primary" (click)="saveChanges()">
-        Save
-    </button>
-    </div>
-</ng-template>
