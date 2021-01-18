@@ -18,7 +18,7 @@ export class SearchInmatesComponent implements OnInit {
   usersList = [];
   facilityList = [];
   filterUsersList = []
-  displayedColumns: string[] = ["name", "facilities","assignee","action"];
+  displayedColumns: string[] = ["name", "facilities","status","action"];
   dataSource = new MatTableDataSource();
   @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: false }) sort: MatSort;
@@ -113,7 +113,11 @@ export class SearchInmatesComponent implements OnInit {
     }
     this.inmatedefenderService.setPublicDefender(data).subscribe((user:any)=>{
       if(user.success){
-        this.toasterService.showSuccessToater('Assignee added successfully.')
+        this.toasterService.showSuccessToater('Assignee added successfully')
+        this.getFacilityInmates();
+        this.dialog.closeAll();
+      } else {
+        this.toasterService.showWarningToater('Already assigned')
         this.dialog.closeAll();
       }
     })

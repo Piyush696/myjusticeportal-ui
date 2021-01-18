@@ -9,6 +9,7 @@ import { ViewUsersComponent } from '../+shared-components/+manage-organization/v
 import { SearchInmatesComponent } from './search-inmates/search-inmates.component';
 import { ManageProfileComponent } from '../+shared-components/manage-profile/manage-profile.component';
 import { ManageBillingSettingsComponent } from '../+shared-components/manage-billing-settings/manage-billing-settings.component';
+import { InmateCaseViewComponent } from './inmate-case-view/inmate-case-view.component';
 
 const routes: Routes = [
     { path: '', redirectTo: 'defender-dashboard', pathMatch: 'full' },
@@ -18,6 +19,7 @@ const routes: Routes = [
     { path: 'manage-organization', component: ManageOrganisationComponent },
     { path: 'search-inquiries', component: SearchInmatesComponent },
     { path: 'inmates-cases', component: InmatesCasesComponent },
+    { path: 'inmates-cases/:caseId', component: InmateCaseViewComponent },
     { path: 'billing-setting', component: ManageBillingSettingsComponent },
     { path: 'manage-organization/users', component: ViewUsersComponent },
     { path: 'manage-organization/facilities', component: ViewFacilitiesComponent },
