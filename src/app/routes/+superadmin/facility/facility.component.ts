@@ -89,7 +89,10 @@ export class FacilityComponent implements OnInit {
     this.facility = facility
     let dialogRef = this.dialog.open(templateRef, {
       // width: '500px',
-      height: '79%'
+      height: '79%',
+      position: {
+        top: '10%'
+      }
     });
 
     dialogRef.afterClosed().subscribe(result => {

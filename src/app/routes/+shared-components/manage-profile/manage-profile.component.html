@@ -33,7 +33,7 @@
                 </tr>
                 <tr>
                     <th>Description</th>
-                    <td>{{userDetails?.userAdditionalInfo?.description}}</td>
+                    <td style="word-break: break-word;">{{userDetails?.userAdditionalInfo?.description}}</td>
                 </tr>
                 <tr>
                     <th>Profile Headshot</th>
@@ -69,10 +69,10 @@
 
 
 <ng-template #updateOrganization class="manage-profile">
-    <div>
-        <h2 class="text-center font-weight-bold">Profile Editor</h2>
-        <h4 class="text-center">Click the Edit button below to make changes, then click Save to confirm your changes.
-        </h4>
+    <div class="pl-1">
+        <h2 class="mb-0 font-weight-bold">Profile Editor</h2>
+        <span class="">Click the Edit button below to make changes, then click Save to confirm your changes.
+        </span>
     </div>
 
     <div class="" *ngIf="currentView == 1">
@@ -145,7 +145,7 @@
             </mat-form-field>
         </div>
     </div>
-    <div class="" *ngIf="currentView == 2">
+    <div *ngIf="currentView == 2">
         <div class="row px-3">
             <div class="card-body px-0 pb-4">
                 <div class="drag-border p-3">
@@ -161,7 +161,7 @@
                             (change)=" onProfile($event.target.files)" />
                     </label>
                     <div>
-                        <small class="text-danger" *ngIf="isFileSizeMax">Image size should be less than 5 MB</small>
+                        <small class=" text-danger" *ngIf="isFileSizeMax">Image size should be less than 5 MB</small>
                     </div>
                     <div> <small class="text-danger" *ngIf="isDimenssionMax">Image should be 157px × 185px (width ×
                             height)
@@ -178,12 +178,12 @@
                                         <mat-icon>delete</mat-icon>Remove
                                     </button>
                                 </td>
-                                <td>
+                                <!-- <td>
                                     <button mat-raised-button color="primary"
                                         [disabled]="isFileSizeMax || isDimenssionMax" (click)="onUploadLogo()">
                                         <mat-icon>file_upload</mat-icon>Upload
                                     </button>
-                                </td>
+                                </td> -->
                             </tr>
                         </tbody>
                     </table>
@@ -193,7 +193,7 @@
 
         <div class="row px-3">
             <div class="card-body px-0 pb-4">
-                <div class="drag-border p-3">
+                <div class="drag-border p-3 mb-3">
                     <h4 class="font-weight-bold margin-remove">Profile Header Background Image</h4>
                     <span class="text-bold">Best image size is 8 MB and 730px × 170px (width × height)</span>
                     <div ng2FileDrop [ngClass]="{'another-file-over-class': hasAnotherDropZoneOver}"
@@ -224,12 +224,12 @@
                                         <mat-icon>delete</mat-icon>Remove
                                     </button>
                                 </td>
-                                <td>
+                                <!-- <td>
                                     <button mat-raised-button color="primary"
                                         [disabled]="isHeadshotFileSizeMax || isDimenssionMax1" (click)="onUploadLogo()">
                                         <mat-icon>file_upload</mat-icon>Upload
                                     </button>
-                                </td>
+                                </td> -->
                             </tr>
                         </tbody>
                     </table>
@@ -238,20 +238,25 @@
         </div>
     </div>
     <div class="d-flex justify-content-between">
-        <button mat-raised-button class="btn bg-color px-perc py-1" (click)="closeModal()">
+        <button mat-raised-button class="btn bg-color-grey px-perc py-1" (click)="closeModal()">
             Close
         </button>
-        <div class="">
+        <div>
             <button mat-raised-button class="btn bg-color px-perc py-1 mr-2" *ngIf="currentView == 2"
                 (click)="OnNextView(1)">
-                Back
+                Back : Edit Details
             </button>
             <button mat-raised-button class="btn bg-color px-perc py-1 mr-2" [disabled]="additionalInfoForm.invalid"
                 *ngIf="currentView == 1" (click)="OnNextView(2)">
-                Next
+                Set Images
             </button>
-            <button class="button-purple px-4 py-1" mat-raised-button (click)="saveChanges()">
+            <button *ngIf="currentView == 1" class="button-purple px-4 py-1" mat-raised-button (click)="saveChanges()">
                 {{buttonText}}
+            </button>
+            <button *ngIf="currentView == 2" class="button-purple px-4 py-1" mat-raised-button
+                [disabled]="isHeadshotFileSizeMax || isDimenssionMax1 || isFileSizeMax || isDimenssionMax || uploader1?.queue.length == 0 || uploader2?.queue.length == 0"
+                (click)="onUploadLogo()">
+                Upload
             </button>
         </div>
     </div>
@@ -283,7 +288,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-9 mt-2 card-height">
+                <div class="col-9 mt-2 card-height pr-4" style="word-break: word-break;">
                     <div>
                         <div class="d-flex justify-content-between">
                             <div class="mt-2">

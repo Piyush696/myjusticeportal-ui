@@ -30,6 +30,11 @@ th {
     background-color: #333442;
 }
 
+.bg-color-grey{
+    background-color:grey;
+
+}
+
 .bg-card {
     background: #ededed;
 }

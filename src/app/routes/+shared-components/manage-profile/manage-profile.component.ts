@@ -106,8 +106,8 @@ export class ManageProfileComponent implements OnInit {
     this.buttonText = 'Edit'
     this.additionalInfoForm.disable()
     let dialogRef = this.dialog.open(templateRef, {
-
-      width: '800px',
+      height: '78%',
+      width: '813px',
     });
     setTimeout(() => {
       var x = document.getElementById('cust-img')
@@ -186,6 +186,8 @@ export class ManageProfileComponent implements OnInit {
   }
   closeModal() {
     this.currentView = 1
+    this.uploader1.queue = [];
+    this.uploader2.queue = [];
     this.dialog.closeAll();
   }
 
@@ -204,6 +206,7 @@ export class ManageProfileComponent implements OnInit {
     const filesToUpload = (file);
     Img.src = URL.createObjectURL(filesToUpload[0]);
     Img.onload = (e: any) => {
+      console.log(e)
       if (e.path[0].height > height && e.path[0].width > width) {
         this.isDimenssionMax = true
       } else {
