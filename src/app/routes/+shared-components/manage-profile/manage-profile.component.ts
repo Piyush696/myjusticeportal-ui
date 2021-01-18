@@ -106,7 +106,7 @@ export class ManageProfileComponent implements OnInit {
     this.buttonText = 'Edit'
     this.additionalInfoForm.disable()
     let dialogRef = this.dialog.open(templateRef, {
-      height: '100%',
+      height: '78%',
       width: '813px',
     });
     setTimeout(() => {
@@ -186,6 +186,8 @@ export class ManageProfileComponent implements OnInit {
   }
   closeModal() {
     this.currentView = 1
+    this.uploader1.queue = [];
+    this.uploader2.queue = [];
     this.dialog.closeAll();
   }
 
