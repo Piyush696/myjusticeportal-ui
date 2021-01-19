@@ -42,7 +42,7 @@ export class MyAccountComponent implements OnInit {
   constructor(private registrationService: RegistrationService, public dialog: MatDialog,
     private toasterService: ToasterService, private securityService: SecurityService,
     private userService: UserService, private store: Store<any>, private facilityService: FacilityService,
-    private fb: FormBuilder, private userMetaService: UserMetaService,  private location: Location) { }
+    private fb: FormBuilder, private userMetaService: UserMetaService, private location: Location) { }
 
   ngOnInit() {
     this.createControl();
@@ -53,7 +53,7 @@ export class MyAccountComponent implements OnInit {
     this.getSingleUser();
   }
 
-  onClick(){
+  onClick() {
     this.location.back();
   }
 
@@ -137,8 +137,14 @@ export class MyAccountComponent implements OnInit {
   securityQuestionControl() {
     this.securityQuestionForm = this.fb.group({
       securityQuestionId: ['', [Validators.required]],
-      answer: ['', [Validators.required]],
+      answer: ['', [Validators.required, this.noWhitespaceValidator.bind(this)]],
     })
+  }
+
+  noWhitespaceValidator(control: AbstractControl) {
+    const isWhitespace = (control.value || '').trim().length === 0;
+    const isValid = !isWhitespace;
+    return isValid ? null : { 'whitespace': true };
   }
 
   checkIfMatchingPasswords(passwordKey: string, passwordConfirmationKey: string) {
