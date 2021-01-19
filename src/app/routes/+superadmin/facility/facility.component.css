@@ -4,6 +4,19 @@
 
 ::ng-deep .mat-dialog-container {
     overflow: hidden !important;
+    /* height: 29% !important; */
+
+}
+
+
+::ng-deep .add-facility .mat-dialog-container {
+    overflow: hidden !important;
+    height: 77% !important;
+
+}
+
+::ng-deep .mat-dialog-container .confirmation-modal {
+    overflow: hidden !important;
     height: 29% !important;
 
 }
