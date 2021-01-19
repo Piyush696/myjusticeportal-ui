@@ -4,6 +4,7 @@ import { LoginService } from 'app/services/login.service';
 import { PublicDefenderService } from 'app/services/registration/public-defender.service';
 import { ToasterService } from 'app/services/toaster.service';
 import { CacheService } from 'app/services/cache.service';
+import { InvitedPublicDefenderService } from 'app/services/registration/invited-public-defender.service';
 
 @Component({
   selector: 'app-invited-public-defender',
@@ -14,18 +15,35 @@ import { CacheService } from 'app/services/cache.service';
 export class InvitedPublicDefenderComponent implements OnInit {
   tokenEmail: string;
   currentStep: number = 1;
-  totalSteps: number = 2;
-  roleId: number = 4;
+  step: number = 1;
+  totalSteps: number = 3;
+  roleId: number = 5;
   authCodeField: boolean;
   message: string;
+  registrationData = {
+    'user': {},
+  }
+  currentState = [];
 
   constructor(private activatedRoute: ActivatedRoute, private loginService: LoginService,
-    private defenderService: PublicDefenderService, private toasterService: ToasterService,
+    private inviteddefenderService: InvitedPublicDefenderService, private toasterService: ToasterService,
     private router: Router, private cacheService: CacheService) {
     this.onGetEmailFromToken(this.activatedRoute.snapshot.params.token);
   }
 
   ngOnInit(): void {
+  }
+
+  userMetaData(userMetaData) {
+    this.step = 3;
+    this.registrationData['userMeta'] = userMetaData;
+          this.inviteddefenderService.onRegistration(this.registrationData).subscribe((res: any) => {
+        if (res.success) {
+          this.currentStep = 3;
+        } else {
+          this.toasterService.showErrorToater('Something went wrong, please refresh page and try again.');
+        }
+      });
   }
 
   onGetEmailFromToken(token) {
@@ -45,16 +63,15 @@ export class InvitedPublicDefenderComponent implements OnInit {
 
   onNextClick(userData) {
     if (userData) {
-      this.defenderService.updateInvitedUserData(userData).subscribe((res: any) => {
-        if (res.success) {
-          this.currentStep = 2;
-        } else {
-          this.toasterService.showErrorToater('Something went wrong, please refresh page and try again.');
-        }
-      });
+      this.registrationData.user = userData;
+      this.currentStep = 2;
     } else {
       this.currentStep = 1;
     }
+  }
+
+  stateEvent(state) {
+    this.currentState = [...state]
   }
 
   mobileDetails(mobileDetails) {
@@ -63,7 +80,7 @@ export class InvitedPublicDefenderComponent implements OnInit {
       "countryCode": mobileDetails.countryCode,
       "userName": this.tokenEmail
     }
-    this.defenderService.authenticateMobile(mobileData).subscribe((generateCode: any) => {
+    this.inviteddefenderService.authenticateMobile(mobileData).subscribe((generateCode: any) => {
       if (generateCode.success) {
         this.authCodeField = true;
         this.toasterService.showSuccessToater("Your code has been sent, please check your mobile device.");
@@ -76,7 +93,7 @@ export class InvitedPublicDefenderComponent implements OnInit {
       "otp": authcode,
       "userName": this.tokenEmail
     }
-    this.defenderService.verifySms(authData).subscribe((verified: any) => {
+    this.inviteddefenderService.verifySms(authData).subscribe((verified: any) => {
       if (verified.success) {
         this.authCodeField = false;
         this.cacheService.setCache('token', verified.token);
@@ -84,10 +101,11 @@ export class InvitedPublicDefenderComponent implements OnInit {
           if (data.success) {
             if (data.user.status) {
               this.router.navigateByUrl('/mjp/public-defender/defender-dashboard');
+              this.toasterService.showWarningToater("Account under review.")
             }
             else {
-              this.toasterService.showWarningToater("Account under review.");
-              this.router.navigateByUrl('/account-review');
+              this.router.navigateByUrl('/mjp/public-defender/defender-dashboard');
+              this.toasterService.showWarningToater("Account under review.")
             }
           }
           else {

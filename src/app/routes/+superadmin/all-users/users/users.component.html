@@ -34,8 +34,7 @@
                         {{user?.firstName | titlecase}}
                         <span *ngIf="user?.middleName">
                             &nbsp;{{user?.middleName | titlecase}}
-                        </span>
-                        &nbsp;{{user?.lastName | titlecase}}
+                        </span> &nbsp;{{user?.lastName | titlecase}}
                     </span>
                     <span *ngIf="!user?.firstName && !user?.middleName && !user?.lastName">
                         N/A
@@ -43,7 +42,7 @@
                 </td>
             </ng-container>
             <ng-container matColumnDef="userName">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header>User Name</th>
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Username</th>
                 <td mat-cell *matCellDef="let user">{{user.userName}}</td>
             </ng-container>
             <ng-container matColumnDef="status">
@@ -61,7 +60,7 @@
             </ng-container>
             <ng-container matColumnDef="createdAt">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header>Date Created</th>
-                <td mat-cell *matCellDef="let user">{{user?.createdAt  | date : 'mediumDate'}}</td>
+                <td mat-cell *matCellDef="let user">{{user?.createdAt | date : 'mediumDate'}}</td>
             </ng-container>
             <ng-container matColumnDef="action">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header>Action</th>
@@ -91,10 +90,8 @@
                 <div class="col-4 pl-2 mb-1">
                     <mat-form-field appearance="fill" class="w-100">
                         <mat-label>Legal First Name</mat-label>
-                        <input matInput placeholder="Legal First Name"
-                            [formControl]="createUserForm.controls['firstName']" required>
-                        <mat-error
-                            *ngIf="createUserForm.controls['firstName'].invalid && createUserForm.controls['firstName'].touched">
+                        <input matInput placeholder="Legal First Name" [formControl]="createUserForm.controls['firstName']" required>
+                        <mat-error *ngIf="createUserForm.controls['firstName'].invalid && createUserForm.controls['firstName'].touched">
                             <small class="font13" *ngIf="createUserForm.get('firstName').errors?.required">
                                 Legal First Name is Required
                             </small>
@@ -110,10 +107,8 @@
                 <div class="col-4 pl-0 mb-1">
                     <mat-form-field appearance="fill" class="w-100">
                         <mat-label>Legal Middle Name</mat-label>
-                        <input matInput placeholder="Legal Middle Name"
-                            [formControl]="createUserForm.controls['middleName']" required>
-                        <mat-error
-                            *ngIf="createUserForm.controls['middleName'].invalid && createUserForm.controls['middleName'].touched">
+                        <input matInput placeholder="Legal Middle Name" [formControl]="createUserForm.controls['middleName']" required>
+                        <mat-error *ngIf="createUserForm.controls['middleName'].invalid && createUserForm.controls['middleName'].touched">
                             <small class="font13" *ngIf="createUserForm.get('middleName').errors?.required">
                                 Legal Middle Name is Required
                             </small>
@@ -129,10 +124,8 @@
                 <div class="col-4 pl-0 pr-2 mb-1">
                     <mat-form-field appearance="fill" class="w-100">
                         <mat-label>Legal Last Name</mat-label>
-                        <input matInput placeholder="Legal Last Name"
-                            [formControl]="createUserForm.controls['lastName']" required>
-                        <mat-error
-                            *ngIf="createUserForm.controls['lastName'].invalid && createUserForm.controls['lastName'].touched">
+                        <input matInput placeholder="Legal Last Name" [formControl]="createUserForm.controls['lastName']" required>
+                        <mat-error *ngIf="createUserForm.controls['lastName'].invalid && createUserForm.controls['lastName'].touched">
                             <small class="font13" *ngIf="createUserForm.get('lastName').errors?.required">
                                 Legal Last Name is Required
                             </small>
@@ -151,13 +144,11 @@
                     <mat-label>User Name</mat-label>
                     <input type="text" matInput [formControl]="createUserForm.controls['userName']" required>
                     <mat-error>
-                        <div
-                            *ngIf="createUserForm.controls['userName'].invalid && 
+                        <div *ngIf="createUserForm.controls['userName'].invalid && 
                                                 createUserForm.controls['userName'].touched && createUserForm.controls['userName'].hasError('taken')">
                             <small class="font13">User Name already taken.</small>
                         </div>
-                        <div
-                            *ngIf="createUserForm.controls['userName'].invalid && 
+                        <div *ngIf="createUserForm.controls['userName'].invalid && 
                                                 createUserForm.controls['userName'].touched && !createUserForm.controls['userName'].hasError('taken')">
                             <small class="font13" *ngIf="createUserForm.get('userName').errors?.required">
                                 User Name is Required
@@ -185,8 +176,7 @@
                                 Password required.
                             </small>
                         </div>
-                        <div
-                            *ngIf="createUserForm.controls['password'].invalid && createUserForm.controls['password'].touched  &&createUserForm.controls['password'].hasError('invalidPassword')">
+                        <div *ngIf="createUserForm.controls['password'].invalid && createUserForm.controls['password'].touched  &&createUserForm.controls['password'].hasError('invalidPassword')">
                             <small class="font13">
                                 Password should contain at least 1 capital, at least 1 lowercase
                                 and at least 1 special character.
@@ -200,8 +190,7 @@
                     <mat-label>Confirm Password</mat-label>
                     <input type="password" matInput [formControl]="createUserForm.controls['confirmPassword']">
                     <mat-error>
-                        <div
-                            *ngIf="createUserForm.controls['confirmPassword'].invalid &&  createUserForm.controls['confirmPassword'].touched &&
+                        <div *ngIf="createUserForm.controls['confirmPassword'].invalid &&  createUserForm.controls['confirmPassword'].touched &&
                                                    createUserForm.controls['confirmPassword'].hasError('notSamePassword')">
                             <small class="font13">
                                 Password does not match
@@ -213,10 +202,8 @@
         </div>
     </div>
     <div class="d-flex justify-content-between p-0">
-        <button type="button" class="button-purple px-4 py-1" mat-raised-button color="primary"
-            (click)="closeModal()">Close</button>
-        <button mat-raised-button color="primary" type="button" class="button-purple px-4 py-1"
-            (click)="onCreateUser()">Save</button>
+        <button type="button" class="button-purple px-4 py-1" mat-raised-button color="primary" (click)="closeModal()">Close</button>
+        <button mat-raised-button color="primary" type="button" class="button-purple px-4 py-1" (click)="onCreateUser()">Save</button>
     </div>
 </ng-template>
 

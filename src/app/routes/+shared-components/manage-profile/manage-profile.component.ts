@@ -206,7 +206,6 @@ export class ManageProfileComponent implements OnInit {
     const filesToUpload = (file);
     Img.src = URL.createObjectURL(filesToUpload[0]);
     Img.onload = (e: any) => {
-      console.log(e)
       if (e.path[0].height > height && e.path[0].width > width) {
         this.isDimenssionMax = true
       } else {

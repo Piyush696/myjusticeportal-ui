@@ -35,7 +35,7 @@ export const ROUTES: RouteInfo[] = [
     { path: 'public-defender/defender-dashboard', title: 'Dashboard', icon: 'nc-bank', class: '', roleIds: [5] },
     { path: 'public-defender/search-inmates', title: 'Search Inmates', icon: 'nc-bank', class: '', roleIds: [5] },
     { path: 'public-defender/inmates-cases', title: 'Inmates Cases', icon: 'nc-bank', class: '', roleIds: [5] },
-    { path: 'public-defender/billing-setting', title: 'Billing Settings', icon: 'nc-bank', class: '', roleIds: [5], isAdmin: true },
+    { path: 'public-defender/billing-setting', title: 'Billing Settings', icon: 'nc-bank', class: '', roleIds: [5] },
     { path: 'public-defender/manage-profile', title: 'Manage Profile', icon: 'nc-bank', class: '', roleIds: [5] },
     { path: 'public-defender/manage-organization', title: 'Manage Organization', icon: 'nc-bank', class: '', roleIds: [5], isAdmin: true },
 
@@ -100,7 +100,43 @@ export class SidebarComponent implements OnInit, AfterViewInit {
 
     filterMenuByUser() {
         if (this.userInfo.roles[0].roleId === 3 || this.userInfo.roles[0].roleId === 5) {
-            if (this.userInfo.status && this.billingsDetails?.data?.userMeta.find(element => element.metaKey === 'sub_id')) {
+            if(this.userInfo.isAdmin && !this.userInfo.isSelfPaid){
+                if (this.userInfo.status && this.billingsDetails?.data?.userMeta.find(element => element.metaKey === 'sub_id')) {
+                    this.filteredMenuItems = ROUTES.filter(menu => {
+                        let isExist = menu.roleIds.find(roleId => roleId == this.userInfo.roles[0].roleId);
+                        if (isExist) {
+                            if (!menu.isAdmin) {
+                                return menu;
+                            }
+                            else if (menu.isAdmin && this.userInfo.isAdmin) {
+                                return menu;
+                            }
+                        }
+                    });
+                }
+                else {
+                    this.filteredMenuItems = null;
+                }
+            } else if(!this.userInfo.isAdmin && this.userInfo.isSelfPaid){
+                if (this.userInfo.status && this.billingsDetails?.data?.userMeta.find(element => element.metaKey === 'sub_id')) {
+                    this.filteredMenuItems = ROUTES.filter(menu => {
+                        let isExist = menu.roleIds.find(roleId => roleId == this.userInfo.roles[0].roleId);
+                        if (isExist) {
+                            if (!menu.isAdmin) {
+                                return menu;
+                            }
+                            else if (menu.isAdmin && this.userInfo.isAdmin) {
+                                return menu;
+                            }
+                        }
+                    });
+                } else{
+                    this.filteredMenuItems = null;
+                }
+            } else if(!this.userInfo.isAdmin && !this.userInfo.isSelfPaid && !this.userInfo.status){
+                this.filteredMenuItems = null;
+            }
+             else {
                 this.filteredMenuItems = ROUTES.filter(menu => {
                     let isExist = menu.roleIds.find(roleId => roleId == this.userInfo.roles[0].roleId);
                     if (isExist) {
@@ -112,9 +148,6 @@ export class SidebarComponent implements OnInit, AfterViewInit {
                         }
                     }
                 });
-            }
-            else {
-                this.filteredMenuItems = null;
             }
         } else {
             if (this.userInfo.status) {
