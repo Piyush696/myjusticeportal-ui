@@ -58,7 +58,6 @@ export class PublicDefenderRegistrationComponent implements OnInit {
     if (orgData) {
       this.registrationData.organization = orgData;
       this.registrationData.organization.address = orgData.address;
-      console.log(this.registrationData)
       this.defenderService.onRegistration(this.registrationData).subscribe((res: any) => {
         if (res.success) {
           this.userName = res.data.userName;

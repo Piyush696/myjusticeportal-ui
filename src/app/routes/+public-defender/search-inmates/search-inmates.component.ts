@@ -18,21 +18,17 @@ export class SearchInmatesComponent implements OnInit {
   usersList = [];
   facilityList = [];
   filterUsersList = []
-  displayedColumns: string[] = ["name", "facilities","status","action"];
+  displayedColumns: string[] = ["name", "facilities","action"];
   dataSource = new MatTableDataSource();
   @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: false }) sort: MatSort;
-  defenderList: any;
-  userId: any;
   publicdefenderId: any;
   
-  constructor(public dialog: MatDialog,private defenderService:DefenderService,  private facilityService: FacilityService ,
-    private inmatedefenderService: InmateDefenderService,private toasterService: ToasterService) { }
+  constructor(public dialog: MatDialog,private defenderService:DefenderService, private inmateDefenderService:InmateDefenderService,  private facilityService: FacilityService ,private toasterService: ToasterService) { }
 
   ngOnInit(): void {
     this.getFacilityInmates();
     this.getALLFacilities();
-    this.getAllDefender();
   }
 
   onFacilityFiltered(facility) {
@@ -85,48 +81,15 @@ export class SearchInmatesComponent implements OnInit {
     }
   }
   
-  openModal(templateRef,userId) {
-    this.userId = userId
-    let dialogRef = this.dialog.open(templateRef, {
-      width: '500px'
-    });
-  }
 
   getALLFacilities() {
-    this.facilityService.getAllFacility().subscribe((facilities: any) => {
+    this.inmateDefenderService.getRegisteredFacilities().subscribe((facilities: any) => {
       this.facilityList = facilities.data;
     })
   }
 
   onCancel(){
     this.dialog.closeAll();
-  }
-
-  onSelectDefender(defenderId){
-    this.publicdefenderId = parseInt(defenderId.value)
-  }
-
-  saveChanges(){
-    let data = {
-      "inmateId":this.userId,
-      "publicdefenderId":this.publicdefenderId
-    }
-    this.inmatedefenderService.setPublicDefender(data).subscribe((user:any)=>{
-      if(user.success){
-        this.toasterService.showSuccessToater('Assignee added successfully')
-        this.getFacilityInmates();
-        this.dialog.closeAll();
-      } else {
-        this.toasterService.showWarningToater('Already assigned')
-        this.dialog.closeAll();
-      }
-    })
-  }
-
-  getAllDefender(){
-    this.inmatedefenderService.getPublicDefenders().subscribe((defenders:any)=>{
-      this.defenderList = defenders.data.Organization.users
-    })
   }
 
 }

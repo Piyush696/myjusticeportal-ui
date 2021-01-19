@@ -1,0 +1,82 @@
+<div class="d-flex justify-content-between">
+    <div>
+        <h1 class="mb-0">Cases</h1>
+        <h4>View cases of inmate user.</h4>
+    </div>
+    <div>
+        <button mat-raised-button class="btn-background px-5 py-1" (click)="onGoBack()">
+            Go Back
+        </button>
+    </div>
+</div>
+
+<div>
+    <div *ngIf="allCases.length <= 0">
+        <mat-card class="inner-card mat-elevation-z10 mt-3">
+            <mat-label class="font-weight-bold">
+                <span>No cases found.</span>
+            </mat-label>
+        </mat-card>
+    </div>
+    <div *ngIf="allCases.length > 0">
+        <mat-card class="inner-card mat-elevation-z10 mt-3" *ngFor="let case of allCases">
+            <div class="d-flex">
+                <div class="d-flex flex-column w-75">
+                    <span><b>Name</b>: 
+                        {{case?.inmate?.firstName + ' ' + case?.inmate?.lastName}}
+                        <span *ngIf="!case?.inmate?.firstName && !case?.inmate?.lastName">N/A</span>
+                    </span>
+                    <span><b>
+                        Description</b>: 
+                        {{case?.briefDescriptionOfChargeOrLegalMatter}}</span>
+
+                    <span>
+                        <b>County Of Arrest</b>:
+                        {{case?.countyOfArrest}}
+                        <span *ngIf="!case?.countyOfArrest">N/A</span>
+                    </span>
+                    <span> <b>Other Information</b>:
+                        {{case?.otherInformation}}
+                        <span *ngIf="!case?.countyOfArrest">N/A</span>
+                    </span>
+
+                    <span> <b>Date Of Arrest</b>:
+                        {{case?.dateOfArrest | date:'longDate'}}
+                        <span *ngIf="!case?.dateOfArrest">N/A</span>
+                    </span>
+                    <span> <b>Next Court Date</b>:
+                        {{case?.nextCourtDate | date:'longDate'}}
+                        <span *ngIf="!case?.nextCourtDate">N/A</span>
+                    </span>
+                </div>
+                <div class=" d-flex align-items-center">
+                    <button [disabled]="case.publicdefender.length > 0" color="black" class="btn btn-lg btn-primary" title="Assign" (click)="openModal(assigneeModal,case.caseId)">
+                        {{case.publicdefender.length > 0 ? 'Assigned' : 'Assign'}}
+                </button>
+                </div>
+            </div>
+        </mat-card>
+    </div>
+</div>
+
+<ng-template #assigneeModal>
+    <div>
+        <h2>Assigne Defender to Case</h2>
+    </div>
+    <mat-form-field appearance="fill" class="w-100 p-1">
+        <mat-select (selectionChange)="onSelectDefender($event)">
+            <mat-option>Select Public Defender</mat-option>
+            <mat-option *ngFor="let user of defenderList" value="{{user.userId}}">
+                {{user.firstName}} {{user.middleName}} {{user.lastName}}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+    <div class="d-flex justify-content-between p-2">
+        <button mat-raised-button color="primary" class="button-purple px-4 py-1" (click)="closeModal()">
+        Cancel
+    </button>
+        <button class="button-purple px-4 py-1" mat-raised-button color="primary" (click)="saveChanges()">
+        Save
+    </button>
+    </div>
+</ng-template>
