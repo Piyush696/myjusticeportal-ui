@@ -78,10 +78,25 @@ export class InquiriesComponent implements OnInit {
       })
       this.allApprovedData = this.pendingCasesList.filter(approvedData => approvedData.status == 'Approved')
       this.dataSource = new MatTableDataSource(this.pendingCasesList);
+      if (this.dataSource) {
+        this.dataSource.filterPredicate = (data: any, filter: string) => {
+          const accumulator = (currentTerm, key) => {
+            return this.nestedFilterCheck(currentTerm, data, key);
+          };
+          const dataStr = Object.keys(data).reduce(accumulator, '').toLowerCase();
+          const transformedFilter = filter.trim().toLowerCase();
+          return dataStr.indexOf(transformedFilter) !== -1;
+        };
+      }
+
       this.dataSource.sortingDataAccessor = (item: any, property) => {
         switch (property) {
           case 'name': if (item) return item.inmate.firstName + item.inmate.lastName;
-          default: return item[property];
+          default: if (typeof (item[property]) == 'string') {
+            return item[property].toLowerCase();
+          } else {
+            return item[property]
+          }
         }
       };
       this.dataSource.paginator = this.paginator;
@@ -120,6 +135,19 @@ export class InquiriesComponent implements OnInit {
   onChatEnable() {
     this.dialog.closeAll();
     this.router.navigateByUrl('/mjp/lawyer/lawyer-chat/' + this.userId);
+  }
+  
+  nestedFilterCheck(search, data, key) {
+    if (typeof data[key] === 'object') {
+      for (const k in data[key]) {
+        if (data[key][k] !== null) {
+          search = this.nestedFilterCheck(search, data[key], k);
+        }
+      }
+    } else {
+      search += data[key];
+    }
+    return search;
   }
 
   getPageSizeOptions(): number[] {
