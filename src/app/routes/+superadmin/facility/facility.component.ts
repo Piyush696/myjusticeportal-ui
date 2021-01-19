@@ -103,7 +103,7 @@ export class FacilityComponent implements OnInit {
     this.facility = facility
     let dialogRef = this.dialog.open(templateRef, {
       // width: '500px',
-      height: '79%',
+      // height: '79%',
       position: {
         top: '10%'
       }
@@ -163,7 +163,7 @@ export class FacilityComponent implements OnInit {
     }
     let dialogRef = this.dialog.open(templateRef, {
       width: '60%',
-      height: '80%',
+      // height: '80%',
     })
     this.addressForm.get('country').setValue('United States')
     this.addressForm.get('country').disable()
