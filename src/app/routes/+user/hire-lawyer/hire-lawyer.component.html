@@ -1,14 +1,21 @@
 <div class="row mb-4">
-  <div class="col-  pl-3">
+  <div class="col pl-3">
     <h1 class="line-height font-weight-bold">Find a Lawyer</h1>
     <h4 class="line-height header-sub-text">
       Find lawyers and start working with them directly through My Justice Portal.
     </h4>
   </div>
   <div class="col">
-    <button [routerLink]="'../case'" class="white-btn padding-btn float-right py-1" mat-raised-button>
-      Back To My Cases
-    </button>
+    <div class="">
+      <button [routerLink]="'../case'" class="white-btn padding-btn float-right py-1" mat-raised-button>
+        Back To My Cases
+      </button>
+    </div>
+    <div class="pl-5">
+      <button [routerLink]="'../inquiries'" class="white-btn padding-btn  py-1" mat-raised-button>
+        Pending Inquiries
+      </button>
+    </div>
   </div>
 </div>
 

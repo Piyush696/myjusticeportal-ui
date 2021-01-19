@@ -361,7 +361,7 @@
     </div>
     <div class="row px-3">
         <div class="card-body px-0 pt-3 pb-4">
-            <div class="drag-border p-3">
+            <div class="drag-border p-3" *ngIf="!uploader1?.queue.length > 0 ">
                 <h4 class="font-weight-bold margin-remove">Your Logo</h4>
                 <div ng2FileDrop [ngClass]="{'another-file-over-class': hasAnotherDropZoneOver}"
                     (fileOver)="fileOverAnother($event)" [uploader]="uploader1"
