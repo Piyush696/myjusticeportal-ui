@@ -74,10 +74,24 @@ export class FacilityComponent implements OnInit {
     this.addressForm.get('country').setValue('United States')
     this.facilityService.getAllFacility().subscribe((res: any) => {
       this.dataSource = new MatTableDataSource(res.data);
+      if (this.dataSource) {
+        this.dataSource.filterPredicate = (data: any, filter: string) => {
+          const accumulator = (currentTerm, key) => {
+            return this.nestedFilterCheck(currentTerm, data, key);
+          };
+          const dataStr = Object.keys(data).reduce(accumulator, '').toLowerCase();
+          const transformedFilter = filter.trim().toLowerCase();
+          return dataStr.indexOf(transformedFilter) !== -1;
+        };
+      }
       this.dataSource.sortingDataAccessor = (item: any, property) => {
         switch (property) {
           case 'state': if (item) return item.Address.state;
-          default: return item[property];
+          default: if (typeof (item[property]) == 'string') {
+            return item[property].toLowerCase();
+          } else {
+            return item[property]
+          }
         }
       };
       this.dataSource.paginator = this.paginator;
@@ -203,6 +217,19 @@ export class FacilityComponent implements OnInit {
 
   closeModal() {
     this.dialog.closeAll();
+  }
+   
+  nestedFilterCheck(search, data, key) {
+    if (typeof data[key] === 'object') {
+      for (const k in data[key]) {
+        if (data[key][k] !== null) {
+          search = this.nestedFilterCheck(search, data[key], k);
+        }
+      }
+    } else {
+      search += data[key];
+    }
+    return search;
   }
 
   // pagination.

@@ -50,6 +50,16 @@ export class PendingInquriesComponent implements OnInit {
   viewhidePendingInquiries(value) {
     if (value) {
       this.dataSource = new MatTableDataSource(this.filteredRejectedPendingInquiriesList);
+      if (this.dataSource) {
+        this.dataSource.filterPredicate = (data: any, filter: string) => {
+          const accumulator = (currentTerm, key) => {
+            return this.nestedFilterCheck(currentTerm, data, key);
+          };
+          const dataStr = Object.keys(data).reduce(accumulator, '').toLowerCase();
+          const transformedFilter = filter.trim().toLowerCase();
+          return dataStr.indexOf(transformedFilter) !== -1;
+        };
+      } 
       this.dataSource.sortingDataAccessor = (item: any, property) => {
         switch (property) {
           case 'lawyer': if (item) return item.firstName + item.middleName + item.lastName;
@@ -107,17 +117,47 @@ export class PendingInquriesComponent implements OnInit {
           this.filteredPendingInquiriesList.push(x)
         }
         this.dataSource = new MatTableDataSource(this.filteredPendingInquiriesList);
+
+        if (this.dataSource) {
+          this.dataSource.filterPredicate = (data: any, filter: string) => {
+            const accumulator = (currentTerm, key) => {
+              return this.nestedFilterCheck(currentTerm, data, key);
+            };
+            const dataStr = Object.keys(data).reduce(accumulator, '').toLowerCase();
+            const transformedFilter = filter.trim().toLowerCase();
+            return dataStr.indexOf(transformedFilter) !== -1;
+          };
+        }
+
         this.dataSource.sortingDataAccessor = (item: any, property) => {
           switch (property) {
             case 'lawyer': if (item) return item.firstName + item.middleName + item.lastName;
             case 'lawFirm': if (item) return item.Organization.name;
-            default: return item[property];
+            default: if (typeof (item[property]) == 'string') {
+              return item[property].toLowerCase();
+            } else {
+              return item[property]
+            }
           }
+         
         };
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
       })
     })
+  }
+
+  nestedFilterCheck(search, data, key) {
+    if (typeof data[key] === 'object') {
+      for (const k in data[key]) {
+        if (data[key][k] !== null) {
+          search = this.nestedFilterCheck(search, data[key], k);
+        }
+      }
+    } else {
+      search += data[key];
+    }
+    return search;
   }
 
   onClickStatus(status, lawyerId, caseId) {
