@@ -46,11 +46,25 @@ export class SearchInmatesComponent implements OnInit {
     this.defenderService.getInmateUser().subscribe((users:any)=>{
       this.usersList = users.data
       this.dataSource = new MatTableDataSource(users.data);
+      if (this.dataSource) {
+        this.dataSource.filterPredicate = (data: any, filter: string) => {
+          const accumulator = (currentTerm, key) => {
+            return this.nestedFilterCheck(currentTerm, data, key);
+          };
+          const dataStr = Object.keys(data).reduce(accumulator, '').toLowerCase();
+          const transformedFilter = filter.trim().toLowerCase();
+          return dataStr.indexOf(transformedFilter) !== -1;
+        };
+      }
       this.dataSource.sortingDataAccessor = (item: any, property) => {
         switch (property) {
           case 'name': if (item) return item.firstName + item.middleName + item.lastName;
           case 'facilities': if (item) return item.facilities[0].facilityName;
-          default: return item[property];
+          default:  if (typeof (item[property]) == 'string') {
+            return item[property].toLowerCase();
+          } else {
+            return item[property]
+          }
         }
       };
       this.dataSource.paginator = this.paginator;
@@ -63,6 +77,18 @@ export class SearchInmatesComponent implements OnInit {
     this.dataSource.filter = searchValue.trim().toLowerCase();
   }
 
+  nestedFilterCheck(search, data, key) {
+    if (typeof data[key] === 'object') {
+      for (const k in data[key]) {
+        if (data[key][k] !== null) {
+          search = this.nestedFilterCheck(search, data[key], k);
+        }
+      }
+    } else {
+      search += data[key];
+    }
+    return search;
+  }
   // pagination.
   getPageSizeOptions(): number[] {
     if (this.dataSource.data.length > 500)
