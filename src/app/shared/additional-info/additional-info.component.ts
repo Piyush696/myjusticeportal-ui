@@ -42,7 +42,6 @@ export class AdditionalInfoComponent implements OnInit, OnChanges {
   }
 
   ngOnInit(): void {
-    console.log(this.roleId)
     this.specialtyForm = this.fb.group({
       specialty: ['', [Validators.required]]
     })

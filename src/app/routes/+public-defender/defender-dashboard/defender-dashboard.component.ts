@@ -46,30 +46,60 @@ export class DefenderDashboardComponent implements OnInit {
   getBillingDetails() {
     this.userMetaService.getUserBillingDetails().subscribe((billingsDetails: any) => {
       if (billingsDetails.data) {
-        if (billingsDetails.data.userMeta) {
-          if (billingsDetails.data.userMeta.length === 1) {
+        if(billingsDetails.data.isAdmin){
+          if (billingsDetails.data.userMeta) {
+            if (billingsDetails.data.userMeta.length === 1) {
+              this.billingBoard = true;
+              this.showDashboard = false;
+            } else if (billingsDetails.data.userMeta.length <= 0) {
+              this.billingBoard = true;
+              this.showDashboard = false;
+            } else {
+              billingsDetails.data.userMeta.forEach((x) => {
+                if (x.metaKey == "sub_id" || x.metaKey == "cust_id") {
+                  this.showDashboard = true;
+                  this.billingBoard = false;
+                } else if (x.metaKey == "State:Bar") {
+                  this.billingBoard = true;
+                  this.showDashboard = false;
+                }
+                else {
+                  this.billingBoard = true;
+                  this.showDashboard = false;
+                }
+              })
+            }
+          } else {
             this.billingBoard = true;
             this.showDashboard = false;
-          } else if (billingsDetails.data.userMeta.length === 0) {
-            this.showDashboard = true;
+          }
+        } else if(!billingsDetails.data.isAdmin && billingsDetails.data.isSelfPaid) {
+          if (billingsDetails.data.userMeta) {
+            if (billingsDetails.data.userMeta.length <= 0) {
+              this.billingBoard = true;
+              this.showDashboard = false;
+            } else {
+              billingsDetails.data.userMeta.forEach((x) => {
+                if (x.metaKey == "sub_id" || x.metaKey == "cust_id") {
+                  this.showDashboard = true;
+                  this.billingBoard = false;
+                } else if (x.metaKey == "State:Bar") {
+                  this.billingBoard = true;
+                  this.showDashboard = false;
+                }
+                else {
+                  this.billingBoard = true;
+                  this.showDashboard = false;
+                }
+              })
+            }
           } else {
-            billingsDetails.data.userMeta.forEach((x) => {
-              if (x.metaKey == "sub_id" || x.metaKey == "cust_id") {
-                this.showDashboard = true;
-                this.billingBoard = false;
-              } else if (x.metaKey == "State:Bar") {
-                this.billingBoard = true;
-                this.showDashboard = false;
-              }
-              else {
-                this.billingBoard = true;
-                this.showDashboard = false;
-              }
-            })
+            this.billingBoard = true;
+            this.showDashboard = false;
           }
         } else {
-          this.billingBoard = true;
-          this.showDashboard = false;
+          this.showDashboard = true;
+          this.billingBoard = false;
         }
       } else {
         this.billingBoard = true;
