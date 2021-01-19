@@ -64,18 +64,36 @@ export class PendingInquriesComponent implements OnInit {
         switch (property) {
           case 'lawyer': if (item) return item.firstName + item.middleName + item.lastName;
           case 'lawFirm': if (item) return item.Organization.name;
-          default: return item[property];
+          default: if (typeof (item[property]) == 'string') {
+            return item[property].toLowerCase();
+          } else {
+            return item[property]
+          }
         }
       };
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
     } else {
       this.dataSource = new MatTableDataSource(this.filteredPendingInquiriesList);
+      if (this.dataSource) {
+        this.dataSource.filterPredicate = (data: any, filter: string) => {
+          const accumulator = (currentTerm, key) => {
+            return this.nestedFilterCheck(currentTerm, data, key);
+          };
+          const dataStr = Object.keys(data).reduce(accumulator, '').toLowerCase();
+          const transformedFilter = filter.trim().toLowerCase();
+          return dataStr.indexOf(transformedFilter) !== -1;
+        };
+      } 
       this.dataSource.sortingDataAccessor = (item: any, property) => {
         switch (property) {
           case 'lawyer': if (item) return item.firstName + item.middleName + item.lastName;
           case 'lawFirm': if (item) return item.Organization.name;
-          default: return item[property];
+          default: if (typeof (item[property]) == 'string') {
+            return item[property].toLowerCase();
+          } else {
+            return item[property]
+          }
         }
       };
       this.dataSource.paginator = this.paginator;
