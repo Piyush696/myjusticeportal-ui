@@ -94,7 +94,7 @@
                 <input type="text"  matInput placeholder="Brief Description"
                     [formControl]="caseForm.controls['briefDescriptionOfChargeOrLegalMatter']" minlength="3"
                     maxlength="500" required />
-                <mat-error>
+                <!-- <mat-error>
                     <div *ngIf="caseForm.controls['briefDescriptionOfChargeOrLegalMatter'].invalid && 
                         caseForm.controls['briefDescriptionOfChargeOrLegalMatter'].touched">
                         <small class="font13">
@@ -108,7 +108,7 @@
                             This case field should be in range of (3-500) characters.
                         </small>
                     </div>
-                </mat-error>
+                </mat-error> -->
             </mat-form-field>
         </div>
         <div class="col-6 pl-0">

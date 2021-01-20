@@ -15,7 +15,7 @@ import { Store } from '@ngrx/store';
 export class CaseFormComponent implements OnInit, OnChanges {
   caseForm: FormGroup;
   buttonText: string = 'Add Case';
-  headerText: string = 'Create a Case';
+  headerText: string = 'Add  Case';
   userData: any;
   fullName: string;
   @Input() caseDetails;
@@ -60,7 +60,7 @@ export class CaseFormComponent implements OnInit, OnChanges {
       countyOfArrest: [''],
       stateOfArrest: [''],
       dateOfArrest: [''],
-      briefDescriptionOfChargeOrLegalMatter: ['', [Validators.required,Validators.pattern(".*\\S.*[a-zA-z0-9 ]")]],
+      briefDescriptionOfChargeOrLegalMatter: [''],
       attorneyName: [''],
       nextCourtDate: [''],
     });

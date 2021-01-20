@@ -1,6 +1,6 @@
 <div class="chat-messages">
     <div class="">
-        <label class="font-weight-bolder" style="font-size: 18px; color: #333442;">{{userName}}</label>
+        <label class="font-weight-bolder" style="font-size: 18px; color: #333442;">Chat with {{userName}}</label>
     </div>
     <div id="scroller" class="chat-messages-show-container chat-scroll" style="overflow: scroll; height: xyz;" #scrollMe
         [scrollTop]="scrollMe.scrollHeight">
@@ -9,7 +9,7 @@
             <ul [ngClass]="messages.senderId !== senderId ? 'sender-messages':'receiver-messages '"
                 class="chat-messages-show-list d-flex flex-column" id="message-list">
                 <li>
-                    {{messages.message}}
+                 {{messages.message}}
                 </li>
                 <div><span>{{messages.createdAt | date:'shortTime'}}</span></div>
 
