@@ -280,10 +280,10 @@
                     <div class="d-flex">
                         <div class="img-profile" *ngIf="userDetails?.userAdditionalInfo?.profile?.downloadLink">
                             <img src="{{userDetails?.userAdditionalInfo?.profile?.downloadLink}}" width="157px"
-                                height="185px" alt="logo" class="logo">
+                                height="auto" alt="logo" class="logo">
                         </div>
                         <div class="img-profile" *ngIf="!userDetails?.userAdditionalInfo?.profile?.downloadLink">
-                            <img src="../../../../assets/img/placeholder.jpg" width="157px" height="185px" alt="logo"
+                            <img src="../../../../assets/img/placeholder.jpg" width="157px" height="auto" alt="logo"
                                 class="logo">
                         </div>
                     </div>

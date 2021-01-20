@@ -105,6 +105,11 @@ export class PendingInquriesComponent implements OnInit {
     this.dialog.closeAll();
   }
 
+  isModelClose(value){
+    if(value){
+      this.dialog.closeAll();
+    }
+  }
   getPendingCaseDetails() {
     this.pendingCasesList = []
     this.filteredPendingInquiriesList = [];

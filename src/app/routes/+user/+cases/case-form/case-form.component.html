@@ -92,8 +92,7 @@
             <mat-form-field appearance="fill" class="w-100 pl-2">
                 <mat-label>Brief Description</mat-label>
                 <input type="text"  matInput placeholder="Brief Description"
-                    [formControl]="caseForm.controls['briefDescriptionOfChargeOrLegalMatter']" minlength="3"
-                    maxlength="500" required />
+                    [formControl]="caseForm.controls['briefDescriptionOfChargeOrLegalMatter']" />
                 <!-- <mat-error>
                     <div *ngIf="caseForm.controls['briefDescriptionOfChargeOrLegalMatter'].invalid && 
                         caseForm.controls['briefDescriptionOfChargeOrLegalMatter'].touched">

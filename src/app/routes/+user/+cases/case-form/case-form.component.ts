@@ -56,7 +56,7 @@ export class CaseFormComponent implements OnInit, OnChanges {
   createFormControl() {
     this.caseForm = this.fb.group({
       firstName: ['', [Validators.required]],
-      legalMatter: ['', [Validators.required,Validators.pattern(".*\\S.*[a-zA-z0-9 ]")]],
+      legalMatter: [''],
       countyOfArrest: [''],
       stateOfArrest: [''],
       dateOfArrest: [''],

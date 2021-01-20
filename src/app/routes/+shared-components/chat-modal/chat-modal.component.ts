@@ -1,4 +1,4 @@
-import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { MessageService } from 'app/services/message.service';
 import { UserService } from 'app/services/user.service';
 
@@ -14,6 +14,8 @@ export class ChatModalComponent implements OnInit {
   senderId: any;
   message: any;
   isLoading: boolean;
+
+  @Output() isModelClose = new EventEmitter()
 
   constructor(private messageService: MessageService, private userService: UserService,) { }
 
@@ -36,6 +38,11 @@ export class ChatModalComponent implements OnInit {
       this.senderId = user.data.userId
     })
   }
+
+  close() {
+    this.isModelClose.emit(true)
+}
+
 
   SendMessage() {
     if (this.message !== '') {

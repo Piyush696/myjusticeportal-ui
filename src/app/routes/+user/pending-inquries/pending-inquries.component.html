@@ -95,5 +95,5 @@
 </div>
 
 <ng-template #openModal>
-    <app-chat-modal [userId]="userId" [userName]="userName"></app-chat-modal>
+    <app-chat-modal [userId]="userId" [userName]="userName"  (isModelClose)="isModelClose($event)"></app-chat-modal>
 </ng-template>
