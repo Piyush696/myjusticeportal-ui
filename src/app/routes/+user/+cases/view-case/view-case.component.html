@@ -98,18 +98,29 @@
                             </div>
                             <div *ngIf="assignedLawyer">
                                 <div class="row">
-                                    <div class="col-4">
-                                        <div *ngIf="assignedLawyer?.userAdditionalInfo?.profile?.downloadLink">
-                                            <img src="{{assignedLawyer?.userAdditionalInfo?.profile?.downloadLink}}"
-                                                width="150px" height="150px" alt="logo" class="logo">
+                                    <div class="col-4 px-4 my-4">
+                                        <div class="row">
+                                            <div *ngIf="assignedLawyer?.userAdditionalInfo?.profile?.downloadLink">
+                                                <img src="{{assignedLawyer?.userAdditionalInfo?.profile?.downloadLink}}"
+                                                    width="150px" height="auto" alt="logo" class="logo">
+                                            </div>
+                                           <div>
+                                            <div *ngIf="!assignedLawyer?.userAdditionalInfo?.profile?.downloadLink">
+                                                <img src="assets/img/placeholder1.jpg" width="150px" height="auto" alt="logo">
+                                            </div>
                                         </div>
-                                        <div *ngIf="!assignedLawyer?.userAdditionalInfo?.profile?.downloadLink">
-                                            <img src="assets/img/placeholder.jpg" width="230px" height="100px"
-                                                alt="logo">
+                                       </div>
+                                       <div class="row">
+                                        <div>
+                                            <a mat-button 
+                                            (click)="removeAlert(lawyerRemoveConforation)">Disconnect
+                                        </a>
                                         </div>
+                                       </div>
                                     </div>
                                     <div class="col-8">
-                                        <h3 class="text-center font-weight-bold">Your Connected Lawyer</h3>
+                                        <h3 class="text-center font-weight-bold" font-size="16px">Your Connected Lawyer
+                                        </h3>
                                         <div>
                                             <p class="text-default">Name:
                                                 <span class="font-weight-normal"> {{assignedLawyer?.firstName}}
@@ -135,9 +146,9 @@
                                             </p>
                                         </div>
                                         <div class="text-center">
-                                            <button class="btn bg-color px-perc py-1" mat-raised-button
+                                            <!-- <button class="btn bg-color px-perc py-1" mat-raised-button
                                                 (click)="removeAlert(lawyerRemoveConforation)">Disconnect
-                                            </button>
+                                            </button> -->
                                             <ng-template #lawyerRemoveConforation>
                                                 <h3 class="text-center">Are you Sure, You want to remove the lawyer</h3>
                                                 <div class="d-flex justify-content-between">
