@@ -22,13 +22,11 @@
         <h3 class="text-center font-weight-bold">Step 3/{{totalSteps}}</h3>
         <mat-card class="p-4">
             <div *ngIf="roleId != 3">
-                <h2 class="text-center">Enter Your Company Information:</h2>
-                <p class="text-center">Please enter your corporate information. If you are a sole<br>
-                    proprietor, please list your name as your Company Name<br>
-                    and complete the rest of the form with your information.</p>
+                <h2 class="text-center">Enter Your Organization Information:</h2>
+                <p class="text-center">Please enter your corporate information. If you are a sole<br> proprietor, please list your name as your organization Name<br> and complete the rest of the form with your information.</p>
             </div>
             <div *ngIf="roleId == 3">
-                <h2 class="text-center org-heading">Enter your Organization details:</h2>
+                <h2 class="text-center org-heading">Enter your organization details:</h2>
                 <p class="text-center">Add information about organization and it's address</p>
             </div>
             <div class="row">
@@ -37,16 +35,14 @@
                         <mat-label>Organization Name</mat-label>
                         <input type="text" matInput [formControl]="organisationForm.controls['name']" required>
                         <mat-error>
-                            <div
-                                *ngIf="organisationForm.controls['name'].invalid && organisationForm.controls['name'].touched">
+                            <div *ngIf="organisationForm.controls['name'].invalid && organisationForm.controls['name'].touched">
                                 <small class="font13" *ngIf="organisationForm.get('name').errors?.required">
                                     Organization name is required
                                 </small>
                                 <small class="font13" *ngIf="organisationForm.get('name').errors?.maxlength">
                                     Organization name should be less than 100 chracters
                                 </small>
-                                <small class="font13"
-                                    *ngIf="organisationForm.controls['name'].hasError('invalidString')">
+                                <small class="font13" *ngIf="organisationForm.controls['name'].hasError('invalidString')">
                                     Organization Name should not contain spaces.
                                 </small>
                             </div>
@@ -60,8 +56,7 @@
                         <mat-label>Street 1</mat-label>
                         <input type="text" matInput [formControl]="addressForm.controls['street1']" required>
                         <mat-error>
-                            <div
-                                *ngIf="addressForm.controls['street1'].invalid && addressForm.controls['street1'].touched">
+                            <div *ngIf="addressForm.controls['street1'].invalid && addressForm.controls['street1'].touched">
                                 <small class="font13" *ngIf="addressForm.get('street1').errors?.required">
                                     Street 1 address is required
                                 </small>
@@ -130,8 +125,7 @@
                         <mat-label>Country</mat-label>
                         <input type="text" matInput [formControl]="addressForm.controls['country']" required>
                         <mat-error>
-                            <div
-                                *ngIf="addressForm.controls['country'].invalid && addressForm.controls['country'].touched">
+                            <div *ngIf="addressForm.controls['country'].invalid && addressForm.controls['country'].touched">
                                 <small class="font13">
                                     Country name is required
                                 </small>
@@ -145,8 +139,7 @@
                 <div class="col-6 pl-0">
                     <mat-form-field appearance="fill" class="w-100 pr-2">
                         <mat-label>Zip Code</mat-label>
-                        <input type="text" (keypress)="numberOnly($event)" matInput
-                            [formControl]="addressForm.controls['zip']" required>
+                        <input type="text" (keypress)="numberOnly($event)" matInput [formControl]="addressForm.controls['zip']" required>
                         <mat-error>
                             <div *ngIf="addressForm.controls['zip'].invalid && addressForm.controls['zip'].touched">
                                 <small class="font13" *ngIf="addressForm.get('zip').errors?.required">
@@ -171,8 +164,7 @@
                 <button class="button-purple px-4 py-1" mat-raised-button (click)="onPreviousClick()">
                     Back
                 </button>
-                <button class="button-purple px-4 py-1" mat-raised-button color="primary"
-                    [disabled]="organisationForm.invalid || this.addressForm.invalid" (click)="submit()">
+                <button class="button-purple px-4 py-1" mat-raised-button color="primary" [disabled]="organisationForm.invalid || this.addressForm.invalid" (click)="submit()">
                     Next
                 </button>
             </div>

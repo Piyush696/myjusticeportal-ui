@@ -87,7 +87,7 @@ export class LoginComponent implements OnInit {
   onGetOtp() {
     this.lawyerService.onGetOtp(this.loginForm.get('userName').value).subscribe((auth: any) => {
       if (auth) {
-        this.toasterService.showSuccessToater('Please Enter Your auth code.');
+        this.toasterService.showSuccessToater('Please enter your auth code.');
       }
     })
   }

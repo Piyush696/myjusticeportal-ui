@@ -97,6 +97,9 @@ export class DefenderDashboardComponent implements OnInit {
             this.billingBoard = true;
             this.showDashboard = false;
           }
+        } else if(!billingsDetails.data.isAdmin && !billingsDetails.data.isSelfPaid){
+          this.showDashboard = true;
+          this.billingBoard = false;
         } else {
           this.showDashboard = true;
           this.billingBoard = false;

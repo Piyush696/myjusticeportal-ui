@@ -26,10 +26,10 @@
                 </span>
             <span><b>Requested By</b>: {{singleCaseData?.inmate?.firstName}} &nbsp;{{singleCaseData?.inmate?.lastName}}</span>
 
-            <!-- <span><b>Attorney Name</b>: 
-                {{singleCaseData?.attorneyName}}
-                <span *ngIf="!singleCaseData?.attorneyName">N/A</span>
-            </span> -->
+            <span><b>Other Information</b>: 
+                {{singleCaseData?.otherInformation}}
+                <span *ngIf="!singleCaseData?.otherInformation">N/A</span>
+            </span>
 
             <span><b>County Of Arrest</b>:
                 {{singleCaseData?.countyOfArrest}}
@@ -46,7 +46,7 @@
             </span>
             <span><b>Notes</b>:
                 {{singleCaseData?.lawyer[0]?.lawyer_case?.notes}}
-                <span *ngIf="!singleCaseData?.countyOfArrest">N/A</span>
+                <span *ngIf="!singleCaseData?.lawyer[0]?.lawyer_case?.notes">N/A</span>
             </span>
         </div>
     </div>
