@@ -5,7 +5,7 @@
     <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
         <div class="row pt-2">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                <mat-card class="mt-2">
+                <mat-card class="mt-2 p-4">
                     <div>
                         <span class="h5 text-center font-weight-bold">Step 1:</span>&nbsp;
                         <span class="h5 text-center font-weight-bold">Select Subscription Level</span>
@@ -15,16 +15,16 @@
                         <a href="https://google.com" target="_blank">Learn More about Connections.</a>
                     </h4>
                     <div class="row">
-                        <div class="col-12 pt-2">
+                        <div class="col-12 pt-2 pb-2">
                             <mat-card class="mat-elevation-z10 border-card">
-                                <input class="circle" type="radio" [checked]="true" name="package" />Unlimited Connections, $40/mo<br />
+                                <input class="circle pl-1" type="radio" [checked]="true" name="package"/><span> Unlimited Connections, $40/mo</span><br />
                             </mat-card>
                         </div>
                     </div>
                 </mat-card>
             </div>
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 pt-2">
-                <mat-card>
+                <mat-card class="mt-4 py-4">
                     <div>
                         <span class="h5 text-center font-weight-bold">Step 2:</span>&nbsp;
                         <span class="h5 text-center font-weight-bold">Select Facilities</span>
@@ -51,18 +51,18 @@
             </div>
         </div>
     </div>
-    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 mx-lg-n2">
         <!-- Estimated Monthly Bill  -->
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 pt-2 px-0">
             <mat-card class="mt-2">
-                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 pt-2">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 ">
                     <div>
                         <span class="h5 text-center font-weight-bold">Step 3:</span>&nbsp;
                         <span class="h5 text-center font-weight-bold">Review Plan Details</span>
                     </div>
                     <span class="text-center text-black">Based on the facilities that you have selected,
                             please review your monthly bill below.</span>
-                    <mat-card class="mat-elevation-z10">
+                    <mat-card class="mat-elevation-z10 mt-2">
                         <div class="d-flex justify-content-between align-items-between">
                             <div>BASE COST:</div>
                             <div>{{ planPrice | currency: "USD":"symbol" }}</div>
@@ -80,8 +80,8 @@
                 </div>
             </mat-card>
         </div>
-        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mt-2 px-0">
-            <mat-card class="p-4 mt-10">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mt-3 px-0 pt-3">
+            <mat-card class="px-4">
                 <div>
                     <span class="h5 text-center font-weight-bold">Step 4:</span>&nbsp;
                     <span class="h5 text-center font-weight-bold">Add Credit Card Info</span>
