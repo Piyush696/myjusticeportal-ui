@@ -9,6 +9,7 @@ export interface RouteInfo {
     class: string;
     roleIds: number[];
     isAdmin?: boolean;
+    isSelfPaid?:boolean;
 }
 
 export const ROUTES: RouteInfo[] = [
@@ -25,7 +26,7 @@ export const ROUTES: RouteInfo[] = [
     { path: 'lawyer/lawyer-dashboard', title: 'Dashboard', icon: 'nc-bank', class: '', roleIds: [3] },
     { path: 'lawyer/inquiries', title: 'Inquiries', icon: 'nc-bank', class: '', roleIds: [3] },
     { path: 'lawyer/lawyer-chat', title: 'Messaging', icon: 'nc-bank', class: '', roleIds: [3] },
-    { path: 'lawyer/accepted-cases', title: 'My Cases', icon: 'nc-bank', class: '', roleIds: [3] },
+    { path: 'lawyer/accepted-cases', title: 'My Connections', icon: 'nc-bank', class: '', roleIds: [3] },
     { path: 'lawyer/billing-setting', title: 'Billing Settings', icon: 'nc-bank', class: '', roleIds: [3], isAdmin: true },
     { path: 'lawyer/manage-profile', title: 'Manage Profile', icon: 'nc-bank', class: '', roleIds: [3] },
     { path: 'lawyer/manage-organization', title: 'Manage Organization', icon: 'nc-bank', class: '', roleIds: [3], isAdmin: true },
@@ -33,9 +34,9 @@ export const ROUTES: RouteInfo[] = [
     { path: 'bondsman/bondsman-dashboard', title: 'Dashboard', icon: 'nc-bank', class: '', roleIds: [6] },
 
     { path: 'public-defender/defender-dashboard', title: 'Dashboard', icon: 'nc-bank', class: '', roleIds: [5] },
-    { path: 'public-defender/search-inmates', title: 'Search Inmates', icon: 'nc-bank', class: '', roleIds: [5] },
+    { path: 'public-defender/search-inmates', title: 'Search Inmates', icon: 'nc-bank', class: '', roleIds: [5], isAdmin: true },
     { path: 'public-defender/inmates-cases', title: 'Inmates Cases', icon: 'nc-bank', class: '', roleIds: [5] },
-    { path: 'public-defender/billing-setting', title: 'Billing Settings', icon: 'nc-bank', class: '', roleIds: [5] },
+    { path: 'public-defender/billing-setting', title: 'Billing Settings', icon: 'nc-bank', class: '', roleIds: [5], isSelfPaid:true },
     { path: 'public-defender/manage-profile', title: 'Manage Profile', icon: 'nc-bank', class: '', roleIds: [5] },
     { path: 'public-defender/manage-organization', title: 'Manage Organization', icon: 'nc-bank', class: '', roleIds: [5], isAdmin: true },
 
@@ -79,6 +80,7 @@ export class SidebarComponent implements OnInit, AfterViewInit {
     ngOnInit() {
         this.store.select(s => s.userInfo).subscribe(x => {
             this.userInfo = x;
+            console.log(this.userInfo)
             if (x.facilities) {
                 this.libraryLink = x.facilities[0]?.libraryLink;
             }
@@ -130,7 +132,7 @@ export class SidebarComponent implements OnInit, AfterViewInit {
                             }
                         }
                     });
-                } else{
+                } else {
                     this.filteredMenuItems = null;
                 }
             } else if(!this.userInfo.isAdmin && !this.userInfo.isSelfPaid && !this.userInfo.status){
