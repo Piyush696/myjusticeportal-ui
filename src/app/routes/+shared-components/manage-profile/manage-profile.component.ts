@@ -106,7 +106,7 @@ export class ManageProfileComponent implements OnInit {
     this.buttonText = 'Edit'
     this.additionalInfoForm.disable()
     let dialogRef = this.dialog.open(templateRef, {
-      height: '78%',
+      // height: '78%',
       width: '813px',
     });
     setTimeout(() => {
