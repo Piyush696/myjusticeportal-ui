@@ -22,13 +22,13 @@
         <h3 class="text-center font-weight-bold">Step 3/{{totalSteps}}</h3>
         <mat-card class="p-4">
             <div *ngIf="roleId != 3">
-                <h2 class="text-center">Enter Your Company Information:</h2>
+                <h3 class="text-center font-weight-bold">Enter Your Company Information:</h3>
                 <p class="text-center">Please enter your corporate information. If you are a sole<br>
                     proprietor, please list your name as your Company Name<br>
                     and complete the rest of the form with your information.</p>
             </div>
             <div *ngIf="roleId == 3">
-                <h2 class="text-center org-heading">Enter your Organization details:</h2>
+                <h3 class="text-center font-weight-bold org-heading">Enter your Organization details:</h3>
                 <p class="text-center">Add information about organization and it's address</p>
             </div>
             <div class="row">

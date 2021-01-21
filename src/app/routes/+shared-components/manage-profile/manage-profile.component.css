@@ -49,7 +49,7 @@ th {
     background-size: cover;
     background-repeat: no-repeat;
     height: 170px;
-    width: 730px;
+    /* width: 730px; */
     background-position: center !important;
 }
 
