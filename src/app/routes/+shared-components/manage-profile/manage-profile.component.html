@@ -16,7 +16,7 @@
 <div class="row">
     <div class="col-12 pt-2">
         <mat-card class="mat-elevation-z10 ">
-            <h1 class="font-weight-bold">Profile Information</h1>
+          <h1 class="font-weight-bold">Profile Information</h1>
             <table style="width:100%">
                 <tr>
                     <th>Name</th>
@@ -63,6 +63,11 @@
 
 
 <ng-template #updateOrganization class="manage-profile">
+    <div>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="closeModal()">
+            <span aria-hidden="true">&times;</span>
+          </button>
+    </div>
     <div class="pl-1">
         <h2 class="mb-0 font-weight-bold">Profile Editor</h2>
         <span class="">Click the Edit button below to make changes, then click Save to confirm your changes.
@@ -153,12 +158,12 @@
                         </small>
                     </div>
                 </div>
-                <div class="px-3">
+                <div class="py-1">
                     <table class="table m-0">
                         <tbody>
                             <tr class="pr-0" *ngFor="let item of uploader1?.queue">
-                                <td class="pr-0"><strong>{{item?.file?.name}}</strong></td>
-                                <td nowrap class="pr-0">
+                                <td ><strong>{{item?.file?.name}}</strong></td>
+                                <td nowrap >
                                     <button mat-raised-button color="warn" (click)="item.remove()">
                                         <mat-icon>delete</mat-icon>Remove
                                     </button>
@@ -178,7 +183,7 @@
 
         <div class="row px-3">
             <!-- <div class="card-body px-0 pb-4"> -->
-                <div class="drag-border  mb-4">
+                <div class="drag-border  mb-1">
                     <h4 class="font-weight-bold margin-remove m-0">Profile Header Background Image</h4>
                     <span class="text-bold">Best image size is 8 MB and 730px × 170px (width × height)</span>
                     <div ng2FileDrop [ngClass]="{'another-file-over-class': hasAnotherDropZoneOver}" (fileOver)="fileOverAnother($event)" [uploader]="uploader2" class="box-placeholder my-drop-zone font-weight-bold pb-2">
@@ -197,12 +202,12 @@
                         </small>
                     </div>
                 </div>
-                <div class="px-3">
+                <div class="py-1">
                     <table class="table m-0">
                         <tbody>
                             <tr class="pr-0" *ngFor="let item of uploader2?.queue">
-                                <td class="pr-0"><strong>{{item?.file?.name}}</strong></td>
-                                <td nowrap class="pr-0">
+                                <td ><strong>{{item?.file?.name}}</strong></td>
+                                <td nowrap>
                                     <button mat-raised-button color="warn" (click)="item.remove()">
                                         <mat-icon>delete</mat-icon>Remove
                                     </button>
