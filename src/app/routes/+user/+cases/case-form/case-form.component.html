@@ -28,15 +28,14 @@
         <div class="col-6 pl-2">
             <mat-form-field appearance="fill" class="w-100 p-0">
                 <mat-label>Charges or Legal Matter</mat-label>
-                <input type="text"  matInput placeholder="Charges or Legal Matter"
-                    [formControl]="caseForm.controls['legalMatter']" required>
-                <mat-error>
+                <input type="text" matInput placeholder="Charges or Legal Matter" [formControl]="caseForm.controls['legalMatter']" required>
+                <!-- <mat-error>
                     <div *ngIf="caseForm.controls['legalMatter'].invalid && caseForm.controls['legalMatter'].touched">
                         <small class="font13">
                             Charges or Legal Matter is Required
                         </small>
                     </div>
-                </mat-error>
+                </mat-error> -->
             </mat-form-field>
         </div>
     </div>
@@ -47,8 +46,7 @@
         <div class="col-6 pl-0">
             <mat-form-field appearance="fill" class="w-100 pl-2">
                 <mat-label>County of Arrest (If Applicable)</mat-label>
-                <input type="text" matInput placeholder="County of Arrest (If Applicable)"
-                    [formControl]="caseForm.controls['countyOfArrest']">
+                <input type="text" matInput placeholder="County of Arrest (If Applicable)" [formControl]="caseForm.controls['countyOfArrest']">
             </mat-form-field>
         </div>
         <div class="col-6 pl-0">
@@ -68,8 +66,7 @@
         <div class="col-6 pl-0">
             <mat-form-field appearance="fill" class="w-100 pl-2">
                 <mat-label>Date of Arrest (If Applicable)</mat-label>
-                <input matInput readonly [matDatepicker]="picker1" [formControl]="caseForm.controls['dateOfArrest']"
-                    [min]="dateOfArrest">
+                <input matInput readonly [matDatepicker]="picker1" [formControl]="caseForm.controls['dateOfArrest']" [min]="dateOfArrest">
                 <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
                 <mat-datepicker #picker1></mat-datepicker>
             </mat-form-field>
@@ -77,8 +74,7 @@
         <div class="col-6 pl-0">
             <mat-form-field appearance="fill" class="w-100 pl-2">
                 <mat-label>Next Court Date (If Know)</mat-label>
-                <input matInput readonly [matDatepicker]="picker" [formControl]="caseForm.controls['nextCourtDate']"
-                    [min]="nextCourtDate">
+                <input matInput readonly [matDatepicker]="picker" [formControl]="caseForm.controls['nextCourtDate']" [min]="nextCourtDate">
                 <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                 <mat-datepicker #picker></mat-datepicker>
             </mat-form-field>
@@ -91,8 +87,7 @@
         <div class="col-6 pl-0">
             <mat-form-field appearance="fill" class="w-100 pl-2">
                 <mat-label>Brief Description</mat-label>
-                <input type="text"  matInput placeholder="Brief Description"
-                    [formControl]="caseForm.controls['briefDescriptionOfChargeOrLegalMatter']" />
+                <input type="text" matInput placeholder="Brief Description" [formControl]="caseForm.controls['briefDescriptionOfChargeOrLegalMatter']" />
                 <!-- <mat-error>
                     <div *ngIf="caseForm.controls['briefDescriptionOfChargeOrLegalMatter'].invalid && 
                         caseForm.controls['briefDescriptionOfChargeOrLegalMatter'].touched">
@@ -113,8 +108,7 @@
         <div class="col-6 pl-0">
             <mat-form-field appearance="fill" class="w-100 pl-2">
                 <mat-label>Attorney Name (If Applicable)</mat-label>
-                <input type="text" matInput placeholder="Attorney Name"
-                    [formControl]="caseForm.controls['attorneyName']">
+                <input type="text" matInput placeholder="Attorney Name" [formControl]="caseForm.controls['attorneyName']">
             </mat-form-field>
         </div>
     </div>
@@ -122,8 +116,7 @@
 
 
 <div class="py-3 pr-3 d-flex">
-    <button class="button-purple px-5 py-1" mat-raised-button [disabled]="caseForm.get('legalMatter').invalid 
-    || caseForm.get('briefDescriptionOfChargeOrLegalMatter').invalid" (click)="updateCase()">
+    <button class="button-purple px-5 py-1" mat-raised-button (click)="updateCase()">
         {{buttonText}}
     </button>
     <button class="white-btn px-5 ml-3 py-1" mat-raised-button [routerLink]="'/mjp/user/case'">

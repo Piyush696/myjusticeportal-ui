@@ -19,6 +19,21 @@
                 </td>
             </ng-container>
 
+            <ng-container matColumnDef="user">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Username</th>
+                <td mat-cell *matCellDef="let user">
+                    <span>
+                {{user?.inmate?.firstName | titlecase}}
+                <span *ngIf="user?.inmate?.middleName">
+                  &nbsp;{{user?.inmate?.middleName | titlecase}}
+                </span> &nbsp;{{user?.inmate?.lastName | titlecase}}
+                    </span>
+                    <span *ngIf="!user?.inmate?.firstName && !user?.inmate?.middleName && !user?.inmate?.lastName">
+                N/A
+              </span>
+                </td>
+            </ng-container>
+
             <ng-container matColumnDef="legalMatter">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header>Legal Matter</th>
                 <td mat-cell *matCellDef="let user">

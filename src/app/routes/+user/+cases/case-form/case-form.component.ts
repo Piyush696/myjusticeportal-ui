@@ -14,7 +14,7 @@ import { Store } from '@ngrx/store';
 
 export class CaseFormComponent implements OnInit, OnChanges {
   caseForm: FormGroup;
-  buttonText: string = 'Add Case';
+  buttonText: string = 'Save';
   headerText: string = 'Add  Case';
   userData: any;
   fullName: string;

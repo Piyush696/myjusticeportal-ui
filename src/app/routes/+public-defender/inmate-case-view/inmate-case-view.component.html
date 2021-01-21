@@ -17,33 +17,36 @@
     <div class="d-flex flex-column" *ngIf="singleCaseData">
         <div class="d-flex flex-column w-75">
             <span>
-                Description: 
+               <b>Description</b>: 
                 {{singleCaseData?.briefDescriptionOfChargeOrLegalMatter}}</span>
             <span>
-                Requested By: {{singleCaseData?.inmate?.firstName}}
+                <b>Requested By</b>: {{singleCaseData?.inmate?.firstName}}
                 <span *ngIf="case?.inmate?.middleName">
                     &nbsp;{{singleCaseData?.inmate?.middleName}}
                 </span> &nbsp;{{singleCaseData?.inmate?.lastName}}
             </span>
-            <span>Attorney Name: 
+            <span>
+                <b>Charges and Legal Matter</b>: 
+                 {{singleCaseData?.legalMatter}}</span>
+            <span> <b>Attorney Name</b>: 
                 {{singleCaseData?.attorneyName}}
                 <span *ngIf="!singleCaseData?.attorneyName">N/A</span>
             </span>
 
-            <span>County Of Arrest:
+            <span> <b>County Of Arrest</b>:
                 {{singleCaseData?.countyOfArrest}}
                 <span *ngIf="!singleCaseData?.countyOfArrest">N/A</span>
             </span>
-            <span>Other Information:
+            <!-- <span> Other Information:
                 {{singleCaseData?.otherInformation}}
                 <span *ngIf="!singleCaseData?.countyOfArrest">N/A</span>
-            </span>
+            </span> -->
 
-            <span>Date Of Arrest:
+            <span><b>Date Of Arrest</b>:
                 {{singleCaseData?.dateOfArrest | date:'longDate'}}
                 <span *ngIf="!singleCaseData?.dateOfArrest">N/A</span>
             </span>
-            <span>Next Court Date:
+            <span><b>Next Court Date</b>:
                 {{singleCaseData?.nextCourtDate | date:'longDate'}}
                 <span *ngIf="!singleCaseData?.nextCourtDate">N/A</span>
             </span>
