@@ -5,7 +5,7 @@
                 <img src="assets/img/logo.png" alt="logo" class="logo">
             </div>
             <div *ngIf="roleId == 3">
-                <h2 class="text-center">Lawyer Registration</h2>
+                <h1 class="text-center">Lawyer Registration</h1>
             </div>
             <div *ngIf="roleId == 5">
                 <h2 class="text-center">Public Defender Registration</h2>
@@ -21,8 +21,8 @@
                         <h3 class=" text-center font-weight-bold" *ngIf="roleId != 3 && roleId != 5">Housing Information</h3>
                     </div>
                     <div>
-                        <h2 class=" text-center font-weight-bold" *ngIf="roleId == 3 || roleId == 5">Bar Information
-                        </h2>
+                        <h3 class=" text-center font-weight-bold" *ngIf="roleId == 3 || roleId == 5">Bar Information
+                        </h3>
                     </div>
                     <p class="text-center" *ngIf="roleId == 3 || roleId == 5">Please add the states in which you are admitted to the bar.
                         <br>If possible, include your Bar ID in that state.</p>

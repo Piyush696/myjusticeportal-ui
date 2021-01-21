@@ -5,7 +5,7 @@
     <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
         <div class="row pt-3">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                <mat-card>
+                <mat-card class="p-4">
                     <div>
                         <span class="h5 text-center font-weight-bold">Step 1:</span>&nbsp;
                         <span class="h5 text-center font-weight-bold">Select Subscription Level</span>
@@ -41,7 +41,7 @@
             </div>
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 pt-2">
                 <div class="d-flex justify-content-center align-items-center mt-10;">
-                    <mat-card>
+                    <mat-card class="px-4">
                         <div>
                             <span class="h5 text-center font-weight-bold">Step 2:</span>&nbsp;
                             <span class="h5 text-center font-weight-bold">Select Facilities</span>
@@ -92,16 +92,16 @@
         <!-- Estimated Monthly Bill  -->
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 pt-2 px-0">
             <div class="d-flex justify-content-center align-items-center  pt-1">
-                <mat-card class="mt-1">
-                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 pt-3">
+                <mat-card class="mt-1 py-4 px-4">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 ">
                         <div>
                             <span class="h5 text-center font-weight-bold">Step 3:</span>&nbsp;
                             <span class="h5 text-center font-weight-bold">Review Plan Details</span>
                         </div>
                         <span class="text-center text-black">Based on the facilities and premiums that you have selected,
                 please review your monthly bill below.</span>
-                        <mat-card class="mat-elevation-z10">
-                            <div class="d-flex justify-content-between align-items-between">
+                        <mat-card class="mat-elevation-z10 my-5">
+                            <div class="d-flex justify-content-between align-items-between pb-2">
                                 <div>BASE COST:</div>
                                 <div>{{ planPrice | currency: "USD":"symbol" }}</div>
                             </div>
@@ -126,7 +126,7 @@
             </div>
         </div>
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mt-2 px-0">
-            <mat-card class="p-4 mt-5">
+            <mat-card class=" px-4">
                 <div>
                     <span class="h5 text-center font-weight-bold">Step 4:</span>&nbsp;
                     <span class="h5 text-center font-weight-bold">Add Credit Card Info</span>
