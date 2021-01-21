@@ -106,7 +106,7 @@ export class ManageProfileComponent implements OnInit {
     this.buttonText = 'Edit'
     this.additionalInfoForm.disable()
     let dialogRef = this.dialog.open(templateRef, {
-      height: '78%',
+      // height: '78%',
       width: '813px',
     });
     setTimeout(() => {
@@ -134,6 +134,7 @@ export class ManageProfileComponent implements OnInit {
         this.fileType = 'private';
         this.getlawyerInfo()
         if (res.success) {
+          this.dialog.closeAll();
           this.uploader1.queue = [];
           this.uploader2.queue = [];
           this.toasterService.showSuccessToater('File uploaded successfully.');

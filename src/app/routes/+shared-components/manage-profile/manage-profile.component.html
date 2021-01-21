@@ -15,14 +15,14 @@
 
 <div class="row">
     <div class="col-12 pt-2">
-        <mat-card class="mat-elevation-z10">
-            <h1 class="font-weight-bold">Profile Information</h1>
+        <mat-card class="mat-elevation-z10 ">
+          <h1 class="font-weight-bold">Profile Information</h1>
             <table style="width:100%">
                 <tr>
                     <th>Name</th>
                     <td>{{userDetails?.firstName}} {{userDetails?.middleName}} {{userDetails?.lastName}}</td>
                 </tr>
-                <tr>
+                <!-- <tr>
                     <th>Tagline</th>
                     <td>{{userDetails?.userAdditionalInfo?.tagline}}</td>
                 </tr>
@@ -33,11 +33,11 @@
                 <tr>
                     <th>Description</th>
                     <td style="word-break: break-word;">{{userDetails?.userAdditionalInfo?.description}}</td>
-                </tr>
+                </tr> -->
                 <tr>
                     <th>Profile Headshot</th>
                     <td>
-                        <img src="{{userDetails?.userAdditionalInfo?.profile?.downloadLink}}" width="157px" height="185px" alt="logo" class="logo" *ngIf="userDetails?.userAdditionalInfo?.profile?.downloadLink">
+                        <img src="{{userDetails?.userAdditionalInfo?.profile?.downloadLink}}" width="157px" height="auto" alt="logo" class="logo" *ngIf="userDetails?.userAdditionalInfo?.profile?.downloadLink">
                     </td>
                 </tr>
                 <tr>
@@ -63,6 +63,11 @@
 
 
 <ng-template #updateOrganization class="manage-profile">
+    <div>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="closeModal()">
+            <span aria-hidden="true">&times;</span>
+          </button>
+    </div>
     <div class="pl-1">
         <h2 class="mb-0 font-weight-bold">Profile Editor</h2>
         <span class="">Click the Edit button below to make changes, then click Save to confirm your changes.
@@ -89,7 +94,7 @@
         </div>
 
 
-        <div class="row px-3">
+        <!-- <div class="row px-3">
             <mat-form-field appearance="fill" class="w-50 p-1">
                 <mat-label>Tagline</mat-label>
                 <input type="text" matInput [formControl]="additionalInfoForm.controls['tagline']">
@@ -130,13 +135,13 @@
                     </div>
                 </mat-error>
             </mat-form-field>
-        </div>
+        </div> -->
     </div>
-    <div *ngIf="currentView == 2">
+    <div *ngIf="currentView == 1">
         <div class="row px-3">
-            <div class="card-body px-0 pb-4">
-                <div class="drag-border p-3">
-                    <h4 class="font-weight-bold margin-remove">Profile Headshot</h4>
+            <!-- <div class="card-body px-0 pb-4"> -->
+                <div class="drag-border mb-2">
+                    <h4 class="font-weight-bold margin-remove m-0">Profile Headshot</h4>
                     <span class="text-bold">Best image size is up to 5MB and 157px × 185px (width × height).</span>
                     <div ng2FileDrop [ngClass]="{'another-file-over-class': hasAnotherDropZoneOver}" (fileOver)="fileOverAnother($event)" [uploader]="uploader1" class="box-placeholder my-drop-zone font-weight-bold pb-2">
                         Drag and drop files here (or) choose below to attach.
@@ -153,33 +158,33 @@
                         </small>
                     </div>
                 </div>
-                <div class="px-3">
+                <div class="py-1">
                     <table class="table m-0">
                         <tbody>
                             <tr class="pr-0" *ngFor="let item of uploader1?.queue">
-                                <td class="pr-0"><strong>{{item?.file?.name}}</strong></td>
-                                <td nowrap class="pr-0">
+                                <td ><strong>{{item?.file?.name}}</strong></td>
+                                <td nowrap >
                                     <button mat-raised-button color="warn" (click)="item.remove()">
                                         <mat-icon>delete</mat-icon>Remove
                                     </button>
                                 </td>
-                                <!-- <td>
+                                <td>
                                     <button mat-raised-button color="primary"
                                         [disabled]="isFileSizeMax || isDimenssionMax" (click)="onUploadLogo()">
                                         <mat-icon>file_upload</mat-icon>Upload
                                     </button>
-                                </td> -->
+                                </td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
-            </div>
+            <!-- </div> -->
         </div>
 
         <div class="row px-3">
-            <div class="card-body px-0 pb-4">
-                <div class="drag-border p-3 mb-3">
-                    <h4 class="font-weight-bold margin-remove">Profile Header Background Image</h4>
+            <!-- <div class="card-body px-0 pb-4"> -->
+                <div class="drag-border  mb-1">
+                    <h4 class="font-weight-bold margin-remove m-0">Profile Header Background Image</h4>
                     <span class="text-bold">Best image size is 8 MB and 730px × 170px (width × height)</span>
                     <div ng2FileDrop [ngClass]="{'another-file-over-class': hasAnotherDropZoneOver}" (fileOver)="fileOverAnother($event)" [uploader]="uploader2" class="box-placeholder my-drop-zone font-weight-bold pb-2">
                         Drag and drop files here (or) choose below to attach.
@@ -197,27 +202,27 @@
                         </small>
                     </div>
                 </div>
-                <div class="px-3">
+                <div class="py-1">
                     <table class="table m-0">
                         <tbody>
                             <tr class="pr-0" *ngFor="let item of uploader2?.queue">
-                                <td class="pr-0"><strong>{{item?.file?.name}}</strong></td>
-                                <td nowrap class="pr-0">
+                                <td ><strong>{{item?.file?.name}}</strong></td>
+                                <td nowrap>
                                     <button mat-raised-button color="warn" (click)="item.remove()">
                                         <mat-icon>delete</mat-icon>Remove
                                     </button>
                                 </td>
-                                <!-- <td>
+                                <td>
                                     <button mat-raised-button color="primary"
                                         [disabled]="isHeadshotFileSizeMax || isDimenssionMax1" (click)="onUploadLogo()">
                                         <mat-icon>file_upload</mat-icon>Upload
                                     </button>
-                                </td> -->
+                                </td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
-            </div>
+            <!-- </div> -->
         </div>
     </div>
     <div class="d-flex justify-content-between">
@@ -225,7 +230,7 @@
             Close
         </button>
         <div>
-            <button mat-raised-button class="btn bg-color px-perc py-1 mr-2" *ngIf="currentView == 2" (click)="OnNextView(1)">
+            <!-- <button mat-raised-button class="btn bg-color px-perc py-1 mr-2" *ngIf="currentView == 2" (click)="OnNextView(1)">
                 Back : Edit Details
             </button>
             <button mat-raised-button class="btn bg-color px-perc py-1 mr-2" [disabled]="additionalInfoForm.invalid" *ngIf="currentView == 1" (click)="OnNextView(2)">
@@ -233,10 +238,10 @@
             </button>
             <button *ngIf="currentView == 1" class="button-purple px-4 py-1" mat-raised-button (click)="saveChanges()">
                 {{buttonText}}
-            </button>
-            <button *ngIf="currentView == 2" class="button-purple px-4 py-1" mat-raised-button [disabled]="isHeadshotFileSizeMax || isDimenssionMax1 || isFileSizeMax || isDimenssionMax || uploader1?.queue.length == 0 || uploader2?.queue.length == 0" (click)="onUploadLogo()">
+            </button> -->
+            <!-- <button *ngIf="currentView == 2" class="button-purple px-4 py-1" mat-raised-button [disabled]="isHeadshotFileSizeMax || isDimenssionMax1 || isFileSizeMax || isDimenssionMax || uploader1?.queue.length == 0 || uploader2?.queue.length == 0" (click)="onUploadLogo()">
                 Upload
-            </button>
+            </button> -->
         </div>
     </div>
 </ng-template>
