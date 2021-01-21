@@ -3,6 +3,11 @@
         <div class="d-flex justify-content-center">
             <img src="assets/img/logo.png" alt="logo" class="logo">
         </div>
+
+        <div>
+            <h1 class="text-center">Inmate Registration</h1>
+        </div>
+
         <h3 *ngIf="!spinner" class="text-center font-weight-bold">Step 3/3</h3>
 
         <div *ngIf="spinner" class="d-flex justify-content-center align-items-center spinner">
@@ -36,8 +41,7 @@
             <br>
             <mat-form-field appearance="fill" class="w-100">
                 <mat-label>Answer</mat-label>
-                <input type="text" matInput placeholder="Answer" [formControl]="securityQuestionForm.controls['answer']"
-                    required />
+                <input type="text" matInput placeholder="Answer" [formControl]="securityQuestionForm.controls['answer']" required />
             </mat-form-field>
 
             <div class="d-flex justify-content-between">
@@ -47,12 +51,10 @@
                 <button *ngIf="count" mat-button color="primary" [disabled]="!count" (click)="onClickBack()">
                     BACK
                 </button>
-                <button *ngIf="count != 2" class="px-4 py-1" mat-raised-button color="primary"
-                    [disabled]="securityQuestionForm.invalid" (click)="onClickNext()">
+                <button *ngIf="count != 2" class="px-4 py-1" mat-raised-button color="primary" [disabled]="securityQuestionForm.invalid" (click)="onClickNext()">
                     NEXT
                 </button>
-                <button *ngIf="count == 2" class="px-4 py-1" mat-raised-button color="primary"
-                    [disabled]="securityQuestionForm.invalid" (click)="onClickRegister()">
+                <button *ngIf="count == 2" class="px-4 py-1" mat-raised-button color="primary" [disabled]="securityQuestionForm.invalid" (click)="onClickRegister()">
                     REGISTER
                 </button>
             </div>

@@ -118,16 +118,16 @@
                     </mat-form-field>
                 </div>
             </div>
-            <h5 *ngIf="roleId === 1" class="text-center">Please give us your email and phone so that you can access the portal anytime.
+            <h5 *ngIf="roleId === 1" class="text-center">Provide your email and phone if you would like the option of accessing the portal upon release.
             </h5>
             <div class="row">
-                <div *ngIf="roleId === 1" class="col-6 pr-2">
+                <div *ngIf="roleId === 1" class="col-6 pl-2">
                     <mat-form-field appearance="fill" class="w-100">
                         <mat-label>Email</mat-label>
                         <input matInput placeholder="abc@xyz.com" [formControl]="registrationForm.controls['userEmail']" autocomplete="new-Email" autocapitalize="off" />
                     </mat-form-field>
                 </div>
-                <div *ngIf="roleId === 1" class="col-6 pl-2">
+                <div *ngIf="roleId === 1" class="col-6 pr-2">
                     <mat-form-field appearance="fill" class="w-100">
                         <mat-label>Mobile</mat-label>
                         <input type="text" matInput placeholder="(123) 456-7890" [textMask]="{mask: mobileMask}" [formControl]="registrationForm.controls['mobile']" />

@@ -101,22 +101,20 @@
                                     <div class="col-4 px-4 my-4">
                                         <div class="row">
                                             <div *ngIf="assignedLawyer?.userAdditionalInfo?.profile?.downloadLink">
-                                                <img src="{{assignedLawyer?.userAdditionalInfo?.profile?.downloadLink}}"
-                                                    width="150px" height="auto" alt="logo" class="logo">
+                                                <img src="{{assignedLawyer?.userAdditionalInfo?.profile?.downloadLink}}" width="150px" height="auto" alt="logo" class="logo">
                                             </div>
-                                           <div>
-                                            <div *ngIf="!assignedLawyer?.userAdditionalInfo?.profile?.downloadLink">
-                                                <img src="assets/img/placeholder1.jpg" width="150px" height="auto" alt="logo">
+                                            <div>
+                                                <div *ngIf="!assignedLawyer?.userAdditionalInfo?.profile?.downloadLink">
+                                                    <img src="assets/img/placeholder1.jpg" width="150px" height="auto" alt="logo">
+                                                </div>
                                             </div>
                                         </div>
-                                       </div>
-                                       <div class="row">
-                                        <div>
-                                            <a mat-button 
-                                            (click)="removeAlert(lawyerRemoveConforation)">Disconnect
+                                        <div class="row">
+                                            <div>
+                                                <a mat-button (click)="removeAlert(lawyerRemoveConforation)">Disconnect
                                         </a>
+                                            </div>
                                         </div>
-                                       </div>
                                     </div>
                                     <div class="col-8">
                                         <h3 class="text-center font-weight-bold" font-size="16px">Your Connected Lawyer
@@ -129,37 +127,36 @@
                                         </div>
                                         <div>
                                             <p class="text-default">Organization:
-                                                <span
-                                                    class="font-weight-normal">{{assignedLawyer?.Organization?.name}}</span>
+                                                <span class="font-weight-normal">{{assignedLawyer?.Organization?.name}}</span>
                                             </p>
                                         </div>
                                         <div>
                                             <p class="text-default">Tagline:
-                                                <span
-                                                    class="font-weight-normal">{{assignedLawyer?.userAdditionalInfo?.tagline}}</span>
+                                                <span class="font-weight-normal">{{assignedLawyer?.userAdditionalInfo?.tagline}}</span>
                                             </p>
                                         </div>
                                         <div>
-                                            <p class="text-default">Practice area:
-                                                <span
-                                                    class="font-weight-normal">{{assignedLawyer?.userAdditionalInfo?.practiceAreas}}</span>
+                                            <p class="text-default">Practice Area(s):
+                                                <span class="font-weight-normal">{{assignedLawyer?.userAdditionalInfo?.practiceAreas}}</span>
                                             </p>
                                         </div>
                                         <div class="text-center">
-                                            <!-- <button class="btn bg-color px-perc py-1" mat-raised-button
+                                            <<<<<<< HEAD <button class="btn bg-color px-perc py-1" mat-raised-button (click)="removeAlert(lawyerRemoveConforation)">Disconnect
+                                                </button>
+                                                =======
+                                                <!-- <button class="btn bg-color px-perc py-1" mat-raised-button
                                                 (click)="removeAlert(lawyerRemoveConforation)">Disconnect
                                             </button> -->
-                                            <ng-template #lawyerRemoveConforation>
-                                                <h3 class="text-center">Are you Sure, You want to remove the lawyer</h3>
-                                                <div class="d-flex justify-content-between">
-                                                    <button class="btn bg-color px-perc py-1" mat-raised-button
-                                                        (click)="onCancelNotesModal()">No
+                                                >>>>>>> develop
+                                                <ng-template #lawyerRemoveConforation>
+                                                    <h3 class="text-center">Are you Sure, You want to remove the lawyer</h3>
+                                                    <div class="d-flex justify-content-between">
+                                                        <button class="btn bg-color px-perc py-1" mat-raised-button (click)="onCancelNotesModal()">No
                                                     </button>
-                                                    <button class="button-purple px-perc py-1" mat-raised-button
-                                                        (click)="removeLawyer(assignedLawyer.userId)">Yes
+                                                        <button class="button-purple px-perc py-1" mat-raised-button (click)="removeLawyer(assignedLawyer.userId)">Yes
                                                     </button>
-                                                </div>
-                                            </ng-template>
+                                                    </div>
+                                                </ng-template>
                                         </div>
                                     </div>
                                 </div>
@@ -183,8 +180,7 @@
                     </div>
                 </div>
                 <div class="pl-2" *ngIf="isFacility">
-                    <button class="button-purple" mat-mini-fab title="Add/Edit Note"
-                        (click)="openModal(managenotesModel)">
+                    <button class="button-purple" mat-mini-fab title="Add/Edit Note" (click)="openModal(managenotesModel)">
                         <mat-icon>edit</mat-icon>
                     </button>
                 </div>
@@ -225,8 +221,7 @@
         <button mat-raised-button class="button-purple mt-2 px-4 py-1" (click)="onCancelNotesModal()">
             Cancel
         </button>
-        <button mat-raised-button color="primary" class="px-4 py-1 mt-2" [disabled]="caseNoteForm.get('notes').invalid"
-            (click)="onSaveChanges()">
+        <button mat-raised-button color="primary" class="px-4 py-1 mt-2" [disabled]="caseNoteForm.get('notes').invalid" (click)="onSaveChanges()">
             Save
         </button>
     </div>

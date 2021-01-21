@@ -21,7 +21,7 @@ export class ViewUsersComponent implements OnInit, AfterViewInit {
   @ViewChild(MatSort, { static: false }) sort: MatSort;
   editUserForm: FormGroup;
   userId: any;
-
+  buttonText: string = 'Edit';
   constructor(private location: Location, public dialog: MatDialog, private fb: FormBuilder,
     private organisationService: OrganisationService, private toasterService: ToasterService,) { }
 
@@ -52,6 +52,26 @@ export class ViewUsersComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit() {
     this.dataSource.sort = this.sort;
+  }
+
+  onSaveChanges(){
+    if(this.buttonText === 'Edit'){
+      this.editUserForm.enable();
+      this.buttonText = 'Save'
+    }
+    else if(this.buttonText === 'Save'){
+      this.buttonText = 'Edit';
+      this.editUserForm.value['userId'] = this.userId;
+      console.log(this.editUserForm.value);
+      this.organisationService.updateUserOrg(this.editUserForm.value).subscribe((res:any)=>{
+        if(res.success){
+          this.toasterService.showSuccessToater('User updated')
+          this.getAllUsers();
+        }else{
+          this.toasterService.showErrorToater('Something went wrong')
+        }
+      })
+    }
   }
 
   getAllUsers() {
@@ -87,6 +107,8 @@ export class ViewUsersComponent implements OnInit, AfterViewInit {
   }
 
   openModal(templateRef, user) {
+    console.log(user)
+    this.userId = user.userId
     this.editUserForm.get('firstName').setValue(user.firstName)
     this.editUserForm.get('middleName').setValue(user.middleName)
     this.editUserForm.get('lastName').setValue(user.lastName)

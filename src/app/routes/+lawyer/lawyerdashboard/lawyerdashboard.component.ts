@@ -39,7 +39,14 @@ export class LawyerdashboardComponent implements OnInit, AfterViewInit {
   userData: any;
   public cardMask = [/\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/]
   public cvvMask = [/\d/, /\d/, /\d/]
-
+  facilityId: any;
+  totalPrice: number = 0;
+  spinner: boolean = false;
+  addOnsCount: number = 0;
+  planPrice: number = 0;
+  addOnsPrice: number = 0;
+  state = [];
+  filteredFacilityList = [];
   lawyerData: any;
   @ViewChild('modalopen') modalopen: ElementRef;
   modalopens: any;
@@ -118,6 +125,11 @@ export class LawyerdashboardComponent implements OnInit, AfterViewInit {
         this.showDashboard = false;
       }
     })
+  }
+
+  isLoading(value) {
+    console.log(value)
+    this.spinner = value
   }
 
 

@@ -17,37 +17,37 @@
     <div class="d-flex flex-column" *ngIf="singleCaseData">
         <div class="d-flex flex-column w-75">
             <span>
-                Description: 
+                <b> Description</b>: 
                 {{singleCaseData?.briefDescriptionOfChargeOrLegalMatter}}</span>
+
             <span>
-                Requested By: {{singleCaseData?.inmate?.firstName}}
-                <span *ngIf="case?.inmate?.middleName">
-                    &nbsp;{{singleCaseData?.inmate?.middleName}}
-                </span> &nbsp;{{singleCaseData?.inmate?.lastName}}
-            </span>
-            <span>Attorney Name: 
+                    <b>Charges or Legal Matter</b>:
+                    {{singleCaseData?.legalMatter}}
+                </span>
+            <span><b>Requested By</b>: {{singleCaseData?.inmate?.firstName}} &nbsp;{{singleCaseData?.inmate?.lastName}}</span>
+
+            <!-- <span><b>Attorney Name</b>: 
                 {{singleCaseData?.attorneyName}}
                 <span *ngIf="!singleCaseData?.attorneyName">N/A</span>
-            </span>
+            </span> -->
 
-            <span>County Of Arrest:
+            <span><b>County Of Arrest</b>:
                 {{singleCaseData?.countyOfArrest}}
                 <span *ngIf="!singleCaseData?.countyOfArrest">N/A</span>
             </span>
-            <span>Other Information:
-                {{singleCaseData?.otherInformation}}
-                <span *ngIf="!singleCaseData?.countyOfArrest">N/A</span>
-            </span>
 
-            <span>Date Of Arrest:
+            <span><b>Date Of Arrest</b>:
                 {{singleCaseData?.dateOfArrest | date:'longDate'}}
                 <span *ngIf="!singleCaseData?.dateOfArrest">N/A</span>
             </span>
-            <span>Next Court Date:
+            <span><b>Next Court Date</b>:
                 {{singleCaseData?.nextCourtDate | date:'longDate'}}
                 <span *ngIf="!singleCaseData?.nextCourtDate">N/A</span>
             </span>
-
+            <span><b>Notes</b>:
+                {{singleCaseData?.lawyer[0]?.lawyer_case?.notes}}
+                <span *ngIf="!singleCaseData?.countyOfArrest">N/A</span>
+            </span>
         </div>
     </div>
 </mat-card>
@@ -98,14 +98,14 @@
 <div class="pb-3">
     <mat-card class="outer-card">
         <mat-label class="font-weight-bold">
-            Shared Files (with my Inmate)({{singleCaseData.caseFile?.length}}):
+            Shared Files (with my Inmate)({{singleCaseData?.caseFile?.length}}):
         </mat-label>
         <div *ngIf="sharedCaseFiles?.caseFile?.length < 0">
             <mat-label class="font-weight-bold text-info">
                 No files uploaded yet.
             </mat-label>
         </div>
-        <mat-card class="d-flex justify-content-between align-items-center inner-card mt-2 px-2" *ngFor="let file of singleCaseData.caseFile">
+        <mat-card class="d-flex justify-content-between align-items-center inner-card mt-2 px-2" *ngFor="let file of singleCaseData?.caseFile">
             <div>
                 <mat-label>
                     {{file?.fileName}}

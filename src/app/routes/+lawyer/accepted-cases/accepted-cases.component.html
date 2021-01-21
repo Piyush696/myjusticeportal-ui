@@ -1,6 +1,6 @@
 <div class="d-flex justify-content-between">
     <div>
-        <h1 class="mb-0 font-weight-bold">My Cases</h1>
+        <h1 class="mb-0 font-weight-bold">My Connections</h1>
         <h4>View all your cases and manage case information.</h4>
     </div>
     <div>
@@ -8,9 +8,6 @@
             <mat-checkbox class="mat-card check-style" color="primary" title="View Rejected Cases" (change)="viewhideCaseDetails($event.checked)">
                 View Hidden Cases
             </mat-checkbox>&nbsp;
-            <mat-checkbox class="mat-card check-style" color="primary" title="View Rejected Cases" (change)="onViewRejectedCases($event.checked)">
-                View Rejected
-            </mat-checkbox>
         </div>
     </div>
 </div>
@@ -27,7 +24,8 @@
         <div *ngFor="let case of requestedCases">
             <mat-card class="d-flex flex-row justify-content-between align-items-center inner-card mt-2">
                 <div class="d-flex flex-column w-75">
-                    <span>{{case?.briefDescriptionOfChargeOrLegalMatter}}</span>
+                    <span>Description: {{case?.briefDescriptionOfChargeOrLegalMatter}}</span>
+                    <span>Charges or Legal Matter: {{case?.legalMatter}}</span>
                     <span>
                         Requested By: {{case?.inmate?.firstName}}
                         <span *ngIf="case?.inmate?.middleName">
@@ -45,19 +43,27 @@
                         Files attached: {{case?.caseFile?.length}}
                     </span>
                     <span>
-                      Notes:  {{case.notes}}
+                      Notes:  {{case?.lawyer_case?.notes}}
                     </span>
                 </div>
                 <div>
                     <button *ngIf="case?.lawyer_case?.isHide" (click)="unHideCaseDetails(case?.caseId)" class="button-purple mr-1" mat-mini-fab title="Unhide Case Details">
                     <mat-icon>visibility_off</mat-icon>
                 </button>
-                    <button *ngIf="!case?.lawyer_case?.isHide" (click)="hideCaseDetails(case?.caseId)" class="bg-warning text-light mr-1" mat-mini-fab title="Hide Case Details">
+                    <!-- <button *ngIf="!case?.lawyer_case?.isHide" (click)="hideCaseDetails(case?.caseId)" class="bg-warning text-light mr-1" mat-mini-fab title="Hide Case Details">
                         <mat-icon>visibility_off</mat-icon>
+                    </button> -->
+
+                    <button *ngIf="!case?.lawyer_case?.isHide" class="btn btn-sm btn-danger" title="Hide Case Details" (click)="hideCaseDetails(case?.caseId)">
+                        Hide Case
                     </button>
-                    <button *ngIf="case?.lawyer_case?.status == 'Connected'" [routerLink]="case?.caseId" class="button-purple mr-1" mat-mini-fab title="View Case Details">
+
+                    <button *ngIf="case?.lawyer_case?.status == 'Connected'" [routerLink]="case?.caseId" class="btn btn-sm btn-success" title="View Case Details">
+                            View Case
+                        </button>
+                    <!-- <button *ngIf="case?.lawyer_case?.status == 'Connected'" [routerLink]="case?.caseId" class="button-purple mr-1" mat-mini-fab title="View Case Details">
                         <mat-icon>remove_red_eye</mat-icon>
-                    </button>
+                    </button> -->
                 </div>
             </mat-card>
         </div>
