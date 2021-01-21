@@ -25,7 +25,8 @@ export class UserDetailsComponent implements OnInit, OnDestroy {
 
     roleStoreSub: Subscription;
     roleList: any;
-
+    formattedPhoneNumber;
+    
     constructor(private fb: FormBuilder, private activatedRoute: ActivatedRoute,
         private store: Store<any>, private userService: UserService, public dialog: MatDialog,
         private toasterService: ToasterService, private facilityService:FacilityService) {
@@ -49,6 +50,7 @@ export class UserDetailsComponent implements OnInit, OnDestroy {
     onGetUserDetails() {
         this.userService.getSingleUserById(+this.selectedUserId).subscribe((res: any) => {
             this.selectedUserData = res.data;
+            this.selectedUserData['formattedPhone'] = res.data.mobile.toString().trim().replace(/^\+|-|\(|\)/g, '')
         });
         this.onGetRoleList();
     }

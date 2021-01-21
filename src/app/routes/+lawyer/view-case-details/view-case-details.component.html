@@ -17,49 +17,48 @@
         </mat-label>
         <div class="d-flex flex-column" *ngIf="singleCaseData">
             <span>
-                Description: {{singleCaseData?.briefDescriptionOfChargeOrLegalMatter}}
+                <b> Description</b>: {{singleCaseData?.briefDescriptionOfChargeOrLegalMatter}}
             </span>
+            <span><b>Charges or Legal Matter</b>: {{singleCaseData?.legalMatter}}</span>
             <span>
-                Requested By: {{singleCaseData?.inmate?.firstName}}
+                <b>Requested By</b>: {{singleCaseData?.inmate?.firstName}}
                 <span *ngIf="singleCaseData?.inmate?.middleName">
                     &nbsp;{{singleCaseData?.inmate?.middleName}}
-                </span>
-                &nbsp;{{singleCaseData?.inmate?.lastName}}
+                </span> &nbsp;{{singleCaseData?.inmate?.lastName}}
             </span>
             <span>
-                Status:&nbsp;
-                <span class="font-weight-bold" [ngClass]="{'text-warning': singleCaseData?.lawyer_case?.status == 'Requested', 
-                        'text-success': singleCaseData?.lawyer_case?.status == 'Approved',
-                        'text-danger': singleCaseData?.lawyer_case?.status == 'Rejected'}">
+                <b>Status</b>:&nbsp;
+                <span class="font-weight-bold" [ngClass]="{'text-warning': singleCaseData?.lawyer_case?.status == 'Lawyer Requested', 
+                        'text-success': singleCaseData?.lawyer_case?.status == 'Connected',
+                        'text-danger': singleCaseData?.lawyer_case?.status == 'Lawyer Rejected'}">
                     {{singleCaseData?.lawyer_case?.status}}
                 </span>
             </span>
             <span>
-                Attorney Name: {{singleCaseData?.attorneyName}}
-                <span *ngIf="!singleCaseData?.attorneyName">N/A</span>
-            </span>
-            <span>
-                County Of Arrest: {{singleCaseData?.countyOfArrest}}
+                <b>County Of Arrest</b>: {{singleCaseData?.countyOfArrest}}
                 <span *ngIf="!singleCaseData?.countyOfArrest">N/A</span>
             </span>
-            <span>
-                Other Information: {{singleCaseData?.otherInformation}}
+            <!-- <span>
+               <b>Other Information</b>: {{singleCaseData?.otherInformation}}
                 <span *ngIf="!singleCaseData?.otherInformation">N/A</span>
-            </span>
+            </span> -->
             <span>
-                Date Of Arrest: {{singleCaseData?.dateOfArrest | date:'longDate'}}
+                <b>Date Of Arrest</b>: {{singleCaseData?.dateOfArrest | date:'longDate'}}
                 <span *ngIf="!singleCaseData?.dateOfArrest">N/A</span>
             </span>
             <span>
-                Next Court Date: {{singleCaseData?.nextCourtDate | date:'longDate'}}
+                <b>Next Court Date</b>: {{singleCaseData?.nextCourtDate | date:'longDate'}}
                 <span *ngIf="!singleCaseData?.nextCourtDate">N/A</span>
+            </span>
+            <span>
+                <b>Notes</b>: {{singleCaseData?.lawyer_case?.notes}}
+                <span *ngIf="!singleCaseData?.attorneyName">N/A</span>
             </span>
             <!-- <span class="pt-3">
                 Files attached:{{singleCaseData?.caseFile?.length}}
             </span> -->
         </div>
-        <mat-card class="d-flex justify-content-between align-items-center inner-card mt-2"
-            *ngFor="let file of singleCaseData?.caseFile">
+        <mat-card class="d-flex justify-content-between align-items-center inner-card mt-2" *ngFor="let file of singleCaseData?.caseFile">
             <div>
                 <mat-label class="font-weight-bold">
                     {{file?.fileName}}
@@ -81,9 +80,7 @@
 
 <div class="card-body px-0 pt-3 pb-4">
     <div class="drag-border p-3">
-        <div ng2FileDrop [ngClass]="{'another-file-over-class': hasAnotherDropZoneOver}"
-            (fileOver)="fileOverAnother($event)" [uploader]="uploader1"
-            class="box-placeholder my-drop-zone font-weight-bold pb-2">
+        <div ng2FileDrop [ngClass]="{'another-file-over-class': hasAnotherDropZoneOver}" (fileOver)="fileOverAnother($event)" [uploader]="uploader1" class="box-placeholder my-drop-zone font-weight-bold pb-2">
             Drag and drop files here (or) Choose below to attach.
         </div>
         <label for="file1" class="file-upload mb-0">
@@ -129,7 +126,7 @@
 
 <!-- To Show Uploaded Shared Files -->
 
-<div class="pb-3">
+<!-- <div class="pb-3">
     <mat-card class="outer-card">
         <mat-label class="font-weight-bold">
             Shared Files (with my Lawyers)({{sharedCaseFiles?.length}}):
@@ -139,11 +136,9 @@
                 No files uploaded yet.
             </mat-label>
         </div>
-        <mat-card class="d-flex justify-content-between align-items-center inner-card mt-2 px-2"
-            *ngFor="let file of sharedCaseFiles">
+        <mat-card class="d-flex justify-content-between align-items-center inner-card mt-2 px-2" *ngFor="let file of sharedCaseFiles">
             <div>
-                <a class="font-weight-bold" title="Download" href="javascript:void(0)"
-                    (click)="onDownloadCaseFile(file?.fileId)">
+                <a class="font-weight-bold" title="Download" href="javascript:void(0)" (click)="onDownloadCaseFile(file?.fileId)">
                     {{file?.fileName}}
                 </a>
                 <div class="pt-1">
@@ -159,18 +154,17 @@
                 </div>
             </div>
             <div class="d-flex">
-                <button class="ml-1" mat-mini-fab color="warn" title="Delete"
-                    (click)="onOpenModal(confirmModal,file?.fileId)">
+                <button class="ml-1" mat-mini-fab color="warn" title="Delete" (click)="onOpenModal(confirmModal,file?.fileId)">
                     <mat-icon>delete</mat-icon>
                 </button>
             </div>
         </mat-card>
     </mat-card>
-</div>
+</div> -->
 
 <!-- To Show Uploaded Private Files -->
 
-<div class="pb-3">
+<!-- <div class="pb-3">
     <mat-card class="outer-card">
         <mat-label class="font-weight-bold">
             Shared Files (with my Legal Researchers)({{privateCaseFiles?.length}}):
@@ -180,11 +174,9 @@
                 No files uploaded yet.
             </mat-label>
         </div>
-        <mat-card class="d-flex justify-content-between align-items-center inner-card mt-2 px-2"
-            *ngFor="let file of privateCaseFiles">
+        <mat-card class="d-flex justify-content-between align-items-center inner-card mt-2 px-2" *ngFor="let file of privateCaseFiles">
             <div>
-                <a class="font-weight-bold" title="Download" href="javascript:void(0)"
-                    (click)="onDownloadCaseFile(file?.fileId)">
+                <a class="font-weight-bold" title="Download" href="javascript:void(0)" (click)="onDownloadCaseFile(file?.fileId)">
                     {{file?.fileName}}
                 </a>
                 <div class="pt-1">
@@ -200,14 +192,13 @@
                 </div>
             </div>
             <div class="d-flex">
-                <button class="ml-1" mat-mini-fab color="warn" title="Delete"
-                    (click)="onOpenModal(confirmModal,file?.fileId)">
+                <button class="ml-1" mat-mini-fab color="warn" title="Delete" (click)="onOpenModal(confirmModal,file?.fileId)">
                     <mat-icon>delete</mat-icon>
                 </button>
             </div>
         </mat-card>
     </mat-card>
-</div>
+</div> -->
 
 <ng-template #confirmModal>
     <div class="d-flex justify-content-center p-2">

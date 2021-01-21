@@ -55,17 +55,6 @@ export class AcceptedCasesComponent implements OnInit {
     }
   }
 
-  onViewRejectedCases(e) {
-    if (e) {
-      this.currentCases.push("Rejected");
-      this.onGetRequestedCases(this.currentCases);
-    } else {
-      var rejectIndex = this.currentCases.indexOf("Rejected")
-      this.currentCases.splice(rejectIndex, 1);
-      this.onGetRequestedCases(this.currentCases);
-    }
-  }
-
 
   viewhideCaseDetails(check) {
     this.isHidden = check;

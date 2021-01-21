@@ -49,7 +49,7 @@ export class InquiriesCaseViewComponent implements OnInit {
 
   onGetCaseData() {
     if (this.activatedRoute.snapshot.params['caseId']) {
-      this.hireLawyerService.getCase(this.activatedRoute.snapshot.params['caseId']).subscribe((res: any) => {
+      this.caseService.getLawyerCase(this.activatedRoute.snapshot.params['caseId']).subscribe((res: any) => {
         if (res.data) {
           this.singleCaseData = res.data;
         } else {
