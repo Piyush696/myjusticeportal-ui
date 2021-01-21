@@ -1,4 +1,4 @@
-<div class="col-12 d-flex justify-content-between pl-0">
+<div class="col-12 d-flex justify-content-between px-0">
     <div>
         <h1 class="line-height font-weight-bold">My Account</h1>
         <h4 class="line-height header-sub-text">Manage your account information.</h4>
@@ -26,8 +26,7 @@
                             <mat-label>Legal First Name</mat-label>
                             <input type="text" matInput [formControl]="profileForm.controls['firstName']" required>
                             <mat-error>
-                                <div
-                                    *ngIf="profileForm.controls['firstName'].invalid && profileForm.controls['firstName'].touched">
+                                <div *ngIf="profileForm.controls['firstName'].invalid && profileForm.controls['firstName'].touched">
                                     <small class="font13">
                                         Firstname is Required
                                     </small>
@@ -46,8 +45,7 @@
                             <mat-label>Legal Last Name</mat-label>
                             <input type="text" matInput [formControl]="profileForm.controls['lastName']" required>
                             <mat-error>
-                                <div
-                                    *ngIf="profileForm.controls['lastName'].invalid && profileForm.controls['lastName'].touched">
+                                <div *ngIf="profileForm.controls['lastName'].invalid && profileForm.controls['lastName'].touched">
                                     <small class="font13">
                                         Lastname is Required
                                     </small>
@@ -61,11 +59,9 @@
                     <div class="col-12" *ngIf="isUser">
                         <mat-form-field appearance="fill" class="w-100 p-1">
                             <mat-label>username</mat-label>
-                            <input matInput placeholder="username" [formControl]="profileForm.controls['userName']"
-                                required>
+                            <input matInput placeholder="username" [formControl]="profileForm.controls['userName']" required>
                             <mat-error>
-                                <div
-                                    *ngIf="profileForm.controls['userName'].invalid &&
+                                <div *ngIf="profileForm.controls['userName'].invalid &&
                                                                    profileForm.controls['userName'].touched && profileForm.controls['userName'].hasError('taken')">
                                     <small class="font13">Username is taken.</small>
                                 </div>
@@ -83,11 +79,9 @@
                     <div class="col-4 p-0 pl-3">
                         <mat-form-field appearance="fill" class="w-100 p-1">
                             <mat-label>Email</mat-label>
-                            <input matInput placeholder="Email" [formControl]="profileForm.controls['userName']"
-                                required>
+                            <input matInput placeholder="Email" [formControl]="profileForm.controls['userName']" required>
                             <mat-error>
-                                <div
-                                    *ngIf="profileForm.controls['userName'].invalid &&
+                                <div *ngIf="profileForm.controls['userName'].invalid &&
                                                                profileForm.controls['userName'].touched && profileForm.controls['userName'].hasError('taken')">
                                     <small class="font13">Email already taken.</small>
                                 </div>
@@ -97,8 +91,7 @@
                                         Email is Required
                                     </small>
                                 </div>
-                                <div
-                                    *ngIf="profileForm.controls['userName'].invalid &&
+                                <div *ngIf="profileForm.controls['userName'].invalid &&
                                 profileForm.controls['userName'].touched && !profileForm.controls['userName'].hasError('taken')">
                                     <small class="font13">That doesn't look right.</small>
                                 </div>
@@ -110,8 +103,7 @@
                             <mat-label>Mobile</mat-label>
                             <input type="text" matInput [formControl]="profileForm.controls['mobile']" required>
                             <mat-error>
-                                <div
-                                    *ngIf="profileForm.controls['mobile'].invalid && profileForm.controls['mobile'].touched">
+                                <div *ngIf="profileForm.controls['mobile'].invalid && profileForm.controls['mobile'].touched">
                                     <small class="font13">
                                         Mobile is Required
                                     </small>
@@ -124,15 +116,13 @@
                     <div class="col-12">
                         <mat-form-field appearance="fill" class="w-100 p-1">
                             <mat-label>Housing Unit</mat-label>
-                            <input type="text" matInput placeholder="Housing Unit"
-                                [formControl]="userMetaForm.controls['housing_unit']">
+                            <input type="text" matInput placeholder="Housing Unit" [formControl]="userMetaForm.controls['housing_unit']">
                         </mat-form-field>
                     </div>
                     <div class="col-12">
                         <mat-form-field class="w-100 p-1">
                             <mat-label>Facility</mat-label>
-                            <input type="text" matInput [formControl]="userMetaForm.controls['facility']"
-                                [matAutocomplete]="auto">
+                            <input type="text" matInput [formControl]="userMetaForm.controls['facility']" [matAutocomplete]="auto">
                             <mat-autocomplete #auto="matAutocomplete">
                                 <mat-option *ngFor="let facility of facilityList" [value]="facility.facilityName">
                                     {{facility.facilityName}}
@@ -145,8 +135,7 @@
                     <div class="col-6">
                         <mat-form-field appearance="fill" class="w-100 p-1">
                             <mat-label>Email</mat-label>
-                            <input type="text" matInput placeholder="Legal Last Name"
-                                [formControl]="profileForm.controls['userEmail']">
+                            <input type="text" matInput placeholder="Legal Last Name" [formControl]="profileForm.controls['userEmail']">
                         </mat-form-field>
                     </div>
                     <div class="col-6">
@@ -158,44 +147,36 @@
                 </div>
                 <div class="row">
                     <div class="col-12">
-                        <div class="d-flex align-items-center pb-3" *ngIf="!isUser">
+                        <div class="d-flex align-items-center pb-3 pl-2" *ngIf="!isUser">
                             MFA
-                            <mat-slide-toggle [disabled]="isDisabled" class="pl-2" color="warn" [checked]="user?.isMFA"
-                                (change)="onMfaSelect()" [formControl]="profileForm.controls['isMFA']">
+                            <mat-slide-toggle [disabled]="isDisabled" class="pl-2" color="warn" [checked]="user?.isMFA" (change)="onMfaSelect()" [formControl]="profileForm.controls['isMFA']">
                                 {{user?.isMFA ? 'Enabled' : 'Disabled'}}
                             </mat-slide-toggle>
                         </div>
                         <div class="row pr-1">
                             <div class="col-6 d-flex justify-content-between justify-content-sm-between">
                                 <div class="pr-4" *ngIf="isUser">
-                                    <button class="btn-black  px-sm-4 px-md-4 px-lg-4 px-xl-4 py-1" mat-raised-button
-                                        (click)="openModal(passwordModal)">
+                                    <button class="btn-black  px-sm-4 px-md-4 px-lg-4 px-xl-4 py-1" mat-raised-button (click)="openModal(passwordModal)">
                                         Reset your Password
                                     </button>
                                 </div>
                                 <div class="pr-4" *ngIf="isUser">
-                                    <button class="btn-black px-sm-4 px-md-4 px-lg-4 px-xl-4 py-1" mat-raised-button
-                                        (click)="openModal(addedmanageSecurityQuestionModal)">
+                                    <button class="btn-black px-sm-4 px-md-4 px-lg-4 px-xl-4 py-1" mat-raised-button (click)="openModal(addedmanageSecurityQuestionModal)">
                                         Manage Security Questions
                                     </button>
                                 </div>
                             </div>
                             <div class="col-6 d-flex justify-content-end justify-content-sm-end">
                                 <div *ngIf="isUser">
-                                    <button
-                                        [disabled]="profileForm.controls['userName'].invalid &&  profileForm.controls['userName'].touched && profileForm.controls['userName'].hasError('taken')"
-                                        class="button-purple px-sm-4 px-md-4 px-lg-4 px-xl-4 py-1" mat-raised-button
-                                        (click)="editChanges()" [ngClass]="{'button-green': buttonText == 'Save'}">
+                                    <button [disabled]="profileForm.controls['userName'].invalid &&  profileForm.controls['userName'].touched && profileForm.controls['userName'].hasError('taken')" class="button-purple px-sm-4 px-md-4 px-lg-4 px-xl-4 py-1" mat-raised-button (click)="editChanges()"
+                                        [ngClass]="{'button-green': buttonText == 'Save'}">
                                         {{buttonText}}
                                     </button>
                                 </div>
                                 <div *ngIf="!isUser">
-                                    <button
-                                        [disabled]="(profileForm.controls['userName'].invalid  && profileForm.controls['userName'].touched && 
+                                    <button [disabled]="(profileForm.controls['userName'].invalid  && profileForm.controls['userName'].touched && 
                                       profileForm.controls['userName'].hasError('taken')) || (profileForm.controls['userName'].invalid &&
-                                      profileForm.controls['userName'].touched && !profileForm.controls['userName'].hasError('taken'))"
-                                        class="button-purple px-sm-4 px-md-4 px-lg-4 px-xl-4 py-1" mat-raised-button
-                                        (click)="editChanges()" [ngClass]="{'button-green': buttonText == 'Save'}">
+                                      profileForm.controls['userName'].touched && !profileForm.controls['userName'].hasError('taken'))" class="button-purple px-sm-4 px-md-4 px-lg-4 px-xl-4 py-1" mat-raised-button (click)="editChanges()" [ngClass]="{'button-green': buttonText == 'Save'}">
                                         {{buttonText}}
                                     </button>
                                 </div>
@@ -224,8 +205,7 @@
                         <mat-label>Enter Current Password</mat-label>
                         <input type="password" matInput [formControl]="passwordForm.controls['oldPassword']" required>
                         <mat-error>
-                            <div
-                                *ngIf="passwordForm.controls['oldPassword'].invalid && passwordForm.controls['oldPassword'].touched">
+                            <div *ngIf="passwordForm.controls['oldPassword'].invalid && passwordForm.controls['oldPassword'].touched">
                                 <small class="font13">
                                     Current password is Required
                                 </small>
@@ -234,11 +214,9 @@
                     </mat-form-field>
                     <mat-form-field appearance="fill" class="w-100 p-2">
                         <mat-label>New Password</mat-label>
-                        <input type="password" matInput placeholder="password"
-                            [formControl]="passwordForm.controls['password']" required>
+                        <input type="password" matInput placeholder="password" [formControl]="passwordForm.controls['password']" required>
                         <mat-error>
-                            <div
-                                *ngIf="passwordForm.controls['password'].invalid && passwordForm.controls['password'].touched">
+                            <div *ngIf="passwordForm.controls['password'].invalid && passwordForm.controls['password'].touched">
                                 <small class="font13" *ngIf="passwordForm.get('password').errors?.required">
                                     Password required.
                                 </small>
@@ -246,8 +224,7 @@
                                     Password must be at least 8 Characters.
                                 </small>
                             </div>
-                            <div
-                                *ngIf="passwordForm.controls['password'].invalid && passwordForm.controls['password'].touched  && passwordForm.controls['password'].hasError('invalidPassword')">
+                            <div *ngIf="passwordForm.controls['password'].invalid && passwordForm.controls['password'].touched  && passwordForm.controls['password'].hasError('invalidPassword')">
                                 <small class="font13">
                                     Password should contain at least 1 capital, at least 1 lowercase
                                     and at least 1 special character.
@@ -260,8 +237,7 @@
                 <div class="form-group">
                     <mat-form-field appearance="fill" class="w-100 p-2">
                         <mat-label>Confirm Password</mat-label>
-                        <input type="password" matInput placeholder="Confirm Password"
-                            [formControl]="passwordForm.controls['confirmPassword']" required>
+                        <input type="password" matInput placeholder="Confirm Password" [formControl]="passwordForm.controls['confirmPassword']" required>
                         <mat-error>
                             <div *ngIf="passwordForm.controls['confirmPassword'].invalid && passwordForm.controls['confirmPassword'].touched
                                          && passwordForm.controls['confirmPassword'].hasError('notSamePassword')">
@@ -276,10 +252,8 @@
         </div>
     </div>
     <div class="d-flex justify-content-between modal-footer">
-        <button type="button" class="button-purple px-4 py-1" mat-raised-button color="primary" type="button"
-            (click)="closeModal()">Close</button>
-        <button type="button" class="button-purple px-4 py-1" [disabled]="passwordForm.invalid"
-            (click)="passwordChange()" mat-raised-button color="primary">Save</button>
+        <button type="button" class="button-purple px-4 py-1" mat-raised-button color="primary" type="button" (click)="closeModal()">Close</button>
+        <button type="button" class="button-purple px-4 py-1" [disabled]="passwordForm.invalid" (click)="passwordChange()" mat-raised-button color="primary">Save</button>
     </div>
 </ng-template>
 
@@ -293,12 +267,9 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="form-group">
-                    <li class="d-flex justify-content-between"
-                        *ngFor="let securityQuestion of addedSecurityQuestionList; let i= index"
-                        [value]="securityQuestion.question">
+                    <li class="d-flex justify-content-between" *ngFor="let securityQuestion of addedSecurityQuestionList; let i= index" [value]="securityQuestion.question">
                         <span class="pt-3">{{i+1}}. {{securityQuestion.question}}</span>
-                        <button class="btn btn-bg-color float-right"
-                            (click)="openQuestionModal(manageSecurityQuestionModal,securityQuestion)">Change</button>
+                        <button class="btn btn-bg-color float-right" (click)="openQuestionModal(manageSecurityQuestionModal,securityQuestion)">Change</button>
 
                     </li>
                 </div>
@@ -306,8 +277,7 @@
         </div>
     </div>
     <div class="d-flex justify-content-end modal-footer">
-        <button type="button" class="button-purple px-4 py-1" mat-raised-button color="primary"
-            (click)="closeModal()">Cancel</button>
+        <button type="button" class="button-purple px-4 py-1" mat-raised-button color="primary" (click)="closeModal()">Cancel</button>
     </div>
 </ng-template>
 
@@ -331,19 +301,15 @@
                 <div class="form-group">
                     <mat-form-field appearance="fill" class="w-100 p-2">
                         <mat-label>Answer</mat-label>
-                        <input type="text" matInput placeholder="Answer"
-                            [formControl]="securityQuestionForm.controls['answer']" required>
+                        <input type="text" matInput placeholder="Answer" [formControl]="securityQuestionForm.controls['answer']" required>
                         <mat-error>
-                            <div
-                                *ngIf="securityQuestionForm.controls['answer'].invalid && securityQuestionForm.controls['answer'].touched">
+                            <div *ngIf="securityQuestionForm.controls['answer'].invalid && securityQuestionForm.controls['answer'].touched">
                                 <small class="font13">
                                     Answer is Required
                                 </small>
                             </div>
-                            <div
-                                *ngIf="securityQuestionForm.controls['answer'].invalid && securityQuestionForm.controls['answer'].touched">
-                                <small class="font13"
-                                    *ngIf="securityQuestionForm.controls['answer'].hasError('whitespace')">
+                            <div *ngIf="securityQuestionForm.controls['answer'].invalid && securityQuestionForm.controls['answer'].touched">
+                                <small class="font13" *ngIf="securityQuestionForm.controls['answer'].hasError('whitespace')">
                                     Answer should not contain spaces.
                                 </small>
                             </div>
@@ -354,9 +320,7 @@
         </div>
     </div>
     <div class="d-flex justify-content-between modal-footer">
-        <button type="button" class="button-purple px-4 py-1" mat-raised-button color="primary"
-            (click)="closeModal()">Close</button>
-        <button [disabled]="securityQuestionForm.get('answer').invalid" mat-raised-button color="primary" type="button"
-            class="button-purple px-4 py-1" (click)="onSaveChanges()">Save</button>
+        <button type="button" class="button-purple px-4 py-1" mat-raised-button color="primary" (click)="closeModal()">Close</button>
+        <button [disabled]="securityQuestionForm.get('answer').invalid" mat-raised-button color="primary" type="button" class="button-purple px-4 py-1" (click)="onSaveChanges()">Save</button>
     </div>
 </ng-template>

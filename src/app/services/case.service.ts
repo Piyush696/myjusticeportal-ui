@@ -37,6 +37,10 @@ export class CaseService {
     return this.httpClient.get<object>(`${this.apiPath}/${this.case}/${caseId}`, this.getHeaders());
   }
 
+  getLawyerCase(caseId) {
+    return this.httpClient.get<object>(`${this.apiPath}/${this.case}/assignedCase/${caseId}`, this.getHeaders());
+  }
+
   updateCase(caseData, caseId) {
     return this.httpClient.put<object>(`${this.apiPath}/${this.case}/${caseId}`, caseData, this.getHeaders());
   }

@@ -125,7 +125,7 @@ export class InquiriesComponent implements OnInit {
     this.userAdditionInfoService.updateLawywrStatus(data).subscribe((res: any) => {
       if (res.success) {
         this.getPendingCaseDetails();
-        this.toasterService.showSuccessToater('Status update successfully.');
+        this.toasterService.showSuccessToater('Status updated successfully');
       } else {
         this.toasterService.showErrorToater('Something went wrong, please try again.');
       }

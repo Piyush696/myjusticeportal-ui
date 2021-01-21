@@ -46,7 +46,7 @@
                     </td>
                 </tr>
                 <tr>
-                    <th>Practice Areas</th>
+                    <th>Practice Area(s)</th>
                     <td>{{orgData?.Organization?.specialty}}</td>
                 </tr>
                 <tr>
@@ -118,7 +118,7 @@
                             {{orgData?.Organization?.Address?.zip}}</span>
                     </span>
                     <br>
-                    <span class="font-weight-bold">Practice areas: </span>
+                    <span class="font-weight-bold">Practice Area(s): </span>
                     <br>
                     <ul class="m-0">
                         <li class="text-dark">{{orgData?.Organization?.specialty}}</li>
@@ -285,7 +285,7 @@
     </div>
     <div class="row px-3">
         <mat-form-field appearance="fill" class="w-100 p-1">
-            <mat-label>Practice Areas</mat-label>
+            <mat-label>Practice Area(s)</mat-label>
             <mat-select [formControl]="toppings" multiple [formControl]="organisationForm.controls['specialty']" required>
                 <span class="pl-3">Select Practice Areas</span>
                 <mat-option *ngFor="let specialty of specialtyList" value="{{specialty.specialtyType}}">
