@@ -59,11 +59,11 @@
                     <div class="text-center line-height">
 
                         <div *ngIf="user?.userAdditionalInfo?.profile?.downloadLink">
-                            <img src="{{user?.userAdditionalInfo?.profile?.downloadLink}}" width="157px" height="185px"
+                            <img src="{{user?.userAdditionalInfo?.profile?.downloadLink}}" width="157px" height="auto"
                                 alt="logo">
                         </div>
                         <div *ngIf="!user?.userAdditionalInfo?.profile?.downloadLink">
-                            <img src="assets/img/placeholder.jpg" width="157px" height="185px" alt="logo">
+                            <img src="assets/img/placeholder.jpg" width="157px" height="auto" alt="logo">
                         </div>
                         <div>
                             <h4 class=" line-height color pt-2"><b>{{user?.firstName}}

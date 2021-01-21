@@ -37,13 +37,7 @@
                 <tr>
                     <th>Profile Headshot</th>
                     <td>
-                        <div *ngIf="!userDetails?.userAdditionalInfo?.profile?.downloadLink">
-                            <img src="{{userDetails?.userAdditionalInfo?.profile?.downloadLink}}" width="157px" height="185px" alt="logo" class="logo" *ngIf="userDetails?.userAdditionalInfo?.profile?.downloadLink">
-                        </div>
-
-                        <!-- <div class="img-profile" *ngIf="!userDetails?.userAdditionalInfo?.profile?.downloadLink">
-                            <img src="../../../../assets/img/placeholder.jpg" width="157px" height="185px" alt="logo" class="logo">
-                        </div> -->
+                        <img src="{{userDetails?.userAdditionalInfo?.profile?.downloadLink}}" width="157px" height="auto" alt="logo" class="logo" *ngIf="userDetails?.userAdditionalInfo?.profile?.downloadLink">
                     </td>
                 </tr>
                 <tr>
@@ -69,6 +63,9 @@
 
 
 <ng-template #updateOrganization class="manage-profile">
+    <button type="button" class="close" aria-label="Close" (click)="closeModal()">
+        <span aria-hidden="true">&times;</span>
+      </button>
     <div class="pl-2">
         <h2 class="font-weight-bold mb-0">Profile Editor</h2>
         <span>Click the Edit button below to make changes, then click Save to confirm your changes.
@@ -264,10 +261,10 @@
                 <div class="col-3">
                     <div class="d-flex">
                         <div class="img-profile" *ngIf="userDetails?.userAdditionalInfo?.profile?.downloadLink">
-                            <img src="{{userDetails?.userAdditionalInfo?.profile?.downloadLink}}" width="157px" height="185px" alt="logo" class="logo">
+                            <img src="{{userDetails?.userAdditionalInfo?.profile?.downloadLink}}" width="157px" height="auto" alt="logo" class="logo">
                         </div>
                         <div class="img-profile" *ngIf="!userDetails?.userAdditionalInfo?.profile?.downloadLink">
-                            <img src="../../../../assets/img/placeholder.jpg" width="157px" height="185px" alt="logo" class="logo">
+                            <img src="../../../../assets/img/placeholder.jpg" width="157px" height="auto" alt="logo" class="logo">
                         </div>
                     </div>
                 </div>

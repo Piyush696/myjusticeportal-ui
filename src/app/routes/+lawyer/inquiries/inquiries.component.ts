@@ -104,6 +104,12 @@ export class InquiriesComponent implements OnInit {
     })
   }
 
+  isModelClose(value){
+    if(value){
+      this.dialog.closeAll();
+    }
+  }
+
   onOpenModal(templateRef, userId, user) {
     this.userId = userId
     user.middleName = user.middleName ? user.middleName : ' '

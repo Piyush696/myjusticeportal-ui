@@ -100,4 +100,8 @@
     height: 80% !important;
 
 }
-  
+
+.modaldismiss{
+  background: transparent;
+  border:none;
+}

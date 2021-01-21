@@ -82,7 +82,9 @@
 
 <ng-template #previewOrganization>
     <div class="pt-2">
+
         <mat-card class="border border-dark padd_mat py-0">
+
             <div class="mt-2 background-org-logo" id="cust-img">
             </div>
             <div class="d-flex justify-content-between align-items-between">
@@ -92,7 +94,7 @@
                     </span>
                 </div>
                 <div>
-                    <button class="white-btn padding-btn btn-outline float-right py-1 mt-1" mat-raised-button (click)="onCloseModal()">
+                    <button class="bg-color padding-btn btn-outline float-right py-1 mt-1" mat-raised-button (click)="onCloseModal()">
                         Close
                     </button>
                 </div>
@@ -134,6 +136,9 @@
 </ng-template>
 
 <ng-template #inviteEmail>
+    <button type="button" class="close" aria-label="Close" (click)="closeModal()">
+        <span aria-hidden="true">&times;</span>
+    </button>
     <div>
         <h2 class="font-weight-bold">Invite User</h2>
     </div>
@@ -180,6 +185,9 @@
 
 
 <ng-template #updateOrganization>
+    <button type="button" class="close" (click)="closeModal()" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
     <div>
         <h2 class="text-center font-weight-bold">Update Changes.</h2>
     </div>
@@ -374,7 +382,7 @@
         </div>
     </div>
     <div class="d-flex justify-content-between">
-        <button mat-raised-button class="button-purple px-4 py-1" (click)="closeModal()">
+        <button mat-raised-button class="button-purple px-4 py-1" data-dismiss="modal" (click)="closeModal()">
             Close
         </button>
         <button class="button-purple px-4 py-1" mat-raised-button (click)="saveChanges()">

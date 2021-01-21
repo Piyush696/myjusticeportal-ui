@@ -36,19 +36,19 @@
                     </mat-select>
                 </mat-form-field>
             </div>
-            <div class="">
-                <mat-form-field appearance="fill">
-                    <mat-label>Filter: Location</mat-label>
-                    <mat-select (selectionChange)="onLocation($event)">
-                        <mat-option [value]=" ">
-                            Select location
-                        </mat-option>
-                        <mat-option *ngFor="let state of states" [value]="state.name">
-                            {{state.name}}
-                        </mat-option>
-                    </mat-select>
-                </mat-form-field>
-            </div>
+            <!-- <div class="">
+        <mat-form-field appearance="fill">
+          <mat-label>Filter: Location</mat-label>
+          <mat-select (selectionChange)="onLocation($event)">
+            <mat-option [value]=" ">
+              Select location
+            </mat-option>
+            <mat-option *ngFor="let state of states" [value]="state.name">
+              {{state.name}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div> -->
         </div>
         <div class="pt-3">
             <mat-card class="outer-card">
@@ -67,34 +67,60 @@
                                 {{org?.firstName}} {{org?.middleName}} {{org?.lastName}}
                             </mat-label>
                         </div>
-                        <div>
-                            <span class="ml-3 premium-tag" *ngIf="org?.lawyerFacility[0]?.lawyer_facility?.isSponsors">Sponsored</span>
+                        <div class="">
+                            <mat-form-field appearance="fill">
+                                <mat-label>Filter: Location</mat-label>
+                                <mat-select (selectionChange)="onLocation($event)">
+                                    <mat-option [value]=" ">
+                                        Select location
+                                    </mat-option>
+                                    <mat-option *ngFor="let state of states" [value]="state.name">
+                                        {{state.name}}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
                         </div>
                     </div>
-                    <div class="px-3">
-                        <span> {{org?.userAdditionalInfo?.practiceAreas}}</span>
-                    </div>
-                    <button class="button-purple" mat-raised-button (click)="openModal(lawyerView,org)">
+                    <div class="pt-3">
+                        <mat-card class="outer-card">
+                            <mat-label class="font-weight-bold">
+                                Filtered Results:
+                            </mat-label>
+                            <div *ngIf="!organizationList?.length">
+                                <mat-label class="font-weight-bold text-danger">
+                                    Based on your search criteria, there are currently no lawyers available to display.
+                                </mat-label>
+                            </div>
+                            <mat-card class="d-flex justify-content-between align-items-center inner-card mt-2" *ngFor="let org of organizationList">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <mat-label class="font-weight-bold">
+                                            {{org?.firstName}} {{org?.middleName}} {{org?.lastName}}
+                                        </mat-label>
+                                    </div>
+                                    <div>
+                                        <span class="ml-3 premium-tag" *ngIf="org?.lawyerFacility[0]?.lawyer_facility?.isSponsors">Sponsored</span>
+                                    </div>
+                                </div>
+                                <div class="px-3">
+                                    <span> {{org?.userAdditionalInfo?.practiceAreas}}</span>
+                                </div>
+                                <button class="button-purple" mat-raised-button (click)="openModal(lawyerView,org)">
             View
           </button>
-                </mat-card>
-            </mat-card>
-        </div>
-    </div>
-    <div class="col-sm-4 col-md-4 col-lg-4 col-xl-4 mt-4">
-        <div>
-            <h1 class="line-height font-weight-bold">Sponsors</h1>
-            <h4 class="line-height header-sub-text">Sponsored lawyers ready to Connect.</h4>
+                            </mat-card>
+                        </mat-card>
+                    </div>
         </div>
         <mat-card class="outer-card">
             <div class="mt-4" *ngFor="let user of sponsorUserList; ">
                 <mat-card class="sponser-card w-100">
                     <div class="text-center line-height">
                         <div *ngIf="user?.userAdditionalInfo?.profile?.downloadLink">
-                            <img src="{{user?.userAdditionalInfo?.profile?.downloadLink}}" width="157px" height="185px" alt="logo">
+                            <img src="{{user?.userAdditionalInfo?.profile?.downloadLink}}" width="157px" height="auto" alt="logo">
                         </div>
                         <div *ngIf="!user?.userAdditionalInfo?.profile?.downloadLink">
-                            <img src="assets/img/placeholder.jpg" width="157px" height="185px" alt="logo">
+                            <img src="assets/img/placeholder.jpg" width="157px" height="auto" alt="logo">
                         </div>
                         <div>
                             <h4 class=" line-height color pt-2"><b>{{user?.firstName}}
@@ -102,7 +128,7 @@
                         </div>
                     </div>
                     <div class="d-flex justify-content-center">
-                        <button (click)="viewUser(user.userId)" class="btn bg-color px-perc py-1" mat-raised-button>View
+                        <button (click)="viewUser(user.userId)" class="btn bg-color py-1" mat-raised-button>View
               Profile</button>
                     </div>
                 </mat-card>
@@ -149,15 +175,15 @@
                 <div class="col-3">
                     <div class="d-flex">
                         <div *ngIf="lawyerData?.userAdditionalInfo?.profile?.downloadLink" class="img-profile">
-                            <img src="{{lawyerData?.userAdditionalInfo?.profile?.downloadLink}}" width="157px" height="185px" alt="logo" class="logo">
+                            <img src="{{lawyerData?.userAdditionalInfo?.profile?.downloadLink}}" width="157px" height="auto" alt="logo" class="logo">
                         </div>
                         <div *ngIf="!lawyerData?.userAdditionalInfo?.profile?.downloadLink">
-                            <img src="assets/img/placeholder.jpg" width="157px" height="185px" alt="logo">
+                            <img src="assets/img/placeholder.jpg" width="157px" height="auto" alt="logo">
                         </div>
                     </div>
                     <div class="d-flex justify-content-center align-items-center">
                         <div class="pt-2">
-                            <button class="button-purple" mat-raised-button (click)="viewContact(lawyerData.userId)">
+                            <button class="button-purple mt-3" mat-raised-button (click)="viewContact(lawyerData.userId)">
                 Contact {{lawyerData?.firstName}}
               </button>
                         </div>
