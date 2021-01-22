@@ -27,7 +27,7 @@ th {
 }
 
 .bg-color{
-  background-color: #333442;
+  background-color:gray;
 }
 
 .bg-card {
@@ -52,4 +52,10 @@ th {
   overflow: hidden !important;
   height: 80% !important;
 
+}
+
+.scrolldesc{
+  overflow: scroll;
+  overflow-x: hidden;
+  height: 100px;
 }
