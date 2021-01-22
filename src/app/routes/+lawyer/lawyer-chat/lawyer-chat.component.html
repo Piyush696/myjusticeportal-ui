@@ -1,19 +1,18 @@
 <div class="col-12 col-sm-12 p-0 d-flex justify-content-between justify-content-sm-between">
     <div>
         <h1 class="font-weight-bold m-0">Messaging</h1>
-        <h4 class="line-height header-sub-text">Engage in real time chat with your Connections, or leave a message and
-            get a response later.</h4>
+        <h4 class="line-height header-sub-text">Engage in real time chat with your Connections, or leave a message and get a response later.</h4>
     </div>
 </div>
 
 <div class="row">
     <div class="col-4 p-0">
-        <app-mesage-list [userList]="userList" (userEvent)="userAdd($event)" (messageEvent)="messageEvent($event)"
-            [headerText]="headerText">
+        <app-mesage-list [userList]="userList" (userEvent)="userAdd($event)" (messageEvent)="messageEvent($event)" [headerText]="headerText">
         </app-mesage-list>
     </div>
+    <mat-spinner *ngIf="isLoading" class="spinner" [diameter]="50"></mat-spinner>
     <div class="col-8 p-0">
-        <app-chat *ngIf="isMessage" [receiverId]="receiverId" [allMessages]="allMessages">
+        <app-chat [receiverId]="receiverId" [allMessages]="allMessages">
         </app-chat>
     </div>
 </div>

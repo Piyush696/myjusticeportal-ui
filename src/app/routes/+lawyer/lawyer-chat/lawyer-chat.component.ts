@@ -20,7 +20,7 @@ export class LawyerChatComponent implements OnInit {
   receiverId: any;
   userList = [];
   headerText = "Your Connected Users"
-
+  isLoading:boolean = false;
 
   constructor(private store: Store<any>, private messageService: MessageService) { }
 
