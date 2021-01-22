@@ -74,7 +74,9 @@ export class SearchInmatesComponent implements OnInit {
 
   
   search(searchValue: string) {
-    this.dataSource.filter = searchValue.trim().toLowerCase();
+   // searchValue.replace(/\s/g,'');
+   let s= searchValue.split(" ").join("")
+    this.dataSource.filter = s.trim().toLowerCase();
   }
 
   nestedFilterCheck(search, data, key) {
