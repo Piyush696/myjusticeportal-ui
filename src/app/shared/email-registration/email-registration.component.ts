@@ -135,6 +135,7 @@ export class EmailRegistrationComponent implements OnInit, OnChanges {
     // visible height + pixel scrolled >= total height 
     if (event.target.offsetHeight + event.target.scrollTop + 10 >= event.target.scrollHeight) {
       this.isAcceptDisabled = false;
+      // this.isAcceptDisabled=true;
     }
     else {
       this.isAcceptDisabled = true;

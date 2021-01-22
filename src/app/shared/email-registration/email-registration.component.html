@@ -30,8 +30,10 @@
                 <div class="col-4 pl-2 mb-1">
                     <mat-form-field appearance="fill" class="w-100">
                         <mat-label>Legal First Name</mat-label>
-                        <input type="text" matInput placeholder="Legal First Name" [formControl]="registrationForm.controls['firstName']" required>
-                        <mat-error *ngIf="registrationForm.controls['firstName'].invalid && registrationForm.controls['firstName'].touched">
+                        <input type="text" matInput placeholder="Legal First Name"
+                            [formControl]="registrationForm.controls['firstName']" required>
+                        <mat-error
+                            *ngIf="registrationForm.controls['firstName'].invalid && registrationForm.controls['firstName'].touched">
                             <small class="font13" *ngIf="registrationForm.get('firstName').errors?.required">
                                 Legal First Name is Required
                             </small>
@@ -41,7 +43,8 @@
                             <small class="font13" *ngIf="registrationForm.get('firstName').errors?.pattern">
                                 Legal First Name should contain only letters.
                             </small>
-                            <small class="font13" *ngIf="registrationForm.controls['firstName'].hasError('invalidString')">
+                            <small class="font13"
+                                *ngIf="registrationForm.controls['firstName'].hasError('invalidString')">
                                 Legal First Name should not contain spaces.
                             </small>
                         </mat-error>
@@ -50,14 +53,17 @@
                 <div class="col-4 pl-0 mb-1">
                     <mat-form-field appearance="fill" class="w-100">
                         <mat-label>Legal Middle Name</mat-label>
-                        <input type="text" matInput placeholder="Legal Middle Name" [formControl]="registrationForm.controls['middleName']">
+                        <input type="text" matInput placeholder="Legal Middle Name"
+                            [formControl]="registrationForm.controls['middleName']">
                     </mat-form-field>
                 </div>
                 <div class="col-4 pl-0 pr-2 mb-1">
                     <mat-form-field appearance="fill" class="w-100">
                         <mat-label>Legal Last Name</mat-label>
-                        <input type="text" matInput placeholder="Legal Last Name" [formControl]="registrationForm.controls['lastName']" required>
-                        <mat-error *ngIf="registrationForm.controls['lastName'].invalid && registrationForm.controls['lastName'].touched">
+                        <input type="text" matInput placeholder="Legal Last Name"
+                            [formControl]="registrationForm.controls['lastName']" required>
+                        <mat-error
+                            *ngIf="registrationForm.controls['lastName'].invalid && registrationForm.controls['lastName'].touched">
                             <small class="font13" *ngIf="registrationForm.get('lastName').errors?.required">
                                 Legal Last Name is Required
                             </small>
@@ -67,7 +73,8 @@
                             <small class="font13" *ngIf="registrationForm.get('lastName').errors?.pattern">
                                 Legal Last Name should contain only letters.
                             </small>
-                            <small class="font13" *ngIf="registrationForm.controls['lastName'].hasError('invalidString')">
+                            <small class="font13"
+                                *ngIf="registrationForm.controls['lastName'].hasError('invalidString')">
                                 Legal Last Name should not contain spaces.
                             </small>
                         </mat-error>
@@ -79,9 +86,11 @@
                 <div *ngIf="roleId == 1" class="col px-2 py-1">
                     <mat-form-field appearance="fill" class="w-100">
                         <mat-label>Username</mat-label>
-                        <input type="text" matInput [formControl]="registrationForm.controls['userName']" autocomplete="new-userName" autocapitalize="off" required>
+                        <input type="text" matInput [formControl]="registrationForm.controls['userName']"
+                            autocomplete="new-userName" autocapitalize="off" required>
                         <mat-error>
-                            <div *ngIf="registrationForm.controls['userName'].invalid && 
+                            <div
+                                *ngIf="registrationForm.controls['userName'].invalid && 
                                 registrationForm.controls['userName'].touched && registrationForm.controls['userName'].hasError('taken')">
                                 <small class="font13">Username already taken.</small>
                             </div>
@@ -104,13 +113,16 @@
                 <div *ngIf="roleId != 1" class="col px-2 py-1">
                     <mat-form-field appearance="fill" class="w-100">
                         <mat-label>Email</mat-label>
-                        <input matInput placeholder="abc@xyz.com" [formControl]="registrationForm.controls['userName']" autocomplete="new-Email" autocapitalize="off" required />
+                        <input matInput placeholder="abc@xyz.com" [formControl]="registrationForm.controls['userName']"
+                            autocomplete="new-Email" autocapitalize="off" required />
                         <mat-error>
-                            <div *ngIf="registrationForm.controls['userName'].invalid &&
+                            <div
+                                *ngIf="registrationForm.controls['userName'].invalid &&
                                                                    registrationForm.controls['userName'].touched && registrationForm.controls['userName'].hasError('taken')">
                                 <small class="font13">Email already taken.</small>
                             </div>
-                            <div *ngIf="registrationForm.controls['userName'].invalid &&
+                            <div
+                                *ngIf="registrationForm.controls['userName'].invalid &&
                                                                    registrationForm.controls['userName'].touched && !registrationForm.controls['userName'].hasError('taken')">
                                 <small class="font13">That doesn't look right.</small>
                             </div>
@@ -118,19 +130,22 @@
                     </mat-form-field>
                 </div>
             </div>
-            <h5 *ngIf="roleId === 1" class="text-center">Provide your email and phone if you would like the option of accessing the portal upon release.
+            <h5 *ngIf="roleId === 1" class="text-center">Provide your email and phone if you would like the option of
+                accessing the portal upon release.
             </h5>
             <div class="row">
                 <div *ngIf="roleId === 1" class="col-6 pl-2">
                     <mat-form-field appearance="fill" class="w-100">
                         <mat-label>Email</mat-label>
-                        <input matInput placeholder="abc@xyz.com" [formControl]="registrationForm.controls['userEmail']" autocomplete="new-Email" autocapitalize="off" />
+                        <input matInput placeholder="abc@xyz.com" [formControl]="registrationForm.controls['userEmail']"
+                            autocomplete="new-Email" autocapitalize="off" />
                     </mat-form-field>
                 </div>
                 <div *ngIf="roleId === 1" class="col-6 pr-2">
                     <mat-form-field appearance="fill" class="w-100">
                         <mat-label>Mobile</mat-label>
-                        <input type="text" matInput placeholder="(123) 456-7890" [textMask]="{mask: mobileMask}" [formControl]="registrationForm.controls['mobile']" />
+                        <input type="text" matInput placeholder="(123) 456-7890" [textMask]="{mask: mobileMask}"
+                            [formControl]="registrationForm.controls['mobile']" />
                     </mat-form-field>
                 </div>
             </div>
@@ -138,9 +153,11 @@
             <div class="row">
                 <mat-form-field appearance="fill" class="w-100 p-2">
                     <mat-label>Password</mat-label>
-                    <input type="password" matInput placeholder="Example: Abc@1234" [formControl]="registrationForm.controls['password']" autocomplete="new-password" required>
+                    <input type="password" matInput placeholder="Example: Abc@1234"
+                        [formControl]="registrationForm.controls['password']" autocomplete="new-password" required>
                     <mat-error>
-                        <div *ngIf="registrationForm.get('password').invalid && registrationForm.get('password').touched">
+                        <div
+                            *ngIf="registrationForm.get('password').invalid && registrationForm.get('password').touched">
                             <small class="font13" *ngIf="registrationForm.get('password').errors?.minlength">
                                 Password must be at least 8 Characters.
                             </small>
@@ -148,7 +165,8 @@
                                 Password required.
                             </small>
                         </div>
-                        <div *ngIf="registrationForm.controls['password'].invalid && registrationForm.controls['password'].touched  &&registrationForm.controls['password'].hasError('invalidPassword')">
+                        <div
+                            *ngIf="registrationForm.controls['password'].invalid && registrationForm.controls['password'].touched  &&registrationForm.controls['password'].hasError('invalidPassword')">
                             <small class="font13">
                                 Password should contain at least 1 capital, at least 1 lowercase
                                 and at least 1 special character.
@@ -161,7 +179,8 @@
             <div class="row">
                 <mat-form-field appearance="fill" class="w-100 p-2">
                     <mat-label>Confirm Password</mat-label>
-                    <input type="password" matInput placeholder="Confirm Password" [formControl]="registrationForm.controls['confirmPassword']" required>
+                    <input type="password" matInput placeholder="Confirm Password"
+                        [formControl]="registrationForm.controls['confirmPassword']" required>
                     <mat-error>
                         <div *ngIf="registrationForm.controls['confirmPassword'].invalid &&  registrationForm.controls['confirmPassword'].touched &&
                                registrationForm.controls['confirmPassword'].hasError('notSamePassword')">
@@ -173,7 +192,9 @@
                 </mat-form-field>
             </div>
             <div class="row">
-                <mat-checkbox class="mat-focus-indicator termCondition-margin ml-2" [formControl]="registrationForm.controls['termCondition']" (change)="openModal(mytemplate)" color="primary">
+                <mat-checkbox class="mat-focus-indicator termCondition-margin ml-2"
+                    [formControl]="registrationForm.controls['termCondition']" (change)="openModal(mytemplate)"
+                    color="primary">
                     <a>
                         <p class="p-0 m-0 line-height">I accept the <span class="font-weight-bold p-0 m-0">Terms and
                                 Conditions</span> of using this website and agree to abide by all applicable
@@ -205,7 +226,8 @@
                     DISCLAIMER CONFIRMATION
                 </p>
                 <p>
-                    To confirm you have read and understood our terms and conditions, please read and <span class="font-weight-bold">scroll to the
+                    To confirm you have read and understood our terms and conditions, please read and <span
+                        class="font-weight-bold">scroll to the
                         bottom to accept.</span>
                 </p>
             </div>
@@ -214,18 +236,41 @@
                     <p>
                         <span class="disclaimer-heading">TERMS AND CONDITIONS</span>
                     </p>
-                    <p class="terms-text pr-3 m-0" (scroll)="onScroll($event)">
-                        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has
-                        survived not only five centuries, but also the leap into electronic typesetting, emaining essentially unchanged.<br> It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum
-                        passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum. Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin
-                        literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going
-                        through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written
-                        in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32. Contrary to popular belief, Lorem
-                        Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the
-                        more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus
-                        Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..",
-                        comes from a line in section 1.10.32.
-                    </p>
+                    <div class="terms-text pr-3 m-0" (scroll)="onScroll($event)">
+                        <div *ngIf="roleId==1">
+                            You are entirely responsible for maintaining the confidentiality of your username and
+                            password.
+                            You may not use a third party's account, username or password at any time. You agree to
+                            notify
+                            My Justice Portal, LLC immediately of any unauthorized use of your account, username or
+                            password. My Justice Portal, LLC shall not be liable for any losses you incur as a result of
+                            someone else's use of your account or password, either with or without your knowledge. You
+                            may
+                            be held liable for any losses incurred by My Justice Portal, LLC, our affiliates, members,
+                            officers, directors, employees, consultants, agents and representatives due to someone
+                            else's
+                            use of your account or password. You must remember to log out of your My Justice Portal
+                            account;
+                            otherwise, your information may be stolen.
+                        </div>
+                        <div *ngIf="roleId==3">
+                            By registering and/or logging in to the Platform you represent and warrant that you are a
+                            licensed attorney and are and will provide accurate information on the Platform and to My
+                            Justice Portal, LLC. By using the Platform, you agree to provide accurate information on the
+                            Platform and to My Justice Portal, LLC. My Justice Portal, LLC does not endorse any attorney
+                            that uses its Platform, and My Justice Portal, LLC does not guarantee that any attorney will
+                            be retained or hired by My Justice Portal, LLC Users. My Justice Portal, LLC cannot
+                            guarantee that your communications are and/or will be privileged or confidential. You are
+                            entirely responsible for maintaining the confidentiality of your username and password. You
+                            may not use a third party's account, username or password at any time. You agree to notify
+                            My Justice Portal, LLC immediately of any unauthorized use of your account, username or
+                            password. My Justice Portal, LLC shall not be liable for any losses you incur as a result of
+                            someone else's use of your account or password, either with or without your knowledge. You
+                            may be held liable for any losses incurred by My Justice Portal, LLC, our affiliates,
+                            members, officers, directors, employees, consultants, agents and representatives due to
+                            someone else's use of your account or password.
+                        </div>
+                    </div>
                 </mat-card>
             </div>
 
@@ -235,7 +280,8 @@
                         DECLINE
                     </button>
                     <span *ngIf="isAcceptDisabled" class="mleft">You must scroll to the bottom to accept.</span>
-                    <button class="px-4 py-1" mat-raised-button color="primary" mat-dialog-close [disabled]="isAcceptDisabled" (click)="onAcceptTerms()">
+                    <button class="px-4 py-1" mat-raised-button color="primary" mat-dialog-close
+                        [disabled]="isAcceptDisabled" (click)="onAcceptTerms()">
                         ACCEPT
                     </button>
                 </div>
