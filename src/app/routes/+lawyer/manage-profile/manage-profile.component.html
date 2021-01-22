@@ -37,16 +37,28 @@
                 <tr>
                     <th>Profile Headshot</th>
                     <td>
-                        <img src="{{userDetails?.userAdditionalInfo?.profile?.downloadLink}}" width="157px"
+                        <!-- <img src="{{userDetails?.userAdditionalInfo?.profile?.downloadLink}}" width="157px" 
                             height="auto" alt="logo" class="logo"
-                            *ngIf="userDetails?.userAdditionalInfo?.profile?.downloadLink">
+                            *ngIf="!userDetails?.userAdditionalInfo?.profile?.downloadLink">-->
+                            <div  *ngIf="!userDetails?.userAdditionalInfo?.profile?.downloadLink" class="my-2 mx-2">
+                                <img src="assets/img/placeholder.jpg" width="157px" height="auto" alt="logo">
+                            </div>
+                            <div  *ngIf="userDetails?.userAdditionalInfo?.profile?.downloadLink" class="my-2 mx-2">
+                                <img src="{{userDetails?.userAdditionalInfo?.profile?.downloadLink}}" width="157px" height="auto" alt="logo">
+                            </div>  
                     </td>
                 </tr>
                 <tr>
                     <th>Profile Header Background Image</th>
                     <td>
-                        <img src="{{userDetails?.userAdditionalInfo?.header?.downloadLink}}" alt="logo" class="logo"
-                            *ngIf="userDetails?.userAdditionalInfo?.header?.downloadLink">
+                        <!-- <img src="{{userDetails?.userAdditionalInfo?.header?.downloadLink}}" alt="logo" class="logo"
+                            *ngIf="userDetails?.userAdditionalInfo?.header?.downloadLink"> -->
+                            <div  *ngIf="!userDetails?.userAdditionalInfo?.header?.downloadLink" class="my-2 mx-2">
+                                <img src="assets/img/hb.png" width="100%" height="auto" alt="logo">
+                            </div>
+                            <div  *ngIf="userDetails?.userAdditionalInfo?.header?.downloadLink" class="my-2 mx-2">
+                                <img src="{{userDetails?.userAdditionalInfo?.header?.downloadLink}}" width="157px" height="auto" alt="logo">
+                            </div> 
                     </td>
                 </tr>
             </table>
