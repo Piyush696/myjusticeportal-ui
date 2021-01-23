@@ -4,7 +4,7 @@
             <div *ngIf="step === 1 || step === 2" class="d-flex justify-content-center">
                 <img src="assets/img/logo.png" alt="logo" class="logo">
             </div>
-            <mat-card class="mat-elevation-z10 p-4" *ngIf="step === 1">
+            <mat-card class="mat-elevation-z10 p-4 mt-3" *ngIf="step === 1">
                 <mat-form-field appearance="fill" class="w-100 p-3">
                     <mat-label>Enter your email or username</mat-label>
                     <input matInput placeholder="username@example.com" [formControl]="loginForm.controls['userName']"

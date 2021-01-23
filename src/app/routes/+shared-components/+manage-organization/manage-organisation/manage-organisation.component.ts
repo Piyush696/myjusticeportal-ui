@@ -55,6 +55,7 @@ export class ManageOrganisationComponent implements OnInit {
       this.organisationService.uploadFile(formData).subscribe((res) => {
         this.fileType = 'private';
         if (res.success) {
+          this.getOrganisationAddress();
           this.uploader1.queue = [];
           this.toasterService.showSuccessToater('File uploaded successfully.');
         } else {
