@@ -24,12 +24,12 @@
                     <b>Charges or Legal Matter</b>:
                     {{singleCaseData?.legalMatter}}
                 </span>
-            <span><b>Requested By</b>: {{singleCaseData?.inmate?.firstName}} &nbsp;{{singleCaseData?.inmate?.lastName}}</span>
+            <span><b>Inmate Name</b>: {{singleCaseData?.inmate?.firstName}} &nbsp;{{singleCaseData?.inmate?.lastName}}</span>
 
-            <span><b>Other Information</b>: 
+            <!-- <span><b>Other Information</b>: 
                 {{singleCaseData?.otherInformation}}
                 <span *ngIf="!singleCaseData?.otherInformation">N/A</span>
-            </span>
+            </span> -->
 
             <span><b>County Of Arrest</b>:
                 {{singleCaseData?.countyOfArrest}}
