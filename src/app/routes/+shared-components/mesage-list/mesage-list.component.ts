@@ -24,6 +24,7 @@ export class MesageListComponent implements OnInit, OnChanges {
   lastChat: any;
 
   constructor(public dialog: MatDialog, private router: ActivatedRoute, private userService: UserService, private messageService: MessageService) { }
+  
   ngOnChanges(): void {
     if (this.userMessageList) {
       this.userMessageList.forEach((x) => {

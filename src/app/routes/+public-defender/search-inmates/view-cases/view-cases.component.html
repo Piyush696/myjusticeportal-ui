@@ -42,7 +42,7 @@
                     <span> <b>Date Of Arrest</b>:
                         {{case?.date
                             ="!case?.dateOfArrest">N/A</span>
-                    </span>
+
                     <span> <b>Next Court Date</b>:
                         {{case?.nextCourtDate | date:'longDate'}}
                         <span *ngIf="!case?.nextCourtDate">N/A</span>
