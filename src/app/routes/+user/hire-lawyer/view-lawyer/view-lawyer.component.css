@@ -41,3 +41,7 @@
 ul {
   padding-inline-start: 0px !important;
 }
+.bg-color{
+  background-color: #333442;
+  color:#fff
+}

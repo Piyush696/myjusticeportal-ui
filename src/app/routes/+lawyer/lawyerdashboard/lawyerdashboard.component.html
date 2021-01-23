@@ -4,8 +4,8 @@
 
 <div *ngIf="!isAuthorized">
     <div class="d-flex justify-content-center align-items-center;">
-        <div class="col-12 pt-2  pl-1 ">
-            <mat-card class="mat-elevation-z10 d-flex justify-content-center mx-md-3">
+        <div class="col-12 pt-2  pl-1  px-lg-2 ">
+            <mat-card class="mat-elevation-z10 d-flex justify-content-center mx-md-3 mx-lg-n2">
                 <h2>
                     Account Status: <span class="panding-review">Pending Review</span>
                 </h2>
@@ -38,8 +38,8 @@
     </div>
 </div>
 
-<div class="pt-3 pr-3 pl-md-1" *ngIf="!billingBoard && !isAuthorized">
-    <mat-card class="mat-elevation-z10 mx-md-3">
+<div class="pt-3" *ngIf="!billingBoard && !isAuthorized">
+    <mat-card class="mat-elevation-z10 ">
         <h2 class="text-center"> Your account is under review meanwhile <button class="fonts btn-link px-0" (click)="redirect()">please setup your profile.</button>
         </h2>
     </mat-card>
