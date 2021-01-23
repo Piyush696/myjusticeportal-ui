@@ -40,8 +40,8 @@ export class PendingInquriesComponent implements OnInit {
 
   onOpenModal(templateRef, userId, user) {
     this.userId = userId
-    user.middleName = user.middleName ? user.middleName : ' '
-    this.userName = user.firstName + ' ' + user.middleName + ' ' + user.lastName
+    user.middleName = user.lawyer[0]?.middleName ? user.lawyer[0]?.middleName : ' '
+    this.userName = user.lawyer[0]?.firstName + ' ' + user.lawyer[0]?.middleName + ' ' + user.lawyer[0]?.lastName
     let dialogRef = this.dialog.open(templateRef, {
       width: '800px'
     });
