@@ -35,14 +35,13 @@
                         {{case?.countyOfArrest}}
                         <span *ngIf="!case?.countyOfArrest">N/A</span>
                     </span>
-                    <span> <b>Other Information</b>:
+                    <!-- <span> <b>Other Information</b>:
                         {{case?.otherInformation}}
                         <span *ngIf="!case?.countyOfArrest">N/A</span>
-                    </span>
-
+                    </span> -->
                     <span> <b>Date Of Arrest</b>:
-                        {{case?.dateOfArrest | date:'longDate'}}
-                        <span *ngIf="!case?.dateOfArrest">N/A</span>
+                        {{case?.date
+                            ="!case?.dateOfArrest">N/A</span>
                     </span>
                     <span> <b>Next Court Date</b>:
                         {{case?.nextCourtDate | date:'longDate'}}
