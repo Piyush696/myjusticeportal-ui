@@ -9,8 +9,6 @@
                             *ngIf="show" (click)="onOpenModal(lawyerlistModal)" aria-hidden="true" data-toggle="tooltip"
                             data-placement="top" title="Add more lawyers to the chat"
                             style="font-size: 20px;cursor: pointer;"></i> -->
-
-
                     </div>
                 </div>
                 <div class="inbox_chat">
@@ -23,8 +21,7 @@
                             <div class="chat_people">
                                 <div class="chat_ib">
                                     <h5 (click)="onClicklawyer(old?.userId)" style="cursor: pointer;">
-                                        {{old?.firstName}} {{old?.middleName}}
-                                        {{old?.lastName}}
+                                        {{old?.firstName}} {{old?.middleName}} {{old?.lastName}}
                                     </h5>
                                 </div>
                             </div>

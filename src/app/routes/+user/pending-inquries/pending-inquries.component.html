@@ -58,7 +58,7 @@
                     </button>
                     <button *ngIf="case.status === 'Lawyer Approved'" [disabled]="(case.status === 'inmate_rejected'  || case.status === 'inmate_accepted' ||  
                     case.status === 'Rejected' ||  case.status === 'Requested')" class="btn btn-sm btn-primary" color="green" (click)="onClickStatus('Connected',case.userId,case.caseId)">
-                        connection 
+                        Connection 
                     </button>
                     <button *ngIf="case.status === 'Connected'" class="btn btn-sm btn-danger" (click)="onClickStatus('Disconnected',case.userId,case.caseId)">
                         Disconnect
@@ -82,5 +82,5 @@
 </div>
 
 <ng-template #openModal>
-    <app-chat-modal [userId]="userId" [userName]="userName"  (isModelClose)="isModelClose($event)"></app-chat-modal>
+    <app-chat-modal [userId]="userId" [userName]="userName" (isModelClose)="isModelClose($event)"></app-chat-modal>
 </ng-template>

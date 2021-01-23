@@ -1,4 +1,4 @@
-import { Component, HostListener, Input, OnChanges, OnInit, } from '@angular/core';
+import { Component, HostListener, Input, OnChanges, OnInit, SimpleChanges, } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserService } from 'app/services/user.service';
 import * as io from 'socket.io-client';
@@ -7,6 +7,7 @@ import { Store } from '@ngrx/store';
 import { environment } from '../../../../environments/environment';
 
 const SOCKET_ENDPOINT = environment.socketEndpoint;
+
 @HostListener('scroll', ['$event'])
 @Component({
   selector: 'app-chat',
@@ -18,8 +19,11 @@ export class ChatComponent implements OnInit, OnChanges {
 
   @Input() receiverId;
   @Input() allMessages = [];
+  @Input() isChatLimit;
 
   socket;
+  isDisabled: boolean = false;
+  disabledText: string;
   message: string = "";
   userId;
   userInfo: any;
@@ -38,7 +42,10 @@ export class ChatComponent implements OnInit, OnChanges {
     this.getSingleUser();
   }
 
-  ngOnChanges(): void {
+  ngOnChanges(changes: SimpleChanges): void {
+    //this.checkConnection();
+    this.checkConnection();
+
   }
 
   getSingleUser() {
@@ -48,11 +55,10 @@ export class ChatComponent implements OnInit, OnChanges {
   }
 
   setupSocketConnection() {
-    this.store.select(s => s.incomingMessages).subscribe((x: any) => {
-    })
     this.socket = io(SOCKET_ENDPOINT);
     this.socket.on('message-broadcast' + this.userInfo.userId, (data: any) => {
       if (data) {
+        console.log(this.allMessages)
         this.allMessages.push(data)
       }
     });
@@ -67,9 +73,28 @@ export class ChatComponent implements OnInit, OnChanges {
         "createdAt": new Date()
       }
       this.allMessages.push(data)
+      this.checkConnection();
       this.socket.emit('message', data);
       this.message = ''
     }
   }
 
+
+  checkConnection() {
+    let count = 0;
+    if (this.isChatLimit) {
+      if (this.allMessages) {
+        this.allMessages.forEach(msg => {
+          if (msg.senderId == this.userInfo.userId) {
+            count++;
+          }
+        })
+        if (count >= 10) {
+          this.isDisabled = true;
+        } else {
+          this.isDisabled = false;
+        }
+      }
+    }
+  }
 }

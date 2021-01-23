@@ -1,14 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
+import { InmateDefenderService } from 'app/services/inmate-defender.service';
 import { MessageService } from 'app/services/message.service';
 
 @Component({
-  selector: 'app-lawyer-chat',
-  templateUrl: './lawyer-chat.component.html',
-  styleUrls: ['./lawyer-chat.component.css']
+  selector: 'app-pd-chat',
+  templateUrl: './pd-chat.component.html',
+  styleUrls: ['./pd-chat.component.css']
 })
-export class LawyerChatComponent implements OnInit {
-
+export class PdChatComponent implements OnInit {
   socket;
   message: string;
   messageData: any;
@@ -17,10 +17,10 @@ export class LawyerChatComponent implements OnInit {
   isMessage: boolean = false;
   receiverId: any;
   userList = [];
-  headerText = "Your Connected Users"
+  headerText = "Your Connected Inmates"
   isLoading:boolean = false;
 
-  constructor(private store: Store<any>, private messageService: MessageService) { }
+  constructor(private store: Store<any>, private messageService: MessageService , private defenderService: InmateDefenderService) { }
 
   ngOnInit() {
     this.store.select(s => s.userInfo).subscribe(x => {
@@ -32,7 +32,7 @@ export class LawyerChatComponent implements OnInit {
 
 
   allusers() {
-    this.messageService.getAllUserMessages().subscribe((res: any) => {
+    this.defenderService.getConnectInmate().subscribe((res: any) => {
       this.userList = res.data
     })
   }
@@ -55,5 +55,6 @@ export class LawyerChatComponent implements OnInit {
       this.userList.push(user)
     }
   }
+
 
 }

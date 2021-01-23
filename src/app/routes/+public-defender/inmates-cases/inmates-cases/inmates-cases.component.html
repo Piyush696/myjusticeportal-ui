@@ -50,13 +50,6 @@
                 </td>
             </ng-container>
 
-            <ng-container matColumnDef="otherInformation">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header>Other Information</th>
-                <td mat-cell *matCellDef="let user">
-                    <span *ngIf="user?.otherInformation!=''">{{user?.otherInformation}}</span>
-                    <span *ngIf="user?.otherInformation==''">N/A</span>
-                </td>
-            </ng-container>
             <ng-container matColumnDef="action">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header>Action</th>
                 <td mat-cell *matCellDef="let user">

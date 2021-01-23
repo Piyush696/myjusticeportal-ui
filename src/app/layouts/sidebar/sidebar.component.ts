@@ -35,7 +35,8 @@ export const ROUTES: RouteInfo[] = [
 
     { path: 'public-defender/defender-dashboard', title: 'Dashboard', icon: 'nc-bank', class: '', roleIds: [5] },
     { path: 'public-defender/search-inmates', title: 'Search Inmates', icon: 'nc-bank', class: '', roleIds: [5], isAdmin: true },
-    { path: 'public-defender/inmates-cases', title: 'Inmates Cases', icon: 'nc-bank', class: '', roleIds: [5] },
+    { path: 'public-defender/inmates-cases', title: 'My Connections', icon: 'nc-bank', class: '', roleIds: [5] },
+    { path: 'public-defender/chat', title: 'Messaging', icon: 'nc-bank', class: '', roleIds: [5] },
     { path: 'public-defender/billing-setting', title: 'Billing Settings', icon: 'nc-bank', class: '', roleIds: [5], isSelfPaid:true },
     { path: 'public-defender/manage-profile', title: 'Manage Profile', icon: 'nc-bank', class: '', roleIds: [5] },
     { path: 'public-defender/manage-organization', title: 'Manage Organization', icon: 'nc-bank', class: '', roleIds: [5], isAdmin: true },
