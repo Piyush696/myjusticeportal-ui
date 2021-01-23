@@ -11,6 +11,7 @@ import { ManageProfileComponent } from '../+shared-components/manage-profile/man
 import { ManageBillingSettingsComponent } from '../+shared-components/manage-billing-settings/manage-billing-settings.component';
 import { InmateCaseViewComponent } from './inmate-case-view/inmate-case-view.component';
 import { ViewCasesComponent } from './search-inmates/view-cases/view-cases.component';
+import { PdChatComponent } from './pd-chat/pd-chat.component';
 
 
 const routes: Routes = [
@@ -23,6 +24,7 @@ const routes: Routes = [
     { path: 'search-inmates/:userId', component: ViewCasesComponent },
     { path: 'inmates-cases', component: InmatesCasesComponent },
     { path: 'inmates-cases/:caseId', component: InmateCaseViewComponent },
+    { path: 'chat', component: PdChatComponent },
     { path: 'billing-setting', component: ManageBillingSettingsComponent },
     { path: 'manage-organization/users', component: ViewUsersComponent },
     { path: 'manage-organization/facilities', component: ViewFacilitiesComponent },

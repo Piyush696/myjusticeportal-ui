@@ -12,11 +12,11 @@ import { InmateDefenderService } from 'app/services/inmate-defender.service';
 })
 export class InmatesCasesComponent implements OnInit {
 
-  displayedColumns: string[] = ['updatedAt','user', 'legalMatter', "briefDescriptionOfChargeOrLegalMatter", "otherInformation","action"];
+  displayedColumns: string[] = ['updatedAt', 'user', 'legalMatter', "briefDescriptionOfChargeOrLegalMatter", "action"];
   dataSource = new MatTableDataSource();
   @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: false }) sort: MatSort;
-  casesList=[];
+  casesList = [];
 
 
   constructor(public dialog: MatDialog, private inmatedefenderService: InmateDefenderService,) { }
@@ -25,21 +25,21 @@ export class InmatesCasesComponent implements OnInit {
     this.getInmatesCases();
   }
 
-  getInmatesCases(){
-    this.inmatedefenderService.getInmateCases().subscribe((users:any)=>{
+  getInmatesCases() {
+    this.inmatedefenderService.getInmateCases().subscribe((users: any) => {
       this.casesList = users.data;
-      this.casesList = this.casesList.map((item)=>{
-        var date=item.updatedAt;
+      this.casesList = this.casesList.map((item) => {
+        var date = item.updatedAt;
         date = new Date(date).toDateString();
-        var monthDay=date.substring(4, 10);
-        var year=date.substring(10, 15);
-        item['newUpdatedAt']=monthDay+","+year;
-        var month=date.substring(4, 7);
-        var day=date.substring(8, 10);
-        var year=date.substring(11, 15);
-        item['newUpdatedAt1']=month+day+year;
-        item['newUpdatedAt2']=month+" "+day+" "+year;
-        item['newUpdatedAt3']=month+"/"+day+"/"+year;
+        var monthDay = date.substring(4, 10);
+        var year = date.substring(10, 15);
+        item['newUpdatedAt'] = monthDay + "," + year;
+        var month = date.substring(4, 7);
+        var day = date.substring(8, 10);
+        var year = date.substring(11, 15);
+        item['newUpdatedAt1'] = month + day + year;
+        item['newUpdatedAt2'] = month + " " + day + " " + year;
+        item['newUpdatedAt3'] = month + "/" + day + "/" + year;
         return item;
       })
       this.dataSource = new MatTableDataSource(users.data);
@@ -67,7 +67,7 @@ export class InmatesCasesComponent implements OnInit {
       this.dataSource.sort = this.sort;
     })
   }
-  
+
   search(searchValue: string) {
     this.dataSource.filter = searchValue.trim().toLowerCase();
   }

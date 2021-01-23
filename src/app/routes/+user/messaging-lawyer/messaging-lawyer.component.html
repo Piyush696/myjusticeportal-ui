@@ -5,12 +5,11 @@
     </div>
     <div class="row">
         <div class="col-4 p-0">
-            <app-mesage-list [userMessageList]="userMessageList" [oldUserList]="oldUserList"
-                (messageEvent)="messageEvent($event)" (userEvent)="userAdd($event)" [headerText]="headerText">
+            <app-mesage-list [userMessageList]="userMessageList" [oldUserList]="oldUserList" (messageEvent)="messageEvent($event)" (userEvent)="userAdd($event)" [headerText]="headerText">
             </app-mesage-list>
         </div>
         <div class="col-8 p-0">
-            <app-chat *ngIf="isMessage" [receiverId]="receiverId" [allMessages]="allMessages">
+            <app-chat [receiverId]="receiverId" [allMessages]="allMessages">
             </app-chat>
         </div>
     </div>

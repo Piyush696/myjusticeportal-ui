@@ -42,4 +42,8 @@ export class InmateDefenderService {
   getInmateCases() {
     return this.httpClient.get<object>(`${this.apiPath}/inmatdefender/allInmateAssignedCases`, this.getHeaders());
   }
+
+  getConnectInmate(){
+    return this.httpClient.get<object>(`${this.apiPath}/inmatdefender/allUser`, this.getHeaders());
+  }
 }

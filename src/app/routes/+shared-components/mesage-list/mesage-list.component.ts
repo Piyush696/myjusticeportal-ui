@@ -96,7 +96,7 @@ export class MesageListComponent implements OnInit, OnChanges {
           isMessage: true,
           receiverId: this.lastChat.receiverId
         }
-        this.messageEvent.emit(data)
+        //this.messageEvent.emit(data)
       }
     })
 
