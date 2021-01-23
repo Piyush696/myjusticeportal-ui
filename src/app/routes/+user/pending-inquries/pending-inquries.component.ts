@@ -40,8 +40,8 @@ export class PendingInquriesComponent implements OnInit {
 
   onOpenModal(templateRef, userId, user) {
     this.userId = userId
-    user.middleName = user.middleName ? user.middleName : ' '
-    this.userName = user.firstName + ' ' + user.middleName + ' ' + user.lastName
+    user.middleName = user.lawyer[0]?.middleName ? user.lawyer[0]?.middleName : ' '
+    this.userName = user.lawyer[0]?.firstName + ' ' + user.lawyer[0]?.middleName + ' ' + user.lawyer[0]?.lastName
     let dialogRef = this.dialog.open(templateRef, {
       width: '800px'
     });
@@ -116,11 +116,11 @@ export class PendingInquriesComponent implements OnInit {
     this.filteredRejectedPendingInquiriesList = []
     this.caseService.getPendingCaseInfo().subscribe((pendingCase: any) => {
       this.pendingCasesList = pendingCase.data.map((status) => {
-        status['name0'] = status.Organization.name;
-        status['name1'] = status.Organization.name.split(" ").join("");
-        status['name2'] = status.firstName + " " + status.lastName;
-        status['name3'] = status.firstName + status.lastName;
-        var date = status.sent;
+        status['name0'] = status.lawyer[0].Organization.name;
+        status['name1'] = status.lawyer[0].Organization.name.split(" ").join("");
+        status['name2'] = status.lawyer[0].firstName + " " + status.lawyer[0].lastName;
+        status['name3'] = status.lawyer[0].firstName + status.lawyer[0].lastName;
+        var date = status.lawyer[0].lawyer_case.createdAt;
         date = new Date(date).toDateString();
         var monthDay = date.substring(4, 10);
         var year = date.substring(10, 15);
@@ -134,7 +134,7 @@ export class PendingInquriesComponent implements OnInit {
         return status
       })
       this.pendingCasesList.filter((x) => {
-        if (x.status == 'Rejected' || x.status == 'inmate_rejected') {
+        if (x.lawyer[0].lawyer_case.status == 'Lawyer Rejected' || x.lawyer[0].lawyer_case.status == 'Inmate Rejected') {
           this.filteredRejectedPendingInquiriesList.push(x)
         } else {
           this.filteredPendingInquiriesList.push(x)
@@ -154,8 +154,8 @@ export class PendingInquriesComponent implements OnInit {
 
         this.dataSource.sortingDataAccessor = (item: any, property) => {
           switch (property) {
-            case 'lawyer': if (item) return item.firstName + item.middleName + item.lastName;
-            case 'lawFirm': if (item) return item.Organization.name;
+            case 'lawyer': if (item) return item.lawyer[0].firstName + item.lawyer[0].middleName + item.lawyer[0].lastName;
+            case 'lawFirm': if (item) return item.lawyer[0].Organization.name;
             default: if (typeof (item[property]) == 'string') {
               return item[property].toLowerCase();
             } else {
