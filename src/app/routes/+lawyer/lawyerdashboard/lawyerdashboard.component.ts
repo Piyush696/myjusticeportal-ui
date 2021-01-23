@@ -128,7 +128,6 @@ export class LawyerdashboardComponent implements OnInit, AfterViewInit {
   }
 
   isLoading(value) {
-    console.log(value)
     this.spinner = value
   }
 

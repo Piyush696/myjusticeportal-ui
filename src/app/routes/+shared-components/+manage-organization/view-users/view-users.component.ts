@@ -62,7 +62,6 @@ export class ViewUsersComponent implements OnInit, AfterViewInit {
     else if(this.buttonText === 'Save'){
       this.buttonText = 'Edit';
       this.editUserForm.value['userId'] = this.userId;
-      console.log(this.editUserForm.value);
       this.organisationService.updateUserOrg(this.editUserForm.value).subscribe((res:any)=>{
         if(res.success){
           this.toasterService.showSuccessToater('User updated')
@@ -107,7 +106,6 @@ export class ViewUsersComponent implements OnInit, AfterViewInit {
   }
 
   openModal(templateRef, user) {
-    console.log(user)
     this.userId = user.userId
     this.editUserForm.get('firstName').setValue(user.firstName)
     this.editUserForm.get('middleName').setValue(user.middleName)

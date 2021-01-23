@@ -1,8 +1,7 @@
 <div class="col-12 d-flex justify-content-between pl-0">
     <div>
         <h1 class="line-height font-weight-bold">Contact A Lawyer</h1>
-        <h4 class="line-height header-sub-text">Please complete the form below to cantact a lawyer.Once the lawyer
-            review your information,you will receive a response here in the portal .</h4>
+        <h4 class="line-height header-sub-text">Please complete the form below to cantact a lawyer.Once the lawyer review your information,you will receive a response here in the portal .</h4>
     </div>
 </div>
 <div>
@@ -11,8 +10,7 @@
         <div class="col-6 pl-0">
             <mat-form-field appearance="fill" class="w-100 p-0">
                 <mat-label>Organization Name</mat-label>
-                <input type="text" matInput placeholder="Organization Name"
-                    [formControl]="lawyerCaseForm.controls['name']" required>
+                <input type="text" matInput placeholder="Organization Name" [formControl]="lawyerCaseForm.controls['name']" required>
                 <mat-error>
                     <div *ngIf="lawyerCaseForm.controls['name'].invalid && lawyerCaseForm.controls['name'].touched">
                         <small class="font13">
@@ -26,8 +24,7 @@
         <div class="col-6 pl-0">
             <mat-form-field appearance="fill" class="w-100 p-0">
                 <mat-label>Lawyer</mat-label>
-                <input type="text" matInput placeholder="Lawyer" [formControl]="lawyerCaseForm.controls['lawyerName']"
-                    required>
+                <input type="text" matInput placeholder="Lawyer" [formControl]="lawyerCaseForm.controls['lawyerName']" required>
             </mat-form-field>
         </div>
     </div>
@@ -38,7 +35,7 @@
     <div class="col-6 pl-0">
         <mat-form-field appearance="fill" class="w-100">
             <mat-label>Cases</mat-label>
-            <mat-select [formControl]="lawyerCaseForm.controls['caseId']" required>
+            <mat-select [formControl]="lawyerCaseForm.controls['caseId']" (selectionChange)="onCaseSelect($event)" required>
                 <mat-option>
                     Select Case
                 </mat-option>
@@ -47,6 +44,7 @@
                 </mat-option>
             </mat-select>
         </mat-form-field>
+        <small *ngIf="confirmAsignedCase()" class="text-center text-danger assisedcase">This case is already assigned to lawyer.</small>
     </div>
 
     <h3 class="font-weight-bold">Your Request</h3>
@@ -56,8 +54,7 @@
 
     <div class="col-8 p-0">
         <mat-form-field appearance="fill" class="w-100 py-2">
-            <textarea rows="2" matInput [formControl]="lawyerCaseForm.controls['notes']"
-                placeholder="Please describe about your case" required></textarea>
+            <textarea rows="2" matInput [formControl]="lawyerCaseForm.controls['notes']" placeholder="Please describe about your case" required></textarea>
             <mat-error>
                 <div *ngIf="lawyerCaseForm.controls['notes'].invalid && lawyerCaseForm.controls['notes'].touched">
                     <small class="font13">
@@ -67,8 +64,7 @@
             </mat-error>
         </mat-form-field>
         <div class="pr-2 pb-2 pt-2 pl-0">
-            <button class="button-purple px-5 py-1" [disabled]="!lawyerCaseForm.valid" mat-raised-button
-                (click)="onContactLawyer()">
+            <button [disabled]="(confirmAsignedCase() || !lawyerCaseForm.valid)" class="button-purple px-5 py-1" mat-raised-button (click)="onContactLawyer()">
                 Send
             </button>
             <button class="ml-4 button-purple px-5 py-1" routerLink="../../case" mat-raised-button>

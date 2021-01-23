@@ -81,7 +81,6 @@ export class SidebarComponent implements OnInit, AfterViewInit {
     ngOnInit() {
         this.store.select(s => s.userInfo).subscribe(x => {
             this.userInfo = x;
-            console.log(this.userInfo)
             if (x.facilities) {
                 this.libraryLink = x.facilities[0]?.libraryLink;
             }

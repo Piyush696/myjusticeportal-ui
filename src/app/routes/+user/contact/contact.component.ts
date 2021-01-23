@@ -13,9 +13,10 @@ import { UserAdditionInfoService } from 'app/services/user-addition-info.service
 })
 export class ContactComponent implements OnInit {
   organizationList: any;
-  caseList: any;
+  caseList = [];
   userOrg: any;
   lawyerCaseForm: FormGroup;
+  caseId: number;
 
   constructor(private hireaLawyerService: HireLawyerService, private fb: FormBuilder, private additionalInfoService: UserAdditionInfoService,
     private router: Router, private activatedRoute: ActivatedRoute, private caseService: CaseService, private toasterService: ToasterService) {
@@ -41,7 +42,7 @@ export class ContactComponent implements OnInit {
     this.additionalInfoService.getSingleUsers(this.activatedRoute.snapshot.params['userId']).subscribe((userOrg: any) => {
       this.userOrg = userOrg.data
       this.lawyerCaseForm.get('name').setValue(userOrg.data?.Organization?.name)
-      this.lawyerCaseForm.get('lawyerName').setValue(userOrg.data?.firstName +' '+ userOrg.data?.middleName + ' ' + userOrg.data?.lastName)
+      this.lawyerCaseForm.get('lawyerName').setValue(userOrg.data?.firstName + ' ' + userOrg.data?.middleName + ' ' + userOrg.data?.lastName)
       this.lawyerCaseForm.get('name').disable();
       this.lawyerCaseForm.get('lawyerName').disable();
     })
@@ -62,6 +63,27 @@ export class ContactComponent implements OnInit {
       }
     })
   }
+
+  onCaseSelect(caseId) {
+    this.caseId = caseId.value
+   this.confirmAsignedCase()
+  }
+
+  confirmAsignedCase(): boolean {
+    let exist: boolean
+    this.caseList.find((x) => {
+      if (x.caseId === this.caseId) {
+        if (x.lawyer.length > 0) {
+          exist = true
+        } else {
+          exist = false
+        }
+      }
+    })
+    return exist
+  }
+
+
 
   getCases() {
     this.caseService.getCases().subscribe((cases: any) => {

@@ -23,7 +23,6 @@ export class ChatModalComponent implements OnInit {
 
   ngOnInit(): void {
     this.receiverId = this.userId
-    console.log(this.userId,this.userName)
     this.getSingleUser()
     this.getMessageHistory(this.userId);
   }

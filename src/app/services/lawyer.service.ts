@@ -45,7 +45,7 @@ export class LawyerService {
 
 
   deleteLawyerCase(lawyerId, caseId) {
-    return this.httpClient.post<object>(`${this.apiPath}/lawyer/${caseId}`, { lawyerId }, this.getHeaders());
+    return this.httpClient.put<object>(`${this.apiPath}/lawyer/${caseId}`, { lawyerId }, this.getHeaders());
   }
 
   // getBillingDetails() {

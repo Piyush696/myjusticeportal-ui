@@ -1,52 +1,52 @@
 /* You can add global styles to this file, and also import other style files */
-@import './assets/scss/variable';
 
+@import './assets/scss/variable';
 body {
-  background-color: #ffffff;
+    background-color: #ffffff;
 }
 
 .font13 {
-  font-size: 11px;
+    font-size: 11px;
 }
 
 .cursor-pointer {
-  cursor: pointer;
+    cursor: pointer;
 }
 
 li {
-  list-style-type: none;
+    list-style-type: none;
 }
 
 .header-sub-text {
-  font-size: 18px;
+    font-size: 18px;
 }
 
 .color-grey {
-  color: #333442;
+    color: #333442;
 }
 
 .bg-header {
-  background: #eaeaea !important;
+    background: #eaeaea !important;
 }
 
 .line-height {
-  line-height: 14px !important;
+    line-height: 14px !important;
 }
 
 .nc-single-02::before {
-  color: black;
+    color: black;
 }
 
 .dropup .dropdown-toggle:after,
 .dropdown .dropdown-toggle:after {
-  color: black;
+    color: black;
 }
 
 input[type="number"]::-webkit-inner-spin-button,
 input[type="number"]::-webkit-outer-spin-button {
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  margin: 0;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    margin: 0;
 }
 
 // For material table.
@@ -56,36 +56,36 @@ input[type="number"]::-webkit-outer-spin-button {
 } */
 
 .mat-select-panel mat-option.mat-option {
-  height: unset;
+    height: unset;
 }
 
 .mat-option-text.mat-option-text {
-  white-space: normal;
-  line-height: 29px;
+    white-space: normal;
+    line-height: 29px;
 }
 
 .mat-table td,
 .mat-table th {
-  border: 1px solid #eee;
-  padding: 8px !important;
+    border: 1px solid #eee;
+    padding: 8px !important;
 }
 
 .mat-table tr:nth-child(even) {
-  background-color: #fafbfc;
+    background-color: #fafbfc;
 }
 
 .mat-table tr:hover {
-  background-color: #ddd;
+    background-color: #ddd;
 }
 
 .mat-table th {
-  padding-top: 12px;
-  padding-bottom: 12px;
-  text-align: left;
-  background-color: #fafbfc;
-  color: black;
-  font-weight: bold;
-  font-size: 14px;
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #fafbfc;
+    color: black;
+    font-weight: bold;
+    font-size: 14px;
 }
 
 // mat-option:last-child:before {
@@ -95,162 +95,155 @@ input[type="number"]::-webkit-outer-spin-button {
 //   top: 4px;
 //   position: relative;
 // }
-
 // mat-option:last-child .mat-option-text {
 //   display: none;
 //   position: relative;
 // }
-
 [mat-mini-fab]:focus {
-  outline: 0 !important;
+    outline: 0 !important;
 }
 
 input[type="text"]:disabled {
-  cursor: not-allowed;
-  -webkit-text-fill-color: #1f1e1e;
-  opacity: 1;
+    cursor: not-allowed;
+    -webkit-text-fill-color: #1f1e1e;
+    opacity: 1;
 }
 
 .mat-form-field-appearance-fill.mat-form-field-disabled .mat-form-field-flex {
-  cursor: not-allowed;
-  background: transparent;
-  background-color: #f5f5f5 !important;
-  -webkit-text-fill-color: #1f1e1e;
-  opacity: 1;
+    cursor: not-allowed;
+    background: transparent;
+    background-color: #f5f5f5 !important;
+    -webkit-text-fill-color: #1f1e1e;
+    opacity: 1;
 }
 
 textarea:disabled,
 textarea[disabled] {
-  cursor: not-allowed;
-  background: transparent;
-  background-color: #f5f5f5 !important;
-  -webkit-text-fill-color: #1f1e1e;
-  opacity: 1;
+    cursor: not-allowed;
+    background: transparent;
+    background-color: #f5f5f5 !important;
+    -webkit-text-fill-color: #1f1e1e;
+    opacity: 1;
 }
 
 @media screen and (max-width: 991px) {
-  .navbar-nav .dropdown-menu:after {
-    border-bottom: 11px solid #ffffff !important;
-    border-left: 11px solid rgba(0, 0, 0, 0) !important;
-    border-right: 11px solid rgba(0, 0, 0, 0) !important;
-    content: "" !important;
-    display: inline-block !important;
-    position: absolute !important;
-    right: 12px !important;
-    top: -11px !important;
-  }
-
-  .dropdown-menu .dropdown-item:hover,
-  .dropdown-menu .dropdown-item:focus {
-    background-color: #66615b;
-    padding: 10px 45px 10px 15px;
-    clear: both;
-    white-space: nowrap;
-    width: 100%;
-  }
-
-  .navbar .navbar-nav .nav-link i.nc-icon {
-    top: -11px;
-    font-size: 22px;
-    font-weight: bold;
-    transition: all 0.3s cubic-bezier(0.215, 0.61, 0.355, 1) 0s, opacity 0.3s ease 0s, height 0s linear 0.35s !important;
-  }
-
-  .dropdown .dropdown-toggle:after {
-    position: absolute;
-  }
-
-  .dropdown-menu {
-    visibility: hidden !important;
-    opacity: 0 !important;
-    transform: translateY(-15px) !important;
-    transition: 0.3s ease all !important;
-    display: block !important;
-    position: absolute !important;
-    box-shadow: 1px 2px 7px 1px rgba(0, 0, 0, 0.125) !important;
-    margin-top: 0px !important;
-    padding-left: 0px !important;
-  }
-
-  .dropdown-menu.show {
-    display: flex !important;
-    visibility: visible !important;
-    opacity: 1 !important;
-    transform: translateY(0px) !important;
-    transition: 0.3s ease all !important;
-    display: block !important;
-    position: absolute !important;
-    box-shadow: 1px 2px 7px 1px rgba(0, 0, 0, 0.125) !important;
-    margin-top: 0px !important;
-    padding-left: 0px !important;
-  }
+    .navbar-nav .dropdown-menu:after {
+        border-bottom: 11px solid #ffffff !important;
+        border-left: 11px solid rgba(0, 0, 0, 0) !important;
+        border-right: 11px solid rgba(0, 0, 0, 0) !important;
+        content: "" !important;
+        display: inline-block !important;
+        position: absolute !important;
+        right: 12px !important;
+        top: -11px !important;
+    }
+    .dropdown-menu .dropdown-item:hover,
+    .dropdown-menu .dropdown-item:focus {
+        background-color: #66615b;
+        padding: 10px 45px 10px 15px;
+        clear: both;
+        white-space: nowrap;
+        width: 100%;
+    }
+    .navbar .navbar-nav .nav-link i.nc-icon {
+        top: -11px;
+        font-size: 22px;
+        font-weight: bold;
+        transition: all 0.3s cubic-bezier(0.215, 0.61, 0.355, 1) 0s, opacity 0.3s ease 0s, height 0s linear 0.35s !important;
+    }
+    .dropdown .dropdown-toggle:after {
+        position: absolute;
+    }
+    .dropdown-menu {
+        visibility: hidden !important;
+        opacity: 0 !important;
+        transform: translateY(-15px) !important;
+        transition: 0.3s ease all !important;
+        display: block !important;
+        position: absolute !important;
+        box-shadow: 1px 2px 7px 1px rgba(0, 0, 0, 0.125) !important;
+        margin-top: 0px !important;
+        padding-left: 0px !important;
+    }
+    .dropdown-menu.show {
+        display: flex !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        transform: translateY(0px) !important;
+        transition: 0.3s ease all !important;
+        display: block !important;
+        position: absolute !important;
+        box-shadow: 1px 2px 7px 1px rgba(0, 0, 0, 0.125) !important;
+        margin-top: 0px !important;
+        padding-left: 0px !important;
+    }
 }
 
 .button-purple {
-  background-color: #333442 !important;
-  color: #ffffff !important;
+    background-color: #333442 !important;
+    color: #ffffff !important;
 }
 
 .button-purple:disabled {
-  cursor: not-allowed !important;
-  background-color: #e0e0e0 !important;
-  color: #a6a6a6 !important;
-  font-weight: 400 !important;
-  user-select: none !important;
-  touch-action: none !important;
-  outline: none !important;
-  border: none !important;
-  -webkit-tap-highlight-color: transparent !important;
-  box-shadow: none !important;
+    cursor: not-allowed !important;
+    background-color: #e0e0e0 !important;
+    color: #a6a6a6 !important;
+    font-weight: 400 !important;
+    user-select: none !important;
+    touch-action: none !important;
+    outline: none !important;
+    border: none !important;
+    -webkit-tap-highlight-color: transparent !important;
+    box-shadow: none !important;
 }
 
 .mat-form-field.mat-focused .mat-form-field-ripple {
-  background-color: $custom-orange;
+    background-color: $custom-orange;
 }
 
 .mat-form-field.mat-focused .mat-form-field-label {
-  color: $custom-orange;
+    color: $custom-orange;
 }
 
 .mat-flat-button.mat-primary,
 .mat-raised-button.mat-primary,
 .mat-fab.mat-primary,
 .mat-mini-fab.mat-primary {
-  background-color: $custom-orange;
+    background-color: $custom-orange;
 }
 
 .mat-button.mat-primary,
 .mat-icon-button.mat-primary,
 .mat-stroked-button.mat-primary {
-  color: $custom-orange;
+    color: $custom-orange;
 }
 
 .mat-checkbox-indeterminate.mat-primary .mat-checkbox-background,
 .mat-checkbox-checked.mat-primary .mat-checkbox-background {
-  background-color: $custom-orange;
+    background-color: $custom-orange;
 }
 
 .button-purple {
-  background-color: $custom-orange !important;
-  color: #ffffff !important;
+    background-color: $custom-orange !important;
+    color: #ffffff !important;
 }
 
 .mat-checkbox-inner-container {
-  margin-top: 2px !important;
+    margin-top: 2px !important;
 }
 
 .mat-radio-button.mat-primary .mat-radio-inner-circle {
-  background-color: #333442 !important;
+    background-color: #333442 !important;
 }
 
 .mat-radio-button.mat-primary.mat-radio-checked .mat-radio-outer-circle {
-  border-color: #333442 !important;
+    border-color: #333442 !important;
 }
 
 .mat-checkbox-layout {
-  white-space: normal !important;
-  }
+    white-space: normal !important;
+}
 
-#textalign{
-  text-align: left !important;
+#textalign {
+    text-align: left !important;
 }

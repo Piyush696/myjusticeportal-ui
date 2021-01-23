@@ -67,7 +67,6 @@ export class MessagingLawyerComponent implements OnInit {
   }
 
   messageEvent(value) {
-    console.log(value)
     this.isMessage = value.isMessage;
     this.receiverId = value.receiverId
     this.getMessageHistory(this.receiverId)

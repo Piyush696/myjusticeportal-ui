@@ -17,7 +17,7 @@
                             <div class="chat_people">
                                 <div class="chat_ib">
                                     <h5 (click)="onClicklawyer(old?.userId)" style="cursor: pointer;">
-                                        {{old?.firstName}} {{old?.middleName}} {{old?.lastName}}
+                                        <b>{{old?.firstName}} {{old?.middleName}} {{old?.lastName}}</b> <span *ngIf="old.role">({{old.role}})</span>
                                     </h5>
                                 </div>
                             </div>
