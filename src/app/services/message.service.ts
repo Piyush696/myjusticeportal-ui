@@ -35,7 +35,7 @@ export class MessageService {
   }
 
   getOldUsers() {
-    return this.httpClient.get<object>(`${this.apiPath}/message/oldUser`, this.getHeaders());
+    return this.httpClient.get<object>(`${this.apiPath}/message/connectedLawyers`, this.getHeaders());
   }
 
   getLastTextedUser() {
