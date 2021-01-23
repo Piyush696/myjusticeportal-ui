@@ -11,6 +11,7 @@ import { InmatesCasesComponent } from './inmates-cases/inmates-cases/inmates-cas
 import { InmateCaseViewComponent } from './inmate-case-view/inmate-case-view.component';
 import { FileUploadModule } from 'ng2-file-upload';
 import { ViewCasesComponent } from './search-inmates/view-cases/view-cases.component';
+import { PdChatComponent } from './pd-chat/pd-chat.component';
 
 
 @NgModule({
@@ -19,7 +20,8 @@ import { ViewCasesComponent } from './search-inmates/view-cases/view-cases.compo
     SearchInmatesComponent,
     InmatesCasesComponent,
     InmateCaseViewComponent,
-    ViewCasesComponent
+    ViewCasesComponent,
+    PdChatComponent
   ],
   imports: [
     CommonModule,
