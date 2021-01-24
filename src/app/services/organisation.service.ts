@@ -55,7 +55,7 @@ export class OrganisationService {
   }
 
   updateUserOrg(data) {
-    return this.httpClient.put<object>(`${this.apiPath}/organization/updateOrgUserDetails`, data, this.getHeaders())
+    return this.httpClient.post<object>(`${this.apiPath}/organization/lawyer/updateOrgUserDetails`, data, this.getHeaders())
   }
 
   deleteInvitedUser(userId){
