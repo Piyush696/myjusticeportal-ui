@@ -21,6 +21,7 @@ export class PublicDefenderBillingComponent implements OnInit {
   filteredFacilityList = [];
   plan: string;
   @Output() paymentConfirm = new EventEmitter()
+  isPaybtnDisabled:boolean = true;
   
   constructor(private facilityService: FacilityService, private userMetaService: UserMetaService,private lawyerFacilityService: LawyerFacilityService) { }
 
@@ -48,6 +49,7 @@ export class PublicDefenderBillingComponent implements OnInit {
 
   onFacilitySelect(event, facilityId) {
     if (event) {
+      this.isPaybtnDisabled = false;
       this.facilityId = facilityId
       this.facilities.map((facility) => {
         if (facility.facilityId === facilityId) {

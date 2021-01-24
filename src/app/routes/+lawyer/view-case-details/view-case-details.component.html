@@ -21,7 +21,7 @@
             </span>
             <span><b>Charges or Legal Matter</b>: {{singleCaseData?.legalMatter}}</span>
             <span>
-                <b>Requested By</b>: {{singleCaseData?.inmate?.firstName}}
+                <b>Inmate Name</b>: {{singleCaseData?.inmate?.firstName}}
                 <span *ngIf="singleCaseData?.inmate?.middleName">
                     &nbsp;{{singleCaseData?.inmate?.middleName}}
                 </span> &nbsp;{{singleCaseData?.inmate?.lastName}}
