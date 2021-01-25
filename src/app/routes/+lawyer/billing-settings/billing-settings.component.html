@@ -6,7 +6,7 @@
 </div>
 
 <div class="row">
-    <div *ngIf="spinner" class="d-flex justify-content-center align-items-center spinner">
+    <div *ngIf="spinner" class="d-flex justify-content-center align-items-center spinner spinner-class">
         <mat-spinner color="primary"></mat-spinner>
     </div>
     <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
@@ -87,6 +87,7 @@
                                             </h4>
                                             <div>
                                                 <mat-checkbox color="primary" [checked]="facility?.addOns?.premium"
+                                                    [disabled]="isDisabled"
                                                     (change)="onSelectAddOns($event.checked,facility?.facilityId,'premium' )">
                                                     <span>Premium Listing: $0.25/mo./Average Daily
                                                         Population</span>
@@ -94,6 +95,7 @@
                                             </div>
                                             <div>
                                                 <mat-checkbox color="primary" [checked]="facility?.addOns?.sponsors"
+                                                    [disabled]="isDisabled"
                                                     (change)="onSelectAddOns($event.checked,facility?.facilityId,'sponsors' )">
                                                     <span>Sponsorship: $1.00/mo./Average Daily
                                                         Population</span>
@@ -157,13 +159,14 @@
                 <span class="text-center text-black">Please enter your credit card information in the form below. Once
                     everything looks correct, click Pay to complete your setup and
                     start using My Justice Portal!</span>
-                <app-stripe class="pt-2 mt-2" [update]="update" [totalCount]="totalPrice" [plan]="plan"
-                    (isloading)="startLoader($event)" (onPayEvent)="onPayEvent($event)" [facilitiesList]="facilityList">
+                <app-stripe class="pt-2 mt-2" [update]="update" [totalCount]="totalPrice" [isDisabled]="isDisabled"
+                    [plan]="plan" (isloading)="startLoader($event)" (onPayEvent)="onPayEvent($event)"
+                    [facilitiesList]="facilityList">
                 </app-stripe>
             </mat-card>
         </div>
-        <div class="">
-            <button (click)="onEdit()">edit</button>
+        <div class="d-flex justify-content-end">
+            <button class="button-purple px-4 py-1 mt-3" mat-raised-button (click)="onEdit()">edit</button>
         </div>
     </div>
 </div>

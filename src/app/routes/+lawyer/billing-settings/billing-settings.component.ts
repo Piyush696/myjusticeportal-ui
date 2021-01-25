@@ -36,8 +36,6 @@ export class BillingSettingsComponent implements OnInit {
   getBillableFacility() {
     this.lawyerFacilityService.getBilliableFacilityDetails().subscribe((data: any) => {
       this.selectedFacilities = data.facilities
-      console.log(this.selectedFacilities)
-
       let addOnsCount: number = 0
       data.facilities.forEach(element => {
         if (element.planSelected === 'Up to 5 Connections') {
@@ -150,7 +148,6 @@ export class BillingSettingsComponent implements OnInit {
           if (this.state.includes(ele.Address.state)) {
             const isFacilitly = this.selectedFacilities.find(x => x.facilityId === ele.facilityId)
             if (isFacilitly) {
-              console.log(true, isFacilitly.isPremium)
               ele['isSelected'] = isFacilitly.isSelected;
               ele['addOns'] = {
                 premium: isFacilitly.isPremium,
@@ -167,30 +164,22 @@ export class BillingSettingsComponent implements OnInit {
           }
         })
         this.facilityList = this.facilityList.filter(x => x)
-        console.log(this.facilityList)
       }
     })
   }
 
   onSelectAddOns(event, facilityId, addOnsType: string) {
-    console.log(addOnsType)
     if (event) {
       this.facilityList.map((x) => {
         if (facilityId === x.facilityId) {
           if (addOnsType == 'premium') {
             x.addOns.premium = true;
-            console.log(this.addOnsPrice, this.totalPrice)
             this.addOnsPrice = this.addOnsPrice + (x.facilityUserCount * 0.25)
             this.totalPrice = this.totalPrice + (x.facilityUserCount * 0.25)
-            console.log(this.addOnsPrice, this.totalPrice)
 
           } else if (addOnsType == 'sponsors') {
-            console.log(this.addOnsPrice, this.totalPrice)
-
             this.addOnsPrice = this.addOnsPrice + (x.facilityUserCount * 1.00)
             this.totalPrice = this.totalPrice + (x.facilityUserCount * 1.00)
-            console.log(this.addOnsPrice, this.totalPrice)
-
             x.addOns.sponsors = true;
           }
         }
@@ -200,20 +189,13 @@ export class BillingSettingsComponent implements OnInit {
       this.facilityList.map((x) => {
         if (facilityId === x.facilityId) {
           if (addOnsType == 'premium' && x.addOns.premium) {
-            console.log(this.addOnsPrice, this.totalPrice)
-
             this.addOnsPrice = this.addOnsPrice - (x.facilityUserCount * 0.25)
             this.totalPrice = this.totalPrice - (x.facilityUserCount * 0.25)
-            console.log(this.addOnsPrice, this.totalPrice)
 
             x.addOns.premium = false;
           } else if (addOnsType == 'sponsors' && x.addOns.sponsors) {
-            console.log(this.addOnsPrice, this.totalPrice)
-
             this.addOnsPrice = this.addOnsPrice - (x.facilityUserCount * 1.00)
             this.totalPrice = this.totalPrice - (x.facilityUserCount * 1.00)
-            console.log(this.addOnsPrice, this.totalPrice)
-
             x.addOns.sponsors = false;
           }
         }
@@ -221,45 +203,6 @@ export class BillingSettingsComponent implements OnInit {
       });
     }
   }
-
-
-
-  // onSelectAddOns(event, facilityId, addOnsType: string) {
-  //   console.log(event, facilityId, addOnsType)
-  //   this.addOnsPrice = 0
-  //   this.totalPrice = 0
-  //   if (event) {
-  //     this.facilityList.map((x) => {
-  //       if (facilityId === x.facilityId) {
-  //         if (addOnsType == 'premium') {
-  //           x.premium = true;
-  //           this.addOnsPrice = this.addOnsPrice + (x.facilityUserCount * 0.25)
-  //           this.totalPrice = this.totalPrice + (x.facilityUserCount * 0.25)
-  //         } else if (addOnsType == 'sponsors') {
-  //           this.addOnsPrice = this.addOnsPrice + (x.facilityUserCount * 1.00)
-  //           this.totalPrice = this.totalPrice + (x.facilityUserCount * 1.00)
-  //           x.sponsors = true;
-  //         }
-  //       }
-  //       return x
-  //     });
-  //   } else {
-  //     this.facilityList.map((x) => {
-  //       if (facilityId === x.facilityId) {
-  //         if (addOnsType == 'premium') {
-  //           this.addOnsPrice = this.addOnsPrice - (x.facilityUserCount * 0.25)
-  //           this.totalPrice = this.totalPrice - (x.facilityUserCount * 0.25)
-  //           x.premium = false;
-  //         } else if (addOnsType == 'sponsors') {
-  //           this.addOnsPrice = this.addOnsPrice - (x.facilityUserCount * 1.00)
-  //           this.totalPrice = this.totalPrice - (x.facilityUserCount * 1.00)
-  //           x.sponsors = false;
-  //         }
-  //       }
-  //       return x
-  //     });
-  //   }
-  // }
 
   startLoader(value) {
     this.spinner = value

@@ -19,12 +19,14 @@ export class StripeComponent implements OnDestroy, AfterViewInit, OnChanges, OnI
   @Output() onPayEvent = new EventEmitter()
   cardError: string;
   userData: any;
+  isCardError: boolean = true
   @Input() plan: string;
   @Input() totalCount: number;
   @Input() facilitiesList: any[];
   @Input() update: boolean;
   @Output() isloading = new EventEmitter()
   @Input() isPaybtnDisabled;
+  @Input() isDisabled: boolean;
 
   constructor(
     private cd: ChangeDetectorRef, private fb: FormBuilder,
@@ -42,7 +44,6 @@ export class StripeComponent implements OnDestroy, AfterViewInit, OnChanges, OnI
   }
 
   ngOnChanges(): void {
-    console.log(this.plan)
     //console.log(this.facilitiesList)
   }
 
@@ -108,8 +109,10 @@ export class StripeComponent implements OnDestroy, AfterViewInit, OnChanges, OnI
 
   onChange({ error }) {
     if (error) {
+      this.isCardError = true
       this.cardError = error.message;
     } else {
+      this.isCardError = false
       this.cardError = null;
     }
     // this.cd.detectChanges();
