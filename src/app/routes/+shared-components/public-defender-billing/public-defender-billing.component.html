@@ -17,7 +17,8 @@
                     <div class="row">
                         <div class="col-12 pt-2 pb-2">
                             <mat-card class="mat-elevation-z10 border-card">
-                                <input class="circle pl-1" type="radio" [checked]="true" name="package" /><span> Unlimited Connections, $40/mo</span><br />
+                                <input class="circle pl-1" type="radio" [checked]="true" name="package" /><span>
+                                    Unlimited Connections, $40/mo</span><br />
                             </mat-card>
                         </div>
                     </div>
@@ -31,17 +32,19 @@
                     </div>
                     <h4>
                         Which facilities would you like to have access?
-                        <a href="https://google.com" target="_blank">Learn more about Premium Listings and Sponsorships.</a>
+                        <a href="https://google.com" target="_blank">Learn more about Premium Listings and
+                            Sponsorships.</a>
                     </h4>
 
                     <div class="col-12 pt-2">
                         <div *ngIf="facilities.length == 0">
                             <span>We currently do not have any facilities in your state.
-                                      Please contact support for more information.</span>
+                                Please contact support for more information.</span>
                         </div>
                         <div *ngIf="facilities.length > 0">
                             <li *ngFor="let facility of facilities">
-                                <mat-checkbox color="primary" (change)="onFacilitySelect($event.checked,facility?.facilityId) ">
+                                <mat-checkbox color="primary"
+                                    (change)="onFacilitySelect($event.checked,facility?.facilityId) ">
                                     {{ facility?.facilityName }} ({{facility.facilityUserCount }})
                                 </mat-checkbox>
                             </li>
@@ -61,7 +64,7 @@
                         <span class="h5 text-center font-weight-bold">Review Plan Details</span>
                     </div>
                     <span class="text-center text-black">Based on the facilities that you have selected,
-                            please review your monthly bill below.</span>
+                        please review your monthly bill below.</span>
                     <mat-card class="mat-elevation-z10 mt-2">
                         <div class="d-flex justify-content-between align-items-between">
                             <div>BASE COST:</div>
@@ -72,8 +75,8 @@
                             <div>TOTAL MONTHLY CHARGE:</div>
                             <div>
                                 <span class="font-weight-bold">{{
-                      totalPrice | currency: "USD":"symbol"
-                      }}</span>
+                                    totalPrice | currency: "USD":"symbol"
+                                    }}</span>
                             </div>
                         </div>
                     </mat-card>
@@ -87,9 +90,10 @@
                     <span class="h5 text-center font-weight-bold">Add Credit Card Info</span>
                 </div>
                 <span class="text-center text-black">Please enter your credit card information in the form below. Once
-            everything looks correct, click Pay to complete your setup and
-            start using My Justice Portal!</span>
-                <app-stripe class="pt-2 mt-2" [totalCount]="totalPrice" [isPaybtnDisabled]="isPaybtnDisabled" [plan]="plan" (isloading)="startLoader($event)" (onPayEvent)="onPayEvent($event)" [facilitiesList]="facilities"></app-stripe>
+                    everything looks correct, click Pay to complete your setup and
+                    start using My Justice Portal!</span>
+                <app-stripe class="pt-2 mt-2" [totalCount]="totalPrice" [plan]="plan" (isloading)="startLoader($event)"
+                    (onPayEvent)="onPayEvent($event)" [facilitiesList]="facilities"></app-stripe>
             </mat-card>
         </div>
     </div>
