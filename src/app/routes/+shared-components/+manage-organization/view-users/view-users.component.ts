@@ -7,6 +7,7 @@ import { ToasterService } from 'app/services/toaster.service';
 import { Location } from '@angular/common';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
+import { UserService } from 'app/services/user.service';
 @Component({
   selector: 'app-view-users',
   templateUrl: './view-users.component.html',
@@ -23,7 +24,7 @@ export class ViewUsersComponent implements OnInit, AfterViewInit {
   userId: any;
   buttonText: string = 'Edit';
   constructor(private location: Location, public dialog: MatDialog, private fb: FormBuilder,
-    private organisationService: OrganisationService, private toasterService: ToasterService,) { }
+    private organisationService: OrganisationService,  private userService: UserService, private toasterService: ToasterService,) { }
 
   ngOnInit(): void {
     this.createControl();
@@ -46,12 +47,24 @@ export class ViewUsersComponent implements OnInit, AfterViewInit {
       firstName: ['', [Validators.required]],
       lastName: ['', [Validators.required]],
       middleName: ['', [Validators.required]],
-      mobile: ['']
+      mobile: [''],
+      isAdmin:['']
     })
   }
 
   ngAfterViewInit() {
     this.dataSource.sort = this.sort;
+  }
+
+  onAdminSelect() {
+    console.log(this.editUserForm.get('isAdmin').value)
+    this.userService.updateAdmin({ isAdmin: this.editUserForm.get('isAdmin').value,userId:this.userId }).subscribe((isAdmin: any) => {
+      if (isAdmin.success) {
+        this.dialog.closeAll();
+        this.toasterService.showSuccessToater('Success');
+        this.getAllUsers();
+      }
+    })
   }
 
   onSaveChanges(){
@@ -121,13 +134,16 @@ export class ViewUsersComponent implements OnInit, AfterViewInit {
   }
 
   openModal(templateRef, user) {
+    console.log(user)
     this.userId = user.userId
     this.editUserForm.get('firstName').setValue(user.firstName)
     this.editUserForm.get('middleName').setValue(user.middleName)
     this.editUserForm.get('lastName').setValue(user.lastName)
     this.editUserForm.get('mobile').setValue(user.mobile)
     this.editUserForm.get('email').setValue(user.userName)
+    this.editUserForm.get('isAdmin').setValue(user.isAdmin)
     this.editUserForm.disable();
+    this.editUserForm.get('isAdmin').enable();
     let dialogRef = this.dialog.open(templateRef, {
       width: '800px',
     });
