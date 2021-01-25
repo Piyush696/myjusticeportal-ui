@@ -23,10 +23,10 @@ export class BillingServicesComponent implements OnInit, AfterViewInit {
   @Output() paymentConfirm = new EventEmitter()
   selectedFacilities = [];
 
-  constructor(private facilityService: FacilityService, private userMetaService: UserMetaService,private lawyerFacilityService: LawyerFacilityService) { }
+  constructor(private facilityService: FacilityService, private userMetaService: UserMetaService, private lawyerFacilityService: LawyerFacilityService) { }
 
   ngAfterViewInit(): void {
-    if(this.update){
+    if (this.update) {
       this.getBillableFacility();
     }
   }
@@ -90,6 +90,8 @@ export class BillingServicesComponent implements OnInit, AfterViewInit {
         }
         return facility
       })
+      this.onSelectAddOns(false, facilityId, 'premium')
+      this.onSelectAddOns(false, facilityId, 'sponsors')
     }
   }
 

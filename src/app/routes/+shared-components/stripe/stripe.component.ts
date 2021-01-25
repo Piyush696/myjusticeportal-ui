@@ -10,26 +10,28 @@ import { ToasterService } from 'app/services/toaster.service';
   templateUrl: './stripe.component.html',
   styleUrls: ['./stripe.component.css'],
 })
-export class StripeComponent implements OnDestroy, AfterViewInit,OnChanges ,OnInit{
+export class StripeComponent implements OnDestroy, AfterViewInit, OnChanges, OnInit {
   cardForm: FormGroup;
   @ViewChild('cardInfo') cardInfo: ElementRef;
   _totalAmount: number;
   card: any;
   cardHandler = this.onChange.bind(this);
-   @Output() onPayEvent = new EventEmitter()
-   cardError: string;
-   userData: any;
-  @Input() plan:string;
-   @Input() totalCount:number;
-   @Input() facilitiesList:any[];
-   @Input() update:boolean;
-   @Output() isloading = new EventEmitter()
-   @Input() isPaybtnDisabled;
+  @Output() onPayEvent = new EventEmitter()
+  cardError: string;
+  userData: any;
+  isCardError: boolean = true
+  @Input() plan: string;
+  @Input() totalCount: number;
+  @Input() facilitiesList: any[];
+  @Input() update: boolean;
+  @Output() isloading = new EventEmitter()
+  @Input() isPaybtnDisabled;
+  @Input() isDisabled: boolean;
 
   constructor(
-    private cd: ChangeDetectorRef,private fb: FormBuilder,
+    private cd: ChangeDetectorRef, private fb: FormBuilder,
     @Inject(MAT_DIALOG_DATA) private data: any,
-    private dialogRef: MatDialogRef<StripeComponent>,private lawyerService: LawyerService, 
+    private dialogRef: MatDialogRef<StripeComponent>, private lawyerService: LawyerService,
     private toasterService: ToasterService, private store: Store<any>,
   ) {
     this._totalAmount = data['totalAmount'];
@@ -72,10 +74,10 @@ export class StripeComponent implements OnDestroy, AfterViewInit,OnChanges ,OnIn
 
   ngAfterViewInit() {
     this.getUserDetailsFromStore();
-      this.initiateCardElement();
+    this.initiateCardElement();
   }
 
-  getUserDetailsFromStore(){
+  getUserDetailsFromStore() {
     this.store.select(s => s.userInfo).subscribe(x => {
       this.userData = x
     });
@@ -98,43 +100,45 @@ export class StripeComponent implements OnDestroy, AfterViewInit,OnChanges ,OnIn
         iconColor: '#fa755a',
       },
     };
-    
+
     const elements = stripe.elements();
-    this.card = elements.create('card',{cardStyle});
+    this.card = elements.create('card', { cardStyle });
     this.card.mount(this.cardInfo.nativeElement);
     this.card.addEventListener('change', this.cardHandler);
   }
 
   onChange({ error }) {
     if (error) {
+      this.isCardError = true
       this.cardError = error.message;
     } else {
+      this.isCardError = false
       this.cardError = null;
     }
     // this.cd.detectChanges();
   }
-  
+
   async createStripeToken() {
     this.isloading.emit(true)
     const { token, error } = await stripe.createToken(this.card);
-    if(this.update){
+    if (this.update) {
       let facilityList = [];
       this.facilitiesList.filter((ele) => {
-        if(ele.isSelected) {
-          if(this.userData.roles[0].roleId == 5){
+        if (ele.isSelected) {
+          if (this.userData.roles[0].roleId == 5) {
             const facilityData = {
-              "facilityId":ele.facilityId,
-              "lawyerId":this.userData.userId
+              "facilityId": ele.facilityId,
+              "lawyerId": this.userData.userId
             }
             facilityList.push(facilityData)
           } else {
             const facilityData = {
-              "facilityId":ele.facilityId,
-              "isSponsors":ele.addOns.sponsors,
-              "isPremium":ele.addOns.premium,
-              "lawyerId":this.userData.userId,
-              "isSelected":true,
-              "planSelected":this.plan
+              "facilityId": ele.facilityId,
+              "isSponsors": ele.addOns.sponsors,
+              "isPremium": ele.addOns.premium,
+              "lawyerId": this.userData.userId,
+              "isSelected": true,
+              "planSelected": this.plan
             }
             facilityList.push(facilityData)
           }
@@ -142,13 +146,13 @@ export class StripeComponent implements OnDestroy, AfterViewInit,OnChanges ,OnIn
       })
       const data = {
         "userId": this.userData.userId,
-        "amount":  Math.round(this.totalCount) * 100,
-        "currency":'usd',
-        "interval":'month',
-        "facilityList":facilityList
+        "amount": Math.round(this.totalCount) * 100,
+        "currency": 'usd',
+        "interval": 'month',
+        "facilityList": facilityList
       }
-      this.lawyerService.updatePlan(data).subscribe((res:any)=>{
-        if(res.success){
+      this.lawyerService.updatePlan(data).subscribe((res: any) => {
+        if (res.success) {
           this.toasterService.showSuccessToater('Plan updated')
           this.onPayEvent.emit(true)
           this.isloading.emit(false)
@@ -159,28 +163,28 @@ export class StripeComponent implements OnDestroy, AfterViewInit,OnChanges ,OnIn
       if (token) {
         let facilityList = [];
         const data = {
-          "token":token.id,
-          "email":this.userData.userName
+          "token": token.id,
+          "email": this.userData.userName
         }
         this.lawyerService.postPay(data).subscribe((addCard: any) => {
-          if(addCard.data){
-            this.facilitiesList.filter((ele)=>{
-              if(ele.isSelected) {
-                if(this.userData.roles[0].roleId == 5){
+          if (addCard.data) {
+            this.facilitiesList.filter((ele) => {
+              if (ele.isSelected) {
+                if (this.userData.roles[0].roleId == 5) {
                   const facilityData = {
-                    "facilityId":ele.facilityId,
-                    "defenderId":this.userData.userId,
-                    "isSelected":true,
+                    "facilityId": ele.facilityId,
+                    "defenderId": this.userData.userId,
+                    "isSelected": true,
                   }
                   facilityList.push(facilityData)
                 } else {
                   const facilityData = {
-                    "facilityId":ele.facilityId,
-                    "isSponsors":ele.addOns.sponsors,
-                    "isPremium":ele.addOns.premium,
-                    "lawyerId":this.userData.userId,
-                    "isSelected":true,
-                    "planSelected":this.plan
+                    "facilityId": ele.facilityId,
+                    "isSponsors": ele.addOns.sponsors,
+                    "isPremium": ele.addOns.premium,
+                    "lawyerId": this.userData.userId,
+                    "isSelected": true,
+                    "planSelected": this.plan
                   }
                   facilityList.push(facilityData)
                 }
@@ -189,10 +193,10 @@ export class StripeComponent implements OnDestroy, AfterViewInit,OnChanges ,OnIn
             const data = {
               "customer": addCard.data.customer,
               "userId": this.userData.userId,
-              "amount":  Math.round(this.totalCount) * 100,
-              "currency":'usd',
-              "interval":'month',
-              "facilityList":facilityList
+              "amount": Math.round(this.totalCount) * 100,
+              "currency": 'usd',
+              "interval": 'month',
+              "facilityList": facilityList
             }
             this.lawyerService.subscribePlan(data).subscribe((subscribePlan: any) => {
               if (subscribePlan.data) {
