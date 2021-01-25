@@ -166,7 +166,7 @@
             </div>
         </div>
         <div class="row">
-            <div class="d-flex align-items-center pb-3 pl-2">
+            <div class="d-flex align-items-center pb-3 pl-4">
                 Admin
                 <mat-slide-toggle class="pl-2" color="warn" [checked]="user?.isAdmin" (change)="onAdminSelect()" [formControl]="editUserForm.controls['isAdmin']">
                     {{user?.isAdmin ? 'Enabled' : 'Disabled'}}

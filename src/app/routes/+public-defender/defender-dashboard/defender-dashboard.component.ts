@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { FacilityService } from 'app/services/facility.service';
@@ -10,7 +10,7 @@ import { UserMetaService } from 'app/services/user-meta.service';
   styleUrls: ['./defender-dashboard.component.css']
 })
 
-export class DefenderDashboardComponent implements OnInit {
+export class DefenderDashboardComponent implements OnInit,AfterViewInit {
 
   isAuthorized: boolean;
   showDashboard: boolean;
@@ -20,8 +20,13 @@ export class DefenderDashboardComponent implements OnInit {
   totalPrice: number = 40
   averageCount: number = 0;
   facilityId: any;
+  @ViewChild('modalopen') modalopen: ElementRef;
 
   constructor(private store: Store<any>,private router: Router, private userMetaService: UserMetaService, private facilityService: FacilityService) { }
+
+  ngAfterViewInit(): void {
+     this.getModal();
+  }
 
   ngOnInit(): void {
     this.store.select(s => s.userInfo).subscribe(x => {
@@ -41,6 +46,18 @@ export class DefenderDashboardComponent implements OnInit {
     if (value) {
       this.getBillingDetails();
     }
+  }
+
+  getModal() {
+    this.userMetaService.getmodalData({ metaKey: 'choosePlanModal' }).subscribe((res: any) => {
+      if (!res.data) {
+        this.modalopen.nativeElement.click();
+      }
+    })
+  }
+
+  onchoosePlan() {
+    this.userMetaService.modalDataEvent({ metaKey: 'choosePlanModal', metaValue: true }).subscribe()
   }
 
   getBillingDetails() {
