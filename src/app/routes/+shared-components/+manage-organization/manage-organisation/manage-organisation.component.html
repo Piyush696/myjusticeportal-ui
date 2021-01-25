@@ -60,7 +60,7 @@
                 <tr>
                     <th>Logo Upload</th>
                        <div  *ngIf="!orgData?.Organization?.logo?.downloadLink" class="my-2 mx-2">
-                        <img src="assets/img/placeholder.jpg" width="157px" height="auto" alt="logo">
+                        <img src="assets/img/logoplaceholder.png" width="157px" height="auto" alt="logo">
                     </div>
                     <div  *ngIf="orgData?.Organization?.logo?.downloadLink" class="my-2 mx-2">
                         <img src="{{orgData?.Organization?.logo?.downloadLink}}" width="157px" height="auto" alt="logo">
@@ -194,7 +194,7 @@
         <span aria-hidden="true">&times;</span>
     </button>
     <div>
-        <h2 class="text-center font-weight-bold">Update Changes.</h2>
+        <h2 class="text-center font-weight-bold">Update Organization.</h2>
     </div>
 
     <div class="col-12 p-0">
@@ -338,7 +338,7 @@
     <div class="row px-3">
         <mat-form-field appearance="fill" class="w-100 p-1">
             <mat-label>Description</mat-label>
-            <textarea [formControl]="organisationForm.controls['description']" rows="8" cols="50" matInput placeholder="Description..."></textarea>
+            <textarea class="text-area"  [formControl]="organisationForm.controls['description']" rows="8" cols="50" matInput placeholder="Description..."></textarea>
             <mat-error>
                 <div *ngIf="organisationForm.controls['description'].invalid && organisationForm.controls['description'].touched">
                     <small class="font13">
