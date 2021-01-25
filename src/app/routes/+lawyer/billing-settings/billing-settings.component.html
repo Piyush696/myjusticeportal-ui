@@ -1,8 +1,15 @@
-<div class="pl-3">
-    <h1 class="font-weight-bold m-0">Manage Billing Settings</h1>
-    <h4 class="line-height header-sub-text">
-        If you need any help, please contact Support.
-    </h4>
+<div class="row pl-3">
+    <div class="col-9">
+        <h1 class="font-weight-bold m-0">Manage Billing Settings</h1>
+        <h4 class="line-height header-sub-text">
+            If you need any help, please contact Support.
+        </h4>
+    </div>
+    <div class="col-3">
+        <div class="d-flex justify-content-end">
+            <button class="btn btn-link" (click)="onEdit()">Edit plan details</button>
+        </div>
+    </div>
 </div>
 
 <div class="row">
@@ -164,9 +171,6 @@
                     [facilitiesList]="facilityList">
                 </app-stripe>
             </mat-card>
-        </div>
-        <div class="d-flex justify-content-end">
-            <button class="button-purple px-4 py-1 mt-3" mat-raised-button (click)="onEdit()">edit</button>
         </div>
     </div>
 </div>

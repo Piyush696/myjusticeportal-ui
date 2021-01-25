@@ -25,7 +25,6 @@ export class StripeComponent implements OnDestroy, AfterViewInit, OnChanges, OnI
   @Input() facilitiesList: any[];
   @Input() update: boolean;
   @Output() isloading = new EventEmitter()
-  @Input() isPaybtnDisabled;
   @Input() isDisabled: boolean;
 
   constructor(
@@ -123,15 +122,19 @@ export class StripeComponent implements OnDestroy, AfterViewInit, OnChanges, OnI
     const { token, error } = await stripe.createToken(this.card);
     if (this.update) {
       let facilityList = [];
+      let type
       this.facilitiesList.filter((ele) => {
         if (ele.isSelected) {
           if (this.userData.roles[0].roleId == 5) {
+            type = 'defender'
             const facilityData = {
               "facilityId": ele.facilityId,
-              "lawyerId": this.userData.userId
+              "defenderId": this.userData.userId,
             }
+
             facilityList.push(facilityData)
           } else {
+            type = 'lawyer'
             const facilityData = {
               "facilityId": ele.facilityId,
               "isSponsors": ele.addOns.sponsors,
@@ -149,10 +152,12 @@ export class StripeComponent implements OnDestroy, AfterViewInit, OnChanges, OnI
         "amount": Math.round(this.totalCount) * 100,
         "currency": 'usd',
         "interval": 'month',
-        "facilityList": facilityList
+        "facilityList": facilityList,
+        "type": type
       }
       this.lawyerService.updatePlan(data).subscribe((res: any) => {
         if (res.success) {
+          this.card.clear()
           this.toasterService.showSuccessToater('Plan updated')
           this.onPayEvent.emit(true)
           this.isloading.emit(false)
@@ -162,6 +167,7 @@ export class StripeComponent implements OnDestroy, AfterViewInit, OnChanges, OnI
       const { token, error } = await stripe.createToken(this.card);
       if (token) {
         let facilityList = [];
+        let type
         const data = {
           "token": token.id,
           "email": this.userData.userName
@@ -171,13 +177,17 @@ export class StripeComponent implements OnDestroy, AfterViewInit, OnChanges, OnI
             this.facilitiesList.filter((ele) => {
               if (ele.isSelected) {
                 if (this.userData.roles[0].roleId == 5) {
+                  type = 'defender'
                   const facilityData = {
                     "facilityId": ele.facilityId,
                     "defenderId": this.userData.userId,
-                    "isSelected": true,
+                    "isSelected": true
+
                   }
                   facilityList.push(facilityData)
                 } else {
+                  type = 'lawyer'
+
                   const facilityData = {
                     "facilityId": ele.facilityId,
                     "isSponsors": ele.addOns.sponsors,
@@ -185,6 +195,7 @@ export class StripeComponent implements OnDestroy, AfterViewInit, OnChanges, OnI
                     "lawyerId": this.userData.userId,
                     "isSelected": true,
                     "planSelected": this.plan
+
                   }
                   facilityList.push(facilityData)
                 }
@@ -196,10 +207,12 @@ export class StripeComponent implements OnDestroy, AfterViewInit, OnChanges, OnI
               "amount": Math.round(this.totalCount) * 100,
               "currency": 'usd',
               "interval": 'month',
-              "facilityList": facilityList
+              "facilityList": facilityList,
+              "type": type
             }
             this.lawyerService.subscribePlan(data).subscribe((subscribePlan: any) => {
               if (subscribePlan.data) {
+                this.card.clear()
                 this.onPayEvent.emit(true)
                 window.location.reload();
                 this.toasterService.showSuccessToater('You have subscribed successfully!')
