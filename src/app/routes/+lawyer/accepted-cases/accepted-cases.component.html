@@ -24,26 +24,30 @@
         <div *ngFor="let case of requestedCases">
             <mat-card class="d-flex flex-row justify-content-between align-items-center inner-card mt-2">
                 <div class="d-flex flex-column w-75">
-                    <span>Description: {{case?.briefDescriptionOfChargeOrLegalMatter}}</span>
-                    <span>Charges or Legal Matter: {{case?.legalMatter}}</span>
+                    <span><b>Charges or Legal Matter</b>: {{case?.legalMatter}}</span>
+                    <span><b>Description</b>: {{case?.briefDescriptionOfChargeOrLegalMatter}}</span>
                     <span>
-                        Requested By: {{case?.inmate?.firstName}}
+                       <b>Inmate Name</b>: {{case?.inmate?.firstName}}
                         <span *ngIf="case?.inmate?.middleName">
                             &nbsp;{{case?.inmate?.middleName}}
                         </span> &nbsp;{{case?.inmate?.lastName}}
                     </span>
                     <span>
-                        Status:&nbsp;
+                        <b>Attorney Name</b>: {{case?.attorneyName}}
+                        <span *ngIf="!singleCaseData?.attorneyName">N/A</span>
+                    </span>
+                    <span>
+                        <b>Status</b>:&nbsp;
                         <span class="font-weight-bold" [ngClass]="{'text-success': case?.lawyer_case?.status == 'Approved',
                                 'text-danger': case?.lawyer_case?.status == 'Rejected'}">
                             {{case?.lawyer_case?.status}}
                         </span>
                     </span>
                     <span>
-                        Files attached: {{case?.caseFile?.length}}
+                        <b>Files attached</b>: {{case?.caseFile?.length}}
                     </span>
                     <span>
-                      Notes:  {{case?.lawyer_case?.notes}}
+                      <b>Enquiry Notes</b>:  {{case?.lawyer_case?.notes}}
                     </span>
                 </div>
                 <div>

@@ -41,7 +41,7 @@ export class OrganisationComponent implements OnInit, OnChanges {
 
   createFormControl() {
     this.organisationForm = this.fb.group({
-      name: ['', [Validators.required, Validators.maxLength(100), this.validateString.bind(this)]],
+      name: ['', [Validators.required, Validators.maxLength(100)]],
       tagline: ['', Validators.maxLength(1000)],
       description: ['', Validators.maxLength(5000)]
     });
@@ -103,6 +103,5 @@ export class OrganisationComponent implements OnInit, OnChanges {
     data.address = this.addressForm.value;
     data.address['country'] = 'United States';
     this.orgAddressEventEmitter.emit(data);
-
   }
 }

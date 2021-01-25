@@ -17,7 +17,7 @@ import { FacilityService } from 'app/services/facility.service'
 })
 export class InquiriesComponent implements OnInit {
   pendingCasesList: any;
-  displayedColumns: string[] = ["name", "briefDescriptionOfChargeOrLegalMatter", "sentAt", "status", "action"];
+  displayedColumns: string[] = ["name", "notes", "sentAt", "status", "action"];
   dataSource = new MatTableDataSource();
 
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
@@ -131,7 +131,11 @@ export class InquiriesComponent implements OnInit {
     this.userAdditionInfoService.updateLawywrStatus(data).subscribe((res: any) => {
       if (res.success) {
         this.getPendingCaseDetails();
-        this.toasterService.showSuccessToater('Status updated successfully');
+        if(status == 'Lawyer Approved'){
+          this.toasterService.showSuccessToater('Please note the inmate must also accept for the connection to become active.');
+        }else{
+          this.toasterService.showSuccessToater('Status updated successfully');
+        }
       } else {
         this.toasterService.showErrorToater('Something went wrong, please try again.');
       }

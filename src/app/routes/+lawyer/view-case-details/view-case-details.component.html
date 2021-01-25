@@ -16,15 +16,19 @@
             <span>No data available, invalid url detected.</span>
         </mat-label>
         <div class="d-flex flex-column" *ngIf="singleCaseData">
+            <span><b>Charges or Legal Matter</b>: {{singleCaseData?.legalMatter}}</span>
             <span>
                 <b> Description</b>: {{singleCaseData?.briefDescriptionOfChargeOrLegalMatter}}
             </span>
-            <span><b>Charges or Legal Matter</b>: {{singleCaseData?.legalMatter}}</span>
             <span>
                 <b>Inmate Name</b>: {{singleCaseData?.inmate?.firstName}}
                 <span *ngIf="singleCaseData?.inmate?.middleName">
                     &nbsp;{{singleCaseData?.inmate?.middleName}}
                 </span> &nbsp;{{singleCaseData?.inmate?.lastName}}
+            </span>
+            <span>
+                <b>Attorney Name</b>: {{singleCaseData?.attorneyName}}
+                <span *ngIf="!singleCaseData?.attorneyName">N/A</span>
             </span>
             <span>
                 <b>Status</b>:&nbsp;
@@ -51,7 +55,7 @@
                 <span *ngIf="!singleCaseData?.nextCourtDate">N/A</span>
             </span>
             <span>
-                <b>Notes</b>: {{singleCaseData?.lawyer_case?.notes}}
+                <b>Enquiry Notes</b>: {{singleCaseData?.lawyer_case?.notes}}
                 <span *ngIf="!singleCaseData?.lawyer_case?.notes">N/A</span>
             </span>
             <!-- <span class="pt-3">
@@ -97,6 +101,11 @@
             <tbody>
                 <tr class="pr-0" *ngFor="let item of uploader1?.queue">
                     <td class="pr-0"><strong>{{item?.file?.name}}</strong></td>
+                    <td>
+                        <button mat-raised-button color="primary" (click)="onUploadCaseFile()">
+                            <mat-icon>file_upload</mat-icon>Upload
+                        </button>
+                    </td>
                     <td nowrap class="pr-0 text-center pl-0">
                         <button mat-raised-button color="warn" (click)="item.remove()">
                             <mat-icon>delete</mat-icon>Remove
@@ -106,7 +115,7 @@
             </tbody>
         </table>
     </div>
-    <div *ngIf="uploader1?.queue?.length > 0" class="d-flex">
+    <!-- <div *ngIf="uploader1?.queue?.length > 0" class="d-flex">
         <div class="col-8">
             <div class="pr-3">
                 <mat-radio-group color="primary" aria-label="Select an option" [(ngModel)]="fileType">
@@ -126,7 +135,7 @@
                 </button>
             </div>
         </div>
-    </div>
+    </div> -->
 </div>
 
 <!-- To Show Uploaded Shared Files -->
