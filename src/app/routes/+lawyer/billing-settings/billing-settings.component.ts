@@ -19,7 +19,7 @@ export class BillingSettingsComponent implements OnInit {
   facilityList = [];
   facilityId: any;
   averageCount: number = 0;
-  update: boolean;
+  update: boolean = true;
   plan: string;
   state = [];
   isUpdate: boolean;
@@ -98,6 +98,7 @@ export class BillingSettingsComponent implements OnInit {
 
 
   onPayEvent(event) {
+    this.isDisabled = true
     this.dialog.closeAll();
     this.getBillableFacility();
   }

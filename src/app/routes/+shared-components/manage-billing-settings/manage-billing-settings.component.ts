@@ -19,7 +19,7 @@ export class ManageBillingSettingsComponent implements OnInit {
   facilityId: any;
   spinner: any;
   isDisabled: boolean = true;
-
+  update: boolean = true;
   constructor(private defenderService: DefenderService, private userMetaService: UserMetaService, private facilityService: FacilityService,) { }
 
   ngOnInit(): void {
@@ -33,8 +33,15 @@ export class ManageBillingSettingsComponent implements OnInit {
     })
   }
 
+  onPayEvent(event) {
+    this.isDisabled = true;
+    this.getBillableFacility();
+  }
+
+
   getUserDetails() {
     this.userMetaService.getUserAdditionalDetails().subscribe((user: any) => {
+      console.log(user)
       user.data.forEach((ele) => {
         if (ele.metaKey == "State:Bar") {
           let splitArray = ele.metaValue.split(":")
