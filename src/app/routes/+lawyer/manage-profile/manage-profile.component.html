@@ -40,12 +40,12 @@
                         <!-- <img src="{{userDetails?.userAdditionalInfo?.profile?.downloadLink}}" width="157px" 
                             height="auto" alt="logo" class="logo"
                             *ngIf="!userDetails?.userAdditionalInfo?.profile?.downloadLink">-->
-                            <div  *ngIf="!userDetails?.userAdditionalInfo?.profile?.downloadLink" class="my-2 mx-2">
-                                <img src="assets/img/placeholder.jpg" width="157px" height="auto" alt="logo">
-                            </div>
-                            <div  *ngIf="userDetails?.userAdditionalInfo?.profile?.downloadLink" class="my-2 mx-2">
-                                <img src="{{userDetails?.userAdditionalInfo?.profile?.downloadLink}}" width="157px" height="auto" alt="logo">
-                            </div>  
+                        <div *ngIf="!userDetails?.userAdditionalInfo?.profile?.downloadLink" class="my-2 mx-2">
+                            <img src="assets/img/placeholder.jpg" width="157px" height="auto" alt="logo">
+                        </div>
+                        <div *ngIf="userDetails?.userAdditionalInfo?.profile?.downloadLink" class="my-2 mx-2">
+                            <img src="{{userDetails?.userAdditionalInfo?.profile?.downloadLink}}" width="157px" height="auto" alt="logo">
+                        </div>
                     </td>
                 </tr>
                 <tr>
@@ -53,24 +53,22 @@
                     <td>
                         <!-- <img src="{{userDetails?.userAdditionalInfo?.header?.downloadLink}}" alt="logo" class="logo"
                             *ngIf="userDetails?.userAdditionalInfo?.header?.downloadLink"> -->
-                            <div  *ngIf="!userDetails?.userAdditionalInfo?.header?.downloadLink" class="my-2 mx-2">
-                                <img src="assets/img/hb.png" width="100%" height="auto" alt="logo">
-                            </div>
-                            <div  *ngIf="userDetails?.userAdditionalInfo?.header?.downloadLink" class="my-2 mx-2">
-                                <img src="{{userDetails?.userAdditionalInfo?.header?.downloadLink}}" width="157px" height="auto" alt="logo">
-                            </div> 
+                        <div *ngIf="!userDetails?.userAdditionalInfo?.header?.downloadLink" class="my-2 mx-2">
+                            <img src="assets/img/hb.png" width="100%" height="auto" alt="logo">
+                        </div>
+                        <div *ngIf="userDetails?.userAdditionalInfo?.header?.downloadLink" class="my-2 mx-2">
+                            <img src="{{userDetails?.userAdditionalInfo?.header?.downloadLink}}" width="157px" height="auto" alt="logo">
+                        </div>
                     </td>
                 </tr>
             </table>
             <div class="row">
                 <div class="col-12 col-sm-12 d-flex justify-content-between justify-content-sm-between">
                     <div>
-                        <button mat-raised-button class="button-purple px-4 py-1 mt-1"
-                            (click)="openOrganizationModal(previewProfile,userDetails)">Preview</button>
+                        <button mat-raised-button class="button-purple px-4 py-1 mt-1" (click)="openOrganizationModal(previewProfile,userDetails)">Preview</button>
                     </div>
                     <div>
-                        <button mat-raised-button class="button-purple px-4 py-1 mt-1"
-                            (click)="openOrganizationModal(updateOrganization,userDetails)">Make Changes</button>
+                        <button mat-raised-button class="button-purple px-4 py-1 mt-1" (click)="openOrganizationModal(updateOrganization,userDetails)">Make Changes</button>
                     </div>
                 </div>
             </div>
@@ -93,11 +91,9 @@
         <div class="col-12 p-0">
             <mat-form-field appearance="fill" class="w-100 p-1">
                 <mat-label> Name</mat-label>
-                <input type="text" matInput placeholder="Name" [formControl]="additionalInfoForm.controls['name']"
-                    required>
+                <input type="text" matInput placeholder="Name" [formControl]="additionalInfoForm.controls['name']" required>
                 <mat-error>
-                    <div
-                        *ngIf="additionalInfoForm.controls['name'].invalid && additionalInfoForm.controls['name'].touched">
+                    <div *ngIf="additionalInfoForm.controls['name'].invalid && additionalInfoForm.controls['name'].touched">
                         <small class="font13">
                             Name is Required
                         </small>
@@ -116,8 +112,7 @@
                 <mat-label>Tagline</mat-label>
                 <input type="text" matInput [formControl]="additionalInfoForm.controls['tagline']">
                 <mat-error>
-                    <div
-                        *ngIf="additionalInfoForm.controls['tagline'].invalid && additionalInfoForm.controls['tagline'].touched">
+                    <div *ngIf="additionalInfoForm.controls['tagline'].invalid && additionalInfoForm.controls['tagline'].touched">
                         <small class="font13">
                             Tagline is Required
                         </small>
@@ -126,16 +121,14 @@
             </mat-form-field>
             <mat-form-field appearance="fill" class="w-50 p-1">
                 <mat-label>Practice Area(s)</mat-label>
-                <mat-select [formControl]="toppings" multiple
-                    [formControl]="additionalInfoForm.controls['practiceAreas']" required>
+                <mat-select [formControl]="toppings" multiple [formControl]="additionalInfoForm.controls['practiceAreas']" required>
                     <span class="pl-3">Select Practice Areas</span>
                     <mat-option *ngFor="let specialty of specialtyList" value="{{specialty?.specialtyType}}">
                         {{specialty.specialtyType}}
                     </mat-option>
                 </mat-select>
                 <mat-error>
-                    <div
-                        *ngIf="additionalInfoForm.controls['practiceAreas'].invalid && additionalInfoForm.controls['practiceAreas'].touched">
+                    <div *ngIf="additionalInfoForm.controls['practiceAreas'].invalid && additionalInfoForm.controls['practiceAreas'].touched">
                         <small class="font13">
                             Practice Areas is Required
                         </small>
@@ -146,11 +139,9 @@
         <div class="row px-3">
             <mat-form-field appearance="fill" class="w-100 p-1">
                 <mat-label>Description</mat-label>
-                <textarea [formControl]="additionalInfoForm.controls['description']" rows="8" cols="50" matInput
-                    placeholder="Description..."></textarea>
+                <textarea [formControl]="additionalInfoForm.controls['description']" rows="8" cols="50" matInput placeholder="Description..."></textarea>
                 <mat-error>
-                    <div
-                        *ngIf="additionalInfoForm.controls['description'].invalid && additionalInfoForm.controls['description'].touched">
+                    <div *ngIf="additionalInfoForm.controls['description'].invalid && additionalInfoForm.controls['description'].touched">
                         <small class="font13">
                             Description is Required
                         </small>
@@ -165,9 +156,7 @@
                 <div class="drag-border p-3">
                     <h4 class="font-weight-bold margin-remove">Profile Headshot</h4>
                     <span class="text-bold">Best image size is up to 5MB and 157px × 185px (width × height).</span>
-                    <div ng2FileDrop [ngClass]="{'another-file-over-class': hasAnotherDropZoneOver}"
-                        (fileOver)="fileOverAnother($event)" [uploader]="uploader1"
-                        class="box-placeholder my-drop-zone font-weight-bold pb-2">
+                    <div ng2FileDrop [ngClass]="{'another-file-over-class': hasAnotherDropZoneOver}" (fileOver)="fileOverAnother($event)" [uploader]="uploader1" class="box-placeholder my-drop-zone font-weight-bold pb-2">
                         Drag and drop files here (or) choose below to attach.
                     </div>
                     <label for="file1" class="file-upload mb-0">
@@ -193,8 +182,7 @@
                                     </button>
                                 </td>
                                 <td>
-                                    <button mat-raised-button color="primary"
-                                        [disabled]="isFileSizeMax || isDimenssionMax" (click)="onUploadLogo()">
+                                    <button mat-raised-button color="primary" [disabled]="isFileSizeMax || isDimenssionMax" (click)="onUploadLogo()">
                                         <mat-icon>file_upload</mat-icon>Upload
                                     </button>
                                 </td>
@@ -210,9 +198,7 @@
                 <div class="drag-border p-3 mb-4">
                     <h4 class="font-weight-bold margin-remove">Profile Header Background Image</h4>
                     <span class="text-bold">Best image size is 8 MB and 730px × 170px (width × height)</span>
-                    <div ng2FileDrop [ngClass]="{'another-file-over-class': hasAnotherDropZoneOver}"
-                        (fileOver)="fileOverAnother($event)" [uploader]="uploader2"
-                        class="box-placeholder my-drop-zone font-weight-bold pb-2">
+                    <div ng2FileDrop [ngClass]="{'another-file-over-class': hasAnotherDropZoneOver}" (fileOver)="fileOverAnother($event)" [uploader]="uploader2" class="box-placeholder my-drop-zone font-weight-bold pb-2">
                         Drag and drop files here (or) choose below to attach.
                     </div>
                     <label for="file1" class="file-upload mb-0">
@@ -239,8 +225,7 @@
                                     </button>
                                 </td>
                                 <td>
-                                    <button mat-raised-button color="primary"
-                                        [disabled]="isHeadshotFileSizeMax || isDimenssionMax1" (click)="onUploadLogo()">
+                                    <button mat-raised-button color="primary" [disabled]="isHeadshotFileSizeMax || isDimenssionMax1" (click)="onUploadLogo()">
                                         <mat-icon>file_upload</mat-icon>Upload
                                     </button>
                                 </td>
@@ -256,12 +241,10 @@
             Close
         </button>
         <div>
-            <button mat-raised-button class="btn bg-color px-perc py-1 mr-2" *ngIf="currentView == 2"
-                (click)="OnNextView(1)">
-                Back : Edit Details
+            <button mat-raised-button class="btn bg-color px-perc py-1 mr-2" *ngIf="currentView == 2" (click)="OnNextView(1)">
+                Back: Edit Details
             </button>
-            <button mat-raised-button class="btn bg-color px-perc py-1 mr-2" *ngIf="currentView == 1"
-                (click)="OnNextView(2)">
+            <button mat-raised-button class="btn bg-color px-perc py-1 mr-2" *ngIf="currentView == 1" (click)="OnNextView(2)">
                 Set Images
             </button>
             <button *ngIf="currentView == 1" class="button-purple px-4 py-1" mat-raised-button (click)="saveChanges()">
@@ -288,12 +271,10 @@
                 <div class="col-3">
                     <div class="d-flex">
                         <div class="img-profile" *ngIf="userDetails?.userAdditionalInfo?.profile?.downloadLink">
-                            <img src="{{userDetails?.userAdditionalInfo?.profile?.downloadLink}}" width="157px"
-                                height="auto" alt="logo" class="logo">
+                            <img src="{{userDetails?.userAdditionalInfo?.profile?.downloadLink}}" width="157px" height="auto" alt="logo" class="logo">
                         </div>
                         <div class="img-profile" *ngIf="!userDetails?.userAdditionalInfo?.profile?.downloadLink">
-                            <img src="../../../../assets/img/placeholder.jpg" width="157px" height="auto" alt="logo"
-                                class="logo">
+                            <img src="../../../../assets/img/placeholder.jpg" width="157px" height="auto" alt="logo" class="logo">
                         </div>
                     </div>
                 </div>

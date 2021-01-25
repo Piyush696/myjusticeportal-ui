@@ -73,7 +73,7 @@ export class ContactComponent implements OnInit {
     let exist: boolean
     this.caseList.find((x) => {
       if (x.caseId === this.caseId) {
-        if (x.lawyer.length > 0) {
+        if (x.lawyer.length > 0 && x.lawyer[0].lawyer_case.status === 'Connected') {
           exist = true
         } else {
           exist = false

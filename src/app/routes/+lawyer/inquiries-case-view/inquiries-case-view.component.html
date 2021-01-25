@@ -17,13 +17,13 @@
     <div class="d-flex flex-column" *ngIf="singleCaseData">
         <div class="d-flex flex-column w-75">
             <span>
+                <b>Charges or Legal Matter</b>:
+                {{singleCaseData?.legalMatter}}
+            </span>
+            <span>
                 <b> Description</b>: 
                 {{singleCaseData?.briefDescriptionOfChargeOrLegalMatter}}</span>
 
-            <span>
-                    <b>Charges or Legal Matter</b>:
-                    {{singleCaseData?.legalMatter}}
-                </span>
             <span><b>Inmate Name</b>: {{singleCaseData?.inmate?.firstName}} &nbsp;{{singleCaseData?.inmate?.lastName}}</span>
 
             <!-- <span><b>Other Information</b>: 
@@ -44,7 +44,7 @@
                 {{singleCaseData?.nextCourtDate | date:'longDate'}}
                 <span *ngIf="!singleCaseData?.nextCourtDate">N/A</span>
             </span>
-            <span><b>Notes</b>:
+            <span><b>Enquiry Notes</b>:
                 {{singleCaseData?.lawyer[0]?.lawyer_case?.notes}}
                 <span *ngIf="!singleCaseData?.lawyer[0]?.lawyer_case?.notes">N/A</span>
             </span>

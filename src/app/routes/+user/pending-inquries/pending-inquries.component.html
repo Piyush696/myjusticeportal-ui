@@ -60,7 +60,7 @@
                     </button>
                     <button *ngIf="case?.lawyer[0]?.lawyer_case?.status === 'Lawyer Approved'" [disabled]="(case?.lawyer[0]?.lawyer_case?.status === 'inmate_rejected'  || case?.lawyer[0]?.lawyer_case?.status === 'inmate_accepted' ||  
                     case?.lawyer[0]?.lawyer_case?.status === 'Rejected' ||  case?.lawyer[0]?.lawyer_case?.status === 'Requested')" class="btn btn-sm btn-primary" color="green" (click)="onClickStatus('Connected',case?.lawyer[0]?.userId,case.caseId)">
-                        Connection 
+                    Accept and connect 
                     </button>
                     <button *ngIf="case?.lawyer[0]?.lawyer_case?.status === 'Connected'" class="btn btn-sm btn-danger" (click)="onClickStatus('Disconnected',case.lawyer[0]?.userId,case.caseId)">
                         Disconnect
