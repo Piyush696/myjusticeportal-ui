@@ -5,59 +5,109 @@
     </h4>
 </div>
 
-<div class="d-flex">
-    <div class="col-8">
-        <mat-card class="card-color">
-            <div class="dflex pb-2">
-                <div class="col-12">
+<div class="row">
+    <div *ngIf="spinner" class="d-flex justify-content-center align-items-center spinner">
+        <mat-spinner color="primary"></mat-spinner>
+    </div>
+    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+        <div class="row pt-2">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <mat-card class="mt-2 p-4">
                     <div>
-                        <span class="h5 font-weight-bold">Plan Selected</span>
+                        <span class="h5 text-center font-weight-bold">Step 1:</span>&nbsp;
+                        <span class="h5 text-center font-weight-bold">Select Subscription Level</span>
                     </div>
+                    <h4>
+                        How many inmate connections do you need?
+                        <a href="https://google.com" target="_blank">Learn More about Connections.</a>
+                    </h4>
                     <div class="row">
-                        <div class="col-12 pt-2">
+                        <div class="col-12 pt-2 pb-2">
                             <mat-card class="mat-elevation-z10 border-card">
-                                Unlimited Connections, $40/mo<br/>
+                                <input class="circle pl-1" type="radio" [disabled]="isDisabled" [checked]="true"
+                                    name="package" /><span>
+                                    Unlimited Connections, $40/mo</span><br />
                             </mat-card>
                         </div>
                     </div>
-                </div>
+                </mat-card>
             </div>
-            <div class="d-flex justify-content-center align-items-center;">
-                <div class="col-6">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 pt-2">
+                <mat-card class="mt-4 py-4">
                     <div>
-                        <span class="h5 text-center font-weight-bold">Facilities you have selected</span>
+                        <span class="h5 text-center font-weight-bold">Step 2:</span>&nbsp;
+                        <span class="h5 text-center font-weight-bold">Select Facilities</span>
                     </div>
-                    <div *ngIf="facilities.length > 0" class="pt-2">
-                        <li *ngFor="let facility of facilities;">
-                            <span class="font-weight-bold">{{facility?.facilityName}}</span>
-                        </li>
-                    </div>
-                </div>
-                <div class="col-6">
-                    <div>
-                        <span class="h5 text-center font-weight-bold">Your plan details</span>
-                    </div>
-                    <span class="text-center text-black">Based on the facilities and add ons that you have selected your monthly bill below.</span>
-                    <mat-card class="mat-elevation-z10">
-                        <div class="d-flex justify-content-between align-items-between">
-                            <div>Plan Base Cost:</div>
-                            <div>{{currentPlanPrice | currency:'USD':'symbol'}}</div>
+                    <h4>
+                        Which facilityList would you like to have access?
+                        <a href="https://google.com" target="_blank">Learn more about Premium Listings and
+                            Sponsorships.</a>
+                    </h4>
+
+                    <div class="col-12 pt-2">
+                        <div *ngIf="facilityList.length == 0">
+                            <span>We currently do not have any facilityList in your state.
+                                Please contact support for more information.</span>
                         </div>
-                        <hr>
+                        <div *ngIf="facilityList.length > 0">
+                            <li *ngFor="let facility of facilityList">
+                                <mat-checkbox color="primary" [checked]="facility.isSelected" [disabled]="isDisabled"
+                                    (change)="onFacilitySelect($event.checked,facility?.facilityId) ">
+                                    {{ facility?.facilityName }} ({{facility.facilityUserCount }})
+                                </mat-checkbox>
+                            </li>
+                        </div>
+                    </div>
+                </mat-card>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 mx-lg-n2">
+        <!-- Estimated Monthly Bill  -->
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 pt-2 px-0">
+            <mat-card class="mt-2">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 ">
+                    <div>
+                        <span class="h5 text-center font-weight-bold">Step 3:</span>&nbsp;
+                        <span class="h5 text-center font-weight-bold">Review Plan Details</span>
+                    </div>
+                    <span class="text-center text-black">Based on the facilityList that you have selected,
+                        please review your monthly bill below.</span>
+                    <mat-card class="mat-elevation-z10 mt-2">
                         <div class="d-flex justify-content-between align-items-between">
-                            <div>Total Monthly Charge:</div>
+                            <div>BASE COST:</div>
+                            <div>{{ planPrice | currency: "USD":"symbol" }}</div>
+                        </div>
+                        <hr />
+                        <div class="d-flex justify-content-between align-items-between">
+                            <div>TOTAL MONTHLY CHARGE:</div>
                             <div>
-                                <span class="font-weight-bold">Total: </span> {{totalBillingPrice | currency:'USD':'symbol'}}
+                                <span class="font-weight-bold">{{
+                                    totalPrice | currency: "USD":"symbol"
+                                    }}</span>
                             </div>
                         </div>
                     </mat-card>
-                    <!-- <div class="d-flex justify-content-end align-items-end  pt-2">
-                        <div>
-                            <button mat-raised-button class="button-purple px-4 py-1 mt-1" (click)="onChangePlan()">Change Plan</button>
-                        </div>
-                    </div> -->
                 </div>
-            </div>
-        </mat-card>
+            </mat-card>
+        </div>
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mt-3 px-0 pt-3">
+            <mat-card class="px-4">
+                <div>
+                    <span class="h5 text-center font-weight-bold">Step 4:</span>&nbsp;
+                    <span class="h5 text-center font-weight-bold">Add Credit Card Info</span>
+                </div>
+                <span class="text-center text-black">Please enter your credit card information in the form below. Once
+                    everything looks correct, click Pay to complete your setup and
+                    start using My Justice Portal!</span>
+                <app-stripe class="pt-2 mt-2" [totalCount]="totalPrice" [isPaybtnDisabled]="isPaybtnDisabled"
+                    [isDisabled]="isDisabled" [plan]="plan" (isloading)="startLoader($event)"
+                    (onPayEvent)="onPayEvent($event)" [facilitiesList]="facilityList"></app-stripe>
+            </mat-card>
+        </div>
+        <div class="d-flex justify-content-end">
+            <button class="button-purple px-4 py-1 mt-3" mat-raised-button (click)="onEdit()">edit</button>
+        </div>
     </div>
+
 </div>
