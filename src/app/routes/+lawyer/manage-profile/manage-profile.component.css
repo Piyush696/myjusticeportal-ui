@@ -59,3 +59,6 @@ th {
   overflow-x: hidden;
   height: 100px;
 } */
+.preline{
+  white-space: pre-line;
+}
