@@ -66,6 +66,7 @@ export class ViewUsersComponent implements OnInit, AfterViewInit {
         if(res.success){
           this.toasterService.showSuccessToater('User updated')
           this.getAllUsers();
+          this.dialog.closeAll();
         }else{
           this.toasterService.showErrorToater('Something went wrong')
         }

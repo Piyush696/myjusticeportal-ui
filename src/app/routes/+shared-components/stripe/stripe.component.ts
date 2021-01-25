@@ -24,6 +24,7 @@ export class StripeComponent implements OnDestroy, AfterViewInit, OnChanges, OnI
   @Input() facilitiesList: any[];
   @Input() update: boolean;
   @Output() isloading = new EventEmitter()
+  @Input() isPaybtnDisabled;
 
   constructor(
     private cd: ChangeDetectorRef, private fb: FormBuilder,

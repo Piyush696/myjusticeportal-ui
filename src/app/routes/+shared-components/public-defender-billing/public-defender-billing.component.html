@@ -17,7 +17,7 @@
                     <div class="row">
                         <div class="col-12 pt-2 pb-2">
                             <mat-card class="mat-elevation-z10 border-card">
-                                <input class="circle pl-1" type="radio" [checked]="true" name="package"/><span> Unlimited Connections, $40/mo</span><br />
+                                <input class="circle pl-1" type="radio" [checked]="true" name="package" /><span> Unlimited Connections, $40/mo</span><br />
                             </mat-card>
                         </div>
                     </div>
@@ -89,7 +89,7 @@
                 <span class="text-center text-black">Please enter your credit card information in the form below. Once
             everything looks correct, click Pay to complete your setup and
             start using My Justice Portal!</span>
-                <app-stripe class="pt-2 mt-2" [totalCount]="totalPrice" [plan]="plan" (isloading)="startLoader($event)" (onPayEvent)="onPayEvent($event)" [facilitiesList]="facilities"></app-stripe>
+                <app-stripe class="pt-2 mt-2" [totalCount]="totalPrice" [isPaybtnDisabled]="isPaybtnDisabled" [plan]="plan" (isloading)="startLoader($event)" (onPayEvent)="onPayEvent($event)" [facilitiesList]="facilities"></app-stripe>
             </mat-card>
         </div>
     </div>
