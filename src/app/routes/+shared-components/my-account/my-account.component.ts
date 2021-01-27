@@ -284,6 +284,7 @@ export class MyAccountComponent implements OnInit {
     this.securityService.updateSecurityQuestion(data).subscribe((data: any) => {
       if (data) {
         this.getAddUserSecurityQuestion();
+        this.getSingleUser()
         this.toasterService.showSuccessToater('Security Question Updated Successfully.')
         this.securityQuestionForm.reset()
         this.closeModal();

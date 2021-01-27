@@ -3,6 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { DefenderService } from 'app/services/defender.service';
 import { FacilityService } from 'app/services/facility.service';
+import { LawyerService } from 'app/services/lawyer.service';
 import { UserMetaService } from 'app/services/user-meta.service';
 
 @Component({
@@ -20,7 +21,10 @@ export class ManageBillingSettingsComponent implements OnInit {
   spinner: any;
   isDisabled: boolean = true;
   update: boolean = true;
-  constructor(private defenderService: DefenderService, private userMetaService: UserMetaService, private facilityService: FacilityService,) { }
+  custId: any;
+  cardView: boolean;
+  cardDetails: any;
+  constructor(private defenderService: DefenderService, private lawyerService: LawyerService, private userMetaService: UserMetaService, private facilityService: FacilityService,) { }
 
   ngOnInit(): void {
     this.getBillableFacility();
@@ -41,7 +45,9 @@ export class ManageBillingSettingsComponent implements OnInit {
 
   getUserDetails() {
     this.userMetaService.getUserAdditionalDetails().subscribe((user: any) => {
-      console.log(user)
+      let stripeData = user.data.find(x => x.metaKey == 'cust_id')
+      this.custId = stripeData.metaValue
+      this.getUserCardDetails(this.custId)
       user.data.forEach((ele) => {
         if (ele.metaKey == "State:Bar") {
           let splitArray = ele.metaValue.split(":")
@@ -50,6 +56,17 @@ export class ManageBillingSettingsComponent implements OnInit {
       })
       this.getAllFacilities();
     })
+  }
+
+  getUserCardDetails(id) {
+    this.lawyerService.getCardDetails({ strip_custId: id }).subscribe((res: any) => {
+      this.cardDetails = res.data
+      this.cardView = this.cardDetails ? true : false
+    })
+  }
+
+  onChangeCard() {
+    this.cardView = false
   }
 
   getAllFacilities() {
