@@ -139,7 +139,7 @@
         <div class="row px-3">
             <mat-form-field appearance="fill" class="w-100 p-1">
                 <mat-label>Description</mat-label>
-                <textarea [formControl]="additionalInfoForm.controls['description']" rows="8" cols="50" matInput placeholder="Description..."></textarea>
+                <textarea [formControl]="additionalInfoForm.controls['description']" rows="8" cols="50" matInput matTextareaAutosize placeholder="Description..."></textarea>
                 <mat-error>
                     <div *ngIf="additionalInfoForm.controls['description'].invalid && additionalInfoForm.controls['description'].touched">
                         <small class="font13">

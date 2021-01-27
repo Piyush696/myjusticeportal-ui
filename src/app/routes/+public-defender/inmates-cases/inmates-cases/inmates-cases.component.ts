@@ -29,7 +29,7 @@ export class InmatesCasesComponent implements OnInit {
     this.inmatedefenderService.getInmateCases().subscribe((users: any) => {
       this.casesList = users.data;
       this.casesList = this.casesList.map((item) => {
-        var date = item.updatedAt;
+       var date = item.updatedAt;
         date = new Date(date).toDateString();
         var monthDay = date.substring(4, 10);
         var year = date.substring(10, 15);
@@ -69,7 +69,9 @@ export class InmatesCasesComponent implements OnInit {
   }
 
   search(searchValue: string) {
-    this.dataSource.filter = searchValue.trim().toLowerCase();
+    let s=searchValue.replace(/  +/g, ' ');
+    s= searchValue.split(" ").join("")
+    this.dataSource.filter = s.trim().toLowerCase();
   }
 
   nestedFilterCheck(search, data, key) {
