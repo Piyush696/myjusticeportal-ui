@@ -15,10 +15,18 @@
                     <input matInput (keyup)="search($event.target.value)">
                 </mat-form-field>
             </div>
-            <div>
-                <mat-checkbox class="mat-card check-style" color="primary" title="View Rejected Cases" (change)="viewhidePendingInquiries($event.checked)">
-                    View Rejected Inquiries
-                </mat-checkbox>
+
+            <div class="d-flex justify-content-between">
+                <div class="pr-3">
+                    <mat-checkbox class="mat-card check-style" color="primary" title="View Rejected Cases" (change)="viewConnectedInquiries($event.checked)">
+                        View Accepted Inquiries
+                    </mat-checkbox>
+                </div>
+                <div>
+                    <mat-checkbox class="mat-card check-style" color="primary" title="View Rejected Cases" (change)="viewhidePendingInquiries($event.checked)">
+                        View Rejected Inquiries
+                    </mat-checkbox>
+                </div>
             </div>
         </div>
         <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8 w-100">
