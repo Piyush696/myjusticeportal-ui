@@ -32,7 +32,7 @@ export class LawyerService {
   }
 
   updatePlan(data) {
-    return this.httpClient.post<object>(`${this.apiPath}/stripe/update_plan`, data,this.getHeaders());
+    return this.httpClient.post<object>(`${this.apiPath}/stripe/update_plan`, data, this.getHeaders());
   }
 
   subscribePlan(customer) {
@@ -43,6 +43,9 @@ export class LawyerService {
     return this.httpClient.post<object>(`${this.apiPath}/stripe/validate_card`, data);
   }
 
+  getCardDetails(data) {
+    return this.httpClient.post<object>(`${this.apiPath}/stripe/subcription_details`, data, this.getHeaders())
+  }
 
   deleteLawyerCase(lawyerId, caseId) {
     return this.httpClient.put<object>(`${this.apiPath}/lawyer/${caseId}`, { lawyerId }, this.getHeaders());
@@ -52,9 +55,9 @@ export class LawyerService {
   //   return this.httpClient.post<object>(`${this.apiPath}/stripe/subcription_details`, this.getHeaders())
   // }
 
-  validate_coupan(coupon){
+  validate_coupan(coupon) {
     return this.httpClient.post<object>(`${this.apiPath}/stripe/validate_coupan`, coupon, this.getHeaders())
   }
-  
+
 
 }
