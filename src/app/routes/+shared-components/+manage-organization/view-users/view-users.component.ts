@@ -92,7 +92,7 @@ export class ViewUsersComponent implements OnInit, AfterViewInit {
       if (users.success) {
         users.data.users.map((item) => {
          let mobile  = (item.mobile).replace(/[^1-9 ]/g, " ")
-          let mobileNo =  mobile.replace(/\s/g,'')
+           let mobileNo =  mobile.replace(/\s/g,'')
           item['mobile'] = Number((mobileNo))
           item['name'] = item.firstName + " " + item.middleName + " " + item.lastName;
           item['name1'] = item.firstName + item.middleName + item.lastName;
@@ -137,19 +137,20 @@ export class ViewUsersComponent implements OnInit, AfterViewInit {
   }
 
   openModal(templateRef, user) {
-    console.log(user)
+    // console.log(user)
     this.userId = user.userId
     this.editUserForm.get('firstName').setValue(user.firstName)
     this.editUserForm.get('middleName').setValue(user.middleName)
     this.editUserForm.get('lastName').setValue(user.lastName)
-    let mobileNo  = (user.mobile).replace(/[^1-9 ]/g, " ").replace(/\s/g,'')
-    this.editUserForm.get('mobile').setValue(Number((mobileNo)))
+    // let mobile  = (user.mobile).replace(/[^1-9 ]/g, " ").replace(/\s/g,'')
+    // let mobileNo =  mobile.replace(/\s/g,'')
+    this.editUserForm.get('mobile').setValue(Number((user.mobile)))
     this.editUserForm.get('email').setValue(user.userName)
     this.editUserForm.get('isAdmin').setValue(user.isAdmin)
     this.editUserForm.disable();
     this.editUserForm.get('isAdmin').enable();
     let dialogRef = this.dialog.open(templateRef, {
-      width: '800px',
+    width: '800px',
     });
 
     dialogRef.afterClosed().subscribe(result => {
