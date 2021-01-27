@@ -35,8 +35,10 @@ export class PendingInquriesComponent implements OnInit {
   }
 
   search(searchValue: string) {
-    this.dataSource.filter = searchValue.trim().toLowerCase();
-  }
+    let s=searchValue.replace(/  +/g, ' ');
+    s= searchValue.split(" ").join("")
+    this.dataSource.filter = s.trim().toLowerCase();
+ }
 
   onOpenModal(templateRef, userId, user) {
     this.userId = userId

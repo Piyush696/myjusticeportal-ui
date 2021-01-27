@@ -91,6 +91,9 @@ export class ViewUsersComponent implements OnInit, AfterViewInit {
     this.organisationService.getOrganisationUsers().subscribe((users: any) => {
       if (users.success) {
         users.data.users.map((item) => {
+         let mobile  = (item.mobile).replace(/[^1-9 ]/g, " ")
+          let mobileNo =  mobile.replace(/\s/g,'')
+          item['mobile'] = Number((mobileNo))
           item['name'] = item.firstName + " " + item.middleName + " " + item.lastName;
           item['name1'] = item.firstName + item.middleName + item.lastName;
           var date = item.createdAt;
@@ -139,7 +142,8 @@ export class ViewUsersComponent implements OnInit, AfterViewInit {
     this.editUserForm.get('firstName').setValue(user.firstName)
     this.editUserForm.get('middleName').setValue(user.middleName)
     this.editUserForm.get('lastName').setValue(user.lastName)
-    this.editUserForm.get('mobile').setValue(user.mobile)
+    let mobileNo  = (user.mobile).replace(/[^1-9 ]/g, " ").replace(/\s/g,'')
+    this.editUserForm.get('mobile').setValue(Number((mobileNo)))
     this.editUserForm.get('email').setValue(user.userName)
     this.editUserForm.get('isAdmin').setValue(user.isAdmin)
     this.editUserForm.disable();
