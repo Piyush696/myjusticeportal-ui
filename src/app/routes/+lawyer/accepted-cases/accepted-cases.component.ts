@@ -34,13 +34,14 @@ export class AcceptedCasesComponent implements OnInit {
   onGetRequestedCases(status) {
     this.hireLawyerService.getRequestedCases({ status: status }).subscribe((res: any) => {
       if (res.data) {
+        console.log(res.data)
         this.allRequestedCases = res.data.lawyer;
         if(!this.isHidden){
           this.requestedCases = this.allRequestedCases.filter(findHideCase => !findHideCase.lawyer_case.isHide);
         } else {
-          this.requestedCases = this.allRequestedCases;
+          console.log('====not hidden')
+          // this.requestedCases = this.allRequestedCases;
         }
-        
       } else {
         this.requestedCases = [];
       }
@@ -58,11 +59,11 @@ export class AcceptedCasesComponent implements OnInit {
 
   viewhideCaseDetails(check) {
     this.isHidden = check;
-    if (!check) {
-      this.requestedCases = this.allRequestedCases.filter(findHideCase => !findHideCase.lawyer_case.isHide);
+    if (check) {
+      this.requestedCases = this.allRequestedCases.filter(findHideCase => findHideCase.lawyer_case.isHide);
     }
     else {
-      this.requestedCases = this.allRequestedCases;
+      this.requestedCases = this.allRequestedCases.filter(findHideCase => !findHideCase.lawyer_case.isHide);
     }
   }
 
@@ -73,9 +74,9 @@ export class AcceptedCasesComponent implements OnInit {
     }
     this.hireLawyerService.hideCase(data).subscribe((res: any) => {
       if (res.success) {
-        let status = 'Approved';
+        let status = 'Connected';
         this.onGetRequestedCases(status);
-        // this.toasterService.showSuccessToater('Hide case successfully.');
+          this.toasterService.showSuccessToater('Hide case successfully.');
       } else {
         this.toasterService.showErrorToater('Something went wrong, please try again.');
       }
@@ -89,9 +90,10 @@ export class AcceptedCasesComponent implements OnInit {
     }
     this.hireLawyerService.hideCase(data).subscribe((res: any) => {
       if (res.success) {
-        let status = ['Approved', 'Rejected'];
+        let status = 'Connected';
         this.onGetRequestedCases(status);
-        // this.toasterService.showSuccessToater('Unhide case successfully.');
+        this.requestedCases = this.requestedCases.filter(x => x.caseId != caseId)
+        this.toasterService.showSuccessToater('Unhide case successfully.');
       } else {
         this.toasterService.showErrorToater('Something went wrong, please try again.');
       }

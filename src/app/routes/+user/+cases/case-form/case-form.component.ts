@@ -23,7 +23,8 @@ export class CaseFormComponent implements OnInit, OnChanges {
   state: any = [];
   dateOfArrest = Date()
   nextCourtDate = new Date(+new Date() + 24 * 60 * 60 * 1000);
-
+  tomorrow = new Date();
+  
   constructor(private toasterService: ToasterService, private router: Router, private _statesService: StatesService,
     private fb: FormBuilder, private caseService: CaseService, private store: Store<any>) {
   }

@@ -1,5 +1,5 @@
 import { StatesService } from '../../services/states.service';
-import { Component, OnInit, EventEmitter, Output, Input, OnChanges } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output, Input, OnChanges, AfterViewInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { FacilityService } from 'app/services/registration/facility.service';
@@ -13,7 +13,7 @@ import { ToasterService } from 'app/services/toaster.service';
   templateUrl: './additional-info.component.html',
   styleUrls: ['./additional-info.component.css']
 })
-export class AdditionalInfoComponent implements OnInit, OnChanges {
+export class AdditionalInfoComponent implements OnInit, OnChanges,AfterViewInit {
 
   additionalInfo: FormGroup;
 
@@ -40,8 +40,13 @@ export class AdditionalInfoComponent implements OnInit, OnChanges {
     private _statesService: StatesService, private facilityService: FacilityService, private userService: UserService) {
     this.facilityCode = this.activatedRoute.snapshot.params.facilityCode;
   }
+  
+  ngAfterViewInit(): void {
+    console.log('=====userAdditional',this.userMeta)
+  }
 
   ngOnInit(): void {
+    console.log('=====userAdditional',this.userMeta)
     this.specialtyForm = this.fb.group({
       specialty: ['', [Validators.required]]
     })
