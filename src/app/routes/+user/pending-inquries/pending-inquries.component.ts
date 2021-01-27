@@ -21,7 +21,7 @@ export class PendingInquriesComponent implements OnInit {
   @ViewChild(MatSort, { static: true }) sort: MatSort;
 
 
-  pendingCasesList = [];
+  connectedInquiries = [];
   filteredPendingInquiriesList = [];
   filteredRejectedPendingInquiriesList = [];
   userId: any;
@@ -59,7 +59,7 @@ export class PendingInquriesComponent implements OnInit {
           const transformedFilter = filter.trim().toLowerCase();
           return dataStr.indexOf(transformedFilter) !== -1;
         };
-      } 
+      }
       this.dataSource.sortingDataAccessor = (item: any, property) => {
         switch (property) {
           case 'lawyer': if (item) return item.firstName + item.middleName + item.lastName;
@@ -84,7 +84,7 @@ export class PendingInquriesComponent implements OnInit {
           const transformedFilter = filter.trim().toLowerCase();
           return dataStr.indexOf(transformedFilter) !== -1;
         };
-      } 
+      }
       this.dataSource.sortingDataAccessor = (item: any, property) => {
         switch (property) {
           case 'lawyer': if (item) return item.firstName + item.middleName + item.lastName;
@@ -105,17 +105,18 @@ export class PendingInquriesComponent implements OnInit {
     this.dialog.closeAll();
   }
 
-  isModelClose(value){
-    if(value){
+  isModelClose(value) {
+    if (value) {
       this.dialog.closeAll();
     }
   }
+
   getPendingCaseDetails() {
-    this.pendingCasesList = []
+    this.connectedInquiries = []
     this.filteredPendingInquiriesList = [];
     this.filteredRejectedPendingInquiriesList = []
     this.caseService.getPendingCaseInfo().subscribe((pendingCase: any) => {
-      this.pendingCasesList = pendingCase.data.map((status) => {
+      let inquiries = pendingCase.data.map((status) => {
         status['name0'] = status.lawyer[0].Organization.name;
         status['name1'] = status.lawyer[0].Organization.name.split(" ").join("");
         status['name2'] = status.lawyer[0].firstName + " " + status.lawyer[0].lastName;
@@ -133,10 +134,13 @@ export class PendingInquriesComponent implements OnInit {
         status['newUpdatedAt3'] = month + "/" + day + "/" + year;
         return status
       })
-      this.pendingCasesList.filter((x) => {
+      inquiries.filter((x) => {
         if (x.lawyer[0].lawyer_case.status == 'Lawyer Rejected' || x.lawyer[0].lawyer_case.status == 'Inmate Rejected') {
           this.filteredRejectedPendingInquiriesList.push(x)
-        } else {
+        } else if (x.lawyer[0].lawyer_case.status == 'Connected') {
+            this.connectedInquiries.push(x)
+        }
+        else {
           this.filteredPendingInquiriesList.push(x)
         }
         this.dataSource = new MatTableDataSource(this.filteredPendingInquiriesList);
@@ -156,18 +160,27 @@ export class PendingInquriesComponent implements OnInit {
           switch (property) {
             case 'lawyer': if (item) return item.lawyer[0].firstName + item.lawyer[0].middleName + item.lawyer[0].lastName;
             case 'lawFirm': if (item) return item.lawyer[0].Organization.name;
+            case 'status': if (item) return item.lawyer[0].lawyer_case.status;
             default: if (typeof (item[property]) == 'string') {
               return item[property].toLowerCase();
             } else {
               return item[property]
             }
           }
-         
+
         };
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
       })
     })
+  }
+
+  viewConnectedInquiries(check) {
+    if (check) {
+      this.dataSource = new MatTableDataSource(this.connectedInquiries);
+    } else {
+      this.dataSource = new MatTableDataSource(this.filteredPendingInquiriesList);
+    }
   }
 
   nestedFilterCheck(search, data, key) {
