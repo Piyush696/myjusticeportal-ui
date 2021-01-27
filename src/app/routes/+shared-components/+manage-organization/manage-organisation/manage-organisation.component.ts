@@ -31,6 +31,7 @@ export class ManageOrganisationComponent implements OnInit {
   public disabled = false;
   public color: ThemePalette = 'primary';
   public touchUi = false;
+  fileLink: any;
   public fileOverAnother(e: any): void {
     this.hasAnotherDropZoneOver = e;
   }
@@ -55,6 +56,7 @@ export class ManageOrganisationComponent implements OnInit {
       this.organisationService.uploadFile(formData).subscribe((res) => {
         this.fileType = 'private';
         if (res.success) {
+          this.fileLink = res.data.downloadLink
           // this.getOrganisationAddress();
           this.uploader1.queue = [];
           this.toasterService.showSuccessToater('File uploaded successfully.');

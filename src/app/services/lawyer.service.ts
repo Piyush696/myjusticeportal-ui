@@ -59,5 +59,13 @@ export class LawyerService {
     return this.httpClient.post<object>(`${this.apiPath}/stripe/validate_coupan`, coupon, this.getHeaders())
   }
 
+  updateCardDetails(data) {
+    return this.httpClient.post<object>(`${this.apiPath}/stripe/update_card`, data, this.getHeaders())
+  }
+
+  chargeLawyer(data) {
+    return this.httpClient.post<object>(`${this.apiPath}/stripe/charge`, data, this.getHeaders())
+  }
+
 
 }

@@ -1,7 +1,11 @@
 import { Component, OnInit } from '@angular/core';
+import { AbstractControl, FormBuilder, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
+import { Store } from '@ngrx/store';
 import { FacilityService } from 'app/services/facility.service';
+import { LawyerService } from 'app/services/lawyer.service';
+import { ToasterService } from 'app/services/toaster.service';
 import { UserAdditionInfoService } from 'app/services/user-addition-info.service';
 import { UserMetaService } from 'app/services/user-meta.service';
 import { LawyerFacilityService } from '../../../services/lawyer-facility.service';
@@ -25,12 +29,59 @@ export class BillingSettingsComponent implements OnInit {
   isUpdate: boolean;
   spinner: any;
   isDisabled: boolean = true;
+  custId: any;
+  cardDetails: any;
+  cardView: boolean;
+  changeCardForm: any;
+  userData: any;
 
-  constructor(private lawyerFacilityService: LawyerFacilityService, private router: Router, private userMetaService: UserMetaService, private facilityService: FacilityService, public dialog: MatDialog) { }
+  constructor(private store: Store<any>, private lawyerFacilityService: LawyerFacilityService, private toasterService: ToasterService, private fb: FormBuilder, private lawyerService: LawyerService, private router: Router, private userMetaService: UserMetaService, private facilityService: FacilityService, public dialog: MatDialog) { }
 
   ngOnInit(): void {
+    this.changeCardForm = this.fb.group({
+      nameOnCard: ['', [Validators.required]],
+      cardNumber: ['', [Validators.required, Validators.minLength(16), Validators.maxLength(16), this.cardPatternValidation.bind(this)], this.cardValidation.bind(this)],
+      exp_month: ['', [Validators.required]],
+      exp_year: ['', [Validators.required]],
+      cvc: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(3), this.cardPatternValidation.bind(this)]],
+      coupon: ['', Validators.required, this.validateCoupon.bind(this)]
+    });
+    this.getUserDetailsFromStore()
     this.getUserDetails();
     this.getBillableFacility();
+  }
+
+
+  async validateCoupon(control: AbstractControl) {
+    const result: any = await this.lawyerService.validate_coupan({
+      coupon: control.value,
+    }).toPromise();
+    if (!result.success) {
+      return { invalidCoupon: true };
+    } else {
+      return null;
+    }
+  }
+
+  cardPatternValidation(control: AbstractControl) {
+    const pattern = /([0-9])$/;
+    if (control.value) {
+      if (!control.value.match(pattern)) {
+        return { invalidCardPattern: true };
+      }
+      return null;
+    }
+  }
+
+  async cardValidation(control: AbstractControl) {
+    const result: any = await this.lawyerService.validateCard({
+      number: control.value,
+    }).toPromise();
+    if (!result.success) {
+      return { invalidCard: true };
+    } else {
+      return null;
+    }
   }
 
   getBillableFacility() {
@@ -73,6 +124,7 @@ export class BillingSettingsComponent implements OnInit {
     });
   }
 
+
   onCloseModal() {
     this.dialog.closeAll();
   }
@@ -80,6 +132,48 @@ export class BillingSettingsComponent implements OnInit {
   onEdit() {
     this.isDisabled = false
   }
+
+  getUserDetailsFromStore() {
+    this.store.select(s => s.userInfo).subscribe(x => {
+      this.userData = x
+    });
+  }
+
+  onPay() {
+    let facilitiesList = [];
+    let type = ''
+    this.facilityList.filter((ele) => {
+      type = 'lawyer'
+      if (ele.isSelected) {
+        const facilityData = {
+          "facilityId": ele.facilityId,
+          "isSponsors": ele.addOns.sponsors,
+          "isPremium": ele.addOns.premium,
+          "lawyerId": this.userData.userId,
+          "isSelected": true,
+          "planSelected": this.plan
+        }
+        facilitiesList.push(facilityData)
+      }
+    })
+    const data = {
+      "userId": this.userData.userId,
+      "amount": Math.round(this.totalPrice) * 100,
+      "currency": 'usd',
+      "interval": 'month',
+      "facilityList": facilitiesList,
+      "type": type,
+      "strip_custId": this.custId
+    }
+    this.lawyerService.chargeLawyer(data).subscribe((res: any) => {
+      if (res.success) {
+        this.getBillableFacility()
+        this.toasterService.showSuccessToater('Plan updated')
+
+      }
+    })
+  }
+
 
   onSelectPlan(price) {
     this.planPrice = 0
@@ -94,13 +188,27 @@ export class BillingSettingsComponent implements OnInit {
     }
   }
 
-
+  getUserCardDetails(id) {
+    this.lawyerService.getCardDetails({ strip_custId: id }).subscribe((res: any) => {
+      this.cardDetails = res.data
+      this.cardView = this.cardDetails ? true : false
+    })
+  }
 
 
   onPayEvent(event) {
     this.isDisabled = true
     this.dialog.closeAll();
     this.getBillableFacility();
+  }
+
+
+
+  updateCard(templateRef) {
+    let dialogRef = this.dialog.open(templateRef, {
+      // height: '80%',
+      width: '613px'
+    });
   }
 
   // onChangePlan() {
@@ -132,6 +240,9 @@ export class BillingSettingsComponent implements OnInit {
 
   getUserDetails() {
     this.userMetaService.getUserAdditionalDetails().subscribe((user: any) => {
+      let stripeData = user.data.find(x => x.metaKey == 'cust_id')
+      this.custId = stripeData.metaValue
+      this.getUserCardDetails(this.custId)
       user.data.forEach((ele) => {
         if (ele.metaKey == "State:Bar") {
           let splitArray = ele.metaValue.split(":")
@@ -207,6 +318,22 @@ export class BillingSettingsComponent implements OnInit {
 
   startLoader(value) {
     this.spinner = value
+  }
+
+  addCard() {
+    this.spinner = true
+    this.lawyerService.updateCardDetails({
+      number: this.changeCardForm.get('cardNumber').value, exp_month: this.changeCardForm.get('exp_month').value, name: this.changeCardForm.get('nameOnCard').value,
+      exp_year: this.changeCardForm.get('exp_year').value, cvc: this.changeCardForm.get('cvc').value, customerId: this.custId,
+    }).subscribe(
+      (res: any) => {
+        this.getUserDetails()
+        this.spinner = false
+        this.changeCardForm.reset()
+        if (res.success) {
+          this.changeCardForm.reset();
+        }
+      })
   }
 
 }

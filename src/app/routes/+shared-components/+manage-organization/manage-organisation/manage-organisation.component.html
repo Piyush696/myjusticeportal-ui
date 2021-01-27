@@ -42,7 +42,7 @@
                 </tr>
                 <tr>
                     <th>Primary Address</th>
-                    <td>{{orgData?.Organization?.Address?.street1}} {{orgData?.Organization?.Address?.street2}} ,
+                    <td>{{orgData?.Organization?.Address?.street1}},{{orgData?.Organization?.Address?.street2}} ,
                         {{orgData?.Organization?.Address?.city}}, {{orgData?.Organization?.Address?.state}}
                         ,{{orgData?.Organization?.Address?.zip}}
                     </td>
@@ -126,9 +126,9 @@
                     </span>
                     <br>
                     <span class="font-weight-bold">Primary Address:
-                        <span class="font-weight-light text-dark"> {{orgData?.Organization?.Address?.street1}}
-                            {{orgData?.Organization?.Address?.street2}}</span>
-                        <span class="font-weight-light text-dark"> {{orgData?.Organization?.Address?.city}}
+                        <span class="font-weight-light text-dark"> {{orgData?.Organization?.Address?.street1}},
+                            {{orgData?.Organization?.Address?.street2}},</span>
+                        <span class="font-weight-light text-dark">{{orgData?.Organization?.Address?.city}},
                             {{orgData?.Organization?.Address?.zip}}</span>
                     </span>
                     <br>
@@ -412,6 +412,9 @@
                     </mat-radio-group>
                 </div>
             </div>
+        </div>
+        <div *ngIf="fileLink" class="my-2 mx-2">
+            <img src="{{fileLink}}" width="157px" height="auto" alt="logo">
         </div>
     </div>
     <div class="d-flex justify-content-between mx-2">
