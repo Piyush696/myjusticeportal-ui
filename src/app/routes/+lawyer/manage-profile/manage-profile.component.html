@@ -32,9 +32,7 @@
                 </tr>
                 <tr>
                     <th>Description</th>
-                    <td>
-                        <div class="scrolldesc">{{userDetails?.userAdditionalInfo?.description}}</div>
-                    </td>
+                    <td><div class="preline">{{userDetails?.userAdditionalInfo?.description}}</div></td>
                 </tr>
                 <tr>
                     <th>Profile Headshot</th>
@@ -84,12 +82,12 @@
         <span aria-hidden="true">&times;</span>
     </button>
     <div class="pl-2">
-        <h2 class="font-weight-bold mb-0">Profile Editor</h2>
-        <span>Click the Edit button below to make changes, then click Save to confirm your changes.
+        <h2 class="font-weight-bold d-flex justify-content-around mb-1">Profile Editor</h2>
+        <span class="d-flex justify-content-around mb-1">Click the Edit button below to make changes, then click Save to confirm your changes.
         </span>
     </div>
 
-    <div class="" *ngIf="currentView == 1">
+    <div  *ngIf="currentView == 1">
         <div class="col-12 p-0">
             <mat-form-field appearance="fill" class="w-100 p-1">
                 <mat-label> Name</mat-label>
@@ -145,7 +143,7 @@
                 <mat-error>
                     <div *ngIf="additionalInfoForm.controls['description'].invalid && additionalInfoForm.controls['description'].touched">
                         <small class="font13">
-                            Description Required
+                            Description is Required
                         </small>
                     </div>
                 </mat-error>

@@ -4,20 +4,20 @@
             <div class="inbox_people">
                 <div class="headind_srch">
                     <div class="col-12 d-flex justify-content-between">
-                        <h4 class="text-center pt-2"><strong>{{headerText}}</strong></h4>
+                        <p class="text-center pt-2"><strong>{{headerText}}</strong></p>
                     </div>
                 </div>
                 <div class="inbox_chat">
-                    <div class="" *ngIf="!oldUserList.length">
-                        <h3 class="text-center text-dark font-weight-bold">You are not currently connected to any users.
-                        </h3>
+                    <div class="heading-2nd"  *ngIf="!oldUserList.length">
+                        <p class="text-center text-dark font-weight-bold pt-2 pl-1">You are not currently connected to any users.
+                        </p>
                     </div>
                     <div class="channels" *ngFor="let old of oldUserList">
                         <div class="chat_list" [ngClass]="{'active': selectedUser == old?.userId}">
                             <div class="chat_people">
-                                <div class="chat_ib">
+                                <div class="chat_ib p-0">
                                     <h5 (click)="onClicklawyer(old?.userId)" style="cursor: pointer;">
-                                        <b>{{old?.firstName}} {{old?.middleName}} {{old?.lastName}}</b> <span *ngIf="old.role">({{old.role}})</span>
+                                        <b>{{old?.firstName}} {{old?.middleName}} {{old?.lastName}}</b><span  *ngIf="old.role">({{old.role}})</span>
                                     </h5>
                                 </div>
                             </div>

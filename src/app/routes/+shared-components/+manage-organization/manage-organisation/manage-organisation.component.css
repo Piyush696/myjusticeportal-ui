@@ -43,3 +43,7 @@ ul {
   background-color: #333442;
   color:white;
 }
+
+.preline{
+  white-space: pre-line;
+}

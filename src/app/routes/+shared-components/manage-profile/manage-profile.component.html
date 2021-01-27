@@ -150,11 +150,11 @@
         </div> -->
     </div>
     <div *ngIf="currentView == 1">
-        <div class="row px-3">
+        <div class="row ml-1">
             <!-- <div class="card-body px-0 pb-4"> -->
                 <div class="drag-border mb-2">
                     <h4 class="font-weight-bold margin-remove m-0">Profile Headshot</h4>
-                    <span class="text-bold">Best image size is up to 5MB and 157px × 185px (width × height).</span>
+                    <small class="text-bold">Best image size is up to 5MB and 157px × 185px (width × height).</small>
                     <div ng2FileDrop [ngClass]="{'another-file-over-class': hasAnotherDropZoneOver}" (fileOver)="fileOverAnother($event)" [uploader]="uploader1" class="box-placeholder my-drop-zone font-weight-bold pb-2">
                         Drag and drop files here (or) choose below to attach.
                     </div>
@@ -193,11 +193,11 @@
             <!-- </div> -->
         </div>
 
-        <div class="row px-3">
+        <div class="row ml-1">
             <!-- <div class="card-body px-0 pb-4"> -->
                 <div class="drag-border  mb-1">
                     <h4 class="font-weight-bold margin-remove m-0">Profile Header Background Image</h4>
-                    <span class="text-bold">Best image size is 8 MB and 730px × 170px (width × height)</span>
+                    <small class="text-bold">Best image size is 8 MB and 730px × 170px (width × height)</small>
                     <div ng2FileDrop [ngClass]="{'another-file-over-class': hasAnotherDropZoneOver}" (fileOver)="fileOverAnother($event)" [uploader]="uploader2" class="box-placeholder my-drop-zone font-weight-bold pb-2">
                         Drag and drop files here (or) choose below to attach.
                     </div>
@@ -238,7 +238,7 @@
         </div>
     </div>
     <div class="d-flex justify-content-between">
-        <button mat-raised-button class="btn bg-color-grey px-perc py-1" (click)="closeModal()">
+        <button mat-raised-button class="btn bg-color-grey px-perc py-1 ml-1" (click)="closeModal()">
             Close
         </button>
         <div>
@@ -299,7 +299,7 @@
                                 <span>{{userDetails?.Organization?.name}}</span>
                             </div>
                         </div>
-                        <div class="row py-2 pl-3">
+                        <!-- <div class="row py-2 pl-3">
                             <div>
                                 <span class="font-weight-bold">Tagline: </span>
                                 <span>{{userDetails?.userAdditionalInfo?.tagline}}</span>
@@ -316,7 +316,7 @@
                                 <span class="font-weight-bold">Description: </span>
                                 <span>{{userDetails?.userAdditionalInfo?.description}}</span>
                             </div>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
             </div>
