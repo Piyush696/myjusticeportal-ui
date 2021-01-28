@@ -19,7 +19,7 @@ export class ViewCaseDetailsComponent implements OnInit {
   sharedCaseFiles: any;
   privateCaseFiles: any;
   fileId: number;
-  fileType: string = 'private';
+  fileType: string = 'public-read';
 
   public uploader1: FileUploader = new FileUploader({ url: URL });
   public hasAnotherDropZoneOver: boolean = false;
@@ -46,6 +46,22 @@ export class ViewCaseDetailsComponent implements OnInit {
     } else {
       this.toasterService.showErrorToater('No data found, invalid url detected.');
     }
+  }
+
+  onSelectFile(file){
+    this.isDisabled();
+  }
+
+  isDisabled():boolean {
+    let isExist:boolean;
+    let x = ['jpg','jpeg','png','pdf']
+    let filetype = this.uploader1.queue[0].file.type.split('/')[1]
+    if(x.includes(filetype)){
+      isExist = true;
+    }else{
+      isExist = false;
+    }
+    return isExist
   }
 
   onGoBack() {

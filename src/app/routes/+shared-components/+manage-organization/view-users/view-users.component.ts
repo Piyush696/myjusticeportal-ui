@@ -57,7 +57,6 @@ export class ViewUsersComponent implements OnInit, AfterViewInit {
   }
 
   onAdminSelect() {
-    console.log(this.editUserForm.get('isAdmin').value)
     this.userService.updateAdmin({ isAdmin: this.editUserForm.get('isAdmin').value,userId:this.userId }).subscribe((isAdmin: any) => {
       if (isAdmin.success) {
         this.dialog.closeAll();
@@ -134,7 +133,6 @@ export class ViewUsersComponent implements OnInit, AfterViewInit {
   }
 
   openModal(templateRef, user) {
-    console.log(user)
     this.userId = user.userId
     this.editUserForm.get('firstName').setValue(user.firstName)
     this.editUserForm.get('middleName').setValue(user.middleName)

@@ -16,10 +16,11 @@ export class ViewCaseFilesComponent implements OnInit {
   sharedCaseFiles: any;
   privateCaseFiles: any;
   fileId: number;
-  fileType: string = 'private';
+  fileType: string = 'public';
 
   public uploader1: FileUploader = new FileUploader({ url: URL });
   public hasAnotherDropZoneOver: boolean = false;
+  fileDetails: any;
 
   public fileOverAnother(e: any): void {
     this.hasAnotherDropZoneOver = e;
@@ -46,8 +47,9 @@ export class ViewCaseFilesComponent implements OnInit {
 
   filterCases(data: any) {
     if (data) {
-      this.sharedCaseFiles = data.filter(data => data.file_case.type == "shared");
-      this.privateCaseFiles = data.filter(data => data.file_case.type == "private");
+      // this.sharedCaseFiles = data.filter(data => data.file_case.type == "shared");
+      // this.privateCaseFiles = data.filter(data => data.file_case.type == "private");
+      this.privateCaseFiles = data;
     }
   }
 
@@ -76,7 +78,18 @@ export class ViewCaseFilesComponent implements OnInit {
   onOpenModal(templateRef, fileId) {
     this.fileId = fileId
     let dialogRef = this.dialog.open(templateRef, {
-      width: '500px',
+      width: '500px'
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+    });
+  }
+
+  openModal(templateRef, file){
+    this.fileDetails = file
+    let dialogRef = this.dialog.open(templateRef, {
+      width: '800px',
+      height:'500px'
     });
 
     dialogRef.afterClosed().subscribe(result => {

@@ -41,7 +41,6 @@ export class ManageBillingSettingsComponent implements OnInit {
 
   getUserDetails() {
     this.userMetaService.getUserAdditionalDetails().subscribe((user: any) => {
-      console.log(user)
       user.data.forEach((ele) => {
         if (ele.metaKey == "State:Bar") {
           let splitArray = ele.metaValue.split(":")

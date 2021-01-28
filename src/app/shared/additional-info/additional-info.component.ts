@@ -42,11 +42,9 @@ export class AdditionalInfoComponent implements OnInit, OnChanges,AfterViewInit 
   }
   
   ngAfterViewInit(): void {
-    console.log('=====userAdditional',this.userMeta)
   }
 
   ngOnInit(): void {
-    console.log('=====userAdditional',this.userMeta)
     this.specialtyForm = this.fb.group({
       specialty: ['', [Validators.required]]
     })
