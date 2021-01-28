@@ -34,12 +34,10 @@ export class AcceptedCasesComponent implements OnInit {
   onGetRequestedCases(status) {
     this.hireLawyerService.getRequestedCases({ status: status }).subscribe((res: any) => {
       if (res.data) {
-        console.log(res.data)
         this.allRequestedCases = res.data.lawyer;
         if(!this.isHidden){
           this.requestedCases = this.allRequestedCases.filter(findHideCase => !findHideCase.lawyer_case.isHide);
         } else {
-          console.log('====not hidden')
           // this.requestedCases = this.allRequestedCases;
         }
       } else {
