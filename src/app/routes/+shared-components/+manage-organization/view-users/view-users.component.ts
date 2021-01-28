@@ -90,19 +90,28 @@ export class ViewUsersComponent implements OnInit, AfterViewInit {
   getAllUsers() {
     this.organisationService.getOrganisationUsers().subscribe((users: any) => {
       if (users.success) {
+        users.data.users.map((user)=>{
+          if(user.isAdmin){
+            user.isAdmin='Admin'
+            return user;
+          }
+        })
         users.data.users.map((item) => {
          let mobile  = (item.mobile).replace(/[^1-9 ]/g, " ")
            let mobileNo =  mobile.replace(/\s/g,'')
           item['mobile'] = Number((mobileNo))
           item['name'] = item.firstName + " " + item.middleName + " " + item.lastName;
           item['name1'] = item.firstName + item.middleName + item.lastName;
+          
           var date = item.createdAt;
           date = new Date(date).toDateString();
           var monthDay = date.substring(4, 10);
           var year = date.substring(10, 15);
           item['sent'] = monthDay + "," + year;
           return item;
+          
         })
+        console.log(users.data.users)
         this.dataSource = new MatTableDataSource(users.data.users);
         if (this.dataSource) {
           this.dataSource.filterPredicate = (data: any, filter: string) => {
