@@ -74,9 +74,9 @@ export class AcceptedCasesComponent implements OnInit {
       if (res.success) {
         let status = 'Connected';
         this.onGetRequestedCases(status);
-          this.toasterService.showSuccessToater('Hide case successfully.');
+         //  this.toasterService.showSuccessToater('Hide case successfully.');
       } else {
-        this.toasterService.showErrorToater('Something went wrong, please try again.');
+          // this.toasterService.showErrorToater('Something went wrong, please try again.');
       }
     });
   }
@@ -91,9 +91,9 @@ export class AcceptedCasesComponent implements OnInit {
         let status = 'Connected';
         this.onGetRequestedCases(status);
         this.requestedCases = this.requestedCases.filter(x => x.caseId != caseId)
-        this.toasterService.showSuccessToater('Unhide case successfully.');
+       // this.toasterService.showSuccessToater('Unhide case successfully.');
       } else {
-        this.toasterService.showErrorToater('Something went wrong, please try again.');
+        // this.toasterService.showErrorToater('Something went wrong, please try again.');
       }
     });
   }
