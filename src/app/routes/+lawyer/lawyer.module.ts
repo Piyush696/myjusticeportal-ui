@@ -17,6 +17,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { InquiriesCaseViewComponent } from './inquiries-case-view/inquiries-case-view.component';
 import { BillingSettingsComponent } from './billing-settings/billing-settings.component';
 import { UpdateBillingSettingsComponent } from './billing-settings/update-billing-settings/update-billing-settings.component';
+import { PdfViewerModule } from 'ng2-pdf-viewer';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { UpdateBillingSettingsComponent } from './billing-settings/update-billin
     SharedComponentsModule,
     FormsModule,
     ReactiveFormsModule,
-    FileUploadModule
+    FileUploadModule,
+    PdfViewerModule
   ],
   providers: [{
     provide: MatDialogRef,

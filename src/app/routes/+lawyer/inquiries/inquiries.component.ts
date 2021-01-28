@@ -137,7 +137,11 @@ export class InquiriesComponent implements OnInit {
           this.toasterService.showSuccessToater('Status updated successfully');
         }
       } else {
-        this.toasterService.showErrorToater('Something went wrong, please try again.');
+        if(res.data === 'Connection limit reached.'){
+          this.toasterService.showErrorToater('Connection limit reached.');
+        }else{
+          this.toasterService.showErrorToater('Something went wrong, please try again.');
+        }
       }
     });
   }

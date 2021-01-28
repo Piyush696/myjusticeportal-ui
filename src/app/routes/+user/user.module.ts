@@ -26,7 +26,7 @@ import { ContactComponent } from './contact/contact.component';
 import { LawyerProfileComponent } from './hire-lawyer/lawyer-profile/lawyer-profile.component';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { PendingInquriesComponent } from './pending-inquries/pending-inquries.component';
-
+import { PdfViewerModule } from 'ng2-pdf-viewer';
 @NgModule({
   declarations: [
     UserDashboardComponent,
@@ -57,7 +57,8 @@ import { PendingInquriesComponent } from './pending-inquries/pending-inquries.co
     SharedComponentsModule,
     FormsModule,
     ReactiveFormsModule,
-    FileUploadModule
+    FileUploadModule,
+    PdfViewerModule
   ],
   providers: [{
     provide: MatDialogRef,
