@@ -33,13 +33,14 @@ export class UserRegistrationComponent implements OnInit {
   }
 
   onNextClick(userDetails) {
-    // this.userMeta = this.user.userMeta;
+    
     if(this.user.userMeta)
     this.step = 2;
     this.user = userDetails;
   }
 
   userMetaData(userMetaData) {
+   // console.log(userMetaData)
     this.step = 3;
     this.user.userMeta = userMetaData;
   }
@@ -64,7 +65,7 @@ export class UserRegistrationComponent implements OnInit {
   }
 
   isPreviousClick(value) {
-    this.userMeta = this.user.userMeta;
+   this.userMeta = this.user.userMeta;
     if (value) {
       this.step = 2
     }

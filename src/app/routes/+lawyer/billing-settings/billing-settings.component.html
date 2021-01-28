@@ -158,7 +158,7 @@
             </div>
         </div>
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mt-2 px-0">
-            <mat-card class=" px-4">
+            <!-- <mat-card class=" px-4" *ngIf="!cardView">
                 <div>
                     <span class="h5 text-center font-weight-bold">Step 4:</span>&nbsp;
                     <span class="h5 text-center font-weight-bold">Add Credit Card Info</span>
@@ -170,7 +170,103 @@
                     [plan]="plan" (isloading)="startLoader($event)" (onPayEvent)="onPayEvent($event)"
                     [facilitiesList]="facilityList">
                 </app-stripe>
+            </mat-card> -->
+            <mat-card *ngIf="cardView">
+                <div>
+                    <span class="h5 text-center font-weight-bold">Credit Card Info</span>
+                </div>
+                <mat-card class="mat-elevation-z10 border-card mt-2">
+                    <div class="d-flex flex-column">
+                        <label>Card on file: <span>{{cardDetails?.last4}}</span></label>
+                        <label>Card brand: <span>{{cardDetails?.brand}}</span></label>
+                        <label>Card expires on:
+                            <span>{{cardDetails?.exp_month}}/{{cardDetails?.exp_year}}</span></label>
+                        <label>Next charge: <span>400</span></label>
+                        <div class="d-flex justify-content-end">
+                            <button class="button-purple px-4 py-1" [disabled]="" mat-raised-button color="primary"
+                                (click)="updateCard(updateCardDetails)">Update Card</button>
+
+                        </div>
+                    </div>
+                </mat-card>
             </mat-card>
+            <div class="d-flex justify-content-end" *ngIf="!isDisabled">
+                <button mat-raised-button class="button-purple px-4 py-1 mt-3" (click)="onPay()">Pay
+                    {{totalPrice | currency:'USD':'symbol'}}
+                </button>
+            </div>
         </div>
     </div>
 </div>
+
+<ng-template #updateCardDetails class="manage-billing">
+    <div class="mt-2" *ngIf="cardView">
+        <div class="pb-3">
+            <div class="col pl-0 pr-0">
+                <input name="" type="text" class="form-control" placeholder="Name on card"
+                    [formControl]="changeCardForm.controls['nameOnCard']">
+            </div>
+        </div>
+        <div class="row pb-3">
+            <div class="col">
+                <input name="" type="text" class="form-control" placeholder="Card number"
+                    [formControl]="changeCardForm.controls['cardNumber']" />
+                <div class="alert alert-danger"
+                    *ngIf="changeCardForm.controls['cardNumber'].invalid && changeCardForm.controls['cardNumber'].touched 
+&& !changeCardForm.controls['cardNumber'].hasError('invalidCardPattern') && !changeCardForm.controls['cardNumber'].hasError('invalidCard')">
+                    <i>Should be 16-digit card number.</i>
+                </div>
+                <div class="alert alert-danger" *ngIf="changeCardForm.controls['cardNumber'].invalid &&
+changeCardForm.controls['cardNumber'].dirty &&
+changeCardForm.controls['cardNumber'].hasError('invalidCardPattern')
+     && !changeCardForm.controls['cardNumber'].hasError('invalidCard')
+">
+                    <i>Card number should be in digit . </i>
+                </div>
+                <div class="alert alert-danger" *ngIf="changeCardForm.controls['cardNumber'].invalid &&
+changeCardForm.controls['cardNumber'].dirty &&
+     !changeCardForm.controls['cardNumber'].hasError('invalidCardPattern')&& changeCardForm.controls['cardNumber'].hasError('invalidCard')
+">
+                    <i>Card number is not Valid. </i>
+                </div>
+            </div>
+        </div>
+        <div class="row fifth-row pb-3">
+            <div class="col-4">
+                <input class="form-control" type="text" placeholder="MM"
+                    [formControl]="changeCardForm.controls['exp_month']">
+            </div>
+            <div class="col-4">
+                <input class="form-control" type="text" placeholder="YYYY"
+                    [formControl]="changeCardForm.controls['exp_year']">
+            </div>
+            <div class="col-4">
+                <input class="form-control" type="text" placeholder="CVV"
+                    [formControl]="changeCardForm.controls['cvc']">
+            </div>
+        </div>
+        <div class="alert alert-danger"
+            *ngIf="!changeCardForm.dirty && changeCardForm.controls['cardNumber'].hasError('invalidCard')">
+            <i>Your Expiry Date or CVV is incorrect.</i>
+        </div>
+        <div class="row pb-3">
+            <div class="col">
+                <label class="input">Coupon Code</label>
+                <p>If you have a coupon code, enter it below.</p>
+                <input class="form-control" type="text" placeholder="Enter valid coupon code"
+                    [formControl]="changeCardForm.controls['coupon']">
+
+                <div class="alert alert-danger" *ngIf="changeCardForm.controls['coupon'].hasError('invalidCoupon')">
+                    <i>Invalid coupon. </i>
+                </div>
+            </div>
+        </div>
+        <label class="float-right">
+            <button class="btn bg-color" mat-raised-button (click)="onCloseModal()">Close</button>
+            <button type="button" aria-label="Save" data-dismiss="modal" [disabled]="changeCardForm.get('nameOnCard').invalid || changeCardForm.get('cardNumber').invalid ||
+                     changeCardForm.get('exp_month').invalid ||
+                     changeCardForm.get('exp_year').invalid || changeCardForm.get('cvc').invalid"
+                class="btn btn-primary" (click)="addCard();onCloseModal()">Update Card</button>
+        </label>
+    </div>
+</ng-template>

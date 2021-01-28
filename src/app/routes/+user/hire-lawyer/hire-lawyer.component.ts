@@ -81,7 +81,7 @@ export class HireLawyerComponent implements OnInit, AfterViewInit {
 
   onGetLaywers() {
     this.hireLawyerService.getOrganization().subscribe((res: any) => {
-      this.organizationList = res.data.reduce((acc, element) => {
+    this.organizationList = res.data.reduce((acc, element) => {
         if (!element.lawyerFacility[0].lawyer_facility.isSponsors == true) {
           return [...acc, element];
         }
@@ -101,12 +101,15 @@ export class HireLawyerComponent implements OnInit, AfterViewInit {
     }
 
     let dialogRef = this.dialog.open(templateRef, {
-      width: '800px'
+      width: '800px',
+      
+    
     });
     setTimeout(() => {
       var x = document.getElementById('cust-img')
       if(lawyerData?.userAdditionalInfo?.header?.downloadLink){
-        x.style.background = 'url(' + this.path + ')'
+        x.style.background = 'url(' + this.path + ')';
+        x.style.backgroundRepeat= 'no-repeat';
       } else {
         x.style.background = 'url(' + this.path + ')'
         x.style.backgroundColor = '#333442'

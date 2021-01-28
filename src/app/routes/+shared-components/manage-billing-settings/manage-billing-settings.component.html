@@ -97,7 +97,7 @@
             </mat-card>
         </div>
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mt-3 px-0 pt-3">
-            <mat-card class="px-4">
+            <mat-card class="px-4" *ngIf="!cardView">
                 <div>
                     <span class="h5 text-center font-weight-bold">Step 4:</span>&nbsp;
                     <span class="h5 text-center font-weight-bold">Add Credit Card Info</span>
@@ -108,6 +108,25 @@
                 <app-stripe class="pt-2 mt-2" [totalCount]="totalPrice" [update]="update" [isDisabled]="isDisabled"
                     (isloading)="startLoader($event)" (onPayEvent)="onPayEvent($event)" [facilitiesList]="facilityList">
                 </app-stripe>
+            </mat-card>
+            <mat-card *ngIf="cardView">
+                <div>
+                    <span class="h5 text-center font-weight-bold">Credit Card Info</span>
+                </div>
+                <mat-card class="mat-elevation-z10 border-card mt-2">
+                    <div class="d-flex flex-column">
+                        <label>Card on file: <span>{{cardDetails?.last4}}</span></label>
+                        <label>Card brand: <span>{{cardDetails?.brand}}</span></label>
+                        <label>Card expires on:
+                            <span>{{cardDetails?.exp_month}}/{{cardDetails?.exp_year}}</span></label>
+                        <label>Next charge: <span>400</span></label>
+                        <div class="d-flex justify-content-end">
+                            <button class="button-purple px-4 py-1" [disabled]="" mat-raised-button color="primary"
+                                (click)="onChangeCard()">Update Card</button>
+
+                        </div>
+                    </div>
+                </mat-card>
             </mat-card>
         </div>
     </div>

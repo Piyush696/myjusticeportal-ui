@@ -26,6 +26,7 @@ export class StripeComponent implements OnDestroy, AfterViewInit, OnChanges, OnI
   @Input() update: boolean;
   @Output() isloading = new EventEmitter()
   @Input() isDisabled: boolean;
+  invalidCard: boolean;
 
   constructor(
     private cd: ChangeDetectorRef, private fb: FormBuilder,
@@ -48,7 +49,7 @@ export class StripeComponent implements OnDestroy, AfterViewInit, OnChanges, OnI
 
   createCardControl() {
     this.cardForm = this.fb.group({
-      coupon: ['', Validators.required, this.validateCoupon.bind(this)]
+      coupon: ['', this.validateCoupon.bind(this)]
     })
   }
 
@@ -166,6 +167,7 @@ export class StripeComponent implements OnDestroy, AfterViewInit, OnChanges, OnI
     } else {
       const { token, error } = await stripe.createToken(this.card);
       if (token) {
+        this.invalidCard = false
         let facilityList = [];
         let type
         const data = {
@@ -224,6 +226,8 @@ export class StripeComponent implements OnDestroy, AfterViewInit, OnChanges, OnI
           this.onSuccess(token);
         })
       } else {
+        this.invalidCard = true
+
         this.onError(error);
       }
     }
