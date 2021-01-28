@@ -31,6 +31,7 @@ export class ManageOrganisationComponent implements OnInit {
   public disabled = false;
   public color: ThemePalette = 'primary';
   public touchUi = false;
+  fileLink: any;
   public fileOverAnother(e: any): void {
     this.hasAnotherDropZoneOver = e;
   }
@@ -55,7 +56,8 @@ export class ManageOrganisationComponent implements OnInit {
       this.organisationService.uploadFile(formData).subscribe((res) => {
         this.fileType = 'private';
         if (res.success) {
-          this.getOrganisationAddress();
+          this.fileLink = res.data.downloadLink
+          // this.getOrganisationAddress();
           this.uploader1.queue = [];
           this.toasterService.showSuccessToater('File uploaded successfully.');
         } else {
@@ -198,7 +200,6 @@ export class ManageOrganisationComponent implements OnInit {
 
   saveChanges() {
     if (this.buttonText === 'Save') {
-      this.buttonText = 'Edit';
       this.organisationForm.get('specialty').value
       const data = {
         organization: {
@@ -219,6 +220,8 @@ export class ManageOrganisationComponent implements OnInit {
       }
       this.organisationService.updateOrganisation(data, this.addressId).subscribe((updatedOrg: any) => {
         if (updatedOrg.success) {
+          this.buttonText = 'Edit';
+          this.organisationForm.disable();
           this.getOrganisationAddress()
           this.toasterService.showSuccessToater('Organization updated successfully.');
           this.dialog.closeAll();

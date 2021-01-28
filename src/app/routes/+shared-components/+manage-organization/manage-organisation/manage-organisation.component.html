@@ -55,14 +55,16 @@
                 </tr>
                 <tr>
                     <th>Organization Statement</th>
-                    <td><div class="preline">{{orgData?.Organization?.description}}</div></td>
+                    <td>
+                        <div class="preline">{{orgData?.Organization?.description}}</div>
+                    </td>
                 </tr>
                 <tr>
                     <th>Logo Upload</th>
-                       <div  *ngIf="!orgData?.Organization?.logo?.downloadLink" class="my-2 mx-2">
+                    <div *ngIf="!orgData?.Organization?.logo?.downloadLink" class="my-2 mx-2">
                         <img src="assets/img/logoplaceholder.png" width="157px" height="auto" alt="logo">
                     </div>
-                    <div  *ngIf="orgData?.Organization?.logo?.downloadLink" class="my-2 mx-2">
+                    <div *ngIf="orgData?.Organization?.logo?.downloadLink" class="my-2 mx-2">
                         <img src="{{orgData?.Organization?.logo?.downloadLink}}" width="157px" height="auto" alt="logo">
                     </div>
                 </tr>
@@ -74,10 +76,12 @@
             <div class="row">
                 <div class="col-12 col-sm-12 d-flex justify-content-between justify-content-sm-between">
                     <div>
-                        <button mat-raised-button class="button-purple px-4 py-1 mt-1" (click)="openOrgPreviewModal(previewOrganization)">Preview</button>
+                        <button mat-raised-button class="button-purple px-4 py-1 mt-1"
+                            (click)="openOrgPreviewModal(previewOrganization)">Preview</button>
                     </div>
                     <div>
-                        <button mat-raised-button class="button-purple px-4 py-1 mt-1" (click)="openOrganizationModal(updateOrganization)">Change</button>
+                        <button mat-raised-button class="button-purple px-4 py-1 mt-1"
+                            (click)="openOrganizationModal(updateOrganization)">Change</button>
                     </div>
                 </div>
             </div>
@@ -96,7 +100,8 @@
                     </span>
                 </div>
                 <div>
-                    <button class="bg-color padding-btn btn-outline float-right py-1 mt-1" mat-raised-button (click)="onCloseModal()">
+                    <button class="bg-color padding-btn btn-outline float-right py-1 mt-1" mat-raised-button
+                        (click)="onCloseModal()">
                         Close
                     </button>
                 </div>
@@ -151,9 +156,11 @@
             <div class="col-12">
                 <mat-form-field appearance="fill" class="w-100 py-1">
                     <mat-label>Email</mat-label>
-                    <input type="email" matInput placeholder="Email" [formControl]="inviteMailForm.controls['userName']" required>
+                    <input type="email" matInput placeholder="Email" [formControl]="inviteMailForm.controls['userName']"
+                        required>
                     <mat-error>
-                        <div *ngIf="inviteMailForm.controls['userName'].invalid && inviteMailForm.controls['userName'].touched">
+                        <div
+                            *ngIf="inviteMailForm.controls['userName'].invalid && inviteMailForm.controls['userName'].touched">
                             <small class="font13">
                                 Email is Required
                             </small>
@@ -164,7 +171,8 @@
             <div class="col-12 pt-1">
                 <mat-label class="font-weight-bold">Billing Option:</mat-label>
                 <div class="pt-1 pb-3">
-                    <mat-radio-group color="primary" aria-label="Select an option" [formControl]="inviteMailForm.controls['isSelfPaid']">
+                    <mat-radio-group color="primary" aria-label="Select an option"
+                        [formControl]="inviteMailForm.controls['isSelfPaid']">
                         <mat-radio-button value="true" class="pr-3">
                             Pay Bill Directly
                         </mat-radio-button>
@@ -177,7 +185,8 @@
         </div>
     </div>
     <div class="d-flex justify-content-between">
-        <button class="button-purple px-4 py-1" mat-raised-button [disabled]="inviteMailForm.invalid" (click)="onEmailInvite()">
+        <button class="button-purple px-4 py-1" mat-raised-button [disabled]="inviteMailForm.invalid"
+            (click)="onEmailInvite()">
             Submit
         </button>
         <button mat-raised-button class="button-purple px-4 py-1" (click)="closeModal()">
@@ -199,7 +208,8 @@
     <div class="col-12 p-0">
         <mat-form-field appearance="fill" class="w-100 p-1">
             <mat-label>Organization Name</mat-label>
-            <input type="text" matInput placeholder="Organization Name" [formControl]="organisationForm.controls['name']" required>
+            <input type="text" matInput placeholder="Organization Name"
+                [formControl]="organisationForm.controls['name']" required>
             <mat-error>
                 <div *ngIf="organisationForm.controls['name'].invalid && organisationForm.controls['name'].touched">
                     <small class="font13">
@@ -214,9 +224,11 @@
         <div class="col-6 pl-3">
             <mat-form-field appearance="fill" class="w-100 p-1">
                 <mat-label>Street1</mat-label>
-                <input type="text" matInput placeholder="Street1" [formControl]="organisationForm.controls['street1']" required>
+                <input type="text" matInput placeholder="Street1" [formControl]="organisationForm.controls['street1']"
+                    required>
                 <mat-error>
-                    <div *ngIf="organisationForm.controls['street1'].invalid && organisationForm.controls['street1'].touched">
+                    <div
+                        *ngIf="organisationForm.controls['street1'].invalid && organisationForm.controls['street1'].touched">
                         <small class="font13">
                             Street1 is Required
                         </small>
@@ -229,7 +241,8 @@
                 <mat-label>Street2</mat-label>
                 <input type="text" matInput placeholder="Street2" [formControl]="organisationForm.controls['street2']">
                 <mat-error>
-                    <div *ngIf="organisationForm.controls['street2'].invalid && organisationForm.controls['street2'].touched">
+                    <div
+                        *ngIf="organisationForm.controls['street2'].invalid && organisationForm.controls['street2'].touched">
                         <small class="font13">
                             Street2 is Required
                         </small>
@@ -243,7 +256,8 @@
         <div class="col-6 pl-3">
             <mat-form-field appearance="fill" class="w-100 p-1">
                 <mat-label>City</mat-label>
-                <input type="text" matInput placeholder="City" [formControl]="organisationForm.controls['city']" required>
+                <input type="text" matInput placeholder="City" [formControl]="organisationForm.controls['city']"
+                    required>
                 <mat-error>
                     <div *ngIf="organisationForm.controls['city'].invalid && organisationForm.controls['city'].touched">
                         <small class="font13">
@@ -258,7 +272,8 @@
                 <mat-label>State</mat-label>
                 <input type="text" matInput placeholder="State" [formControl]="organisationForm.controls['state']">
                 <mat-error>
-                    <div *ngIf="organisationForm.controls['state'].invalid && organisationForm.controls['state'].touched">
+                    <div
+                        *ngIf="organisationForm.controls['state'].invalid && organisationForm.controls['state'].touched">
                         <small class="font13">
                             State is Required
                         </small>
@@ -271,9 +286,11 @@
         <div class="col-6 pl-3">
             <mat-form-field appearance="fill" class="w-100 p-1">
                 <mat-label>Country</mat-label>
-                <input type="text" matInput placeholder="Country" [formControl]="organisationForm.controls['country']" required>
+                <input type="text" matInput placeholder="Country" [formControl]="organisationForm.controls['country']"
+                    required>
                 <mat-error>
-                    <div *ngIf="organisationForm.controls['country'].invalid && organisationForm.controls['country'].touched">
+                    <div
+                        *ngIf="organisationForm.controls['country'].invalid && organisationForm.controls['country'].touched">
                         <small class="font13">
                             Country is Required
                         </small>
@@ -298,14 +315,16 @@
     <div class="row px-3">
         <mat-form-field appearance="fill" class="w-100 p-1">
             <mat-label>Practice Area(s)</mat-label>
-            <mat-select [formControl]="toppings" multiple [formControl]="organisationForm.controls['specialty']" required>
+            <mat-select [formControl]="toppings" multiple [formControl]="organisationForm.controls['specialty']"
+                required>
                 <span class="pl-3">Select Practice Areas</span>
                 <mat-option *ngFor="let specialty of specialtyList" value="{{specialty.specialtyType}}">
                     {{specialty.specialtyType}}&nbsp;
                 </mat-option>
             </mat-select>
             <mat-error>
-                <div *ngIf="organisationForm.controls['specialty'].invalid && organisationForm.controls['specialty'].touched">
+                <div
+                    *ngIf="organisationForm.controls['specialty'].invalid && organisationForm.controls['specialty'].touched">
                     <small class="font13">
                         Practice Areas is Required
                     </small>
@@ -319,7 +338,8 @@
                 <mat-label>Tagline</mat-label>
                 <input type="text" matInput [formControl]="organisationForm.controls['tagline']">
                 <mat-error>
-                    <div *ngIf="organisationForm.controls['tagline'].invalid && organisationForm.controls['tagline'].touched">
+                    <div
+                        *ngIf="organisationForm.controls['tagline'].invalid && organisationForm.controls['tagline'].touched">
                         <small class="font13">
                             Tagline is Required
                         </small>
@@ -330,18 +350,22 @@
         <div class="col-6 pr-3">
             <mat-form-field appearance="fill" class="w-100 p-1">
                 <mat-label>Color Picker</mat-label>
-                <input matInput [(colorPicker)]="selectedColor" [value]="selectedColor" [cpCancelButton]="true" [cpHeight]="'310px'" [formControl]="organisationForm.controls['colorPiker']" (colorPickerChange)="buttonColor($event)" />
+                <input matInput [(colorPicker)]="selectedColor" [value]="selectedColor" [cpCancelButton]="true"
+                    [cpHeight]="'310px'" [formControl]="organisationForm.controls['colorPiker']"
+                    (colorPickerChange)="buttonColor($event)" />
             </mat-form-field>
         </div>
     </div>
     <div class="row px-3">
         <mat-form-field appearance="fill" class="w-100 p-1">
             <mat-label>Description</mat-label>
-            <textarea class="text-area"  [formControl]="organisationForm.controls['description']" rows="8" cols="50" matInput placeholder="Description..."></textarea>
+            <textarea class="text-area" [formControl]="organisationForm.controls['description']" rows="8" cols="50"
+                matInput placeholder="Description..."></textarea>
             <mat-error>
-                <div *ngIf="organisationForm.controls['description'].invalid && organisationForm.controls['description'].touched">
+                <div
+                    *ngIf="organisationForm.controls['description'].invalid && organisationForm.controls['description'].touched">
                     <small class="font13">
-                        Description  is Required
+                        Description is Required
                     </small>
                 </div>
             </mat-error>
@@ -351,7 +375,9 @@
         <div class="card-body px-0 pt-3 pb-4">
             <div class="drag-border p-3" *ngIf="!uploader1?.queue.length > 0 ">
                 <h4 class="font-weight-bold margin-remove">Your Logo</h4>
-                <div ng2FileDrop [ngClass]="{'another-file-over-class': hasAnotherDropZoneOver}" (fileOver)="fileOverAnother($event)" [uploader]="uploader1" class="box-placeholder my-drop-zone font-weight-bold pb-2">
+                <div ng2FileDrop [ngClass]="{'another-file-over-class': hasAnotherDropZoneOver}"
+                    (fileOver)="fileOverAnother($event)" [uploader]="uploader1"
+                    class="box-placeholder my-drop-zone font-weight-bold pb-2">
                     Drag and drop files here (or) Choose below to attach.
                 </div>
                 <label for="file1" class="file-upload mb-0">
@@ -384,12 +410,19 @@
                 </div>
             </div>
         </div>
+        <div *ngIf="fileLink" class="my-2 mx-2">
+            <img src="{{fileLink}}" width="157px" height="auto" alt="logo">
+        </div>
     </div>
     <div class="d-flex justify-content-between mx-2">
         <button mat-raised-button class="button-purple px-4 py-1" data-dismiss="modal" (click)="closeModal()">
             Close
         </button>
-        <button class="button-purple px-4 py-1" mat-raised-button (click)="saveChanges()">
+        <button *ngIf="buttonText == 'Edit'" class="button-purple px-4 py-1" mat-raised-button (click)="saveChanges()">
+            {{buttonText}}
+        </button>
+        <button *ngIf="buttonText == 'Save'" class="button-purple px-4 py-1" [disabled]="organisationForm.invalid"
+            mat-raised-button (click)="saveChanges()">
             {{buttonText}}
         </button>
     </div>
