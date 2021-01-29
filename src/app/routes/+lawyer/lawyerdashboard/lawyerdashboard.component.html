@@ -6,7 +6,7 @@
     <div class="d-flex justify-content-center align-items-center;">
         <div class="col-12 pt-2  pl-1  px-lg-2 ">
             <mat-card class="mat-elevation-z10 d-flex justify-content-center mx-md-3 mx-lg-n2">
-                <h2>
+                <h2 class="approv">
                     Account Status: <span class="panding-review">Pending Review</span>
                 </h2>
             </mat-card>
@@ -40,10 +40,35 @@
 
 <div class="pt-3" *ngIf="!billingBoard && !isAuthorized">
     <mat-card class="mat-elevation-z10 ">
-        <h2 class="text-center"> Your account is under review meanwhile <button class="fonts btn-link px-0"
+        <!-- <h2 class="text-center"> Your account is under review meanwhile <button class="fonts btn-link px-0"
                 (click)="redirect()">please setup your profile.</button>
-        </h2>
-    </mat-card>
+        </h2> -->
+          <div class="text-center">
+            <ul class="mr-5">
+      
+                <li class="one">
+                    <mat-checkbox class="fonts" [checked]="true" [disabled]=true>
+                         Step 1: Register 
+                    </mat-checkbox>
+                </li>
+                <li>
+                    <mat-checkbox class="fonts" [checked]="true" [disabled]=true>
+                         Step 2: Choose your plan
+                    </mat-checkbox>
+                </li>
+                <li class="ml-2">
+                    <mat-checkbox class="fonts" id="third-check" [disabled]=true>
+                        Step 3: <a  class="link" (click)="redirect()">Set up your profile</a>
+                        
+                    </mat-checkbox>
+                </li>
+              
+            </ul>
+       </div>
+       <div class="text-center" >
+           <p class="font-weight-bold">After completing youir profile, you must log out. You will receive a confirmation email with a link to your new account</p>
+       </div>
+       </mat-card>
 </div>
 
 <div *ngIf="showDashboard && isAuthorized">
@@ -143,14 +168,14 @@
                     <p class="text-center modal-text mb-0 pt-4" font-size="16px">
                         Your registration status is
                         <span class="text-warning modal-text">Pending</span> while we verify your information. When your
-                        account is<br/>
+                        account is<br />
                         <span class="text-success modal-text">Approved</span> you'll receive an email notification.
                         (Typically within 24 Hours).
-    
+
                         <br /><br />
                     </p>
                     <p class="text-center font-weight-bold">
-                        In the meantime, let select your access plan and configure your marketing <br />preferences so
+                        In the meantime, select your access plan and configure your marketing <br />preferences so
                         you'll be ready to go! <br /><br />
                     </p>
                 </div>
@@ -158,7 +183,7 @@
             <div class="d-flex justify-content-center">
                 <div class="modal-btn">
                     <button type="button" (click)="onchoosePlan()" class="btn btn-primary  mt-xl-n3 px-5 py-3"
-                      id="btn-blue"  data-dismiss="modal">
+                        id="btn-blue" data-dismiss="modal">
                         Choose Your Plan
                     </button>
                 </div>
