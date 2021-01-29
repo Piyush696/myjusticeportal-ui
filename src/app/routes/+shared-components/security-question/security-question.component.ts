@@ -1,3 +1,4 @@
+import { CompileShallowModuleMetadata } from '@angular/compiler';
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { SecurityService } from 'app/services/security.service';
@@ -49,6 +50,29 @@ export class SecurityQuestionComponent implements OnInit {
     this.count = this.count + 1;
     this.progressValue = (100 / 3) * this.count;
     this.setAnswers();
+    let y;
+    y = this.originalSecurityQuestions.filter((filterr) => {
+      if (filterr.securityQuestionId == this.questionId) {
+     //   console.log(filterr);
+        return filterr
+      }
+    })
+    y = this.originalSecurityQuestions.find((filterr) => {
+      return filterr.securityQuestionId == this.questionId;
+    })
+    let qa = this.securityQuestionAnswered.push()
+   /// console.log(this.securityQuestionAnswered);
+  //  console.log(y.securityQuestionId)
+    this.securityQuestionForm.get('securityQuestionId').setValue(y.securityQuestionId)
+    // let qa=Object.fromEnteries(
+    //   Object.entries.(qa).map(([key,value])=>[key,value]));
+    //  console.log(qa.answer);
+   // console.log(qa.answer)
+    //    this.securityQuestionForm.get('securityQuestionId').setValue(qa.securityQuestionId)
+    // let qa=this.securityQuestionAnswered.push(fv)
+    // console.log(fv);
+
+  
   }
 
   onClickBack() {
@@ -60,6 +84,13 @@ export class SecurityQuestionComponent implements OnInit {
         return filteredquestion;
       }
     })
+    //console.log(x);
+    x = this.originalSecurityQuestions.find((filteredquestion) => {
+      return filteredquestion.securityQuestionId == this.questionId;
+    })
+    let questionAnswer = this.securityQuestionAnswered.pop()
+    this.securityQuestionForm.get('securityQuestionId').setValue(questionAnswer.securityQuestionId)
+    this.securityQuestionForm.get('answer').setValue(questionAnswer.answer)
     this.securityQuestions = this.securityQuestions.concat(x);
     if (this.count == 0) {
       this.securityQuestions = [];
@@ -70,14 +101,16 @@ export class SecurityQuestionComponent implements OnInit {
   setAnswers() {
     this.questionId = this.securityQuestionForm.get('securityQuestionId').value;
     let formValue = this.securityQuestionForm.value;
-      this.securityQuestionAnswered.push(formValue)
+    //console.log(formValue);
+    //console.log(this.securityQuestionAnswered);
+    this.securityQuestionAnswered.push(formValue)
     this.securityQuestionForm.reset();
   }
 
   onClickRegister() {
     this.spinner = true;
     this.onClickNext()
-    if(this.count < 3){
+    if (this.count < 3) {
       this.setAnswers();
     }
     this.isRegisterEvent.emit(this.securityQuestionAnswered);

@@ -11,7 +11,7 @@ import { FormGroup } from '@angular/forms';
 import { UserMetaService } from 'app/services/user-meta.service';
 import { UserAdditionInfoService } from 'app/services/user-addition-info.service';
 import { Router } from '@angular/router';
-
+import {ThemePalette} from '@angular/material/core';
 
 @Component({
   selector: 'app-lawyerdashboard',
@@ -26,6 +26,7 @@ export class LawyerdashboardComponent implements OnInit, AfterViewInit {
   billingBoard: boolean = false;
   isDisabled: boolean = true;
   clients: any;
+  isChecked: boolean=true;
 
   allClients: any;
   count: number = 1;

@@ -15,7 +15,7 @@ import { Router } from '@angular/router';
 
 export class UserRegistrationComponent implements OnInit {
 
-  step: number = 1;
+  step: number =1;
   roleId: number = 1;
   totalSteps: number = 3;
   facilityCode: any;
