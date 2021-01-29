@@ -60,7 +60,7 @@ export class SecurityQuestionComponent implements OnInit {
       return filterr.securityQuestionId == this.questionId;
     })
     let qa = this.securityQuestionAnswered.push()//id
-    console.log(this.securityQuestionAnswered);//answer and id
+  //  console.log(this.securityQuestionAnswered);//answer and id
     this.securityQuestionForm.get('securityQuestionId').setValue(y.securityQuestionId)
   }
 
