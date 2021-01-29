@@ -46,9 +46,12 @@
                     <span>
                         <b>Files attached</b>: {{case?.caseFile?.length}}
                     </span>
-                    <span>
-                      <b>Enquiry Notes</b>:  {{case?.lawyer_case?.notes}}
-                    </span>
+                    <mat-card class="enquiry-notes mt-2">
+                        <span>
+                            <b>Enquiry Notes</b>:  {{case?.lawyer_case?.notes}}
+                          </span>
+                    </mat-card>
+
                 </div>
                 <div>
                     <!-- <button *ngIf="case?.lawyer_case?.isHide" (click)="unHideCaseDetails(case?.caseId)" class="button-purple mr-1" mat-mini-fab title="Unhide Case Details">
