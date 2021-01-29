@@ -111,7 +111,7 @@
             <mat-label class="font-weight-bold">
                 Shared Files (Files for my Inmate)({{singleCaseData?.caseFile?.length}}):
             </mat-label>
-            <div *ngIf="singleCaseData?.caseFile?.length > 0">
+            <div *ngIf="!singleCaseData.caseFile.length">
                 <mat-label class="font-weight-bold text-info">
                     No files uploaded yet.
                 </mat-label>
@@ -129,7 +129,7 @@
                             Uploaded Date: {{file?.createdAt | date : 'MM/dd/yyyy'}}
                         </span>
                         <span class="pl-2">
-                            Type: {{file?.fileType}}
+                            Type: {{file?.filetype}}
                         </span>
                     </div>
                 </div>

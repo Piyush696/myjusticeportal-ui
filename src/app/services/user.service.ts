@@ -77,4 +77,8 @@ export class UserService {
   addUser(userData) {
     return this.httpClient.post<Object>(`${this.apiPath}/user/createUser`, userData, this.getHeaders());
   }
+
+  deleteBulkUsers(userIds){
+    return this.httpClient.post<Object>(`${this.apiPath}/user/deleteUsers`, userIds, this.getHeaders());
+  }
 }
