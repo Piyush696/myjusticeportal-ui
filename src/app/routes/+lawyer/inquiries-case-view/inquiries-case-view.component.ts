@@ -6,6 +6,7 @@ import { HireLawyerService } from 'app/services/hire-lawyer.service';
 import { FileUploader } from 'ng2-file-upload';
 import { CaseService } from 'app/services/case.service';
 import { MatDialog } from '@angular/material/dialog';
+import { UserAdditionInfoService } from 'app/services/user-addition-info.service';
 const URL = 'https://evening-anchorage-3159.herokuapp.com/api/';
 @Component({
   selector: 'app-inquiries-case-view',
@@ -21,27 +22,19 @@ export class InquiriesCaseViewComponent implements OnInit {
 
   public uploader1: FileUploader = new FileUploader({ url: URL });
   public hasAnotherDropZoneOver: boolean = false;
+  userId: any;
+  userName: string;
 
   public fileOverAnother(e: any): void {
     this.hasAnotherDropZoneOver = e;
   }
   
-  constructor(private hireLawyerService: HireLawyerService, private activatedRoute: ActivatedRoute,
+  constructor(private hireLawyerService: HireLawyerService,private userAdditionInfoService: UserAdditionInfoService, private activatedRoute: ActivatedRoute,
     private location: Location, private toasterService: ToasterService,private caseService: CaseService, public dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.onGetCaseData();
-  }
-
-  onOpenModal(templateRef, fileId) {
-    this.fileId = fileId
-    let dialogRef = this.dialog.open(templateRef, {
-      width: '500px',
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-    });
-  }
+  }a
 
   closeModal() {
     this.dialog.closeAll();
@@ -52,6 +45,7 @@ export class InquiriesCaseViewComponent implements OnInit {
       this.caseService.getLawyerCase(this.activatedRoute.snapshot.params['caseId']).subscribe((res: any) => {
         if (res.data) {
           this.singleCaseData = res.data;
+          console.log(this.singleCaseData)
         } else {
           this.toasterService.showErrorToater('No data found, invalid url detected.');
         }
@@ -99,6 +93,44 @@ export class InquiriesCaseViewComponent implements OnInit {
     }, (error: any) => {
       this.toasterService.showErrorToater(error.statusText);
     })
+  }
+
+  onOpenModal(templateRef, userId, user) {
+    this.userId = userId
+    user.middleName = user.middleName ? user.middleName : ' '
+    this.userName = user.firstName + ' ' + user.middleName + ' ' + user.lastName
+    let dialogRef = this.dialog.open(templateRef, {
+      width: '800px',
+    });
+  }
+
+  isModelClose(value){
+    if(value){
+      this.dialog.closeAll();
+    }
+  }
+
+  onStatusUpdate(caseId, status) {
+    const data = {
+      'caseId': caseId,
+      'status': status
+    }
+    this.userAdditionInfoService.updateLawywrStatus(data).subscribe((res: any) => {
+      if (res.success) {
+        this.onGetCaseData();
+        if(status == 'Lawyer Approved'){
+          this.toasterService.showSuccessToater('Please note the inmate must also accept for the connection to become active.');
+        }else{
+          this.toasterService.showSuccessToater('Status updated successfully');
+        }
+      } else {
+        if(res.data === 'Connection limit reached.'){
+          this.toasterService.showErrorToater('Connection limit reached.');
+        }else{
+          this.toasterService.showErrorToater('Something went wrong, please try again.');
+        }
+      }
+    });
   }
 
 }

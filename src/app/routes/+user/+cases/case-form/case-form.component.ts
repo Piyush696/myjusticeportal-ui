@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { CaseService } from 'app/services/case.service';
 import { ToasterService } from 'app/services/toaster.service';
 import { Store } from '@ngrx/store';
+import { UserService } from 'app/services/user.service';
 
 @Component({
   selector: 'app-case-form',
@@ -25,7 +26,7 @@ export class CaseFormComponent implements OnInit, OnChanges {
   nextCourtDate = new Date(+new Date() + 24 * 60 * 60 * 1000);
   tomorrow = new Date();
   
-  constructor(private toasterService: ToasterService, private router: Router, private _statesService: StatesService,
+  constructor(private userService: UserService,private toasterService: ToasterService, private router: Router, private _statesService: StatesService,
     private fb: FormBuilder, private caseService: CaseService, private store: Store<any>) {
   }
 
@@ -52,6 +53,15 @@ export class CaseFormComponent implements OnInit, OnChanges {
     this.getUserFromStore();
     this.stateData();
     this.userState();
+    this.getSingleUser();
+  }
+
+  getSingleUser() {
+    this.userService.getSingleUser().subscribe((user: any) => {
+      this.fullName = `${user.data.firstName} ${user.data.middleName ? user.data.middleName : ''} ${user.data.lastName}`;
+      this.caseForm.get('firstName').setValue(this.fullName);
+      this.caseForm.get('firstName').disable();
+    })
   }
 
   createFormControl() {
@@ -85,9 +95,9 @@ export class CaseFormComponent implements OnInit, OnChanges {
 
   getUserFromStore() {
     this.store.select(s => s.userInfo).subscribe(user => this.userData = user);
-    this.fullName = `${this.userData.firstName} ${this.userData.middleName ? this.userData.middleName : ''} ${this.userData.lastName}`;
-    this.caseForm.get('firstName').setValue(this.fullName);
-    this.caseForm.get('firstName').disable();
+    // this.fullName = `${this.userData.firstName} ${this.userData.middleName ? this.userData.middleName : ''} ${this.userData.lastName}`;
+    // this.caseForm.get('firstName').setValue(this.fullName);
+    // this.caseForm.get('firstName').disable();
   }
 
   updateCase() {
