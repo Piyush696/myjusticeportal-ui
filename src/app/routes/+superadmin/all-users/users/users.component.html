@@ -19,7 +19,7 @@
                 </mat-checkbox>
             </div>
             <div>
-                <button [disabled]="!userIdList.length > 0" class="button-purple px-5 py-1" mat-raised-button (click)="deleteUsers(confirmDeleteUsers)">
+                <button [disabled]="userIdList.length > 0" class="button-purple px-5 py-1" mat-raised-button (click)="deleteUsers(confirmDeleteUsers)">
                            Delete users
                         </button>
             </div>
