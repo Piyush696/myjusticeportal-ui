@@ -22,13 +22,13 @@ export class UsersComponent implements OnInit, OnDestroy {
   userInfoStoreSub: Subscription;
   createUserForm: FormGroup;
 
-  displayedColumns: string[] = ["name", "userName", "status", "roles", "createdAt", "action"];
+  displayedColumns: string[] = ["select", "name", "userName", "status", "roles", "createdAt", "action"];
   dataSource = new MatTableDataSource();
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort: MatSort;
   user: any;
   filterStatus: any;
-
+  userIdList = [];
 
   constructor(private userService: UserService, private store: Store<any>,
     private toasterService: ToasterService, private registrationService: RegistrationService, private fb: FormBuilder, public dialog: MatDialog) {
@@ -40,6 +40,38 @@ export class UsersComponent implements OnInit, OnDestroy {
     this.createUserControl();
   }
 
+  onSelectUser(check, userId) {
+    console.log(check, userId)
+    if (check) {
+      this.userIdList.push(userId)
+    } else {
+      this.userIdList.map((x, i, a) => {
+        if (x == userId) {
+          a.splice(i, 1)
+        }
+      })
+    }
+    console.log(this.userIdList)
+  }
+
+  deleteUsers(templateRef){
+    let dialogRef = this.dialog.open(templateRef, {
+      width: '368px',
+    });
+  }
+
+  bulkDeleteUsers(){
+    this.userService.deleteBulkUsers(this.userIdList).subscribe((users:any)=>{
+      if(users.success){
+        this.dialog.closeAll();
+        this.userIdList = [];
+        this.toasterService.showSuccessToater(users.data)
+        this.onGetAllUsers();
+      } else{
+        this.toasterService.showWarningToater('Something went wrong.')
+      }
+    })
+  }
 
   onViewRejectedUsers(e) {
     if (e) {
@@ -65,14 +97,14 @@ export class UsersComponent implements OnInit, OnDestroy {
           var month = date.substring(4, 7);
           var day = date.substring(8, 10);
           var year = date.substring(11, 15);
-          if(day<10){
+          if (day < 10) {
             var day1 = day.substring(1, 2);
           }
-          else{
+          else {
             var day1 = day.substring(0, 2);
           }
-          element['newCreatedAt1'] = month +' '+ day1 +','+' '+ year;
-          element['newCreatedAt2'] = month +' '+ day +','+' '+ year;
+          element['newCreatedAt1'] = month + ' ' + day1 + ',' + ' ' + year;
+          element['newCreatedAt2'] = month + ' ' + day + ',' + ' ' + year;
           return element
         })
         this.dataSource = new MatTableDataSource(this.filterStatus);
@@ -153,14 +185,14 @@ export class UsersComponent implements OnInit, OnDestroy {
         var month = date.substring(4, 7);
         var day = date.substring(8, 10);
         var year = date.substring(11, 15);
-        if(day<10){
+        if (day < 10) {
           var day1 = day.substring(1, 2);
         }
-        else{
+        else {
           var day1 = day.substring(0, 2);
         }
-        element['newCreatedAt1'] = month +' '+ day1 +','+' '+ year;
-        element['newCreatedAt2'] = month +' '+ day +','+' '+ year;
+        element['newCreatedAt1'] = month + ' ' + day1 + ',' + ' ' + year;
+        element['newCreatedAt2'] = month + ' ' + day + ',' + ' ' + year;
         return element
       })
       this.dataSource = new MatTableDataSource(x);
@@ -227,7 +259,7 @@ export class UsersComponent implements OnInit, OnDestroy {
     return search;
   }
 
-  
+
   // pagination.
   getPageSizeOptions(): number[] {
     if (this.dataSource.data.length > 500)
