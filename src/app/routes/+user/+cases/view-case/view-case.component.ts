@@ -20,6 +20,7 @@ export class ViewCaseComponent implements OnInit {
   caseNoteForm: FormGroup;
   assignedLawyer: any;
   isFacility: boolean;
+  practicearea: any;
   // enableEditBtn: boolean = true;
 
   constructor(private router: Router, private route: ActivatedRoute, private caseService: CaseService,
@@ -44,6 +45,11 @@ export class ViewCaseComponent implements OnInit {
     this.caseService.getAssignedLawyer(this.route.snapshot.params['caseId']).subscribe((lawyer: any) => {
       if (lawyer.data != 'No lawyer assigned to this case.') {
         this.assignedLawyer = lawyer.data
+        this.practicearea = this.assignedLawyer.userAdditionalInfo.practiceAreas
+        this.practicearea = this.practicearea.split(",")
+        if (this.practicearea.length > 3) {
+          this.practicearea = this.practicearea.slice(0, 3);
+        }
       } else {
         this.assignedLawyer = '';
       }
