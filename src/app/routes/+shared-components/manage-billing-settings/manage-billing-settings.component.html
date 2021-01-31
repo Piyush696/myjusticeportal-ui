@@ -119,7 +119,7 @@
                 <span class="text-center text-black">Please enter your credit card information in the form below. Once
                     everything looks correct, click Pay to complete your setup and
                     start using My Justice Portal!</span>
-                <app-stripe class="pt-2 mt-2" [totalCount]="totalPrice" [update]="update" [isDisabled]="isDisabled" (isloading)="startLoader($event)" (onPayEvent)="onPayEvent($event)" [facilitiesList]="facilityList">
+                <app-stripe class="pt-2 mt-2" [totalCount]="totalPrice" [update]="update" [isDisabled]="isDisabled" (isloading)="startLoader($event)" [facilitiesList]="facilityList">
                 </app-stripe>
             </mat-card>
         </div>
