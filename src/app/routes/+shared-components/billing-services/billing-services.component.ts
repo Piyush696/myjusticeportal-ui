@@ -22,6 +22,7 @@ export class BillingServicesComponent implements OnInit, AfterViewInit {
   plan: string;
   @Output() paymentConfirm = new EventEmitter()
   selectedFacilities = [];
+  isDiscount: any;
 
   constructor(private facilityService: FacilityService, private userMetaService: UserMetaService, private lawyerFacilityService: LawyerFacilityService) { }
 
@@ -35,6 +36,20 @@ export class BillingServicesComponent implements OnInit, AfterViewInit {
   ngOnInit(): void {
     this.getUserDetails();
   }
+
+  couponObj(value){
+    console.log(value)
+    if(value){
+      if(value.name === "UNRECOGNIZED"){
+        this.isDiscount = null;
+      } else {
+        this.isDiscount = value;
+      }
+    } else {
+      this.isDiscount = value;
+    }
+    console.log(this.isDiscount)
+   }
 
   getBillableFacility() {
     this.lawyerFacilityService.getBilliableFacilityDetails().subscribe((data: any) => {

@@ -31,4 +31,8 @@ export class StripeService {
     return this.httpClient.post<object>(`${this.apiPath}/stripeConnection`, updateStripeCredencialData, this.getHeaders())
   }
 
+  listAllTransactions() {
+    return this.httpClient.get<object>(`${this.apiPath}/stripeConnection/list-transactions`, this.getHeaders())
+  }
+
 }

@@ -105,19 +105,26 @@
                                 <div>BASE COST:</div>
                                 <div>{{ planPrice | currency: "USD":"symbol" }}</div>
                             </div>
-                            <div class="d-flex justify-content-between align-items-between">
+                            <div class="d-flex justify-content-between align-items-between pb-2">
                                 <div>PREMIUM:</div>
                                 <div>
                                     {{ (addOnsPrice ? addOnsPrice : 0) | currency: "USD":"symbol" }}
                                 </div>
                             </div>
+                            <div *ngIf="isDiscount" class="d-flex justify-content-between align-items-between">
+                                <div>DISCOUNT&nbsp;(<b>{{isDiscount.id}}</b>):</div>
+                                <div *ngIf="isDiscount.percent_off"> {{ - ( isDiscount.percent_off ? totalPrice * isDiscount.percent_off / 100 : 0) | currency: "USD":"symbol" }}</div>
+                                <div *ngIf="isDiscount.amount_off"> {{ - ( isDiscount.amount_off ? isDiscount.amount_off / 100 : 0) | currency: "USD":"symbol" }}</div>
+                            </div>
                             <hr />
                             <div class="d-flex justify-content-between align-items-between">
                                 <div>TOTAL MONTHLY CHARGE:</div>
-                                <div>
-                                    <span class="font-weight-bold">{{
-                      totalPrice | currency: "USD":"symbol"
-                      }}</span>
+                                <div *ngIf="isDiscount">
+                                    <span *ngIf="isDiscount?.percent_off" class="font-weight-bold">{{(totalPrice *  isDiscount.percent_off / 100) | currency: "USD":"symbol"}}</span>
+                                    <span *ngIf="isDiscount?.amount_off" class="font-weight-bold">{{(totalPrice - isDiscount.amount_off / 100) | currency: "USD":"symbol"}}</span>
+                                </div>
+                                <div *ngIf="!isDiscount">
+                                    <span class="font-weight-bold">{{totalPrice  | currency: "USD":"symbol"}}</span>
                                 </div>
                             </div>
                         </mat-card>
@@ -134,7 +141,7 @@
                 <span class="text-center text-black">Please enter your credit card information in the form below. Once
             everything looks correct, click Pay to complete your setup and
             start using My Justice Portal!</span>
-                <app-stripe class="pt-2 mt-2" [update]="update" [totalCount]="totalPrice" [plan]="plan" (isloading)="startLoader($event)" (onPayEvent)="onPayEvent($event)" [facilitiesList]="facilities"></app-stripe>
+                <app-stripe class="pt-2 mt-2" (couponData)="couponObj($event)" [update]="update" [totalCount]="totalPrice" [plan]="plan" (isloading)="startLoader($event)" (onPayEvent)="onPayEvent($event)" [facilitiesList]="facilities"></app-stripe>
             </mat-card>
         </div>
     </div>
