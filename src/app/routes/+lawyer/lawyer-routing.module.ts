@@ -13,6 +13,7 @@ import { InquiriesComponent } from './inquiries/inquiries.component';
 import { InquiriesCaseViewComponent } from './inquiries-case-view/inquiries-case-view.component';
 import { BillingSettingsComponent } from './billing-settings/billing-settings.component';
 import { UpdateBillingSettingsComponent } from './billing-settings/update-billing-settings/update-billing-settings.component';
+import { AllTransactionsComponent } from './all-transactions/all-transactions.component';
 
 const routes: Routes = [
     { path: '', redirectTo: 'lawyer-dashboard', pathMatch: 'full' },
@@ -24,6 +25,7 @@ const routes: Routes = [
     { path: 'manage-profile', component: ManageProfileComponent },
     { path: 'inquiries', component: InquiriesComponent },
     { path: 'billing-setting', component: BillingSettingsComponent },
+    { path: 'billing-setting/all-transactions', component: AllTransactionsComponent },
     { path: 'billing-setting/update', component: UpdateBillingSettingsComponent },
     { path: 'manage-organization/users', component: ViewUsersComponent },
     { path: 'lawyer-chat', component: LawyerChatComponent },

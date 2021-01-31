@@ -43,8 +43,8 @@ export class LawyerService {
     return this.httpClient.post<object>(`${this.apiPath}/stripe/validate_card`, data);
   }
 
-  getCardDetails(data) {
-    return this.httpClient.post<object>(`${this.apiPath}/stripe/subcription_details`, data, this.getHeaders())
+  getCardDetails() {
+    return this.httpClient.get<object>(`${this.apiPath}/stripe/subcription_details`, this.getHeaders())
   }
 
   deleteLawyerCase(lawyerId, caseId) {
@@ -66,6 +66,10 @@ export class LawyerService {
   chargeLawyer(data) {
     return this.httpClient.post<object>(`${this.apiPath}/stripe/charge`, data, this.getHeaders())
   }
+
+  // updatePlan(data){
+  //   return this.httpClient.post<object>(`${this.apiPath}/stripe/charge`, data, this.getHeaders())
+  // }
 
 
 }

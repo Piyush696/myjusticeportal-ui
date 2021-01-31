@@ -22,13 +22,16 @@ export class ManageBillingSettingsComponent implements OnInit {
   isDisabled: boolean = true;
   update: boolean = true;
   custId: any;
-  cardView: boolean;
-  cardDetails: any;
-  constructor(private defenderService: DefenderService, private lawyerService: LawyerService, private userMetaService: UserMetaService, private facilityService: FacilityService,) { }
+
+  constructor(private router:Router,private defenderService: DefenderService, private lawyerService: LawyerService, private userMetaService: UserMetaService, private facilityService: FacilityService,) { }
 
   ngOnInit(): void {
     this.getBillableFacility();
     this.getUserDetails();
+  }
+
+  alltransactions(){
+    this.router.navigateByUrl('/mjp/public-defender/billing-setting/all-transactions')
   }
 
   getBillableFacility() {
@@ -37,17 +40,9 @@ export class ManageBillingSettingsComponent implements OnInit {
     })
   }
 
-  onPayEvent(event) {
-    this.isDisabled = true;
-    this.getBillableFacility();
-  }
-
 
   getUserDetails() {
     this.userMetaService.getUserAdditionalDetails().subscribe((user: any) => {
-      let stripeData = user.data.find(x => x.metaKey == 'cust_id')
-      this.custId = stripeData.metaValue
-      this.getUserCardDetails(this.custId)
       user.data.forEach((ele) => {
         if (ele.metaKey == "State:Bar") {
           let splitArray = ele.metaValue.split(":")
@@ -56,17 +51,6 @@ export class ManageBillingSettingsComponent implements OnInit {
       })
       this.getAllFacilities();
     })
-  }
-
-  getUserCardDetails(id) {
-    this.lawyerService.getCardDetails({ strip_custId: id }).subscribe((res: any) => {
-      this.cardDetails = res.data
-      this.cardView = this.cardDetails ? true : false
-    })
-  }
-
-  onChangeCard() {
-    this.cardView = false
   }
 
   getAllFacilities() {

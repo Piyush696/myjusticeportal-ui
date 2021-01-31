@@ -1,0 +1,136 @@
+<div class="pl-3">
+    <h1 class="font-weight-bold m-0">List Transactions</h1>
+    <h4 class="line-height header-sub-text">
+        If you need any help, please contact Support.
+    </h4>
+</div>
+<div class="d-flex">
+    <div class="col-8">
+        <mat-card>
+            <h3 class="font-weight-bold">Billing History</h3>
+            <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8 w-100">
+                <ng-container matColumnDef="created">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Date</th>
+                    <td mat-cell *matCellDef="let user">
+                        <span>
+                            {{(user?.created * 1000) | date : 'mediumDate'}}
+                        </span>
+                        <span *ngIf="!user.created">
+                            N/A
+                        </span>
+                    </td>
+                </ng-container>
+                <ng-container matColumnDef="amount">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Amount</th>
+                    <td mat-cell *matCellDef="let user">
+                        <span>{{user?.amount / 100 | currency:'USD' }}</span>
+                    </td>
+                </ng-container>
+                <ng-container matColumnDef="last4">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Card</th>
+                    <td mat-cell *matCellDef="let user">****&nbsp; {{user?.source?.last4}}</td>
+                </ng-container>
+                <ng-container matColumnDef="status">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Status</th>
+                    <td mat-cell *matCellDef="let user" [ngClass]="{'text-success': user?.status == 'succeeded','text-danger': user?.status == 'failed'}">{{user?.status}}</td>
+                </ng-container>
+                <ng-container matColumnDef="action">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Action</th>
+                    <td mat-cell *matCellDef="let user">
+                        <button class="btn btn-md btn-success" title="View Invoices" (click)="viewInvoices(user)">
+                         view
+                       </button>
+                    </td>
+                </ng-container>
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table>
+            <mat-paginator [pageSizeOptions]="getPageSizeOptions()" showFirstLastButtons></mat-paginator>
+        </mat-card>
+    </div>
+    <div class="col-4">
+        <mat-card>
+            <div>
+                <span class="h5 text-center font-weight-bold">Credit Card Info</span>
+            </div>
+            <mat-card class="mat-elevation-z10 border-card mt-2">
+                <div class="d-flex flex-column">
+                    <label>Card on file: <span>****&nbsp;{{cardDetails?.last4}}</span></label>
+                    <label>Card brand: <span>{{cardDetails?.brand}}</span></label>
+                    <label>Card expires on:
+                        <span>{{cardDetails?.exp_month < 10 ? '0' + cardDetails?.exp_month : cardDetails?.exp_month}}</span>
+                            <span>/</span> <span>{{cardDetails?.exp_year}}</span>
+                        </label>
+                    <label>Next charge: <span>{{totalCharge | currency: 'USD'}}</span></label>
+                    <div class="d-flex justify-content-end">
+                        <button class="button-purple px-4 py-1" [disabled]="" mat-raised-button color="primary" (click)="updateCard(updateCardDetails)">Update Card</button>
+                    </div>
+                </div>
+            </mat-card>
+        </mat-card>
+    </div>
+</div>
+
+<ng-template #updateCardDetails class="manage-billing">
+    <div class="mt-2">
+        <div class="pb-3">
+            <div class="col pl-0 pr-0">
+                <input name="" type="text" class="form-control" placeholder="Name on card" [formControl]="changeCardForm.controls['nameOnCard']">
+            </div>
+        </div>
+        <div class="row pb-3">
+            <div class="col">
+                <input name="" type="text" class="form-control" placeholder="Card number" [formControl]="changeCardForm.controls['cardNumber']" />
+                <div class="alert alert-danger" *ngIf="changeCardForm.controls['cardNumber'].invalid && changeCardForm.controls['cardNumber'].touched 
+&& !changeCardForm.controls['cardNumber'].hasError('invalidCardPattern') && !changeCardForm.controls['cardNumber'].hasError('invalidCard')">
+                    <i>Should be 16-digit card number.</i>
+                </div>
+                <div class="alert alert-danger" *ngIf="changeCardForm.controls['cardNumber'].invalid &&
+changeCardForm.controls['cardNumber'].dirty &&
+changeCardForm.controls['cardNumber'].hasError('invalidCardPattern')
+     && !changeCardForm.controls['cardNumber'].hasError('invalidCard')
+">
+                    <i>Card number should be in digit . </i>
+                </div>
+                <div class="alert alert-danger" *ngIf="changeCardForm.controls['cardNumber'].invalid &&
+changeCardForm.controls['cardNumber'].dirty &&
+     !changeCardForm.controls['cardNumber'].hasError('invalidCardPattern')&& changeCardForm.controls['cardNumber'].hasError('invalidCard')
+">
+                    <i>Card number is not Valid. </i>
+                </div>
+            </div>
+        </div>
+        <div class="row fifth-row pb-3">
+            <div class="col-4">
+                <input class="form-control" type="text" placeholder="MM" [formControl]="changeCardForm.controls['exp_month']">
+            </div>
+            <div class="col-4">
+                <input class="form-control" type="text" placeholder="YYYY" [formControl]="changeCardForm.controls['exp_year']">
+            </div>
+            <div class="col-4">
+                <input class="form-control" type="text" placeholder="CVV" [formControl]="changeCardForm.controls['cvc']">
+            </div>
+        </div>
+        <div class="alert alert-danger" *ngIf="!changeCardForm.dirty && changeCardForm.controls['cardNumber'].hasError('invalidCard')">
+            <i>Your Expiry Date or CVV is incorrect.</i>
+        </div>
+        <div class="row pb-3">
+            <div class="col">
+                <label class="input">Coupon Code</label>
+                <p>If you have a coupon code, enter it below.</p>
+                <input class="form-control" type="text" placeholder="Enter valid coupon code" [formControl]="changeCardForm.controls['coupon']">
+
+                <div class="alert alert-danger" *ngIf="changeCardForm.controls['coupon'].hasError('invalidCoupon')">
+                    <i>Invalid coupon. </i>
+                </div>
+            </div>
+        </div>
+        <label class="float-right">
+            <button class="btn bg-color" mat-raised-button (click)="onCloseModal()">Close</button>
+            <button type="button" aria-label="Save" data-dismiss="modal" [disabled]="changeCardForm.get('nameOnCard').invalid || changeCardForm.get('cardNumber').invalid ||
+                     changeCardForm.get('exp_month').invalid ||
+                     changeCardForm.get('exp_year').invalid || changeCardForm.get('cvc').invalid"
+                class="btn btn-primary" (click)="addCard();onCloseModal()">Update Card</button>
+        </label>
+    </div>
+</ng-template>

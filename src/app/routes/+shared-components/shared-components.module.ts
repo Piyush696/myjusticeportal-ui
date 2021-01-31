@@ -19,6 +19,7 @@ import { BillingServicesComponent } from './billing-services/billing-services.co
 import { PublicDefenderBillingComponent } from './public-defender-billing/public-defender-billing.component';
 import { ManageProfileComponent } from './manage-profile/manage-profile.component';
 import { ManageBillingSettingsComponent } from './manage-billing-settings/manage-billing-settings.component';
+import { SharedAllTransactionsComponent } from './shared-all-transactions/shared-all-transactions.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { ManageBillingSettingsComponent } from './manage-billing-settings/manage
     ChatModalComponent,
     PublicDefenderBillingComponent,
     ManageProfileComponent,
-    ManageBillingSettingsComponent
+    ManageBillingSettingsComponent,
+    SharedAllTransactionsComponent
   ],
   imports: [
     CommonModule,
@@ -60,7 +62,8 @@ import { ManageBillingSettingsComponent } from './manage-billing-settings/manage
     ChatModalComponent,
     PublicDefenderBillingComponent,
     ManageProfileComponent,
-    ManageBillingSettingsComponent
+    ManageBillingSettingsComponent,
+    SharedAllTransactionsComponent
   ]
 })
 

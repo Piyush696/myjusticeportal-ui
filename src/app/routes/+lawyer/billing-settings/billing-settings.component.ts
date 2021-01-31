@@ -6,7 +6,6 @@ import { Store } from '@ngrx/store';
 import { FacilityService } from 'app/services/facility.service';
 import { LawyerService } from 'app/services/lawyer.service';
 import { ToasterService } from 'app/services/toaster.service';
-import { UserAdditionInfoService } from 'app/services/user-addition-info.service';
 import { UserMetaService } from 'app/services/user-meta.service';
 import { LawyerFacilityService } from '../../../services/lawyer-facility.service';
 @Component({
@@ -30,22 +29,15 @@ export class BillingSettingsComponent implements OnInit {
   spinner: any;
   isDisabled: boolean = true;
   custId: any;
-  cardDetails: any;
-  cardView: boolean;
-  changeCardForm: any;
+  isDiscount:  boolean = false;
   userData: any;
 
-  constructor(private store: Store<any>, private lawyerFacilityService: LawyerFacilityService, private toasterService: ToasterService, private fb: FormBuilder, private lawyerService: LawyerService, private router: Router, private userMetaService: UserMetaService, private facilityService: FacilityService, public dialog: MatDialog) { }
+  constructor(private store: Store<any>, private lawyerFacilityService: LawyerFacilityService, private toasterService: ToasterService,
+     private fb: FormBuilder, private lawyerService: LawyerService,
+     private router: Router, private userMetaService: UserMetaService, private facilityService: FacilityService,
+      public dialog: MatDialog) { }
 
   ngOnInit(): void {
-    this.changeCardForm = this.fb.group({
-      nameOnCard: ['', [Validators.required]],
-      cardNumber: ['', [Validators.required, Validators.minLength(16), Validators.maxLength(16), this.cardPatternValidation.bind(this)], this.cardValidation.bind(this)],
-      exp_month: ['', [Validators.required]],
-      exp_year: ['', [Validators.required]],
-      cvc: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(3), this.cardPatternValidation.bind(this)]],
-      coupon: ['', Validators.required, this.validateCoupon.bind(this)]
-    });
     this.getUserDetailsFromStore()
     this.getUserDetails();
     this.getBillableFacility();
@@ -59,8 +51,13 @@ export class BillingSettingsComponent implements OnInit {
     if (!result.success) {
       return { invalidCoupon: true };
     } else {
+      this.isDiscount = true;
       return null;
     }
+  }
+
+  couponData(value){
+   console.log(value)
   }
 
   cardPatternValidation(control: AbstractControl) {
@@ -165,11 +162,10 @@ export class BillingSettingsComponent implements OnInit {
       "type": type,
       "strip_custId": this.custId
     }
-    this.lawyerService.chargeLawyer(data).subscribe((res: any) => {
+    this.lawyerService.updatePlan(data).subscribe((res: any) => {
       if (res.success) {
         this.getBillableFacility()
         this.toasterService.showSuccessToater('Plan updated')
-
       }
     })
   }
@@ -188,11 +184,8 @@ export class BillingSettingsComponent implements OnInit {
     }
   }
 
-  getUserCardDetails(id) {
-    this.lawyerService.getCardDetails({ strip_custId: id }).subscribe((res: any) => {
-      this.cardDetails = res.data
-      this.cardView = this.cardDetails ? true : false
-    })
+  listAllTransactions(){
+    this.router.navigateByUrl('/mjp/lawyer/billing-setting/all-transactions')
   }
 
 
@@ -204,12 +197,6 @@ export class BillingSettingsComponent implements OnInit {
 
 
 
-  updateCard(templateRef) {
-    let dialogRef = this.dialog.open(templateRef, {
-      // height: '80%',
-      width: '613px'
-    });
-  }
 
   // onChangePlan() {
   //   this.isUpdate = true
@@ -240,9 +227,6 @@ export class BillingSettingsComponent implements OnInit {
 
   getUserDetails() {
     this.userMetaService.getUserAdditionalDetails().subscribe((user: any) => {
-      let stripeData = user.data.find(x => x.metaKey == 'cust_id')
-      this.custId = stripeData.metaValue
-      this.getUserCardDetails(this.custId)
       user.data.forEach((ele) => {
         if (ele.metaKey == "State:Bar") {
           let splitArray = ele.metaValue.split(":")
@@ -320,20 +304,6 @@ export class BillingSettingsComponent implements OnInit {
     this.spinner = value
   }
 
-  addCard() {
-    this.spinner = true
-    this.lawyerService.updateCardDetails({
-      number: this.changeCardForm.get('cardNumber').value, exp_month: this.changeCardForm.get('exp_month').value, name: this.changeCardForm.get('nameOnCard').value,
-      exp_year: this.changeCardForm.get('exp_year').value, cvc: this.changeCardForm.get('cvc').value, customerId: this.custId,
-    }).subscribe(
-      (res: any) => {
-        this.getUserDetails()
-        this.spinner = false
-        this.changeCardForm.reset()
-        if (res.success) {
-          this.changeCardForm.reset();
-        }
-      })
-  }
+
 
 }
