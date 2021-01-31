@@ -26,6 +26,7 @@ export class LawyerdashboardComponent implements OnInit, AfterViewInit {
   billingBoard: boolean = false;
   isDisabled: boolean = true;
   clients: any;
+  isChecked: boolean=true;
 
   allClients: any;
   count: number = 1;

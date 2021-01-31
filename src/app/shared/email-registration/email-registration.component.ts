@@ -22,6 +22,7 @@ export class EmailRegistrationComponent implements OnInit, OnChanges {
   @Input() email: string;
   @Input() user;
   @Output() isNextEvent = new EventEmitter();
+  currentUserName: void;
   
   constructor(public securityService: SecurityService, public dialog: MatDialog,
     private fb: FormBuilder, private registrationService: RegistrationService) {
@@ -66,6 +67,7 @@ export class EmailRegistrationComponent implements OnInit, OnChanges {
       this.registrationForm.get('lastName').setValue(this.user.lastName)
       this.registrationForm.get('middleName').setValue(this.user?.middleName)
       this.registrationForm.get('userName').setValue(this.user?.userName)
+      this.currentUserName=this.user.userName;
       this.registrationForm.get('mobile').setValue(this.user?.mobile)
       this.registrationForm.get('userEmail').setValue(this.user?.email)
       this.registrationForm.get('password').setValue(this.user?.password)
@@ -106,7 +108,7 @@ export class EmailRegistrationComponent implements OnInit, OnChanges {
 
   async validateUserNotTaken(control: AbstractControl) {
     const result: any = await this.registrationService.checkUser({ userName: control.value }).toPromise();
-    if (result.taken) {
+    if (result.taken && ((this.registrationForm.get('userName').value != this.currentUserName ))) {
       return { taken: true };
     } else {
       return null;
