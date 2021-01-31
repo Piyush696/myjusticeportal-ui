@@ -22,6 +22,7 @@ export class PublicDefenderBillingComponent implements OnInit {
   plan: string;
   @Output() paymentConfirm = new EventEmitter()
   isPaybtnDisabled:boolean = true;
+  isDiscount: any;
   
   constructor(private facilityService: FacilityService, private userMetaService: UserMetaService,private lawyerFacilityService: LawyerFacilityService) { }
 
@@ -86,6 +87,20 @@ export class PublicDefenderBillingComponent implements OnInit {
       }
     })
   }
+
+  couponObj(value){
+    console.log(value)
+    if(value){
+      if(value.name === "UNRECOGNIZED"){
+        this.isDiscount = null;
+      } else {
+        this.isDiscount = value;
+      }
+    } else {
+      this.isDiscount = value;
+    }
+    console.log(this.isDiscount)
+   }
   
 
   startLoader(value) {

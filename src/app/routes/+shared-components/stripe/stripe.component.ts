@@ -59,10 +59,12 @@ export class StripeComponent implements OnDestroy, AfterViewInit, OnChanges, OnI
       coupon: control.value,
     }).toPromise();
     if (!result.success) {
+      console.log(result)
+      this.couponData.emit(result.error)
       return { invalidCoupon: true };
     } else {
       console.log(result)
-      this.couponData.emit(result)
+      this.couponData.emit(result.data)
       return null;
     }
   }
@@ -193,7 +195,6 @@ export class StripeComponent implements OnDestroy, AfterViewInit, OnChanges, OnI
                   facilityList.push(facilityData)
                 } else {
                   type = 'lawyer'
-
                   const facilityData = {
                     "facilityId": ele.facilityId,
                     "isSponsors": ele.addOns.sponsors,
@@ -201,7 +202,6 @@ export class StripeComponent implements OnDestroy, AfterViewInit, OnChanges, OnI
                     "lawyerId": this.userData.userId,
                     "isSelected": true,
                     "planSelected": this.plan
-
                   }
                   facilityList.push(facilityData)
                 }

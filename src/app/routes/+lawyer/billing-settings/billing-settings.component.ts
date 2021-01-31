@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { AbstractControl, FormBuilder, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
@@ -29,8 +29,9 @@ export class BillingSettingsComponent implements OnInit {
   spinner: any;
   isDisabled: boolean = true;
   custId: any;
-  isDiscount:  boolean = false;
+  isDiscount: any;
   userData: any;
+  @Output() couponData = new EventEmitter();
 
   constructor(private store: Store<any>, private lawyerFacilityService: LawyerFacilityService, private toasterService: ToasterService,
      private fb: FormBuilder, private lawyerService: LawyerService,
@@ -51,13 +52,13 @@ export class BillingSettingsComponent implements OnInit {
     if (!result.success) {
       return { invalidCoupon: true };
     } else {
-      this.isDiscount = true;
       return null;
     }
   }
 
-  couponData(value){
+  couponObj(value){
    console.log(value)
+   this.isDiscount = value;
   }
 
   cardPatternValidation(control: AbstractControl) {
