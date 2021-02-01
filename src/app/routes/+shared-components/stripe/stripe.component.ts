@@ -24,7 +24,8 @@ export class StripeComponent implements OnDestroy, AfterViewInit, OnChanges, OnI
   @Input() totalCount: number;
   @Input() facilitiesList: any[];
   @Input() update: boolean;
-  @Output() isloading = new EventEmitter()
+  @Output() isloading = new EventEmitter();
+  @Output() couponData = new EventEmitter();
   @Input() isDisabled: boolean;
   invalidCard: boolean;
 
@@ -58,8 +59,12 @@ export class StripeComponent implements OnDestroy, AfterViewInit, OnChanges, OnI
       coupon: control.value,
     }).toPromise();
     if (!result.success) {
+      console.log(result)
+      this.couponData.emit(result.error)
       return { invalidCoupon: true };
     } else {
+      console.log(result)
+      this.couponData.emit(result.data)
       return null;
     }
   }
@@ -142,7 +147,7 @@ export class StripeComponent implements OnDestroy, AfterViewInit, OnChanges, OnI
               "isPremium": ele.addOns.premium,
               "lawyerId": this.userData.userId,
               "isSelected": true,
-              "planSelected": this.plan
+              "planSelected": this.plan,
             }
             facilityList.push(facilityData)
           }
@@ -154,8 +159,10 @@ export class StripeComponent implements OnDestroy, AfterViewInit, OnChanges, OnI
         "currency": 'usd',
         "interval": 'month',
         "facilityList": facilityList,
-        "type": type
+        "type": type,
+        "coupon": this.cardForm.get('coupon').value
       }
+      console.log(data)
       this.lawyerService.updatePlan(data).subscribe((res: any) => {
         if (res.success) {
           this.card.clear()
@@ -184,12 +191,10 @@ export class StripeComponent implements OnDestroy, AfterViewInit, OnChanges, OnI
                     "facilityId": ele.facilityId,
                     "defenderId": this.userData.userId,
                     "isSelected": true
-
                   }
                   facilityList.push(facilityData)
                 } else {
                   type = 'lawyer'
-
                   const facilityData = {
                     "facilityId": ele.facilityId,
                     "isSponsors": ele.addOns.sponsors,
@@ -197,7 +202,6 @@ export class StripeComponent implements OnDestroy, AfterViewInit, OnChanges, OnI
                     "lawyerId": this.userData.userId,
                     "isSelected": true,
                     "planSelected": this.plan
-
                   }
                   facilityList.push(facilityData)
                 }
@@ -210,8 +214,10 @@ export class StripeComponent implements OnDestroy, AfterViewInit, OnChanges, OnI
               "currency": 'usd',
               "interval": 'month',
               "facilityList": facilityList,
-              "type": type
+              "type": type,
+              "coupon": this.cardForm.get('coupon').value
             }
+            console.log(data)
             this.lawyerService.subscribePlan(data).subscribe((subscribePlan: any) => {
               if (subscribePlan.data) {
                 this.card.clear()

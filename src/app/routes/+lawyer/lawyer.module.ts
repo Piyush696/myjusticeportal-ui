@@ -18,6 +18,7 @@ import { InquiriesCaseViewComponent } from './inquiries-case-view/inquiries-case
 import { BillingSettingsComponent } from './billing-settings/billing-settings.component';
 import { UpdateBillingSettingsComponent } from './billing-settings/update-billing-settings/update-billing-settings.component';
 import { PdfViewerModule } from 'ng2-pdf-viewer';
+import { AllTransactionsComponent } from './all-transactions/all-transactions.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { PdfViewerModule } from 'ng2-pdf-viewer';
     InquiriesComponent,
     InquiriesCaseViewComponent,
     BillingSettingsComponent,
-    UpdateBillingSettingsComponent
+    UpdateBillingSettingsComponent,
+    AllTransactionsComponent
   ],
   imports: [
     TextMaskModule,

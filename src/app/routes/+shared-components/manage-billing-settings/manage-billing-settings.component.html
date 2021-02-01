@@ -1,13 +1,29 @@
-<div class="row pl-3">
-    <div class="col-9">
+<div class="d-flex justify-content-between align-items-center">
+    <div>
         <h1 class="font-weight-bold m-0">Manage Billing Settings</h1>
         <h4 class="line-height header-sub-text">
             If you need any help, please contact Support.
         </h4>
     </div>
-    <div class="col-3 d-flex justify-content-end">
-        <button class="btn btn-link" (click)="onEdit()">Edit plan details</button>
+    <div class="d-flex justify-content-between align-items-center">
+        <div>
+            <button class="button-purple px-4 py-1" mat-raised-button (click)="alltransactions()">
+                View Transactions
+            </button> &nbsp;
+        </div>
+        <div>
+            <button mat-raised-button class="button-purple px-4 py-1" (click)="onEdit()">
+                Edit Plan 
+            </button> &nbsp;
+        </div>
+        <!-- <div class="col-3 d-flex justify-content-end">
+            <button class="btn btn-link" (click)="onEdit()">Edit plan details</button>
+        </div>
+        <div class="col-3 d-flex justify-content-end">
+            <button class="btn btn-link" (click)="alltransactions()">All Transactions</button>
+        </div> -->
     </div>
+
 </div>
 
 <div class="row">
@@ -29,8 +45,7 @@
                     <div class="row">
                         <div class="col-12 pt-2 pb-2">
                             <mat-card class="mat-elevation-z10 border-card">
-                                <input class="circle pl-1" type="radio" [disabled]="isDisabled" [checked]="true"
-                                    name="package" /><span>
+                                <input class="circle pl-1" type="radio" [disabled]="isDisabled" [checked]="true" name="package" /><span>
                                     Unlimited Connections, $40/mo</span><br />
                             </mat-card>
                         </div>
@@ -56,8 +71,7 @@
                         </div>
                         <div *ngIf="facilityList.length > 0">
                             <li *ngFor="let facility of facilityList">
-                                <mat-checkbox color="primary" [checked]="facility.isSelected" [disabled]="isDisabled"
-                                    (change)="onFacilitySelect($event.checked,facility?.facilityId) ">
+                                <mat-checkbox color="primary" [checked]="facility.isSelected" [disabled]="isDisabled" (change)="onFacilitySelect($event.checked,facility?.facilityId) ">
                                     {{ facility?.facilityName }} ({{facility.facilityUserCount }})
                                 </mat-checkbox>
                             </li>
@@ -97,7 +111,7 @@
             </mat-card>
         </div>
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mt-3 px-0 pt-3">
-            <mat-card class="px-4" *ngIf="!cardView">
+            <mat-card class="px-4">
                 <div>
                     <span class="h5 text-center font-weight-bold">Step 4:</span>&nbsp;
                     <span class="h5 text-center font-weight-bold">Add Credit Card Info</span>
@@ -105,28 +119,8 @@
                 <span class="text-center text-black">Please enter your credit card information in the form below. Once
                     everything looks correct, click Pay to complete your setup and
                     start using My Justice Portal!</span>
-                <app-stripe class="pt-2 mt-2" [totalCount]="totalPrice" [update]="update" [isDisabled]="isDisabled"
-                    (isloading)="startLoader($event)" (onPayEvent)="onPayEvent($event)" [facilitiesList]="facilityList">
+                <app-stripe class="pt-2 mt-2" [totalCount]="totalPrice" [update]="update" [isDisabled]="isDisabled" (isloading)="startLoader($event)" [facilitiesList]="facilityList">
                 </app-stripe>
-            </mat-card>
-            <mat-card *ngIf="cardView">
-                <div>
-                    <span class="h5 text-center font-weight-bold">Credit Card Info</span>
-                </div>
-                <mat-card class="mat-elevation-z10 border-card mt-2">
-                    <div class="d-flex flex-column">
-                        <label>Card on file: <span>{{cardDetails?.last4}}</span></label>
-                        <label>Card brand: <span>{{cardDetails?.brand}}</span></label>
-                        <label>Card expires on:
-                            <span>{{cardDetails?.exp_month}}/{{cardDetails?.exp_year}}</span></label>
-                        <label>Next charge: <span>400</span></label>
-                        <div class="d-flex justify-content-end">
-                            <button class="button-purple px-4 py-1" [disabled]="" mat-raised-button color="primary"
-                                (click)="onChangeCard()">Update Card</button>
-
-                        </div>
-                    </div>
-                </mat-card>
             </mat-card>
         </div>
     </div>
