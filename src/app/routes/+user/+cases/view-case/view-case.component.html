@@ -119,9 +119,40 @@
                                             </div>
                                         </div>
                                         <div class="row">
-                                            <div class="mx-4">
-                                                <a mat-button (click)="removeAlert(lawyerRemoveConforation)">Disconnect
-                                        </a>
+                                            <div >
+                                                <div class="row">
+                                                   <div class="col-6 mx-0">
+                                                    <a mat-button (click)="removeAlert(lawyerRemoveConforation)" class="mx-0 px-1">Disconnect
+                                                    </a>
+                                                   </div>
+                                                   <div class="col-6  mx-0 pl-2 pl-lg-1">
+                                                            <!-- Button trigger modal -->
+                                                            <a mat-button  data-toggle="modal" data-target="#exampleModal"  class="mx-1 ml-auto px-1">
+                                                               view
+                                                            </a>
+                                                            
+                                                            <!-- Modal -->
+                                                            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                                <div class="modal-dialog" role="document">
+                                                                <div class="modal-content">
+                                                                    <div class="modal-header">
+                                                                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                        <span aria-hidden="true">&times;</span>
+                                                                    </button>
+                                                                    </div>
+                                                                    <div class="modal-body">
+                                                                    ...
+                                                                    </div>
+                                                                    <div class="modal-footer">
+                                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                                    <button type="button" class="btn btn-primary">Save changes</button>
+                                                                    </div>
+                                                                </div>
+                                                                </div>
+                                                            </div>
+                                                   </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -156,10 +187,8 @@
                                         </div>
                                     </div>
                                     <div class="col-12 text-default">Practice Area(s):
-
-                                        <span class="font-weight-normal">{{assignedLawyer?.userAdditionalInfo?.practiceAreas}}</span>
-
-                                    </div>
+                                        <span class="font-weight-normal">{{practicearea}}</span>
+                                     </div>
                                 </div>
                             </div>
                         </mat-card>

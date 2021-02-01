@@ -75,3 +75,64 @@
 .modal-text {
     font-weight: bold !important;
 }
+.fonts{
+    font: 500 20px/32px Roboto, "Helvetica Neue", sans-serif !important;
+   
+   
+  }
+  #btn-blue{
+    background-color: #3c78d8ff;
+  }
+  
+  .one{
+    margin-right: 81px;
+  }
+  .third{
+    margin-left:31px
+  }
+    
+  .link{
+    color: #007bff;
+    
+  }
+  .approv{
+    margin-left:31px;
+    }
+    
+  .mat-checkbox-inner-container {
+    display: inline-block;
+    height: 16px;
+    line-height: 0;
+    margin: revert!important;
+    margin-right: 8px;
+    order: 0;
+    position: relative;
+    vertical-align: middle;
+    white-space: nowrap;
+    width: 16px;
+    flex-shrink: 0;
+  }
+  ::ng-deep .mat-checkbox-disabled .mat-checkbox-label {
+    color: black;
+  }
+
+  ::ng-deep .mat-checkbox-layout .mat-checkbox-label {
+    line-height: 19px!important;
+  }
+
+  ::ng-deep .mat-checkbox-inner-container{
+    background-color: white !important;
+  }
+  
+  ::ng-deep .mat-checkbox-checked.mat-accent .mat-checkbox-ripple .mat-ripple-element {
+    opacity: 0.03 !important;
+    background-color: #bbbbbb !important;
+  }
+
+::ng-deep .mat-checkbox-checked.mat-accent .mat-checkbox-background,.mat-checkbox-indeterminate.mat-accent .mat-checkbox-background {
+    background-color: #ff6700 !important;
+  }
+
+
+
+ 

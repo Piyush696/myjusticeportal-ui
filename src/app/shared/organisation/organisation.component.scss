@@ -9,3 +9,9 @@ button:disabled {
 .org-heading {
   margin: 0 200px;
 }
+
+
+
+::ng-deep .cdk-overlay-pane{
+  overflow: inherit !important;
+}

@@ -6,7 +6,7 @@
     <div class="d-flex justify-content-center align-items-center;">
         <div class="col-12 pt-2 pl-2">
             <mat-card class="mat-elevation-z10 d-flex justify-content-center mx-md-n2">
-                <h2>
+                <h2 class="approv">
                     Account Status: <span class="panding-review">Pending Review</span>
                 </h2>
             </mat-card>
@@ -16,8 +16,33 @@
 
 <div class="pt-3 pr-3" *ngIf="!billingBoard && !isAuthorized">
     <mat-card class="mat-elevation-z10 mr-lg-n2">
-        <h2 class="text-center"> Your account is under review meanwhile <button class=" btn-link px-0" (click)="redirect()">please setup your profile.</button>
-        </h2>
+        <!-- <h2 class="text-center"> Your account is under review meanwhile <button class=" btn-link px-0" (click)="redirect()">please setup your profile.</button>
+        </h2> -->
+        <div class="text-center">
+            <ul class="mr-5">
+
+                <li class="one">
+                    <mat-checkbox class="fonts" [checked]="true" [disabled]=true>
+                        Step 1: Register
+                    </mat-checkbox>
+                </li>
+                <li>
+                    <mat-checkbox class="fonts" [checked]="true" [disabled]=true>
+                        Step 2: Choose your plan
+                    </mat-checkbox>
+                </li>
+                <li class="ml-2">
+                    <mat-checkbox class="fonts" id="third-check" [disabled]=true>
+                        Step 3: <a class="link" (click)="redirect()">Set up your profile</a>
+
+                    </mat-checkbox>
+                </li>
+
+            </ul>
+        </div>
+        <div class="text-center">
+            <p class="font-weight-bold">After completing your profile, you must log out. You will receive a confirmation email with a link to your new account.</p>
+        </div>
     </mat-card>
 </div>
 
