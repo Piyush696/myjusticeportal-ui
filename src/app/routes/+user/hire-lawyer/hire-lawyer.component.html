@@ -2,7 +2,8 @@
     <div class="col pl-3">
         <h1 class="line-height font-weight-bold">Find a Lawyer</h1>
         <h4 class="line-height header-sub-text">
-            Please complete the form below to contact a lawyer. Once the lawyer reviews your information, you will receive a response here in the portal.
+            Please complete the form below to contact a lawyer. Once the lawyer reviews your information, you will
+            receive a response here in the portal.
         </h4>
     </div>
     <div class="col">
@@ -59,7 +60,8 @@
                         Based on your search criteria, there are currently no lawyers available to display.
                     </mat-label>
                 </div>
-                <mat-card class="d-flex justify-content-between align-items-center inner-card mt-2" *ngFor="let org of organizationList">
+                <mat-card class="d-flex justify-content-between align-items-center inner-card mt-2"
+                    *ngFor="let org of organizationList">
                     <div class="d-flex justify-content-between align-items-center">
                         <div>
                             <mat-label class="font-weight-bold">
@@ -67,7 +69,8 @@
                             </mat-label>
                         </div>
                         <div>
-                            <span class="ml-3 premium-tag" *ngIf="org?.lawyerFacility[0]?.lawyer_facility?.isSponsors">Sponsored</span>
+                            <span class="ml-3 premium-tag"
+                                *ngIf="org?.lawyerFacility[0]?.lawyer_facility?.isSponsors">Sponsored</span>
                         </div>
                     </div>
                     <div class="px-3">
@@ -90,7 +93,8 @@
                 <mat-card class="sponser-card w-100">
                     <div class="text-center line-height">
                         <div *ngIf="user?.userAdditionalInfo?.profile?.downloadLink">
-                            <img src="{{user?.userAdditionalInfo?.profile?.downloadLink}}" width="157px" height="auto" alt="logo">
+                            <img src="{{user?.userAdditionalInfo?.profile?.downloadLink}}" width="157px" height="auto"
+                                alt="logo">
                         </div>
                         <div *ngIf="!user?.userAdditionalInfo?.profile?.downloadLink">
                             <img src="assets/img/placeholder.jpg" width="157px" height="auto" alt="logo">
@@ -114,7 +118,8 @@
 <button id="modalopen" #modalopen [hidden]="true" data-toggle="modal" data-target="#exampleModalCenter">
 </button>
 <!-- Modal -->
-<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+    aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-lg px-4 py-4" role="document">
         <div class="modal-content px-4 py-4">
             <div class="d-flex justify-content-end">
@@ -122,27 +127,29 @@
                     X
                 </button>
             </div>
-            <h2 class="modal-title text-center font-weight-bold px-4 py-1 " id="exampleModalLongTitle">Find a Lawyer</h2>
+            <h2 class="modal-title text-center font-weight-bold px-4 py-1 " id="exampleModalLongTitle">Find a Lawyer
+            </h2>
             <p id="textstyle" class=" text-justify">
-                MY JUSTICE PORTAL, LLC IS NOT AN ATTORNEY AND USING THE PLATFORM 
-                AND/OR SERVICES DOES NOT  CREATE AN ATTORNEY-CLIENT PRIVILEDGE.
-                MY JUSTICE PORTAL, LLC CANNOT GUARANTEE THAT ANY NOTES YOU TAKE ON THE  
-                PLATFORM OR ANY COMMUNICATIONS YOU HAVE WITH AN ATTORNEY OR LAW 
+                MY JUSTICE PORTAL, LLC IS NOT AN ATTORNEY AND USING THE PLATFORM
+                AND/OR SERVICES DOES NOT CREATE AN ATTORNEY-CLIENT PRIVILEGE.
+                MY JUSTICE PORTAL, LLC CANNOT GUARANTEE THAT ANY NOTES YOU TAKE ON THE
+                PLATFORM OR ANY COMMUNICATIONS YOU HAVE WITH AN ATTORNEY OR LAW
                 FIRM WILL BE PRIVILEGED AND CONFIDENTIAL. MY JUSTICE PORTAL, LLC
-                 CANNOT GUARRANTEE THE SUCCESS OF ANY ATTORNEY OR LAW FIRM THAT YOU 
-                 CHOOSE TO HIRE. MY JUSTICE PORTAL, LLC DOES NOT ENDORSE ANY
-                  ATTORNEYS OR LAW FIRMS THAT ARE LISTED ON THE MY JUSTICE PORTAL PLATFORM.
+                CANNOT GUARRANTEE THE SUCCESS OF ANY ATTORNEY OR LAW FIRM THAT YOU
+                CHOOSE TO HIRE. MY JUSTICE PORTAL, LLC DOES NOT ENDORSE ANY
+                ATTORNEYS OR LAW FIRMS THAT ARE LISTED ON THE MY JUSTICE PORTAL PLATFORM.
 
-            </p>    
-            
-            <p id="textstyle"  class=" text-justify">
-                MY JUSTICE PORTAL, LLC DOES NOT ENDORSE AND CANNOT GUARANTEE THE 
-            SUCCESS OF ANY THIRD PARTY SERVICE PROVIDER, INCLUDING BUT NOT 
-            LIMITED TO, ATTORNEYS, LAW FIRMS, BAIL BONDSMEN, REHAB FACILITES, ETC.
+            </p>
+
+            <p id="textstyle" class=" text-justify">
+                MY JUSTICE PORTAL, LLC DOES NOT ENDORSE AND CANNOT GUARANTEE THE
+                SUCCESS OF ANY THIRD PARTY SERVICE PROVIDER, INCLUDING BUT NOT
+                LIMITED TO, ATTORNEYS, LAW FIRMS, BAIL BONDSMEN, REHAB FACILITES, ETC.
             </p>
             <div class="d-flex justify-content-center mt-1">
                 <div class="mt-1">
-                    <button type="button" class="btn btn-secondary button-purple px-2" data-dismiss="modal" (click)="acceptDisclaimer()">Accept and
+                    <button type="button" class="btn btn-secondary button-purple px-2" data-dismiss="modal"
+                        (click)="acceptDisclaimer()">Accept and
                         Continue</button>
                 </div>
             </div>
@@ -166,7 +173,8 @@
                 <div class="col-3">
                     <div class="d-flex">
                         <div *ngIf="lawyerData?.userAdditionalInfo?.profile?.downloadLink" class="img-profile">
-                            <img src="{{lawyerData?.userAdditionalInfo?.profile?.downloadLink}}" width="157px" height="auto" alt="logo" class="logo">
+                            <img src="{{lawyerData?.userAdditionalInfo?.profile?.downloadLink}}" width="157px"
+                                height="auto" alt="logo" class="logo">
                         </div>
                         <div *ngIf="!lawyerData?.userAdditionalInfo?.profile?.downloadLink">
                             <img src="assets/img/placeholder.jpg" width="157px" height="auto" alt="logo">
@@ -174,7 +182,8 @@
                     </div>
                     <div class="d-flex justify-content-center align-items-center">
                         <div class="pt-2">
-                            <button class="button-purple mt-3" mat-raised-button (click)="viewContact(lawyerData.userId)">
+                            <button class="button-purple mt-3" mat-raised-button
+                                (click)="viewContact(lawyerData.userId)">
                                 Contact {{lawyerData?.firstName}}
                             </button>
                         </div>
@@ -191,7 +200,8 @@
                                 </h4>
                             </div>
                             <div>
-                                <button class="btn bg-color px-perc m-0 mr-1" (click)="viewOrg(lawyerData.Organization.organizationId)">View Organization</button>
+                                <button class="btn bg-color px-perc m-0 mr-1"
+                                    (click)="viewOrg(lawyerData.Organization.organizationId)">View Organization</button>
                             </div>
                         </div>
                         <div class="row py-2 px-3">
