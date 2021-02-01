@@ -38,7 +38,6 @@ export class BillingServicesComponent implements OnInit, AfterViewInit {
   }
 
   couponObj(value){
-    console.log(value)
     if(value){
       if(value.name === "UNRECOGNIZED"){
         this.isDiscount = null;
@@ -48,7 +47,6 @@ export class BillingServicesComponent implements OnInit, AfterViewInit {
     } else {
       this.isDiscount = value;
     }
-    console.log(this.isDiscount)
    }
 
   getBillableFacility() {

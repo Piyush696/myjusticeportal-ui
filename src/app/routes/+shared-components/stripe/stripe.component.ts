@@ -28,6 +28,7 @@ export class StripeComponent implements OnDestroy, AfterViewInit, OnChanges, OnI
   @Output() couponData = new EventEmitter();
   @Input() isDisabled: boolean;
   invalidCard: boolean;
+  discount: number;
 
   constructor(
     private cd: ChangeDetectorRef, private fb: FormBuilder,
@@ -59,12 +60,15 @@ export class StripeComponent implements OnDestroy, AfterViewInit, OnChanges, OnI
       coupon: control.value,
     }).toPromise();
     if (!result.success) {
-      console.log(result)
       this.couponData.emit(result.error)
       return { invalidCoupon: true };
     } else {
-      console.log(result)
       this.couponData.emit(result.data)
+      if(result.data && result.data.amount_off != null){
+        this.discount = (((Math.round(this.totalCount) * 100) - result.data.amount_off) / 100)
+      } else if(result.data && result.data.percent_off != null) {
+        this.discount = (((Math.round(this.totalCount) * 100) * result.data.percent_off / 100) / 100)
+      }
       return null;
     }
   }
@@ -162,7 +166,6 @@ export class StripeComponent implements OnDestroy, AfterViewInit, OnChanges, OnI
         "type": type,
         "coupon": this.cardForm.get('coupon').value
       }
-      console.log(data)
       this.lawyerService.updatePlan(data).subscribe((res: any) => {
         if (res.success) {
           this.card.clear()
@@ -215,9 +218,9 @@ export class StripeComponent implements OnDestroy, AfterViewInit, OnChanges, OnI
               "interval": 'month',
               "facilityList": facilityList,
               "type": type,
-              "coupon": this.cardForm.get('coupon').value
+              "coupon": this.cardForm.get('coupon').value,
+              "discount": this.discount
             }
-            console.log(data)
             this.lawyerService.subscribePlan(data).subscribe((subscribePlan: any) => {
               if (subscribePlan.data) {
                 this.card.clear()

@@ -41,7 +41,6 @@ export class UsersComponent implements OnInit, OnDestroy {
   }
 
   onSelectUser(check, userId) {
-    console.log(check, userId)
     if (check) {
       this.userIdList.push(userId)
     } else {
@@ -51,7 +50,6 @@ export class UsersComponent implements OnInit, OnDestroy {
         }
       })
     }
-    console.log(this.userIdList)
   }
 
   deleteUsers(templateRef){

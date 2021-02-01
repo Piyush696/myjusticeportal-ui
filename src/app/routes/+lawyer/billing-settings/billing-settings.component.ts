@@ -1,5 +1,5 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { AbstractControl, FormBuilder, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
@@ -14,6 +14,7 @@ import { LawyerFacilityService } from '../../../services/lawyer-facility.service
   styleUrls: ['./billing-settings.component.css']
 })
 export class BillingSettingsComponent implements OnInit {
+
   billingFacilities = [];
   selectedFacilities = [];
   planPrice: number = 0;
@@ -32,7 +33,9 @@ export class BillingSettingsComponent implements OnInit {
   isDiscount: any;
   userData: any;
   @Output() couponData = new EventEmitter();
-
+  cardDetails: any;
+  cardForm: FormGroup;
+  
   constructor(private store: Store<any>, private lawyerFacilityService: LawyerFacilityService, private toasterService: ToasterService,
      private fb: FormBuilder, private lawyerService: LawyerService,
      private router: Router, private userMetaService: UserMetaService, private facilityService: FacilityService,
@@ -42,23 +45,40 @@ export class BillingSettingsComponent implements OnInit {
     this.getUserDetailsFromStore()
     this.getUserDetails();
     this.getBillableFacility();
+    this.getUserCardDetails();
+    this.createCardControl();
   }
 
+  createCardControl() {
+    this.cardForm = this.fb.group({
+      coupon: ['', this.validateCoupon.bind(this)]
+    })
+  }
 
   async validateCoupon(control: AbstractControl) {
     const result: any = await this.lawyerService.validate_coupan({
       coupon: control.value,
     }).toPromise();
     if (!result.success) {
+      if(result.error.name === "UNRECOGNIZED"){
+        this.isDiscount = null;
+      } else {
+        this.isDiscount = null;
+      }
       return { invalidCoupon: true };
     } else {
+      this.isDiscount = result.data;
       return null;
     }
   }
 
+  getUserCardDetails() {
+    this.lawyerService.getCardDetails().subscribe((res: any) => {
+      this.cardDetails = res.data
+    })
+  }
+
   couponObj(value){
-   console.log(value)
-   this.isDiscount = value;
   }
 
   cardPatternValidation(control: AbstractControl) {
@@ -85,6 +105,8 @@ export class BillingSettingsComponent implements OnInit {
   getBillableFacility() {
     this.lawyerFacilityService.getBilliableFacilityDetails().subscribe((data: any) => {
       this.selectedFacilities = data.facilities
+      this.addOnsPrice = 0;
+      this.totalPrice = 0;
       let addOnsCount: number = 0
       data.facilities.forEach(element => {
         if (element.planSelected === 'Up to 5 Connections') {
@@ -102,6 +124,9 @@ export class BillingSettingsComponent implements OnInit {
         }
         if (element.isSponsors && element.isSelected) {
           this.addOnsPrice += (element.facilityUserCount * 1)
+        }
+        if(this.selectedFacilities[0]?.user_plan?.coupon){
+          this.cardForm.get('coupon').setValue(this.selectedFacilities[0]?.user_plan?.coupon)
         }
 
 
@@ -128,12 +153,13 @@ export class BillingSettingsComponent implements OnInit {
   }
 
   onEdit() {
-    this.isDisabled = false
+    this.isDisabled = false;
+    
   }
 
   getUserDetailsFromStore() {
     this.store.select(s => s.userInfo).subscribe(x => {
-      this.userData = x
+      this.userData = x;
     });
   }
 
@@ -154,6 +180,14 @@ export class BillingSettingsComponent implements OnInit {
         facilitiesList.push(facilityData)
       }
     })
+    let discountPrice:number;
+    if(this.isDiscount){
+      if(this.isDiscount && this.isDiscount.amount_off != null){
+        discountPrice =  this.isDiscount.amount_off / 100
+      } else if(this.isDiscount && this.isDiscount.percent_off != null){
+        discountPrice = ((this.totalPrice * this.isDiscount.percent_off / 100))
+      }
+    }
     const data = {
       "userId": this.userData.userId,
       "amount": Math.round(this.totalPrice) * 100,
@@ -161,11 +195,13 @@ export class BillingSettingsComponent implements OnInit {
       "interval": 'month',
       "facilityList": facilitiesList,
       "type": type,
-      "strip_custId": this.custId
+      "strip_custId": this.custId,
+      "coupon":this.cardForm.get('coupon').value,
+      "discount":discountPrice
     }
     this.lawyerService.updatePlan(data).subscribe((res: any) => {
       if (res.success) {
-        this.getBillableFacility()
+        this.getBillableFacility();
         this.toasterService.showSuccessToater('Plan updated')
       }
     })

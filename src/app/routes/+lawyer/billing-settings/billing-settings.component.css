@@ -12,3 +12,9 @@
     position: absolute;
     z-index: 1;
 }
+
+.coupon-field {
+    border-radius: 5px;
+    background: #ededed;
+    padding: 8px 8px;
+}

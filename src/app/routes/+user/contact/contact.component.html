@@ -47,7 +47,7 @@
         <small *ngIf="confirmAsignedCase()" class="text-center text-danger assisedcase">This case is already assigned to lawyer.</small>
     </div>
 
-    <h3 class="font-weight-bold">Enquiry Notes</h3>
+    <h3 class="font-weight-bold">Inquiry Notes</h3>
     <span class="font-italic">Tell the lawyer what you need help with and provide as much detail as possible. This will
         help them give you a
         complete response and hopefully, allow you to hire them.</span>
@@ -58,7 +58,7 @@
             <mat-error>
                 <div *ngIf="lawyerCaseForm.controls['notes'].invalid && lawyerCaseForm.controls['notes'].touched">
                     <small class="font13">
-                        Enquiry Notes is Required
+                        Inquiry Notes is Required
                     </small>
                 </div>
             </mat-error>

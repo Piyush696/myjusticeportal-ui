@@ -110,7 +110,6 @@ export class ViewUsersComponent implements OnInit, AfterViewInit {
           return item;
           
         })
-        console.log(users.data.users)
         this.dataSource = new MatTableDataSource(users.data.users);
         if (this.dataSource) {
           this.dataSource.filterPredicate = (data: any, filter: string) => {

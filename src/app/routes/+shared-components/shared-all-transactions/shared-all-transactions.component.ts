@@ -47,8 +47,8 @@ export class SharedAllTransactionsComponent implements OnInit {
     }
   }
 
-  viewInvoices(invoices){
-    window.open(invoices.receipt_url, "_blank");
+  viewInvoices(invoice){
+    window.open(invoice.receipt_url, "_blank");
   }
 
   async cardValidation(control: AbstractControl) {
@@ -64,9 +64,7 @@ export class SharedAllTransactionsComponent implements OnInit {
 
   getListTransactions(){
     this.StripeService.listAllTransactions().subscribe((transactionsDetails:any)=>{
-      console.log(transactionsDetails)
-      this.totalCharge = transactionsDetails.data[0].amount / 100
-      console.log(this.totalCharge)
+      this.totalCharge = transactionsDetails.data[0].amount / 100;
       this.dataSource = new MatTableDataSource(transactionsDetails.data);
       this.dataSource.sortingDataAccessor = (item: any, property) => {
         switch (property) {
