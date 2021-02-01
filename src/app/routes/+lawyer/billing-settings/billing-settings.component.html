@@ -129,20 +129,37 @@
                                 <div>BASE COST:</div>
                                 <div>{{ planPrice | currency: "USD":"symbol" }}</div>
                             </div>
-                            <div class="d-flex justify-content-between align-items-between">
+                            <div class="d-flex justify-content-between align-items-between pb-2">
                                 <div>PREMIUM:</div>
                                 <div> {{ ( addOnsPrice ? addOnsPrice : 0) | currency: "USD":"symbol" }}</div>
                             </div>
-                            <!-- <div *ngIf="isDiscount" class="d-flex justify-content-between align-items-between">
-                                <div>DISCOUNT:</div>
-                                <div>{{ ( addOnsPrice ? addOnsPrice : 0) | currency: "USD":"symbol" }}</div>
-                            </div> -->
+                            <div *ngIf="cardForm.get('coupon').value">
+                                <div *ngIf="selectedFacilities[0]?.user_plan?.coupon && !cardForm.get('coupon').touched" class="d-flex justify-content-between align-items-between">
+                                    <div>DISCOUNT&nbsp;(<b>{{selectedFacilities[0]?.user_plan?.coupon}}</b>):</div>
+                                    <div *ngIf="selectedFacilities[0].user_plan"> {{ - ( selectedFacilities[0]?.user_plan ? selectedFacilities[0]?.user_plan?.discount : 0) | currency: "USD":"symbol" }}</div>
+                                </div>
+                                <div *ngIf="isDiscount && cardForm.get('coupon').touched" class="d-flex justify-content-between align-items-between">
+                                    <div>DISCOUNT&nbsp;(<b>{{isDiscount.id}}</b>):</div>
+                                    <div *ngIf="isDiscount.percent_off"> {{ - ( isDiscount.percent_off ? totalPrice * isDiscount.percent_off / 100 : 0) | currency: "USD":"symbol" }}</div>
+                                    <div *ngIf="isDiscount.amount_off"> {{ - ( isDiscount.amount_off ? isDiscount.amount_off / 100 : 0) | currency: "USD":"symbol" }}</div>
+                                </div>
+                            </div>
                             <hr />
                             <div class="d-flex justify-content-between align-items-between">
                                 <div>TOTAL MONTHLY CHARGE:</div>
-                                <div>
+                                <div *ngIf="cardForm.get('coupon').value">
+                                    <div *ngIf="isDiscount && cardForm.get('coupon').touched">
+                                        <span *ngIf="isDiscount?.percent_off" class="font-weight-bold">{{(totalPrice *  isDiscount.percent_off / 100) | currency: "USD":"symbol"}}</span>
+                                        <span *ngIf="isDiscount?.amount_off" class="font-weight-bold">{{(totalPrice - isDiscount.amount_off / 100) | currency: "USD":"symbol"}}</span>
+                                    </div>
+                                    <div *ngIf="selectedFacilities[0]?.user_plan?.coupon && !cardForm.get('coupon').touched">
+                                        <span class="font-weight-bold">{{totalPrice - selectedFacilities[0]?.user_plan?.discount | currency: "USD":"symbol"}}</span>
+                                    </div>
+                                </div>
+                                <div *ngIf="!cardForm.get('coupon').value && cardForm.get('coupon').value === ''">
                                     <span class="font-weight-bold">{{totalPrice | currency: "USD":"symbol"}}</span>
                                 </div>
+
                             </div>
                         </mat-card>
                     </div>
@@ -150,7 +167,7 @@
             </div>
         </div>
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mt-2 px-0">
-            <mat-card class=" px-4">
+            <!-- <mat-card class=" px-4">
                 <div>
                     <span class="h5 text-center font-weight-bold">Step 4:</span>&nbsp;
                     <span class="h5 text-center font-weight-bold">Add Credit Card Info</span>
@@ -160,12 +177,41 @@
                     start using My Justice Portal!</span>
                 <app-stripe class="pt-2 mt-2" [update]="update" [totalCount]="totalPrice" [isDisabled]="isDisabled" [plan]="plan" (isloading)="startLoader($event)" (couponData)="couponObj($event)" (onPayEvent)="onPayEvent($event)" [facilitiesList]="facilityList">
                 </app-stripe>
+            </mat-card> -->
+            <mat-card>
+                <div>
+                    <span class="h5 text-center font-weight-bold">Credit Card Info</span>
+                </div>
+                <mat-card class="mat-elevation-z10 border-card mt-2">
+                    <div class="d-flex flex-column">
+                        <label>Card on file: <span>****&nbsp;{{cardDetails?.last4}}</span></label>
+                        <label>Card type: <span>{{cardDetails?.brand}}</span></label>
+                        <label>Card expiry:
+                            <span>{{cardDetails?.exp_month < 10 ? '0' + cardDetails?.exp_month : cardDetails?.exp_month}}</span>
+                                <span>/</span> <span>{{cardDetails?.exp_year}}</span>
+                            </label>
+                        <label>Next charge: <span>{{totalPrice - selectedFacilities[0]?.user_plan?.discount | currency: "USD":"symbol"}}</span></label>
+                        <div class="d-flex justify-content-end">
+                            <button class="button-purple px-4 py-1" [disabled]="true" mat-raised-button color="primary" (click)="updateCard(updateCardDetails)">Update Card</button>
+                        </div>
+                    </div>
+                </mat-card>
             </mat-card>
-
-            <div class="d-flex justify-content-end" *ngIf="!isDisabled">
-                <button mat-raised-button class="button-purple px-4 py-1 mt-3" (click)="onPay()">Pay
-                    {{totalPrice | currency:'USD':'symbol'}}
-                </button>
+            <div *ngIf="!isDisabled">
+                <div class="pt-2">
+                    <mat-card>
+                        <span class="h5 text-center font-weight-bold m-0">Coupon Code</span>
+                        <p class="m-0 text-center mb-1">If you have a coupon code, enter it below.</p>
+                        <input class="w-100 coupon-field border-0" matInput placeholder="Enter valid coupon code" [formControl]="cardForm.controls['coupon']">
+                        <mat-error *ngIf="cardForm.controls['coupon'].hasError('invalidCoupon')">
+                            <i>Invalid coupon. </i>
+                        </mat-error>
+                        <div class="d-flex justify-content-center">
+                            <button mat-raised-button class="button-purple px-4 py-1 mt-3" (click)="onPay()">Pay
+                            </button>
+                        </div>
+                    </mat-card>
+                </div>
             </div>
         </div>
     </div>

@@ -56,8 +56,8 @@
             <mat-card class="mat-elevation-z10 border-card mt-2">
                 <div class="d-flex flex-column">
                     <label>Card on file: <span>****&nbsp;{{cardDetails?.last4}}</span></label>
-                    <label>Card brand: <span>{{cardDetails?.brand}}</span></label>
-                    <label>Card expires on:
+                    <label>Card type: <span>{{cardDetails?.brand}}</span></label>
+                    <label>Card expiry:
                         <span>{{cardDetails?.exp_month < 10 ? '0' + cardDetails?.exp_month : cardDetails?.exp_month}}</span>
                             <span>/</span> <span>{{cardDetails?.exp_year}}</span>
                         </label>

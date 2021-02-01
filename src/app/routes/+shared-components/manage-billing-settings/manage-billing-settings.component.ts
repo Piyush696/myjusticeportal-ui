@@ -1,9 +1,12 @@
 import { Component, OnInit } from '@angular/core';
+import { AbstractControl, FormBuilder, FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
+import { Store } from '@ngrx/store';
 import { DefenderService } from 'app/services/defender.service';
 import { FacilityService } from 'app/services/facility.service';
 import { LawyerService } from 'app/services/lawyer.service';
+import { ToasterService } from 'app/services/toaster.service';
 import { UserMetaService } from 'app/services/user-meta.service';
 
 @Component({
@@ -22,12 +25,19 @@ export class ManageBillingSettingsComponent implements OnInit {
   isDisabled: boolean = true;
   update: boolean = true;
   custId: any;
+  cardForm: FormGroup;
+  isDiscount: any;
+  cardDetails: any;
+  userData: any;
 
-  constructor(private router:Router,private defenderService: DefenderService, private lawyerService: LawyerService, private userMetaService: UserMetaService, private facilityService: FacilityService,) { }
+  constructor(private store: Store<any>,private router:Router,private fb: FormBuilder,private toasterService: ToasterService,private defenderService: DefenderService, private lawyerService: LawyerService, private userMetaService: UserMetaService, private facilityService: FacilityService,) { }
 
   ngOnInit(): void {
     this.getBillableFacility();
     this.getUserDetails();
+    this.getUserCardDetails();
+    this.createCardControl();
+    this.getUserDetailsFromStore()
   }
 
   alltransactions(){
@@ -37,9 +47,47 @@ export class ManageBillingSettingsComponent implements OnInit {
   getBillableFacility() {
     this.defenderService.getBilliableFacilityDetails().subscribe((data: any) => {
       this.selectedFacilities = data.facilities
+      if(this.selectedFacilities[0]?.user_plan?.coupon){
+        this.cardForm.get('coupon').setValue(this.selectedFacilities[0]?.user_plan?.coupon)
+      }
     })
   }
 
+  getUserDetailsFromStore() {
+    this.store.select(s => s.userInfo).subscribe(x => {
+      this.userData = x;
+    });
+  }
+  createCardControl() {
+    this.cardForm = this.fb.group({
+      coupon: ['', this.validateCoupon.bind(this)]
+    })
+  }
+
+  getUserCardDetails() {
+    this.lawyerService.getCardDetails().subscribe((res: any) => {
+      this.cardDetails = res.data
+    })
+  }
+
+  
+
+  async validateCoupon(control: AbstractControl) {
+    const result: any = await this.lawyerService.validate_coupan({
+      coupon: control.value,
+    }).toPromise();
+    if (!result.success) {
+      if(result.error.name === "UNRECOGNIZED"){
+        this.isDiscount = null;
+      } else {
+        this.isDiscount = null;
+      }
+      return { invalidCoupon: true };
+    } else {
+      this.isDiscount = result.data;
+      return null;
+    }
+  }
 
   getUserDetails() {
     this.userMetaService.getUserAdditionalDetails().subscribe((user: any) => {
@@ -89,6 +137,47 @@ export class ManageBillingSettingsComponent implements OnInit {
         return facility
       })
     }
+  }
+
+  onPay() {
+    let facilitiesList = [];
+    let type = ''
+    this.facilityList.filter((ele) => {
+      type = 'defender'
+      if (ele.isSelected) {
+        const facilityData = {
+          "facilityId": ele.facilityId,
+          "defenderId": this.userData.userId,
+          "isSelected": true,
+        }
+        facilitiesList.push(facilityData)
+      }
+    })
+    let discountPrice:number;
+    if(this.isDiscount){
+      if(this.isDiscount && this.isDiscount.amount_off != null){
+        discountPrice =  this.isDiscount.amount_off / 100
+      } else if(this.isDiscount && this.isDiscount.percent_off != null){
+        discountPrice = ((this.totalPrice * this.isDiscount.percent_off / 100))
+      }
+    }
+    const data = {
+      "userId": this.userData.userId,
+      "amount": Math.round(this.totalPrice) * 100,
+      "currency": 'usd',
+      "interval": 'month',
+      "facilityList": facilitiesList,
+      "type": type,
+      "strip_custId": this.custId,
+      "coupon":this.cardForm.get('coupon').value,
+      "discount":discountPrice
+    }
+    this.lawyerService.updatePlan(data).subscribe((res: any) => {
+      if (res.success) {
+        this.getBillableFacility();
+        this.toasterService.showSuccessToater('Plan updated')
+      }
+    })
   }
 
   onEdit() {

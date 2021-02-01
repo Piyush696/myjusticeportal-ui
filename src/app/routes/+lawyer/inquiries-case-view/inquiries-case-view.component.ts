@@ -45,7 +45,6 @@ export class InquiriesCaseViewComponent implements OnInit {
       this.caseService.getLawyerCase(this.activatedRoute.snapshot.params['caseId']).subscribe((res: any) => {
         if (res.data) {
           this.singleCaseData = res.data;
-          console.log(this.singleCaseData)
         } else {
           this.toasterService.showErrorToater('No data found, invalid url detected.');
         }

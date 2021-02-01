@@ -89,7 +89,6 @@ export class PublicDefenderBillingComponent implements OnInit {
   }
 
   couponObj(value){
-    console.log(value)
     if(value){
       if(value.name === "UNRECOGNIZED"){
         this.isDiscount = null;
@@ -99,7 +98,6 @@ export class PublicDefenderBillingComponent implements OnInit {
     } else {
       this.isDiscount = value;
     }
-    console.log(this.isDiscount)
    }
   
 
