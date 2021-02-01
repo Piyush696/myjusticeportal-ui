@@ -96,7 +96,7 @@ export class ViewUsersComponent implements OnInit, AfterViewInit {
           }
         })
         users.data.users.map((item) => {
-         let mobile  = (item.mobile).replace(/[^1-9 ]/g, " ")
+         let mobile  = (item.mobile).replace(/[^0-9 ]/g, " ")
            let mobileNo =  mobile.replace(/\s/g,'')
           item['mobile'] = Number((mobileNo))
           item['name'] = item.firstName + " " + item.middleName + " " + item.lastName;

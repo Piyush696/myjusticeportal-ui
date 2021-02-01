@@ -238,7 +238,7 @@ export class MyAccountComponent implements OnInit {
       this.profileForm.get('lastName').setValue(result.data.lastName)
       this.profileForm.get('userName').setValue(result.data.userName)
       //console.log(typeof(result.data.mobile))
-      let mobileNo  = (result.data.mobile).replace(/[^1-9 ]/g, " ").replace(/\s/g,'')
+      let mobileNo  = (result.data.mobile).replace(/[^0-9 ]/g, " ").replace(/\s/g,'')
       this.profileForm.get('mobile').setValue(Number((mobileNo)))
       this.profileForm.get('userEmail').setValue(result.data.email)
       this.profileForm.get('isMFA').setValue(result.data.isMFA)
