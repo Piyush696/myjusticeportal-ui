@@ -17,20 +17,27 @@
                 <span>No data available, invalid url detected.</span>
             </mat-label>
             <div *ngIf="singleCaseData" class="d-flex flex-column w-75">
+                <span><b>Inmate Name</b>: {{singleCaseData?.inmate?.firstName}} &nbsp;{{singleCaseData?.inmate?.lastName}}</span>
                 <span>
-                        <b>Charges or Legal Matter</b>:{{singleCaseData?.legalMatter}}
+                        <b>Charges or Legal Matter</b>: &nbsp;{{singleCaseData?.legalMatter}}
                     </span>
+                <span><b>Date Of Arrest</b>:
+                        {{singleCaseData?.dateOfArrest | date:'longDate'}}
+                        <span *ngIf="!singleCaseData?.dateOfArrest">N/A</span>
+                </span>
 
                 <span>
                         <b> Description</b>: 
                         {{singleCaseData?.briefDescriptionOfChargeOrLegalMatter}}</span>
-
-                <span><b>Inmate Name</b>: {{singleCaseData?.inmate?.firstName}} &nbsp;{{singleCaseData?.inmate?.lastName}}</span>
-
                 <span>
-                    <b>Status</b>:&nbsp;
-                    <span class="font-weight-bold" 
-                    [ngClass]="{'text-warning': singleCaseData?.lawyer[0]?.lawyer_case?.status === 'Lawyer Requested', 
+                    <span><b>Next Court Date</b>:
+                        {{singleCaseData?.nextCourtDate | date:'longDate'}}
+                        <span *ngIf="!singleCaseData?.nextCourtDate">N/A</span>
+                </span>
+                </span>
+
+                <span><b>Status</b>:&nbsp;
+                <span class="font-weight-bold" [ngClass]="{'text-warning': singleCaseData?.lawyer[0]?.lawyer_case?.status === 'Lawyer Requested', 
                     'text-success': singleCaseData?.lawyer[0]?.lawyer_case?.status === 'Connected',
                     'text-danger': singleCaseData?.lawyer[0]?.lawyer_case?.status === 'Lawyer Rejected',
                     'text-danger': singleCaseData?.lawyer[0]?.lawyer_case?.status === 'Inmate Rejected',
@@ -42,16 +49,6 @@
                 <span><b>County Of Arrest</b>:
                         {{singleCaseData?.countyOfArrest}}
                         <span *ngIf="!singleCaseData?.countyOfArrest">N/A</span>
-                </span>
-
-                <span><b>Date Of Arrest</b>:
-                        {{singleCaseData?.dateOfArrest | date:'longDate'}}
-                        <span *ngIf="!singleCaseData?.dateOfArrest">N/A</span>
-                </span>
-
-                <span><b>Next Court Date</b>:
-                        {{singleCaseData?.nextCourtDate | date:'longDate'}}
-                        <span *ngIf="!singleCaseData?.nextCourtDate">N/A</span>
                 </span>
                 <mat-card class="enquiry-notes mt-2">
                     <span><b>Inquiry Notes</b>:

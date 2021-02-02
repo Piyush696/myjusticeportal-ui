@@ -24,14 +24,15 @@
         <div *ngFor="let case of requestedCases">
             <mat-card class="d-flex flex-row justify-content-between align-items-center inner-card mt-2">
                 <div class="d-flex flex-column w-75">
+                    <span>
+                        <b>Inmate Name</b>: {{case?.inmate?.firstName}}
+                         <span *ngIf="case?.inmate?.middleName">
+                             &nbsp;{{case?.inmate?.middleName}}
+                         </span> &nbsp;{{case?.inmate?.lastName}}
+                    </span>
                     <span><b>Charges or Legal Matter</b>: {{case?.legalMatter}}</span>
                     <span><b>Description</b>: {{case?.briefDescriptionOfChargeOrLegalMatter}}</span>
-                    <span>
-                       <b>Inmate Name</b>: {{case?.inmate?.firstName}}
-                        <span *ngIf="case?.inmate?.middleName">
-                            &nbsp;{{case?.inmate?.middleName}}
-                        </span> &nbsp;{{case?.inmate?.lastName}}
-                    </span>
+
                     <span>
                         <b>Attorney Name</b>: {{case?.attorneyName}}
                         <span *ngIf="!case?.attorneyName">N/A</span>

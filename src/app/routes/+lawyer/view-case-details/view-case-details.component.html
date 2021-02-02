@@ -16,15 +16,19 @@
             <span>No data available, invalid url detected.</span>
         </mat-label>
         <div class="d-flex flex-column" *ngIf="singleCaseData">
-            <span><b>Charges or Legal Matter</b>: {{singleCaseData?.legalMatter}}</span>
-            <span>
-                <b> Description</b>: {{singleCaseData?.briefDescriptionOfChargeOrLegalMatter}}
-            </span>
             <span>
                 <b>Inmate Name</b>: {{singleCaseData?.inmate?.firstName}}
                 <span *ngIf="singleCaseData?.inmate?.middleName">
                     &nbsp;{{singleCaseData?.inmate?.middleName}}
                 </span> &nbsp;{{singleCaseData?.inmate?.lastName}}
+            </span>
+            <span><b>Charges or Legal Matter</b>: {{singleCaseData?.legalMatter}}</span>
+            <span>
+                <b>Date Of Arrest</b>: {{singleCaseData?.dateOfArrest | date:'longDate'}}
+                <span *ngIf="!singleCaseData?.dateOfArrest">N/A</span>
+            </span>
+            <span>
+                <b> Description</b>: {{singleCaseData?.briefDescriptionOfChargeOrLegalMatter}}
             </span>
             <span>
                 <b>Attorney Name</b>: {{singleCaseData?.attorneyName}}
@@ -41,10 +45,6 @@
             <span>
                 <b>County Of Arrest</b>: {{singleCaseData?.countyOfArrest}}
                 <span *ngIf="!singleCaseData?.countyOfArrest">N/A</span>
-            </span>
-            <span>
-                <b>Date Of Arrest</b>: {{singleCaseData?.dateOfArrest | date:'longDate'}}
-                <span *ngIf="!singleCaseData?.dateOfArrest">N/A</span>
             </span>
             <span>
                 <b>Next Court Date</b>: {{singleCaseData?.nextCourtDate | date:'longDate'}}
