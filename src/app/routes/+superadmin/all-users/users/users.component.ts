@@ -29,6 +29,7 @@ export class UsersComponent implements OnInit, OnDestroy {
   user: any;
   filterStatus: any;
   userIdList = [];
+  isfilter: boolean;
 
   constructor(private userService: UserService, private store: Store<any>,
     private toasterService: ToasterService, private registrationService: RegistrationService, private fb: FormBuilder, public dialog: MatDialog) {
@@ -71,8 +72,69 @@ export class UsersComponent implements OnInit, OnDestroy {
     })
   }
 
+  
+  onGetAllUsers() {
+    this.userService.getUsers().subscribe((res: any) => {
+      let x = res.data.map((element) => {
+        if (element.status == true) {
+          element.status = 'Active'
+        } else {
+          element.status = 'Pending'
+        }
+        element["name1"] = element.firstName + element.middleName + element.lastName;
+        element["name2"] = element.firstName + " " + element.middleName + " " + element.lastName;
+        var date = element.createdAt;
+        date = new Date(date).toDateString();
+        var month = date.substring(4, 7);
+        var day = date.substring(8, 10);
+        var year = date.substring(11, 15);
+        if (day < 10) {
+          var day1 = day.substring(1, 2);
+        }
+        else {
+          var day1 = day.substring(0, 2);
+        }
+        element['newCreatedAt1'] = month + ' ' + day1 + ',' + ' ' + year;
+        element['newCreatedAt2'] = month + ' ' + day + ',' + ' ' + year;
+        return element
+      })
+      if(this.isfilter){
+        let filteredPendingUsers = x.filter(x => x.status == 'Pending')
+        this.dataSource = new MatTableDataSource(filteredPendingUsers)
+      } else {
+        this.dataSource = new MatTableDataSource(x);
+      }
+
+      if (this.dataSource) {
+        this.dataSource.filterPredicate = (data: any, filter: string) => {
+          const accumulator = (currentTerm, key) => {
+            return this.nestedFilterCheck(currentTerm, data, key);
+          };
+          const dataStr = Object.keys(data).reduce(accumulator, '').toLowerCase();
+          const transformedFilter = filter.trim().toLowerCase();
+          return dataStr.indexOf(transformedFilter) !== -1;
+        };
+      }
+      this.dataSource.sortingDataAccessor = (item: any, property) => {
+        switch (property) {
+          case 'name': if (item) return item.firstName + item.middleName + item.lastName;
+          case 'roles': if (item) return item.roles[0].name;
+          default: if (typeof (item[property]) == 'string') {
+            return item[property].toLowerCase();
+          } else {
+            return item[property]
+          }
+        }
+      };
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
+    })
+  }
+
+
   onViewRejectedUsers(e) {
     if (e) {
+      this.isfilter = true;
       this.userService.getUsers().subscribe((res: any) => {
         if (res.data) {
           this.filterStatus = res.data.filter((res) => {
@@ -110,6 +172,7 @@ export class UsersComponent implements OnInit, OnDestroy {
         this.dataSource.sort = this.sort;
       })
     } else {
+      this.isfilter = false;
       this.onGetAllUsers();
     }
   }
@@ -167,60 +230,6 @@ export class UsersComponent implements OnInit, OnDestroy {
   onGetUserInfo() {
     this.userInfoStoreSub = this.store.select(s => s.userInfo).subscribe(data => this.userInfo = data);
   }
-
-  onGetAllUsers() {
-    this.userService.getUsers().subscribe((res: any) => {
-      let x = res.data.map((element) => {
-        if (element.status == true) {
-          element.status = 'Active'
-        } else {
-          element.status = 'Pending'
-        }
-        element["name1"] = element.firstName + element.middleName + element.lastName;
-        element["name2"] = element.firstName + " " + element.middleName + " " + element.lastName;
-        var date = element.createdAt;
-        date = new Date(date).toDateString();
-        var month = date.substring(4, 7);
-        var day = date.substring(8, 10);
-        var year = date.substring(11, 15);
-        if (day < 10) {
-          var day1 = day.substring(1, 2);
-        }
-        else {
-          var day1 = day.substring(0, 2);
-        }
-        element['newCreatedAt1'] = month + ' ' + day1 + ',' + ' ' + year;
-        element['newCreatedAt2'] = month + ' ' + day + ',' + ' ' + year;
-        return element
-      })
-      this.dataSource = new MatTableDataSource(x);
-      if (this.dataSource) {
-        this.dataSource.filterPredicate = (data: any, filter: string) => {
-          const accumulator = (currentTerm, key) => {
-            return this.nestedFilterCheck(currentTerm, data, key);
-          };
-          const dataStr = Object.keys(data).reduce(accumulator, '').toLowerCase();
-          const transformedFilter = filter.trim().toLowerCase();
-          return dataStr.indexOf(transformedFilter) !== -1;
-        };
-      }
-      this.dataSource.sortingDataAccessor = (item: any, property) => {
-        switch (property) {
-          case 'name': if (item) return item.firstName + item.middleName + item.lastName;
-          case 'roles': if (item) return item.roles[0].name;
-          default: if (typeof (item[property]) == 'string') {
-            return item[property].toLowerCase();
-          } else {
-            return item[property]
-          }
-        }
-      };
-      this.dataSource.paginator = this.paginator;
-      this.dataSource.sort = this.sort;
-    })
-  }
-
-
 
   onDeleteUser() {
     if (this.user.userId != this.userInfo.userId) {

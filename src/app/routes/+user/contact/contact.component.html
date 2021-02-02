@@ -1,7 +1,7 @@
 <div class="col-12 d-flex justify-content-between pl-0">
     <div>
         <h1 class="line-height font-weight-bold">Contact A Lawyer</h1>
-        <h4 class="line-height header-sub-text">Please complete the form below to cantact a lawyer.Once the lawyer review your information,you will receive a response here in the portal .</h4>
+        <h4 class="line-height header-sub-text">Please complete the form below to contact a lawyer. Once the lawyer reviews your information,you will receive a response here in the portal .</h4>
     </div>
 </div>
 <div>
@@ -48,20 +48,18 @@
     </div>
 
     <h3 class="font-weight-bold">Inquiry Notes</h3>
-    <span class="font-italic">Tell the lawyer what you need help with and provide as much detail as possible. This will
-        help them give you a
-        complete response and hopefully, allow you to hire them.</span>
+    <span class="font-italic">Tell the lawyer what you need help with and provide as much detail as possible.</span>
 
     <div class="col-8 p-0">
         <mat-form-field appearance="fill" class="w-100 py-2">
             <textarea rows="2" matInput [formControl]="lawyerCaseForm.controls['notes']" placeholder="Provide details about your case" required></textarea>
-            <mat-error>
+            <!-- <mat-error>
                 <div *ngIf="lawyerCaseForm.controls['notes'].invalid && lawyerCaseForm.controls['notes'].touched">
                     <small class="font13">
                         Inquiry Notes is Required
                     </small>
                 </div>
-            </mat-error>
+            </mat-error> -->
         </mat-form-field>
         <div class="pr-2 pb-2 pt-2 pl-0">
             <button [disabled]="(confirmAsignedCase() || !lawyerCaseForm.valid)" class="button-purple px-5 py-1" mat-raised-button (click)="onContactLawyer()">
