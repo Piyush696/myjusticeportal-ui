@@ -1,0 +1,17 @@
+.card-section {
+    padding: 10px;
+    border: 1px solid #ededed;
+    border-radius: 7px;
+    background: #ededed;
+}
+
+.coupon-field {
+    border-radius: 5px;
+    background: #ededed;
+    padding: 8px 8px;
+}
+
+.modaldismiss {
+    background: transparent;
+    border: none;
+}

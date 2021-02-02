@@ -21,7 +21,7 @@ export class ManageBillingSettingsComponent implements OnInit {
   state = [];
   facilityList = [];
   facilityId: any;
-  spinner: any;
+  spinner: boolean;
   isDisabled: boolean = true;
   update: boolean = true;
   custId: any;
@@ -30,7 +30,7 @@ export class ManageBillingSettingsComponent implements OnInit {
   cardDetails: any;
   userData: any;
 
-  constructor(private store: Store<any>,private router:Router,private fb: FormBuilder,private toasterService: ToasterService,private defenderService: DefenderService, private lawyerService: LawyerService, private userMetaService: UserMetaService, private facilityService: FacilityService,) { }
+  constructor(private store: Store<any>,private router:Router,  public dialog: MatDialog,private fb: FormBuilder,private toasterService: ToasterService,private defenderService: DefenderService, private lawyerService: LawyerService, private userMetaService: UserMetaService, private facilityService: FacilityService,) { }
 
   ngOnInit(): void {
     this.getBillableFacility();
@@ -89,6 +89,23 @@ export class ManageBillingSettingsComponent implements OnInit {
     }
   }
 
+  
+  onOpenChangeCardModal(templateRef){
+    let dialogRef = this.dialog.open(templateRef, {
+      width: '550px',
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+    });
+  }
+
+  cardChange(event){
+    if(event){
+      this.getUserCardDetails();
+      this.dialog.closeAll();
+    }
+  }
+
   getUserDetails() {
     this.userMetaService.getUserAdditionalDetails().subscribe((user: any) => {
       user.data.forEach((ele) => {
@@ -140,6 +157,7 @@ export class ManageBillingSettingsComponent implements OnInit {
   }
 
   onPay() {
+    this.spinner = true;
     let facilitiesList = [];
     let type = ''
     this.facilityList.filter((ele) => {
@@ -175,7 +193,9 @@ export class ManageBillingSettingsComponent implements OnInit {
     this.lawyerService.updatePlan(data).subscribe((res: any) => {
       if (res.success) {
         this.getBillableFacility();
-        this.toasterService.showSuccessToater('Plan updated')
+        this.spinner = false;
+        this.toasterService.showSuccessToater('Plan updated');
+        this.isDisabled = true;
       }
     })
   }

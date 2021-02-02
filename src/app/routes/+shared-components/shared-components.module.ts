@@ -20,6 +20,7 @@ import { PublicDefenderBillingComponent } from './public-defender-billing/public
 import { ManageProfileComponent } from './manage-profile/manage-profile.component';
 import { ManageBillingSettingsComponent } from './manage-billing-settings/manage-billing-settings.component';
 import { SharedAllTransactionsComponent } from './shared-all-transactions/shared-all-transactions.component';
+import { UpdateCardModalComponent } from './update-card-modal/update-card-modal.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { SharedAllTransactionsComponent } from './shared-all-transactions/shared
     PublicDefenderBillingComponent,
     ManageProfileComponent,
     ManageBillingSettingsComponent,
-    SharedAllTransactionsComponent
+    SharedAllTransactionsComponent,
+    UpdateCardModalComponent
   ],
   imports: [
     CommonModule,
@@ -63,7 +65,8 @@ import { SharedAllTransactionsComponent } from './shared-all-transactions/shared
     PublicDefenderBillingComponent,
     ManageProfileComponent,
     ManageBillingSettingsComponent,
-    SharedAllTransactionsComponent
+    SharedAllTransactionsComponent,
+    UpdateCardModalComponent
   ]
 })
 
