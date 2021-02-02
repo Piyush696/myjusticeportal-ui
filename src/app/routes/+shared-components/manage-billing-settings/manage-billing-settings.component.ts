@@ -21,7 +21,7 @@ export class ManageBillingSettingsComponent implements OnInit {
   state = [];
   facilityList = [];
   facilityId: any;
-  spinner: any;
+  spinner: boolean;
   isDisabled: boolean = true;
   update: boolean = true;
   custId: any;
@@ -157,6 +157,7 @@ export class ManageBillingSettingsComponent implements OnInit {
   }
 
   onPay() {
+    this.spinner = true;
     let facilitiesList = [];
     let type = ''
     this.facilityList.filter((ele) => {
@@ -192,7 +193,9 @@ export class ManageBillingSettingsComponent implements OnInit {
     this.lawyerService.updatePlan(data).subscribe((res: any) => {
       if (res.success) {
         this.getBillableFacility();
-        this.toasterService.showSuccessToater('Plan updated')
+        this.spinner = false;
+        this.toasterService.showSuccessToater('Plan updated');
+        this.isDisabled = true;
       }
     })
   }
