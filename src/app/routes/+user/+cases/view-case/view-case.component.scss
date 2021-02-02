@@ -1,47 +1,51 @@
 .background-color {
-  background-color: #333442;
+    background-color: #333442;
 }
 
 .white-btn {
-  background: #e4e4ec;
-  color: #333442;
+    background: #e4e4ec;
+    color: #333442;
 }
 
 .text-default {
-  font-weight: 800;
+    font-weight: 800;
 }
 
 .view-card-color {
-  border: 1px solid #333442;
+    border: 1px solid #333442;
 }
 
 .btn-group {
-  width: 17em;
+    width: 17em;
 }
 
 .padding-btn {
-  padding-left: 63px;
-  padding-right: 60px;
+    padding-left: 63px;
+    padding-right: 60px;
 }
 
 .notes {
-  white-space: pre-wrap;
+    white-space: pre-wrap;
 }
 
 .px {
-  padding: 0 60px;
+    padding: 0 60px;
 }
 
-.image-placeholder{
-  position: relative;
-  text-align: center;
-  color: white;
- 
+.image-placeholder {
+    position: relative;
+    text-align: center;
+    color: white;
 }
-.textlink{
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);;
- 
+
+.textlink {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    ;
+}
+
+li {
+    list-style-type: unset;
 }

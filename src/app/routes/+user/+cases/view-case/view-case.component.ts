@@ -21,7 +21,7 @@ export class ViewCaseComponent implements OnInit {
   assignedLawyer: any;
   isFacility: boolean;
   practicearea: any;
-  // enableEditBtn: boolean = true;
+  practiceAreaList = [];
 
   constructor(private router: Router, private route: ActivatedRoute, private caseService: CaseService,
     private toasterService: ToasterService, private location: Location,
@@ -41,19 +41,31 @@ export class ViewCaseComponent implements OnInit {
     })
   }
 
+  
+  onViewLawyer(userId) {
+    this.router.navigateByUrl('mjp/user/lawyer-profile/'+userId)
+  }
+  
   getAssignedLawyer() {
     this.caseService.getAssignedLawyer(this.route.snapshot.params['caseId']).subscribe((lawyer: any) => {
+      console.log(lawyer)
       if (lawyer.data != 'No lawyer assigned to this case.') {
         this.assignedLawyer = lawyer.data
-        this.practicearea = this.assignedLawyer.userAdditionalInfo.practiceAreas
-        this.practicearea = this.practicearea.split(",")
-        if (this.practicearea.length > 3) {
-          this.practicearea = this.practicearea.slice(0, 3);
+        if(this.assignedLawyer?.userAdditionalInfo?.practiceAreas){ 
+          this.practiceAreaList =  lawyer?.data?.userAdditionalInfo?.practiceAreas.split(",")
+          this.practicearea = this.assignedLawyer?.userAdditionalInfo?.practiceAreas.split(",").slice(0, 3)
+          console.log(this.practiceAreaList)
         }
       } else {
         this.assignedLawyer = '';
       }
     })
+  }
+
+  openPAModal(templateRef){
+    this.dialog.open(templateRef, {
+      width: '500px'
+    });
   }
 
   getCase() {
@@ -91,7 +103,6 @@ export class ViewCaseComponent implements OnInit {
       width: '800px'
     });
     this.caseNoteForm.get('notes').setValue(this.caseDetails.notes);
-    // this.caseNoteForm.get('notes').disable();
     dialogRef.afterClosed().subscribe(result => {
     });
   }

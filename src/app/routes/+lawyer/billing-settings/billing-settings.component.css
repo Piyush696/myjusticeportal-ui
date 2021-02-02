@@ -18,3 +18,20 @@
     background: #ededed;
     padding: 8px 8px;
 }
+
+.outer-card {
+    border: 1px solid #333442;
+    color: #333442;
+    background: #e4e4ec;
+}
+
+.inner-card {
+    border: 1px solid #333442;
+    color: #333442;
+    background: white;
+}
+
+.border-card {
+    background: #ededed;
+    border: 1px solid #000;
+}

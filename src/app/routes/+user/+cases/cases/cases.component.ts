@@ -5,7 +5,6 @@ import { Router } from '@angular/router';
 import { CaseService } from 'app/services/case.service';
 import { ToasterService } from 'app/services/toaster.service';
 import { UserAdditionInfoService } from 'app/services/user-addition-info.service';
-import { UserMetaService } from 'app/services/user-meta.service';
 
 
 @Component({

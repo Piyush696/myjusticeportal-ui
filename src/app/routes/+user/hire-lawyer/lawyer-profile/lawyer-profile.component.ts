@@ -34,6 +34,7 @@ export class LawyerProfileComponent implements OnInit {
           var x = document.getElementById('cust-img')
           if(user.data?.userAdditionalInfo?.header?.downloadLink){
             x.style.background = 'url(' + this.path + ')'
+            x.style.backgroundRepeat = 'no-repeat';
           } else{
             x.style.backgroundColor = '#333442'
           }
