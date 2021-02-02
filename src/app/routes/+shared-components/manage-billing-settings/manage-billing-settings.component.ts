@@ -30,7 +30,7 @@ export class ManageBillingSettingsComponent implements OnInit {
   cardDetails: any;
   userData: any;
 
-  constructor(private store: Store<any>,private router:Router,private fb: FormBuilder,private toasterService: ToasterService,private defenderService: DefenderService, private lawyerService: LawyerService, private userMetaService: UserMetaService, private facilityService: FacilityService,) { }
+  constructor(private store: Store<any>,private router:Router,  public dialog: MatDialog,private fb: FormBuilder,private toasterService: ToasterService,private defenderService: DefenderService, private lawyerService: LawyerService, private userMetaService: UserMetaService, private facilityService: FacilityService,) { }
 
   ngOnInit(): void {
     this.getBillableFacility();
@@ -86,6 +86,23 @@ export class ManageBillingSettingsComponent implements OnInit {
     } else {
       this.isDiscount = result.data;
       return null;
+    }
+  }
+
+  
+  onOpenChangeCardModal(templateRef){
+    let dialogRef = this.dialog.open(templateRef, {
+      width: '550px',
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+    });
+  }
+
+  cardChange(event){
+    if(event){
+      this.getUserCardDetails();
+      this.dialog.closeAll();
     }
   }
 

@@ -72,6 +72,24 @@ export class BillingSettingsComponent implements OnInit {
     }
   }
 
+
+
+  onOpenChangeCardModal(templateRef){
+    let dialogRef = this.dialog.open(templateRef, {
+      width: '550px',
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+    });
+  }
+
+  cardChange(event){
+    if(event){
+      this.getUserCardDetails();
+      this.dialog.closeAll();
+    }
+  }
+
   getUserCardDetails() {
     this.lawyerService.getCardDetails().subscribe((res: any) => {
       this.cardDetails = res.data

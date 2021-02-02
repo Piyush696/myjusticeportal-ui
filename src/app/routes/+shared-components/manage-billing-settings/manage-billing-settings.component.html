@@ -151,7 +151,7 @@
                             </label>
                         <label>Next charge: <span>{{totalPrice - facilityList[0]?.user_plan?.discount | currency: "USD":"symbol"}}</span></label>
                         <div class="d-flex justify-content-end">
-                            <button class="button-purple px-4 py-1" [disabled]="true" mat-raised-button color="primary">Update Card</button>
+                            <button class="button-purple px-4 py-1" [disabled]="true" mat-raised-button color="primary" (click)="onOpenChangeCardModal(openCardModal)">Update Card</button>
                         </div>
                     </div>
                 </mat-card>
@@ -176,3 +176,7 @@
     </div>
 
 </div>
+
+<ng-template #openCardModal>
+    <app-update-card-modal (cardChange)="cardChange($event)"></app-update-card-modal>
+</ng-template>
