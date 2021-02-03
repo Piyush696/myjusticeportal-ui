@@ -30,6 +30,7 @@ export class UsersComponent implements OnInit, OnDestroy {
   filterStatus: any;
   userIdList = [];
   isfilter: boolean;
+  modalText: string;
 
   constructor(private userService: UserService, private store: Store<any>,
     private toasterService: ToasterService, private registrationService: RegistrationService, private fb: FormBuilder, public dialog: MatDialog) {
@@ -50,6 +51,11 @@ export class UsersComponent implements OnInit, OnDestroy {
           a.splice(i, 1)
         }
       })
+    }
+    if(this.userIdList.length === 1){
+      this.modalText = 'Are you sure you want to delete this user?'
+    } else {
+      this.modalText = ' Are you sure you want to delete this all users?' 
     }
   }
 

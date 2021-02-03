@@ -8,8 +8,7 @@
                         <tr>
                             <th>Name:&nbsp;</th>
                             <td>
-                                <span>
-                  {{selectedUserData?.firstName | titlecase}}
+                                <span> {{selectedUserData?.firstName | titlecase}}
                   <span *ngIf="selectedUserData?.middleName">
                     &nbsp;{{selectedUserData?.middleName | titlecase}}
                   </span> &nbsp;{{selectedUserData?.lastName | titlecase}}
@@ -39,10 +38,10 @@
                   {{facility?.facilityName}}{{isLast ? '' : ', '}}
                 </span>
                                 <span>
-                  <button mat-button color="primary" class="onHover" (click)="openChangefacilityModal(changeFacilityModal)">
-                    Change Facility
-                  </button>
-                </span>
+                           <button mat-button color="primary" class="onHover" (click)="openChangefacilityModal(changeFacilityModal)">
+                            Change Facility
+                            </button>
+                   </span>
                             </td>
                         </tr>
                         <tr>
@@ -57,13 +56,13 @@
                             <th>Mobile:&nbsp;</th>
                             <td>
                                 <span *ngIf="selectedUserData?.mobile">
-                  &#43;{{selectedUserData?.countryCode}} {{selectedUserData?.formattedPhone}}
-                </span>
+                              &#43;{{selectedUserData?.countryCode}} {{selectedUserData?.mobile}}
+                              </span>
                                 <span *ngIf="!selectedUserData?.mobile">N/A</span>
                             </td>
                         </tr>
                         <tr>
-                            <th>{{selectedUserData.roles[0].name}} Status:&nbsp;</th>
+                            <th>{{selectedUserData?.roles[0].name}} Status:&nbsp;</th>
                             <td>
                                 <mat-slide-toggle color="warn" [checked]="selectedUserData?.status" [formControl]="userDetailsForm.controls['status']" (change)="onChangeStatus()">
                                     {{selectedUserData?.status ? 'Enabled' : 'Disabled'}}
@@ -76,6 +75,21 @@
                                 <mat-slide-toggle color="warn" [checked]="selectedUserData?.isMFA" [formControl]="userDetailsForm.controls['isMFA']" (change)="onChangeMfa()">
                                     {{selectedUserData?.isMFA ? 'Enabled' : 'Disabled'}}
                                 </mat-slide-toggle>
+                            </td>
+                        </tr>
+                        <tr *ngIf="selectedUserData?.roles[0]?.roleId === 3 || selectedUserData?.roles[0]?.roleId === 5">
+                            <th>Organization:&nbsp;</th>
+                            <td>{{selectedUserData?.Organization?.name}}
+                                <span *ngIf="!selectedUserData?.Organization?.name">N/A</span>
+                            </td>
+                        </tr>
+                        <tr *ngIf="selectedUserData?.roles[0]?.roleId === 3 || selectedUserData?.roles[0]?.roleId === 5">
+                            <th>Address:&nbsp;</th>
+                            <td>{{selectedUserData?.Organization?.Address?.street1}}, {{selectedUserData?.Organization?.Address?.street2}}, {{selectedUserData?.Organization?.Address?.city}}, {{selectedUserData?.Organization?.Address?.state}}, {{selectedUserData?.Organization?.Address?.country}},
+                                {{selectedUserData?.Organization?.Address?.zip}}
+                                <span *ngIf="!selectedUserData?.Organization?.Address?.street1
+                                 && !selectedUserData?.Organization?.Address?.street2 && !selectedUserData?.Organization?.Address?.city
+                                  && selectedUserData?.Organization?.Address?.state && selectedUserData?.Organization?.Address?.country">N/A</span>
                             </td>
                         </tr>
                     </tbody>
