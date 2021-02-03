@@ -49,11 +49,13 @@
           </span>
                 </td>
             </ng-container>
+            
             <ng-container matColumnDef="roles">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header>Role</th>
                 <td mat-cell *matCellDef="let user">
                     <ng-container *ngFor="let role of user?.roles;let isLast=last">
-                        <span>{{role?.name}}{{isLast ? '' : ', '}} {{user.isAdmin}}</span>
+                        <span>{{user?.roles1}}</span>
+                        <!-- <span>{{role?.name}}{{isLast ? '' : ', '}} {{user.isAdmin}}</span> -->
                         <!-- <span *ngIf="user.isAdmin">&nbsp;({{ user.isAdmin ? 'Admin' : ''}})</span> -->
                     </ng-container>
                 </td>

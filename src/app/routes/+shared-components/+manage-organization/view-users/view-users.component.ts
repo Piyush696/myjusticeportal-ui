@@ -16,7 +16,7 @@ import { UserService } from 'app/services/user.service';
 
 export class ViewUsersComponent implements OnInit, AfterViewInit {
 
-  displayedColumns: string[] = ["name", "userName", "roles", 'mobile', "createdAt", "action"];
+  displayedColumns: string[] = ["name", "userName","roles", 'mobile', "createdAt", "action"];
   dataSource = new MatTableDataSource();
   @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: false }) sort: MatSort;
@@ -91,8 +91,11 @@ export class ViewUsersComponent implements OnInit, AfterViewInit {
       if (users.success) {
         users.data.users.map((user)=>{
           if(user.isAdmin){
-            user.isAdmin='Admin'
+            user.isAdmin='('+'Admin'+')'
             return user;
+          }else{
+            user.isAdmin='';
+          
           }
         })
         users.data.users.map((item) => {
@@ -101,8 +104,16 @@ export class ViewUsersComponent implements OnInit, AfterViewInit {
           item['mobile'] = Number((mobileNo))
           item['name'] = item.firstName + " " + item.middleName + " " + item.lastName;
           item['name1'] = item.firstName + item.middleName + item.lastName;
-          
-          var date = item.createdAt;
+         // item.roles1= item.roles[0].name +' '+item.isAdmin;
+          if(item.isAdmin=='(Admin)'){
+            item.roles1= item.roles[0].name +' '+item.isAdmin;
+            item.roles1=item.roles1.trim();
+          }else{
+            item.roles1= item.roles[0].name;
+            item.roles1=item.roles1.trim();
+          }
+          item.roles1=item.roles1.trim();
+           var date = item.createdAt;
           date = new Date(date).toDateString();
           var monthDay = date.substring(4, 10);
           var year = date.substring(10, 15);
@@ -117,8 +128,8 @@ export class ViewUsersComponent implements OnInit, AfterViewInit {
               return this.nestedFilterCheck(currentTerm, data, key);
             };
             const dataStr = Object.keys(data).reduce(accumulator, '').toLowerCase();
-            const transformedFilter = filter.trim().toLowerCase();
-            return dataStr.indexOf(transformedFilter) !== -1;
+           const transformedFilter = filter.trim().toLowerCase();
+           return dataStr.indexOf(transformedFilter) !== -1;
           };
         }
         this.dataSource.sortingDataAccessor = (item: any, property) => {
@@ -181,7 +192,7 @@ export class ViewUsersComponent implements OnInit, AfterViewInit {
     let s=searchValue.replace(/  +/g, ' ');
     s= searchValue.split(" ").join("")
    this.dataSource.filter = s.trim().toLowerCase();
-  }
+   }
 
 
   nestedFilterCheck(search, data, key) {
