@@ -22,7 +22,7 @@ export class UsersComponent implements OnInit, OnDestroy {
   userInfoStoreSub: Subscription;
   createUserForm: FormGroup;
 
-  displayedColumns: string[] = ["select", "name", "userName", "status", "roles", "createdAt", "action"];
+  displayedColumns: string[] = ["select", "name", "userName", "status", "state","roles", "createdAt", "action"];
   dataSource = new MatTableDataSource();
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort: MatSort;
