@@ -225,7 +225,7 @@ export class UsersComponent implements OnInit, OnDestroy {
 
   openModal(templateRef) {
     let dialogRef = this.dialog.open(templateRef, {
-      width: '368px',
+      width: '500px',
     });
      
     dialogRef.afterClosed().subscribe(result => {
