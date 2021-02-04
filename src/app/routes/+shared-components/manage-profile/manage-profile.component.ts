@@ -43,6 +43,7 @@ export class ManageProfileComponent implements OnInit {
     private organisationService: OrganisationService) { }
 
   ngOnInit(): void {
+    console.log(this.uploader1)
     this.getAllSpecialty()
     this.getlawyerInfo()
     this.createControl()
