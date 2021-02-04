@@ -108,10 +108,56 @@
 
 
 <!-- Button trigger modal -->
-<button id="modalopen" #modalopen [hidden]="true" data-toggle="modal" data-target="#exampleModalCenter">
+<button id="modalopen" #modalopen [hidden]="true" data-toggle="modal" data-target="#exampleModalCenterTitle1">
 </button>
 
 <!-- Modal -->
+<div class="modal fade" id="exampleModalCenterTitle1" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false"
+    aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered px-4 modal-lg py-4" role="document">
+        <div class="modal-content modal-xl px-4 py-4">
+            <div class="mb-1">
+                <h1 class="text-center"><b>Welcome to My Justice Portal!</b></h1>
+
+                <p id="textstyle" class=" text-justify text-center" style="color: #44546A;"><i>The secure, all-in-one
+                        portal designed to help support meaningful representation and access to the courts.</i>
+                </p>
+                <div class="text-center text-justify" style="font-size: 18px;">
+                    <p> As an <b>Inmate</b> of this Correctional Facility you can use this tool to*:</p>
+                </div>
+                <div class="d-flex justify-content-center li-dis">
+                    <ul>
+                        <li>Organize and maintain information related to your legal matters</li>
+                        <li>Find, complete and submit related forms as needed</li>
+                        <li>Communicate with your current lawyer</li>
+                        <li>Conduct legal research as needed</li>
+                        <li>Search for an attorney if you need to hire one</li>
+                        <li>Post legal questions to a qualified pool of attorneys </li>
+                        <li>Contact a bail bonding company, if needed.</li>
+                    </ul>
+                </div>
+
+                <div class="text-center text-justify">To utilize any of these features, you must first create a
+                    “case” as a reference.</div>
+            </div>
+            <div class="d-flex justify-content-center">
+                <div class="modal-btn">
+                    <button type="button" class="btn btn-secondary button-purple px-5 py-4 got-btn" data-dismiss="modal" 
+                       (click)="openSecModel()" >Got It! Let’s get started</button>
+                </div>
+            </div>
+            <div>
+                <p class="text-center">*Feature availability may vary by facility and charges may apply</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<button id="secmodalopen" #secmodalopen [hidden]="true" data-toggle="modal" data-target="#exampleModalCenter">
+</button>
+
+
+
 <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered px-4 modal-lg py-4" role="document">
         <div class="modal-content modal-xl px-4 py-4">
