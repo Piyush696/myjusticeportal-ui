@@ -62,6 +62,7 @@ export class LawyerdashboardComponent implements OnInit, AfterViewInit {
   ngOnInit(): void {
     this.store.select(s => s.userInfo).subscribe(x => {
       this.userData = x
+      console.log(this.userData)
       if (x.status) {
         this.isAuthorized = true;
       }
@@ -95,28 +96,42 @@ export class LawyerdashboardComponent implements OnInit, AfterViewInit {
 
   getBillingDetails() {
     this.userMetaService.getUserBillingDetails().subscribe((billingsDetails: any) => {
+      console.log(billingsDetails)
       if (billingsDetails.data) {
         if (billingsDetails.data.userMeta) {
-          if (billingsDetails.data.userMeta.length === 1) {
-            this.billingBoard = true;
-            this.showDashboard = false;
+          if (billingsDetails.data.userMeta.length >= 1) {
+            if(this.userData.isAdmin && this.userData.isSelfPaid){
+              console.log('1')
+              this.billingBoard = true;
+              this.showDashboard = false;
+            } else if(!this.userData.isAdmin && !this.userData.isSelfPaid) {
+              console.log('invitedUser')
+              this.showDashboard = true;
+            }else if(!this.userData.isAdmin && this.userData.isSelfPaid) {
+              console.log('invitedUser')
+              this.billingBoard = true;
+            }
+
           } else if (billingsDetails.data.userMeta.length === 0) {
+            console.log('2')
             this.showDashboard = true;
-          } else {
+          } 
+            console.log('3')
             billingsDetails.data.userMeta.forEach((x) => {
               if (x.metaKey == "sub_id" || x.metaKey == "cust_id") {
                 this.showDashboard = true;
                 this.billingBoard = false;
-              } else if (x.metaKey == "State:Bar") {
-                this.billingBoard = true;
-                this.showDashboard = false;
               }
-              else {
-                this.billingBoard = true;
-                this.showDashboard = false;
-              }
+              //  else if (x.metaKey == "State:Bar") {
+              //   this.billingBoard = true;
+              //   this.showDashboard = false;
+              // }
+              // else {
+              //   this.billingBoard = true;
+              //   this.showDashboard = false;
+              // }
             })
-          }
+          
         } else {
           this.billingBoard = true;
           this.showDashboard = false;

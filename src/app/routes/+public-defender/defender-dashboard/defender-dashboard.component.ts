@@ -59,67 +59,48 @@ export class DefenderDashboardComponent implements OnInit,AfterViewInit {
   onchoosePlan() {
     this.userMetaService.modalDataEvent({ metaKey: 'choosePlanModal', metaValue: true }).subscribe()
   }
-
+  
   getBillingDetails() {
     this.userMetaService.getUserBillingDetails().subscribe((billingsDetails: any) => {
+      console.log(billingsDetails)
       if (billingsDetails.data) {
-        if(billingsDetails.data.isAdmin){
-          if (billingsDetails.data.userMeta) {
-            if (billingsDetails.data.userMeta.length === 1) {
+        if (billingsDetails.data.userMeta) {
+          if (billingsDetails.data.userMeta.length >= 1) {
+            if(this.userData.isAdmin && this.userData.isSelfPaid){
+              console.log('1')
               this.billingBoard = true;
               this.showDashboard = false;
-            } else if (billingsDetails.data.userMeta.length <= 0) {
+            } else if(!this.userData.isAdmin && !this.userData.isSelfPaid) {
+              console.log('invitedUser')
+              this.showDashboard = true;
+            }else if(!this.userData.isAdmin && this.userData.isSelfPaid) {
+              console.log('invitedUser')
               this.billingBoard = true;
-              this.showDashboard = false;
-            } else {
-              billingsDetails.data.userMeta.forEach((x) => {
-                if (x.metaKey == "sub_id" || x.metaKey == "cust_id") {
-                  this.showDashboard = true;
-                  this.billingBoard = false;
-                } else if (x.metaKey == "State:Bar") {
-                  this.billingBoard = true;
-                  this.showDashboard = false;
-                }
-                else {
-                  this.billingBoard = true;
-                  this.showDashboard = false;
-                }
-              })
             }
-          } else {
-            this.billingBoard = true;
-            this.showDashboard = false;
-          }
-        } else if(!billingsDetails.data.isAdmin && billingsDetails.data.isSelfPaid) {
-          if (billingsDetails.data.userMeta) {
-            if (billingsDetails.data.userMeta.length <= 0) {
-              this.billingBoard = true;
-              this.showDashboard = false;
-            } else {
-              billingsDetails.data.userMeta.forEach((x) => {
-                if (x.metaKey == "sub_id" || x.metaKey == "cust_id") {
-                  this.showDashboard = true;
-                  this.billingBoard = false;
-                } else if (x.metaKey == "State:Bar") {
-                  this.billingBoard = true;
-                  this.showDashboard = false;
-                }
-                else {
-                  this.billingBoard = true;
-                  this.showDashboard = false;
-                }
-              })
-            }
-          } else {
-            this.billingBoard = true;
-            this.showDashboard = false;
-          }
-        } else if(!billingsDetails.data.isAdmin && !billingsDetails.data.isSelfPaid){
-          this.showDashboard = true;
-          this.billingBoard = false;
+
+          } else if (billingsDetails.data.userMeta.length === 0) {
+            console.log('2')
+            this.showDashboard = true;
+          } 
+            console.log('3')
+            billingsDetails.data.userMeta.forEach((x) => {
+              if (x.metaKey == "sub_id" || x.metaKey == "cust_id") {
+                this.showDashboard = true;
+                this.billingBoard = false;
+              }
+              //  else if (x.metaKey == "State:Bar") {
+              //   this.billingBoard = true;
+              //   this.showDashboard = false;
+              // }
+              // else {
+              //   this.billingBoard = true;
+              //   this.showDashboard = false;
+              // }
+            })
+          
         } else {
-          this.showDashboard = true;
-          this.billingBoard = false;
+          this.billingBoard = true;
+          this.showDashboard = false;
         }
       } else {
         this.billingBoard = true;

@@ -1,8 +1,8 @@
 <div class="bg-color">
-    <app-email-registration *ngIf="currentStep == 1" [totalSteps]="totalSteps" [message]="message" [roleId]="roleId"
-        [email]="tokenEmail" (isNextEvent)="onNextClick($event)">
+    <app-email-registration *ngIf="currentStep == 1" [totalSteps]="totalSteps" [message]="message" [roleId]="roleId" [email]="tokenEmail" (isNextEvent)="onNextClick($event)">
     </app-email-registration>
-    <app-mobile-registration *ngIf="currentStep == 2" [authCodeField]="authCodeField" [totalSteps]="totalSteps"
-        (isMobileEvent)="mobileDetails($event)" (isOtpEvent)="onAuthCodeValidate($event)">
+    <app-additional-info *ngIf="currentStep == 2" (userMetaEventEmitter)="userMetaData($event)" (stateEvent)="stateEvent($event)" (isPreviousClick)="onUserPageClick($event)" [roleId]="roleId" [userMeta]="registrationData.userMeta">
+    </app-additional-info>
+    <app-mobile-registration *ngIf="currentStep == 3" [authCodeField]="authCodeField" [totalSteps]="totalSteps" (isMobileEvent)="mobileDetails($event)" (isOtpEvent)="onAuthCodeValidate($event)">
     </app-mobile-registration>
 </div>

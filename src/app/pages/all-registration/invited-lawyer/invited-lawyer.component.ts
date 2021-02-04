@@ -16,10 +16,16 @@ import { Store } from '@ngrx/store';
 export class InvitedLawyerComponent implements OnInit {
   tokenEmail: string;
   currentStep: number = 1;
-  totalSteps: number = 2;
+  step: number = 1;
+  totalSteps: number = 3;
+
   roleId: number = 3;
   authCodeField: boolean;
   message: string = '* Use legal name of the facility for registration.';
+  registrationData = {
+    'user': {},
+  }
+  currentState = [];
 
   constructor(private activatedRoute: ActivatedRoute, private loginService: LoginService,
     private lawyerService: LawyerService, private toasterService: ToasterService,
@@ -28,6 +34,22 @@ export class InvitedLawyerComponent implements OnInit {
   }
 
   ngOnInit(): void {
+  }
+
+  stateEvent(state) {
+    this.currentState = [...state]
+  }
+
+  userMetaData(userMetaData) {
+    this.step = 3;
+    this.registrationData['userMeta'] = userMetaData;
+          this.lawyerService.updateInvitedUserData(this.registrationData).subscribe((res: any) => {
+        if (res.success) {
+          this.currentStep = 3;
+        } else {
+          this.toasterService.showErrorToater('Something went wrong, please refresh page and try again.');
+        }
+      });
   }
 
   onGetEmailFromToken(token) {
@@ -47,16 +69,22 @@ export class InvitedLawyerComponent implements OnInit {
 
   onNextClick(userData) {
     if (userData) {
-      this.lawyerService.updateInvitedUserData(userData).subscribe((res: any) => {
-        if (res.success) {
-          this.currentStep = 2;
-        } else {
-          this.toasterService.showErrorToater('Something went wrong, please refresh page and try again.');
-        }
-      });
+      this.registrationData.user = userData;
+      this.currentStep = 2;
     } else {
       this.currentStep = 1;
     }
+    // if (userData) {
+    //   this.lawyerService.updateInvitedUserData(userData).subscribe((res: any) => {
+    //     if (res.success) {
+    //       this.currentStep = 2;
+    //     } else {
+    //       this.toasterService.showErrorToater('Something went wrong, please refresh page and try again.');
+    //     }
+    //   });
+    // } else {
+    //   this.currentStep = 1;
+    // }
   }
 
   mobileDetails(mobileDetails) {

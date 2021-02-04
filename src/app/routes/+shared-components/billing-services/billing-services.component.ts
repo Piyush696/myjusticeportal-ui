@@ -10,7 +10,7 @@ import { UserMetaService } from 'app/services/user-meta.service';
 })
 export class BillingServicesComponent implements OnInit, AfterViewInit {
   addOnsCount: number = 0;
-  planPrice: number = 0;
+  planPrice: number = 400;
   addOnsPrice: number = 0;
   facilityId: any;
   totalPrice: number = 0;
@@ -19,7 +19,7 @@ export class BillingServicesComponent implements OnInit, AfterViewInit {
   facilities = [];
   state = [];
   filteredFacilityList = [];
-  plan: string;
+  plan: string = 'Unlimited Connections';
   @Output() paymentConfirm = new EventEmitter()
   selectedFacilities = [];
   isDiscount: any;
@@ -34,6 +34,7 @@ export class BillingServicesComponent implements OnInit, AfterViewInit {
 
 
   ngOnInit(): void {
+    this.totalPrice = this.planPrice;
     this.getUserDetails();
   }
 
