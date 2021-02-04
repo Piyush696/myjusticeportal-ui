@@ -65,6 +65,10 @@ export class CasesComponent implements OnInit,AfterViewInit {
       this.sponsorUserList = sponsorsUser.data
     })
   }
+  
+  openSecModel(){
+    this.secmodalopen.nativeElement.click();
+  }
 
   getCases() {
     this.caseService.getCases().subscribe((cases: any) => {
