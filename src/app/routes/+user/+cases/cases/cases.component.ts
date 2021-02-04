@@ -20,6 +20,7 @@ export class CasesComponent implements OnInit,AfterViewInit {
   currentCaseId: any;
   count:number = 0;
   @ViewChild('modalopen') modalopen: ElementRef;
+  @ViewChild('secmodalopen') secmodalopen: ElementRef;
 
   constructor(private toasterService: ToasterService, public dialog: MatDialog,
     private caseService: CaseService, private fb: FormBuilder, private router: Router, 
@@ -75,24 +76,6 @@ export class CasesComponent implements OnInit,AfterViewInit {
     }, (error: any) => {
       this.toasterService.showErrorToater(error.statusText);
     })
-  }
-
-  openModal(templateRef, value) {
-    this.currentCaseId = value.caseId
-    let dialogRef = this.dialog.open(templateRef, {
-      width: '55%',
-      position: {
-        top: '80px',
-      }
-    });
-    this.caseNoteForm.get('notes').setValue(value.notes);
-    dialogRef.afterClosed().subscribe(result => {
-    });
-  }
-
-  onOpenModal(templateRef) {
-    let dialogRef = this.dialog.open(templateRef, {});
-    dialogRef.disableClose = true;
   }
 
   onViewLawyer(userId) {

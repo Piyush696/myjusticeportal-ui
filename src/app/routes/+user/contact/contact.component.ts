@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CaseService } from 'app/services/case.service';
@@ -11,16 +11,20 @@ import { UserAdditionInfoService } from 'app/services/user-addition-info.service
   templateUrl: './contact.component.html',
   styleUrls: ['./contact.component.css']
 })
-export class ContactComponent implements OnInit {
+export class ContactComponent implements OnInit, AfterViewInit {
   organizationList: any;
   caseList = [];
   userOrg: any;
   lawyerCaseForm: FormGroup;
   caseId: number;
+  @ViewChild('modalopen') modalopen: ElementRef;
 
   constructor(private hireaLawyerService: HireLawyerService, private fb: FormBuilder, private additionalInfoService: UserAdditionInfoService,
     private router: Router, private activatedRoute: ActivatedRoute, private caseService: CaseService, private toasterService: ToasterService) {
     this.activatedRoute.snapshot.params['userId']
+  }
+  ngAfterViewInit(): void {
+    this.modalopen.nativeElement.click();
   }
 
   ngOnInit(): void {
@@ -83,6 +87,9 @@ export class ContactComponent implements OnInit {
     return exist
   }
 
+  openModel(){
+    this.modalopen.nativeElement.click();
+  } 
 
 
   getCases() {

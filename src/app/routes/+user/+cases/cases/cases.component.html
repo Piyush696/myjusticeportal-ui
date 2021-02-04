@@ -18,12 +18,12 @@
                                     {{case?.legalMatter}}
                                     <br><span
                                         class="font-weight-normal">{{case?.briefDescriptionOfChargeOrLegalMatter}}</span>
-                                </span>
-                                <span *ngIf="case?.briefDescriptionOfChargeOrLegalMatter.length > 45">
+                            </span>
+                            <span *ngIf="case?.briefDescriptionOfChargeOrLegalMatter.length > 45">
                                     {{case?.legalMatter}}
                                     <br><span class="font-weight-normal">{{case?.briefDescriptionOfChargeOrLegalMatter |
                                         slice:0:45}}...</span>
-                                </span>
+                            </span>
                             </span>
                         </mat-label>
                         <br>
@@ -59,8 +59,7 @@
                     <div class="text-center line-height">
 
                         <div *ngIf="user?.userAdditionalInfo?.profile?.downloadLink">
-                            <img src="{{user?.userAdditionalInfo?.profile?.downloadLink}}" width="157px" height="auto"
-                                alt="logo">
+                            <img src="{{user?.userAdditionalInfo?.profile?.downloadLink}}" width="157px" height="auto" alt="logo">
                         </div>
                         <div *ngIf="!user?.userAdditionalInfo?.profile?.downloadLink">
                             <img src="assets/img/placeholder.jpg" width="157px" height="auto" alt="logo">
@@ -71,8 +70,7 @@
                         </div>
                     </div>
                     <div class="d-flex justify-content-center">
-                        <button (click)="onViewLawyer(user.userId)" class="btn bg-color px-perc py-1"
-                            mat-raised-button>View Profile</button>
+                        <button (click)="onViewLawyer(user.userId)" class="btn bg-color px-perc py-1" mat-raised-button>View Profile</button>
                     </div>
                 </mat-card>
             </div>
@@ -102,8 +100,7 @@
         <button mat-raised-button class="button-purple mt-2 px-4 py-1" (click)="onCancelNotesModal()">
             Cancel
         </button>
-        <button mat-raised-button color="primary" class="px-4 py-1 mt-2" [disabled]="caseNoteForm.get('notes').invalid"
-            (click)="onSaveChanges()">
+        <button mat-raised-button color="primary" class="px-4 py-1 mt-2" [disabled]="caseNoteForm.get('notes').invalid" (click)="onSaveChanges()">
             Save
         </button>
     </div>
@@ -111,20 +108,23 @@
 
 
 <!-- Button trigger modal -->
-<button id="modalopen" #modalopen [hidden]="true" data-toggle="modal" data-target="#exampleModalCenter">
+<button id="modalopen" #modalopen [hidden]="true" data-toggle="modal" data-target="#exampleModalCenterTitle1">
 </button>
 
 <!-- Modal -->
-<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false"
+<div class="modal fade" id="exampleModalCenterTitle1" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false"
     aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered px-4 modal-lg py-4" role="document">
         <div class="modal-content modal-xl px-4 py-4">
             <div class="mb-1">
                 <h1 class="text-center"><b>Welcome to My Justice Portal!</b></h1>
 
-                <p id="textstyle" class=" text-justify text-center" style="color: #44546A;"><i>The secure, all-in-one portal designed to help support meaningful representation and access to the courts.</i>
+                <p id="textstyle" class=" text-justify text-center" style="color: #44546A;"><i>The secure, all-in-one
+                        portal designed to help support meaningful representation and access to the courts.</i>
                 </p>
-                <div class="text-center text-justify" style="font-size: 18px;"> <p>    As an <b>Inmate</b> of this Correctional Facility you can use this tool to*:</p></div>
+                <div class="text-center text-justify" style="font-size: 18px;">
+                    <p> As an <b>Inmate</b> of this Correctional Facility you can use this tool to*:</p>
+                </div>
                 <div class="d-flex justify-content-center li-dis">
                     <ul>
                         <li>Organize and maintain information related to your legal matters</li>
@@ -138,12 +138,12 @@
                 </div>
 
                 <div class="text-center text-justify">To utilize any of these features, you must first create a
-                        “case” as a reference.</div>
+                    “case” as a reference.</div>
             </div>
             <div class="d-flex justify-content-center">
                 <div class="modal-btn">
-                    <button type="button" class="btn btn-secondary button-purple px-5 py-4 got-btn" data-dismiss="modal"
-                        (click)="onOpenModal(openModal)">Got It!  Let’s get started</button>
+                    <button type="button" class="btn btn-secondary button-purple px-5 py-4 got-btn" data-dismiss="modal" 
+                       (click)="openSecModel()" >Got It! Let’s get started</button>
                 </div>
             </div>
             <div>
@@ -153,24 +153,23 @@
     </div>
 </div>
 
-<ng-template #openModal>
-    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
-        <div>
+<button id="secmodalopen" #secmodalopen [hidden]="true" data-toggle="modal" data-target="#exampleModalCenter">
+</button>
+
+
+
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered px-4 modal-lg py-4" role="document">
+        <div class="modal-content modal-xl px-4 py-4">
             <div class="mb-1">
                 <h2 class="text-center"><b>Welcome to My Justice Portal!</b></h2>
 
-                <p id="textstyle" class=" text-justify">The My Justice Portal, LLC Platform may provide access to
-                    attorneys who you may choose tohire to represent you in whatever capacity you so choose. MY JUSTICE
-                    PORTAL, LLC IS NOT AN ATTORNEY. USING MY JUSTICE PORTAL, LLC’S PLATFORM, AND/OR
-                    SERVICES DOES NOT CREATE AN ATTORNEY-CLIENT PRIVILEGE. MY JUSTICE PORTAL, LLC CANNOT GUARANTEE THAT
-                    ANY NOTES YOU TAKE ON THE PLATFORM OR ANY COMMUNICATIONS YOU HAVE WITH AN ATTORNEY WILL BE
-                    PRIVILEGED AND CONFIDENTIAL. MY JUSTICE
-                    PORTAL, LLC CANNOT GUARANTEE THE SUCCESS OF ANY ATTORNEY THAT YOU CHOOSE TO HIRE.MY JUSTICE PORTAL,
-                    LLC DOES NOT ENDORSE ANY ATTORNEYS THAT ARE LISTED ON THE PLATFORM.
+                <p id="textstyle" class=" text-justify">The My Justice Portal, LLC Platform may provide access to attorneys who you may choose tohire to represent you in whatever capacity you so choose. MY JUSTICE PORTAL, LLC IS NOT AN ATTORNEY. USING MY JUSTICE PORTAL, LLC’S PLATFORM, AND/OR
+                    SERVICES DOES NOT CREATE AN ATTORNEY-CLIENT PRIVILEGE. MY JUSTICE PORTAL, LLC CANNOT GUARANTEE THAT ANY NOTES YOU TAKE ON THE PLATFORM OR ANY COMMUNICATIONS YOU HAVE WITH AN ATTORNEY WILL BE PRIVILEGED AND CONFIDENTIAL. MY JUSTICE
+                    PORTAL, LLC CANNOT GUARANTEE THE SUCCESS OF ANY ATTORNEY THAT YOU CHOOSE TO HIRE.MY JUSTICE PORTAL, LLC DOES NOT ENDORSE ANY ATTORNEYS THAT ARE LISTED ON THE PLATFORM.
                 </p>
                 <p id="textstyle" class=" text-justify">
-                    MY JUSTICE PORTAL, LLC DOES NOT ENDORSE AND CANNOT GUARANTEE THESUCCESS OF ANY THIRD PARTY SERVICE
-                    PROVIDER, INCLUDING BUT NOT LIMITED TO, ATTORNEYS, BAIL BONDSMEN, REHAB FACILITES, ETC.
+                    MY JUSTICE PORTAL, LLC DOES NOT ENDORSE AND CANNOT GUARANTEE THESUCCESS OF ANY THIRD PARTY SERVICE PROVIDER, INCLUDING BUT NOT LIMITED TO, ATTORNEYS, BAIL BONDSMEN, REHAB FACILITES, ETC.
                 </p>
 
 
@@ -179,10 +178,9 @@
             </div>
             <div class="d-flex justify-content-center">
                 <div class="modal-btn">
-                    <button type="button" class="btn btn-secondary button-purple px-5 py-3 acc-btn" data-dismiss="modal"
-                        (click)="onAcceptClick()">Continue</button>
+                    <button type="button" class="btn btn-secondary button-purple px-5 py-3" data-dismiss="modal" (click)="onAcceptClick()">Continue</button>
                 </div>
             </div>
         </div>
     </div>
-</ng-template>
+</div>

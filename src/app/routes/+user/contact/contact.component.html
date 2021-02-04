@@ -1,7 +1,34 @@
+<button id="modalopen" #modalopen [hidden]="true" data-toggle="modal" data-target="#contact">
+</button>
+
+<div class="modal fade" id="contact" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false"
+    aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered px-4 modal-lg py-4" role="document">
+        <div class="modal-content modal-xl px-4 py-4 text-justify m-4">
+            MY JUSTICE PORTAL, LLC IS NOT AN ATTORNEY AND USING THE PLATFORM AND/OR SERVICES DOES NOT CREATE AN
+            ATTORNEY-CLIENT PRIVILEGE. MY JUSTICE PORTAL, LLC CANNOT GUARANTEE THAT ANY NOTES YOU TAKE ON THE PLATFORM
+            OR ANY COMMUNICATIONS YOU HAVE WITH AN ATTORNEY OR LAW FIRM WILL BE PRIVILEGED AND CONFIDENTIAL. MY JUSTICE
+            PORTAL, LLC CANNOT GUARANTEE THE SUCCESS OF ANY ATTORNEY OR LAW FIRM THAT YOU CHOOSE TO HIRE. MY JUSTICE
+            PORTAL, LLC DOES NOT ENDORSE ANY ATTORNEYS OR LAW FIRMS THAT ARE LISTED ON THE MY JUSTICE PORTAL PLATFORM.
+
+            <br>
+            MY JUSTICE PORTAL, LLC DOES NOT ENDORSE AND CANNOT GUARANTEE THE SUCCESS OF ANY THIRD PARTY SERVICE
+            PROVIDER, INCLUDING BUT NOT LIMITED TO, ATTORNEYS, LAW FIRMS, BAIL BONDSMEN, REHAB FACILITIES, ETC.
+            <div class="d-flex justify-content-center">
+                <div class="modal-btn">
+                    <button type="button" class="btn btn-secondary button-purple px-5 py-4 got-btn" data-dismiss="modal"
+                        >Continue</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 <div class="col-12 d-flex justify-content-between pl-0">
     <div>
         <h1 class="line-height font-weight-bold">Contact A Lawyer</h1>
-        <h4 class="line-height header-sub-text">Please complete the form below to contact a lawyer. Once the lawyer reviews your information, you will receive a response here in the portal .</h4>
+        <h4 class="line-height header-sub-text">Please complete the form below to contact a lawyer. Once the lawyer
+            reviews your information, you will receive a response here in the portal .</h4>
     </div>
 </div>
 <div>
@@ -10,7 +37,8 @@
         <div class="col-6 pl-0">
             <mat-form-field appearance="fill" class="w-100 p-0">
                 <mat-label>Organization Name</mat-label>
-                <input type="text" matInput placeholder="Organization Name" [formControl]="lawyerCaseForm.controls['name']" required>
+                <input type="text" matInput placeholder="Organization Name"
+                    [formControl]="lawyerCaseForm.controls['name']" required>
                 <mat-error>
                     <div *ngIf="lawyerCaseForm.controls['name'].invalid && lawyerCaseForm.controls['name'].touched">
                         <small class="font13">
@@ -24,7 +52,8 @@
         <div class="col-6 pl-0">
             <mat-form-field appearance="fill" class="w-100 p-0">
                 <mat-label>Lawyer</mat-label>
-                <input type="text" matInput placeholder="Lawyer" [formControl]="lawyerCaseForm.controls['lawyerName']" required>
+                <input type="text" matInput placeholder="Lawyer" [formControl]="lawyerCaseForm.controls['lawyerName']"
+                    required>
             </mat-form-field>
         </div>
     </div>
@@ -35,7 +64,8 @@
     <div class="col-6 pl-0">
         <mat-form-field appearance="fill" class="w-100">
             <mat-label>Cases</mat-label>
-            <mat-select [formControl]="lawyerCaseForm.controls['caseId']" (selectionChange)="onCaseSelect($event)" required>
+            <mat-select [formControl]="lawyerCaseForm.controls['caseId']" (selectionChange)="onCaseSelect($event)"
+                required>
                 <mat-option>
                     Select Case
                 </mat-option>
@@ -44,7 +74,8 @@
                 </mat-option>
             </mat-select>
         </mat-form-field>
-        <small *ngIf="confirmAsignedCase()" class="text-center text-danger assisedcase">This case is already assigned to lawyer.</small>
+        <small *ngIf="confirmAsignedCase()" class="text-center text-danger assisedcase">This case is already assigned to
+            lawyer.</small>
     </div>
 
     <h3 class="font-weight-bold">Inquiry Notes</h3>
@@ -52,7 +83,8 @@
 
     <div class="col-8 p-0">
         <mat-form-field appearance="fill" class="w-100 py-2">
-            <textarea rows="2" matInput [formControl]="lawyerCaseForm.controls['notes']" placeholder="Provide details about your case" required></textarea>
+            <textarea rows="2" matInput [formControl]="lawyerCaseForm.controls['notes']"
+                placeholder="Provide details about your case" required></textarea>
             <!-- <mat-error>
                 <div *ngIf="lawyerCaseForm.controls['notes'].invalid && lawyerCaseForm.controls['notes'].touched">
                     <small class="font13">
@@ -62,7 +94,8 @@
             </mat-error> -->
         </mat-form-field>
         <div class="pr-2 pb-2 pt-2 pl-0">
-            <button [disabled]="(confirmAsignedCase() || !lawyerCaseForm.valid)" class="button-purple px-5 py-1" mat-raised-button (click)="onContactLawyer()">
+            <button [disabled]="(confirmAsignedCase() || !lawyerCaseForm.valid)" class="button-purple px-5 py-1"
+                mat-raised-button (click)="onContactLawyer()">
                 Send
             </button>
             <button class="ml-4 button-purple px-5 py-1" routerLink="../../case" mat-raised-button>
