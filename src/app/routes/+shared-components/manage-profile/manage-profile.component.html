@@ -16,7 +16,7 @@
 <div class="row">
     <div class="col-12 pt-2">
         <mat-card class="mat-elevation-z10 ">
-          <h1 class="font-weight-bold">Profile Information</h1>
+            <h1 class="font-weight-bold">Profile Information</h1>
             <table style="width:100%">
                 <tr>
                     <th>Name</th>
@@ -38,11 +38,12 @@
                     <th>Profile Headshot</th>
                     <td>
                         <!-- <img src="{{userDetails?.userAdditionalInfo?.profile?.downloadLink}}" width="157px" height="auto" alt="logo" class="logo" *ngIf="userDetails?.userAdditionalInfo?.profile?.downloadLink"> -->
-                        <div  *ngIf="!userDetails?.userAdditionalInfo?.profile?.downloadLink" class="my-2 mx-2">
+                        <div *ngIf="!userDetails?.userAdditionalInfo?.profile?.downloadLink" class="my-2 mx-2">
                             <img src="assets/img/placeholder.jpg" width="157px" height="auto" alt="logo">
                         </div>
-                        <div  *ngIf="userDetails?.userAdditionalInfo?.profile?.downloadLink" class="my-2 mx-2">
-                            <img src="{{userDetails?.userAdditionalInfo?.profile?.downloadLink}}" width="157px" height="auto" alt="logo">
+                        <div *ngIf="userDetails?.userAdditionalInfo?.profile?.downloadLink" class="my-2 mx-2">
+                            <img src="{{userDetails?.userAdditionalInfo?.profile?.downloadLink}}" width="157px"
+                                height="auto" alt="logo">
                         </div>
                     </td>
                 </tr>
@@ -50,22 +51,25 @@
                     <th>Profile Header Background Image</th>
                     <td>
                         <!-- <img src="{{userDetails?.userAdditionalInfo?.header?.downloadLink}}" alt="logo" class="logo" *ngIf="userDetails?.userAdditionalInfo?.header?.downloadLink"> -->
-                        <div  *ngIf="!userDetails?.userAdditionalInfo?.header?.downloadLink" class="my-2 mx-2">
+                        <div *ngIf="!userDetails?.userAdditionalInfo?.header?.downloadLink" class="my-2 mx-2">
                             <img src="assets/img/hb.png" width="100%" height="auto" alt="logo">
                         </div>
-                        <div  *ngIf="userDetails?.userAdditionalInfo?.header?.downloadLink" class="my-2 mx-2">
-                            <img src="{{userDetails?.userAdditionalInfo?.header?.downloadLink}}" width="157px" height="auto" alt="logo">
-                        </div>    
+                        <div *ngIf="userDetails?.userAdditionalInfo?.header?.downloadLink" class="my-2 mx-2">
+                            <img src="{{userDetails?.userAdditionalInfo?.header?.downloadLink}}" width="157px"
+                                height="auto" alt="logo">
+                        </div>
                     </td>
                 </tr>
             </table>
             <div class="row">
                 <div class="col-12 col-sm-12 d-flex justify-content-between justify-content-sm-between">
                     <div>
-                        <button mat-raised-button class="button-purple px-4 py-1 mt-1" (click)="openOrganizationModal(previewProfile,userDetails)">Preview</button>
+                        <button mat-raised-button class="button-purple px-4 py-1 mt-1"
+                            (click)="openOrganizationModal(previewProfile,userDetails)">Preview</button>
                     </div>
                     <div>
-                        <button mat-raised-button class="button-purple px-4 py-1 mt-1" (click)="openOrganizationModal(updateOrganization,userDetails)">Make Changes</button>
+                        <button mat-raised-button class="button-purple px-4 py-1 mt-1"
+                            (click)="openOrganizationModal(updateOrganization,userDetails)">Make Changes</button>
                     </div>
                 </div>
             </div>
@@ -78,11 +82,12 @@
     <div>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="closeModal()">
             <span aria-hidden="true">&times;</span>
-          </button>
+        </button>
     </div>
     <div class="pl-1">
         <h2 class="d-flex font-weight-bold justify-content-around mb-1">Profile Editor</h2>
-        <span class="d-flex justify-content-around mb-1">Click the Edit button below to make changes, then click Save to confirm your changes.
+        <span class="d-flex justify-content-around mb-1">Click the Edit button below to make changes, then click Save to
+            confirm your changes.
         </span>
     </div>
 
@@ -90,9 +95,11 @@
         <div class="col-12 p-0">
             <mat-form-field appearance="fill" class="w-100 p-1">
                 <mat-label> Name</mat-label>
-                <input type="text" matInput placeholder="Name" [formControl]="additionalInfoForm.controls['name']" required>
+                <input type="text" matInput placeholder="Name" [formControl]="additionalInfoForm.controls['name']"
+                    required>
                 <mat-error>
-                    <div *ngIf="additionalInfoForm.controls['name'].invalid && additionalInfoForm.controls['name'].touched">
+                    <div
+                        *ngIf="additionalInfoForm.controls['name'].invalid && additionalInfoForm.controls['name'].touched">
                         <small class="font13">
                             Name is Required
                         </small>
@@ -152,88 +159,100 @@
     <div *ngIf="currentView == 1">
         <div class="row ml-1 mb-2">
             <!-- <div class="card-body px-0 pb-4"> -->
-                <div class="drag-border mb-2">
-                    <h4 class="font-weight-bold margin-remove m-0">Profile Headshot</h4>
-                    <small class="text-bold">Best image size is up to 5MB and 157px × 185px (width × height).</small>
-                    <div ng2FileDrop [ngClass]="{'another-file-over-class': hasAnotherDropZoneOver}" (fileOver)="fileOverAnother($event)" [uploader]="uploader1" class="box-placeholder my-drop-zone font-weight-bold pb-2">
-                        Drag and drop files here (or) choose below to attach.
-                    </div>
-                    <label for="file1" class="file-upload mb-0">
-                        <input id="file1" type="file" ng2FileSelect [uploader]="uploader1" accept="image/*"
-                            (change)=" onProfile($event.target.files)" />
-                    </label>
-                    <div>
-                        <small class=" text-danger" *ngIf="isFileSizeMax">Image size should be less than 5 MB</small>
-                    </div>
-                    <div> <small class="text-danger" *ngIf="isDimenssionMax">Image should be 157px × 185px (width ×
-                            height)
-                        </small>
-                    </div>
+            <div class="drag-border mb-2">
+                <h4 class="font-weight-bold margin-remove m-0">Profile Headshot</h4>
+                <small class="text-bold">Best image size is up to 5MB and 157px × 185px (width × height).</small>
+                <div ng2FileDrop [ngClass]="{'another-file-over-class': hasAnotherDropZoneOver}"
+                    (fileOver)="fileOverAnother($event)" [uploader]="uploader1"
+                    class="box-placeholder my-drop-zone font-weight-bold pb-2">
+                    Drag and drop files here (or) choose below to attach.
                 </div>
-                <div class="py-1">
-                    <table class="table m-0">
-                        <tbody>
-                            <tr class="pr-0" *ngFor="let item of uploader1?.queue">
-                                <td ><strong>{{item?.file?.name}}</strong></td>
-                                <td nowrap >
-                                    <button mat-raised-button color="warn" (click)="item.remove()">
-                                        <mat-icon>delete</mat-icon>Remove
-                                    </button>
-                                </td>
-                                <td>
-                                    <button mat-raised-button color="primary"
-                                        [disabled]="isFileSizeMax || isDimenssionMax" (click)="onUploadLogo()">
-                                        <mat-icon>file_upload</mat-icon>Upload
-                                    </button>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
+                <label for="file1" class="file-upload mb-0">
+                    <input [disabled]="uploader1?.queue.length==1" id="file1" type="file" ng2FileSelect
+                        [uploader]="uploader1" accept="image/*" (change)=" onProfile($event.target.files)" />
+                </label>
+                <div>
+                    <small class=" text-danger" *ngIf="isFileSizeMax">Image size should be less than 5 MB</small>
                 </div>
+                <div> <small class="text-danger" *ngIf="isDimenssionMax">Image should be 157px × 185px (width ×
+                        height)
+                    </small>
+                </div>
+                <div> <small class="text-danger" *ngIf="uploader1?.queue.length==1">If you want to add another image, So
+                        remove the upload image.
+                    </small>
+                </div>
+            </div>
+            <div class="py-1">
+                <table class="table m-0">
+                    <tbody>
+                        <tr class="pr-0" *ngFor="let item of uploader1?.queue">
+                            <td><strong>{{item?.file?.name}}</strong></td>
+                            <td nowrap>
+                                <button mat-raised-button color="warn" (click)="item.remove()">
+                                    <mat-icon>delete</mat-icon>Remove
+                                </button>
+                            </td>
+                            <td>
+                                <button mat-raised-button color="primary" [disabled]="isFileSizeMax || isDimenssionMax"
+                                    (click)="onUploadLogo()">
+                                    <mat-icon>file_upload</mat-icon>Upload
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
             <!-- </div> -->
         </div>
 
         <div class="row ml-1 mb-2">
             <!-- <div class="card-body px-0 pb-4"> -->
-                <div class="drag-border  mb-1">
-                    <h4 class="font-weight-bold margin-remove m-0">Profile Header Background Image</h4>
-                    <small class="text-bold">Best image size is 8 MB and 730px × 170px (width × height)</small>
-                    <div ng2FileDrop [ngClass]="{'another-file-over-class': hasAnotherDropZoneOver}" (fileOver)="fileOverAnother($event)" [uploader]="uploader2" class="box-placeholder my-drop-zone font-weight-bold pb-2">
-                        Drag and drop files here (or) choose below to attach.
-                    </div>
-                    <label for="file1" class="file-upload mb-0">
-                        <input id="file1" type="file" ng2FileSelect [uploader]="uploader2"
-                            (change)="onHeadshot($event.target.files)" />
-                    </label>
-                    <div>
-                        <small class="text-danger" *ngIf="isHeadshotFileSizeMax">File size should be less than 8
-                            MB</small>
-                    </div>
-                    <div> <small class="text-danger" *ngIf="isDimenssionMax1">Image should be 730px × 170px (width ×
-                            height)
-                        </small>
-                    </div>
+            <div class="drag-border  mb-1">
+                <h4 class="font-weight-bold margin-remove m-0">Profile Header Background Image</h4>
+                <small class="text-bold">Best image size is 8 MB and 730px × 170px (width × height)</small>
+                <div ng2FileDrop [ngClass]="{'another-file-over-class': hasAnotherDropZoneOver}"
+                    (fileOver)="fileOverAnother($event)" [uploader]="uploader2"
+                    class="box-placeholder my-drop-zone font-weight-bold pb-2">
+                    Drag and drop files here (or) choose below to attach.
                 </div>
-                <div class="py-1">
-                    <table class="table m-0">
-                        <tbody>
-                            <tr class="pr-0" *ngFor="let item of uploader2?.queue">
-                                <td ><strong>{{item?.file?.name}}</strong></td>
-                                <td nowrap>
-                                    <button mat-raised-button color="warn" (click)="item.remove()">
-                                        <mat-icon>delete</mat-icon>Remove
-                                    </button>
-                                </td>
-                                <td>
-                                    <button mat-raised-button color="primary"
-                                        [disabled]="isHeadshotFileSizeMax || isDimenssionMax1" (click)="onUploadLogo()">
-                                        <mat-icon>file_upload</mat-icon>Upload
-                                    </button>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
+                <label for="file1" class="file-upload mb-0">
+                    <input id="file1" [disabled]="uploader2?.queue.length==1" type="file" ng2FileSelect
+                        [uploader]="uploader2" (change)="onHeadshot($event.target.files)" />
+                </label>
+                <div>
+                    <small class="text-danger" *ngIf="isHeadshotFileSizeMax">File size should be less than 8
+                        MB</small>
                 </div>
+                <div> <small class="text-danger" *ngIf="isDimenssionMax1">Image should be 730px × 170px (width ×
+                        height)
+                    </small>
+                </div>
+                <div> <small class="text-danger" *ngIf="uploader2?.queue.length==1">If you want to add another image, So
+                        remove the upload image.
+                    </small>
+                </div>
+            </div>
+            <div class="py-1">
+                <table class="table m-0">
+                    <tbody>
+                        <tr class="pr-0" *ngFor="let item of uploader2?.queue">
+                            <td><strong>{{item?.file?.name}}</strong></td>
+                            <td nowrap>
+                                <button mat-raised-button color="warn" (click)="item.remove()">
+                                    <mat-icon>delete</mat-icon>Remove
+                                </button>
+                            </td>
+                            <td>
+                                <button mat-raised-button color="primary"
+                                    [disabled]="isHeadshotFileSizeMax || isDimenssionMax1" (click)="onUploadLogo()">
+                                    <mat-icon>file_upload</mat-icon>Upload
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
             <!-- </div> -->
         </div>
     </div>
@@ -275,10 +294,12 @@
                 <div class="col-3">
                     <div class="d-flex">
                         <div class="img-profile" *ngIf="userDetails?.userAdditionalInfo?.profile?.downloadLink">
-                            <img src="{{userDetails?.userAdditionalInfo?.profile?.downloadLink}}" width="157px" height="auto" alt="logo" class="logo">
+                            <img src="{{userDetails?.userAdditionalInfo?.profile?.downloadLink}}" width="157px"
+                                height="auto" alt="logo" class="logo">
                         </div>
                         <div class="img-profile" *ngIf="!userDetails?.userAdditionalInfo?.profile?.downloadLink">
-                            <img src="../../../../assets/img/placeholder.jpg" width="157px" height="auto" alt="logo" class="logo">
+                            <img src="../../../../assets/img/placeholder.jpg" width="157px" height="auto" alt="logo"
+                                class="logo">
                         </div>
                     </div>
                 </div>
