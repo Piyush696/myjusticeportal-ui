@@ -188,7 +188,7 @@ export class UsersComponent implements OnInit, OnDestroy {
       firstName: ['', [Validators.required, Validators.maxLength(50), Validators.pattern('^[a-zA-Z ]*$')]],
       middleName: ['', [Validators.required, Validators.maxLength(50), Validators.pattern('^[a-zA-Z ]*$')]],
       lastName: ['', [Validators.required, Validators.maxLength(50), Validators.pattern('^[a-zA-Z ]*$')]],
-      userName: ['', [Validators.required, Validators.maxLength(25), Validators.minLength(8)], this.validateUserNotTaken.bind(this)],
+      userName: ['', [Validators.required, Validators.maxLength(25), Validators.minLength(8),this.validateEmail.bind(this)], this.validateUserNotTaken.bind(this)],
       password: ['', [Validators.required, Validators.minLength(8), this.validatePassword.bind(this)]],
       confirmPassword: ['', [Validators.required, Validators.minLength(8)]],
     }, { validator: this.checkIfMatchingPasswords('password', 'confirmPassword') })
@@ -204,6 +204,14 @@ export class UsersComponent implements OnInit, OnDestroy {
         return passwordConfirmationInput.setErrors(null);
       }
     };
+  }
+
+  validateEmail(control: AbstractControl) {
+      const pattern = /^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,15})$/;
+      if (!control.value.match(pattern) && control.value !== '') {
+        return { invalidEmail: true };
+      }
+      return null;
   }
 
   validatePassword(control: AbstractControl) {
@@ -225,7 +233,7 @@ export class UsersComponent implements OnInit, OnDestroy {
 
   openModal(templateRef) {
     let dialogRef = this.dialog.open(templateRef, {
-      width: '368px',
+      width: '500px',
     });
      
     dialogRef.afterClosed().subscribe(result => {

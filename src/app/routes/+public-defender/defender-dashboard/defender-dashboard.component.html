@@ -62,7 +62,7 @@
         </div>
     </div>
 
-    <div *ngIf="userData?.roles[0]?.roleId == 5">
+    <div *ngIf="((userData?.isAdmin && userData?.isSelfPaid) || (!userData?.isAdmin && userData?.isSelfPaid))">
         <app-public-defender-billing (paymentConfirm)="onPayEvent($event)"></app-public-defender-billing>
     </div>
 </div>
