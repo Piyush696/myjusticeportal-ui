@@ -27,7 +27,7 @@ export const ROUTES: RouteInfo[] = [
     { path: 'lawyer/inquiries', title: 'Inquiries', icon: 'nc-bank', class: '', roleIds: [3] },
     { path: 'lawyer/lawyer-chat', title: 'Messaging', icon: 'nc-bank', class: '', roleIds: [3] },
     { path: 'lawyer/accepted-cases', title: 'My Connections', icon: 'nc-bank', class: '', roleIds: [3] },
-    { path: 'lawyer/billing-setting', title: 'Billing Settings', icon: 'nc-bank', class: '', roleIds: [3], isAdmin: true },
+    { path: 'lawyer/billing-setting', title: 'Billing Settings', icon: 'nc-bank', class: '', roleIds: [3], isSelfPaid:true },
     { path: 'lawyer/manage-profile', title: 'Manage Profile', icon: 'nc-bank', class: '', roleIds: [3] },
     { path: 'lawyer/manage-organization', title: 'Manage Organization', icon: 'nc-bank', class: '', roleIds: [3], isAdmin: true },
 
@@ -37,7 +37,7 @@ export const ROUTES: RouteInfo[] = [
     { path: 'public-defender/search-inmates', title: 'Search Inmates', icon: 'nc-bank', class: '', roleIds: [5], isAdmin: true },
     { path: 'public-defender/inmates-cases', title: 'My Connections', icon: 'nc-bank', class: '', roleIds: [5] },
     { path: 'public-defender/chat', title: 'Messaging', icon: 'nc-bank', class: '', roleIds: [5] },
-    { path: 'public-defender/billing-setting', title: 'Billing Settings', icon: 'nc-bank', class: '', roleIds: [5], isSelfPaid:true },
+    { path: 'public-defender/billing-setting', title: 'Billing Settings', icon: 'nc-bank', class: '', roleIds: [5], isSelfPaid: true },
     { path: 'public-defender/manage-profile', title: 'Manage Profile', icon: 'nc-bank', class: '', roleIds: [5] },
     { path: 'public-defender/manage-organization', title: 'Manage Organization', icon: 'nc-bank', class: '', roleIds: [5], isAdmin: true },
 
@@ -102,7 +102,7 @@ export class SidebarComponent implements OnInit, AfterViewInit {
 
     filterMenuByUser() {
         if (this.userInfo.roles[0].roleId === 3 || this.userInfo.roles[0].roleId === 5) {
-            if(this.userInfo.isAdmin && !this.userInfo.isSelfPaid){
+            if(this.userInfo.isAdmin && this.userInfo.isSelfPaid){
                 if (this.userInfo.status && this.billingsDetails?.data?.userMeta.find(element => element.metaKey === 'sub_id')) {
                     this.filteredMenuItems = ROUTES.filter(menu => {
                         let isExist = menu.roleIds.find(roleId => roleId == this.userInfo.roles[0].roleId);
@@ -137,6 +137,19 @@ export class SidebarComponent implements OnInit, AfterViewInit {
                 }
             } else if(!this.userInfo.isAdmin && !this.userInfo.isSelfPaid && !this.userInfo.status){
                 this.filteredMenuItems = null;
+            }
+            else if(!this.userInfo.isAdmin && !this.userInfo.isSelfPaid ){
+                this.filteredMenuItems = ROUTES.filter(menu => {
+                    let isExist = menu.roleIds.find(roleId => roleId == this.userInfo.roles[0].roleId);
+                    if (isExist) {
+                        if (!menu.isSelfPaid) {
+                            return menu;
+                        }
+                        else if (menu.isAdmin && this.userInfo.isAdmin) {
+                            return menu;
+                        }
+                    }
+                });
             }
              else {
                 this.filteredMenuItems = ROUTES.filter(menu => {

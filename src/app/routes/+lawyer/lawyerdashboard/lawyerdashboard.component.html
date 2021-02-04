@@ -33,7 +33,7 @@
             </div>
         </div>
     </div>
-    <div *ngIf="userData?.roles[0]?.roleId == 3">
+    <div *ngIf="((userData?.isAdmin && userData?.isSelfPaid) || (!userData?.isAdmin && userData?.isSelfPaid))">
         <app-billing-services (paymentConfirm)="onPayEvent($event)"></app-billing-services>
     </div>
 </div>
@@ -59,7 +59,6 @@
                 <li class="ml-2">
                     <mat-checkbox class="fonts" id="third-check" [disabled]=true>
                         Step 3: <a class="link" (click)="redirect()">Set up your profile</a>
-
                     </mat-checkbox>
                 </li>
 
