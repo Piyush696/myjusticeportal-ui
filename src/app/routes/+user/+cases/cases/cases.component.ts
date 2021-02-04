@@ -90,6 +90,11 @@ export class CasesComponent implements OnInit,AfterViewInit {
     });
   }
 
+  onOpenModal(templateRef) {
+    let dialogRef = this.dialog.open(templateRef, {});
+    dialogRef.disableClose = true;
+  }
+
   onViewLawyer(userId) {
     this.router.navigateByUrl('mjp/user/lawyer-profile/'+userId)
   }
