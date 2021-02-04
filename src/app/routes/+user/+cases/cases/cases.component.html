@@ -112,14 +112,9 @@
 </button>
 
 <!-- Modal -->
-<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered px-4 modal-lg py-4" role="document">
         <div class="modal-content modal-xl px-4 py-4">
-            <div class="d-flex justify-content-end">
-                <button type="button" class="bg-button" data-dismiss="modal">
-                    X
-                </button>
-            </div>
             <div class="mb-1">
                 <h2 class="text-center"><b>Welcome to My Justice Portal!</b></h2>
 
@@ -137,7 +132,7 @@
             </div>
             <div class="d-flex justify-content-center">
                 <div class="modal-btn">
-                    <button type="button" class="btn btn-secondary button-purple px-2" data-dismiss="modal" (click)="onAcceptClick()">Continue</button>
+                    <button type="button" class="btn btn-secondary button-purple px-5 py-3" data-dismiss="modal" (click)="onAcceptClick()">Continue</button>
                 </div>
             </div>
         </div>

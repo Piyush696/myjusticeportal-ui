@@ -53,7 +53,7 @@ export class UsersComponent implements OnInit, OnDestroy {
       })
     }
     if(this.userIdList.length === 1){
-      this.modalText = 'Are you sure you want to delete this user?'
+      this.modalText = 'Are you sure you want to delete the selected users?'
     } else {
       this.modalText = ' Are you sure you want to delete this all users?' 
     }
@@ -227,7 +227,7 @@ export class UsersComponent implements OnInit, OnDestroy {
     let dialogRef = this.dialog.open(templateRef, {
       width: '368px',
     });
-
+     
     dialogRef.afterClosed().subscribe(result => {
     });
   }
@@ -296,7 +296,7 @@ export class UsersComponent implements OnInit, OnDestroy {
     let dialogRef = this.dialog.open(templateRef, {
       width: '500px',
     });
-
+     
     dialogRef.afterClosed().subscribe(result => {
     });
   }
