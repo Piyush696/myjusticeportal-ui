@@ -151,23 +151,23 @@
             </div>
             <div class="col-12 p-2">
                 <mat-form-field appearance="fill" class="w-100">
-                    <mat-label>User Name</mat-label>
-                    <input type="text" matInput [formControl]="createUserForm.controls['userName']" required>
+                    <mat-label>Email</mat-label>
+                    <input type="email" matInput [formControl]="createUserForm.controls['userName']" required>
                     <mat-error>
                         <div *ngIf="createUserForm.controls['userName'].invalid && 
                                                 createUserForm.controls['userName'].touched && createUserForm.controls['userName'].hasError('taken')">
-                            <small class="font13">User Name already taken.</small>
+                            <small class="font13">Email already taken.</small>
                         </div>
                         <div *ngIf="createUserForm.controls['userName'].invalid && 
                                                 createUserForm.controls['userName'].touched && !createUserForm.controls['userName'].hasError('taken')">
                             <small class="font13" *ngIf="createUserForm.get('userName').errors?.required">
-                                User Name is Required
+                                Email is Required
                             </small>
                             <small class="font13" *ngIf="createUserForm.get('userName').errors?.maxlength">
-                                User Name Name should be less than 25 chracters
+                                Email should be less than 25 chracters
                             </small>
                             <small class="font13" *ngIf="createUserForm.get('userName').errors?.minlength">
-                                User Name Name should be at least 8 chracters
+                                Email should be at least 8 chracters
                             </small>
                         </div>
                     </mat-error>
