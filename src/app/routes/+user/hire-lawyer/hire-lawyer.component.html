@@ -114,7 +114,7 @@
 <button id="modalopen" #modalopen [hidden]="true" data-toggle="modal" data-target="#exampleModalCenter">
 </button>
 <!-- Modal -->
-<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-lg px-4 py-4" role="document">
         <div class="modal-content px-4 py-4">
             <!-- <div class="d-flex justify-content-end">
@@ -136,7 +136,7 @@
             </p>
             <div class="d-flex justify-content-center mt-1">
                 <div class="mt-1">
-                    <button type="button" class="btn btn-secondary button-purple px-2" data-dismiss="modal" (click)="acceptDisclaimer()">Accept and
+                    <button type="button" class="btn btn-secondary button-purple px-5 py-3" data-dismiss="modal" (click)="acceptDisclaimer()">Accept and
                         Continue</button>
                 </div>
             </div>

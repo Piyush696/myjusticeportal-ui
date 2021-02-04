@@ -131,6 +131,7 @@ export class EmailRegistrationComponent implements OnInit, OnChanges {
     let dialogRef = this.dialog.open(templateRef, {
       width: '836px',
     });
+    dialogRef.disableClose = true;
   }
 
   onScroll(event: any) {
