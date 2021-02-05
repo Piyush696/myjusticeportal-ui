@@ -72,4 +72,8 @@ export class CaseService {
   getAssignedLawyer(caseId) {
     return this.httpClient.get<object>(`${this.apiPath}/${this.case}/lawyer-case/${caseId}`, this.getHeaders());
   }
+
+  sendFileDetails(fileId) {
+    return this.httpClient.get<object>(`${this.apiPath}/case-file/file-viewer/${fileId}`, this.getHeaders());
+  }
 }
