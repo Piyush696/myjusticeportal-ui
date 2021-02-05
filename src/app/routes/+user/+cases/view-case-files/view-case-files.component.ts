@@ -16,8 +16,8 @@ export class ViewCaseFilesComponent implements OnInit {
   sharedCaseFiles: any;
   privateCaseFiles: any;
   fileId: number;
-  fileIds:number;
-  viewData:any;
+  fileIds: number;
+  viewData: any;
   fileType: string = 'public';
 
   public uploader1: FileUploader = new FileUploader({ url: URL });
@@ -32,7 +32,7 @@ export class ViewCaseFilesComponent implements OnInit {
     private toasterService: ToasterService, public dialog: MatDialog) { }
 
   ngOnInit(): void {
-    this.onGetCase();  
+    this.onGetCase();
   }
 
   onGetCase() {
@@ -88,15 +88,15 @@ export class ViewCaseFilesComponent implements OnInit {
     });
   }
 
-  openModal(templateRef, file){
+  openModal(templateRef, file) {
     this.fileDetails = file
     this.fileIds = file.fileId
-    this.caseService.sendFileDetails(this.fileIds).subscribe((files)=>{
-      this.viewData = files;
+    this.caseService.sendFileDetails(this.fileIds).subscribe((res:any) => {
+        this.viewData = res;
     });
     let dialogRef = this.dialog.open(templateRef, {
       width: '800px',
-      height:'500px'
+      height: '500px'
     });
 
     dialogRef.afterClosed().subscribe(result => {

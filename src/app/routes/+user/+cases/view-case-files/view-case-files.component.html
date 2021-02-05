@@ -93,11 +93,11 @@
         <div *ngIf="fileDetails.fileType === 'image/jpeg' || fileDetails.fileType === 'image/jpg' || fileDetails.fileType === 'image/png'"
             class="d-flex justify-content-center align-items-center" style="height: 400px;">
             <div class="pt-3">
-                <img src="{{viewData.data}}" width="auto" height="auto" alt="logo" class="logo">
+                <img src="{{viewData?.data}}" width="auto" height="auto" alt="logo" class="logo">
             </div>
         </div>
         <div *ngIf="fileDetails.fileType === 'application/pdf'">
-            <pdf-viewer [src]="viewData.data" [render-text]="true" style="display: block;"></pdf-viewer>
+            <pdf-viewer [src]="viewData?.data" [render-text]="true" style="display: block;"></pdf-viewer>
         </div>
     </div>
 </ng-template>
