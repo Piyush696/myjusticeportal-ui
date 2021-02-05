@@ -1,4 +1,4 @@
-import { Component, HostListener, Input, OnChanges, OnInit, SimpleChanges, } from '@angular/core';
+import { Component, ElementRef, HostListener, Input, OnChanges, OnInit, SimpleChanges, ViewChild, } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserService } from 'app/services/user.service';
 import * as io from 'socket.io-client';
@@ -29,12 +29,14 @@ export class ChatComponent implements OnInit, OnChanges {
   userInfo: any;
   messageList: any;
   isLoading: boolean;
+  @ViewChild('scrollMe') private myScrollContainer: ElementRef;
 
   constructor(private userService: UserService, private loc: Location, private router: Router, private store: Store<any>) {
 
   }
 
   ngOnInit() {
+    this.scrollToBottom();
     this.store.select(s => s.userInfo).subscribe(x => {
       this.userInfo = x
     })
@@ -95,5 +97,15 @@ export class ChatComponent implements OnInit, OnChanges {
         }
       }
     }
+  }
+
+  ngAfterViewChecked() {        
+      this.scrollToBottom();        
+  } 
+
+  scrollToBottom(): void {
+      try {
+          this.myScrollContainer.nativeElement.scrollTop = this.myScrollContainer.nativeElement.scrollHeight;
+      } catch(err) { }                 
   }
 }
