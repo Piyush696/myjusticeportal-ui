@@ -89,15 +89,24 @@
 </ng-template>
 
 <ng-template #fileViewer>
+    <div *ngIf="spinner" class="d-flex justify-content-center align-items-center spinner spinner-class">
+        <mat-spinner color="primary"></mat-spinner>
+    </div>
     <div class=" p-2">
         <div *ngIf="fileDetails.fileType === 'image/jpeg' || fileDetails.fileType === 'image/jpg' || fileDetails.fileType === 'image/png'"
             class="d-flex justify-content-center align-items-center" style="height: 400px;">
-            <div class="pt-3">
+            <div class="ptForImage">
                 <img src="{{viewData?.data}}" width="auto" height="auto" alt="logo" class="logo">
             </div>
         </div>
         <div *ngIf="fileDetails.fileType === 'application/pdf'">
-            <pdf-viewer [src]="viewData?.data" [render-text]="true" style="display: block;"></pdf-viewer>
+            <pdf-viewer [src]="viewData?.data" [render-text]="true" style="display: block;" [original-size]="false"
+            [render-text]='false'
+            [show-all]="false"
+            (after-load-complete)='afterLoadComplete($event)'
+            (page-rendered)='pageRendered($event)'
+            (pageChange)='pageChange($event)'
+            [fit-to-page]="true"></pdf-viewer>
         </div>
     </div>
 </ng-template>

@@ -19,6 +19,7 @@ export class ViewCaseFilesComponent implements OnInit {
   fileIds: number;
   viewData: any;
   fileType: string = 'public';
+  spinner: boolean;
 
   public uploader1: FileUploader = new FileUploader({ url: URL });
   public hasAnotherDropZoneOver: boolean = false;
@@ -89,16 +90,21 @@ export class ViewCaseFilesComponent implements OnInit {
   }
 
   openModal(templateRef, file) {
+    this.spinner = true;
     this.fileDetails = file
     this.fileIds = file.fileId
-    this.caseService.sendFileDetails(this.fileIds).subscribe((res:any) => {
-        this.viewData = res;
+    this.caseService.sendFileDetails(this.fileIds).subscribe((res: any) => {
+
+      this.viewData = res;
+
+      setTimeout(() => {
+        this.spinner = false;
+      }, 3000);
     });
     let dialogRef = this.dialog.open(templateRef, {
       width: '800px',
       height: '500px'
     });
-
     dialogRef.afterClosed().subscribe(result => {
     });
   }
