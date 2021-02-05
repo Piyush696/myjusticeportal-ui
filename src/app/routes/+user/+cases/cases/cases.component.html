@@ -70,7 +70,7 @@
                         </div>
                     </div>
                     <div class="d-flex justify-content-center">
-                        <button (click)="onViewLawyer(user.userId)" class="btn bg-color px-perc py-1" mat-raised-button>View Profile</button>
+                        <button (click)="onViewLawyer(lawyerView,user)" class="btn bg-color px-perc py-1" mat-raised-button>View Profile</button>
                     </div>
                 </mat-card>
             </div>
@@ -112,8 +112,7 @@
 </button>
 
 <!-- Modal -->
-<div class="modal fade" id="exampleModalCenterTitle1" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false"
-    aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+<div class="modal fade" id="exampleModalCenterTitle1" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered px-4 modal-lg py-4" role="document">
         <div class="modal-content modal-xl px-4 py-4">
             <div class="mb-1">
@@ -137,13 +136,11 @@
                     </ul>
                 </div>
 
-                <div class="text-center text-justify">To utilize any of these features, you must first create a
-                    “case” as a reference.</div>
+                <div class="text-center text-justify">To utilize any of these features, you must first create a “case” as a reference.</div>
             </div>
             <div class="d-flex justify-content-center">
                 <div class="modal-btn">
-                    <button type="button" class="btn btn-secondary button-purple px-5 py-4 got-btn" data-dismiss="modal" 
-                       (click)="openSecModel()" >Got It! Let’s get started</button>
+                    <button type="button" class="btn btn-secondary button-purple px-5 py-4 got-btn" data-dismiss="modal" (click)="openSecModel()">Got It! Let’s get started</button>
                 </div>
             </div>
             <div>
@@ -184,3 +181,81 @@
         </div>
     </div>
 </div>
+
+
+<!-- lawyer view modal -->
+<ng-template #lawyerView id="hire-lawyer">
+    <mat-card class="border bg-card p-2">
+        <div class="d-flex justify-content-between align-items-center bg-header">
+            <div>
+                <h2 class="font-weight-bold m-0">Lawyer Profile</h2>
+            </div>
+            <div>
+                <button class="btn bg-color" mat-raised-button (click)="onCloseModal()">Close</button>
+            </div>
+        </div>
+        <div class="mt-2 background-profile-headshot" id="cust-img">
+        </div>
+        <div class="p-2 bg-white">
+            <div class="row mt-3">
+                <div class="col-3">
+                    <div class="d-flex">
+                        <div *ngIf="lawyerData?.userAdditionalInfo?.profile?.downloadLink" class="img-profile">
+                            <img src="{{lawyerData?.userAdditionalInfo?.profile?.downloadLink}}" width="157px" height="auto" alt="logo" class="logo">
+                        </div>
+                        <div *ngIf="!lawyerData?.userAdditionalInfo?.profile?.downloadLink">
+                            <img src="assets/img/placeholder.jpg" width="157px" height="auto" alt="logo">
+                        </div>
+                    </div>
+                    <div class="d-flex justify-content-center align-items-center">
+                        <div class="pt-2">
+                            <button class="button-purple mt-3" mat-raised-button (click)="viewContact(lawyerData.userId)">
+                                Contact {{lawyerData?.firstName}}
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-9 mt-2 card-height">
+                    <div>
+                        <div class="d-flex justify-content-between">
+                            <div class="mt-2">
+                                <h4>
+                                    <span class="font-weight-bold name-size">Name: </span>
+                                    <span class="font-weight-bold name-size">{{lawyerData?.firstName}}
+                                        {{lawyerData?.middleName}} {{lawyerData?.lastName}}</span>
+                                </h4>
+                            </div>
+                            <div>
+                                <button class="btn bg-color m-0 mr-1" (click)="viewOrg(lawyerData.Organization.organizationId)">View Organization</button>
+                            </div>
+                        </div>
+                        <div class="row py-2 px-3">
+                            <div>
+                                <span class="font-weight-bold">Organization: </span>
+                                <span>{{lawyerData?.Organization?.name}}</span>
+                            </div>
+                        </div>
+                        <div class="row py-2 px-3">
+                            <div>
+                                <span class="font-weight-bold">Tagline: </span>
+                                <span>{{lawyerData?.userAdditionalInfo?.tagline}}</span>
+                            </div>
+                        </div>
+                        <div class="row py-2 px-3">
+                            <div>
+                                <span class="font-weight-bold">Practice area: </span>
+                                <span>{{lawyerData?.userAdditionalInfo?.practiceAreas}}</span>
+                            </div>
+                        </div>
+                        <div class="row py-2 px-3">
+                            <div>
+                                <span class="font-weight-bold">Description: </span>
+                                <span>{{lawyerData?.userAdditionalInfo?.description}}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </mat-card>
+</ng-template>

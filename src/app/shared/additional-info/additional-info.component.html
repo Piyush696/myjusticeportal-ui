@@ -14,7 +14,7 @@
                 <h1 class="text-center">Inmate Registration</h1>
             </div>
             <h3 *ngIf="roleId == 1" class="text-center font-weight-bold">Step 2/3</h3>
-            <h3 *ngIf="roleId == 3 || roleId == 4 || roleId == 5" class="text-center font-weight-bold">Step 2/4</h3>
+            <h3 *ngIf="roleId == 3 || roleId == 4 || roleId == 5" class="text-center font-weight-bold">Step 2/{{totalSteps}}</h3>
             <mat-card class="p-4">
                 <div>
                     <div>

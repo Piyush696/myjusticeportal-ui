@@ -24,9 +24,14 @@ export class InvitedLawyerComponent implements OnInit {
   message: string = '* Use legal name of the facility for registration.';
   registrationData = {
     'user': {},
+    'organization': {
+      'address': {}
+    }
   }
+  orgAddress: {};
   currentState = [];
-
+  user: any;
+  
   constructor(private activatedRoute: ActivatedRoute, private loginService: LoginService,
     private lawyerService: LawyerService, private toasterService: ToasterService,
     private router: Router, private cacheService: CacheService,private store: Store<any>) {
@@ -38,6 +43,15 @@ export class InvitedLawyerComponent implements OnInit {
 
   stateEvent(state) {
     this.currentState = [...state]
+  }
+
+  onUserPageClick(user) {
+    this.user = this.registrationData.user;
+    if (user) {
+      this.currentStep = 1
+    } else {
+      this.currentStep = 2;
+    }
   }
 
   userMetaData(userMetaData) {
@@ -65,6 +79,14 @@ export class InvitedLawyerComponent implements OnInit {
         }
       }
     });
+  }
+
+  
+  onBackClickFromMobile(event){
+    if(event){
+      this.currentStep = 2;
+      this.orgAddress = this.registrationData.organization
+    }
   }
 
   onNextClick(userData) {

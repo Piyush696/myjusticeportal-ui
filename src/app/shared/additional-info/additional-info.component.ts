@@ -21,6 +21,7 @@ export class AdditionalInfoComponent implements OnInit, OnChanges,AfterViewInit 
   @Output() userMetaEventEmitter = new EventEmitter();
   @Output() isPreviousClick = new EventEmitter();
   @Input() userMeta;
+  @Input() totalSteps;
   @Input() roleId;
   facilityCode: any;
   fieldName: string = 'Housing Unit';

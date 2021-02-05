@@ -1,131 +1,141 @@
 .card-style {
-  border: 1px solid #333442;
-  color: #333442;
-  background: #e4e4ec;
+    border: 1px solid #333442;
+    color: #333442;
+    background: #e4e4ec;
 }
 
 .case-heading {
-  font-weight: bolder;
-  letter-spacing: 1px;
+    font-weight: bolder;
+    letter-spacing: 1px;
 }
 
 .sponser-card {
-  border: 1px solid #333442;
+    border: 1px solid #333442;
 }
 
 .color {
-  color: #333442;
+    color: #333442;
 }
 
 .button-play {
-  border-radius: 50%;
-  border: 3px solid #333442;
-  background: #333442;
+    border-radius: 50%;
+    border: 3px solid #333442;
+    background: #333442;
 }
 
 .fa-play:before {
-  content: "\f04b";
-  color: #fff;
-  position: relative;
-  left: 2px;
-  font-size: 30px;
+    content: "\f04b";
+    color: #fff;
+    position: relative;
+    left: 2px;
+    font-size: 30px;
 }
 
 .white-btn {
-  background: #e4e4ec;
-  color: #333442;
+    background: #e4e4ec;
+    color: #333442;
 }
 
 .blue-btn {
-  background: #4646ed;
-  color: #f8f8f9;
+    background: #4646ed;
+    color: #f8f8f9;
 }
 
 .px-perc {
-  padding-left: 13%;
-  padding-right: 13%;
+    padding-left: 13%;
+    padding-right: 13%;
 }
 
 .mat-dialog-container {
-  padding: 21px 15px 7px 15px !important;
+    padding: 21px 15px 7px 15px !important;
 }
 
 .notes-height {
-  height: 10px;
-}
-.bg-color{
-  background-color: #333442;
+    height: 10px;
 }
 
-.bg-button{
-  background-color: #fff;
-  border: none !important;
-  outline: none;
+.bg-color {
+    background-color: #333442;
+}
+
+.bg-button {
+    background-color: #fff;
+    border: none !important;
+    outline: none;
 }
 
 .white-btn {
-  background: #e4e4ec;
-  color: #333442;
+    background: #e4e4ec;
+    color: #333442;
 }
 
 .padding-btn {
-  padding-left: 10%;
-  padding-right: 10%;
+    padding-left: 10%;
+    padding-right: 10%;
 }
 
 .btn-outline {
-  outline: 4px auto -webkit-focus-ring-color;
+    outline: 4px auto -webkit-focus-ring-color;
 }
 
 .bg-card {
-  background: #ededed;
+    background: #ededed;
 }
 
 .name-size {
-  font-size: 18px;
+    font-size: 18px;
 }
+
 .card-height {
-  min-height: 180px;
+    min-height: 180px;
 }
 
 .img-profile {
-  width: 180px;
-  padding: 3%;
-  margin: auto;
-  border: 2px solid #ededed;
+    width: 180px;
+    padding: 3%;
+    margin: auto;
+    border: 2px solid #ededed;
 }
+
 .outer-card {
-  border: 1px solid #333442;
-  color: #333442;
-  background: #e4e4ec;
+    border: 1px solid #333442;
+    color: #333442;
+    background: #e4e4ec;
 }
 
 .inner-card {
-  border: 1px solid #333442;
-  color: #333442;
-  background: white;
+    border: 1px solid #333442;
+    color: #333442;
+    background: white;
 }
 
-.bg-color{
-  background-color: #333442;
+.bg-color {
+    background-color: #333442;
 }
 
-#textstyle{
-  word-spacing: 7px;
-  padding: 0px 30px;
-  font-size: 16px;
+#textstyle {
+    word-spacing: 7px;
+    padding: 0px 30px;
+    font-size: 16px;
 }
 
-.got-btn{
-  background: rgb(26, 115, 232) !important;
-  border-radius: 0px !important;
+.got-btn {
+    background: rgb(26, 115, 232) !important;
+    border-radius: 0px !important;
 }
 
-.li-dis ul li{
-  list-style-type: disc !important;
+.li-dis ul li {
+    list-style-type: disc !important;
 }
 
-.acc-btn{
+.acc-btn {
     background-color: #FF6700 !important;
     color: #ffffff !important;
+}
+
+.background-profile-headshot {
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 170px;
+    background-position: center;
 }

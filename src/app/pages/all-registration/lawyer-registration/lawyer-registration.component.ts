@@ -15,6 +15,7 @@ import { AddUserInfo } from 'app/store/actions/userInfo.actions';
 
 export class LawyerRegistrationComponent implements OnInit {
   step: number = 1;
+  currentStep : number = 4
   totalSteps: number = 4;
   roleId: number = 3;
   userName: string;
