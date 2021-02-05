@@ -14,6 +14,7 @@ export class MobileRegistrationComponent implements OnInit, OnChanges {
   @Output() isPreviousClick = new EventEmitter();
   @Input() authCodeField: boolean;
   @Input() totalSteps: any;
+  @Input() step: any;
   @Output() isMobileEvent = new EventEmitter();
   @Output() isOtpEvent = new EventEmitter();
   @Input() roleId;

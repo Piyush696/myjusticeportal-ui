@@ -122,6 +122,7 @@ export class PublicDefenderRegistrationComponent implements OnInit {
   onBackClickFromMobile(event){
     if(event){
       this.step = 3;
+      this.orgAddress = this.registrationData.organization
     }
   }
 
@@ -133,6 +134,7 @@ export class PublicDefenderRegistrationComponent implements OnInit {
       this.step = 3;
     }
   }
+
   onBackClick(back) {
     if (back) {
       this.step = 2;
