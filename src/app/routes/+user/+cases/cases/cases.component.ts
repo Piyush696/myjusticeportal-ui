@@ -21,6 +21,8 @@ export class CasesComponent implements OnInit,AfterViewInit {
   count:number = 0;
   @ViewChild('modalopen') modalopen: ElementRef;
   @ViewChild('secmodalopen') secmodalopen: ElementRef;
+  lawyerData: any;
+  path: any;
 
   constructor(private toasterService: ToasterService, public dialog: MatDialog,
     private caseService: CaseService, private fb: FormBuilder, private router: Router, 
@@ -32,6 +34,10 @@ export class CasesComponent implements OnInit,AfterViewInit {
     this.getSponsors();
     this.createCaseNotesForm();
     this.modalAcceptDetails();
+  }
+
+  onCloseModal() {
+    this.dialog.closeAll();
   }
 
   modalAcceptDetails(){
@@ -82,8 +88,29 @@ export class CasesComponent implements OnInit,AfterViewInit {
     })
   }
 
-  onViewLawyer(userId) {
-    this.router.navigateByUrl('mjp/user/lawyer-profile/'+userId)
+  onViewLawyer(templateRef,user) {
+    this.lawyerData = user
+    console.log(user?.userAdditionalInfo?.header?.downloadLink)
+    if(user?.userAdditionalInfo?.header?.downloadLink){
+      this.path = user?.userAdditionalInfo?.header?.downloadLink
+    } else {
+      this.path = 'assets/img/LOGO 4.jpg'
+    }
+    console.log(user)
+    let dialogRef = this.dialog.open(templateRef, {
+      width: '800px',
+    });
+    setTimeout(() => {
+      var x = document.getElementById('cust-img')
+      if(user?.userAdditionalInfo?.header?.downloadLink){
+        x.style.background = 'url(' + this.path + ')';
+        x.style.backgroundRepeat= 'no-repeat';
+      } else {
+        x.style.background = 'url(' + this.path + ')'
+        x.style.backgroundColor = '#333442';
+      }
+    }, 500);
+    // this.router.navigateByUrl('mjp/user/lawyer-profile/'+userId)
   }
 
 

@@ -102,8 +102,6 @@ export class HireLawyerComponent implements OnInit, AfterViewInit {
 
     let dialogRef = this.dialog.open(templateRef, {
       width: '800px',
-      
-    
     });
     setTimeout(() => {
       var x = document.getElementById('cust-img')
@@ -117,9 +115,9 @@ export class HireLawyerComponent implements OnInit, AfterViewInit {
     }, 500);
   }
 
-  viewUser(userId) {
-    this.router.navigateByUrl('mjp/user/lawyer-profile/' + userId)
-  }
+  // viewUser(user) {
+  //   this.router.navigateByUrl('mjp/user/lawyer-profile/' + userId)
+  // }
 
   onCloseModal() {
     this.dialog.closeAll();

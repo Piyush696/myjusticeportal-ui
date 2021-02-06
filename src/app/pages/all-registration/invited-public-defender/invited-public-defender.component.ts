@@ -22,9 +22,14 @@ export class InvitedPublicDefenderComponent implements OnInit {
   message: string;
   registrationData = {
     'user': {},
+    'organization': {
+      'address': {}
+    }
   }
+  user: any;
   currentState = [];
-
+  orgAddress: {};
+  
   constructor(private activatedRoute: ActivatedRoute, private loginService: LoginService,
     private inviteddefenderService: InvitedPublicDefenderService, private toasterService: ToasterService,
     private router: Router, private cacheService: CacheService) {
@@ -32,6 +37,15 @@ export class InvitedPublicDefenderComponent implements OnInit {
   }
 
   ngOnInit(): void {
+  }
+
+  onUserPageClick(user) {
+    this.user = this.registrationData.user;
+    if (user) {
+      this.currentStep = 1
+    } else {
+      this.currentStep = 2;
+    }
   }
 
   userMetaData(userMetaData) {
@@ -86,6 +100,13 @@ export class InvitedPublicDefenderComponent implements OnInit {
         this.toasterService.showSuccessToater("Your code has been sent, please check your mobile device.");
       }
     })
+  }
+
+  onBackClickFromMobile(event){
+    if(event){
+      this.currentStep = 2;
+      this.orgAddress = this.registrationData.organization
+    }
   }
 
   onAuthCodeValidate(authcode) {
