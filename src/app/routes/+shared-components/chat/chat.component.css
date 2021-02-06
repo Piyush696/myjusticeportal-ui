@@ -1,7 +1,6 @@
 .chat-messages-show-container {
   background: #c3c3c3;
   height: 420px;
-  display: flex;
   overflow-y: auto;
   flex-direction: column;
 }
@@ -91,6 +90,6 @@
 }
 
 .chat-scroll {
-  overflow: scroll;
+  overflow-y: scroll;
   height: xyz;
 }
