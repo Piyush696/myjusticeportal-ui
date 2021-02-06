@@ -50,10 +50,10 @@ export class FooterComponent implements OnInit {
                 x.push(msg)
                 this.store.dispatch(new AddIncomingMessages(Object.assign({}, data)));
                 if ((this.userInfo.roles[0].roleId == 3) && (this.userInfo.userId === data.receiverId)) {
-                    this.footerText = 'You have' + x.length + 'unreadMessages';
+                    this.footerText = 'You have ' + x.length + ' unread Messages';
                 }
                 if ((this.userInfo.roles[0].roleId == 1) && (this.userInfo.userId === data.receiverId)) {
-                    this.footerText = 'You have' + x.length + 'unreadMessages';
+                    this.footerText = 'You have ' + x.length + ' unread Messages';
                 }
             }
         });

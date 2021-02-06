@@ -17,7 +17,7 @@
                 <span>No data available, invalid url detected.</span>
             </mat-label>
             <div *ngIf="singleCaseData" class="d-flex flex-column w-75">
-                <span><b>Inmate Name</b>: {{singleCaseData?.inmate?.firstName}} &nbsp;{{singleCaseData?.inmate?.lastName}}</span>
+                <span><b>Inmate Name</b>: {{singleCaseData?.inmate?.firstName}} {{singleCaseData?.inmate?.middleName}} {{singleCaseData?.inmate?.lastName}}</span>
                 <span>
                         <b>Charges or Legal Matter</b>: &nbsp;{{singleCaseData?.legalMatter}}
                     </span>

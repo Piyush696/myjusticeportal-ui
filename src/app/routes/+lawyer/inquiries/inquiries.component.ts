@@ -61,7 +61,7 @@ export class InquiriesComponent implements OnInit {
     this.userAdditionInfoService.getLawyerCases().subscribe((pendingCase: any) => {
       this.pendingCasesList = pendingCase.data
       this.pendingCasesList = this.pendingCasesList.map((item) => {
-        item['name'] = item.inmate.firstName + " " + item.inmate.lastName;
+        item['name'] = item.inmate.firstName + " " + item.inmate.middleName + " " + item.inmate.lastName;
         item['name1'] = item.inmate.firstName + item.inmate.lastName;
         var date = item.sentAt;
         date = new Date(date).toDateString();
