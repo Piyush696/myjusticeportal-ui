@@ -22,7 +22,7 @@ export class UsersComponent implements OnInit, OnDestroy {
   userInfoStoreSub: Subscription;
   createUserForm: FormGroup;
 
-  displayedColumns: string[] = ["select", "name", "userName", "status", "state","roles", "createdAt", "action"];
+  displayedColumns: string[] = ["select", "name", "userName", "status", "state", "roles", "createdAt", "action"];
   dataSource = new MatTableDataSource();
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort: MatSort;
@@ -52,33 +52,33 @@ export class UsersComponent implements OnInit, OnDestroy {
         }
       })
     }
-    if(this.userIdList.length === 1){
-      this.modalText = 'Are you sure you want to delete the selected users?'
+    if (this.userIdList.length === 1) {
+      this.modalText = 'Are you sure you want to delete this user?'
     } else {
-      this.modalText = ' Are you sure you want to delete this all users?' 
+      this.modalText = 'Are you sure you want to delete the selected users?'
     }
   }
 
-  deleteUsers(templateRef){
+  deleteUsers(templateRef) {
     let dialogRef = this.dialog.open(templateRef, {
       width: '368px',
     });
   }
 
-  bulkDeleteUsers(){
-    this.userService.deleteBulkUsers(this.userIdList).subscribe((users:any)=>{
-      if(users.success){
+  bulkDeleteUsers() {
+    this.userService.deleteBulkUsers(this.userIdList).subscribe((users: any) => {
+      if (users.success) {
         this.dialog.closeAll();
         this.userIdList = [];
         this.toasterService.showSuccessToater(users.data)
         this.onGetAllUsers();
-      } else{
+      } else {
         this.toasterService.showWarningToater('Something went wrong.')
       }
     })
   }
 
-  
+
   onGetAllUsers() {
     this.userService.getUsers().subscribe((res: any) => {
       let x = res.data.map((element) => {
@@ -104,7 +104,7 @@ export class UsersComponent implements OnInit, OnDestroy {
         element['newCreatedAt2'] = month + ' ' + day + ',' + ' ' + year;
         return element
       })
-      if(this.isfilter){
+      if (this.isfilter) {
         let filteredPendingUsers = x.filter(x => x.status == 'Pending')
         this.dataSource = new MatTableDataSource(filteredPendingUsers)
       } else {
@@ -188,7 +188,7 @@ export class UsersComponent implements OnInit, OnDestroy {
       firstName: ['', [Validators.required, Validators.maxLength(50), Validators.pattern('^[a-zA-Z ]*$')]],
       middleName: ['', [Validators.required, Validators.maxLength(50), Validators.pattern('^[a-zA-Z ]*$')]],
       lastName: ['', [Validators.required, Validators.maxLength(50), Validators.pattern('^[a-zA-Z ]*$')]],
-      userName: ['', [Validators.required, Validators.maxLength(25), Validators.minLength(8),this.validateEmail.bind(this)], this.validateUserNotTaken.bind(this)],
+      userName: ['', [Validators.required, Validators.maxLength(25), Validators.minLength(8), this.validateEmail.bind(this)], this.validateUserNotTaken.bind(this)],
       password: ['', [Validators.required, Validators.minLength(8), this.validatePassword.bind(this)]],
       confirmPassword: ['', [Validators.required, Validators.minLength(8)]],
     }, { validator: this.checkIfMatchingPasswords('password', 'confirmPassword') })
@@ -207,11 +207,11 @@ export class UsersComponent implements OnInit, OnDestroy {
   }
 
   validateEmail(control: AbstractControl) {
-      const pattern = /^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,15})$/;
-      if (!control.value.match(pattern) && control.value !== '') {
-        return { invalidEmail: true };
-      }
-      return null;
+    const pattern = /^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,15})$/;
+    if (!control.value.match(pattern) && control.value !== '') {
+      return { invalidEmail: true };
+    }
+    return null;
   }
 
   validatePassword(control: AbstractControl) {
@@ -235,7 +235,7 @@ export class UsersComponent implements OnInit, OnDestroy {
     let dialogRef = this.dialog.open(templateRef, {
       width: '500px',
     });
-     
+
     dialogRef.afterClosed().subscribe(result => {
     });
   }
@@ -304,7 +304,7 @@ export class UsersComponent implements OnInit, OnDestroy {
     let dialogRef = this.dialog.open(templateRef, {
       width: '500px',
     });
-     
+
     dialogRef.afterClosed().subscribe(result => {
     });
   }
