@@ -65,7 +65,7 @@
                 <div class="col-12 col-sm-12 d-flex justify-content-between justify-content-sm-between">
                     <div>
                         <button mat-raised-button class="button-purple px-4 py-1 mt-1" data-target="#lawyerViewModel"
-                            data-toggle="modal" (click)="openOrganizationModal(userDetails)">Preview</button>
+                            data-toggle="modal" (click)="openLawyerViewModal(userDetails)">Preview</button>
                     </div>
                     <div>
                         <button mat-raised-button class="button-purple px-4 py-1 mt-1"
@@ -280,7 +280,7 @@
 </ng-template>
 
 <div class="modal fade" id="lawyerViewModel" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false">
-    <app-lawyer-view-shared [lawyerData]="userDetails"></app-lawyer-view-shared>
+    <app-lawyer-view-shared [lawyerData]="lawyerData"></app-lawyer-view-shared>
 </div>
 
 <!-- <ng-template #previewProfile> -->
