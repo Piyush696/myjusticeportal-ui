@@ -14,34 +14,34 @@
                   </span> &nbsp;{{selectedUserData?.lastName | titlecase}}
                                 </span>
                                 <span *ngIf="!selectedUserData?.firstName && !selectedUserData?.middleName && !selectedUserData?.lastName">
-                  N/A
-                </span>
+                                    N/A
+                                </span>
                             </td>
                         </tr>
                         <tr>
                             <th>Role(s):&nbsp;</th>
                             <td class="d-flex align-items-center justify-content-between py-1">
                                 <span *ngFor="let role of selectedUserData?.roles;let isLast=last">
-                  {{role?.name}}{{isLast ? '' : ', '}}
-                </span>
+                                {{role?.name}}{{isLast ? '' : ', '}}
+                               </span>
                                 <span>
-                  <button mat-button color="primary" class="onHover" (click)="openChangeRoleModal(changeRoleModal)">
-                    Change Role
-                  </button>
-                </span>
+                          <button mat-button color="primary" class="onHover" (click)="openChangeRoleModal(changeRoleModal)">
+                            Change Role
+                          </button>
+                             </span>
                             </td>
                         </tr>
                         <tr *ngIf="selectedUserData?.roles[0]?.roleId === 1">
                             <th>Facility(s):&nbsp;</th>
                             <td class="d-flex align-items-center justify-content-between py-1">
                                 <span *ngFor="let facility of selectedUserData?.facilities;let isLast=last">
-                  {{facility?.facilityName}}{{isLast ? '' : ', '}}
-                </span>
+                                    {{facility?.facilityName}}{{isLast ? '' : ', '}}
+                                </span>
                                 <span>
-                           <button mat-button color="primary" class="onHover" (click)="openChangefacilityModal(changeFacilityModal)">
-                            Change Facility
-                            </button>
-                   </span>
+                             <button mat-button color="primary" class="onHover" (click)="openChangefacilityModal(changeFacilityModal)">
+                               Change Facility
+                             </button>
+                            </span>
                             </td>
                         </tr>
                         <tr>
@@ -92,6 +92,16 @@
                                   && selectedUserData?.Organization?.Address?.state && selectedUserData?.Organization?.Address?.country">N/A</span>
                             </td>
                         </tr>
+                        <tr *ngIf="selectedUserData?.roles[0]?.roleId === 2">
+                            <th>Assign Facility:&nbsp;</th>
+                            <td>
+                                <span>
+                                <button mat-button color="primary" class="onHover" (click)="assigneefacilityModal(changeFacilityModal)">
+                                  Change Facility
+                                </button>
+                                </span>
+                            </td>
+                        </tr>
                     </tbody>
                 </table>
             </mat-card-content>
@@ -120,6 +130,26 @@
 </ng-template>
 
 <ng-template #changeFacilityModal>
+    <h2 mat-dialog-title>Change Facility:</h2>
+    <div mat-dialog-content>
+        <mat-form-field appearance="fill">
+            <mat-label>Select Facility</mat-label>
+            <mat-select [(ngModel)]="selectedFacilityId" name="selectedFacility">
+                <mat-option *ngFor="let facility of facilityList" [value]="facility?.facilityId">
+                    {{facility?.facilityName}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+    <div mat-dialog-actions class="float-right pb-4">
+        <button mat-raised-button (click)="onCloseModal()">Close</button>
+        <button mat-raised-button class="button-purple" [mat-dialog-close]="selectedFacilityId" cdkFocusInitial>
+      Save
+    </button>
+    </div>
+</ng-template>
+
+<ng-template #AssigneFacilityModal>
     <h2 mat-dialog-title>Change Facility:</h2>
     <div mat-dialog-content>
         <mat-form-field appearance="fill">

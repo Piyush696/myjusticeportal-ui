@@ -5,10 +5,12 @@ import { SharedMaterialModule } from 'app/shared-material/shared-material.module
 import { SharedComponentsModule } from '../+shared-components/shared-components.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FacilityDashboardComponent } from './facility-dashboard/facility-dashboard.component';
+import { FacilityUsersComponent } from './facility-users/facility-users.component';
 
 @NgModule({
   declarations: [
-    FacilityDashboardComponent
+    FacilityDashboardComponent,
+    FacilityUsersComponent
   ],
   imports: [
     CommonModule,
