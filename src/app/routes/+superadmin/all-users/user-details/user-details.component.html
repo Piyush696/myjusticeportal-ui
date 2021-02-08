@@ -94,10 +94,18 @@
                         </tr>
                         <tr *ngIf="selectedUserData?.roles[0]?.roleId === 2">
                             <th>Assign Facility:&nbsp;</th>
-                            <td>
+                            <td class="d-flex align-items-center justify-content-between py-1">
+                                <div *ngIf="selectedUserData?.facility.length <= 0">
+                                    <small class="text-danger">This user is not assigned to any facility.</small>
+                                </div>
+                                <div *ngIf="selectedUserData?.facility.length > 0">
+                                    <span *ngFor="let facility of selectedUserData?.facility;let isLast=last">
+                                        {{facility?.facilityName}}{{isLast ? '' : ', '}}
+                                    </span>
+                                </div>
                                 <span>
                                 <button mat-button color="primary" class="onHover" (click)="assigneefacilityModal(changeFacilityModal)">
-                                  Change Facility
+                                  Assigne Facility
                                 </button>
                                 </span>
                             </td>

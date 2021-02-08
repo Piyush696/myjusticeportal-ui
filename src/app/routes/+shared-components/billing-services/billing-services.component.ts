@@ -88,24 +88,29 @@ export class BillingServicesComponent implements OnInit, AfterViewInit {
 
   }
 
-  onFacilitySelect(event, facilityId) {
+  onFacilitySelect(event, facility) {
     if (event) {
-      this.facilityId = facilityId
-      this.facilities.map((facility) => {
-        if (facility.facilityId === facilityId) {
-          facility.isSelected = true;
+      this.facilityId = facility.facilityId
+      this.facilities.map((fac) => {
+        if (fac.facilityId === facility.facilityId) {
+          fac.isSelected = true;
         }
-        return facility
+        return fac
       })
     } else {
-      this.facilities.map((facility) => {
-        if (facility.facilityId === facilityId) {
-          facility.isSelected = false;
+      this.facilities.map((fac) => {
+        if (fac.facilityId === facility.facilityId) {
+          fac.isSelected = false;
         }
-        return facility
+        return fac
       })
-      this.onSelectAddOns(false, facilityId, 'premium')
-      this.onSelectAddOns(false, facilityId, 'sponsors')
+      if(facility.addOns.premium){
+        this.onSelectAddOns(false, facility.facilityId, 'premium')
+      }
+      if(facility.addOns.sponsors) {
+        this.onSelectAddOns(false, facility.facilityId, 'sponsors')
+      }
+     
     }
   }
 
@@ -126,21 +131,21 @@ export class BillingServicesComponent implements OnInit, AfterViewInit {
         return x
       });
     } else {
-      this.facilities.map((x) => {
-        if (facilityId === x.facilityId) {
-          if (addOnsType == 'premium') {
-            this.addOnsPrice = this.addOnsPrice - (x.facilityUserCount * 0.25)
-            this.totalPrice = this.totalPrice - (x.facilityUserCount * 0.25)
-            x.addOns.premium = false;
-          } else if (addOnsType == 'sponsors') {
-            this.addOnsPrice = this.addOnsPrice - (x.facilityUserCount * 1.00)
-            this.totalPrice = this.totalPrice - (x.facilityUserCount * 1.00)
-            x.addOns.sponsors = false;
+        this.facilities.map((x) => {
+          if (facilityId === x.facilityId) {
+            if (addOnsType == 'premium') {
+              this.addOnsPrice = this.addOnsPrice - (x.facilityUserCount * 0.25)
+              this.totalPrice = this.totalPrice - (x.facilityUserCount * 0.25)
+              x.addOns.premium = false;
+            } else if (addOnsType == 'sponsors') {
+              this.addOnsPrice = this.addOnsPrice - (x.facilityUserCount * 1.00)
+              this.totalPrice = this.totalPrice - (x.facilityUserCount * 1.00)
+              x.addOns.sponsors = false;
+            }
           }
-        }
-        return x
-      });
-    }
+          return x;
+        });
+      }
   }
 
   getALLFacilities() {

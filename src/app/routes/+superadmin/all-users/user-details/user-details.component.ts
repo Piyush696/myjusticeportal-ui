@@ -76,7 +76,7 @@ export class UserDetailsComponent implements OnInit, OnDestroy {
 
         dialogRef.afterClosed().subscribe(result => {
             if (result) {
-                this.onChangeFacility(result);
+                this.setFacilityUserFacility(result);
             }
         });
     }
@@ -127,6 +127,21 @@ export class UserDetailsComponent implements OnInit, OnDestroy {
         data.facilityId = facilityId;
         this.userService.changeFacility(data).subscribe((res: any) => {
             if (res.success) {
+                this.toasterService.showSuccessToater('Facility changed successfully.');
+            } else {
+                this.toasterService.showErrorToater('Facility change unsuccessful.');
+            }
+            this.onGetUserDetails();
+        });
+    }
+
+    setFacilityUserFacility(facilityId) {
+        let data: any = {};
+        data.userId = this.selectedUserId;
+        data.facilityId = facilityId;
+        this.userService.setFacilityUserFacility(data).subscribe((res: any) => {
+            if (res.success) {
+                this.onGetUserDetails();
                 this.toasterService.showSuccessToater('Facility changed successfully.');
             } else {
                 this.toasterService.showErrorToater('Facility change unsuccessful.');
