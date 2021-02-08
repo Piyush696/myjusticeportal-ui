@@ -37,6 +37,7 @@ export class ManageProfileComponent implements OnInit {
   specialtyList: any;
   orgData: any;
   currentView: number = 1;
+  lawyerData:any;
 
   constructor(private userAdditionalInfo: UserAdditionInfoService, private router: Router, private fb: FormBuilder,
     private specialtyService: SpecialtyService, public dialog: MatDialog, private toasterService: ToasterService, private location: Location,
@@ -99,12 +100,30 @@ export class ManageProfileComponent implements OnInit {
     })
   }
 
-  openOrganizationModal(userDetails) {
+  openOrganizationModal(templateRef, userDetails) {
     this.currentView = 1
     let name = userDetails.firstName + ' ' + userDetails.middleName + ' ' + userDetails.lastName
     this.additionalInfoForm.get('name').setValue(name)
     this.buttonText = 'Edit'
     this.additionalInfoForm.disable()
+    let dialogRef = this.dialog.open(templateRef, {
+      height: '80%',
+      width: '813px',
+    });
+    setTimeout(() => {
+      var x = document.getElementById('cust-img')
+      if (this.userDetails?.userAdditionalInfo?.header?.downloadLink) {
+        x.style.background = 'url(' + this.path + ')'
+      } else {
+        x.style.background = 'url(' + this.path + ')'
+        x.style.backgroundColor = '#333442'
+      }
+    }, 500);
+  }
+
+  openLawyerViewModal(userDetails){
+    this.lawyerData = userDetails
+
   }
 
   onUploadLogo() {
