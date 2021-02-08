@@ -99,25 +99,12 @@ export class ManageProfileComponent implements OnInit {
     })
   }
 
-  openOrganizationModal(templateRef, userDetails) {
+  openOrganizationModal(userDetails) {
     this.currentView = 1
     let name = userDetails.firstName + ' ' + userDetails.middleName + ' ' + userDetails.lastName
     this.additionalInfoForm.get('name').setValue(name)
     this.buttonText = 'Edit'
     this.additionalInfoForm.disable()
-    let dialogRef = this.dialog.open(templateRef, {
-      height: '80%',
-      width: '813px',
-    });
-    setTimeout(() => {
-      var x = document.getElementById('cust-img')
-      if (this.userDetails?.userAdditionalInfo?.header?.downloadLink) {
-        x.style.background = 'url(' + this.path + ')'
-      } else {
-        x.style.background = 'url(' + this.path + ')'
-        x.style.backgroundColor = '#333442'
-      }
-    }, 500);
   }
 
   onUploadLogo() {

@@ -32,7 +32,8 @@
                     <div class="col-7">
                         <div>
                             <p class="text-default">Name:
-                                <span class="font-weight-normal"> {{caseDetails?.inmate?.firstName}} {{caseDetails?.inmate?.middleName}}
+                                <span class="font-weight-normal"> {{caseDetails?.inmate?.firstName}}
+                                    {{caseDetails?.inmate?.middleName}}
                                     {{caseDetails?.inmate?.lastName}}</span>
                             </p>
                         </div>
@@ -84,7 +85,8 @@
                                 <h4 class="text-center font-weight-bold">No Connected Lawyer</h4>
                                 <p class="text-justify">Please click find a lawyer to search for lawyers.</p>
                                 <div class="pl-4">
-                                    <button class="button-purple btn-group mt-1 py-1  btn-group" mat-raised-button (click)="hireLayer()">
+                                    <button class="button-purple btn-group mt-1 py-1  btn-group" mat-raised-button
+                                        (click)="hireLayer()">
                                         Find a Lawyer
                                     </button>
                                 </div>
@@ -98,11 +100,13 @@
                                     <div class="col-5 px-4 ">
                                         <div class="row">
                                             <div *ngIf="assignedLawyer?.userAdditionalInfo?.profile?.downloadLink">
-                                                <img src="{{assignedLawyer?.userAdditionalInfo?.profile?.downloadLink}}" width="150px" height="auto" alt="logo" class="logo">
+                                                <img src="{{assignedLawyer?.userAdditionalInfo?.profile?.downloadLink}}"
+                                                    width="150px" height="auto" alt="logo" class="logo">
                                             </div>
                                             <div>
                                                 <div *ngIf="!assignedLawyer?.userAdditionalInfo?.profile?.downloadLink">
-                                                    <img src="assets/img/placeholder1.jpg" width="150px" height="auto" alt="logo">
+                                                    <img src="assets/img/placeholder1.jpg" width="150px" height="auto"
+                                                        alt="logo">
                                                 </div>
                                             </div>
                                         </div>
@@ -113,38 +117,47 @@
                                     <div class="col-7">
                                         <div class="text-default">Name:
                                             <span class="font-weight-normal"> {{assignedLawyer?.firstName}}
-                                                    {{assignedLawyer?.lastName}}</span>
+                                                {{assignedLawyer?.lastName}}</span>
                                         </div>
                                         <div class="text-default">Organization:
 
-                                            <span class="font-weight-normal">{{assignedLawyer?.Organization?.name}}</span>
+                                            <span
+                                                class="font-weight-normal">{{assignedLawyer?.Organization?.name}}</span>
 
                                         </div>
                                         <div class="text-default">Tagline:
-                                            <span class="font-weight-normal">{{assignedLawyer?.userAdditionalInfo?.tagline}}</span>
+                                            <span
+                                                class="font-weight-normal">{{assignedLawyer?.userAdditionalInfo?.tagline}}</span>
                                         </div>
 
                                         <div class="text-default">Practice Area(s):
                                             <span class="font-weight-normal">{{practicearea}}
-                                                <span *ngIf="practiceAreaList.length > 3" style="cursor: pointer; color: blue;"  (click)="openPAModal(viewPAList)">
+                                                <span *ngIf="practiceAreaList.length > 3"
+                                                    style="cursor: pointer; color: blue;"
+                                                    (click)="openPAModal(viewPAList)">
                                                     <span>....</span> View more
-                                            </span>
+                                                </span>
                                             </span>
                                         </div>
 
                                         <div class="d-flex mt-1">
-                                            <button class="button-purple btn-group" mat-raised-button (click)="onViewLawyer(assignedLawyer.userId)">
-                                               View Lawyer
+                                            <button class="button-purple btn-group" mat-raised-button
+                                                (click)="onViewLawyerModal(assignedLawyer)"
+                                                data-target="#lawyerViewModel" data-toggle="modal">
+                                                View Lawyer
                                             </button>
                                         </div>
 
                                         <div class="text-center">
                                             <ng-template #lawyerRemoveConforation>
-                                                <h3 class="text-center">Are you sure you want to disconnect the lawyer? if you do this, lawyer will no longer have access to your case.</h3>
+                                                <h3 class="text-center">Are you sure you want to disconnect the lawyer?
+                                                    if you do this, lawyer will no longer have access to your case.</h3>
                                                 <div class="d-flex justify-content-between">
-                                                    <button class="btn bg-color px-perc py-1" mat-raised-button (click)="onCancelNotesModal()">No
+                                                    <button class="btn bg-color px-perc py-1" mat-raised-button
+                                                        (click)="onCancelNotesModal()">No
                                                     </button>
-                                                    <button class="button-purple px-perc py-1" mat-raised-button (click)="removeLawyer(assignedLawyer.userId)">Yes
+                                                    <button class="button-purple px-perc py-1" mat-raised-button
+                                                        (click)="removeLawyer(assignedLawyer.userId)">Yes
                                                     </button>
                                                 </div>
                                             </ng-template>
@@ -171,7 +184,8 @@
                     </div>
                 </div>
                 <div class="pl-2" *ngIf="isFacility">
-                    <button class="button-purple" mat-mini-fab title="Add/Edit Note" (click)="openModal(managenotesModel)">
+                    <button class="button-purple" mat-mini-fab title="Add/Edit Note"
+                        (click)="openModal(managenotesModel)">
                         <mat-icon>edit</mat-icon>
                     </button>
                 </div>
@@ -212,7 +226,8 @@
         <button mat-raised-button class="button-purple mt-2 px-4 py-1" (click)="onCancelNotesModal();fileViewer()">
             Cancel
         </button>
-        <button mat-raised-button color="primary" class="px-4 py-1 mt-2" [disabled]="caseNoteForm.get('notes').invalid" (click)="onSaveChanges()">
+        <button mat-raised-button color="primary" class="px-4 py-1 mt-2" [disabled]="caseNoteForm.get('notes').invalid"
+            (click)="onSaveChanges()">
             Save
         </button>
     </div>
@@ -222,8 +237,11 @@
 <!-- Modal -->
 <ng-template #viewPAList>
     <h3 class="text-default text-center">Practice Area(s)</h3>
-
     <ul>
         <li *ngFor="let x of practiceAreaList;">{{x}}</li>
     </ul>
 </ng-template>
+
+<div class="modal fade" id="lawyerViewModel" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false">
+    <app-lawyer-view-shared [lawyerData]="userDetails"></app-lawyer-view-shared>
+</div>
