@@ -35,11 +35,11 @@ export class BillingSettingsComponent implements OnInit {
   @Output() couponData = new EventEmitter();
   cardDetails: any;
   cardForm: FormGroup;
-
+  
   constructor(private store: Store<any>, private lawyerFacilityService: LawyerFacilityService, private toasterService: ToasterService,
-    private fb: FormBuilder, private lawyerService: LawyerService,
-    private router: Router, private userMetaService: UserMetaService, private facilityService: FacilityService,
-    public dialog: MatDialog) { }
+     private fb: FormBuilder, private lawyerService: LawyerService,
+     private router: Router, private userMetaService: UserMetaService, private facilityService: FacilityService,
+      public dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.getUserDetailsFromStore()
@@ -60,7 +60,7 @@ export class BillingSettingsComponent implements OnInit {
       coupon: control.value,
     }).toPromise();
     if (!result.success) {
-      if (result.error.name === "UNRECOGNIZED") {
+      if(result.error.name === "UNRECOGNIZED"){
         this.isDiscount = null;
       } else {
         this.isDiscount = null;
@@ -74,7 +74,7 @@ export class BillingSettingsComponent implements OnInit {
 
 
 
-  onOpenChangeCardModal(templateRef) {
+  onOpenChangeCardModal(templateRef){
     let dialogRef = this.dialog.open(templateRef, {
       width: '550px',
     });
@@ -83,8 +83,8 @@ export class BillingSettingsComponent implements OnInit {
     });
   }
 
-  cardChange(event) {
-    if (event) {
+  cardChange(event){
+    if(event){
       this.getUserCardDetails();
       this.dialog.closeAll();
     }
@@ -96,7 +96,7 @@ export class BillingSettingsComponent implements OnInit {
     })
   }
 
-  couponObj(value) {
+  couponObj(value){
   }
 
   cardPatternValidation(control: AbstractControl) {
@@ -143,7 +143,7 @@ export class BillingSettingsComponent implements OnInit {
         if (element.isSponsors && element.isSelected) {
           this.addOnsPrice += (element.facilityUserCount * 1)
         }
-        if (this.selectedFacilities[0]?.user_plan?.coupon) {
+        if(this.selectedFacilities[0]?.user_plan?.coupon){
           this.cardForm.get('coupon').setValue(this.selectedFacilities[0]?.user_plan?.coupon)
         }
 
@@ -198,11 +198,11 @@ export class BillingSettingsComponent implements OnInit {
         facilitiesList.push(facilityData)
       }
     })
-    let discountPrice: number;
-    if (this.isDiscount) {
-      if (this.isDiscount && this.isDiscount.amount_off != null) {
-        discountPrice = this.isDiscount.amount_off / 100
-      } else if (this.isDiscount && this.isDiscount.percent_off != null) {
+    let discountPrice:number;
+    if(this.isDiscount){
+      if(this.isDiscount && this.isDiscount.amount_off != null){
+        discountPrice =  this.isDiscount.amount_off / 100
+      } else if(this.isDiscount && this.isDiscount.percent_off != null){
         discountPrice = ((this.totalPrice * this.isDiscount.percent_off / 100))
       }
     }
@@ -214,8 +214,8 @@ export class BillingSettingsComponent implements OnInit {
       "facilityList": facilitiesList,
       "type": type,
       "strip_custId": this.custId,
-      "coupon": this.cardForm.get('coupon').value,
-      "discount": discountPrice
+      "coupon":this.cardForm.get('coupon').value,
+      "discount":discountPrice
     }
     this.lawyerService.updatePlan(data).subscribe((res: any) => {
       if (res.success) {
@@ -241,7 +241,7 @@ export class BillingSettingsComponent implements OnInit {
     }
   }
 
-  listAllTransactions() {
+  listAllTransactions(){
     this.router.navigateByUrl('/mjp/lawyer/billing-setting/all-transactions')
   }
 
@@ -252,30 +252,33 @@ export class BillingSettingsComponent implements OnInit {
     this.getBillableFacility();
   }
 
-  onFacilitySelect(event, facility) {
+
+
+
+  // onChangePlan() {
+  //   this.isUpdate = true
+  //   // this.router.navigateByUrl('/mjp/lawyer/billing-setting/update')
+  // }
+
+
+  onFacilitySelect(event, facilityId) {
     if (event) {
-      this.facilityId = facility.facilityId
+      this.facilityId = facilityId
       this.facilityList = this.facilityList.map((facility) => {
-        if (facility.facilityId === facility.facilityId) {
+        if (facility.facilityId === facilityId) {
           facility.isSelected = true;
         }
         return facility
       })
     } else {
       this.facilityList.map((facility) => {
-        if (facility.facilityId === facility.facilityId) {
+        if (facility.facilityId === facilityId) {
           facility.isSelected = false;
         }
         return facility
       })
-      
-      if (facility.addOns.premium) {
-        this.onSelectAddOns(false, facility.facilityId, 'premium')
-      }
-
-      if (facility.addOns.sponsors) {
-        this.onSelectAddOns(false, facility.facilityId, 'sponsors')
-      }
+      this.onSelectAddOns(false, facilityId, 'premium')
+      this.onSelectAddOns(false, facilityId, 'sponsors')
     }
   }
 
