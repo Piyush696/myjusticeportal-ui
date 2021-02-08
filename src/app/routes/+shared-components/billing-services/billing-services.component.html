@@ -57,7 +57,7 @@
                             </div>
                             <div *ngIf="facilities.length > 0">
                                 <li *ngFor="let facility of facilities">
-                                    <mat-checkbox color="primary" (change)="onFacilitySelect($event.checked,facility?.facilityId) ">
+                                    <mat-checkbox color="primary" (change)="onFacilitySelect($event.checked,facility) ">
                                         {{ facility?.facilityName }} ({{facility.facilityUserCount }})
                                     </mat-checkbox>
                                     <div *ngIf="facility.isSelected">

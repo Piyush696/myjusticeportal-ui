@@ -70,6 +70,10 @@ export class UserService {
     return this.httpClient.put<Object>(`${this.apiPath}/user/changeFacility`, FacilityId, this.getHeaders());
   }
 
+  setFacilityUserFacility(FacilityId){
+    return this.httpClient.put<Object>(`${this.apiPath}/user/facility/changeFacility`, FacilityId, this.getHeaders());
+  }
+
   updateAdmin(userData) {
     return this.httpClient.put<Object>(`${this.apiPath}/user/update/admin`, userData, this.getHeaders());
   }

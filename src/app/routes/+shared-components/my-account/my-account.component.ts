@@ -221,6 +221,7 @@ export class MyAccountComponent implements OnInit {
 
   getSingleUser() {
     this.userService.getSingleUser().subscribe((result: any) => {
+      console.log(result)
       this.roleId = result.data.roles[0].roleId;
       if (result.data.roles[0].name == 'User') {
         this.isUser = true
@@ -238,6 +239,7 @@ export class MyAccountComponent implements OnInit {
       this.profileForm.get('userName').setValue(result.data.userName)
       let mobileNo  = (result.data.mobile).replace(/[^0-9 ]/g, " ").replace(/\s/g,'')
       this.profileForm.get('mobile').setValue(Number((mobileNo)))
+      
       this.profileForm.get('userEmail').setValue(result.data.email)
       this.profileForm.get('isMFA').setValue(result.data.isMFA)
       if (result.data.facilities.length > 0) {
