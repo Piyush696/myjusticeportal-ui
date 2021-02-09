@@ -21,6 +21,7 @@ import { ManageProfileComponent } from './manage-profile/manage-profile.componen
 import { ManageBillingSettingsComponent } from './manage-billing-settings/manage-billing-settings.component';
 import { SharedAllTransactionsComponent } from './shared-all-transactions/shared-all-transactions.component';
 import { UpdateCardModalComponent } from './update-card-modal/update-card-modal.component';
+import { LawyerViewSharedComponent } from './lawyer-view-shared/lawyer-view-shared.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { UpdateCardModalComponent } from './update-card-modal/update-card-modal.
     ManageProfileComponent,
     ManageBillingSettingsComponent,
     SharedAllTransactionsComponent,
-    UpdateCardModalComponent
+    UpdateCardModalComponent,
+    LawyerViewSharedComponent
   ],
   imports: [
     CommonModule,
@@ -66,7 +68,8 @@ import { UpdateCardModalComponent } from './update-card-modal/update-card-modal.
     ManageProfileComponent,
     ManageBillingSettingsComponent,
     SharedAllTransactionsComponent,
-    UpdateCardModalComponent
+    UpdateCardModalComponent,
+    LawyerViewSharedComponent
   ]
 })
 

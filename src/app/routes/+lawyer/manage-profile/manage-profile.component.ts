@@ -37,6 +37,7 @@ export class ManageProfileComponent implements OnInit {
   specialtyList: any;
   orgData: any;
   currentView: number = 1;
+  lawyerData:any;
 
   constructor(private userAdditionalInfo: UserAdditionInfoService, private router: Router, private fb: FormBuilder,
     private specialtyService: SpecialtyService, public dialog: MatDialog, private toasterService: ToasterService, private location: Location,
@@ -118,6 +119,11 @@ export class ManageProfileComponent implements OnInit {
         x.style.backgroundColor = '#333442'
       }
     }, 500);
+  }
+
+  openLawyerViewModal(userDetails){
+    this.lawyerData = userDetails
+
   }
 
   onUploadLogo() {

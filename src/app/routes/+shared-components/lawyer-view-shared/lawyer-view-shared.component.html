@@ -1,0 +1,81 @@
+<div class="modal-dialog modal-dialog-centered modal-lg px-4 py-4" role="document">
+    <div class="modal-content px-4 py-4">
+        <div class="lawyerModal p-2">
+            <div class="d-flex justify-content-between">
+                <h2 class="modal-title text-center font-weight-bold mb-0 py-1 " id="exampleModalLongTitle">Lawyer
+                    Profile
+                </h2>
+                <div>
+                    <button class="btn bg-color" mat-raised-button data-dismiss="modal" >Close</button>
+                </div>
+            </div>
+            <div class="mt-2 background-profile-headshot" id="cust-img">
+            </div>
+            <div class="bg-white">
+                <div class="row pt-3">
+                    <div class="col-3">
+                        <div class="d-flex mb-3">
+                            <div *ngIf="lawyerData?.userAdditionalInfo?.profile?.downloadLink" class="img-profile">
+                                <img src="{{lawyerData?.userAdditionalInfo?.profile?.downloadLink}}" width="157px"
+                                    height="auto" alt="logo" class="logo">
+                            </div>
+                            <div *ngIf="!lawyerData?.userAdditionalInfo?.profile?.downloadLink">
+                                <img src="assets/img/placeholder.jpg" width="157px" height="auto" alt="logo">
+                            </div>
+                        </div>
+                        <div class="d-flex justify-content-center align-items-center">
+                            <div *ngIf="!hideButton">
+                                <button data-dismiss="modal" class="button-purple mb-3" mat-raised-button
+                                    (click)="viewContact(lawyerData.userId)">
+                                    Contact {{lawyerData?.firstName}}
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-9 card-height">
+                        <div>
+                            <div class="d-flex justify-content-between">
+                                <div class="mt-1">
+                                    <h4 class="mb-0">
+                                        <!-- <span class="font-weight-bold name-size">Name: </span> -->
+                                        <span class="font-weight-bold name-size">{{lawyerData?.firstName}}
+                                            {{lawyerData?.middleName}} {{lawyerData?.lastName}}</span>
+                                    </h4>
+                                </div>
+                                <div *ngIf="!hideButton">
+                                    <button class="btn bg-color m-0" data-dismiss="modal"
+                                        (click)="viewOrg(lawyerData.Organization.organizationId)">View
+                                        Organization</button>
+                                </div>
+                            </div>
+                            <div class="row px-3">
+                                <div>
+                                    <span class="font-weight-bold">Organization: </span>
+                                    <span>{{lawyerData?.Organization?.name}}</span>
+                                </div>
+                            </div>
+                            <div class="row px-3">
+                                <div>
+                                    <span class="font-weight-bold">Tagline: </span>
+                                    <span>{{lawyerData?.userAdditionalInfo?.tagline}}</span>
+                                </div>
+                            </div>
+                            <div class="row px-3">
+                                <div>
+                                    <span class="font-weight-bold">Practice area(s): </span>
+                                    <span>{{lawyerData?.userAdditionalInfo?.practiceAreas}}</span>
+                                </div>
+                            </div>
+                            <div class="row px-3">
+                                <div>
+                                    <span class="font-weight-bold">Description: </span>
+                                    <span>{{lawyerData?.userAdditionalInfo?.description}}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

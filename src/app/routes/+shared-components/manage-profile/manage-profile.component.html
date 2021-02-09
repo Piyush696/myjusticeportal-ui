@@ -64,8 +64,8 @@
             <div class="row">
                 <div class="col-12 col-sm-12 d-flex justify-content-between justify-content-sm-between">
                     <div>
-                        <button mat-raised-button class="button-purple px-4 py-1 mt-1"
-                            (click)="openOrganizationModal(previewProfile,userDetails)">Preview</button>
+                        <button mat-raised-button class="button-purple px-4 py-1 mt-1" data-target="#lawyerViewModel"
+                            data-toggle="modal" (click)="openLawyerViewModal(userDetails)">Preview</button>
                     </div>
                     <div>
                         <button mat-raised-button class="button-purple px-4 py-1 mt-1"
@@ -178,31 +178,32 @@
                         height)
                     </small>
                 </div>
-                <div> <small class="text-danger" *ngIf="uploader1?.queue.length==1">If you want to add another image, Please
+                <div> <small class="text-danger" *ngIf="uploader1?.queue.length==1">If you want to add another image,
+                        Please
                         remove the selected image.
                     </small>
                 </div>
-            <!-- </div> -->
-            <div class="py-1">
-                <table class="table m-0">
-                    <tbody>
-                        <tr class="pr-0" *ngFor="let item of uploader1?.queue">
-                            <td><strong>{{item?.file?.name}}</strong></td>
-                            <td nowrap>
-                                <button mat-raised-button color="warn" (click)="item.remove()">
-                                    <mat-icon>delete</mat-icon>Remove
-                                </button>
-                            </td>
-                            <td>
-                                <button mat-raised-button color="primary" [disabled]="isFileSizeMax || isDimenssionMax"
-                                    (click)="onUploadLogo()">
-                                    <mat-icon>file_upload</mat-icon>Upload
-                                </button>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
+                <!-- </div> -->
+                <div class="py-1">
+                    <table class="table m-0">
+                        <tbody>
+                            <tr class="pr-0" *ngFor="let item of uploader1?.queue">
+                                <td><strong>{{item?.file?.name}}</strong></td>
+                                <td nowrap>
+                                    <button mat-raised-button color="warn" (click)="item.remove()">
+                                        <mat-icon>delete</mat-icon>Remove
+                                    </button>
+                                </td>
+                                <td>
+                                    <button mat-raised-button color="primary"
+                                        [disabled]="isFileSizeMax || isDimenssionMax" (click)="onUploadLogo()">
+                                        <mat-icon>file_upload</mat-icon>Upload
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
 
@@ -228,31 +229,32 @@
                         height)
                     </small>
                 </div>
-                <div> <small class="text-danger" *ngIf="uploader2?.queue.length==1">If you want to add another image, Please
-                    remove the selected image
+                <div> <small class="text-danger" *ngIf="uploader2?.queue.length==1">If you want to add another image,
+                        Please
+                        remove the selected image
                     </small>
                 </div>
-            <!-- </div> -->
-            <div class="py-1">
-                <table class="table m-0">
-                    <tbody>
-                        <tr class="pr-0" *ngFor="let item of uploader2?.queue">
-                            <td><strong>{{item?.file?.name}}</strong></td>
-                            <td nowrap>
-                                <button mat-raised-button color="warn" (click)="item.remove()">
-                                    <mat-icon>delete</mat-icon>Remove
-                                </button>
-                            </td>
-                            <td>
-                                <button mat-raised-button color="primary"
-                                    [disabled]="isHeadshotFileSizeMax || isDimenssionMax1" (click)="onUploadLogo()">
-                                    <mat-icon>file_upload</mat-icon>Upload
-                                </button>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
+                <!-- </div> -->
+                <div class="py-1">
+                    <table class="table m-0">
+                        <tbody>
+                            <tr class="pr-0" *ngFor="let item of uploader2?.queue">
+                                <td><strong>{{item?.file?.name}}</strong></td>
+                                <td nowrap>
+                                    <button mat-raised-button color="warn" (click)="item.remove()">
+                                        <mat-icon>delete</mat-icon>Remove
+                                    </button>
+                                </td>
+                                <td>
+                                    <button mat-raised-button color="primary"
+                                        [disabled]="isHeadshotFileSizeMax || isDimenssionMax1" (click)="onUploadLogo()">
+                                        <mat-icon>file_upload</mat-icon>Upload
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>
@@ -277,8 +279,12 @@
     </div>
 </ng-template>
 
-<ng-template #previewProfile>
-    <mat-card class="border bg-card p-2">
+<div class="modal fade" id="lawyerViewModel" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false">
+    <app-lawyer-view-shared [lawyerData]="lawyerData"></app-lawyer-view-shared>
+</div>
+
+<!-- <ng-template #previewProfile> -->
+<!-- <mat-card class="border bg-card p-2">
         <div class="d-flex justify-content-between align-items-center bg-header">
             <div>
                 <h2 class="font-weight-bold m-0">Lawyer Profile</h2>
@@ -320,7 +326,7 @@
                                 <span>{{userDetails?.Organization?.name}}</span>
                             </div>
                         </div>
-                        <!-- <div class="row py-2 pl-3">
+                        <div class="row py-2 pl-3">
                             <div>
                                 <span class="font-weight-bold">Tagline: </span>
                                 <span>{{userDetails?.userAdditionalInfo?.tagline}}</span>
@@ -337,11 +343,11 @@
                                 <span class="font-weight-bold">Description: </span>
                                 <span>{{userDetails?.userAdditionalInfo?.description}}</span>
                             </div>
-                        </div> -->
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
 
-    </mat-card>
-</ng-template>
+    </mat-card> -->
+<!-- </ng-template> -->

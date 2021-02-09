@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CaseService } from 'app/services/case.service';
 import { ToasterService } from 'app/services/toaster.service';
@@ -7,6 +7,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { LawyerService } from 'app/services/lawyer.service';
 import { UserService } from 'app/services/registration/user.service';
+import { HireLawyerService } from 'app/services/hire-lawyer.service';
 
 
 @Component({
@@ -22,8 +23,13 @@ export class ViewCaseComponent implements OnInit {
   isFacility: boolean;
   practicearea: any;
   practiceAreaList = [];
+  userDetails:any
+  practiseAreaList = [];
+  path: string;
+  viewLawyer:any;
+  modalButton:boolean;
 
-  constructor(private router: Router, private route: ActivatedRoute, private caseService: CaseService,
+  constructor(private router: Router, private route: ActivatedRoute, private caseService: CaseService, private hireLawyerService: HireLawyerService,
     private toasterService: ToasterService, private location: Location,
     public dialog: MatDialog, private fb: FormBuilder, private lawyerService: LawyerService, private userService: UserService) {
   }
@@ -53,7 +59,6 @@ export class ViewCaseComponent implements OnInit {
         if(this.assignedLawyer?.userAdditionalInfo?.practiceAreas){ 
           this.practiceAreaList =  lawyer?.data?.userAdditionalInfo?.practiceAreas.split(",")
           this.practicearea = this.assignedLawyer?.userAdditionalInfo?.practiceAreas.split(",").slice(0, 3)
-          console.log(this.practiceAreaList)
         }
       } else {
         this.assignedLawyer = '';
@@ -136,5 +141,9 @@ export class ViewCaseComponent implements OnInit {
 
   onCancelNotesModal() {
     this.dialog.closeAll();
+  }
+
+  onViewLawyerModal(lawyerData) {
+    this.userDetails = lawyerData;
   }
 }

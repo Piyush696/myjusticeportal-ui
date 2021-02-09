@@ -66,3 +66,9 @@
     background: #c0c6f3;
   }
 }
+
+select:disabled {
+  cursor:  no-drop;
+  -webkit-text-fill-color: #1f1e1e;
+  opacity: 1;
+}
