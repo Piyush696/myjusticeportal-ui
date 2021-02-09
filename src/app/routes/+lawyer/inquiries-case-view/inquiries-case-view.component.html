@@ -59,8 +59,11 @@
             </div>
         </div>
         <div style="flex-direction: column; display: flex;">
-            <button *ngIf="singleCaseData?.lawyer[0]?.lawyer_case?.status != 'Lawyer Approved' || singleCaseData?.lawyer[0]?.lawyer_case?.status === 'Inmate Rejected' || singleCaseData?.lawyer[0]?.lawyer_case?.status === 'Lawyer Requested'" class="mr-1" class="btn btn-md btn-primary "
-                color=" green" title="Approve" [disabled]="( singleCaseData?.lawyer[0]?.lawyer_case?.status === 'Inmate Rejected' )" (click)="onStatusUpdate(singleCaseData?.caseId, status='Lawyer Approved')">
+            <button *ngIf="((singleCaseData?.lawyer[0]?.lawyer_case?.status != 'Lawyer Rejected') && 
+                        ( singleCaseData?.lawyer[0]?.lawyer_case?.status != 'Lawyer Approved' 
+                        || singleCaseData?.lawyer[0]?.lawyer_case?.status === 'Inmate Rejected' 
+                        || singleCaseData?.lawyer[0]?.lawyer_case?.status === 'Lawyer Requested'))" class="mr-1" class="btn btn-md btn-primary " color=" green" title="Approve" [disabled]="( singleCaseData?.lawyer[0]?.lawyer_case?.status === 'Inmate Rejected' )"
+                (click)="onStatusUpdate(singleCaseData?.caseId, status='Lawyer Approved')">
                             ACCEPT
                         </button>
             <button *ngIf="singleCaseData?.lawyer[0]?.lawyer_case?.status === 'Lawyer Rejected'" class="mr-1" class="btn btn-md btn-primary " color=" green" title="Approve" [disabled]="( singleCaseData?.lawyer[0]?.lawyer_case?.status === 'Rejected' || singleCaseData?.lawyer[0]?.lawyer_case?.status === 'inmate_rejected' 

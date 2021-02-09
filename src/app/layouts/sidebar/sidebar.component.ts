@@ -47,7 +47,7 @@ export const ROUTES: RouteInfo[] = [
     { path: 'bondsman/manage-organization', title: 'Manage Organization', icon: 'nc-bank', class: '', roleIds: [6], isAdmin: true },
 
     { path: 'facility/facility-dashboard', title: 'Dashboard', icon: 'nc-bank', class: '', roleIds: [2] },
-    { path: 'facility/facility-users', title: 'All Users', icon: 'nc-bank', class: '', roleIds: [2] },
+    { path: 'facility/facility-users', title: 'All Inmate Users', icon: 'nc-bank', class: '', roleIds: [2] },
     // { path: '/message-lawyer', title: 'Message My lawyer', icon: 'nc-bank', class: '', roleIds: [5] },
     // { path: '/video-lawyer', title: 'Video My lawyer', icon: 'nc-bank', class: '', roleIds: [5] },
     { path: 'bail-bonds', title: 'Bail Bonds', icon: 'nc-bank', class: '', roleIds: [4, 6] },

@@ -196,7 +196,7 @@
                             <i>Invalid coupon. </i>
                         </mat-error>
                         <div class="d-flex justify-content-center">
-                            <button mat-raised-button class="button-purple px-4 py-1 mt-3" (click)="onPay()">Save
+                            <button mat-raised-button class="button-purple px-4 py-1 mt-3" (click)="confirmPlanChange(confirmModal)">Save
                             </button>
                         </div>
                     </mat-card>
@@ -207,4 +207,14 @@
 </div>
 <ng-template #openCardModal>
     <app-update-card-modal (cardChange)="cardChange($event)"></app-update-card-modal>
+</ng-template>
+
+<ng-template #confirmModal>
+    <div class="d-flex justify-content-center p-2">
+        <mat-label class="font-weight-bold">Are you sure you want to make this change? </mat-label>
+    </div>
+    <div class="d-flex justify-content-between p-2">
+        <button mat-raised-button type="button" class="button-purple px-4 py-1" (click)="onPay()">Yes</button>
+        <button type="button" class="button-purple px-4 py-1" mat-raised-button (click)="closeModal()">No</button>
+    </div>
 </ng-template>

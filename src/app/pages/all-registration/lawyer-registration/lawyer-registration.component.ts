@@ -50,6 +50,7 @@ export class LawyerRegistrationComponent implements OnInit {
 
   userMetaData(userMetaData) {
     this.step = 3;
+    console.log(userMetaData)
     this.registrationData['userMeta'] = userMetaData;
   }
 

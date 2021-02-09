@@ -99,7 +99,7 @@
                         BACK
                     </button>
                     <button *ngIf="roleId != 3 && roleId != 5" [disabled]="additionalInfo.controls['housing_unit'].invalid || additionalInfo.controls['facility'].invalid" class="px-4 py-1" mat-raised-button color="primary" (click)="submit()">Next</button>
-                    <button *ngIf="roleId == 3 || roleId == 5" [disabled]="isDisable" class="px-4 py-1" mat-raised-button color="primary" (click)="submit()">Next</button>
+                    <button *ngIf="roleId == 3 || roleId == 5" [disabled]="!additionalInfoLawyer.controls['state'].invalid" class="px-4 py-1" mat-raised-button color="primary" (click)="submit()">Next</button>
                 </div>
             </mat-card>
         </div>
