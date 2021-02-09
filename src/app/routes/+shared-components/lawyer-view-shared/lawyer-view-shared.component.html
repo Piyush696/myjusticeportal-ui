@@ -24,7 +24,7 @@
                             </div>
                         </div>
                         <div class="d-flex justify-content-center align-items-center">
-                            <div *ngIf="!hideButton">
+                            <div *ngIf="!hideButton.roles[0].roleId == 3 || !hideButton.roles[0].roleId == 5">
                                 <button data-dismiss="modal" class="button-purple mb-3" mat-raised-button
                                     (click)="viewContact(lawyerData.userId)">
                                     Contact {{lawyerData?.firstName}}
@@ -42,7 +42,7 @@
                                             {{lawyerData?.middleName}} {{lawyerData?.lastName}}</span>
                                     </h4>
                                 </div>
-                                <div *ngIf="!hideButton">
+                                <div *ngIf="!hideButton.roles[0].roleId == 3 || !hideButton.roles[0].roleId == 5">
                                     <button class="btn bg-color m-0" data-dismiss="modal"
                                         (click)="viewOrg(lawyerData.Organization.organizationId)">View
                                         Organization</button>
