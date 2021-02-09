@@ -11,7 +11,7 @@ import { Store } from '@ngrx/store';
 export class LawyerViewSharedComponent implements OnInit, AfterViewInit, OnChanges {
   @Input() lawyerData: any;
   path='';
-  hideButton: boolean;
+  hideButton: any;
   newData;
 
   constructor(public dialog: MatDialog, private router: Router, private store: Store<any>) {  }
@@ -31,7 +31,7 @@ export class LawyerViewSharedComponent implements OnInit, AfterViewInit, OnChang
   
   ngOnInit(): void {
     this.store.select(s => s.userInfo).subscribe(x => {
-      this.hideButton = x.roles[0].roleId == 3
+      this.hideButton = x;
     })
   }
 

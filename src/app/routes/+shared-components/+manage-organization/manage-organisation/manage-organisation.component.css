@@ -47,3 +47,12 @@ ul {
 .preline{
   white-space: pre-line;
 }
+
+.org-view{
+  box-shadow: 0 0 3px #868585;
+  border-radius: 3px;
+}
+
+.btn-background{
+  background-color: #ededed;
+}
