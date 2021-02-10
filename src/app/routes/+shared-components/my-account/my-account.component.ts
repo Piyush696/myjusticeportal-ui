@@ -37,7 +37,8 @@ export class MyAccountComponent implements OnInit {
   previousSecurityId: any;
   facilityList: any;
   isDisabled: boolean = true;
- 
+  public mask = ['(', /[1-9]/, /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/]
+
 
   constructor(private registrationService: RegistrationService, public dialog: MatDialog,
     private toasterService: ToasterService, private securityService: SecurityService,
