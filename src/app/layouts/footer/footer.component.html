@@ -21,9 +21,16 @@
             </ul>
         </nav> -->
         <hr>
-        <div class="copyright pull-right">
+        <div class="copyright pull-right mt-2">
             &copy; {{test | date: 'yyyy'}} My Justice Portal
+            &nbsp;<a target="_blank" href="https://www.google.com/" class="text-dark">
+                Terms of Service
+            </a>
+            &nbsp;<a target="_blank" href="https://www.google.com/" class="text-dark">
+                Privacy Policy
+            </a>
         </div>
+        
         <div *ngIf="isButton && this.userInfo.status">
             <div class="d-flex justify-content-end line-height mt-3">
                 <button [routerLink]="buttonLink" class="white-btn py-1 mat-raised-button mat-button-base"
