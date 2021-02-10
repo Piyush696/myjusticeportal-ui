@@ -26,6 +26,7 @@ export class PendingInquriesComponent implements OnInit {
   filteredRejectedPendingInquiriesList = [];
   userId: any;
   userName: any;
+  isChatLimit:boolean=true;
 
   constructor(private caseService: CaseService, public dialog: MatDialog,
     private additionalService: UserAdditionInfoService, private toasterService: ToasterService, public router: Router) { }
