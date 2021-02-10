@@ -22,6 +22,7 @@ import { ManageBillingSettingsComponent } from './manage-billing-settings/manage
 import { SharedAllTransactionsComponent } from './shared-all-transactions/shared-all-transactions.component';
 import { UpdateCardModalComponent } from './update-card-modal/update-card-modal.component';
 import { LawyerViewSharedComponent } from './lawyer-view-shared/lawyer-view-shared.component';
+import { TextMaskModule } from 'angular2-text-mask';
 
 @NgModule({
   declarations: [
@@ -50,7 +51,8 @@ import { LawyerViewSharedComponent } from './lawyer-view-shared/lawyer-view-shar
     SharedMaterialModule,
     RouterModule,
     FileUploadModule,
-    ColorPickerModule
+    ColorPickerModule,
+    TextMaskModule
   ],
   exports: [
     LoginComponent,
