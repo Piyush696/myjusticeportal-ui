@@ -37,7 +37,7 @@ export class MyAccountComponent implements OnInit {
   previousSecurityId: any;
   facilityList: any;
   isDisabled: boolean = true;
-
+ 
 
   constructor(private registrationService: RegistrationService, public dialog: MatDialog,
     private toasterService: ToasterService, private securityService: SecurityService,
@@ -237,8 +237,8 @@ export class MyAccountComponent implements OnInit {
       this.profileForm.get('middleName').setValue(result.data.middleName)
       this.profileForm.get('lastName').setValue(result.data.lastName)
       this.profileForm.get('userName').setValue(result.data.userName)
-      let mobileNo  = (result.data.mobile).replace(/[^0-9 ]/g, " ").replace(/\s/g,'')
-      this.profileForm.get('mobile').setValue(Number((mobileNo)))
+      // let mobileNo  = (result.data.mobile).replace(/[^0-9 ]/g, " ").replace(/\s/g,'')
+      this.profileForm.get('mobile').setValue(result.data.mobile)
       
       this.profileForm.get('userEmail').setValue(result.data.email)
       this.profileForm.get('isMFA').setValue(result.data.isMFA)
