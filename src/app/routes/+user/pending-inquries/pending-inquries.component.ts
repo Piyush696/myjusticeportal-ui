@@ -42,8 +42,8 @@ export class PendingInquriesComponent implements OnInit {
 
   onOpenModal(templateRef, userId, user) {
     this.userId = userId
-    user.middleName = user.lawyer[0]?.middleName ? user.lawyer[0]?.middleName : ' '
-    this.userName = user.lawyer[0]?.firstName + ' ' + user.lawyer[0]?.middleName + ' ' + user.lawyer[0]?.lastName
+    user.middleName = user.middleName ? user.middleName : ' '
+    this.userName = user.firstName + ' ' + user.middleName + ' ' + user.lastName
     let dialogRef = this.dialog.open(templateRef, {
       width: '800px'
     });
@@ -117,13 +117,14 @@ export class PendingInquriesComponent implements OnInit {
     this.connectedInquiries = []
     this.filteredPendingInquiriesList = [];
     this.filteredRejectedPendingInquiriesList = []
-    this.caseService.getPendingCaseInfo().subscribe((pendingCase: any) => {
+    this.caseService.getInmateCases().subscribe((pendingCase: any) => {
+      console.log(pendingCase)
       let inquiries = pendingCase.data.map((status) => {
-        status['name0'] = status.lawyer[0].Organization.name;
-        status['name1'] = status.lawyer[0].Organization.name.split(" ").join("");
-        status['name2'] = status.lawyer[0].firstName + " " + status.lawyer[0].lastName;
-        status['name3'] = status.lawyer[0].firstName + status.lawyer[0].lastName;
-        var date = status.lawyer[0].lawyer_case.createdAt;
+        status['name0'] = status.organization;
+        status['name1'] = status.organization.split(" ").join("");
+        status['name2'] = status.firstName + " " + status.lastName;
+        status['name3'] = status.firstName + status.lastName;
+        var date = status.createdAt;
         date = new Date(date).toDateString();
         var monthDay = date.substring(4, 10);
         var year = date.substring(10, 15);
@@ -137,9 +138,9 @@ export class PendingInquriesComponent implements OnInit {
         return status
       })
       inquiries.filter((x) => {
-        if (x.lawyer[0].lawyer_case.status == 'Lawyer Rejected' || x.lawyer[0].lawyer_case.status == 'Inmate Rejected') {
+        if (x.status == 'Lawyer Rejected' || x.status == 'Inmate Rejected') {
           this.filteredRejectedPendingInquiriesList.push(x)
-        } else if (x.lawyer[0].lawyer_case.status == 'Connected') {
+        } else if (x.status == 'Connected') {
             this.connectedInquiries.push(x)
         }
         else {
@@ -160,16 +161,15 @@ export class PendingInquriesComponent implements OnInit {
 
         this.dataSource.sortingDataAccessor = (item: any, property) => {
           switch (property) {
-            case 'lawyer': if (item) return item.lawyer[0].firstName + item.lawyer[0].middleName + item.lawyer[0].lastName;
-            case 'lawFirm': if (item) return item.lawyer[0].Organization.name;
-            case 'status': if (item) return item.lawyer[0].lawyer_case.status;
+            case 'lawyer': if (item) return item.firstName + item.middleName + item.lastName;
+            case 'lawFirm': if (item) return item.organization;
+            case 'status': if (item) return item.status;
             default: if (typeof (item[property]) == 'string') {
               return item[property].toLowerCase();
             } else {
               return item[property]
             }
           }
-
         };
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;

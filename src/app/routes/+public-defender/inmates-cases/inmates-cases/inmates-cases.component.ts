@@ -27,6 +27,7 @@ export class InmatesCasesComponent implements OnInit {
 
   getInmatesCases() {
     this.inmatedefenderService.getInmateCases().subscribe((users: any) => {
+      console.log(users.data)
       this.casesList = users.data;
       this.casesList = this.casesList.map((item) => {
        var date = item.updatedAt;
