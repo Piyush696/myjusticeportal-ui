@@ -181,6 +181,7 @@ export class BillingSettingsComponent implements OnInit {
   }
 
   onPay() {
+    this.dialog.closeAll();
     this.spinner = true;
     let facilitiesList = [];
     let type = ''
@@ -252,9 +253,15 @@ export class BillingSettingsComponent implements OnInit {
     this.getBillableFacility();
   }
 
+  confirmPlanChange(templateRef) {
+    let dialogRef = this.dialog.open(templateRef, {
+      width: '368px',
+    });
+  }
 
-
-
+  closeModal(){
+    this.dialog.closeAll();
+  }
   // onChangePlan() {
   //   this.isUpdate = true
   //   // this.router.navigateByUrl('/mjp/lawyer/billing-setting/update')

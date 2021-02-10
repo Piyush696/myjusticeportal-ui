@@ -63,7 +63,8 @@ export class CasesComponent implements OnInit,AfterViewInit {
   createCaseNotesForm() {
     this.caseNoteForm = this.fb.group({
       notes: ['', [Validators.required]]
-    })
+    });
+    console.log(this.caseNoteForm)
   }
 
   getSponsors() {

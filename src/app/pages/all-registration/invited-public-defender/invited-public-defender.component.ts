@@ -5,6 +5,8 @@ import { PublicDefenderService } from 'app/services/registration/public-defender
 import { ToasterService } from 'app/services/toaster.service';
 import { CacheService } from 'app/services/cache.service';
 import { InvitedPublicDefenderService } from 'app/services/registration/invited-public-defender.service';
+import { Store } from '@ngrx/store';
+import { AddUserInfo } from 'app/store/actions/userInfo.actions';
 
 @Component({
   selector: 'app-invited-public-defender',
@@ -32,7 +34,7 @@ export class InvitedPublicDefenderComponent implements OnInit {
   
   constructor(private activatedRoute: ActivatedRoute, private loginService: LoginService,
     private inviteddefenderService: InvitedPublicDefenderService, private toasterService: ToasterService,
-    private router: Router, private cacheService: CacheService) {
+    private router: Router, private cacheService: CacheService,private store: Store<any>) {
     this.onGetEmailFromToken(this.activatedRoute.snapshot.params.token);
   }
 
@@ -120,6 +122,7 @@ export class InvitedPublicDefenderComponent implements OnInit {
         this.cacheService.setCache('token', verified.token);
         this.loginService.checkToken().then((data: any) => {
           if (data.success) {
+            this.store.dispatch(new AddUserInfo(Object.assign({}, data.user)));
             if (data.user.status) {
               this.router.navigateByUrl('/mjp/public-defender/defender-dashboard');
               this.toasterService.showWarningToater("Account under review.")
