@@ -12,11 +12,11 @@ export class ChatModalComponent implements OnInit {
   allMessages: any;
   @Input() userId: any
   @Input() userName: string
+  @Input() isChatLimit:boolean
   senderId: any;
   message: any;
   isLoading: boolean;
   receiverId:any;
-  isChatLimit:boolean = true;
   @Output() isModelClose = new EventEmitter()
 
   constructor(private messageService: MessageService, private userService: UserService,) { }
