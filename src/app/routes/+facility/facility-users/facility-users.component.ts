@@ -31,7 +31,6 @@ export class FacilityUsersComponent implements OnInit {
  
   getAllFacilityUsers(){
     this.facilityService.getFacilityUsers().subscribe((users:any)=>{
-      console.log(users)
       this.dataSource.sortingDataAccessor = (item: any, property) => {
         switch (property) {
           case 'name': if (item) return item.firstName + item.middleName + item.lastName;
