@@ -307,7 +307,7 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="form-group">
-                    <select class="dropdown" [formControl]="securityQuestionForm.controls['securityQuestionId']">
+                    <select class="dropdown" [formControl]="securityQuestionForm.controls['securityQuestionId']" disabled>
                         <option [selected]="true">Select Question</option>
                         <option *ngFor="let securityQuestion of securityQuestionList"
                             [value]="securityQuestion.securityQuestionId">
