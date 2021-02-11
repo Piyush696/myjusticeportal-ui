@@ -3,6 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import { Router } from '@angular/router';
 import { HireLawyerService } from 'app/services/hire-lawyer.service';
 import { ToasterService } from 'app/services/toaster.service';
 import { count } from 'rxjs/operators';
@@ -14,7 +15,7 @@ import { count } from 'rxjs/operators';
 })
 
 export class AcceptedCasesComponent implements OnInit {
-  displayedColumns: string[] = ["createdAt", "name", "countyOfArrest", "status", "briefDescriptionOfChargeOrLegalMatter"];
+  displayedColumns: string[] = ["createdAt", "name", "countyOfArrest", "status", "briefDescriptionOfChargeOrLegalMatter", "action"];
   dataSource = new MatTableDataSource();
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort: MatSort;
@@ -28,7 +29,8 @@ export class AcceptedCasesComponent implements OnInit {
   userId:any;
   userName:any;
 
-  constructor(private hireLawyerService: HireLawyerService, private toasterService: ToasterService, public dialog: MatDialog) { }
+  constructor(private hireLawyerService: HireLawyerService, private toasterService: ToasterService, public dialog: MatDialog,
+    private router: Router) { }
   
   ngOnInit(): void {
     this.onGetRequestedCases('Connected');
@@ -163,7 +165,9 @@ export class AcceptedCasesComponent implements OnInit {
     })
   }
   
- 
+  historyViewCase(caseId){
+    this.router.navigateByUrl("/mjp/lawyer/history-case-view/"+caseId);
+  }
 
 
   nestedFilterCheck(search, data, key) {

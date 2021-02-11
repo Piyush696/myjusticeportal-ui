@@ -19,6 +19,7 @@ import { BillingSettingsComponent } from './billing-settings/billing-settings.co
 import { UpdateBillingSettingsComponent } from './billing-settings/update-billing-settings/update-billing-settings.component';
 import { PdfViewerModule } from 'ng2-pdf-viewer';
 import { AllTransactionsComponent } from './all-transactions/all-transactions.component';
+import { HistoryCaseComponent } from './history-case/history-case.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { AllTransactionsComponent } from './all-transactions/all-transactions.co
     InquiriesCaseViewComponent,
     BillingSettingsComponent,
     UpdateBillingSettingsComponent,
-    AllTransactionsComponent
+    AllTransactionsComponent,
+    HistoryCaseComponent
   ],
   imports: [
     TextMaskModule,
