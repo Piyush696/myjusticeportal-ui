@@ -1,0 +1,65 @@
+<div class="d-flex justify-content-between">
+    <div>
+        <h1 class="font-weight-bold mb-0">Case Details</h1>
+        <h4>View connected case details.</h4>
+    </div>
+    <div>
+        <button mat-raised-button class="btn-background px-5 py-1" (click)="onGoBack()">
+            Go Back
+        </button>
+    </div>
+</div>
+
+<mat-card class="inner-card mat-elevation-z10 mt-3">
+    <div class="d-flex justify-content-between">
+        <div class="col">
+            <mat-label class="font-weight-bold" *ngIf="!singleCaseData">
+                <span>No data available, invalid url detected.</span>
+            </mat-label>
+            <div *ngIf="singleCaseData" class="d-flex flex-column">
+                <span><b>Inmate Name</b>: {{singleCaseData?.inmate?.firstName}} {{singleCaseData?.inmate?.middleName}}
+                    {{singleCaseData?.inmate?.lastName}}</span>
+                <span>
+                    <b>Charges or Legal Matter</b>: {{singleCaseData?.legalMatter}}
+                    <span *ngIf="!singleCaseData?.legalMatter">N/A</span>
+                </span>
+                <span><b>Date Of Arrest</b>:
+                    {{singleCaseData?.dateOfArrest | date:'longDate'}}
+                    <span *ngIf="!singleCaseData?.dateOfArrest">N/A</span>
+                </span>
+
+                <span>
+                    <b> Description</b>:
+                    {{singleCaseData?.briefDescriptionOfChargeOrLegalMatter}}
+                    <span *ngIf="!singleCaseData?.briefDescriptionOfChargeOrLegalMatter">N/A</span>
+                </span>
+
+                <span>
+                    <span><b>Next Court Date</b>:
+                        {{singleCaseData?.nextCourtDate | date:'longDate'}}
+                        <span *ngIf="!singleCaseData?.nextCourtDate">N/A</span>
+                </span>
+                </span>
+
+                <span><b>Status</b>:&nbsp;
+                    <span class="font-weight-bold text-success">
+                        {{singleCaseData?.lawyer[0]?.lawyer_case?.status}}
+                    </span>
+                <span *ngIf="singleCaseData?.lawyer[0]?.lawyer_case?.status === 'Lawyer Approved'">(Pending inmate's
+                        acceptance)</span>
+                </span>
+                <span><b>County Of Arrest</b>:
+                    {{singleCaseData?.countyOfArrest}}
+                    <span *ngIf="!singleCaseData?.countyOfArrest">N/A</span>
+                </span>
+                <mat-card class="enquiry-notes mt-2">
+                    <span><b>Inquiry Notes</b>:
+                        {{singleCaseData?.lawyer[0]?.lawyer_case?.notes}}
+                        <span *ngIf="!singleCaseData?.lawyer[0]?.lawyer_case?.notes">N/A</span>
+                    </span>
+                </mat-card>
+            </div>
+        </div>
+    </div>
+
+</mat-card>
