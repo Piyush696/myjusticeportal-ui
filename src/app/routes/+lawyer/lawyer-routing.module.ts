@@ -30,7 +30,7 @@ const routes: Routes = [
     { path: 'manage-organization/users', component: ViewUsersComponent },
     { path: 'lawyer-chat', component: LawyerChatComponent },
     { path: 'lawyer-chat/:userId', component: LawyerChatComponent },
-    { path: 'inquiries/:caseId', component: InquiriesCaseViewComponent },
+    { path: 'inquiries/:lawyer_caseId', component: InquiriesCaseViewComponent },
     { path: 'manage-organization/facilities', component: ViewFacilitiesComponent },
     { path: '**', component: LawyerdashboardComponent }
 ];

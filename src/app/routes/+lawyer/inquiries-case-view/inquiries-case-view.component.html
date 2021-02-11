@@ -38,18 +38,18 @@
                     <span><b>Next Court Date</b>:
                         {{singleCaseData?.nextCourtDate | date:'longDate'}}
                         <span *ngIf="!singleCaseData?.nextCourtDate">N/A</span>
-                    </span>
+                </span>
                 </span>
 
                 <span><b>Status</b>:&nbsp;
-                    <span class="font-weight-bold" [ngClass]="{'text-warning': singleCaseData?.lawyer[0]?.lawyer_case?.status === 'Lawyer Requested', 
-                    'text-success': singleCaseData?.lawyer[0]?.lawyer_case?.status === 'Connected',
-                    'text-danger': singleCaseData?.lawyer[0]?.lawyer_case?.status === 'Lawyer Rejected',
-                    'text-danger': singleCaseData?.lawyer[0]?.lawyer_case?.status === 'Inmate Rejected',
-                    'text-success': singleCaseData?.lawyer[0]?.lawyer_case?.status === 'Lawyer Approved' }">
-                        {{singleCaseData?.lawyer[0]?.lawyer_case?.status}}
+                    <span class="font-weight-bold" [ngClass]="{'text-warning': singleCaseData?.status === 'Lawyer Requested', 
+                    'text-success': singleCaseData?.status === 'Connected',
+                    'text-danger': singleCaseData?.status === 'Lawyer Rejected',
+                    'text-danger': singleCaseData?.status === 'Inmate Rejected',
+                    'text-success': singleCaseData?.status === 'Lawyer Approved' }">
+                        {{singleCaseData?.status}}
                     </span>
-                    <span *ngIf="singleCaseData?.lawyer[0]?.lawyer_case?.status === 'Lawyer Approved'">(Pending inmate's
+                <span *ngIf="singleCaseData?.status === 'Lawyer Approved'">(Pending inmate's
                         acceptance)</span>
                 </span>
                 <span><b>County Of Arrest</b>:
@@ -58,43 +58,32 @@
                 </span>
                 <mat-card class="enquiry-notes mt-2">
                     <span><b>Inquiry Notes</b>:
-                        {{singleCaseData?.lawyer[0]?.lawyer_case?.notes}}
-                        <span *ngIf="!singleCaseData?.lawyer[0]?.lawyer_case?.notes">N/A</span>
+                        {{singleCaseData?.notes}}
+                        <span *ngIf="!singleCaseData?.notes">N/A</span>
                     </span>
                 </mat-card>
             </div>
         </div>
         <div style="flex-direction: column; display: flex;">
-            <button
-                *ngIf="singleCaseData?.lawyer[0]?.lawyer_case?.status != 'Lawyer Approved' || singleCaseData?.lawyer[0]?.lawyer_case?.status === 'Inmate Rejected' || singleCaseData?.lawyer[0]?.lawyer_case?.status === 'Lawyer Requested'"
-                class="mr-1" class="btn btn-md btn-primary " color=" green" title="Approve"
-                [disabled]="( singleCaseData?.lawyer[0]?.lawyer_case?.status === 'Inmate Rejected' )"
-                (click)="onStatusUpdate(singleCaseData?.caseId, status='Lawyer Approved')">
-                ACCEPT
-            </button>
-            <button *ngIf="singleCaseData?.lawyer[0]?.lawyer_case?.status === 'Lawyer Rejected'" class="mr-1"
-                class="btn btn-md btn-primary " color=" green" title="Approve" [disabled]="( singleCaseData?.lawyer[0]?.lawyer_case?.status === 'Rejected' || singleCaseData?.lawyer[0]?.lawyer_case?.status === 'inmate_rejected' 
+            <button *ngIf="((singleCaseData?.status != 'Lawyer Rejected') && 
+                        ( singleCaseData?.status != 'Lawyer Approved' 
+                        || singleCaseData?.status === 'Inmate Rejected' 
+                        || singleCaseData?.status === 'Lawyer Requested'))" class="mr-1" class="btn btn-md btn-primary " color=" green" title="Approve" [disabled]="( singleCaseData?.status === 'Inmate Rejected' )" (click)="onStatusUpdate(singleCaseData?.caseId, status='Lawyer Approved')">
+                            ACCEPT
+                        </button>
+            <button *ngIf="singleCaseData?.status === 'Lawyer Rejected'" class="mr-1" class="btn btn-md btn-primary " color=" green" title="Approve" [disabled]="( singleCaseData?.status === 'Rejected' || singleCaseData?.status === 'inmate_rejected' 
                         )" (click)="onStatusUpdate(singleCaseData?.caseId, status='Lawyer Approved')">
                 ACCEPT AGAIN
             </button>
-            <button
-                *ngIf="(singleCaseData?.lawyer[0]?.lawyer_case?.status != 'Lawyer Rejected'  || singleCaseData?.lawyer[0]?.lawyer_case?.status === 'Lawyer Approved' || singleCaseData?.lawyer[0]?.lawyer_case?.status === 'Inmate Rejected'|| singleCaseData?.lawyer[0]?.lawyer_case?.status === 'Lawyer Requested')"
-                color="warn" title="Reject" class="btn btn-md btn-warning"
-                [disabled]="(singleCaseData?.lawyer[0]?.lawyer_case?.status === 'Rejected' || singleCaseData?.lawyer[0]?.lawyer_case?.status === 'inmate_rejected' || singleCaseData?.lawyer[0]?.lawyer_case?.status === 'Inmate Rejected')"
-                (click)="onStatusUpdate(singleCaseData?.caseId, status='Lawyer Rejected')">
+            <button *ngIf="(singleCaseData?.status != 'Lawyer Rejected'  || singleCaseData?.status === 'Lawyer Approved' || singleCaseData?.status === 'Inmate Rejected'|| singleCaseData?.status === 'Lawyer Requested')" color="warn" title="Reject" class="btn btn-md btn-warning"
+                [disabled]="(singleCaseData?.status === 'Rejected' || singleCaseData?.status === 'inmate_rejected' || singleCaseData?.status === 'Inmate Rejected')" (click)="onStatusUpdate(singleCaseData?.caseId, status='Lawyer Rejected')">
                 REJECT
             </button>
-            <button *ngIf="(singleCaseData?.lawyer[0]?.lawyer_case?.status === 'Connected')" color="black"
-                class="btn btn-md btn-danger" title="More Queries"
-                (click)="onStatusUpdate(singleCaseData?.caseId, status='Disconnected')">
+            <button *ngIf="(singleCaseData?.status === 'Connected')" color="black" class="btn btn-md btn-danger" title="More Queries" (click)="onStatusUpdate(singleCaseData?.caseId, status='Disconnected')">
                 Disconnect
             </button>
-            <button
-                *ngIf="(singleCaseData?.lawyer[0]?.lawyer_case?.status != 'Lawyer Rejected' || singleCaseData?.lawyer[0]?.lawyer_case?.status === 'Connected' || singleCaseData?.lawyer[0]?.lawyer_case?.status === 'Lawyer Approved'|| singleCaseData?.lawyer[0]?.lawyer_case?.status === 'Lawyer Requested')"
-                color="black"
-                [disabled]="(singleCaseData?.lawyer[0]?.lawyer_case?.status === 'Rejected' || singleCaseData?.lawyer[0]?.lawyer_case?.status === inmate_rejected)"
-                class="btn btn-md btn-dark" title="More Queries"
-                (click)="onOpenModal(openModal,singleCaseData?.inmate?.userId,singleCaseData?.inmate)">
+            <button *ngIf="(singleCaseData?.status != 'Lawyer Rejected' || singleCaseData?.status === 'Connected' || singleCaseData?.status === 'Lawyer Approved'|| singleCaseData?.status === 'Lawyer Requested')" color="black" [disabled]="(singleCaseData?.status === 'Rejected' || singleCaseData?.status === inmate_rejected)"
+                class="btn btn-md btn-dark" title="More Queries" (click)="onOpenModal(openModal,singleCaseData?.inmate?.userId,singleCaseData?.inmate)">
                 MESSAGE
             </button>
         </div>
@@ -119,5 +108,5 @@
 
 
 <ng-template #openModal>
-    <app-chat-modal [userId]="userId" [userName]="userName" (isModelClose)="isModelClose($event)"></app-chat-modal>
+    <app-chat-modal [userId]="userId" [userName]="userName" [isChatLimit]="isChatLimit" (isModelClose)="isModelClose($event)"></app-chat-modal>
 </ng-template>

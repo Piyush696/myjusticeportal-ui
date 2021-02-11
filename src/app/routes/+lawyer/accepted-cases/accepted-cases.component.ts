@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
@@ -17,18 +18,30 @@ export class AcceptedCasesComponent implements OnInit {
   dataSource = new MatTableDataSource();
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort: MatSort;
+  isChatLimit:boolean = false;
   filterStatus: any;
   requestedCases: any;
   allRequestedCases: any;
   isHidden: boolean;
   allCasesData: any;
   currentCases: any = ['Lawyer Approved'];
+  userId:any;
+  userName:any;
 
-  constructor(private hireLawyerService: HireLawyerService, private toasterService: ToasterService) { }
+  constructor(private hireLawyerService: HireLawyerService, private toasterService: ToasterService, public dialog: MatDialog) { }
   
   ngOnInit(): void {
     this.onGetRequestedCases('Connected');
     this.allCase()
+  }
+
+  onOpenMessageModal(templateRef, userId, user) {
+    this.userId = userId
+    user.middleName = user.middleName ? user.middleName : ' '
+    this.userName = user.firstName + ' ' + user.middleName + ' ' + user.lastName
+    let dialogRef = this.dialog.open(templateRef, {
+      width: '800px',
+    });
   }
 
   onGetRequestedCases(status) {
@@ -44,6 +57,12 @@ export class AcceptedCasesComponent implements OnInit {
         this.requestedCases = [];
       }
     })
+  }
+
+  isModelClose(value){
+    if(value){
+      this.dialog.closeAll();
+    }
   }
 
   search(searchValue: string) {

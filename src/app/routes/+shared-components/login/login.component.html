@@ -74,9 +74,15 @@
             </mat-card>
             <app-mobile-registration *ngIf="step === 3" [userName]="loginForm.get('userName').value">
             </app-mobile-registration>
-            <div class="d-flex justify-content-center p-3">
+            <div class="d-flex justify-content-center px-3 pt-3">
                 <a [routerLink]="'/forget-password'" class="p-3 text-dark">
                     Forgot password? Click here to reset
+                </a>
+            </div>
+            <div class="d-flex justify-content-center">
+                <a target="_blank" href="https://www.google.com/" class="text-dark">
+                    By signing in, you agree to the Terms of Service
+                     <!-- -- Provacy Policy -- Disclaimers -->
                 </a>
             </div>
         </div>

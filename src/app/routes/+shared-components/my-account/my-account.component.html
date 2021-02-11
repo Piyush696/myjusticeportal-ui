@@ -101,7 +101,7 @@
                     <div class="col-4 p-0">
                         <mat-form-field appearance="fill" class="w-100 p-1">
                             <mat-label>Mobile</mat-label>
-                            <input type="text" matInput [formControl]="profileForm.controls['mobile']" required>
+                            <input type="text" matInput  [formControl]="profileForm.controls['mobile']" required>
                             <mat-error>
                                 <div *ngIf="profileForm.controls['mobile'].invalid && profileForm.controls['mobile'].touched">
                                     <small class="font13">
@@ -159,7 +159,7 @@
                     <div class="col-4">
                         <mat-form-field appearance="fill" class="w-100 p-1">
                             <mat-label>Mobile</mat-label>
-                            <input type="number" matInput [formControl]="profileForm.controls['mobile']">
+                            <input type="text" [textMask]="{mask: mask}" matInput [formControl]="profileForm.controls['mobile']">
                         </mat-form-field>
                     </div>
                 </div>

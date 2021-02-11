@@ -19,6 +19,7 @@ export class InquiriesCaseViewComponent implements OnInit {
   privateCaseFiles: any;
   fileId: number;
   fileType: string = 'private';
+  isChatLimit: boolean = true
 
   public uploader1: FileUploader = new FileUploader({ url: URL });
   public hasAnotherDropZoneOver: boolean = false;
@@ -28,21 +29,21 @@ export class InquiriesCaseViewComponent implements OnInit {
   public fileOverAnother(e: any): void {
     this.hasAnotherDropZoneOver = e;
   }
-  
-  constructor(private hireLawyerService: HireLawyerService,private userAdditionInfoService: UserAdditionInfoService, private activatedRoute: ActivatedRoute,
-    private location: Location, private toasterService: ToasterService,private caseService: CaseService, public dialog: MatDialog) { }
+
+  constructor(private hireLawyerService: HireLawyerService, private userAdditionInfoService: UserAdditionInfoService, private activatedRoute: ActivatedRoute,
+    private location: Location, private toasterService: ToasterService, private caseService: CaseService, public dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.onGetCaseData();
-  }a
+  } a
 
   closeModal() {
     this.dialog.closeAll();
   }
 
   onGetCaseData() {
-    if (this.activatedRoute.snapshot.params['caseId']) {
-      this.caseService.getLawyerCase(this.activatedRoute.snapshot.params['caseId']).subscribe((res: any) => {
+    if (this.activatedRoute.snapshot.params['lawyer_caseId']) {
+      this.caseService.getLawyerViewCase(this.activatedRoute.snapshot.params['lawyer_caseId']).subscribe((res: any) => {
         if (res.data) {
           this.singleCaseData = res.data;
         } else {
@@ -103,8 +104,8 @@ export class InquiriesCaseViewComponent implements OnInit {
     });
   }
 
-  isModelClose(value){
-    if(value){
+  isModelClose(value) {
+    if (value) {
       this.dialog.closeAll();
     }
   }
@@ -117,15 +118,15 @@ export class InquiriesCaseViewComponent implements OnInit {
     this.userAdditionInfoService.updateLawywrStatus(data).subscribe((res: any) => {
       if (res.success) {
         this.onGetCaseData();
-        if(status == 'Lawyer Approved'){
+        if (status == 'Lawyer Approved') {
           this.toasterService.showSuccessToater('Please note the inmate must also accept for the connection to become active.');
-        }else{
+        } else {
           this.toasterService.showSuccessToater('Status updated successfully');
         }
       } else {
-        if(res.data === 'Connection limit reached.'){
+        if (res.data === 'Connection limit reached.') {
           this.toasterService.showErrorToater('Connection limit reached.');
-        }else{
+        } else {
           this.toasterService.showErrorToater('Something went wrong, please try again.');
         }
       }

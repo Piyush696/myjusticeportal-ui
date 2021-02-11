@@ -50,9 +50,9 @@ export class UserDetailsComponent implements OnInit, OnDestroy {
         this.userService.getSingleUserById(+this.selectedUserId).subscribe((res: any) => {
             console.log(res)
             this.selectedUserData = res.data;
-            let mobile = (res.data.mobile).replace(/[^0-9 ]/g, " ")
-            let mobileNo = mobile.replace(/\s/g, '')
-            res.data['mobile'] = Number((mobileNo))
+            // let mobile = (res.data.mobile).replace(/[^0-9 ]/g, " ")
+            // let mobileNo = mobile.replace(/\s/g, '')
+            // res.data['mobile'] = Number((mobileNo))
         });
         this.onGetRoleList();
     }

@@ -114,7 +114,7 @@ export class AdditionalInfoComponent implements OnInit, OnChanges,AfterViewInit 
         let lawyer = {}
         let splitArray = item.metaValue.split(":")
         lawyer['state'] = splitArray[0],
-          lawyer['bar_info_Exam_Id'] = splitArray[1]
+        lawyer['bar_info_Exam_Id'] = splitArray[1] 
         return lawyer
       })
     }
@@ -130,12 +130,15 @@ export class AdditionalInfoComponent implements OnInit, OnChanges,AfterViewInit 
   }
 
   addMoreStates() {
+    if(this.additionalInfoLawyer.get('bar_info_Exam_Id').value === null){
+      this.additionalInfoLawyer.get('bar_info_Exam_Id').setValue('')
+    }
     this.lawyerInfoArray.push(this.additionalInfoLawyer.value)
     this.filteredStateArray = this.filteredStateArray.filter((currentState) => {
       return currentState.name != this.additionalInfoLawyer.get('state').value
     })
     this.buttonText = "Save"
-    this.isDisable = false
+    this.isDisable = false;
     this.additionalInfoLawyer.reset()
   }
 
