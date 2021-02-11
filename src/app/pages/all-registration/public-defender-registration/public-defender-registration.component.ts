@@ -16,6 +16,7 @@ import { AddUserInfo } from 'app/store/actions/userInfo.actions';
 export class PublicDefenderRegistrationComponent implements OnInit {
   step: number = 1;
   totalSteps: number = 4;
+  currentStep : number = 4
   roleId: number = 5;
   userName: string;
   authCodeField: boolean;

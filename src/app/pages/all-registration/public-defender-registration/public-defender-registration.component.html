@@ -8,6 +8,6 @@
     <!-- <app-select-facility *ngIf="step == 3" [roleId]="roleId" [totalSteps]="totalSteps"
         (selectedFacilityEventEmitter)="onSelectedfacility($event)" (perviousClick)="onBackClick($event)">
     </app-select-facility> -->
-    <app-mobile-registration *ngIf="step == 4" [roleId]="roleId" [authCodeField]="authCodeField" [totalSteps]="totalSteps" (isMobileEvent)="mobileDetails($event)" (isOtpEvent)="onAuthCodeValidate($event)" (isPreviousClick)="onBackClickFromMobile($event)">
+    <app-mobile-registration *ngIf="step == 4" [roleId]="roleId" [authCodeField]="authCodeField" [totalSteps]="totalSteps" (isMobileEvent)="mobileDetails($event)" (isOtpEvent)="onAuthCodeValidate($event)" (isPreviousClick)="onBackClickFromMobile($event)" [step]="currentStep">
     </app-mobile-registration>
 </div>

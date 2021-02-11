@@ -27,9 +27,9 @@ export const ROUTES: RouteInfo[] = [
 
 
     { path: 'lawyer/lawyer-dashboard', title: 'Dashboard', icon: 'nc-bank', class: '', roleIds: [3] },
+    { path: 'lawyer/accepted-cases', title: 'My Connections', icon: 'nc-bank', class: '', roleIds: [3] },
     { path: 'lawyer/inquiries', title: 'Inquiries', icon: 'nc-bank', class: '', roleIds: [3] },
     { path: 'lawyer/lawyer-chat', title: 'Messaging', icon: 'nc-bank', class: '', roleIds: [3] },
-    { path: 'lawyer/accepted-cases', title: 'My Connections', icon: 'nc-bank', class: '', roleIds: [3] },
     { path: 'lawyer/billing-setting', title: 'Billing Settings', icon: 'nc-bank', class: '', roleIds: [3], isSelfPaid:true },
     { path: 'lawyer/manage-profile', title: 'Manage Profile', icon: 'nc-bank', class: '', roleIds: [3] },
     { path: 'lawyer/manage-organization', title: 'Manage Organization', icon: 'nc-bank', class: '', roleIds: [3], isAdmin: true },
