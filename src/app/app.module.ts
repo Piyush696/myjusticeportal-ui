@@ -44,6 +44,9 @@ import { SharedMaterialModule } from './shared-material/shared-material.module';
 import { CommonModule } from '@angular/common';
 import { SharedComponentsModule } from './routes/+shared-components/shared-components.module';
 import { TextMaskModule } from 'angular2-text-mask';
+import { TermsAndConditionsComponent } from './terms-and-conditions/terms-and-conditions/terms-and-conditions.component';
+import { PrivacyPolicyComponent } from './terms-and-conditions/privacy-policy/privacy-policy.component';
+import { DisclaimersComponent } from './terms-and-conditions/disclaimers/disclaimers.component';
 
 export function usersProviderFactory(provider: AuthLoadService) {
   return () => provider.setUserbyAPI();
@@ -69,7 +72,10 @@ export function usersProviderFactory(provider: AuthLoadService) {
     InvitedLawyerComponent,
     InvitedParalegalComponent,
     InvitedPublicDefenderComponent,
-    InvitedBondsmanComponent
+    InvitedBondsmanComponent,
+    TermsAndConditionsComponent,
+    PrivacyPolicyComponent,
+    DisclaimersComponent
   ],
   imports: [
     TextMaskModule,

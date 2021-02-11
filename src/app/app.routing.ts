@@ -13,6 +13,9 @@ import { InvitedLawyerComponent } from './pages/all-registration/invited-lawyer/
 import { InvitedParalegalComponent } from './pages/all-registration/invited-paralegal/invited-paralegal.component';
 import { InvitedPublicDefenderComponent } from './pages/all-registration/invited-public-defender/invited-public-defender.component';
 import { InvitedBondsmanComponent } from './pages/all-registration/invited-bondsman/invited-bondsman.component';
+import { TermsAndConditionsComponent } from './terms-and-conditions/terms-and-conditions/terms-and-conditions.component';
+import { PrivacyPolicyComponent } from './terms-and-conditions/privacy-policy/privacy-policy.component';
+import { DisclaimersComponent } from './terms-and-conditions/disclaimers/disclaimers.component';
 
 export const AppRoutes: Routes = [
   {
@@ -34,5 +37,8 @@ export const AppRoutes: Routes = [
   { path: 'facility/registration', component: FacilityRegistrationComponent },
   { path: 'forget-password', component: ForgetPasswordComponent },
   { path: 'reset-password/:token', component: ResetPasswordComponent },
+  { path: 'terms-and-conditions', component: TermsAndConditionsComponent },
+  { path: 'privacy-policy', component: PrivacyPolicyComponent },
+  { path: 'disclaimers', component: DisclaimersComponent },
   { path: '**', redirectTo: 'login' }
 ]
