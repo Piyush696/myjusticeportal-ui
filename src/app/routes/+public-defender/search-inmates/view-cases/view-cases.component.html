@@ -11,17 +11,20 @@
 </div>
 
 <div>
-    <div *ngIf="allCases.length <= 0">
-        <mat-card class="inner-card mat-elevation-z10 mt-3">
-            <mat-label class="font-weight-bold">
-                <span>No cases found.</span>
-            </mat-label>
-        </mat-card>
-    </div>
-    <div *ngIf="allCases.length > 0">
-        <mat-card class="inner-card mat-elevation-z10 mt-3" *ngFor="let case of allCases">
-            <div class="d-flex">
-                <div class="d-flex flex-column w-75">
+    <mat-card class="outer-card mat-elevation-z10 mt-3">
+        <mat-label class="font-weight-bold">
+            Cases: ({{allCases?.length}})
+        </mat-label>
+        <div *ngIf="allCases.length <= 0">
+            <mat-card class="inner-card mat-elevation-z10 mt-3">
+                <mat-label class="font-weight-bold">
+                    <span>No cases found.</span>
+                </mat-label>
+            </mat-card>
+        </div>
+        <div *ngIf="allCases.length > 0">
+            <mat-card class="d-flex flex-row justify-content-between align-items-center inner-card mt-2" *ngFor="let case of allCases">
+                <div class="d-flex flex-column">
                     <span><b>Name</b>: 
                         {{case?.inmate?.firstName + ' ' + case?.inmate?.lastName}}
                         <span *ngIf="!case?.inmate?.firstName && !case?.inmate?.lastName">N/A</span>
@@ -49,14 +52,17 @@
                         <span *ngIf="!case?.nextCourtDate">N/A</span>
                     </span>
                 </div>
-                <div class=" d-flex align-items-center">
-                    <button [disabled]="case.publicdefender.length > 0" color="black" class="btn btn-lg btn-primary" title="Assign" (click)="openModal(assigneeModal,case.caseId)">
-                        {{case.publicdefender.length > 0 ? 'Assigned' : 'Assign'}}
+                <div [ngClass]="{'pr-5': !case.lawyer.length}">
+                    <button [disabled]="case.lawyer.length > 0" color="black" class="btn btn-lg btn-primary" title="Assign" (click)="openModal(assigneeModal,case.caseId)">
+                    {{case.lawyer.length > 0 ? 'Assigned' : 'Assign'}}
                 </button>
+                    <div *ngIf="case.lawyer.length > 0">
+                        <small class="text-danger">This case is already connected to a lawyer.</small>
+                    </div>
                 </div>
-            </div>
-        </mat-card>
-    </div>
+            </mat-card>
+        </div>
+    </mat-card>
 </div>
 
 <ng-template #assigneeModal>
