@@ -42,8 +42,8 @@ export class InquiriesCaseViewComponent implements OnInit {
   }
 
   onGetCaseData() {
-    if (this.activatedRoute.snapshot.params['caseId']) {
-      this.caseService.getLawyerCase(this.activatedRoute.snapshot.params['caseId']).subscribe((res: any) => {
+    if (this.activatedRoute.snapshot.params['lawyer_caseId']) {
+      this.caseService.getLawyerViewCase(this.activatedRoute.snapshot.params['lawyer_caseId']).subscribe((res: any) => {
         if (res.data) {
           this.singleCaseData = res.data;
         } else {
