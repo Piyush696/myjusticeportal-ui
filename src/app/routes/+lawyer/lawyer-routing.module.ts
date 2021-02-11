@@ -14,12 +14,14 @@ import { InquiriesCaseViewComponent } from './inquiries-case-view/inquiries-case
 import { BillingSettingsComponent } from './billing-settings/billing-settings.component';
 import { UpdateBillingSettingsComponent } from './billing-settings/update-billing-settings/update-billing-settings.component';
 import { AllTransactionsComponent } from './all-transactions/all-transactions.component';
+import { HistoryCaseComponent } from './history-case/history-case.component';
 
 const routes: Routes = [
     { path: '', redirectTo: 'lawyer-dashboard', pathMatch: 'full' },
     { path: 'lawyer-dashboard', component: LawyerdashboardComponent },
     { path: 'accepted-cases', component: AcceptedCasesComponent },
     { path: 'accepted-cases/:caseId', component: ViewCaseDetailsComponent },
+    { path: 'history-case-view/:caseId', component: HistoryCaseComponent },
     { path: 'my-account', component: MyAccountComponent },
     { path: 'manage-organization', component: ManageOrganisationComponent },
     { path: 'manage-profile', component: ManageProfileComponent },
