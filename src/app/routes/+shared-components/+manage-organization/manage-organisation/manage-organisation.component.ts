@@ -6,6 +6,7 @@ import { SpecialtyService } from 'app/services/specialty.service';
 import { ToasterService } from 'app/services/toaster.service';
 import { FileUploader } from 'ng2-file-upload';
 import { ThemePalette } from '@angular/material/core';
+import { Router } from '@angular/router';
 const URL = 'https://evening-anchorage-3159.herokuapp.com/api/';
 
 @Component({
@@ -36,7 +37,7 @@ export class ManageOrganisationComponent implements OnInit, OnChanges {
     this.hasAnotherDropZoneOver = e;
   }
   path: any;
-  constructor(private fb: FormBuilder, private toasterService: ToasterService,
+  constructor(private fb: FormBuilder, private toasterService: ToasterService,private router:Router,
     public dialog: MatDialog, private organisationService: OrganisationService, private specialtyService: SpecialtyService) { }
   ngOnChanges(changes: SimpleChanges): void {
 
@@ -45,6 +46,10 @@ export class ManageOrganisationComponent implements OnInit, OnChanges {
   ngOnInit(): void {
     this.createControl()
     this.getOrganisationAddress()
+  }
+
+  manageBIlling(){
+    this.router.navigateByUrl('/mjp/public-defender/manage-organization/org-billing')
   }
 
   onUploadLogo() {

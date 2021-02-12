@@ -13,6 +13,7 @@ import { InmateCaseViewComponent } from './inmate-case-view/inmate-case-view.com
 import { ViewCasesComponent } from './search-inmates/view-cases/view-cases.component';
 import { PdChatComponent } from './pd-chat/pd-chat.component';
 import { PdTransactionsComponent } from './pd-transactions/pd-transactions.component';
+import { ManageOrgBillingComponent } from '../+shared-components/+manage-organization/manage-org-billing/manage-org-billing.component';
 
 
 const routes: Routes = [
@@ -21,6 +22,7 @@ const routes: Routes = [
     { path: 'my-account', component: MyAccountComponent },
     { path: 'manage-profile', component: ManageProfileComponent },
     { path: 'manage-organization', component: ManageOrganisationComponent },
+    { path: 'manage-organization/org-billing', component: ManageOrgBillingComponent },
     { path: 'search-inmates', component: SearchInmatesComponent },
     { path: 'search-inmates/:userId', component: ViewCasesComponent },
     { path: 'inmates-cases', component: InmatesCasesComponent },

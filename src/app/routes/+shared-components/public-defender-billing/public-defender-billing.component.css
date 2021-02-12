@@ -81,3 +81,11 @@
     position: absolute;
     z-index: 1;
 }
+
+.text-color {
+    color: #000;
+}
+
+.invited-link-btn {
+    color: #ff6700;
+}
