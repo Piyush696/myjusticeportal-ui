@@ -7,6 +7,7 @@ import { ToasterService } from 'app/services/toaster.service';
 import { FileUploader } from 'ng2-file-upload';
 import { ThemePalette } from '@angular/material/core';
 import { Router } from '@angular/router';
+import { Store } from '@ngrx/store';
 const URL = 'https://evening-anchorage-3159.herokuapp.com/api/';
 
 @Component({
@@ -33,19 +34,24 @@ export class ManageOrganisationComponent implements OnInit, OnChanges {
   public color: ThemePalette = 'primary';
   public touchUi = false;
   fileLink: any;
+  userData: any;
   public fileOverAnother(e: any): void {
     this.hasAnotherDropZoneOver = e;
   }
   path: any;
   constructor(private fb: FormBuilder, private toasterService: ToasterService,private router:Router,
-    public dialog: MatDialog, private organisationService: OrganisationService, private specialtyService: SpecialtyService) { }
+    public dialog: MatDialog, private organisationService: OrganisationService, private store: Store<any>, private specialtyService: SpecialtyService) { }
   ngOnChanges(changes: SimpleChanges): void {
 
   }
 
   ngOnInit(): void {
     this.createControl()
-    this.getOrganisationAddress()
+    this.getOrganisationAddress();
+    this.store.select(s => s.userInfo).subscribe(x => {
+      this.userData = x
+      console.log(x)
+    });
   }
 
   manageBIlling(){

@@ -9,7 +9,7 @@
     </div>
     <div class="col-7 px-0">
         <div class="d-flex justify-content-end">
-            <div>
+            <div *ngIf="userData.roles[0].roleId === 5">
                 <button mat-raised-button class="button-purple px-4 py-1" (click)="manageBIlling()">
                    Manage Billing
                 </button> &nbsp;
