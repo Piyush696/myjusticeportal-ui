@@ -121,7 +121,6 @@ export class ViewUsersComponent implements OnInit, AfterViewInit {
           return item;
 
         })
-        console.log(users.data.users)
         this.dataSource = new MatTableDataSource(users.data.users);
         if (this.dataSource) {
           this.dataSource.filterPredicate = (data: any, filter: string) => {
@@ -193,7 +192,6 @@ export class ViewUsersComponent implements OnInit, AfterViewInit {
     let s=searchValue.replace(/  +/g, ' ');
     // s= searchValue.split(" ").join("")
     this.dataSource.filter = s.trim().toLowerCase();
-    console.log(this.dataSource.filter)
   }
 
 

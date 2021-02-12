@@ -47,7 +47,6 @@ export class ManageBillingSettingsComponent implements OnInit {
   getBillableFacility() {
     this.defenderService.getBilliableFacilityDetails().subscribe((data: any) => {
       this.selectedFacilities = data.facilities
-      console.log(this.selectedFacilities)
       if(this.selectedFacilities[0]?.user_plan?.coupon){
         this.cardForm.get('coupon').setValue(this.selectedFacilities[0]?.user_plan?.coupon)
       }

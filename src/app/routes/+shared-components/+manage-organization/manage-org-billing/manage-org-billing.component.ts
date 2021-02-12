@@ -25,7 +25,6 @@ export class ManageOrgBillingComponent implements OnInit {
 
   getAllUsers() {
     this.organisationService.getOrganisationUsers().subscribe((users: any) => {
-        console.log(users.data.users)
         this.userList = users.data.users.map((item) => {
 
           if(!item.isAdmin && !item.isSelfPaid){

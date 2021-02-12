@@ -54,15 +54,14 @@ export class PublicDefenderBillingComponent implements OnInit {
   getUserDetailsStore(){
     this.store.select(s => s.userInfo).subscribe(x => {
       this.userData = x;
-      console.log(this.userData)
     });
   }
 
   getAllUsers() {
     this.orgCount = 0;
     this.selfCount = 0;
+    this.totalPrice = 40;
     this.organisationService.getOrganisationUsers().subscribe((users: any) => {
-      console.log(users)
       if (users.success) {
         users.data.users.map((user) => {
           if (user.isAdmin) {
@@ -101,7 +100,6 @@ export class PublicDefenderBillingComponent implements OnInit {
 
         })
         this.totalPrice = ((this.orgCount * 40) + this.totalPrice)
-        console.log(users.data.users)
         this.dataSource = new MatTableDataSource(users.data.users);
         if (this.dataSource) {
           this.dataSource.filterPredicate = (data: any, filter: string) => {
@@ -196,6 +194,7 @@ export class PublicDefenderBillingComponent implements OnInit {
         this.toasterService.showSuccessToater('Email Sent.');
         this.dialog.closeAll();
         this.getAllUsers();
+      //  window.location.reload();
       }
       else {
         if (res.data == 'Email exist') {

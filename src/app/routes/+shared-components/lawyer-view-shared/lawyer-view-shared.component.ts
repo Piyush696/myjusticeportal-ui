@@ -31,7 +31,6 @@ export class LawyerViewSharedComponent implements OnInit, AfterViewInit, OnChang
   ngOnInit(): void {
     this.store.select(s => s.userInfo).subscribe(x => {
       this.hideButton = x.roles[0].roleId == 3 || x.roles[0].roleId == 5;
-      console.log(this.hideButton)
     })
   }
 

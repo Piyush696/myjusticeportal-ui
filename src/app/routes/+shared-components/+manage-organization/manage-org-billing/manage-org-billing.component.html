@@ -22,7 +22,7 @@
                                 <span class="font-weight-bold">Current Organization Paid Users: {{orgCount}}</span>
                             </div>
                             <div class="py-3">
-                                <span class="font-weight-bold">Total Monthly Bill: {{orgCount * 40 | currency: "USD":"symbol"}}</span>
+                                <span class="font-weight-bold">Total Monthly Bill: {{((orgCount * 40 )+ 40)| currency: "USD":"symbol"}}</span>
                             </div>
                             <div>
                                 <span>To make changes, simply remove</span>
