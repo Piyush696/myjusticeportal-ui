@@ -86,9 +86,7 @@ export class UpdateCardModalComponent implements OnDestroy, AfterViewInit, OnIni
         const data = {
           "token": token.id,
         }
-        console.log(data)
         this.lawyerService.updateCardDetails(data).subscribe((card:any)=>{
-          console.log(card)
           if(card.success){
             this.cardChange.emit(true)
             this.toasterService.showSuccessToater('Card updated successfully.')

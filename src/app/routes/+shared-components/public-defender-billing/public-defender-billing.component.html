@@ -22,6 +22,30 @@
                             </mat-card>
                         </div>
                     </div>
+
+                    <div *ngIf="userData?.isAdmin" class="p-4">
+                        <div class="row">
+                            <span class="text-default text-color font-weight-bolder">Additional Users Invited:&nbsp;<span class="font-weight-light">{{userList?.length - 1}}</span></span>
+                        </div>
+                        <div class="row">
+                            <span class="text-default text-color font-weight-bolder">Paid By Organization:&nbsp;<span class="font-weight-light">{{orgCount ? orgCount : 0}}</span></span>
+                        </div>
+                        <div class="row">
+                            <span class="text-default text-color font-weight-bolder">Paid Bill Directly by User:&nbsp;<span class="font-weight-light">{{selfCount ? selfCount : 0}}</span></span>
+                        </div>
+                    </div>
+
+                    <div *ngIf="userData?.isAdmin" class="row px-3">
+                        <div>
+                            <button mat-raised-button class="button-purple px-4 py-1" (click)="openModal(inviteEmail)">
+                                    Add User
+                                </button>
+                        </div>
+                        <div>
+                            <a mat-flat-button class="invited-link-btn py-1" (click)="openManageUsersModal(manageUsersModal)">View Invited Users</a>
+                        </div>
+                    </div>
+
                 </mat-card>
             </div>
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 pt-2">
@@ -69,6 +93,10 @@
                             <div>BASE COST:</div>
                             <div>{{ planPrice | currency: "USD":"symbol" }}</div>
                         </div>
+                        <div *ngIf="orgCount" class="d-flex justify-content-between align-items-between">
+                            <div>ORGANIZATION USER CHARGES&nbsp;(<b>{{orgCount}} User * $40.00</b>):</div>
+                            <div *ngIf="orgCount"> {{ orgCount * 40 | currency: "USD":"symbol" }}</div>
+                        </div>
                         <div *ngIf="isDiscount" class="d-flex justify-content-between align-items-between">
                             <div>DISCOUNT&nbsp;(<b>{{isDiscount.id}}</b>):</div>
                             <div *ngIf="isDiscount.percent_off"> {{ - ( isDiscount.percent_off ? totalPrice * isDiscount.percent_off / 100 : 0) | currency: "USD":"symbol" }}</div>
@@ -103,3 +131,129 @@
         </div>
     </div>
 </div>
+
+
+<ng-template #inviteEmail>
+    <button type="button" class="close" aria-label="Close" (click)="closeModal()">
+        <span aria-hidden="true">&times;</span>
+    </button>
+    <div>
+        <h2 class="font-weight-bold">Invite User</h2>
+    </div>
+    <div>
+        <div class="row">
+            <div class="col-12">
+                <mat-form-field appearance="fill" class="w-100 py-1">
+                    <mat-label>Email</mat-label>
+                    <input type="email" matInput placeholder="Email" [formControl]="inviteMailForm.controls['userName']" required>
+                    <mat-error>
+                        <div *ngIf="inviteMailForm.controls['userName'].invalid && inviteMailForm.controls['userName'].touched">
+                            <small class="font13">
+                                Email is Required
+                            </small>
+                        </div>
+                    </mat-error>
+                </mat-form-field>
+            </div>
+            <div class="col-12 pt-1">
+                <mat-label class="font-weight-bold">Billing Option:</mat-label>
+                <div class="pt-1 pb-3">
+                    <mat-radio-group color="primary" aria-label="Select an option" [formControl]="inviteMailForm.controls['isSelfPaid']">
+                        <mat-radio-button value="true" class="pr-3">
+                            Pay Bill Directly
+                        </mat-radio-button>
+                        <mat-radio-button value="false">
+                            Bill Paid by Organization
+                        </mat-radio-button>
+                    </mat-radio-group>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="d-flex justify-content-between">
+        <button mat-raised-button class="button-purple px-4 py-1" (click)="closeModal()">
+            Close
+        </button>
+        <button class="button-purple px-4 py-1" mat-raised-button [disabled]="inviteMailForm.invalid" (click)="onEmailInvite()">
+            Submit
+        </button>
+    </div>
+</ng-template>
+
+<ng-template #manageUsersModal>
+    <button type="button" class="close" aria-label="Close" (click)="closeModal()">
+        <span aria-hidden="true">&times;</span>
+    </button>
+    <div>
+        <h2 class="font-weight-bold m-0">Manage Users</h2>
+        <label>View and manage all your organization users</label>
+    </div>
+    <div class="row">
+        <mat-card class="col-12">
+            <div>
+                <div class="col-5 px-0">
+                    <mat-form-field class="w-100">
+                        <mat-label>Search</mat-label>
+                        <input matInput (keyup)="search($event.target.value)">
+                    </mat-form-field>
+                </div>
+            </div>
+            <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8 w-100">
+                <ng-container matColumnDef="name">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>User</th>
+                    <td mat-cell *matCellDef="let user">
+                        <span>
+                {{user?.firstName | titlecase}}
+                <span *ngIf="user?.middleName">
+                  &nbsp;{{user?.middleName | titlecase}}
+                </span> &nbsp;{{user?.lastName | titlecase}}
+                        </span>
+                        <span *ngIf="!user?.firstName && !user?.middleName && !user?.lastName">
+                N/A
+              </span>
+                    </td>
+                </ng-container>
+                <ng-container matColumnDef="userName">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Username</th>
+                    <td mat-cell *matCellDef="let user">{{user?.userName}}</td>
+                </ng-container>
+                <ng-container matColumnDef="mobile">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Mobile</th>
+                    <td mat-cell *matCellDef="let user">
+                        <span *ngIf="user?.mobile">{{user?.mobile}}</span>
+                        <span *ngIf="!user?.mobile">N/A</span>
+                    </td>
+                </ng-container>
+
+                <ng-container matColumnDef="roles">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Role</th>
+                    <td mat-cell *matCellDef="let user">
+                        <ng-container *ngFor="let role of user?.roles;let isLast=last">
+                            <span>{{user?.roles1}}</span>
+                            <!-- <span>{{role?.name}}{{isLast ? '' : ', '}} {{user.isAdmin}}</span> -->
+                            <!-- <span *ngIf="user.isAdmin">&nbsp;({{ user.isAdmin ? 'Admin' : ''}})</span> -->
+                        </ng-container>
+                    </td>
+                </ng-container>
+                <ng-container matColumnDef="createdAt">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Date Created</th>
+                    <td mat-cell *matCellDef="let user">{{user?.sent}}</td>
+                </ng-container>
+                <ng-container matColumnDef="action">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Action</th>
+                    <td mat-cell *matCellDef="let user">
+                        <button class="button-purple mr-1" mat-mini-fab title="View Details" (click)="openModal(manageUserModal,user)">
+                <mat-icon>remove_red_eye</mat-icon>
+              </button>
+                        <button mat-mini-fab color="warn" title="Delete User" (click)="deleteUserModal(confirmModal,user.userId)">
+                <mat-icon>delete</mat-icon>
+              </button>
+                    </td>
+                </ng-container>
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table>
+            <mat-paginator [pageSizeOptions]="getPageSizeOptions()"></mat-paginator>
+        </mat-card>
+    </div>
+</ng-template>

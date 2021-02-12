@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { AbstractControl, FormBuilder, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
@@ -20,7 +20,7 @@ export class SharedAllTransactionsComponent implements OnInit {
   @ViewChild(MatSort, { static: true }) sort: MatSort;
   cardDetails: any;
   totalCharge: any;
-
+ @Input() headerText:boolean;
   constructor(private StripeService:StripeService,private lawyerService: LawyerService,  public dialog: MatDialog) { }
 
   ngOnInit(): void {

@@ -11,7 +11,7 @@ import { StripeService } from 'app/services/stripe.service';
 })
 export class AllTransactionsComponent implements OnInit {
   
-  
+  headerText: boolean = true;
   constructor() { }
 
   ngOnInit(): void {
