@@ -3,6 +3,6 @@
         [roleId]="roleId">
     </app-email-registration>
     <app-mobile-registration *ngIf="step == 2" [authCodeField]="authCodeField" [totalSteps]="totalSteps"
-        (isMobileEvent)="mobileDetails($event)" (isOtpEvent)="onAuthCodeValidate($event)">
+    [step]="currentStep" (isMobileEvent)="mobileDetails($event)"  (isOtpEvent)="onAuthCodeValidate($event)">
     </app-mobile-registration>
 </div>
