@@ -61,6 +61,7 @@ export class StripeComponent implements OnDestroy, AfterViewInit, OnChanges, OnI
     }).toPromise();
     if (!result.success) {
       this.couponData.emit(result.error)
+      this.discount = 0;
       return { invalidCoupon: true };
     } else {
       this.couponData.emit(result.data)
@@ -221,6 +222,7 @@ export class StripeComponent implements OnDestroy, AfterViewInit, OnChanges, OnI
               "coupon": this.cardForm.get('coupon').value,
               "discount": this.discount
             }
+            console.log(data)
             this.lawyerService.subscribePlan(data).subscribe((subscribePlan: any) => {
               if (subscribePlan.data) {
                 this.card.clear()

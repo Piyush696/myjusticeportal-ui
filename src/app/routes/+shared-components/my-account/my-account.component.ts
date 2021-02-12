@@ -221,7 +221,6 @@ export class MyAccountComponent implements OnInit {
 
   getSingleUser() {
     this.userService.getSingleUser().subscribe((result: any) => {
-      console.log(result)
       this.roleId = result.data.roles[0].roleId;
       if (result.data.roles[0].name == 'User') {
         this.isUser = true

@@ -23,6 +23,7 @@ import { SharedAllTransactionsComponent } from './shared-all-transactions/shared
 import { UpdateCardModalComponent } from './update-card-modal/update-card-modal.component';
 import { LawyerViewSharedComponent } from './lawyer-view-shared/lawyer-view-shared.component';
 import { TextMaskModule } from 'angular2-text-mask';
+import { ManageOrgBillingComponent } from './+manage-organization/manage-org-billing/manage-org-billing.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,8 @@ import { TextMaskModule } from 'angular2-text-mask';
     ManageBillingSettingsComponent,
     SharedAllTransactionsComponent,
     UpdateCardModalComponent,
-    LawyerViewSharedComponent
+    LawyerViewSharedComponent,
+    ManageOrgBillingComponent
   ],
   imports: [
     CommonModule,
@@ -71,7 +73,8 @@ import { TextMaskModule } from 'angular2-text-mask';
     ManageBillingSettingsComponent,
     SharedAllTransactionsComponent,
     UpdateCardModalComponent,
-    LawyerViewSharedComponent
+    LawyerViewSharedComponent,
+    ManageOrgBillingComponent
   ]
 })
 

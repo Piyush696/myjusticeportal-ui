@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./pd-transactions.component.css']
 })
 export class PdTransactionsComponent implements OnInit {
-
+  headerText: boolean = true;
   constructor() { }
 
   ngOnInit(): void {
