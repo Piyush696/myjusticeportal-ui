@@ -15,10 +15,11 @@ import { AddUserInfo } from 'app/store/actions/userInfo.actions';
 
 export class FacilityRegistrationComponent implements OnInit {
   step: number = 1;
-  roleId: number = 3;
+  roleId: number = 2;
   userName: string;
   totalSteps: number = 2;
   authCodeField: boolean;
+  currentStep: number = 2;
   facililityRegistrationData = {
     'user': {
 
